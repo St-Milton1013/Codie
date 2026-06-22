@@ -58,6 +58,8 @@ class HareruyaClient:
         status, body = self.transport(url, headers, self.timeout_seconds)
         if status == 429:
             raise RateLimitError("Hareruya rate limit response")
+        if status == 202 and "AwsWafIntegration" in body:
+            raise RateLimitError("Hareruya WAF challenge response")
         if status >= 500:
             raise NetworkError(f"Hareruya server error: HTTP {status}")
         if status >= 400:

@@ -34,6 +34,18 @@ class HareruyaProviderTest(unittest.TestCase):
         self.assertEqual(event.deck_count, 12)
         self.assertEqual(event.source_url, "https://www.hareruyamtg.com/en/deck/202/metagame/")
 
+    def test_parse_live_shape_commander_metagame_page(self) -> None:
+        event = HareruyaProvider().parse_metagame_page(load_fixture("live_metagame_page_7.html"))
+        self.assertIsInstance(event, SourceEventCandidate)
+        self.assertEqual(event.provider_event_id, "7")
+        self.assertEqual(event.event_name, "Commander Meta Game(2025/06/22～)")
+        self.assertEqual(event.format, "Commander")
+        self.assertEqual(event.country, "JP")
+        self.assertEqual(event.region, "Japan")
+        self.assertIsNone(event.event_date)
+        self.assertEqual(event.deck_count, 221)
+        self.assertEqual(event.source_url, "https://www.hareruyamtg.com/en/deck/7/metagame/")
+
     def test_parse_deck_page_success(self) -> None:
         deck = HareruyaProvider().parse_deck_page(load_fixture("deck_page_101.html"), event_key="202")
         self.assertIsInstance(deck, SourceDeckCandidate)
@@ -48,6 +60,19 @@ class HareruyaProviderTest(unittest.TestCase):
         self.assertEqual(deck.record, "6-1")
         self.assertEqual(deck.source_url, "https://www.hareruyamtg.com/en/deck/101/show/")
 
+    def test_parse_live_shape_deck_page_success(self) -> None:
+        deck = HareruyaProvider().parse_deck_page(load_fixture("live_deck_page_100000.html"), event_key="7")
+        self.assertIsInstance(deck, SourceDeckCandidate)
+        self.assertEqual(deck.provider_deck_id, "100000")
+        self.assertEqual(deck.source_event_key, "7")
+        self.assertEqual(deck.deck_title, "Titan Valakut")
+        self.assertEqual(deck.archetype_name, "Titan Valakut")
+        self.assertEqual(deck.pilot_name, "GRACE LEGGE")
+        self.assertEqual(deck.rank, 23)
+        self.assertEqual(deck.rank_label, "23th")
+        self.assertEqual(deck.source_url, "https://www.hareruyamtg.com/en/deck/100000/show/")
+        self.assertEqual(deck.download_url, "https://www.hareruyamtg.com/en/deck/download?deck=100000")
+
     def test_deck_cards_parse_into_candidates_and_preserve_japanese_names(self) -> None:
         deck = HareruyaProvider().parse_deck_page(load_fixture("deck_page_101.html"), event_key="202")
         self.assertEqual(len(deck.cards), 6)
@@ -59,6 +84,18 @@ class HareruyaProviderTest(unittest.TestCase):
         self.assertEqual(deck.cards[2].source_zone, "mainboard")
         self.assertEqual(deck.cards[5].raw_name, "Silence")
         self.assertEqual(deck.cards[5].source_zone, "sideboard")
+
+    def test_live_shape_deck_cards_parse_from_hareruya_sections(self) -> None:
+        deck = HareruyaProvider().parse_deck_page(load_fixture("live_deck_page_100000.html"), event_key="7")
+        self.assertEqual(len(deck.cards), 5)
+        self.assertEqual(deck.cards[0].raw_name, "Cinder Glade")
+        self.assertEqual(deck.cards[0].quantity, 3)
+        self.assertEqual(deck.cards[0].source_zone, "mainboard")
+        self.assertEqual(deck.cards[1].raw_name, "Mountain")
+        self.assertEqual(deck.cards[1].quantity, 7)
+        self.assertEqual(deck.cards[3].raw_name, "Lightning Bolt")
+        self.assertEqual(deck.cards[4].raw_name, "Nature's Claim")
+        self.assertEqual(deck.cards[4].source_zone, "sideboard")
 
     def test_commander_fallback_requires_commander_metadata(self) -> None:
         deck = HareruyaProvider().parse_deck_page(load_fixture("deck_page_fallback_commander.html"), event_key="202")
@@ -142,6 +179,16 @@ class HareruyaProviderTest(unittest.TestCase):
             rate_client.fetch_metagame_page("https://hareruya.example/metagame")
         self.assertTrue(network.exception.retryable)
         self.assertTrue(rate_limit.exception.retryable)
+
+    def test_client_maps_waf_challenge_to_retryable_rate_limit(self) -> None:
+        waf_body = """
+        <html><head><script>AwsWafIntegration.getToken()</script></head>
+        <body><div id="challenge-container"></div></body></html>
+        """
+        client = HareruyaClient(transport=lambda url, headers, timeout: (202, waf_body), min_interval_seconds=0)
+        with self.assertRaises(RateLimitError) as error:
+            client.fetch_deck_page("https://www.hareruyamtg.com/en/deck/result?archetypeIds=3282")
+        self.assertTrue(error.exception.retryable)
 
     def test_urllib_transport_maps_urlerror_to_network_error(self) -> None:
         with patch.object(hareruya_client, "urlopen", side_effect=URLError("offline")):

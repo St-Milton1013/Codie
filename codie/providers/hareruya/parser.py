@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import re
+from html import unescape
 from typing import Any
 from urllib.parse import parse_qs, urlparse
 
@@ -127,6 +128,13 @@ def _field_map(root: BeautifulSoup | Tag) -> dict[str, str]:
             value = cells[1].get_text(" ", strip=True)
             if key and value:
                 fields.setdefault(key, value)
+    for row in root.select(".deckSearch-deckList__information__flex__list"):
+        header = row.select_one(".deckSearch-deckList__information__list__header")
+        body = row.select_one(".deckSearch-deckList__information__list__body")
+        key = header.get_text(" ", strip=True).lower().rstrip(":") if header else ""
+        value = body.get_text(" ", strip=True) if body else ""
+        if key and value:
+            fields.setdefault(key, value)
     return fields
 
 
@@ -135,6 +143,50 @@ def _first_text(root: BeautifulSoup | Tag, *classes: str) -> str | None:
         node = root.select_one(f".{class_name}")
         if node and node.get_text(" ", strip=True):
             return node.get_text(" ", strip=True)
+    return None
+
+
+def _select_text(root: BeautifulSoup | Tag, *selectors: str) -> str | None:
+    for selector in selectors:
+        node = root.select_one(selector)
+        if node and node.get_text(" ", strip=True):
+            return node.get_text(" ", strip=True)
+    return None
+
+
+def _strip_card_brackets(value: str) -> str:
+    text = unescape(value).strip()
+    if text.startswith("《") and text.endswith("》"):
+        return text[1:-1].strip()
+    return text
+
+
+def _headline_format(headline: str | None) -> str | None:
+    if not headline:
+        return None
+    match = re.match(r"^\s*([A-Za-z ]+?)\s+Meta\s+Game", headline)
+    return match.group(1).strip() if match else None
+
+
+def _live_metagame_deck_count(root: BeautifulSoup | Tag) -> int | None:
+    total = 0
+    found = False
+    for node in root.select(".deckSearch-metaList__list__item__count"):
+        count = _int(node.get_text(" ", strip=True))
+        if count is not None:
+            total += count
+            found = True
+    return total if found else None
+
+
+def _download_url(root: BeautifulSoup | Tag, fields: dict[str, str]) -> str | None:
+    explicit = _field(fields, "download_url", "deck_url")
+    if explicit:
+        return explicit
+    link = root.find("a", title=lambda value: isinstance(value, str) and "download" in value.lower())
+    if isinstance(link, Tag) and link.get("href"):
+        href = str(link["href"])
+        return href if href.startswith("http") else f"{BASE_URL}{href}"
     return None
 
 
@@ -195,11 +247,15 @@ class HareruyaProvider(Provider):
         source_url = _field(fields, "source_url", "page_url") or _canonical_url(root)
         event_id = _field(fields, "event_id", "metagame_id", "event id") or _query_value(source_url, "event") or _query_value(source_url, "id") or _path_id(source_url)
         event_id = _require(event_id, "event_id")
-        event_name = _field(fields, "event_name", "metagame_name", "event", "name") or _first_text(root, "event-title", "metagame-title", "event-name")
+        headline = _select_text(root, "h1.common-headline--deckSearch")
+        event_name = _field(fields, "event_name", "metagame_name", "event", "name") or _first_text(root, "event-title", "metagame-title", "event-name") or headline
         if not event_name:
             raise ParseError("Hareruya metagame page missing parseable event name")
         country = _field(fields, "country") or "JP"
         region = _field(fields, "region", "state") or "Japan"
+        deck_count = _int(_field(fields, "deck_count", "decks"))
+        if deck_count is None:
+            deck_count = _live_metagame_deck_count(root)
         return SourceEventCandidate(
             provider=PROVIDER,
             provider_event_id=event_id,
@@ -208,13 +264,13 @@ class HareruyaProvider(Provider):
             original_source_url=_field(fields, "original_source_url", "source") or source_url,
             event_name=event_name,
             event_date=_field(fields, "event_date", "date"),
-            format=_field(fields, "format"),
+            format=_field(fields, "format") or _headline_format(headline),
             region=region,
             country=country,
             store_tag=_field(fields, "store_tag", "venue", "location"),
             language=_field(fields, "language"),
             player_count=_int(_field(fields, "player_count", "players")),
-            deck_count=_int(_field(fields, "deck_count", "decks")),
+            deck_count=deck_count,
             raw_payload=_raw_payload(html, "event", event_id, source_url),
             event_key=event_id,
         )
@@ -236,12 +292,12 @@ class HareruyaProvider(Provider):
             provider_deck_id=deck_id,
             source_event_key=event_key,
             source_url=source_url or f"{BASE_URL}/en/deck/{deck_id}/show/",
-            download_url=_field(fields, "download_url", "deck_url"),
-            deck_title=_field(fields, "deck_title", "deck", "name") or _first_text(root, "deck-title", "deck-name"),
+            download_url=_download_url(root, fields),
+            deck_title=_field(fields, "deck_title", "deck", "name", "archetype") or _first_text(root, "deck-title", "deck-name") or _select_text(root, "h1.common-headline--deckSearch-deck_List"),
             commander_text=commander_text,
             pilot_name=_field(fields, "pilot_name", "pilot", "player"),
-            rank=_int(_field(fields, "rank", "placement", "place")),
-            rank_label=_field(fields, "rank_label", "placement", "place"),
+            rank=_int(_field(fields, "rank", "placement", "place", "score")),
+            rank_label=_field(fields, "rank_label", "placement", "place", "score"),
             record=_field(fields, "record"),
             win_rate=None,
             archetype_name=_field(fields, "archetype_name", "archetype"),
@@ -264,6 +320,29 @@ class HareruyaProvider(Provider):
                 continue
             for row in section.select(".card-row, .deck-card"):
                 quantity, name = self._parse_card_row(row)
+                if name is None:
+                    raise SchemaValidationError("Hareruya card row is missing a card name")
+                entries.append(
+                    SourceDeckCardCandidate(
+                        source_deck_key=deck_id,
+                        raw_name=name,
+                        quantity=quantity,
+                        source_zone=zone,
+                        source_order=len(entries) + 1,
+                        raw_entry=row.get_text(" ", strip=True),
+                    )
+                )
+        for section in root.select(".deckSearch-deckList__deckList__container__text"):
+            zone = self._normalize_live_section_zone(section)
+            if zone is None:
+                continue
+            for row in section.find_all("div", recursive=False):
+                if row.select_one(".deckSearch-deckList__deckList__totalNumber"):
+                    continue
+                card_link = row.select_one("a.popup_product")
+                if card_link is None:
+                    continue
+                quantity, name = self._parse_live_card_row(row, card_link)
                 if name is None:
                     raise SchemaValidationError("Hareruya card row is missing a card name")
                 entries.append(
@@ -305,3 +384,20 @@ class HareruyaProvider(Provider):
 
     def _normalize_zone(self, zone: str) -> str | None:
         return ZONE_ALIASES.get(zone.lower().strip())
+
+    def _parse_live_card_row(self, row: Tag, card_link: Tag) -> tuple[int, str | None]:
+        quantity_node = row.find("span", recursive=False)
+        quantity = _int(quantity_node.get_text(" ", strip=True) if quantity_node else None) or 1
+        name = _strip_card_brackets(card_link.get_text(" ", strip=True))
+        return quantity, name or None
+
+    def _normalize_live_section_zone(self, section: Tag) -> str | None:
+        classes = " ".join(str(value) for value in section.get("class", ())).lower()
+        text = section.get_text(" ", strip=True).lower()
+        if "sideboard" in classes or text.startswith("sideboard"):
+            return "sideboard"
+        if "commander" in classes or text.startswith("commander"):
+            return "commanders"
+        if "container__text--" in classes:
+            return "mainboard"
+        return None
