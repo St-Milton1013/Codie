@@ -9,6 +9,7 @@ Phase 10C: PASS
 Phase 10D: PASS
 Phase 10E: PASS
 Phase 10G: PASS
+Phase 10I: PASS
 Overall: READY FOR OUTSIDE VALIDATION
 ```
 
@@ -26,6 +27,7 @@ Phase 10 added the local user-deck workflow needed before user-facing analysis:
 - export comparison reports as Markdown
 - write comparison exports to caller-supplied files
 - run the accepted workflow through a repeatable CLI wrapper
+- persist already-built evidence-only comparison summaries to `saved_analysis`
 
 ## Files Added Or Modified
 
@@ -40,6 +42,7 @@ Primary implementation:
 - `codie/exports/__init__.py`
 - `codie/cli/__init__.py`
 - `codie/cli/user_deck.py`
+- `codie/user_decks/saved_analysis.py`
 
 Tests:
 
@@ -48,6 +51,7 @@ Tests:
 - `tests/test_user_deck_evidence_comparison.py`
 - `tests/test_exports_user_deck_reports.py`
 - `tests/test_cli_user_deck.py`
+- `tests/test_user_deck_saved_analysis.py`
 
 Contracts:
 
@@ -57,6 +61,7 @@ Contracts:
 - `docs/PHASE10D_USER_DECK_COMPARISON_EXPORT_CONTRACT.md`
 - `docs/PHASE10E_USER_DECK_COMPARISON_FILE_WRITER_CONTRACT.md`
 - `docs/PHASE10G_USER_DECK_CLI_CONTRACT.md`
+- `docs/PHASE10I_SAVED_ANALYSIS_PERSISTENCE_CONTRACT.md`
 
 ## Public API Added
 
@@ -102,6 +107,14 @@ CLI:
 - `codie.cli.user_deck.build_parser(...)`
 - `codie.cli.user_deck.main(...)`
 
+Saved analysis:
+
+- `SavedUserDeckAnalysisResult`
+- `save_user_deck_comparison_analysis(...)`
+- `UserRepository.create_saved_analysis(...)`
+- `UserRepository.get_saved_analysis(...)`
+- `UserRepository.list_saved_analysis_for_deck(...)`
+
 ## Schema Impact
 
 None.
@@ -111,6 +124,7 @@ Existing tables used:
 - `user_decks`
 - `user_deck_cards`
 - `analysis_sessions`
+- `saved_analysis`
 
 ## Boundary Compliance
 
@@ -172,7 +186,7 @@ Focused tests were run for each packet.
 Latest full-suite validation:
 
 ```text
-Ran 266 tests in 0.694s
+Ran 271 tests in 0.691s
 
 OK
 ```
@@ -227,6 +241,7 @@ no matches
 - No UI exists yet.
 - Phase 10 comparison is evidence-only and does not persist comparison rows.
 - CLI requires a local Codie SQLite database with card rows before deck import can resolve cards.
+- Saved analysis persistence stores summaries, not final recommendations.
 - Final recommendation generation remains intentionally separate.
 
 ## Recommended Next Step
@@ -235,8 +250,8 @@ Run outside validation on Phase 10, then proceed to the next contract-first pack
 
 Likely next candidates:
 
-- persisted saved analysis records
 - UI planning
 - simulator integration planning
+- broader Phase 10 outside validation with CLI and saved-analysis persistence
 
 Do not start final recommendation output until outside validation accepts the user-deck workflow boundaries.
