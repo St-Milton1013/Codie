@@ -1,153 +1,100 @@
 # Next Phase Contract
 
-Recommended next task: Phase 8G - Innovation Observation Repository Wiring
+Recommended next task: Phase 8I - Recommendation Persistence And Rebuild Semantics
 
-## Objective
+## Current Status
 
-Connect the analytics innovation detector to canonical database records through repository read methods.
+Phase 8G and Phase 8H are locally implemented and validated.
 
-This phase should turn canonical tournament/deck/card rows into `InnovationObservation` objects, then feed them into `detect_innovations`.
+Phase 8H added in-memory recommendation candidate generation orchestration. It composes canonical analytics/report inputs into evidence bundles, recommendation score drafts, and audit reports without persistence.
 
-It must remain analytics evidence, not recommendation generation.
+## Files Created Or Modified In Latest Packet
 
-## Scope
+- `codie/recommendations/generation.py`
+- `codie/recommendations/__init__.py`
+- `tests/test_recommendation_generation.py`
+- `docs/PHASE8H_RECOMMENDATION_GENERATION_CONTRACT.md`
+- `docs/NEXT_PHASE_CONTRACT.md`
 
-Allowed files:
+## Public Functions / Classes Added
 
-- `codie/db/repositories/analytics.py`
-- `codie/analytics/innovation/`
-- `tests/test_analytics_innovation_repository.py`
-- `docs/PHASE8G_INNOVATION_REPOSITORY_WIRING_CONTRACT.md`
-
-Optional only if needed:
-
-- `codie/analytics/__init__.py`
-
-## Public Functions / Classes
-
-Expected additions:
-
-```python
-AnalyticsRepository.list_innovation_observation_rows(...)
-innovation_observations_from_rows(...)
-detect_innovations_from_repository(...)
-```
-
-Exact names may change if the local code suggests a better pattern, but responsibilities should remain:
-
-- repository reads canonical/analytics data only
-- mapper converts rows into `InnovationObservation`
-- orchestration calls `detect_innovations`
-
-## Allowed Reads
-
-Repository code may read:
-
-- `canonical_events`
-- `canonical_decks`
-- `canonical_deck_cards`
-- `event_deck_entries`
-- `cards`
-- `card_performance_metrics`
-- `historical_card_metrics`
-- `regional_card_metrics`
-- `canonical_event_sources`
-- `canonical_deck_sources`
-
-## Forbidden Reads
-
-Do not read:
-
-- `source_events`
-- `source_decks`
-- `source_deck_cards`
-- `provider_objects`
-- provider raw payload fields
-- primer body text
+- `RecommendationGenerationConfig`
+- `RecommendationCandidateSource`
+- `RecommendationCandidatePacket`
+- `build_candidate_packet(...)`
+- `generate_candidate_packets(...)`
+- `candidate_sources_from_staples_report(...)`
 
 ## Schema Impact
 
 None.
 
-Do not create innovation tables yet.
+Phase 8H does not create tables, alter tables, insert recommendation runs, or insert recommendation candidates.
 
-Persistence, caching, and snapshot invalidation are a later explicit phase.
+## Validation Command
 
-## Required Behavior
+Use the bundled Python runtime when system Python is unavailable:
 
-The repository wiring must:
-
-- produce `InnovationObservation` records from canonical records
-- include `oracle_id`
-- include `scryfall_id`
-- include source deck/event IDs or canonical deck/event IDs converted to stable strings
-- include event date
-- include commander hash/signature from canonical deck
-- include region/country from canonical event
-- include placement, top cut, winner flags
-- include player count
-- include `cards.released_at`
-- support date window inputs
-- support minimum event size or allow detector filters to handle it
-
-## Tests
-
-Required tests:
-
-- repository rows map to `InnovationObservation`
-- recent top-performing canonical rows feed detector and flag innovation
-- historical common card does not flag
-- new release adoption uses `cards.released_at`
-- regional innovation includes region code
-- commander-specific innovation includes commander hash
-- source/canonical deck and event IDs are included in evidence output
-- no recommendation rows are created
-- boundary test still passes
-- full suite passes
-
-## Failure Modes
-
-- Missing generated timestamp raises `ValueError`
-- Missing required row identity raises `ValueError`
-- Invalid date format raises `ValueError`
-- Unsupported baseline window raises `ValueError`
-- Empty result returns empty tuple, not failure
-
-## Acceptance Criteria
-
-```text
-python -m unittest discover -s tests -v
+```powershell
+& "C:\Users\Main\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" -m unittest discover -s tests -v
 ```
 
-must pass.
-
-Static scans must remain clean:
+Static checks:
 
 ```text
+git diff --check
 rg -n "execute\(|executescript\(|sqlite3" codie --glob "!codie/db/**"
-rg -n "from codie\.db|import codie\.db|import sqlite3|from .*repositories|import .*repositories|codie\.ingestion|codie\.cards|codie\.analytics|codie\.recommendations|codie\.canonical|codie\.combos|codie\.primers|codie\.validation" codie\providers
 rg -n "codie\.providers|codie\.ingestion|codie\.db\.repositories\.source|source_events|source_decks|source_deck_cards|source_primers|source_combos|provider_objects|Moxfield|Spellbook|moxfield|spellbook|recommendation_runs|recommendation_candidates|execute\(|executescript\(|sqlite3" codie\recommendations
 ```
 
-## Do Not Do
+## Known Caveats / Review Notes
 
-- Do not generate persisted recommendation candidates.
-- Do not create recommendation runs.
-- Do not persist innovation rows.
-- Do not add schema.
-- Do not read source/provider tables directly from analytics detector code.
-- Do not add strategic wording.
+- GitHub remote is configured, but first push is still blocked on interactive GitHub HTTPS authentication.
+- Phase 8H produces in-memory candidate packets only.
+- Persistence is intentionally deferred to Phase 8I.
 
-## Follow-Up After Phase 8G
+## Recommended Next Packet
 
-Recommended later slices:
+Phase 8I - Recommendation Persistence And Rebuild Semantics.
 
-1. Phase 8H - recommendation candidate generation orchestration, still in memory
-2. Phase 8I - recommendation persistence and rebuild semantics
-3. Phase 8J - innovation snapshot persistence, if needed
-4. Phase 9 - exports/UI/report surfaces
+## Phase 8I Objective
 
-Keep each phase separately committed and validated.
+Persist validated recommendation candidate drafts through repository methods with deterministic rebuild semantics.
+
+This phase must define:
+
+- recommendation run creation
+- candidate upsert or rebuild behavior
+- transaction boundaries
+- idempotency
+- rollback behavior
+- provenance JSON shape
+- audit/report persistence rules
+
+## Phase 8I Scope
+
+Likely files:
+
+- `codie/db/repositories/recommendations.py`
+- `codie/recommendations/persistence.py`
+- `tests/test_recommendation_persistence.py`
+- `docs/PHASE8I_RECOMMENDATION_PERSISTENCE_CONTRACT.md`
+- `docs/NEXT_PHASE_CONTRACT.md`
+
+Optional only if local code requires it:
+
+- `codie/db/repositories/__init__.py`
+- `codie/recommendations/__init__.py`
+
+## Phase 8I Do Not Do
+
+- Do not read provider/source tables.
+- Do not call providers.
+- Do not create recommendation text beyond evidence/audit outputs.
+- Do not bypass repositories.
+- Do not add strategic claim language.
+- Do not implement UI/export surfaces.
+- Do not implement simulator integration.
 
 ## Required Phase Packet Shape
 
