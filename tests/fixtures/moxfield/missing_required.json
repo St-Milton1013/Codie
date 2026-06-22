@@ -1,0 +1,11 @@
+{
+  "name": "Missing Deck Identity",
+  "format": "Commander",
+  "commanders": [
+    "Tymna the Weaver"
+  ],
+  "primerMetadata": {
+    "hasPrimer": true,
+    "routeExists": true
+  }
+}

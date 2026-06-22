@@ -113,6 +113,7 @@ class SourcePrimerCandidate:
     comments: int | None
     objective_metadata: dict[str, Any]
     raw_payload: RawPayload
+    author_url: str | None = None
 
 
 @dataclass(frozen=True)

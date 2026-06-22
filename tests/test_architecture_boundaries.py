@@ -26,8 +26,11 @@ class ArchitectureBoundaryTest(unittest.TestCase):
         forbidden_prefixes = (
             "codie.analytics",
             "codie.cards",
+            "codie.canonical",
+            "codie.combos",
             "codie.db",
             "codie.ingestion",
+            "codie.primers",
             "codie.recommendations",
         )
         for path in provider_files:
@@ -96,6 +99,21 @@ class ArchitectureBoundaryTest(unittest.TestCase):
             "codie.recommendations",
         )
         for path in sorted((ROOT / "codie" / "combos").rglob("*.py")):
+            imports = imports_for(path)
+            offenders.extend(
+                f"{path.relative_to(ROOT)} imports {module}"
+                for module in imports
+                if module.startswith(forbidden_prefixes)
+            )
+        self.assertEqual(offenders, [])
+
+    def test_primer_sync_does_not_import_providers_or_recommendations(self) -> None:
+        offenders = []
+        forbidden_prefixes = (
+            "codie.providers",
+            "codie.recommendations",
+        )
+        for path in sorted((ROOT / "codie" / "primers").rglob("*.py")):
             imports = imports_for(path)
             offenders.extend(
                 f"{path.relative_to(ROOT)} imports {module}"

@@ -115,3 +115,18 @@ class SourceRepository(BaseRepository):
             """,
             (provider, provider_combo_id),
         ).fetchone()
+
+    def create_source_primer(self, primer: Mapping[str, Any]) -> int:
+        self.require(primer, ("provider", "primer_url", "imported_at"))
+        return self.insert("source_primers", primer)
+
+    def get_source_primer(self, provider: str, primer_url: str):
+        return self.connection.execute(
+            """
+            SELECT * FROM source_primers
+            WHERE provider = ? AND primer_url = ?
+            ORDER BY source_primer_id DESC
+            LIMIT 1
+            """,
+            (provider, primer_url),
+        ).fetchone()

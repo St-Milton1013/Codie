@@ -1,0 +1,16 @@
+{
+  "publicId": "mox-no-primer",
+  "publicUrl": "https://moxfield.com/decks/mox-no-primer",
+  "name": "Casual Metadata Only Deck",
+  "format": "Commander",
+  "commanders": [
+    "Najeela, the Blade-Blossom"
+  ],
+  "author": {
+    "userName": "NoPrimerAuthor"
+  },
+  "tags": [
+    "Commander"
+  ],
+  "likeCount": 1
+}

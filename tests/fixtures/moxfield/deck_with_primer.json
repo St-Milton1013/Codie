@@ -1,0 +1,50 @@
+{
+  "publicId": "mox-primer-1",
+  "publicUrl": "https://moxfield.com/decks/mox-primer-1",
+  "name": "cEDH Tymna Kraum Primer",
+  "format": "Commander",
+  "commanders": [
+    {
+      "name": "Tymna the Weaver"
+    },
+    {
+      "name": "Kraum, Ludevic's Opus"
+    }
+  ],
+  "author": {
+    "userName": "PrimerAuthor",
+    "profileUrl": "https://moxfield.com/users/PrimerAuthor"
+  },
+  "updatedAt": "2026-05-10T12:00:00Z",
+  "likeCount": 42,
+  "viewCount": 9001,
+  "commentCount": 7,
+  "tags": [
+    "cEDH",
+    "Competitive"
+  ],
+  "primerMetadata": {
+    "title": "Tymna Kraum Primer",
+    "hasPrimer": true,
+    "routeExists": true,
+    "tocPresent": true,
+    "headingCount": 6,
+    "sectionNames": [
+      "Overview",
+      "Card Choices",
+      "Mulligans"
+    ],
+    "externalLinkCount": 3,
+    "videoCount": 1,
+    "imageCount": 2,
+    "contentLengthEstimate": 12345,
+    "body": "DO NOT STORE THIS PRIMER BODY OR STRATEGY TEXT",
+    "sections": [
+      {
+        "title": "Mulligans",
+        "content": "DO NOT STORE THIS MULLIGAN GUIDE"
+      }
+    ]
+  },
+  "description": "DO NOT STORE THIS DESCRIPTION BODY"
+}

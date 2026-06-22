@@ -106,3 +106,100 @@ class CuratedRepository(BaseRepository):
             """,
             (combo_id,),
         ).fetchall()
+
+    def upsert_primer(self, primer: Mapping[str, Any]) -> int:
+        self.require(primer, ("source", "primer_url", "created_at", "updated_at"))
+        columns = (
+            "source",
+            "deck_url",
+            "primer_url",
+            "commander_key",
+            "partner_key",
+            "deck_title",
+            "primer_title",
+            "author",
+            "author_url",
+            "published_at",
+            "modified_at",
+            "primer_updated_at_text",
+            "primer_updated_at_parsed",
+            "likes",
+            "views",
+            "comments",
+            "bracket",
+            "has_primer_route",
+            "primer_content_present",
+            "primer_toc_present",
+            "primer_heading_count",
+            "primer_section_names_json",
+            "primer_external_link_count",
+            "primer_video_count",
+            "primer_image_count",
+            "cedh_title_signal",
+            "cedh_tag_signal",
+            "competitive_tag_signal",
+            "tournament_title_signal",
+            "content_length_estimate",
+            "primer_quality_score",
+            "raw_metadata_json",
+            "created_at",
+            "updated_at",
+        )
+        values = tuple(primer.get(column) for column in columns)
+        self.connection.execute(
+            """
+            INSERT INTO primer_registry (
+                source, deck_url, primer_url, commander_key, partner_key, deck_title, primer_title,
+                author, author_url, published_at, modified_at, primer_updated_at_text,
+                primer_updated_at_parsed, likes, views, comments, bracket, has_primer_route,
+                primer_content_present, primer_toc_present, primer_heading_count,
+                primer_section_names_json, primer_external_link_count, primer_video_count,
+                primer_image_count, cedh_title_signal, cedh_tag_signal, competitive_tag_signal,
+                tournament_title_signal, content_length_estimate, primer_quality_score,
+                raw_metadata_json, created_at, updated_at
+            )
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            ON CONFLICT(primer_url) DO UPDATE SET
+                source = excluded.source,
+                deck_url = excluded.deck_url,
+                commander_key = excluded.commander_key,
+                partner_key = excluded.partner_key,
+                deck_title = excluded.deck_title,
+                primer_title = excluded.primer_title,
+                author = excluded.author,
+                author_url = excluded.author_url,
+                published_at = excluded.published_at,
+                modified_at = excluded.modified_at,
+                primer_updated_at_text = excluded.primer_updated_at_text,
+                primer_updated_at_parsed = excluded.primer_updated_at_parsed,
+                likes = excluded.likes,
+                views = excluded.views,
+                comments = excluded.comments,
+                bracket = excluded.bracket,
+                has_primer_route = excluded.has_primer_route,
+                primer_content_present = excluded.primer_content_present,
+                primer_toc_present = excluded.primer_toc_present,
+                primer_heading_count = excluded.primer_heading_count,
+                primer_section_names_json = excluded.primer_section_names_json,
+                primer_external_link_count = excluded.primer_external_link_count,
+                primer_video_count = excluded.primer_video_count,
+                primer_image_count = excluded.primer_image_count,
+                cedh_title_signal = excluded.cedh_title_signal,
+                cedh_tag_signal = excluded.cedh_tag_signal,
+                competitive_tag_signal = excluded.competitive_tag_signal,
+                tournament_title_signal = excluded.tournament_title_signal,
+                content_length_estimate = excluded.content_length_estimate,
+                primer_quality_score = excluded.primer_quality_score,
+                raw_metadata_json = excluded.raw_metadata_json,
+                updated_at = excluded.updated_at
+            """,
+            values,
+        )
+        row = self.get_primer(str(primer["primer_url"]))
+        return int(row["primer_id"])
+
+    def get_primer(self, primer_url: str):
+        return self.connection.execute(
+            "SELECT * FROM primer_registry WHERE primer_url = ?",
+            (primer_url,),
+        ).fetchone()
