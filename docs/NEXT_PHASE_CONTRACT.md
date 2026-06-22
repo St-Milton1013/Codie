@@ -1,25 +1,21 @@
 # Next Phase Contract
 
-Recommended next task: Phase 10F - User Deck Workflow Checkpoint Report
+Recommended next task: Outside Validation - Phase 10 User Deck Workflow
 
 ## Current Status
 
-Phase 10E is locally implemented and validated.
+Phase 10F is locally implemented and validated.
 
-Phase 10E added safe file writers for already-built user deck comparison JSON and Markdown exports. It reuses existing export writer path and content-type validation. It did not add providers, source table reads, recommendations, UI, schema, DB access, or live network dependencies.
+Phase 10F added a checkpoint report covering the Phase 10 user deck workflow from import through comparison export writing. It did not add code, providers, source table reads, recommendations, UI, schema, DB access, or live network dependencies.
 
 ## Files Created Or Modified In Latest Packet
 
-- `codie/exports/__init__.py`
-- `codie/exports/user_deck_reports.py`
-- `tests/test_exports_user_deck_reports.py`
-- `docs/PHASE10E_USER_DECK_COMPARISON_FILE_WRITER_CONTRACT.md`
+- `docs/CHECKPOINT_PHASE10_USER_DECK_WORKFLOW_REPORT.md`
 - `docs/NEXT_PHASE_CONTRACT.md`
 
 ## Public Functions / Classes Added
 
-- `UserDeckComparisonWriteResult`
-- `write_user_deck_comparison_exports(...)`
+None. Documentation-only checkpoint.
 
 ## Schema Impact
 
@@ -44,22 +40,21 @@ rg -n "codie\.providers|codie\.recommendations|codie\.analytics|codie\.ingestion
 ## Known Caveats / Review Notes
 
 - GitHub remote is configured, but first push is still blocked on interactive GitHub HTTPS authentication.
-- User deck comparison file writers require caller-supplied paths.
+- Phase 10 should be sent for outside validation before UI or final recommendation output begins.
 - No UI exists yet.
 
 ## Recommended Next Packet
 
-Phase 10F - User Deck Workflow Checkpoint Report.
+Outside Validation - Phase 10 User Deck Workflow.
 
-This should summarize Phase 10A-10E for outside validation:
+Send:
 
-- user deck import
-- analysis input builder
-- evidence comparison
-- export surface
-- file writers
-- validation results
-- boundaries and remaining caveats
+- `docs/CHECKPOINT_PHASE10_USER_DECK_WORKFLOW_REPORT.md`
+- `docs/PHASE10A_USER_DECK_IMPORT_CONTRACT.md`
+- `docs/PHASE10B_USER_DECK_ANALYSIS_INPUT_CONTRACT.md`
+- `docs/PHASE10C_USER_DECK_EVIDENCE_COMPARISON_CONTRACT.md`
+- `docs/PHASE10D_USER_DECK_COMPARISON_EXPORT_CONTRACT.md`
+- `docs/PHASE10E_USER_DECK_COMPARISON_FILE_WRITER_CONTRACT.md`
 
 ## Do Not Do
 
@@ -69,7 +64,7 @@ This should summarize Phase 10A-10E for outside validation:
 - Do not add strategic claim language.
 - Do not start simulator integration.
 - Do not add schema without explicit migration contract.
-- Do not generate final recommendations in Phase 10F.
+- Do not generate final recommendations before Phase 10 outside validation.
 
 ## Required Phase Packet Shape
 
