@@ -8,6 +8,7 @@ Phase 10B: PASS
 Phase 10C: PASS
 Phase 10D: PASS
 Phase 10E: PASS
+Phase 10G: PASS
 Overall: READY FOR OUTSIDE VALIDATION
 ```
 
@@ -24,6 +25,7 @@ Phase 10 added the local user-deck workflow needed before user-facing analysis:
 - export comparison data as JSON-compatible dictionaries
 - export comparison reports as Markdown
 - write comparison exports to caller-supplied files
+- run the accepted workflow through a repeatable CLI wrapper
 
 ## Files Added Or Modified
 
@@ -36,6 +38,8 @@ Primary implementation:
 - `codie/db/repositories/user.py`
 - `codie/exports/user_deck_reports.py`
 - `codie/exports/__init__.py`
+- `codie/cli/__init__.py`
+- `codie/cli/user_deck.py`
 
 Tests:
 
@@ -43,6 +47,7 @@ Tests:
 - `tests/test_user_deck_analysis_input.py`
 - `tests/test_user_deck_evidence_comparison.py`
 - `tests/test_exports_user_deck_reports.py`
+- `tests/test_cli_user_deck.py`
 
 Contracts:
 
@@ -51,6 +56,7 @@ Contracts:
 - `docs/PHASE10C_USER_DECK_EVIDENCE_COMPARISON_CONTRACT.md`
 - `docs/PHASE10D_USER_DECK_COMPARISON_EXPORT_CONTRACT.md`
 - `docs/PHASE10E_USER_DECK_COMPARISON_FILE_WRITER_CONTRACT.md`
+- `docs/PHASE10G_USER_DECK_CLI_CONTRACT.md`
 
 ## Public API Added
 
@@ -91,6 +97,11 @@ Repository read methods:
 - `UserRepository.list_user_deck_cards(...)`
 - `UserRepository.get_analysis_session(...)`
 
+CLI:
+
+- `codie.cli.user_deck.build_parser(...)`
+- `codie.cli.user_deck.main(...)`
+
 ## Schema Impact
 
 None.
@@ -118,6 +129,13 @@ The export layer does not import:
 - ingestion
 - source/provider tables
 - SQLite
+
+The CLI layer does not import:
+
+- providers
+- recommendations
+- analytics
+- source/provider tables
 
 ## Atomicity
 
@@ -154,7 +172,7 @@ Focused tests were run for each packet.
 Latest full-suite validation:
 
 ```text
-Ran 261 tests in 0.543s
+Ran 266 tests in 0.694s
 
 OK
 ```
@@ -179,6 +197,18 @@ returned:
 no matches
 ```
 
+CLI boundary scan:
+
+```text
+rg -n "codie\.providers|codie\.recommendations|codie\.analytics|source_events|source_decks|provider_objects" codie\cli
+```
+
+returned:
+
+```text
+no matches
+```
+
 User deck boundary scan:
 
 ```text
@@ -193,9 +223,10 @@ no matches
 
 ## Remaining Review Notes
 
-- GitHub remote is configured, but first push still needs interactive GitHub HTTPS authentication.
+- GitHub remote is configured and the earlier Phase 10F checkpoint was pushed. Phase 10G should be pushed after this checkpoint update commit.
 - No UI exists yet.
 - Phase 10 comparison is evidence-only and does not persist comparison rows.
+- CLI requires a local Codie SQLite database with card rows before deck import can resolve cards.
 - Final recommendation generation remains intentionally separate.
 
 ## Recommended Next Step
@@ -204,7 +235,6 @@ Run outside validation on Phase 10, then proceed to the next contract-first pack
 
 Likely next candidates:
 
-- user-facing CLI wrapper for deck import/comparison exports
 - persisted saved analysis records
 - UI planning
 - simulator integration planning
