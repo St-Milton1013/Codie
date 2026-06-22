@@ -20,6 +20,7 @@ from .importer import (
     UserDeckImporter,
     parse_user_deck_text,
 )
+from .saved_analysis import SavedUserDeckAnalysisResult, save_user_deck_comparison_analysis
 
 __all__ = [
     "ParsedUserDeck",
@@ -33,7 +34,9 @@ __all__ = [
     "UserDeckImportError",
     "UserDeckImportResult",
     "UserDeckImporter",
+    "SavedUserDeckAnalysisResult",
     "build_user_deck_analysis_input",
     "compare_user_deck_to_evidence",
     "parse_user_deck_text",
+    "save_user_deck_comparison_analysis",
 ]

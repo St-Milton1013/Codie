@@ -37,3 +37,21 @@ class UserRepository(BaseRepository):
 
     def get_analysis_session(self, analysis_session_id: int):
         return self.fetch_by_id("analysis_sessions", "analysis_session_id", analysis_session_id)
+
+    def create_saved_analysis(self, analysis: Mapping[str, Any]) -> int:
+        self.require(analysis, ("deck_hash", "analysis_type", "generated_at", "summary_json"))
+        return self.insert("saved_analysis", analysis)
+
+    def get_saved_analysis(self, saved_analysis_id: int):
+        return self.fetch_by_id("saved_analysis", "saved_analysis_id", saved_analysis_id)
+
+    def list_saved_analysis_for_deck(self, user_deck_id: int):
+        return self.connection.execute(
+            """
+            SELECT *
+            FROM saved_analysis
+            WHERE user_deck_id = ?
+            ORDER BY generated_at, saved_analysis_id
+            """,
+            (user_deck_id,),
+        ).fetchall()
