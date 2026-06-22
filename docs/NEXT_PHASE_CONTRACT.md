@@ -1,29 +1,26 @@
 # Next Phase Contract
 
-Recommended next task: Phase 9B - Export File Writer / CLI Wrapper
+Recommended next task: Phase 9C - Export CLI Or Checkpoint Report Generator
 
 ## Current Status
 
-Phase 9A is locally implemented and validated.
+Phase 9B is locally implemented and validated.
 
-Phase 9A added deterministic JSON-compatible and Markdown export helpers for recommendation runs and innovation snapshots. It did not add UI, schema, providers, or live network dependencies.
+Phase 9B added deterministic file writers for accepted JSON-compatible export dictionaries and Markdown report strings. It did not add UI, schema, DB reads, providers, or live network dependencies.
 
 ## Files Created Or Modified In Latest Packet
 
+- `codie/exports/writers.py`
 - `codie/exports/__init__.py`
-- `codie/exports/reports.py`
-- `tests/test_exports_reports.py`
-- `docs/PHASE9A_REPORT_EXPORT_SURFACE_CONTRACT.md`
+- `tests/test_exports_writers.py`
+- `docs/PHASE9B_EXPORT_FILE_WRITER_CONTRACT.md`
 - `docs/NEXT_PHASE_CONTRACT.md`
 
 ## Public Functions / Classes Added
 
-- `ExportMetadata`
-- `export_recommendation_run_json(...)`
-- `export_innovation_snapshot_json(...)`
-- `recommendation_run_markdown(...)`
-- `innovation_snapshot_markdown(...)`
-- `outside_review_markdown(...)`
+- `ExportWriteResult`
+- `write_json_export(...)`
+- `write_markdown_export(...)`
 
 ## Schema Impact
 
@@ -41,29 +38,24 @@ Static checks:
 
 ```text
 git diff --check
-rg -n "codie\.providers|codie\.ingestion|source_events|source_decks|source_deck_cards|source_primers|source_combos|provider_objects|execute\(|executescript\(|sqlite3" codie\exports
+rg -n "codie\.providers|codie\.db|codie\.ingestion|source_events|source_decks|provider_objects|execute\(|executescript\(|sqlite3" codie\exports
 ```
 
 ## Known Caveats / Review Notes
 
 - GitHub remote is configured, but first push is still blocked on interactive GitHub HTTPS authentication.
-- Export helpers are pure in-memory transforms; no file writer or CLI exists yet.
+- Export writers are low-level helpers; no CLI exists yet.
 - No UI exists yet.
 
 ## Recommended Next Packet
 
-Phase 9B - Export File Writer / CLI Wrapper.
+Phase 9C - Export CLI Or Checkpoint Report Generator.
 
-## Phase 9B Objective
+Preferred next scope:
 
-Add a thin, deterministic wrapper that writes accepted export dictionaries/Markdown strings to disk.
-
-Likely outputs:
-
-- JSON file writer
-- Markdown file writer
-- safe path handling
-- optional small CLI entry point if project structure supports it
+- generate a checkpoint Markdown report from already-built export payloads
+- optionally add a tiny CLI only if it does not require packaging changes
+- no DB access unless explicitly routed through repository methods and covered by contract
 
 ## Do Not Do
 
