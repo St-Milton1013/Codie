@@ -88,6 +88,7 @@ class RecommendationCandidateSource:
 class RecommendationCandidatePacket:
     candidate: RecommendationCandidateDraft
     audit: CandidateAuditReport
+    scryfall_id: str | None = None
 
 
 def _require_text(value: str, field_name: str) -> None:
@@ -160,6 +161,7 @@ def build_candidate_packet(
             generated_at=config.generated_at,
             minimum_ranked_sample_size=config.minimum_sample_size,
         ),
+        scryfall_id=source.scryfall_id,
     )
 
 

@@ -4,6 +4,7 @@ from .analytics import AnalyticsRepository
 from .canonical import CanonicalRepository
 from .core import CoreRepository
 from .curated import CuratedRepository
+from .recommendations import RecommendationRepository
 from .regional import RegionalRepository
 from .simulation import SimulationRepository
 from .source import SourceRepository
@@ -14,6 +15,7 @@ __all__ = [
     "CanonicalRepository",
     "CoreRepository",
     "CuratedRepository",
+    "RecommendationRepository",
     "RegionalRepository",
     "SimulationRepository",
     "SourceRepository",

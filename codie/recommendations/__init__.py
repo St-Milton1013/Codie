@@ -17,6 +17,13 @@ from .generation import (
     generate_candidate_packets,
 )
 from .observations import staple_observations_from_canonical_rows
+from .persistence import (
+    PersistedRecommendationRun,
+    RecommendationRunSpec,
+    persist_recommendation_packets,
+    recommendation_candidate_row,
+    recommendation_run_row,
+)
 from .reports import (
     CandidateAuditIssue,
     CandidateAuditReport,
@@ -70,11 +77,13 @@ __all__ = [
     "RecommendationCandidatePacket",
     "RecommendationCandidateSource",
     "RecommendationGenerationConfig",
+    "RecommendationRunSpec",
     "RecommendationScoreBreakdown",
     "RecommendationScoreInput",
     "ScoreComponent",
     "StapleObservation",
     "StapleReportRow",
+    "PersistedRecommendationRun",
     "build_candidate_packet",
     "build_candidate_audit_report",
     "build_evidence_bundle",
@@ -92,6 +101,9 @@ __all__ = [
     "jaccard_similarity",
     "lift_score",
     "low_sample_penalty",
+    "persist_recommendation_packets",
+    "recommendation_candidate_row",
+    "recommendation_run_row",
     "normalize_candidate_type",
     "safe_rate",
     "score_recommendation_candidate",

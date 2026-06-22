@@ -1,35 +1,43 @@
 # Next Phase Contract
 
-Recommended next task: Phase 8I - Recommendation Persistence And Rebuild Semantics
+Recommended next task: Phase 8J - Innovation Snapshot Persistence Decision
 
 ## Current Status
 
-Phase 8G and Phase 8H are locally implemented and validated.
+Phase 8G, Phase 8H, and Phase 8I are locally implemented and validated.
 
-Phase 8H added in-memory recommendation candidate generation orchestration. It composes canonical analytics/report inputs into evidence bundles, recommendation score drafts, and audit reports without persistence.
+Phase 8I added recommendation persistence and rebuild semantics. Validated candidate packets can now be written through `RecommendationRepository` into existing recommendation tables with atomic replacement behavior.
 
 ## Files Created Or Modified In Latest Packet
 
-- `codie/recommendations/generation.py`
+- `codie/db/repositories/recommendations.py`
+- `codie/db/repositories/__init__.py`
+- `codie/recommendations/persistence.py`
 - `codie/recommendations/__init__.py`
-- `tests/test_recommendation_generation.py`
-- `docs/PHASE8H_RECOMMENDATION_GENERATION_CONTRACT.md`
+- `codie/recommendations/generation.py`
+- `tests/test_recommendation_persistence.py`
+- `docs/PHASE8I_RECOMMENDATION_PERSISTENCE_CONTRACT.md`
 - `docs/NEXT_PHASE_CONTRACT.md`
 
 ## Public Functions / Classes Added
 
-- `RecommendationGenerationConfig`
-- `RecommendationCandidateSource`
-- `RecommendationCandidatePacket`
-- `build_candidate_packet(...)`
-- `generate_candidate_packets(...)`
-- `candidate_sources_from_staples_report(...)`
+- `RecommendationRepository`
+- `RecommendationRunSpec`
+- `PersistedRecommendationRun`
+- `recommendation_run_row(...)`
+- `recommendation_candidate_row(...)`
+- `persist_recommendation_packets(...)`
 
 ## Schema Impact
 
 None.
 
-Phase 8H does not create tables, alter tables, insert recommendation runs, or insert recommendation candidates.
+Phase 8I uses existing tables:
+
+- `recommendation_runs`
+- `recommendation_candidates`
+
+No migration or schema change was introduced.
 
 ## Validation Command
 
@@ -44,57 +52,39 @@ Static checks:
 ```text
 git diff --check
 rg -n "execute\(|executescript\(|sqlite3" codie --glob "!codie/db/**"
-rg -n "codie\.providers|codie\.ingestion|codie\.db\.repositories\.source|source_events|source_decks|source_deck_cards|source_primers|source_combos|provider_objects|Moxfield|Spellbook|moxfield|spellbook|recommendation_runs|recommendation_candidates|execute\(|executescript\(|sqlite3" codie\recommendations
+rg -n "codie\.providers|codie\.ingestion|codie\.db\.repositories\.source|source_events|source_decks|source_deck_cards|source_primers|source_combos|provider_objects|Moxfield|Spellbook|moxfield|spellbook|execute\(|executescript\(|sqlite3" codie\recommendations
 ```
 
 ## Known Caveats / Review Notes
 
 - GitHub remote is configured, but first push is still blocked on interactive GitHub HTTPS authentication.
-- Phase 8H produces in-memory candidate packets only.
-- Persistence is intentionally deferred to Phase 8I.
+- Phase 8I rebuild key is `input_deck_hash + generated_at`; future user-deck workflow may refine this.
+- Phase 8J should decide whether innovation snapshots need persistence now or can remain computed on demand.
 
 ## Recommended Next Packet
 
-Phase 8I - Recommendation Persistence And Rebuild Semantics.
+Phase 8J - Innovation Snapshot Persistence Decision.
 
-## Phase 8I Objective
+This should be a decision packet first:
 
-Persist validated recommendation candidate drafts through repository methods with deterministic rebuild semantics.
+- determine whether innovation outputs need persistence before exports/UI
+- if yes, define schema/migration requirements explicitly
+- if no, document computed-on-demand behavior and move to Phase 9A
 
-This phase must define:
+## Alternative Next Packet
 
-- recommendation run creation
-- candidate upsert or rebuild behavior
-- transaction boundaries
-- idempotency
-- rollback behavior
-- provenance JSON shape
-- audit/report persistence rules
+Phase 9A - Report/Export Surface Contract.
 
-## Phase 8I Scope
+This is appropriate if innovation snapshot persistence is deferred.
 
-Likely files:
+## Do Not Do
 
-- `codie/db/repositories/recommendations.py`
-- `codie/recommendations/persistence.py`
-- `tests/test_recommendation_persistence.py`
-- `docs/PHASE8I_RECOMMENDATION_PERSISTENCE_CONTRACT.md`
-- `docs/NEXT_PHASE_CONTRACT.md`
-
-Optional only if local code requires it:
-
-- `codie/db/repositories/__init__.py`
-- `codie/recommendations/__init__.py`
-
-## Phase 8I Do Not Do
-
-- Do not read provider/source tables.
+- Do not add schema without an explicit migration contract.
+- Do not read provider/source tables from recommendations.
 - Do not call providers.
-- Do not create recommendation text beyond evidence/audit outputs.
-- Do not bypass repositories.
 - Do not add strategic claim language.
-- Do not implement UI/export surfaces.
-- Do not implement simulator integration.
+- Do not implement UI before report/export contract is defined.
+- Do not start simulator integration.
 
 ## Required Phase Packet Shape
 
