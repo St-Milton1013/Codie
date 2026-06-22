@@ -54,6 +54,8 @@ python -m codie.cli.user_deck import-user-deck `
   --output-root .
 ```
 
+User-facing usage should supply `--output-root` whenever `--json-out` and `--markdown-out` are used. The low-level writer still allows omitted `output_root` for trusted internal callers, but CLI documentation should prefer containment.
+
 ## Evidence JSON Shape
 
 Accepted input:
@@ -112,6 +114,7 @@ The CLI must not import:
 - Invalid evidence JSON fails before comparison.
 - `--json-out` and `--markdown-out` must be supplied together.
 - Export paths respect existing output-root containment rules.
+- `--output-root` is recommended for normal CLI export usage so output paths are explicitly contained.
 
 ## Tests
 

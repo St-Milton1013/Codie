@@ -1,16 +1,17 @@
 # Next Phase Contract
 
-Recommended next task: Outside Validation - Phase 10 User Deck Workflow With CLI And Saved Analysis
+Recommended next task: Phase 11 Planning
 
 ## Current Status
 
-Phase 10J is locally implemented and ready for validation.
+Phase 10K is locally implemented and ready for validation.
 
-Phase 10J updated the Phase 10 checkpoint report to include saved-analysis persistence. It did not add code, providers, source table reads, recommendations, UI, schema, DB access, or live network dependencies.
+Phase 10K completed the small CLI documentation pass requested by outside review. It documents that user-facing CLI export usage should include `--output-root` while preserving low-level writer flexibility for trusted callers.
 
 ## Files Created Or Modified In Latest Packet
 
 - `docs/CHECKPOINT_PHASE10_USER_DECK_WORKFLOW_REPORT.md`
+- `docs/PHASE10G_USER_DECK_CLI_CONTRACT.md`
 - `docs/NEXT_PHASE_CONTRACT.md`
 
 ## Public Functions / Classes Added
@@ -40,24 +41,23 @@ rg -n "codie\.providers|codie\.recommendations|codie\.analytics|source_events|so
 
 ## Known Caveats / Review Notes
 
-- GitHub remote is configured and Phase 10G/10H were pushed; Phase 10I/10J still need push after validation.
+- GitHub remote is configured and Phase 10I/10J were pushed; Phase 10K still needs commit and push after validation.
 - CLI requires a local Codie database with card rows before deck import can resolve cards.
+- CLI export docs recommend `--output-root` for normal usage.
 - No UI exists yet.
 
 ## Recommended Next Packet
 
-Outside Validation - Phase 10 User Deck Workflow With CLI And Saved Analysis.
+Phase 11 Planning.
 
-Send:
+Define the next major workflow before implementation. Candidate directions:
 
-- `docs/CHECKPOINT_PHASE10_USER_DECK_WORKFLOW_REPORT.md`
-- `docs/PHASE10A_USER_DECK_IMPORT_CONTRACT.md`
-- `docs/PHASE10B_USER_DECK_ANALYSIS_INPUT_CONTRACT.md`
-- `docs/PHASE10C_USER_DECK_EVIDENCE_COMPARISON_CONTRACT.md`
-- `docs/PHASE10D_USER_DECK_COMPARISON_EXPORT_CONTRACT.md`
-- `docs/PHASE10E_USER_DECK_COMPARISON_FILE_WRITER_CONTRACT.md`
-- `docs/PHASE10G_USER_DECK_CLI_CONTRACT.md`
-- `docs/PHASE10I_SAVED_ANALYSIS_PERSISTENCE_CONTRACT.md`
+- UI planning
+- simulator integration planning
+- saved analysis retrieval/report listing
+- deployment/packaging docs
+
+Keep final recommendation generation separate until the Phase 8/10 boundaries are explicitly carried forward.
 
 ## Do Not Do
 

@@ -241,6 +241,7 @@ no matches
 - No UI exists yet.
 - Phase 10 comparison is evidence-only and does not persist comparison rows.
 - CLI requires a local Codie SQLite database with card rows before deck import can resolve cards.
+- CLI export docs recommend `--output-root` for normal usage; omitted `output_root` remains available for trusted low-level callers.
 - Saved analysis persistence stores summaries, not final recommendations.
 - Final recommendation generation remains intentionally separate.
 
