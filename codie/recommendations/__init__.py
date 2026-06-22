@@ -23,15 +23,25 @@ from .statistics import (
     weighted_inclusion_rate,
     weighted_jaccard_similarity,
 )
+from .staples import (
+    CommanderStaplesReport,
+    StapleObservation,
+    StapleReportRow,
+    build_commander_staples_report,
+)
 
 __all__ = [
     "ConfidenceRating",
+    "CommanderStaplesReport",
     "EvidenceBundle",
     "EvidenceItem",
     "EvidenceStackSummary",
     "FrequencyStats",
     "GenericStapleProfile",
+    "StapleObservation",
+    "StapleReportRow",
     "build_evidence_bundle",
+    "build_commander_staples_report",
     "clamp",
     "confidence_rating",
     "evidence_stack_summary",
