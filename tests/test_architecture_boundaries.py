@@ -126,6 +126,7 @@ class ArchitectureBoundaryTest(unittest.TestCase):
         recommendation_root = ROOT / "codie" / "recommendations"
         if not recommendation_root.exists():
             return
+        forbidden_exact_imports = {"sqlite3"}
         forbidden_import_prefixes = (
             "codie.providers",
             "codie.ingestion",
@@ -142,10 +143,21 @@ class ArchitectureBoundaryTest(unittest.TestCase):
             "Spellbook",
             "moxfield",
             "spellbook",
+            "recommendation_runs",
+            "recommendation_candidates",
+        )
+        forbidden_sql_fragments = (
+            "execute(",
+            "executescript(",
         )
         offenders = []
         for path in sorted(recommendation_root.rglob("*.py")):
             imports = imports_for(path)
+            offenders.extend(
+                f"{path.relative_to(ROOT)} imports {module}"
+                for module in imports
+                if module in forbidden_exact_imports
+            )
             offenders.extend(
                 f"{path.relative_to(ROOT)} imports {module}"
                 for module in imports
@@ -155,6 +167,11 @@ class ArchitectureBoundaryTest(unittest.TestCase):
             offenders.extend(
                 f"{path.relative_to(ROOT)} references {fragment}"
                 for fragment in forbidden_text
+                if fragment in text
+            )
+            offenders.extend(
+                f"{path.relative_to(ROOT)} uses raw SQL fragment {fragment}"
+                for fragment in forbidden_sql_fragments
                 if fragment in text
             )
         self.assertEqual(offenders, [])
