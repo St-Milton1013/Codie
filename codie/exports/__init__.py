@@ -15,13 +15,19 @@ from .reports import (
     outside_review_markdown,
     recommendation_run_markdown,
 )
-from .user_deck_reports import user_deck_comparison_export, user_deck_comparison_markdown
+from .user_deck_reports import (
+    UserDeckComparisonWriteResult,
+    user_deck_comparison_export,
+    user_deck_comparison_markdown,
+    write_user_deck_comparison_exports,
+)
 from .writers import ExportWriteResult, write_json_export, write_markdown_export
 
 __all__ = [
     "CheckpointExport",
     "ExportMetadata",
     "ExportWriteResult",
+    "UserDeckComparisonWriteResult",
     "ValidationSummary",
     "build_checkpoint_export",
     "checkpoint_markdown",
@@ -35,4 +41,5 @@ __all__ = [
     "write_checkpoint_markdown",
     "write_json_export",
     "write_markdown_export",
+    "write_user_deck_comparison_exports",
 ]

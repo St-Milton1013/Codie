@@ -1,8 +1,15 @@
 from __future__ import annotations
 
+import json
+import tempfile
+from pathlib import Path
 import unittest
 
-from codie.exports import user_deck_comparison_export, user_deck_comparison_markdown
+from codie.exports import (
+    user_deck_comparison_export,
+    user_deck_comparison_markdown,
+    write_user_deck_comparison_exports,
+)
 from codie.user_decks import (
     UserDeckEvidenceComparison,
     UserDeckEvidenceComparisonRow,
@@ -101,6 +108,34 @@ class UserDeckReportExportTest(unittest.TestCase):
 
         self.assertIn("Card \\| Name", markdown)
         self.assertIn("source\\|record", markdown)
+
+    def test_write_user_deck_comparison_exports_writes_json_and_markdown(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            result = write_user_deck_comparison_exports(
+                comparison(),
+                json_path=root / "comparison.json",
+                markdown_path=root / "comparison.md",
+                output_root=root,
+            )
+
+            payload = json.loads((root / "comparison.json").read_text(encoding="utf-8"))
+            markdown = (root / "comparison.md").read_text(encoding="utf-8")
+            self.assertEqual(result.json.content_type, "application/json")
+            self.assertEqual(result.markdown.content_type, "text/markdown")
+            self.assertEqual(payload["deck_hash"], "deck-hash")
+            self.assertIn("# User Deck Evidence Comparison", markdown)
+
+    def test_write_user_deck_comparison_exports_respects_output_root(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            with self.assertRaises(ValueError):
+                write_user_deck_comparison_exports(
+                    comparison(),
+                    json_path=root.parent / "comparison.json",
+                    markdown_path=root / "comparison.md",
+                    output_root=root,
+                )
 
 
 if __name__ == "__main__":

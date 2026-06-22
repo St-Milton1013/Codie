@@ -2,7 +2,18 @@
 
 from __future__ import annotations
 
+from dataclasses import dataclass
+from pathlib import Path
+
 from codie.user_decks import UserDeckEvidenceComparison
+
+from .writers import ExportWriteResult, write_json_export, write_markdown_export
+
+
+@dataclass(frozen=True)
+class UserDeckComparisonWriteResult:
+    json: ExportWriteResult
+    markdown: ExportWriteResult
 
 
 def user_deck_comparison_export(comparison: UserDeckEvidenceComparison) -> dict:
@@ -73,6 +84,29 @@ def user_deck_comparison_markdown(comparison: UserDeckEvidenceComparison) -> str
     for row in comparison.rows:
         lines.append(f"- {row.evidence_line}")
     return "\n".join(lines).rstrip() + "\n"
+
+
+def write_user_deck_comparison_exports(
+    comparison: UserDeckEvidenceComparison,
+    *,
+    json_path: str | Path,
+    markdown_path: str | Path,
+    output_root: str | Path | None = None,
+) -> UserDeckComparisonWriteResult:
+    """Write JSON and Markdown comparison exports with caller-supplied paths."""
+
+    return UserDeckComparisonWriteResult(
+        json=write_json_export(
+            user_deck_comparison_export(comparison),
+            json_path,
+            output_root=output_root,
+        ),
+        markdown=write_markdown_export(
+            user_deck_comparison_markdown(comparison),
+            markdown_path,
+            output_root=output_root,
+        ),
+    )
 
 
 def _escape_table(value: str) -> str:
