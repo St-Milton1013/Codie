@@ -8,6 +8,7 @@ from .evidence import (
     evidence_stack_summary,
     validate_claim_text,
 )
+from .observations import staple_observations_from_canonical_rows
 from .statistics import (
     ConfidenceRating,
     FrequencyStats,
@@ -51,6 +52,7 @@ __all__ = [
     "jaccard_similarity",
     "lift_score",
     "safe_rate",
+    "staple_observations_from_canonical_rows",
     "validate_claim_text",
     "weighted_inclusion_rate",
     "weighted_jaccard_similarity",

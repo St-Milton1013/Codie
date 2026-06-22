@@ -5,7 +5,10 @@ from __future__ import annotations
 from collections.abc import Mapping
 from typing import Any
 
-from .base import BaseRepository
+from .base import BaseRepository, RepositoryError
+
+
+_OBSERVATION_SCOPES = {"all", "top_16", "winners"}
 
 
 class AnalyticsRepository(BaseRepository):
@@ -61,6 +64,118 @@ class AnalyticsRepository(BaseRepository):
             ORDER BY zone, scryfall_id
             """,
             (canonical_deck_id,),
+        ).fetchall()
+
+    def list_commander_card_observation_rows(
+        self,
+        *,
+        commander_hash: str,
+        window_start_date: str | None = None,
+        window_end_date: str | None = None,
+        placement_scope: str = "top_16",
+        include_commanders: bool = False,
+    ):
+        """Return canonical card observations for downstream recommendation/report inputs."""
+        if not isinstance(commander_hash, str) or not commander_hash.strip():
+            raise RepositoryError("commander_hash is required")
+        if placement_scope not in _OBSERVATION_SCOPES:
+            raise RepositoryError(f"Unsupported placement_scope: {placement_scope}")
+
+        filters = ["cd.commander_hash = ?"]
+        params: list[Any] = [commander_hash]
+        if window_start_date:
+            filters.append("ce.event_date >= ?")
+            params.append(window_start_date)
+        if window_end_date:
+            filters.append("ce.event_date <= ?")
+            params.append(window_end_date)
+        if placement_scope == "top_16":
+            filters.append(
+                """
+                (
+                    ede.top_cut_made = 1
+                    OR ede.final_pod = 1
+                    OR ede.winner = 1
+                    OR (ede.placement IS NOT NULL AND ede.placement <= 16)
+                )
+                """
+            )
+        elif placement_scope == "winners":
+            filters.append("(ede.winner = 1 OR ede.placement = 1)")
+        if not include_commanders:
+            filters.append("COALESCE(cdc.is_commander, 0) = 0")
+
+        where_clause = " AND ".join(filters)
+        return self.connection.execute(
+            f"""
+            SELECT
+                ede.event_deck_entry_id,
+                ede.canonical_event_id,
+                ede.canonical_deck_id,
+                cd.commander_hash,
+                cdc.canonical_deck_card_id,
+                cdc.scryfall_id,
+                cdc.oracle_id,
+                c.name AS card_name,
+                c.type_line,
+                c.color_identity_json,
+                cdc.quantity,
+                cdc.zone,
+                cdc.is_commander,
+                ede.entry_weight,
+                ede.placement,
+                ede.top_cut_made,
+                ede.final_pod,
+                ede.winner,
+                ce.event_date,
+                ce.region,
+                ce.country,
+                (
+                    SELECT cds.source_url
+                    FROM canonical_deck_sources cds
+                    WHERE cds.canonical_deck_id = ede.canonical_deck_id
+                        AND (
+                            ede.source_deck_id IS NULL
+                            OR cds.source_deck_id = ede.source_deck_id
+                        )
+                        AND cds.source_url IS NOT NULL
+                    ORDER BY cds.canonical_deck_source_id
+                    LIMIT 1
+                ) AS deck_url,
+                (
+                    SELECT ces.source_url
+                    FROM canonical_event_sources ces
+                    WHERE ces.canonical_event_id = ede.canonical_event_id
+                        AND ces.source_url IS NOT NULL
+                    ORDER BY ces.canonical_event_source_id
+                    LIMIT 1
+                ) AS event_url,
+                (
+                    SELECT cds.provider
+                    FROM canonical_deck_sources cds
+                    WHERE cds.canonical_deck_id = ede.canonical_deck_id
+                        AND (
+                            ede.source_deck_id IS NULL
+                            OR cds.source_deck_id = ede.source_deck_id
+                        )
+                    ORDER BY cds.canonical_deck_source_id
+                    LIMIT 1
+                ) AS provider
+            FROM event_deck_entries ede
+            JOIN canonical_events ce ON ce.canonical_event_id = ede.canonical_event_id
+            JOIN canonical_decks cd ON cd.canonical_deck_id = ede.canonical_deck_id
+            JOIN canonical_deck_cards cdc ON cdc.canonical_deck_id = ede.canonical_deck_id
+            JOIN cards c ON c.scryfall_id = cdc.scryfall_id
+            WHERE {where_clause}
+            ORDER BY
+                ce.event_date,
+                ede.canonical_event_id,
+                ede.placement,
+                ede.event_deck_entry_id,
+                cdc.zone,
+                cdc.scryfall_id
+            """,
+            tuple(params),
         ).fetchall()
 
     def update_event_deck_entry_weight(self, event_deck_entry_id: int, entry_weight: float) -> None:
