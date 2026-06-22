@@ -1,0 +1,117 @@
+{
+  "window_end_date": "2026-06-21",
+  "time_window": "90d",
+  "cards": [
+    {
+      "scryfall_id": "mana-crypt",
+      "oracle_id": "oracle-mana-crypt",
+      "name": "Mana Crypt"
+    },
+    {
+      "scryfall_id": "demonic-tutor",
+      "oracle_id": "oracle-demonic-tutor",
+      "name": "Demonic Tutor"
+    },
+    {
+      "scryfall_id": "thassa-oracle",
+      "oracle_id": "oracle-thassa-oracle",
+      "name": "Thassa's Oracle"
+    }
+  ],
+  "events": [
+    {
+      "event_name": "Codie Test Open",
+      "normalized_event_name": "codie test open",
+      "event_date": "2026-06-01",
+      "format": "commander",
+      "region": "NA",
+      "country": "US",
+      "player_count": 64,
+      "deck_count": 2,
+      "dedupe_key": "codie-test-open|2026-06-01|commander|us|na"
+    },
+    {
+      "event_name": "Too Small Local",
+      "normalized_event_name": "too small local",
+      "event_date": "2026-05-01",
+      "format": "commander",
+      "region": "NA",
+      "country": "US",
+      "player_count": 8,
+      "deck_count": 1,
+      "dedupe_key": "too-small-local|2026-05-01|commander|us|na"
+    }
+  ],
+  "decks": [
+    {
+      "deck_hash": "blue-farm-a",
+      "commander_hash": "kraum-card|tymna-card",
+      "card_count": 100,
+      "commander_count": 2,
+      "cards": [
+        "mana-crypt",
+        "demonic-tutor"
+      ]
+    },
+    {
+      "deck_hash": "oracle-consult",
+      "commander_hash": "thrasios-card|tymna-card",
+      "card_count": 100,
+      "commander_count": 2,
+      "cards": [
+        "mana-crypt",
+        "thassa-oracle"
+      ]
+    }
+  ],
+  "entries": [
+    {
+      "event_index": 0,
+      "deck_index": 0,
+      "pilot_name": "Alice",
+      "placement": 1,
+      "placement_label": "Winner",
+      "wins": 5,
+      "losses": 0,
+      "draws": 0,
+      "top_cut_made": 1,
+      "winner": 1
+    },
+    {
+      "event_index": 0,
+      "deck_index": 0,
+      "pilot_name": "Alice",
+      "placement": 1,
+      "placement_label": "Winner",
+      "wins": 5,
+      "losses": 0,
+      "draws": 0,
+      "top_cut_made": 1,
+      "winner": 1
+    },
+    {
+      "event_index": 0,
+      "deck_index": 1,
+      "pilot_name": "Bob",
+      "placement": 9,
+      "placement_label": "Top 16",
+      "wins": 3,
+      "losses": 2,
+      "draws": 0,
+      "top_cut_made": 1,
+      "winner": 0
+    },
+    {
+      "event_index": 1,
+      "deck_index": 0,
+      "pilot_name": "Carol",
+      "placement": 5,
+      "placement_label": "Top 16",
+      "wins": 3,
+      "losses": 2,
+      "draws": 0,
+      "top_cut_made": 1,
+      "winner": 0
+    }
+  ]
+}

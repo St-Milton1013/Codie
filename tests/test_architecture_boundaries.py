@@ -56,3 +56,35 @@ class ArchitectureBoundaryTest(unittest.TestCase):
             if imports.intersection(forbidden_imports):
                 offenders.append(str(path.relative_to(ROOT)))
         self.assertEqual(offenders, [])
+
+    def test_analytics_do_not_import_provider_or_source_layers(self) -> None:
+        offenders = []
+        forbidden_prefixes = (
+            "codie.providers",
+            "codie.ingestion",
+            "codie.db.repositories.source",
+        )
+        for path in sorted((ROOT / "codie" / "analytics").rglob("*.py")):
+            imports = imports_for(path)
+            offenders.extend(
+                f"{path.relative_to(ROOT)} imports {module}"
+                for module in imports
+                if module.startswith(forbidden_prefixes)
+            )
+        self.assertEqual(offenders, [])
+
+    def test_analytics_repository_does_not_query_source_tables(self) -> None:
+        repository = ROOT / "codie" / "db" / "repositories" / "analytics.py"
+        text = repository.read_text(encoding="utf-8")
+        forbidden_fragments = (
+            "FROM source_events",
+            "JOIN source_events",
+            "FROM source_decks",
+            "JOIN source_decks",
+            "FROM source_deck_cards",
+            "JOIN source_deck_cards",
+            "FROM provider_objects",
+            "JOIN provider_objects",
+        )
+        offenders = [fragment for fragment in forbidden_fragments if fragment in text]
+        self.assertEqual(offenders, [])
