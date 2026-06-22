@@ -1,0 +1,482 @@
+{
+  "TID": "dual-2",
+  "eventData": {},
+  "format": "EDH",
+  "game": "Magic: The Gathering",
+  "standings": [
+    {
+      "deckObj": {
+        "Commanders": {
+          "Oskar, Rubbish Reclaimer": {
+            "count": 1,
+            "id": "14c2c818-0ce2-4809-a5ff-ee4a6253defa"
+          }
+        },
+        "Mainboard": {
+          "An Offer You Can't Refuse": {
+            "count": 1,
+            "id": "234a734b-ba28-4f1b-9d01-3c3e7d516590"
+          },
+          "Ancient Tomb": {
+            "count": 1,
+            "id": "23467047-6dba-4498-b783-1ebc4f74b8c2"
+          },
+          "Bazaar of Baghdad": {
+            "count": 1,
+            "id": "54022a10-c9f0-458d-a0ed-228843cd9a40"
+          },
+          "Beseech the Mirror": {
+            "count": 1,
+            "id": "cbbe535b-12d6-4e6c-8b26-9220f06a1604"
+          },
+          "Bloodstained Mire": {
+            "count": 1,
+            "id": "fc0707c7-d504-4ccf-a0d2-3eb6e26e7a57"
+          },
+          "Cabal Ritual": {
+            "count": 1,
+            "id": "5b5bf1fa-6502-4790-b66b-f0f8504ebc7c"
+          },
+          "Careful Study": {
+            "count": 1,
+            "id": "32e9aa23-fc0a-4b82-82f9-1659c304428c"
+          },
+          "Cavern of Souls": {
+            "count": 1,
+            "id": "89ca686a-7c72-4d8f-9290-e89635624a83"
+          },
+          "Chrome Mox": {
+            "count": 1,
+            "id": "ec3d4466-547c-4e02-b1b5-a156ec4637e9"
+          },
+          "Clever Impersonator": {
+            "count": 1,
+            "id": "d4ec0df9-a4a3-48cf-a0aa-b1aea5c49142"
+          },
+          "Command Tower": {
+            "count": 1,
+            "id": "0895c9b7-ae7d-4bb3-af17-3b75deb50a25"
+          },
+          "Copy Artifact": {
+            "count": 1,
+            "id": "80bc56a9-40e0-48da-ae86-190e39c8a4a3"
+          },
+          "Copy Enchantment": {
+            "count": 1,
+            "id": "87bc0b1f-49ef-4c06-9049-2c148b467882"
+          },
+          "Culling the Weak": {
+            "count": 1,
+            "id": "6385fd0d-256d-4400-9319-afa8170024db"
+          },
+          "Dark Ritual": {
+            "count": 1,
+            "id": "53f7c868-b03e-4fc2-8dcf-a75bbfa3272b"
+          },
+          "Dauthi Voidwalker": {
+            "count": 1,
+            "id": "f1c2dbe2-fbe0-4058-bdf1-91d1b1832786"
+          },
+          "Deadly Rollick": {
+            "count": 1,
+            "id": "0456ec64-2c81-4763-a352-8ff64a4c3d6b"
+          },
+          "Demonic Consultation": {
+            "count": 1,
+            "id": "9a1412db-45ad-46ea-8f12-a85d203113d8"
+          },
+          "Demonic Counsel": {
+            "count": 1,
+            "id": "712e3479-722c-40a1-9b61-d5bdde93042b"
+          },
+          "Demonic Tutor": {
+            "count": 1,
+            "id": "82004860-e589-4e38-8d61-8c0210e4ea39"
+          },
+          "Diamond Lion": {
+            "count": 1,
+            "id": "7ea9bb3b-76e9-4150-9e4f-1cd3abfe8ad7"
+          },
+          "Dismember": {
+            "count": 1,
+            "id": "fd74f8eb-0253-42dd-8277-186d4934da38"
+          },
+          "Doomsday": {
+            "count": 1,
+            "id": "721eb5a2-d7cf-4db0-8013-ef3f596c52a5"
+          },
+          "Drowned Catacomb": {
+            "count": 1,
+            "id": "819fc966-434e-470f-91e9-a38df974ad17"
+          },
+          "Fatal Push": {
+            "count": 1,
+            "id": "16437a83-be52-44cd-a768-a767c9347eb2"
+          },
+          "Fierce Guardianship": {
+            "count": 1,
+            "id": "d09c9cba-fdd2-479b-ad5d-d05181c3e3f9"
+          },
+          "Flash Photography": {
+            "count": 1,
+            "id": "a92ae7b0-cbbb-44a8-bfd8-2a68f4c1ce1a"
+          },
+          "Flooded Strand": {
+            "count": 1,
+            "id": "f3c7af78-a77d-4134-82a2-a5ce84285a84"
+          },
+          "Flusterstorm": {
+            "count": 1,
+            "id": "86bf58f2-7f25-4e10-b797-25e0e8e67769"
+          },
+          "Force of Will": {
+            "count": 1,
+            "id": "956381ba-6d37-4a8a-846c-bad79222dbee"
+          },
+          "Frantic Search": {
+            "count": 1,
+            "id": "16e015b2-f8a3-4b1a-80be-58a8f5fb5e8c"
+          },
+          "Gemstone Caverns": {
+            "count": 1,
+            "id": "c0adbddc-b070-4c5f-afe0-0474c72a9251"
+          },
+          "Ghostly Pilferer": {
+            "count": 1,
+            "id": "fe168bf1-f626-460c-890b-1ce758af01fc"
+          },
+          "Gilded Drake": {
+            "count": 1,
+            "id": "7f06c098-6482-4bf3-a9a1-110d6d5b5703"
+          },
+          "Gloomlake Verge": {
+            "count": 1,
+            "id": "d71bda4c-3dee-4398-8fd0-f77d8743b887"
+          },
+          "Imperial Seal": {
+            "count": 1,
+            "id": "16cd0b90-f70c-4efa-b252-8de8784ef9a3"
+          },
+          "Imposter Mech": {
+            "count": 1,
+            "id": "f434e266-d9d6-4058-96ff-a1bd4029d8dc"
+          },
+          "Into the Flood Maw": {
+            "count": 1,
+            "id": "8cb36a67-9206-4665-a03f-64f52ba559c4"
+          },
+          "Lion's Eye Diamond": {
+            "count": 1,
+            "id": "ee6099b0-fb1f-42f1-b862-7708c6e36d05"
+          },
+          "Lively Dirge": {
+            "count": 1,
+            "id": "0b23d9aa-d4ed-4ccf-8810-4a4d11d6fb9c"
+          },
+          "Lotus Petal": {
+            "count": 1,
+            "id": "32e5339e-9e4f-46f8-b305-f9d6d3ba8bb5"
+          },
+          "Magus of the Bazaar": {
+            "count": 1,
+            "id": "e08d264d-5731-4e2a-ae6d-5a74ef648575"
+          },
+          "Mana Vault": {
+            "count": 1,
+            "id": "736892cb-a34b-4bb9-b56c-e26e3db207a2"
+          },
+          "Marsh Flats": {
+            "count": 1,
+            "id": "dab520d0-20b4-4273-ba6b-eb07f85ea433"
+          },
+          "Massacre": {
+            "count": 1,
+            "id": "ce1866e9-28de-4bcc-9999-11958e6c13a6"
+          },
+          "Mental Misstep": {
+            "count": 1,
+            "id": "1a0770e6-b093-4439-baff-6889a50ba12e"
+          },
+          "Mindbreak Trap": {
+            "count": 1,
+            "id": "48712d36-5c13-4ded-87a4-68106da4a5cd"
+          },
+          "Mirrormade": {
+            "count": 1,
+            "id": "79a71fe5-38ce-4bb5-aea0-c9b9a856d397"
+          },
+          "Misty Rainforest": {
+            "count": 1,
+            "id": "09dd85aa-47bc-4713-a9b9-8b52ff2285ed"
+          },
+          "Mockingbird": {
+            "count": 1,
+            "id": "b9df2cdf-397c-458d-89cf-911568737ffa"
+          },
+          "Morphic Pool": {
+            "count": 1,
+            "id": "bd004c9d-771e-4e63-a97d-a2259c096af8"
+          },
+          "Mox Amber": {
+            "count": 1,
+            "id": "7a43bd27-fdd8-41f0-9bc4-92568f3408f1"
+          },
+          "Mox Diamond": {
+            "count": 1,
+            "id": "f3c5978a-70fa-431f-933b-b954bd0db0ea"
+          },
+          "Mox Opal": {
+            "count": 1,
+            "id": "de2440de-e948-4811-903c-0bbe376ff64d"
+          },
+          "Mystic Remora": {
+            "count": 1,
+            "id": "8a52f3c0-2552-4425-b2e3-5496eb2232a7"
+          },
+          "Mystical Tutor": {
+            "count": 1,
+            "id": "fb81f95c-70f8-4eb7-8d15-15d0ae23ec03"
+          },
+          "Necrologia": {
+            "count": 1,
+            "id": "925f11c3-fd32-4aa7-a130-6554b81ad3eb"
+          },
+          "Necropotence": {
+            "count": 1,
+            "id": "94a844d2-0574-45a7-b347-e0e329767c42"
+          },
+          "Oblivion Crown": {
+            "count": 1,
+            "id": "e690461b-2925-4484-b6fa-69ca1166f5a2"
+          },
+          "Opposition Agent": {
+            "count": 1,
+            "id": "1f438b8f-fe23-4f3b-ab2e-f6c33676c462"
+          },
+          "Orcish Bowmasters": {
+            "count": 1,
+            "id": "ea5103f5-27e0-4eb1-902c-7f34652d6bf3"
+          },
+          "Otawara, Soaring City": {
+            "count": 1,
+            "id": "e9b6a394-691c-425a-9307-76d8edc7375e"
+          },
+          "Otherworldly Gaze": {
+            "count": 1,
+            "id": "be668c2d-71ea-4346-8980-1fbf5e4cbed3"
+          },
+          "Pact of Negation": {
+            "count": 1,
+            "id": "f3e213a4-ba5a-468a-93b3-c0a34e1bd725"
+          },
+          "Phantasmal Image": {
+            "count": 1,
+            "id": "bde94af8-faea-41ff-8eed-ba642eac9968"
+          },
+          "Polluted Delta": {
+            "count": 1,
+            "id": "ef86989d-ce80-4e55-aece-7d11710eeffa"
+          },
+          "Psychic Frog": {
+            "count": 1,
+            "id": "e157ad1e-be35-47f3-92db-01799f8fb6a5"
+          },
+          "Putrid Imp": {
+            "count": 1,
+            "id": "7192ff07-9a84-49ad-a40c-ce255ce21544"
+          },
+          "Reanimate": {
+            "count": 1,
+            "id": "a044474a-cd72-4e9d-bd8d-a08f2de9cdc0"
+          },
+          "Rhystic Study": {
+            "count": 1,
+            "id": "53236dd7-845a-444c-96d5-f41ed7325d8f"
+          },
+          "Sacrifice": {
+            "count": 1,
+            "id": "068b3692-411b-44d4-a7e9-005262760cfc"
+          },
+          "Scalding Tarn": {
+            "count": 1,
+            "id": "cb027150-848c-4a66-88ad-e20222304dd8"
+          },
+          "Seat of the Synod": {
+            "count": 1,
+            "id": "39451b4d-cd7a-40da-b457-cb51b609173f"
+          },
+          "Snow-Covered Swamp": {
+            "count": 1,
+            "id": "d8239a86-7184-4005-ba1e-2dddcd756c47"
+          },
+          "Sol Ring": {
+            "count": 1,
+            "id": "6ad8011d-3471-4369-9d68-b264cc027487"
+          },
+          "Starting Town": {
+            "count": 1,
+            "id": "d04e0975-f401-41b8-a9db-9bcf9cbbce66"
+          },
+          "Steal Enchantment": {
+            "count": 1,
+            "id": "567a3fa7-5ca9-4812-b81d-4953c401c83d"
+          },
+          "Street Wraith": {
+            "count": 1,
+            "id": "bd7867f4-4f58-49c2-9c24-a124dfdb506d"
+          },
+          "Sunken Ruins": {
+            "count": 1,
+            "id": "e6415ffb-8b7a-41c3-bedf-0d4112b7b795"
+          },
+          "Swamp": {
+            "count": 1,
+            "id": "56719f6a-1a6c-4c0a-8d21-18f7d7350b68"
+          },
+          "Swan Song": {
+            "count": 1,
+            "id": "8ddfc283-c9b4-41a5-af88-cf0068e986cc"
+          },
+          "Tainted Pact": {
+            "count": 1,
+            "id": "1a85ba2b-ae10-4917-954a-7709b75a9740"
+          },
+          "Thassa's Oracle": {
+            "count": 1,
+            "id": "1de1b591-a73f-4974-b507-8c63e07a0868"
+          },
+          "The One Ring": {
+            "count": 1,
+            "id": "3aa83ed2-f48b-4ce6-a614-2c54ddf50538"
+          },
+          "Tormod's Crypt": {
+            "count": 1,
+            "id": "1573f7f9-672c-421a-b1ac-3d0d8aea59ca"
+          },
+          "Undercity Sewers": {
+            "count": 1,
+            "id": "08d80efc-9542-4ba2-824c-c8615d8d07f2"
+          },
+          "Underground River": {
+            "count": 1,
+            "id": "857febd9-cdd7-4f8e-a852-d88084b0cfbc"
+          },
+          "Underground Sea": {
+            "count": 1,
+            "id": "4b22be3a-8ce1-47d1-b82e-6c3ccfb0548b"
+          },
+          "Unearth": {
+            "count": 1,
+            "id": "4e0b647a-6e1a-421b-bca9-8d5e346bda80"
+          },
+          "Urborg, Tomb of Yawgmoth": {
+            "count": 1,
+            "id": "db6174d7-211d-4817-b8e4-8384594c83f9"
+          },
+          "Urza's Saga": {
+            "count": 1,
+            "id": "4c6a0c30-b547-4eff-8ff4-0ca25803c076"
+          },
+          "Vampiric Tutor": {
+            "count": 1,
+            "id": "ededbdae-d9dc-4206-9335-d7158f2d7700"
+          },
+          "Vault of Whispers": {
+            "count": 1,
+            "id": "09496421-74e4-466a-9546-56f2a0c8eef4"
+          },
+          "Verdant Catacombs": {
+            "count": 1,
+            "id": "67d60b24-d429-4ded-90d9-06e49f28c396"
+          },
+          "Vexing Bauble": {
+            "count": 1,
+            "id": "4514777d-0589-4631-978b-ff244167c176"
+          },
+          "Vohar, Vodalian Desecrator": {
+            "count": 1,
+            "id": "4380df08-7be4-48ca-9783-d644fd2ea27d"
+          },
+          "Volatile Stormdrake": {
+            "count": 1,
+            "id": "08d64b16-9221-4532-890c-d5cdbf181e28"
+          },
+          "Watery Grave": {
+            "count": 1,
+            "id": "fc9ec820-4245-4a96-b009-5308a818ca58"
+          },
+          "Wishclaw Talisman": {
+            "count": 1,
+            "id": "81c70ae7-3c18-4c9b-8505-e4db9e0e6518"
+          }
+        },
+        "metadata": {
+          "format": "EDH",
+          "game": "Magic: The Gathering",
+          "importedFrom": "https://moxfield.com/decks/3NhOGr3CIUyALOZYoIAXHg"
+        }
+      },
+      "decklist": "~~Commanders~~\\n1 Oskar, Rubbish Reclaimer\\n\\n~~Mainboard~~\\n1 An Offer You Can\\'t Refuse\\n1 Ancient Tomb\\n1 Bazaar of Baghdad\\n1 Beseech the Mirror\\n1 Bloodstained Mire\\n1 Cabal Ritual\\n1 Careful Study\\n1 Cavern of Souls\\n1 Chrome Mox\\n1 Clever Impersonator\\n1 Command Tower\\n1 Copy Artifact\\n1 Copy Enchantment\\n1 Culling the Weak\\n1 Dark Ritual\\n1 Dauthi Voidwalker\\n1 Deadly Rollick\\n1 Demonic Consultation\\n1 Demonic Counsel\\n1 Demonic Tutor\\n1 Diamond Lion\\n1 Dismember\\n1 Doomsday\\n1 Drowned Catacomb\\n1 Fatal Push\\n1 Fierce Guardianship\\n1 Flash Photography\\n1 Flooded Strand\\n1 Flusterstorm\\n1 Force of Will\\n1 Frantic Search\\n1 Gemstone Caverns\\n1 Ghostly Pilferer\\n1 Gilded Drake\\n1 Gloomlake Verge\\n1 Imperial Seal\\n1 Imposter Mech\\n1 Into the Flood Maw\\n1 Lion\\'s Eye Diamond\\n1 Lively Dirge\\n1 Lotus Petal\\n1 Magus of the Bazaar\\n1 Mana Vault\\n1 Marsh Flats\\n1 Massacre\\n1 Mental Misstep\\n1 Mindbreak Trap\\n1 Mirrormade\\n1 Misty Rainforest\\n1 Mockingbird\\n1 Morphic Pool\\n1 Mox Amber\\n1 Mox Diamond\\n1 Mox Opal\\n1 Mystic Remora\\n1 Mystical Tutor\\n1 Necrologia\\n1 Necropotence\\n1 Oblivion Crown\\n1 Opposition Agent\\n1 Orcish Bowmasters\\n1 Otawara, Soaring City\\n1 Otherworldly Gaze\\n1 Pact of Negation\\n1 Phantasmal Image\\n1 Polluted Delta\\n1 Psychic Frog\\n1 Putrid Imp\\n1 Reanimate\\n1 Rhystic Study\\n1 Sacrifice\\n1 Scalding Tarn\\n1 Seat of the Synod\\n1 Snow-Covered Swamp\\n1 Sol Ring\\n1 Starting Town\\n1 Steal Enchantment\\n1 Street Wraith\\n1 Sunken Ruins\\n1 Swamp\\n1 Swan Song\\n1 Tainted Pact\\n1 Thassa\\'s Oracle\\n1 The One Ring\\n1 Tormod\\'s Crypt\\n1 Undercity Sewers\\n1 Underground River\\n1 Underground Sea\\n1 Unearth\\n1 Urborg, Tomb of Yawgmoth\\n1 Urza\\'s Saga\\n1 Vampiric Tutor\\n1 Vault of Whispers\\n1 Verdant Catacombs\\n1 Vexing Bauble\\n1 Vohar, Vodalian Desecrator\\n1 Volatile Stormdrake\\n1 Watery Grave\\n1 Wishclaw Talisman\\n\\n",
+      "draws": 0,
+      "id": "ZNEz6KlAZ0crALFMe1sCMyEtGL93",
+      "losses": 1,
+      "name": "Jason Kroes",
+      "winRate": 0,
+      "wins": 0
+    },
+    {
+      "deckObj": null,
+      "decklist": null,
+      "draws": 0,
+      "id": "LYVKNk8mRqYPcZEAevwz2uyczXH3",
+      "losses": 0,
+      "name": "Ashton W Mott",
+      "winRate": 1,
+      "wins": 2
+    },
+    {
+      "deckObj": null,
+      "decklist": null,
+      "draws": 0,
+      "id": "KuQoPLj8WrSf8L8yHshrA9fpGUF2",
+      "losses": 1,
+      "name": "Raul Villarruel ",
+      "winRate": 0.5,
+      "wins": 1
+    },
+    {
+      "deckObj": null,
+      "decklist": null,
+      "draws": 0,
+      "id": "8sDQeblE0RPSYSkSNBQLxAS4OaM2",
+      "losses": 1,
+      "name": "Alberto Liggayu ",
+      "winRate": 0.5,
+      "wins": 1
+    },
+    {
+      "deckObj": null,
+      "decklist": null,
+      "draws": 0,
+      "id": "5Z7OUnnUA8fZLJDPVtSMTgjNGdG2",
+      "losses": 1,
+      "name": "Sal Ranzulla",
+      "winRate": 0.5,
+      "wins": 1
+    },
+    {
+      "deckObj": null,
+      "decklist": null,
+      "draws": 0,
+      "id": "OJPbDVaz9VYtuznsxcCZv7zB9jx2",
+      "losses": 1,
+      "name": "Hunter Myles",
+      "winRate": 0,
+      "wins": 0
+    }
+  ],
+  "startDate": 1781802000,
+  "swissNum": 0,
+  "topCut": 16,
+  "tournamentName": "Dual 2"
+}

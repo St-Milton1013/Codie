@@ -1,0 +1,61 @@
+{
+  "data": {
+    "tournament": {
+      "TID": "edhtop16-fixture-open",
+      "name": "EDHTop16 Fixture Open",
+      "size": 64,
+      "format": "EDH",
+      "tournamentDate": "2026-05-10T00:00:00.000Z",
+      "bracketUrl": "https://topdeck.gg/bracket/edhtop16-fixture-open",
+      "entries": [
+        {
+          "id": "entry-1",
+          "standing": 1,
+          "decklist": "https://moxfield.com/decks/tymna-kraum-fixture",
+          "winsSwiss": 5,
+          "winsBracket": 2,
+          "draws": 1,
+          "lossesSwiss": 0,
+          "lossesBracket": 1,
+          "winRate": 0.7777777778,
+          "commander": {
+            "name": "Tymna the Weaver / Kraum, Ludevic's Opus"
+          },
+          "player": {
+            "name": "Fixture Pilot"
+          },
+          "maindeck": [
+            {
+              "name": "Command Tower"
+            },
+            {
+              "name": "Dockside Extortionist"
+            },
+            {
+              "name": "Borne Upon a Wind",
+              "quantity": 1,
+              "zone": "mainboard"
+            }
+          ]
+        },
+        {
+          "id": "hidden-entry",
+          "standing": 2,
+          "decklist": null,
+          "winsSwiss": 4,
+          "winsBracket": 1,
+          "draws": 0,
+          "lossesSwiss": 1,
+          "lossesBracket": 1,
+          "commander": {
+            "name": "Kinnan, Bonder Prodigy"
+          },
+          "player": {
+            "name": "Hidden Pilot"
+          },
+          "maindeck": []
+        }
+      ]
+    }
+  }
+}

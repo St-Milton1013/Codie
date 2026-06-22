@@ -1,0 +1,32 @@
+{
+  "data": {
+    "node": {
+      "id": "entry-standalone",
+      "standing": 4,
+      "decklist": "https://moxfield.com/decks/blue-farm-standalone",
+      "winsSwiss": 4,
+      "winsBracket": 0,
+      "draws": 0,
+      "lossesSwiss": 2,
+      "lossesBracket": 0,
+      "winRate": 0.6666666667,
+      "commander": {
+        "name": "Tymna the Weaver / Kraum, Ludevic's Opus"
+      },
+      "player": {
+        "name": "Standalone Pilot"
+      },
+      "maindeck": [
+        {
+          "name": "Ad Nauseam"
+        },
+        {
+          "name": "Silence"
+        }
+      ],
+      "tournament": {
+        "TID": "edhtop16-fixture-open"
+      }
+    }
+  }
+}

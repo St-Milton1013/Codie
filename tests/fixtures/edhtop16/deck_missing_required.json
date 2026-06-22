@@ -1,0 +1,16 @@
+{
+  "data": {
+    "node": {
+      "id": "entry-missing-commander",
+      "decklist": "https://moxfield.com/decks/missing-commander",
+      "player": {
+        "name": "No Commander Pilot"
+      },
+      "maindeck": [
+        {
+          "name": "Command Tower"
+        }
+      ]
+    }
+  }
+}

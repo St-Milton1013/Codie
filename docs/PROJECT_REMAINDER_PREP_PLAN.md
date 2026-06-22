@@ -1,0 +1,158 @@
+# Codie Remaining Project Preparation Plan
+
+Date: 2026-06-21
+
+## Current Checkpoint
+
+Completed and validated:
+
+- Phase 0: Reference preservation and constitution freeze.
+- Phase 1: Schema and repository foundation.
+- Phase 2: Scryfall truth layer.
+- Phase 3: Provider candidate contracts and ingestion pipeline.
+- Phase 4A: TopDeck adapter.
+- Phase 4B: EDHTop16 adapter.
+- Phase 4C: MTGTop8 adapter.
+
+Current verification baseline:
+
+- Full test suite: 73 tests passing.
+- Provider boundary tests pass.
+- No schema changes after Phase 1.
+- No raw SQL outside `codie/db/bootstrap.py` and `codie/db/repositories/`.
+- `beautifulsoup4==4.15.0` is recorded in `requirements.txt` for HTML adapters.
+
+## Remaining Build Sequence
+
+### Phase 4D - MTGDecks Adapter
+
+Objective: Add secondary tournament/deck discovery while preserving mirror-risk boundaries.
+
+Primary risk: MTGDecks may mirror events also present in TopDeck or MTGTop8. MTGDecks source records must not independently power analytics until canonical event/deck deduplication links or separates them.
+
+Prepared contract:
+
+- `docs/PHASE4D_MTGDECKS_ADAPTER_CONTRACT.md`
+
+### Phase 4E - Hareruya Adapter
+
+Objective: Add Japanese/regional tournament and deck source coverage.
+
+Primary risk: Hareruya commander/deck page structure differs from MTGDecks and MTGTop8. Parser logic must use Hareruya-specific metadata and must not reuse MTGDecks sideboard heuristics for commander detection.
+
+Prepared contract:
+
+- `docs/PHASE4E_HARERUYA_ADAPTER_CONTRACT.md`
+
+### Phase 5 - Canonicalization And Deduplication
+
+Do not start analytics before this phase.
+
+Objective: Convert source records into canonical events/decks while preserving provenance links.
+
+Required deliverables:
+
+- `codie/canonical/canonicalizer.py`
+- `codie/canonical/deck_hash.py`
+- `codie/canonical/event_matcher.py`
+- repository methods for canonical events, decks, cards, commanders, and source links
+- `tests/fixtures/canonicalization/event_dedupe_cases.json`
+- `tests/fixtures/canonicalization/deck_hash_cases.json`
+- `tests/test_canonicalization.py`
+
+Core acceptance:
+
+- Same event across sources dedupes into one `canonical_event`.
+- Similar but distinct events do not dedupe incorrectly.
+- Same 99/100 decklist hashes identically across providers.
+- One-card difference changes deck hash.
+- Auxiliary cards do not affect canonical deck hash.
+- `canonical_event_sources` and `canonical_deck_sources` retain all provider provenance.
+- Analytics eligibility is checked after canonicalization, not inside providers.
+
+### Phase 6 - Tournament Weighting And Analytics Foundations
+
+Objective: Build deterministic metrics from canonical records only.
+
+Required deliverables:
+
+- tournament weighting model
+- card performance metric generation
+- historical snapshot generation
+- regional metric generation
+- evidence count aggregation
+
+Core acceptance:
+
+- Analytics read canonical tables only.
+- Formulas are deterministic and tested.
+- Every metric records input window, source scope, generated timestamp, and sample-size guardrails.
+- Duplicate source records do not double count after canonicalization.
+
+### Phase 7 - Primer, Combo, And Package Evidence
+
+Objective: Add non-tournament evidence sources without turning them into strategy claims.
+
+Build order:
+
+1. Commander Spellbook combo sync.
+2. Moxfield primer metadata discovery.
+3. cEDH DDB classification/primer reference.
+4. Manual curated package definitions.
+5. Archidekt primer metadata only after primary primer workflow is stable.
+
+Core acceptance:
+
+- Primer body is not stored.
+- Combo lines are not invented.
+- Package recommendations require curated or source-backed definitions.
+- Evidence counts separate tournament, primer, combo, package, and simulation evidence.
+
+### Phase 8 - Recommendations, Simulation, Evidence, And UI
+
+Objective: Present evidence-backed outputs after canonical and evidence layers are reliable.
+
+Build order:
+
+1. Evidence layer and provenance bundle model.
+2. Commander/card analytics pages.
+3. Commander staples explorer.
+4. Deck comparison.
+5. Recommendation candidates.
+6. Simulation engine and traces.
+7. Evidence explorer and exports.
+8. UI surfaces.
+
+Core acceptance:
+
+- Recommendation language is evidence-oriented, not strategic coaching.
+- Simulation evidence appears only under the constitution thresholds.
+- Every displayed metric has provenance.
+- Exports do not mutate canonical data.
+
+## Persistent Quality Gate
+
+Before each implementation phase:
+
+- Define files created and modified.
+- Define public functions/classes.
+- Define schema impact.
+- Define dependencies.
+- Define test cases.
+- Define failure modes.
+
+Before closing each implementation phase:
+
+- Run targeted tests.
+- Run full test suite.
+- Run provider boundary/static SQL checks when provider code changes.
+- Confirm no schema drift unless explicitly approved.
+- Return completion report with actual test output.
+
+## Known Prep Gaps
+
+- EDHTop16 fixtures are schema-shaped local samples, not live captures.
+- MTGTop8 fixtures are local HTML samples, not live captures.
+- MTGDecks and Hareruya still need captured/reference fixtures before implementation closure.
+- No dependency management existed before `requirements.txt`; future third-party dependencies should be recorded there or moved to a stronger project packaging file.
+- Canonicalization is now the next major architecture risk because it controls deduplication, analytics eligibility, and source provenance.

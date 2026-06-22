@@ -1,0 +1,21 @@
+{
+  "data": {
+    "tournament": {
+      "TID": "edhtop16-minimal",
+      "name": "EDHTop16 Minimal Event",
+      "entries": [
+        {
+          "id": "minimal-entry",
+          "standing": 8,
+          "decklist": "https://moxfield.com/decks/minimal",
+          "commander": {
+            "name": "Najeela, the Blade-Blossom"
+          },
+          "player": {
+            "name": "Minimal Pilot"
+          }
+        }
+      ]
+    }
+  }
+}

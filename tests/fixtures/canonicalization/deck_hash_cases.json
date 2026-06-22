@@ -1,0 +1,171 @@
+{
+  "cards": {
+    "tymna": {
+      "scryfall_id": "tymna-card",
+      "oracle_id": "tymna-oracle",
+      "name": "Tymna the Weaver"
+    },
+    "kraum": {
+      "scryfall_id": "kraum-card",
+      "oracle_id": "kraum-oracle",
+      "name": "Kraum, Ludevic's Opus"
+    },
+    "tower": {
+      "scryfall_id": "tower-card",
+      "oracle_id": "tower-oracle",
+      "name": "Command Tower"
+    },
+    "dockside": {
+      "scryfall_id": "dockside-card",
+      "oracle_id": "dockside-oracle",
+      "name": "Dockside Extortionist"
+    },
+    "ad_nauseam": {
+      "scryfall_id": "ad-naus-card",
+      "oracle_id": "ad-naus-oracle",
+      "name": "Ad Nauseam"
+    },
+    "silence": {
+      "scryfall_id": "silence-card",
+      "oracle_id": "silence-oracle",
+      "name": "Silence"
+    },
+    "auxiliary": {
+      "scryfall_id": "sticker-card",
+      "oracle_id": "sticker-oracle",
+      "name": "Sticker Sheet"
+    }
+  },
+  "cases": [
+    {
+      "id": "same_deck_different_provider_order",
+      "description": "Same deck from two providers with different card order should hash identically.",
+      "expected_same_deck_hash": true,
+      "decks": [
+        {
+          "provider": "topdeck",
+          "provider_deck_id": "topdeck-blue-farm",
+          "commander_text": "Tymna the Weaver / Kraum, Ludevic's Opus",
+          "cards": [
+            {"scryfall_id": "tymna-card", "oracle_id": "tymna-oracle", "quantity": 1, "source_zone": "commanders"},
+            {"scryfall_id": "kraum-card", "oracle_id": "kraum-oracle", "quantity": 1, "source_zone": "commanders"},
+            {"scryfall_id": "tower-card", "oracle_id": "tower-oracle", "quantity": 1, "source_zone": "mainboard"},
+            {"scryfall_id": "dockside-card", "oracle_id": "dockside-oracle", "quantity": 1, "source_zone": "mainboard"},
+            {"scryfall_id": "ad-naus-card", "oracle_id": "ad-naus-oracle", "quantity": 1, "source_zone": "mainboard"}
+          ]
+        },
+        {
+          "provider": "mtgdecks",
+          "provider_deck_id": "mtgdecks-blue-farm",
+          "commander_text": "Kraum, Ludevic's Opus / Tymna the Weaver",
+          "cards": [
+            {"scryfall_id": "ad-naus-card", "oracle_id": "ad-naus-oracle", "quantity": 1, "source_zone": "mainboard"},
+            {"scryfall_id": "dockside-card", "oracle_id": "dockside-oracle", "quantity": 1, "source_zone": "mainboard"},
+            {"scryfall_id": "tower-card", "oracle_id": "tower-oracle", "quantity": 1, "source_zone": "mainboard"},
+            {"scryfall_id": "kraum-card", "oracle_id": "kraum-oracle", "quantity": 1, "source_zone": "commanders"},
+            {"scryfall_id": "tymna-card", "oracle_id": "tymna-oracle", "quantity": 1, "source_zone": "commanders"}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "one_card_difference_changes_hash",
+      "description": "Replacing one mainboard card changes deck hash.",
+      "expected_same_deck_hash": false,
+      "decks": [
+        {
+          "provider": "topdeck",
+          "provider_deck_id": "topdeck-blue-farm-a",
+          "commander_text": "Tymna the Weaver / Kraum, Ludevic's Opus",
+          "cards": [
+            {"scryfall_id": "tymna-card", "oracle_id": "tymna-oracle", "quantity": 1, "source_zone": "commanders"},
+            {"scryfall_id": "kraum-card", "oracle_id": "kraum-oracle", "quantity": 1, "source_zone": "commanders"},
+            {"scryfall_id": "tower-card", "oracle_id": "tower-oracle", "quantity": 1, "source_zone": "mainboard"},
+            {"scryfall_id": "dockside-card", "oracle_id": "dockside-oracle", "quantity": 1, "source_zone": "mainboard"}
+          ]
+        },
+        {
+          "provider": "topdeck",
+          "provider_deck_id": "topdeck-blue-farm-b",
+          "commander_text": "Tymna the Weaver / Kraum, Ludevic's Opus",
+          "cards": [
+            {"scryfall_id": "tymna-card", "oracle_id": "tymna-oracle", "quantity": 1, "source_zone": "commanders"},
+            {"scryfall_id": "kraum-card", "oracle_id": "kraum-oracle", "quantity": 1, "source_zone": "commanders"},
+            {"scryfall_id": "tower-card", "oracle_id": "tower-oracle", "quantity": 1, "source_zone": "mainboard"},
+            {"scryfall_id": "silence-card", "oracle_id": "silence-oracle", "quantity": 1, "source_zone": "mainboard"}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "auxiliary_difference_ignored",
+      "description": "Auxiliary card differences should not affect canonical deck hash.",
+      "expected_same_deck_hash": true,
+      "decks": [
+        {
+          "provider": "mtgdecks",
+          "provider_deck_id": "mtgdecks-aux-a",
+          "commander_text": "Tymna the Weaver / Kraum, Ludevic's Opus",
+          "cards": [
+            {"scryfall_id": "tymna-card", "oracle_id": "tymna-oracle", "quantity": 1, "source_zone": "commanders"},
+            {"scryfall_id": "kraum-card", "oracle_id": "kraum-oracle", "quantity": 1, "source_zone": "commanders"},
+            {"scryfall_id": "tower-card", "oracle_id": "tower-oracle", "quantity": 1, "source_zone": "mainboard"},
+            {"scryfall_id": "sticker-card", "oracle_id": "sticker-oracle", "quantity": 1, "source_zone": "auxiliary"}
+          ]
+        },
+        {
+          "provider": "mtgdecks",
+          "provider_deck_id": "mtgdecks-aux-b",
+          "commander_text": "Tymna the Weaver / Kraum, Ludevic's Opus",
+          "cards": [
+            {"scryfall_id": "tymna-card", "oracle_id": "tymna-oracle", "quantity": 1, "source_zone": "commanders"},
+            {"scryfall_id": "kraum-card", "oracle_id": "kraum-oracle", "quantity": 1, "source_zone": "commanders"},
+            {"scryfall_id": "tower-card", "oracle_id": "tower-oracle", "quantity": 1, "source_zone": "mainboard"}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "duplicate_quantities_aggregate",
+      "description": "Duplicate card rows aggregate before hashing.",
+      "expected_same_deck_hash": true,
+      "decks": [
+        {
+          "provider": "fixture",
+          "provider_deck_id": "quantity-a",
+          "commander_text": "Tymna the Weaver / Kraum, Ludevic's Opus",
+          "cards": [
+            {"scryfall_id": "tymna-card", "oracle_id": "tymna-oracle", "quantity": 1, "source_zone": "commanders"},
+            {"scryfall_id": "kraum-card", "oracle_id": "kraum-oracle", "quantity": 1, "source_zone": "commanders"},
+            {"scryfall_id": "tower-card", "oracle_id": "tower-oracle", "quantity": 1, "source_zone": "mainboard"},
+            {"scryfall_id": "tower-card", "oracle_id": "tower-oracle", "quantity": 1, "source_zone": "mainboard"}
+          ]
+        },
+        {
+          "provider": "fixture",
+          "provider_deck_id": "quantity-b",
+          "commander_text": "Tymna the Weaver / Kraum, Ludevic's Opus",
+          "cards": [
+            {"scryfall_id": "kraum-card", "oracle_id": "kraum-oracle", "quantity": 1, "source_zone": "commanders"},
+            {"scryfall_id": "tymna-card", "oracle_id": "tymna-oracle", "quantity": 1, "source_zone": "commanders"},
+            {"scryfall_id": "tower-card", "oracle_id": "tower-oracle", "quantity": 2, "source_zone": "mainboard"}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "unresolved_card_blocks_canonicalization",
+      "description": "Deck with unresolved source card must fail before canonical deck creation.",
+      "expected_error": "unresolved_source_card",
+      "deck": {
+        "provider": "fixture",
+        "provider_deck_id": "unresolved-card",
+        "commander_text": "Tymna the Weaver / Kraum, Ludevic's Opus",
+        "cards": [
+          {"scryfall_id": "tymna-card", "oracle_id": "tymna-oracle", "quantity": 1, "source_zone": "commanders"},
+          {"scryfall_id": null, "oracle_id": null, "quantity": 1, "source_zone": "mainboard", "raw_name": "Unknown Card"}
+        ]
+      }
+    }
+  ]
+}

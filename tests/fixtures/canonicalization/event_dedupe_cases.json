@@ -1,0 +1,87 @@
+{
+  "cases": [
+    {
+      "id": "same_event_topdeck_mtgdecks",
+      "description": "Same tournament represented by TopDeck and MTGDecks should merge into one canonical event.",
+      "expected_same_canonical_event": true,
+      "source_events": [
+        {
+          "provider": "topdeck",
+          "provider_event_id": "td-cedh-open-2026",
+          "source_url": "https://topdeck.gg/event/td-cedh-open-2026",
+          "event_name": "cEDH Open Madrid",
+          "event_date": "2026-04-12",
+          "format": "commander",
+          "source_region": "Madrid",
+          "source_country": "ES",
+          "source_store_tag": "Fixture Hall",
+          "source_reported_player_count": 48,
+          "source_reported_deck_count": 16
+        },
+        {
+          "provider": "mtgdecks",
+          "provider_event_id": "789",
+          "source_url": "https://mtgdecks.net/events/mtgdecks-fixture-commander-open-789",
+          "event_name": "CEDH Open Madrid",
+          "event_date": "2026-04-12",
+          "format": "Commander",
+          "source_region": "Madrid",
+          "source_country": "ES",
+          "source_store_tag": "Fixture Hall",
+          "source_reported_player_count": 48,
+          "source_reported_deck_count": 8
+        }
+      ]
+    },
+    {
+      "id": "same_name_different_date",
+      "description": "Same name but different dates should not merge.",
+      "expected_same_canonical_event": false,
+      "source_events": [
+        {
+          "provider": "topdeck",
+          "provider_event_id": "td-weekly-1",
+          "event_name": "Sunday cEDH Weekly",
+          "event_date": "2026-04-12",
+          "format": "commander",
+          "source_region": "TX",
+          "source_country": "US"
+        },
+        {
+          "provider": "topdeck",
+          "provider_event_id": "td-weekly-2",
+          "event_name": "Sunday cEDH Weekly",
+          "event_date": "2026-04-19",
+          "format": "commander",
+          "source_region": "TX",
+          "source_country": "US"
+        }
+      ]
+    },
+    {
+      "id": "same_name_different_country",
+      "description": "Same name/date in different countries should not merge without stronger evidence.",
+      "expected_same_canonical_event": false,
+      "source_events": [
+        {
+          "provider": "mtgtop8",
+          "provider_event_id": "mtgtop8-123",
+          "event_name": "Commander Challenge",
+          "event_date": "2026-03-30",
+          "format": "commander",
+          "source_region": "CA",
+          "source_country": "US"
+        },
+        {
+          "provider": "hareruya",
+          "provider_event_id": "hareruya-202",
+          "event_name": "Commander Challenge",
+          "event_date": "2026-03-30",
+          "format": "commander",
+          "source_region": "Tokyo",
+          "source_country": "JP"
+        }
+      ]
+    }
+  ]
+}

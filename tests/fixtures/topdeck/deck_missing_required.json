@@ -1,0 +1,8 @@
+{
+  "deck_id": "67890",
+  "deck_title": "Missing Commander",
+  "retrieved_at": "2026-06-21T00:00:00+00:00",
+  "cards": [
+    {"name": "Command Tower", "quantity": 1, "zone": "mainboard"}
+  ]
+}

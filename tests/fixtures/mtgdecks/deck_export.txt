@@ -1,0 +1,25 @@
+Source URL: https://mtgdecks.net/Commander/tymna-kraum-control-decklist-by-fixture-pilot-456
+Original Source URL: https://mtgdecks.net/Commander/tymna-kraum-control-decklist-by-fixture-pilot-456
+Deck ID: 456
+Deck Title: Tymna Kraum Control
+Commander: Tymna the Weaver / Kraum, Ludevic's Opus
+Pilot: Fixture Pilot
+Rank: 1
+Rank Label: 1st Place
+Record: 7-1
+Archetype: Blue Farm
+
+[Commander]
+1 Tymna the Weaver
+1 Kraum, Ludevic's Opus
+
+[Mainboard]
+1 Command Tower
+1 Dockside Extortionist
+1 Ad Nauseam
+
+[Sideboard]
+1 Silence
+
+[Auxiliary]
+1 Sticker Sheet

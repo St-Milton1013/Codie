@@ -1,0 +1,16 @@
+{
+  "event_id": "12345",
+  "event_name": "TopDeck Example cEDH Open",
+  "event_date": "2026-06-01",
+  "format": "commander",
+  "region": "north_america",
+  "country": "US",
+  "store_tag": "Example Games",
+  "language": "en",
+  "player_count": 64,
+  "deck_count": 64,
+  "source_url": "https://topdeck.gg/event/12345",
+  "original_source": "TopDeck",
+  "original_source_url": "https://topdeck.gg",
+  "retrieved_at": "2026-06-21T00:00:00+00:00"
+}

@@ -1,0 +1,21 @@
+{
+  "deck_id": "67890",
+  "event_id": "12345",
+  "source_url": "https://topdeck.gg/deck/67890",
+  "download_url": "https://topdeck.gg/deck/67890/export",
+  "deck_title": "Tymna Kraum Example",
+  "commander_text": "Tymna the Weaver / Kraum, Ludevic's Opus",
+  "pilot_name": "Fixture Pilot",
+  "rank": 1,
+  "rank_label": "1st",
+  "record": "7-1",
+  "win_rate": 0.875,
+  "archetype_name": "Source Provided Label",
+  "retrieved_at": "2026-06-21T00:00:00+00:00",
+  "cards": [
+    {"name": "Tymna the Weaver", "quantity": 1, "zone": "commander"},
+    {"name": "Kraum, Ludevic's Opus", "quantity": 1, "zone": "commander"},
+    {"name": "Command Tower", "quantity": 1, "zone": "mainboard"},
+    {"name": "Bala Ged Recovery // Bala Ged Sanctuary", "quantity": 1, "zone": "mainboard"}
+  ]
+}

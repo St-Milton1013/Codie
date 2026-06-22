@@ -1,0 +1,33 @@
+{
+  "data": {
+    "tid": "abc123",
+    "name": "Documented EDH Open",
+    "game": "Magic: The Gathering",
+    "format": "EDH",
+    "startDate": 1780272000,
+    "location": {
+      "name": "Example Store",
+      "city": "Seattle",
+      "state": "WA",
+      "country": "US"
+    }
+  },
+  "standings": [
+    {
+      "standing": 1,
+      "name": "Fixture Pilot",
+      "id": "player123",
+      "winRate": 0.83,
+      "deckObj": {
+        "Commanders": {
+          "Tymna the Weaver": 1,
+          "Kraum, Ludevic's Opus": 1
+        },
+        "Mainboard": {
+          "Command Tower": 1
+        }
+      }
+    }
+  ],
+  "rounds": []
+}
