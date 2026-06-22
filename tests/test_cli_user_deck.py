@@ -10,6 +10,8 @@ from pathlib import Path
 from codie.cli.user_deck import main
 from codie.db.connection import connect
 from codie.db.repositories.core import CoreRepository
+from codie.db.repositories.user import UserRepository
+from codie.user_decks import UserDeckEvidenceComparison, UserDeckEvidenceComparisonRow, save_user_deck_comparison_analysis
 
 
 NOW = "2026-06-22T00:00:00+00:00"
@@ -159,6 +161,56 @@ class UserDeckCliTest(unittest.TestCase):
                     ]
                 )
 
+    def test_list_saved_analyses_prints_deterministic_json(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            db_path = root / "codie.sqlite"
+            main(["init-db", "--db", str(db_path)])
+            user_deck_id, saved_id = self._seed_saved_analysis(db_path)
+
+            stdout = StringIO()
+            with redirect_stdout(stdout):
+                exit_code = main(
+                    [
+                        "list-saved-analyses",
+                        "--db",
+                        str(db_path),
+                        "--user-deck-id",
+                        str(user_deck_id),
+                    ]
+                )
+
+            self.assertEqual(exit_code, 0)
+            payload = json.loads(stdout.getvalue())
+            self.assertEqual(payload["user_deck_id"], user_deck_id)
+            self.assertEqual(payload["saved_analyses"][0]["saved_analysis_id"], saved_id)
+            self.assertEqual(payload["saved_analyses"][0]["analysis_type"], "user_deck_evidence_comparison")
+
+    def test_show_saved_analysis_prints_detail_json(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            db_path = root / "codie.sqlite"
+            main(["init-db", "--db", str(db_path)])
+            _, saved_id = self._seed_saved_analysis(db_path)
+
+            stdout = StringIO()
+            with redirect_stdout(stdout):
+                exit_code = main(
+                    [
+                        "show-saved-analysis",
+                        "--db",
+                        str(db_path),
+                        "--saved-analysis-id",
+                        str(saved_id),
+                    ]
+                )
+
+            self.assertEqual(exit_code, 0)
+            payload = json.loads(stdout.getvalue())
+            self.assertEqual(payload["summary"]["saved_analysis_id"], saved_id)
+            self.assertEqual(payload["summary_payload"]["absent_count"], 1)
+            self.assertEqual(payload["summary_payload"]["rows"][0]["card_name"], "Mystic Remora")
+
     def test_cli_module_has_no_provider_or_recommendation_imports(self) -> None:
         import codie.cli.user_deck as cli_module
 
@@ -199,6 +251,48 @@ class UserDeckCliTest(unittest.TestCase):
                 }
             )
             connection.commit()
+        finally:
+            connection.close()
+
+    def _seed_saved_analysis(self, db_path: Path) -> tuple[int, int]:
+        connection = connect(db_path)
+        try:
+            user = UserRepository(connection)
+            user_deck_id = user.create_user_deck(
+                {
+                    "deck_hash": "deck-hash",
+                    "created_at": NOW,
+                    "updated_at": NOW,
+                }
+            )
+            result = save_user_deck_comparison_analysis(
+                user,
+                UserDeckEvidenceComparison(
+                    user_deck_id=user_deck_id,
+                    deck_hash="deck-hash",
+                    commander_hash="tymna the weaver",
+                    rows=(
+                        UserDeckEvidenceComparisonRow(
+                            oracle_id="oracle-remora",
+                            card_name="Mystic Remora",
+                            evidence_type="commander_staple",
+                            presence_status="absent",
+                            quantity_in_deck=0,
+                            zones=(),
+                            score=0.8,
+                            sample_size=42,
+                            source_record_id="staple:remora",
+                            source_url=None,
+                            evidence_line="Mystic Remora is absent in the imported user deck; evidence type commander_staple; sample size 42.",
+                        ),
+                    ),
+                    present_count=0,
+                    absent_count=1,
+                    generated_at=NOW,
+                ),
+            )
+            connection.commit()
+            return user_deck_id, result.saved_analysis_id
         finally:
             connection.close()
 

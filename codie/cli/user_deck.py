@@ -22,6 +22,8 @@ from codie.user_decks import (
     UserDeckImporter,
     build_user_deck_analysis_input,
     compare_user_deck_to_evidence,
+    get_saved_user_deck_analysis,
+    list_saved_user_deck_analyses,
 )
 
 
@@ -46,6 +48,14 @@ def build_parser() -> argparse.ArgumentParser:
         default="1970-01-01T00:00:00+00:00",
         help="Timestamp to stamp comparison outputs with.",
     )
+
+    list_saved = subparsers.add_parser("list-saved-analyses", help="List saved analyses for a user deck.")
+    list_saved.add_argument("--db", required=True, help="Existing Codie SQLite database path.")
+    list_saved.add_argument("--user-deck-id", required=True, type=int, help="User deck ID to list analyses for.")
+
+    show_saved = subparsers.add_parser("show-saved-analysis", help="Show one saved analysis detail.")
+    show_saved.add_argument("--db", required=True, help="Existing Codie SQLite database path.")
+    show_saved.add_argument("--saved-analysis-id", required=True, type=int, help="Saved analysis ID to show.")
     return parser
 
 
@@ -58,6 +68,14 @@ def main(argv: list[str] | None = None) -> int:
     if args.command == "import-user-deck":
         summary = _import_user_deck(args)
         print(json.dumps(summary, sort_keys=True))
+        return 0
+    if args.command == "list-saved-analyses":
+        summary = _list_saved_analyses(args)
+        print(json.dumps(summary, sort_keys=True))
+        return 0
+    if args.command == "show-saved-analysis":
+        detail = _show_saved_analysis(args)
+        print(json.dumps(detail, sort_keys=True))
         return 0
     parser.error(f"Unsupported command: {args.command}")
     return 2
@@ -128,6 +146,43 @@ def _load_evidence_candidates(path: Path) -> tuple[UserDeckEvidenceCandidate, ..
     if not isinstance(rows, list):
         raise ValueError("evidence JSON must be a list or an object with a candidates list")
     return tuple(_candidate_from_mapping(row) for row in rows)
+
+
+def _list_saved_analyses(args: argparse.Namespace) -> dict[str, Any]:
+    connection = connect(args.db)
+    try:
+        user_repository = UserRepository(connection)
+        rows = list_saved_user_deck_analyses(user_repository, args.user_deck_id)
+        return {
+            "user_deck_id": args.user_deck_id,
+            "saved_analyses": [_summary_to_dict(row) for row in rows],
+        }
+    finally:
+        connection.close()
+
+
+def _show_saved_analysis(args: argparse.Namespace) -> dict[str, Any]:
+    connection = connect(args.db)
+    try:
+        user_repository = UserRepository(connection)
+        detail = get_saved_user_deck_analysis(user_repository, args.saved_analysis_id)
+        return {
+            "summary": _summary_to_dict(detail.summary),
+            "summary_payload": detail.summary_payload,
+        }
+    finally:
+        connection.close()
+
+
+def _summary_to_dict(summary) -> dict[str, Any]:
+    return {
+        "saved_analysis_id": summary.saved_analysis_id,
+        "user_deck_id": summary.user_deck_id,
+        "deck_hash": summary.deck_hash,
+        "analysis_type": summary.analysis_type,
+        "generated_at": summary.generated_at,
+        "report_path": summary.report_path,
+    }
 
 
 def _candidate_from_mapping(row: Any) -> UserDeckEvidenceCandidate:
