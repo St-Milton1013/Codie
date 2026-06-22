@@ -88,3 +88,18 @@ class ArchitectureBoundaryTest(unittest.TestCase):
         )
         offenders = [fragment for fragment in forbidden_fragments if fragment in text]
         self.assertEqual(offenders, [])
+
+    def test_combo_sync_does_not_import_providers_or_recommendations(self) -> None:
+        offenders = []
+        forbidden_prefixes = (
+            "codie.providers",
+            "codie.recommendations",
+        )
+        for path in sorted((ROOT / "codie" / "combos").rglob("*.py")):
+            imports = imports_for(path)
+            offenders.extend(
+                f"{path.relative_to(ROOT)} imports {module}"
+                for module in imports
+                if module.startswith(forbidden_prefixes)
+            )
+        self.assertEqual(offenders, [])

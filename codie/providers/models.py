@@ -124,3 +124,12 @@ class SourceComboCandidate:
     components: tuple[str, ...]
     outputs: tuple[str, ...]
     raw_payload: RawPayload
+    cards: tuple["SourceComboCardCandidate", ...] = ()
+
+
+@dataclass(frozen=True)
+class SourceComboCardCandidate:
+    raw_name: str
+    role: str | None
+    required: bool = True
+    raw_entry: Any | None = None

@@ -98,3 +98,20 @@ class SourceRepository(BaseRepository):
             """,
             (source_deck_id,),
         ).fetchall()
+
+    def create_source_combo(self, combo: Mapping[str, Any]) -> int:
+        self.require(combo, ("provider", "imported_at"))
+        return self.insert("source_combos", combo)
+
+    def get_source_combo(self, provider: str, provider_combo_id: str | None):
+        if provider_combo_id is None:
+            return None
+        return self.connection.execute(
+            """
+            SELECT * FROM source_combos
+            WHERE provider = ? AND provider_combo_id = ?
+            ORDER BY source_combo_id DESC
+            LIMIT 1
+            """,
+            (provider, provider_combo_id),
+        ).fetchone()

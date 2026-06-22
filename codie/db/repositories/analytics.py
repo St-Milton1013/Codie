@@ -218,3 +218,35 @@ class AnalyticsRepository(BaseRepository):
             "SELECT * FROM evidence_counts WHERE entity_type = ? AND entity_id = ?",
             (entity_type, entity_id),
         ).fetchone()
+
+    def increment_evidence_count(
+        self,
+        *,
+        entity_type: str,
+        entity_id: str,
+        tournament: int = 0,
+        primer: int = 0,
+        combo: int = 0,
+        package: int = 0,
+        simulation: int = 0,
+        updated_at: str,
+    ) -> int:
+        self.connection.execute(
+            """
+            INSERT INTO evidence_counts (
+                entity_type, entity_id, tournament_evidence_count, primer_evidence_count,
+                combo_evidence_count, package_evidence_count, simulation_evidence_count, updated_at
+            )
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+            ON CONFLICT(entity_type, entity_id) DO UPDATE SET
+                tournament_evidence_count = evidence_counts.tournament_evidence_count + excluded.tournament_evidence_count,
+                primer_evidence_count = evidence_counts.primer_evidence_count + excluded.primer_evidence_count,
+                combo_evidence_count = evidence_counts.combo_evidence_count + excluded.combo_evidence_count,
+                package_evidence_count = evidence_counts.package_evidence_count + excluded.package_evidence_count,
+                simulation_evidence_count = evidence_counts.simulation_evidence_count + excluded.simulation_evidence_count,
+                updated_at = excluded.updated_at
+            """,
+            (entity_type, entity_id, tournament, primer, combo, package, simulation, updated_at),
+        )
+        row = self.get_evidence_count(entity_type, entity_id)
+        return int(row["evidence_id"])

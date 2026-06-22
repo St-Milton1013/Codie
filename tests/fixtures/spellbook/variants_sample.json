@@ -1,0 +1,50 @@
+{
+  "count": 2,
+  "results": [
+    {
+      "id": "spellbook-1",
+      "slug": "thassas-oracle-demonic-consultation",
+      "name": "Thassa's Oracle + Demonic Consultation",
+      "url": "https://commanderspellbook.com/combo/spellbook-1/",
+      "uses": [
+        {
+          "card": {
+            "name": "Thassa's Oracle"
+          },
+          "role": "win_condition",
+          "required": true
+        },
+        {
+          "card": {
+            "name": "Demonic Consultation"
+          },
+          "role": "enabler",
+          "required": true
+        }
+      ],
+      "produces": [
+        {
+          "name": "Win the game"
+        }
+      ]
+    },
+    {
+      "id": "spellbook-2",
+      "slug": "unresolved-example",
+      "name": "Known Card + Unknown Local Card",
+      "uses": [
+        {
+          "name": "Thassa's Oracle",
+          "role": "known_component"
+        },
+        {
+          "name": "Card Not In Local Cache",
+          "role": "unresolved_component"
+        }
+      ],
+      "outputs": [
+        "Demonstrates unresolved component storage"
+      ]
+    }
+  ]
+}
