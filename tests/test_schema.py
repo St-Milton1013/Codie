@@ -66,6 +66,8 @@ class SchemaFoundationTest(unittest.TestCase):
             "card_statistics",
             "recommendation_runs",
             "recommendation_candidates",
+            "innovation_snapshot_runs",
+            "innovation_snapshot_items",
             "regional_commander_metrics",
             "regional_card_metrics",
             "regional_package_metrics",

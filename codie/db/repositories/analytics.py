@@ -272,6 +272,114 @@ class AnalyticsRepository(BaseRepository):
             tuple(params),
         ).fetchall()
 
+    def create_innovation_snapshot_run(self, run: Mapping[str, Any]) -> int:
+        self.require(run, ("generated_at", "config_hash", "config_json"))
+        columns = ("generated_at", "config_hash", "config_json", "notes")
+        return self.insert("innovation_snapshot_runs", {column: run.get(column) for column in columns})
+
+    def add_innovation_snapshot_item(self, item: Mapping[str, Any]) -> int:
+        self.require(
+            item,
+            (
+                "innovation_snapshot_run_id",
+                "innovation_id",
+                "oracle_id",
+                "innovation_type",
+                "recent_window",
+                "baseline_window",
+                "first_recent_seen_at",
+                "source_event_ids_json",
+                "source_deck_ids_json",
+                "generated_at",
+            ),
+        )
+        columns = (
+            "innovation_snapshot_run_id",
+            "innovation_id",
+            "oracle_id",
+            "scryfall_id",
+            "commander_signature",
+            "region_code",
+            "innovation_type",
+            "recent_window",
+            "baseline_window",
+            "recent_inclusion_rate",
+            "baseline_inclusion_rate",
+            "usage_delta",
+            "recent_topcut_count",
+            "recent_winner_count",
+            "first_recent_seen_at",
+            "last_seen_before_recent_window",
+            "card_released_at",
+            "is_new_release",
+            "sample_size",
+            "confidence_score",
+            "source_event_ids_json",
+            "source_deck_ids_json",
+            "generated_at",
+        )
+        return self.insert("innovation_snapshot_items", {column: item.get(column) for column in columns})
+
+    def find_innovation_snapshot_runs(self, *, generated_at: str, config_hash: str):
+        return self.connection.execute(
+            """
+            SELECT *
+            FROM innovation_snapshot_runs
+            WHERE generated_at = ? AND config_hash = ?
+            ORDER BY innovation_snapshot_run_id
+            """,
+            (generated_at, config_hash),
+        ).fetchall()
+
+    def get_innovation_snapshot_run(self, innovation_snapshot_run_id: int):
+        return self.fetch_by_id(
+            "innovation_snapshot_runs",
+            "innovation_snapshot_run_id",
+            innovation_snapshot_run_id,
+        )
+
+    def list_innovation_snapshot_items(self, innovation_snapshot_run_id: int):
+        return self.connection.execute(
+            """
+            SELECT *
+            FROM innovation_snapshot_items
+            WHERE innovation_snapshot_run_id = ?
+            ORDER BY innovation_type, oracle_id, commander_signature, region_code, innovation_id
+            """,
+            (innovation_snapshot_run_id,),
+        ).fetchall()
+
+    def delete_innovation_snapshot_run(self, innovation_snapshot_run_id: int) -> None:
+        self.connection.execute(
+            "DELETE FROM innovation_snapshot_items WHERE innovation_snapshot_run_id = ?",
+            (innovation_snapshot_run_id,),
+        )
+        self.connection.execute(
+            "DELETE FROM innovation_snapshot_runs WHERE innovation_snapshot_run_id = ?",
+            (innovation_snapshot_run_id,),
+        )
+
+    def replace_innovation_snapshot(
+        self,
+        *,
+        run: Mapping[str, Any],
+        items: list[Mapping[str, Any]] | tuple[Mapping[str, Any], ...],
+    ) -> int:
+        self.require(run, ("generated_at", "config_hash", "config_json"))
+        with self.transaction(self.connection, "innovation_snapshot_rebuild"):
+            existing_runs = self.find_innovation_snapshot_runs(
+                generated_at=str(run["generated_at"]),
+                config_hash=str(run["config_hash"]),
+            )
+            for existing_run in existing_runs:
+                self.delete_innovation_snapshot_run(int(existing_run["innovation_snapshot_run_id"]))
+            innovation_snapshot_run_id = self.create_innovation_snapshot_run(run)
+            for item in items:
+                item_data = dict(item)
+                item_data["innovation_snapshot_run_id"] = innovation_snapshot_run_id
+                self.add_innovation_snapshot_item(item_data)
+        return innovation_snapshot_run_id
+
     def update_event_deck_entry_weight(self, event_deck_entry_id: int, entry_weight: float) -> None:
         self.connection.execute(
             "UPDATE event_deck_entries SET entry_weight = ? WHERE event_deck_entry_id = ?",

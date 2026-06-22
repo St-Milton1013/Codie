@@ -124,7 +124,7 @@ def _signal(
     }
     winner_decks = {observation.source_deck_id for observation in recent_observations if observation.winner}
     historical_dates = sorted(observation.event_date for observation in historical_before_recent)
-    source_events = {observation.source_event_id for observation in recent_observations}
+    event_refs = {observation.source_event_id for observation in recent_observations}
     usage_delta = None if recent_rate is None or baseline_rate is None else recent_rate - baseline_rate
     return InnovationSignal(
         innovation_id=_stable_id(
@@ -153,7 +153,7 @@ def _signal(
         is_new_release=is_new_release,
         sample_size=len(recent_decks),
         confidence_score=_confidence(len(recent_decks)),
-        source_event_ids_json=_source_json(source_events),
+        source_event_ids_json=_source_json(event_refs),
         source_deck_ids_json=_source_json(recent_decks),
         generated_at=generated_at,
     )

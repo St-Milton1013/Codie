@@ -1,43 +1,47 @@
 # Next Phase Contract
 
-Recommended next task: Phase 8J - Innovation Snapshot Persistence Decision
+Recommended next task: Phase 9A - Report/Export Surface Contract
 
 ## Current Status
 
-Phase 8G, Phase 8H, and Phase 8I are locally implemented and validated.
+Phase 8G, Phase 8H, Phase 8I, and Phase 8J are locally implemented and validated.
 
-Phase 8I added recommendation persistence and rebuild semantics. Validated candidate packets can now be written through `RecommendationRepository` into existing recommendation tables with atomic replacement behavior.
+Phase 8J added persistent innovation snapshots. Innovation detector outputs are now stored as reproducible analytics evidence snapshots with stable run/item rows, deterministic config hashes, and atomic rebuild semantics.
 
 ## Files Created Or Modified In Latest Packet
 
-- `codie/db/repositories/recommendations.py`
-- `codie/db/repositories/__init__.py`
-- `codie/recommendations/persistence.py`
-- `codie/recommendations/__init__.py`
-- `codie/recommendations/generation.py`
-- `tests/test_recommendation_persistence.py`
-- `docs/PHASE8I_RECOMMENDATION_PERSISTENCE_CONTRACT.md`
+- `codie/db/schema/analytics.sql`
+- `codie/db/repositories/analytics.py`
+- `codie/analytics/innovation/snapshot_persistence.py`
+- `codie/analytics/innovation/__init__.py`
+- `codie/analytics/__init__.py`
+- `docs/SCHEMA_SPEC.md`
+- `docs/CODIE_V1_CONSTITUTION.md`
+- `tests/test_analytics_innovation_snapshot_persistence.py`
+- `tests/test_schema.py`
+- `docs/PHASE8J_INNOVATION_SNAPSHOT_PERSISTENCE_CONTRACT.md`
 - `docs/NEXT_PHASE_CONTRACT.md`
 
 ## Public Functions / Classes Added
 
-- `RecommendationRepository`
-- `RecommendationRunSpec`
-- `PersistedRecommendationRun`
-- `recommendation_run_row(...)`
-- `recommendation_candidate_row(...)`
-- `persist_recommendation_packets(...)`
+- `InnovationSnapshotSpec`
+- `PersistedInnovationSnapshot`
+- `config_json(...)`
+- `config_hash(...)`
+- `innovation_snapshot_run_row(...)`
+- `innovation_snapshot_item_row(...)`
+- `persist_innovation_snapshot(...)`
+- `AnalyticsRepository.replace_innovation_snapshot(...)`
+- `AnalyticsRepository.list_innovation_snapshot_items(...)`
 
 ## Schema Impact
 
-None.
+Adds analytics evidence tables:
 
-Phase 8I uses existing tables:
+- `innovation_snapshot_runs`
+- `innovation_snapshot_items`
 
-- `recommendation_runs`
-- `recommendation_candidates`
-
-No migration or schema change was introduced.
+This was approved because innovation outputs are evidence artifacts requiring provenance and replayability.
 
 ## Validation Command
 
@@ -52,39 +56,47 @@ Static checks:
 ```text
 git diff --check
 rg -n "execute\(|executescript\(|sqlite3" codie --glob "!codie/db/**"
-rg -n "codie\.providers|codie\.ingestion|codie\.db\.repositories\.source|source_events|source_decks|source_deck_cards|source_primers|source_combos|provider_objects|Moxfield|Spellbook|moxfield|spellbook|execute\(|executescript\(|sqlite3" codie\recommendations
+rg -n "codie\.providers|codie\.ingestion|codie\.db\.repositories\.source|source_events|source_decks|source_deck_cards|source_primers|source_combos|provider_objects|Moxfield|Spellbook|moxfield|spellbook|recommendation_runs|recommendation_candidates|execute\(|executescript\(|sqlite3" codie\analytics
 ```
 
 ## Known Caveats / Review Notes
 
 - GitHub remote is configured, but first push is still blocked on interactive GitHub HTTPS authentication.
-- Phase 8I rebuild key is `input_deck_hash + generated_at`; future user-deck workflow may refine this.
-- Phase 8J should decide whether innovation snapshots need persistence now or can remain computed on demand.
+- Phase 8J added schema; outside review should verify the tables are appropriate before broad deployment.
+- No UI exists yet.
 
 ## Recommended Next Packet
 
-Phase 8J - Innovation Snapshot Persistence Decision.
-
-This should be a decision packet first:
-
-- determine whether innovation outputs need persistence before exports/UI
-- if yes, define schema/migration requirements explicitly
-- if no, document computed-on-demand behavior and move to Phase 9A
-
-## Alternative Next Packet
-
 Phase 9A - Report/Export Surface Contract.
 
-This is appropriate if innovation snapshot persistence is deferred.
+## Phase 9A Objective
+
+Define export surfaces for the evidence and recommendation layers before building UI.
+
+Likely outputs:
+
+- JSON export for recommendation runs and candidates
+- JSON export for innovation snapshots
+- Markdown report export for outside review
+- deterministic ordering and generated metadata
+
+## Phase 9A Scope
+
+Recommended initial scope:
+
+- contract document only or narrow exporter implementation
+- no web UI
+- no live provider calls
+- no new schema unless explicitly justified
 
 ## Do Not Do
 
-- Do not add schema without an explicit migration contract.
-- Do not read provider/source tables from recommendations.
+- Do not build UI before export contracts are defined.
 - Do not call providers.
+- Do not read source/provider tables.
 - Do not add strategic claim language.
-- Do not implement UI before report/export contract is defined.
 - Do not start simulator integration.
+- Do not add schema without explicit migration contract.
 
 ## Required Phase Packet Shape
 

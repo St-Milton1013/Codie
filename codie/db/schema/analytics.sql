@@ -124,3 +124,42 @@ CREATE TABLE recommendation_candidates (
     FOREIGN KEY(recommendation_run_id) REFERENCES recommendation_runs(recommendation_run_id),
     FOREIGN KEY(scryfall_id) REFERENCES cards(scryfall_id)
 );
+
+CREATE TABLE innovation_snapshot_runs (
+    innovation_snapshot_run_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    generated_at TEXT NOT NULL,
+    config_hash TEXT NOT NULL,
+    config_json TEXT NOT NULL,
+    notes TEXT,
+    UNIQUE(generated_at, config_hash)
+);
+
+CREATE TABLE innovation_snapshot_items (
+    innovation_snapshot_item_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    innovation_snapshot_run_id INTEGER NOT NULL,
+    innovation_id TEXT NOT NULL,
+    oracle_id TEXT NOT NULL,
+    scryfall_id TEXT,
+    commander_signature TEXT,
+    region_code TEXT,
+    innovation_type TEXT NOT NULL,
+    recent_window TEXT NOT NULL,
+    baseline_window TEXT NOT NULL,
+    recent_inclusion_rate REAL,
+    baseline_inclusion_rate REAL,
+    usage_delta REAL,
+    recent_topcut_count INTEGER DEFAULT 0,
+    recent_winner_count INTEGER DEFAULT 0,
+    first_recent_seen_at TEXT NOT NULL,
+    last_seen_before_recent_window TEXT,
+    card_released_at TEXT,
+    is_new_release INTEGER DEFAULT 0,
+    sample_size INTEGER DEFAULT 0,
+    confidence_score REAL,
+    source_event_ids_json TEXT NOT NULL,
+    source_deck_ids_json TEXT NOT NULL,
+    generated_at TEXT NOT NULL,
+    UNIQUE(innovation_snapshot_run_id, innovation_id),
+    FOREIGN KEY(innovation_snapshot_run_id) REFERENCES innovation_snapshot_runs(innovation_snapshot_run_id),
+    FOREIGN KEY(scryfall_id) REFERENCES cards(scryfall_id)
+);
