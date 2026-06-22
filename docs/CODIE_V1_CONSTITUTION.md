@@ -4812,6 +4812,38 @@ Every implementation response must end with:
 - Recommended Next Step
 - Roadmap Impact
 
+### 33.11 Phase Packet And Handoff Rule
+
+Work must proceed in bounded phase packets. A packet is not accepted unless it contains:
+
+- locked contract document
+- complete implementation files
+- required fixtures or test data
+- tests for success, failure, and boundary behavior
+- exact test command and actual output
+- static architecture compliance checks when relevant
+- completion report
+- updated handoff or next-phase document
+- clean commit boundary when validation passes
+
+The handoff document must be updated after each accepted packet and must include:
+
+- current phase status
+- files created or modified
+- public functions/classes added
+- schema impact, or explicit no-schema-impact statement
+- tests added and full validation command
+- known caveats or review notes
+- recommended next packet
+- explicit do-not-do list for the next packet
+
+If validation cannot be executed locally, the packet must remain uncommitted until validation succeeds or the handoff records the exact missing runtime/tooling blocker.
+
+Large phases must be split into separately validated packets. Each packet should be small enough to review independently and must preserve the same shape:
+
+```text
+contract -> code -> tests -> validation -> completion report -> handoff -> commit
+```
 ---
 
 ## 34. BUILD ORDER

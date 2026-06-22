@@ -6,6 +6,8 @@ from .innovation import (
     InnovationObservation,
     InnovationSignal,
     detect_innovations,
+    detect_innovations_from_repository,
+    innovation_observations_from_rows,
     innovation_evidence_line,
 )
 from .weights import (
@@ -27,10 +29,12 @@ __all__ = [
     "InnovationObservation",
     "InnovationSignal",
     "detect_innovations",
+    "detect_innovations_from_repository",
     "decklist_completeness_weight",
     "event_size_weight",
     "final_entry_weight",
     "innovation_evidence_line",
+    "innovation_observations_from_rows",
     "normalize_time_window",
     "placement_weight",
     "recency_weight",

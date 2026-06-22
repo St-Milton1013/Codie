@@ -3,12 +3,22 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
+from datetime import date
 from typing import Any
 
 from .base import BaseRepository, RepositoryError
 
 
 _OBSERVATION_SCOPES = {"all", "top_16", "winners"}
+
+
+def _validate_date(value: str | None, field_name: str) -> None:
+    if value in (None, ""):
+        return
+    try:
+        date.fromisoformat(str(value)[:10])
+    except ValueError as exc:
+        raise ValueError(f"Invalid {field_name}: {value}") from exc
 
 
 class AnalyticsRepository(BaseRepository):
@@ -167,6 +177,90 @@ class AnalyticsRepository(BaseRepository):
             JOIN canonical_deck_cards cdc ON cdc.canonical_deck_id = ede.canonical_deck_id
             JOIN cards c ON c.scryfall_id = cdc.scryfall_id
             WHERE {where_clause}
+            ORDER BY
+                ce.event_date,
+                ede.canonical_event_id,
+                ede.placement,
+                ede.event_deck_entry_id,
+                cdc.zone,
+                cdc.scryfall_id
+            """,
+            tuple(params),
+        ).fetchall()
+
+    def list_innovation_observation_rows(
+        self,
+        *,
+        window_start_date: str | None = None,
+        window_end_date: str | None = None,
+        minimum_event_size: int | None = None,
+        include_commanders: bool = False,
+    ):
+        """Return canonical tournament card rows for analytics innovation detection."""
+        _validate_date(window_start_date, "window_start_date")
+        _validate_date(window_end_date, "window_end_date")
+        if minimum_event_size is not None and minimum_event_size < 0:
+            raise ValueError("minimum_event_size must be non-negative")
+
+        filters = ["ce.event_date IS NOT NULL"]
+        params: list[Any] = []
+        if window_start_date:
+            filters.append("ce.event_date >= ?")
+            params.append(window_start_date)
+        if window_end_date:
+            filters.append("ce.event_date <= ?")
+            params.append(window_end_date)
+        if minimum_event_size is not None:
+            filters.append("(ce.player_count IS NULL OR ce.player_count >= ?)")
+            params.append(minimum_event_size)
+        if not include_commanders:
+            filters.append("COALESCE(cdc.is_commander, 0) = 0")
+
+        where_clause = " AND ".join(filters)
+        return self.connection.execute(
+            f"""
+            SELECT
+                ede.event_deck_entry_id,
+                ede.canonical_event_id,
+                ede.canonical_deck_id,
+                COALESCE(ede.source_deck_id, cds.source_deck_id) AS source_deck_id,
+                ces.source_event_id,
+                cd.commander_hash AS commander_signature,
+                cdc.canonical_deck_card_id,
+                cdc.scryfall_id,
+                cdc.oracle_id,
+                c.name AS card_name,
+                c.type_line,
+                c.color_identity_json,
+                c.released_at AS card_released_at,
+                cdc.quantity,
+                cdc.zone,
+                cdc.is_commander,
+                ede.placement,
+                ede.top_cut_made,
+                ede.final_pod,
+                ede.winner,
+                ce.event_date,
+                ce.region,
+                ce.country,
+                ce.player_count
+            FROM event_deck_entries ede
+            JOIN canonical_events ce ON ce.canonical_event_id = ede.canonical_event_id
+            JOIN canonical_decks cd ON cd.canonical_deck_id = ede.canonical_deck_id
+            JOIN canonical_deck_cards cdc ON cdc.canonical_deck_id = ede.canonical_deck_id
+            JOIN cards c ON c.scryfall_id = cdc.scryfall_id
+            LEFT JOIN canonical_deck_sources cds
+                ON cds.canonical_deck_id = ede.canonical_deck_id
+                AND (
+                    ede.source_deck_id IS NULL
+                    OR cds.source_deck_id = ede.source_deck_id
+                )
+            LEFT JOIN canonical_event_sources ces
+                ON ces.canonical_event_id = ede.canonical_event_id
+            WHERE {where_clause}
+            GROUP BY
+                ede.event_deck_entry_id,
+                cdc.canonical_deck_card_id
             ORDER BY
                 ce.event_date,
                 ede.canonical_event_id,

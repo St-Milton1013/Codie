@@ -148,3 +148,22 @@ Recommended later slices:
 4. Phase 9 - exports/UI/report surfaces
 
 Keep each phase separately committed and validated.
+
+## Required Phase Packet Shape
+
+Every follow-up phase packet must include:
+
+- contract document before code
+- complete implementation files
+- focused tests and fixture data where relevant
+- full validation command and actual output
+- static architecture checks where relevant
+- completion report
+- updated handoff or next-phase document
+- clean commit after validation passes
+
+Use this packet order:
+
+```text
+contract -> code -> tests -> validation -> completion report -> handoff -> commit
+```
