@@ -1,31 +1,27 @@
 # Next Phase Contract
 
-Recommended next task: Phase 10C - User Deck Evidence Comparison Surface
+Recommended next task: Phase 10D - User Deck Comparison Report Export
 
 ## Current Status
 
-Phase 10B is locally implemented and validated.
+Phase 10C is locally implemented and validated.
 
-Phase 10B added a read-only analysis input builder for imported user decks. It loads user deck metadata, cards, commander hash, counts, and unresolved rows through `UserRepository`. It did not add providers, source table reads, recommendations, UI, schema, or live network dependencies.
+Phase 10C added an evidence-only comparison surface between imported user decks and generic card evidence candidates. It reports present/absent status, quantities, zones, source metadata, and evidence-only lines. It did not add providers, source table reads, recommendations, UI, schema, DB access, or live network dependencies.
 
 ## Files Created Or Modified In Latest Packet
 
 - `codie/user_decks/__init__.py`
-- `codie/user_decks/analysis_input.py`
-- `codie/db/repositories/user.py`
-- `tests/test_user_deck_analysis_input.py`
-- `docs/PHASE10B_USER_DECK_ANALYSIS_INPUT_CONTRACT.md`
+- `codie/user_decks/evidence_comparison.py`
+- `tests/test_user_deck_evidence_comparison.py`
+- `docs/PHASE10C_USER_DECK_EVIDENCE_COMPARISON_CONTRACT.md`
 - `docs/NEXT_PHASE_CONTRACT.md`
 
 ## Public Functions / Classes Added
 
-- `UserDeckAnalysisCard`
-- `UserDeckAnalysisInput`
-- `UserDeckAnalysisInputError`
-- `build_user_deck_analysis_input(...)`
-- `UserRepository.get_user_deck(...)`
-- `UserRepository.list_user_deck_cards(...)`
-- `UserRepository.get_analysis_session(...)`
+- `UserDeckEvidenceCandidate`
+- `UserDeckEvidenceComparisonRow`
+- `UserDeckEvidenceComparison`
+- `compare_user_deck_to_evidence(...)`
 
 ## Schema Impact
 
@@ -50,20 +46,20 @@ rg -n "codie\.providers|codie\.recommendations|codie\.analytics|codie\.ingestion
 ## Known Caveats / Review Notes
 
 - GitHub remote is configured, but first push is still blocked on interactive GitHub HTTPS authentication.
-- User deck analysis input is read-only and does not generate recommendations.
+- User deck evidence comparison is in-memory only and does not persist rows.
 - No UI exists yet.
 
 ## Recommended Next Packet
 
-Phase 10C - User Deck Evidence Comparison Surface.
+Phase 10D - User Deck Comparison Report Export.
 
-This should stay evidence-only and compare a resolved user deck input against already-built recommendation/statistics evidence:
+This should stay evidence-only and export already-built comparison objects:
 
-- identify cards already present in the user deck
-- identify evidence candidates absent from the deck
-- separate staple, innovation, and evidence-count signals if available
-- preserve source/evidence metadata
-- no strategic recommendation language yet
+- deterministic JSON-compatible comparison export
+- Markdown comparison report
+- no DB access
+- no recommendation generation
+- no strategic recommendation language
 
 ## Do Not Do
 
@@ -73,7 +69,7 @@ This should stay evidence-only and compare a resolved user deck input against al
 - Do not add strategic claim language.
 - Do not start simulator integration.
 - Do not add schema without explicit migration contract.
-- Do not generate final recommendations in Phase 10C.
+- Do not generate final recommendations in Phase 10D.
 
 ## Required Phase Packet Shape
 
