@@ -185,6 +185,19 @@ class PrimerMetadataSyncTest(unittest.TestCase):
         self.assertEqual(package_count["count"], 0)
         self.assertEqual(combo_count["count"], 0)
 
+    def test_sync_rolls_back_all_tables_when_evidence_update_fails(self) -> None:
+        def fail_evidence_update(evidence):
+            raise RuntimeError("evidence write failed")
+
+        self.analytics.upsert_evidence_count = fail_evidence_update
+        candidate = MoxfieldProvider().parse_deck(load_fixture("deck_with_primer.json"))
+        with self.assertRaises(RuntimeError):
+            PrimerMetadataSync(self.source, self.curated, self.analytics).sync_candidates((candidate,))
+
+        self.assertEqual(self.connection.execute("SELECT COUNT(*) AS count FROM source_primers").fetchone()["count"], 0)
+        self.assertEqual(self.connection.execute("SELECT COUNT(*) AS count FROM primer_registry").fetchone()["count"], 0)
+        self.assertEqual(self.connection.execute("SELECT COUNT(*) AS count FROM evidence_counts").fetchone()["count"], 0)
+
 
 if __name__ == "__main__":
     unittest.main()

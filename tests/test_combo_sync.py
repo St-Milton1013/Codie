@@ -110,6 +110,20 @@ class ComboEvidenceSyncTest(unittest.TestCase):
         self.assertEqual(recommendation_count["count"], 0)
         self.assertEqual(package_count["count"], 0)
 
+    def test_sync_rolls_back_all_tables_when_evidence_update_fails(self) -> None:
+        def fail_evidence_update(evidence):
+            raise RuntimeError("evidence write failed")
+
+        self.analytics.upsert_evidence_count = fail_evidence_update
+        candidates = SpellbookProvider().parse_variants(load_fixture("variants_sample.json"))
+        with self.assertRaises(RuntimeError):
+            ComboEvidenceSync(self.source, self.curated, self.analytics, self.lookup).sync_candidates(candidates)
+
+        self.assertEqual(self.connection.execute("SELECT COUNT(*) AS count FROM source_combos").fetchone()["count"], 0)
+        self.assertEqual(self.connection.execute("SELECT COUNT(*) AS count FROM combos").fetchone()["count"], 0)
+        self.assertEqual(self.connection.execute("SELECT COUNT(*) AS count FROM combo_cards").fetchone()["count"], 0)
+        self.assertEqual(self.connection.execute("SELECT COUNT(*) AS count FROM evidence_counts").fetchone()["count"], 0)
+
 
 if __name__ == "__main__":
     unittest.main()

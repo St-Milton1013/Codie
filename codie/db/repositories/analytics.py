@@ -250,3 +250,107 @@ class AnalyticsRepository(BaseRepository):
         )
         row = self.get_evidence_count(entity_type, entity_id)
         return int(row["evidence_id"])
+
+    def rebuild_evidence_counts(self, *, updated_at: str) -> int:
+        """Rebuild derived evidence counts from canonical and curated records."""
+        with BaseRepository.transaction(self.connection, "evidence_rebuild"):
+            self.connection.execute("DELETE FROM evidence_counts")
+            for row in self.connection.execute(
+                """
+                SELECT
+                    COALESCE(cdc.oracle_id, cdc.scryfall_id) AS entity_id,
+                    COUNT(DISTINCT ede.event_deck_entry_id) AS evidence_count
+                FROM canonical_deck_cards cdc
+                JOIN event_deck_entries ede
+                    ON ede.canonical_deck_id = cdc.canonical_deck_id
+                WHERE COALESCE(cdc.oracle_id, cdc.scryfall_id) IS NOT NULL
+                GROUP BY COALESCE(cdc.oracle_id, cdc.scryfall_id)
+                """
+            ).fetchall():
+                self.increment_evidence_count(
+                    entity_type="card",
+                    entity_id=row["entity_id"],
+                    tournament=int(row["evidence_count"]),
+                    updated_at=updated_at,
+                )
+            for row in self.connection.execute(
+                """
+                SELECT
+                    COALESCE(oracle_id, scryfall_id) AS entity_id,
+                    COUNT(*) AS evidence_count
+                FROM combo_cards
+                WHERE COALESCE(oracle_id, scryfall_id) IS NOT NULL
+                GROUP BY COALESCE(oracle_id, scryfall_id)
+                """
+            ).fetchall():
+                self.increment_evidence_count(
+                    entity_type="card",
+                    entity_id=row["entity_id"],
+                    combo=int(row["evidence_count"]),
+                    updated_at=updated_at,
+                )
+            for row in self.connection.execute(
+                """
+                SELECT
+                    COALESCE(c.provider_combo_id, c.combo_url, CAST(c.combo_id AS TEXT)) AS entity_id,
+                    COUNT(cc.combo_card_id) AS evidence_count
+                FROM combos c
+                LEFT JOIN combo_cards cc ON cc.combo_id = c.combo_id
+                GROUP BY c.combo_id
+                HAVING COUNT(cc.combo_card_id) > 0
+                """
+            ).fetchall():
+                self.increment_evidence_count(
+                    entity_type="combo",
+                    entity_id=row["entity_id"],
+                    combo=int(row["evidence_count"]),
+                    updated_at=updated_at,
+                )
+            for row in self.connection.execute(
+                """
+                SELECT primer_url AS entity_id, COUNT(*) AS evidence_count
+                FROM primer_registry
+                GROUP BY primer_url
+                """
+            ).fetchall():
+                self.increment_evidence_count(
+                    entity_type="primer",
+                    entity_id=row["entity_id"],
+                    primer=int(row["evidence_count"]),
+                    updated_at=updated_at,
+                )
+            for row in self.connection.execute(
+                """
+                SELECT
+                    pr.package_name AS entity_id,
+                    COUNT(pc.package_card_id) AS evidence_count
+                FROM package_registry pr
+                LEFT JOIN package_cards pc ON pc.package_id = pr.package_id
+                GROUP BY pr.package_id
+                HAVING COUNT(pc.package_card_id) > 0
+                """
+            ).fetchall():
+                self.increment_evidence_count(
+                    entity_type="package",
+                    entity_id=row["entity_id"],
+                    package=int(row["evidence_count"]),
+                    updated_at=updated_at,
+                )
+            for row in self.connection.execute(
+                """
+                SELECT
+                    COALESCE(target_card_id, target_card) AS entity_id,
+                    COUNT(*) AS evidence_count
+                FROM simulation_batch_results
+                WHERE COALESCE(target_card_id, target_card) IS NOT NULL
+                GROUP BY COALESCE(target_card_id, target_card)
+                """
+            ).fetchall():
+                self.increment_evidence_count(
+                    entity_type="card",
+                    entity_id=row["entity_id"],
+                    simulation=int(row["evidence_count"]),
+                    updated_at=updated_at,
+                )
+        row = self.connection.execute("SELECT COUNT(*) AS count FROM evidence_counts").fetchone()
+        return int(row["count"])

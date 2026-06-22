@@ -9,7 +9,7 @@ from typing import Any, Iterable, Protocol
 
 from codie.canonical.signature import commander_signature
 from codie.db.repositories.analytics import AnalyticsRepository
-from codie.db.repositories.base import BaseRepository
+from codie.db.repositories.base import BaseRepository, RepositoryError
 from codie.db.repositories.curated import CuratedRepository
 from codie.db.repositories.source import SourceRepository
 
@@ -94,88 +94,101 @@ class PrimerMetadataSync:
         self.source = source
         self.curated = curated
         self.analytics = analytics
+        self.connection = self._shared_connection(source, curated, analytics)
+
+    @staticmethod
+    def _shared_connection(
+        source: SourceRepository,
+        curated: CuratedRepository,
+        analytics: AnalyticsRepository,
+    ):
+        connection = source.connection
+        if curated.connection is not connection or analytics.connection is not connection:
+            raise RepositoryError("PrimerMetadataSync repositories must share one SQLite connection")
+        return connection
 
     def sync_candidates(self, candidates: Iterable[PrimerCandidate]) -> PrimerSyncResult:
         now = BaseRepository.now()
         source_count = registry_count = evidence_count = skipped_count = 0
 
-        for candidate in candidates:
-            source_tags = _metadata(candidate, "source_tags", [])
-            self.source.create_source_primer(
-                {
-                    "provider": candidate.provider,
-                    "deck_url": candidate.deck_url,
-                    "primer_url": candidate.primer_url,
-                    "commander_text": candidate.commander_text,
-                    "partner_text": candidate.partner_text,
-                    "deck_title": candidate.deck_title,
-                    "primer_title": candidate.primer_title,
-                    "author": candidate.author,
-                    "author_url": candidate.author_url,
-                    "modified_at": candidate.updated_at,
-                    "source_tags_json": json.dumps(source_tags, sort_keys=True, ensure_ascii=False),
-                    "raw_metadata_json": candidate.raw_payload.raw_payload_json,
-                    "imported_at": now,
-                }
-            )
-            source_count += 1
+        with BaseRepository.transaction(self.connection, "primer_metadata_sync"):
+            for candidate in candidates:
+                source_tags = _metadata(candidate, "source_tags", [])
+                self.source.create_source_primer(
+                    {
+                        "provider": candidate.provider,
+                        "deck_url": candidate.deck_url,
+                        "primer_url": candidate.primer_url,
+                        "commander_text": candidate.commander_text,
+                        "partner_text": candidate.partner_text,
+                        "deck_title": candidate.deck_title,
+                        "primer_title": candidate.primer_title,
+                        "author": candidate.author,
+                        "author_url": candidate.author_url,
+                        "modified_at": candidate.updated_at,
+                        "source_tags_json": json.dumps(source_tags, sort_keys=True, ensure_ascii=False),
+                        "raw_metadata_json": candidate.raw_payload.raw_payload_json,
+                        "imported_at": now,
+                    }
+                )
+                source_count += 1
 
-            if not _metadata(candidate, "has_primer_route", 0):
-                skipped_count += 1
-                continue
+                if not _metadata(candidate, "has_primer_route", 0):
+                    skipped_count += 1
+                    continue
 
-            ranking_score = score_primer_candidate(candidate, generated_at=now)
-            self.curated.upsert_primer(
-                {
-                    "source": candidate.provider,
-                    "deck_url": candidate.deck_url,
-                    "primer_url": candidate.primer_url,
-                    "commander_key": _signature_key(candidate.commander_text, candidate.partner_text),
-                    "partner_key": _signature_key(candidate.partner_text),
-                    "deck_title": candidate.deck_title,
-                    "primer_title": candidate.primer_title,
-                    "author": candidate.author,
-                    "author_url": candidate.author_url,
-                    "modified_at": candidate.updated_at,
-                    "primer_updated_at_text": candidate.updated_at,
-                    "primer_updated_at_parsed": candidate.updated_at,
-                    "likes": candidate.likes,
-                    "views": candidate.views,
-                    "comments": candidate.comments,
-                    "bracket": _metadata(candidate, "bracket"),
-                    "has_primer_route": _metadata(candidate, "has_primer_route", 0),
-                    "primer_content_present": _metadata(candidate, "primer_content_present", 0),
-                    "primer_toc_present": _metadata(candidate, "primer_toc_present", 0),
-                    "primer_heading_count": _metadata(candidate, "primer_heading_count", 0),
-                    "primer_section_names_json": json.dumps(
-                        _metadata(candidate, "primer_section_names", []),
-                        sort_keys=True,
-                        ensure_ascii=False,
-                    ),
-                    "primer_external_link_count": _metadata(candidate, "primer_external_link_count", 0),
-                    "primer_video_count": _metadata(candidate, "primer_video_count", 0),
-                    "primer_image_count": _metadata(candidate, "primer_image_count", 0),
-                    "cedh_title_signal": _metadata(candidate, "cedh_title_signal", 0),
-                    "cedh_tag_signal": _metadata(candidate, "cedh_tag_signal", 0),
-                    "competitive_tag_signal": _metadata(candidate, "competitive_tag_signal", 0),
-                    "tournament_title_signal": _metadata(candidate, "tournament_title_signal", 0),
-                    "content_length_estimate": _metadata(candidate, "content_length_estimate"),
-                    "primer_quality_score": ranking_score.score,
-                    "raw_metadata_json": candidate.raw_payload.raw_payload_json,
-                    "created_at": now,
-                    "updated_at": now,
-                }
-            )
-            registry_count += 1
-            self.analytics.upsert_evidence_count(
-                {
-                    "entity_type": "primer",
-                    "entity_id": candidate.primer_url,
-                    "primer_evidence_count": 1,
-                    "updated_at": now,
-                }
-            )
-            evidence_count += 1
+                ranking_score = score_primer_candidate(candidate, generated_at=now)
+                self.curated.upsert_primer(
+                    {
+                        "source": candidate.provider,
+                        "deck_url": candidate.deck_url,
+                        "primer_url": candidate.primer_url,
+                        "commander_key": _signature_key(candidate.commander_text, candidate.partner_text),
+                        "partner_key": _signature_key(candidate.partner_text),
+                        "deck_title": candidate.deck_title,
+                        "primer_title": candidate.primer_title,
+                        "author": candidate.author,
+                        "author_url": candidate.author_url,
+                        "modified_at": candidate.updated_at,
+                        "primer_updated_at_text": candidate.updated_at,
+                        "primer_updated_at_parsed": candidate.updated_at,
+                        "likes": candidate.likes,
+                        "views": candidate.views,
+                        "comments": candidate.comments,
+                        "bracket": _metadata(candidate, "bracket"),
+                        "has_primer_route": _metadata(candidate, "has_primer_route", 0),
+                        "primer_content_present": _metadata(candidate, "primer_content_present", 0),
+                        "primer_toc_present": _metadata(candidate, "primer_toc_present", 0),
+                        "primer_heading_count": _metadata(candidate, "primer_heading_count", 0),
+                        "primer_section_names_json": json.dumps(
+                            _metadata(candidate, "primer_section_names", []),
+                            sort_keys=True,
+                            ensure_ascii=False,
+                        ),
+                        "primer_external_link_count": _metadata(candidate, "primer_external_link_count", 0),
+                        "primer_video_count": _metadata(candidate, "primer_video_count", 0),
+                        "primer_image_count": _metadata(candidate, "primer_image_count", 0),
+                        "cedh_title_signal": _metadata(candidate, "cedh_title_signal", 0),
+                        "cedh_tag_signal": _metadata(candidate, "cedh_tag_signal", 0),
+                        "competitive_tag_signal": _metadata(candidate, "competitive_tag_signal", 0),
+                        "tournament_title_signal": _metadata(candidate, "tournament_title_signal", 0),
+                        "content_length_estimate": _metadata(candidate, "content_length_estimate"),
+                        "primer_quality_score": ranking_score.score,
+                        "raw_metadata_json": candidate.raw_payload.raw_payload_json,
+                        "created_at": now,
+                        "updated_at": now,
+                    }
+                )
+                registry_count += 1
+                self.analytics.upsert_evidence_count(
+                    {
+                        "entity_type": "primer",
+                        "entity_id": candidate.primer_url,
+                        "primer_evidence_count": 1,
+                        "updated_at": now,
+                    }
+                )
+                evidence_count += 1
 
         return PrimerSyncResult(
             source_primer_count=source_count,

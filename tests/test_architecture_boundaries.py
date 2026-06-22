@@ -121,3 +121,40 @@ class ArchitectureBoundaryTest(unittest.TestCase):
                 if module.startswith(forbidden_prefixes)
             )
         self.assertEqual(offenders, [])
+
+    def test_recommendations_cannot_read_source_or_provider_layers(self) -> None:
+        recommendation_root = ROOT / "codie" / "recommendations"
+        if not recommendation_root.exists():
+            return
+        forbidden_import_prefixes = (
+            "codie.providers",
+            "codie.ingestion",
+            "codie.db.repositories.source",
+        )
+        forbidden_text = (
+            "source_events",
+            "source_decks",
+            "source_deck_cards",
+            "source_primers",
+            "source_combos",
+            "provider_objects",
+            "Moxfield",
+            "Spellbook",
+            "moxfield",
+            "spellbook",
+        )
+        offenders = []
+        for path in sorted(recommendation_root.rglob("*.py")):
+            imports = imports_for(path)
+            offenders.extend(
+                f"{path.relative_to(ROOT)} imports {module}"
+                for module in imports
+                if module.startswith(forbidden_import_prefixes)
+            )
+            text = path.read_text(encoding="utf-8")
+            offenders.extend(
+                f"{path.relative_to(ROOT)} references {fragment}"
+                for fragment in forbidden_text
+                if fragment in text
+            )
+        self.assertEqual(offenders, [])
