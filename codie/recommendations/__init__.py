@@ -9,6 +9,23 @@ from .evidence import (
     validate_claim_text,
 )
 from .observations import staple_observations_from_canonical_rows
+from .reports import (
+    CandidateAuditIssue,
+    CandidateAuditReport,
+    build_candidate_audit_report,
+    candidate_explanation_lines,
+    validate_candidate_explanation_lines,
+)
+from .scoring import (
+    RecommendationCandidateDraft,
+    RecommendationScoreBreakdown,
+    RecommendationScoreInput,
+    ScoreComponent,
+    build_recommendation_candidate_draft,
+    low_sample_penalty,
+    normalize_candidate_type,
+    score_recommendation_candidate,
+)
 from .statistics import (
     ConfidenceRating,
     FrequencyStats,
@@ -34,15 +51,24 @@ from .staples import (
 __all__ = [
     "ConfidenceRating",
     "CommanderStaplesReport",
+    "CandidateAuditIssue",
+    "CandidateAuditReport",
     "EvidenceBundle",
     "EvidenceItem",
     "EvidenceStackSummary",
     "FrequencyStats",
     "GenericStapleProfile",
+    "RecommendationCandidateDraft",
+    "RecommendationScoreBreakdown",
+    "RecommendationScoreInput",
+    "ScoreComponent",
     "StapleObservation",
     "StapleReportRow",
+    "build_candidate_audit_report",
     "build_evidence_bundle",
     "build_commander_staples_report",
+    "build_recommendation_candidate_draft",
+    "candidate_explanation_lines",
     "clamp",
     "confidence_rating",
     "evidence_stack_summary",
@@ -51,9 +77,13 @@ __all__ = [
     "inclusion_rate",
     "jaccard_similarity",
     "lift_score",
+    "low_sample_penalty",
+    "normalize_candidate_type",
     "safe_rate",
+    "score_recommendation_candidate",
     "staple_observations_from_canonical_rows",
     "validate_claim_text",
+    "validate_candidate_explanation_lines",
     "weighted_inclusion_rate",
     "weighted_jaccard_similarity",
 ]
