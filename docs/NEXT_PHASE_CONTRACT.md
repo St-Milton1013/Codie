@@ -1,28 +1,30 @@
 # Next Phase Contract
 
-Recommended next task: Phase 10A - User Deck Import / Analysis Contract
+Recommended next task: Phase 10B - User Deck Analysis Input Builder
 
 ## Current Status
 
-Phase 9C is locally implemented and validated.
+Phase 10A is locally implemented and validated.
 
-Phase 9C added deterministic checkpoint report generation from already-built export payloads and validation metadata. It did not add DB reads, providers, UI, schema, or live network dependencies.
+Phase 10A added local user deck text parsing, card resolution, atomic persistence into user-analysis tables, and analysis-session creation. It did not add providers, source table reads, recommendations, UI, schema, or live network dependencies.
 
 ## Files Created Or Modified In Latest Packet
 
-- `codie/exports/checkpoints.py`
-- `codie/exports/__init__.py`
-- `tests/test_exports_checkpoints.py`
-- `docs/PHASE9C_CHECKPOINT_EXPORT_GENERATOR_CONTRACT.md`
+- `codie/user_decks/__init__.py`
+- `codie/user_decks/importer.py`
+- `tests/test_user_deck_import.py`
+- `docs/PHASE10A_USER_DECK_IMPORT_CONTRACT.md`
 - `docs/NEXT_PHASE_CONTRACT.md`
 
 ## Public Functions / Classes Added
 
-- `ValidationSummary`
-- `CheckpointExport`
-- `build_checkpoint_export(...)`
-- `checkpoint_markdown(...)`
-- `write_checkpoint_markdown(...)`
+- `ParsedUserDeckCard`
+- `ParsedUserDeck`
+- `UserDeckImportError`
+- `UserDeckImportResult`
+- `parse_user_deck_text(...)`
+- `UserDeckImporter.import_text(...)`
+- `UserDeckImporter.import_parsed(...)`
 
 ## Schema Impact
 
@@ -41,26 +43,26 @@ Static checks:
 ```text
 git diff --check
 rg -n "codie\.providers|codie\.db|codie\.ingestion|source_events|source_decks|provider_objects|execute\(|executescript\(|sqlite3" codie\exports
+rg -n "codie\.providers|codie\.recommendations|codie\.analytics|codie\.ingestion|source_events|source_decks|provider_objects" codie\user_decks
 ```
 
 ## Known Caveats / Review Notes
 
 - GitHub remote is configured, but first push is still blocked on interactive GitHub HTTPS authentication.
-- Export/checkpoint layers are pure transforms and file writers.
+- User deck import currently supports simple quantity/name text input and section headers.
 - No UI exists yet.
 
 ## Recommended Next Packet
 
-Phase 10A - User Deck Import / Analysis Contract.
+Phase 10B - User Deck Analysis Input Builder.
 
-This should be contract-first. Before implementation, define:
+This should stay read-only and build the resolved user-deck view needed by later analysis:
 
-- accepted user deck input format
-- card resolution behavior
-- repository writes to `user_decks` / `user_deck_cards`
-- analysis session lifecycle
-- failure behavior for unresolved cards
-- no provider/source table reads
+- load one imported user deck through `UserRepository`
+- return deck metadata, commander hash, and resolved cards
+- expose unresolved/partial states if future import modes allow them
+- prepare an input object for later recommendation/statistics comparison
+- no recommendation generation yet
 
 ## Do Not Do
 
@@ -70,6 +72,7 @@ This should be contract-first. Before implementation, define:
 - Do not add strategic claim language.
 - Do not start simulator integration.
 - Do not add schema without explicit migration contract.
+- Do not generate recommendations in Phase 10B.
 
 ## Required Phase Packet Shape
 
