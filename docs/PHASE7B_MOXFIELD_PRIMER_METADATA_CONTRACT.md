@@ -48,6 +48,8 @@ class MoxfieldProvider(Provider):
 
 class PrimerMetadataSync:
     def sync_candidates(self, candidates: Iterable[PrimerCandidate]) -> PrimerSyncResult: ...
+
+def score_primer_candidate(candidate: PrimerCandidate, *, generated_at: str) -> PrimerRankingScore: ...
 ```
 
 ## Provider Output
@@ -124,6 +126,8 @@ Sync service allowed:
 - missing primer route produces a candidate with `has_primer_route = 0`; sync may skip registry insertion but may store source metadata.
 - body-like fields are stripped from raw metadata before persistence.
 - repeated syncs upsert `primer_registry` by `primer_url`.
+- primer registry commander keys use canonical alphabetical pipe-separated commander signatures.
+- primer score output includes score, component breakdown, and generated_at for reproducibility.
 
 ## Acceptance Tests
 
@@ -134,6 +138,8 @@ Sync service allowed:
 - malformed payload fails cleanly.
 - source primer metadata persists.
 - primer registry upsert persists objective metadata.
+- repeated syncs update the existing `primer_registry` row instead of creating duplicates.
+- partner pairs match exactly, are order-insensitive, and do not collapse into single-commander records.
 - evidence counts update primer evidence only.
 - sync does not create recommendations, packages, or analytics metrics.
 - provider boundary test passes.

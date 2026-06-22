@@ -59,6 +59,18 @@ class MoxfieldProviderTest(unittest.TestCase):
         self.assertEqual(candidate.objective_metadata["has_primer_route"], 0)
         self.assertEqual(candidate.objective_metadata["primer_content_present"], 0)
 
+    def test_minimal_primer_tolerates_metadata_drift(self) -> None:
+        candidate = MoxfieldProvider().parse_deck(load_fixture("minimal_primer.json"))
+        self.assertEqual(candidate.primer_url, "https://moxfield.com/decks/mox-minimal-primer/primer")
+        self.assertEqual(candidate.deck_url, "https://moxfield.com/decks/mox-minimal-primer")
+        self.assertEqual(candidate.commander_text, "Tymna the Weaver")
+        self.assertIsNone(candidate.likes)
+        self.assertIsNone(candidate.views)
+        self.assertIsNone(candidate.comments)
+        self.assertIsNone(candidate.updated_at)
+        self.assertEqual(candidate.objective_metadata["source_tags"], [])
+        self.assertEqual(candidate.objective_metadata["has_primer_route"], 1)
+
     def test_missing_required_identity_fails_cleanly(self) -> None:
         with self.assertRaises(MissingRequiredFieldError):
             MoxfieldProvider().parse_deck(load_fixture("missing_required.json"))

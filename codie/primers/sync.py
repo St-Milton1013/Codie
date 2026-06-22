@@ -7,6 +7,7 @@ import re
 from dataclasses import dataclass
 from typing import Any, Iterable, Protocol
 
+from codie.canonical.signature import commander_signature
 from codie.db.repositories.analytics import AnalyticsRepository
 from codie.db.repositories.base import BaseRepository
 from codie.db.repositories.curated import CuratedRepository
@@ -39,30 +40,46 @@ class PrimerSyncResult:
     skipped_registry_count: int
 
 
-def _key(value: str | None) -> str | None:
+@dataclass(frozen=True)
+class PrimerRankingScore:
+    score: float
+    component_breakdown: dict[str, float]
+    generated_at: str
+
+
+def _names_from_text(value: str | None) -> list[str]:
     if value is None:
+        return []
+    return [part.strip() for part in re.split(r"\s*(?:\||//|/)\s*", value) if part.strip()]
+
+
+def _signature_key(*values: str | None) -> str | None:
+    names: list[str] = []
+    for value in values:
+        names.extend(_names_from_text(value))
+    if not names:
         return None
-    lowered = value.lower().replace("//", " ")
-    lowered = lowered.replace(chr(8217), "")
-    lowered = re.sub(r"[']", "", lowered)
-    lowered = re.sub(r"[^a-z0-9]+", " ", lowered)
-    normalized = re.sub(r"\s+", " ", lowered).strip()
-    return normalized or None
+    return commander_signature(names)
 
 
 def _metadata(candidate: PrimerCandidate, key: str, default: Any = None) -> Any:
     return candidate.objective_metadata.get(key, default)
 
 
-def _quality_score(candidate: PrimerCandidate) -> float:
-    score = 0.0
-    score += 0.25 if _metadata(candidate, "has_primer_route", 0) else 0
-    score += 0.25 if _metadata(candidate, "primer_content_present", 0) else 0
-    score += min(int(_metadata(candidate, "primer_heading_count", 0) or 0), 8) * 0.03
-    score += min(int(_metadata(candidate, "primer_external_link_count", 0) or 0), 10) * 0.01
-    score += 0.05 if _metadata(candidate, "primer_toc_present", 0) else 0
-    score += 0.05 if candidate.updated_at else 0
-    return min(score, 1.0)
+def score_primer_candidate(candidate: PrimerCandidate, *, generated_at: str) -> PrimerRankingScore:
+    components = {
+        "has_primer_route": 0.25 if _metadata(candidate, "has_primer_route", 0) else 0.0,
+        "primer_content_present": 0.25 if _metadata(candidate, "primer_content_present", 0) else 0.0,
+        "primer_heading_count": min(int(_metadata(candidate, "primer_heading_count", 0) or 0), 8) * 0.03,
+        "primer_external_link_count": min(int(_metadata(candidate, "primer_external_link_count", 0) or 0), 10) * 0.01,
+        "primer_toc_present": 0.05 if _metadata(candidate, "primer_toc_present", 0) else 0.0,
+        "updated_at_present": 0.05 if candidate.updated_at else 0.0,
+    }
+    return PrimerRankingScore(
+        score=min(sum(components.values()), 1.0),
+        component_breakdown=components,
+        generated_at=generated_at,
+    )
 
 
 class PrimerMetadataSync:
@@ -107,13 +124,14 @@ class PrimerMetadataSync:
                 skipped_count += 1
                 continue
 
+            ranking_score = score_primer_candidate(candidate, generated_at=now)
             self.curated.upsert_primer(
                 {
                     "source": candidate.provider,
                     "deck_url": candidate.deck_url,
                     "primer_url": candidate.primer_url,
-                    "commander_key": _key(candidate.commander_text),
-                    "partner_key": _key(candidate.partner_text),
+                    "commander_key": _signature_key(candidate.commander_text, candidate.partner_text),
+                    "partner_key": _signature_key(candidate.partner_text),
                     "deck_title": candidate.deck_title,
                     "primer_title": candidate.primer_title,
                     "author": candidate.author,
@@ -142,7 +160,7 @@ class PrimerMetadataSync:
                     "competitive_tag_signal": _metadata(candidate, "competitive_tag_signal", 0),
                     "tournament_title_signal": _metadata(candidate, "tournament_title_signal", 0),
                     "content_length_estimate": _metadata(candidate, "content_length_estimate"),
-                    "primer_quality_score": _quality_score(candidate),
+                    "primer_quality_score": ranking_score.score,
                     "raw_metadata_json": candidate.raw_payload.raw_payload_json,
                     "created_at": now,
                     "updated_at": now,
