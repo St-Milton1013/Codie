@@ -1,21 +1,25 @@
 # Next Phase Contract
 
-Recommended next task: Outside Validation - Phase 10 User Deck Workflow
+Recommended next task: Phase 10H - CLI Checkpoint Update
 
 ## Current Status
 
-Phase 10F is locally implemented and validated.
+Phase 10G is locally implemented and ready for validation.
 
-Phase 10F added a checkpoint report covering the Phase 10 user deck workflow from import through comparison export writing. It did not add code, providers, source table reads, recommendations, UI, schema, DB access, or live network dependencies.
+Phase 10G added a small command-line wrapper for the accepted Phase 10 user deck workflow. It can bootstrap a SQLite database, import a deck text file, compare against optional evidence JSON, and write JSON/Markdown comparison exports. It did not add providers, source table reads, recommendations, UI, schema, or live network dependencies.
 
 ## Files Created Or Modified In Latest Packet
 
-- `docs/CHECKPOINT_PHASE10_USER_DECK_WORKFLOW_REPORT.md`
+- `codie/cli/__init__.py`
+- `codie/cli/user_deck.py`
+- `tests/test_cli_user_deck.py`
+- `docs/PHASE10G_USER_DECK_CLI_CONTRACT.md`
 - `docs/NEXT_PHASE_CONTRACT.md`
 
 ## Public Functions / Classes Added
 
-None. Documentation-only checkpoint.
+- `build_parser(...)`
+- `main(...)`
 
 ## Schema Impact
 
@@ -35,36 +39,39 @@ Static checks:
 git diff --check
 rg -n "codie\.providers|codie\.db|codie\.ingestion|source_events|source_decks|provider_objects|execute\(|executescript\(|sqlite3" codie\exports
 rg -n "codie\.providers|codie\.recommendations|codie\.analytics|codie\.ingestion|source_events|source_decks|provider_objects" codie\user_decks
+rg -n "codie\.providers|codie\.recommendations|codie\.analytics|source_events|source_decks|provider_objects" codie\cli
 ```
 
 ## Known Caveats / Review Notes
 
-- GitHub remote is configured, but first push is still blocked on interactive GitHub HTTPS authentication.
-- Phase 10 should be sent for outside validation before UI or final recommendation output begins.
+- GitHub remote is configured and Phase 10F was pushed; Phase 10G still needs commit and push after validation.
+- CLI requires a local Codie database with card rows before deck import can resolve cards.
 - No UI exists yet.
 
 ## Recommended Next Packet
 
-Outside Validation - Phase 10 User Deck Workflow.
+Phase 10H - CLI Checkpoint Update.
 
-Send:
+After Phase 10G validates, update:
 
 - `docs/CHECKPOINT_PHASE10_USER_DECK_WORKFLOW_REPORT.md`
-- `docs/PHASE10A_USER_DECK_IMPORT_CONTRACT.md`
-- `docs/PHASE10B_USER_DECK_ANALYSIS_INPUT_CONTRACT.md`
-- `docs/PHASE10C_USER_DECK_EVIDENCE_COMPARISON_CONTRACT.md`
-- `docs/PHASE10D_USER_DECK_COMPARISON_EXPORT_CONTRACT.md`
-- `docs/PHASE10E_USER_DECK_COMPARISON_FILE_WRITER_CONTRACT.md`
+
+to include:
+
+- CLI commands
+- CLI validation results
+- Phase 10G contract reference
+- remaining caveats
 
 ## Do Not Do
 
-- Do not build UI before user-deck contracts are accepted.
+- Do not build UI before CLI wrapper validation is accepted.
 - Do not call providers.
 - Do not read source/provider tables.
 - Do not add strategic claim language.
 - Do not start simulator integration.
 - Do not add schema without explicit migration contract.
-- Do not generate final recommendations before Phase 10 outside validation.
+- Do not generate final recommendations before updated Phase 10 validation.
 
 ## Required Phase Packet Shape
 
