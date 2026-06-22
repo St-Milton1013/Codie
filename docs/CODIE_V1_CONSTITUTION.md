@@ -3070,11 +3070,14 @@ event_size_weight = clamp(log2(player_count) / log2(128), 0.25, 1.50)
 
 **Interpretation:**
 ```text
-16 players ≈ 0.50
-32 players ≈ 0.625
-64 players ≈ 0.75
+16 players ≈ 0.571
+32 players ≈ 0.714
+64 players ≈ 0.857
 128 players ≈ 1.00
-256 players ≈ 1.125, capped by clamp
+256 players ≈ 1.143
+
+Formula is authoritative. Regenerate examples from:
+log2(player_count) / log2(128)
 ```
 
 ### 13.4 Placement Weight

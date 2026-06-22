@@ -317,13 +317,13 @@ Important files:
 
 Review note:
 
-- The implementation follows the written constitution formula:
+- The implementation follows the constitution formula:
 
 ```text
 event_size_weight = clamp(log2(player_count) / log2(128), 0.25, 1.50)
 ```
 
-The constitution's nearby prose examples appear inconsistent with that formula for 16/32/64-player events. Outside review should decide whether the formula or examples should be amended.
+The constitution examples were amended after outside review to match this formula and now state that the formula is authoritative.
 
 ## Known Caveats
 
@@ -332,7 +332,6 @@ No Git remote is configured.
 No CI workflow is configured yet.
 No Phase 7 evidence-source implementation yet.
 Hareruya deck/result live pages may WAF-challenge basic clients.
-Phase 6 follows the written event-size formula despite inconsistent prose examples.
 TopDeck API key is not committed; local probe scripts remain ignored under work/.
 ```
 
@@ -363,7 +362,7 @@ Also check:
 10. Analytics reads canonical tables only, not source/provider tables.
 11. Hareruya live-shape fixtures match current Hareruya DOM assumptions.
 12. Hareruya WAF challenge handling is acceptable for retryable live-fetch failure.
-13. Phase 6 event-size weighting should follow either the written formula or prose examples; flag any required constitution correction.
+13. Phase 6 event-size weighting follows the authoritative written formula and constitution examples match it.
 
 Return:
 PASS / PASS WITH REQUIRED FIXES / FAIL
