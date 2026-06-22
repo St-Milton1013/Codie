@@ -1,22 +1,21 @@
 # Next Phase Contract
 
-Recommended next task: Phase 11 Planning
+Recommended next task: Phase 11A - Saved Analysis Retrieval And Listing
 
 ## Current Status
 
-Phase 10K is locally implemented and ready for validation.
+Phase 11 planning is locally implemented and ready for validation.
 
-Phase 10K completed the small CLI documentation pass requested by outside review. It documents that user-facing CLI export usage should include `--output-root` while preserving low-level writer flexibility for trusted callers.
+Phase 11 planning chooses the next implementation packet: saved-analysis retrieval and listing. This completes the local user-deck workflow loop before UI, simulator integration, or final recommendation output.
 
 ## Files Created Or Modified In Latest Packet
 
-- `docs/CHECKPOINT_PHASE10_USER_DECK_WORKFLOW_REPORT.md`
-- `docs/PHASE10G_USER_DECK_CLI_CONTRACT.md`
+- `docs/PHASE11_PLANNING_CONTRACT.md`
 - `docs/NEXT_PHASE_CONTRACT.md`
 
 ## Public Functions / Classes Added
 
-None. Documentation-only checkpoint update.
+None. Documentation-only planning packet.
 
 ## Schema Impact
 
@@ -41,27 +40,29 @@ rg -n "codie\.providers|codie\.recommendations|codie\.analytics|source_events|so
 
 ## Known Caveats / Review Notes
 
-- GitHub remote is configured and Phase 10I/10J were pushed; Phase 10K still needs commit and push after validation.
+- GitHub remote is configured and Phase 10K was pushed; Phase 11 planning still needs commit and push after validation.
 - CLI requires a local Codie database with card rows before deck import can resolve cards.
 - CLI export docs recommend `--output-root` for normal usage.
 - No UI exists yet.
 
 ## Recommended Next Packet
 
-Phase 11 Planning.
+Phase 11A - Saved Analysis Retrieval And Listing.
 
-Define the next major workflow before implementation. Candidate directions:
+Implement read-only retrieval of persisted user deck analysis summaries:
 
-- UI planning
-- simulator integration planning
-- saved analysis retrieval/report listing
-- deployment/packaging docs
+- list saved analyses for a user deck
+- fetch saved analysis detail by ID
+- parse summary JSON into stable models
+- add CLI commands for list/show
+- keep output deterministic JSON
+- no schema changes
 
 Keep final recommendation generation separate until the Phase 8/10 boundaries are explicitly carried forward.
 
 ## Do Not Do
 
-- Do not build UI before saved-analysis outside validation is accepted.
+- Do not build UI before saved-analysis retrieval/listing is accepted.
 - Do not call providers.
 - Do not read source/provider tables.
 - Do not add strategic claim language.
