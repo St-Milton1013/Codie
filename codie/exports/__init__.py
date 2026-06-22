@@ -15,6 +15,7 @@ from .reports import (
     outside_review_markdown,
     recommendation_run_markdown,
 )
+from .user_deck_reports import user_deck_comparison_export, user_deck_comparison_markdown
 from .writers import ExportWriteResult, write_json_export, write_markdown_export
 
 __all__ = [
@@ -29,6 +30,8 @@ __all__ = [
     "innovation_snapshot_markdown",
     "outside_review_markdown",
     "recommendation_run_markdown",
+    "user_deck_comparison_export",
+    "user_deck_comparison_markdown",
     "write_checkpoint_markdown",
     "write_json_export",
     "write_markdown_export",

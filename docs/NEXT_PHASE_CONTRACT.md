@@ -1,27 +1,25 @@
 # Next Phase Contract
 
-Recommended next task: Phase 10D - User Deck Comparison Report Export
+Recommended next task: Phase 10E - User Deck Comparison File Writer
 
 ## Current Status
 
-Phase 10C is locally implemented and validated.
+Phase 10D is locally implemented and validated.
 
-Phase 10C added an evidence-only comparison surface between imported user decks and generic card evidence candidates. It reports present/absent status, quantities, zones, source metadata, and evidence-only lines. It did not add providers, source table reads, recommendations, UI, schema, DB access, or live network dependencies.
+Phase 10D added deterministic export helpers for already-built user deck evidence comparisons. It emits JSON-compatible dictionaries and evidence-only Markdown reports. It did not add providers, source table reads, recommendations, UI, schema, DB access, persistence, or live network dependencies.
 
 ## Files Created Or Modified In Latest Packet
 
-- `codie/user_decks/__init__.py`
-- `codie/user_decks/evidence_comparison.py`
-- `tests/test_user_deck_evidence_comparison.py`
-- `docs/PHASE10C_USER_DECK_EVIDENCE_COMPARISON_CONTRACT.md`
+- `codie/exports/__init__.py`
+- `codie/exports/user_deck_reports.py`
+- `tests/test_exports_user_deck_reports.py`
+- `docs/PHASE10D_USER_DECK_COMPARISON_EXPORT_CONTRACT.md`
 - `docs/NEXT_PHASE_CONTRACT.md`
 
 ## Public Functions / Classes Added
 
-- `UserDeckEvidenceCandidate`
-- `UserDeckEvidenceComparisonRow`
-- `UserDeckEvidenceComparison`
-- `compare_user_deck_to_evidence(...)`
+- `user_deck_comparison_export(...)`
+- `user_deck_comparison_markdown(...)`
 
 ## Schema Impact
 
@@ -46,17 +44,18 @@ rg -n "codie\.providers|codie\.recommendations|codie\.analytics|codie\.ingestion
 ## Known Caveats / Review Notes
 
 - GitHub remote is configured, but first push is still blocked on interactive GitHub HTTPS authentication.
-- User deck evidence comparison is in-memory only and does not persist rows.
+- User deck comparison exports are pure transforms and do not write files.
 - No UI exists yet.
 
 ## Recommended Next Packet
 
-Phase 10D - User Deck Comparison Report Export.
+Phase 10E - User Deck Comparison File Writer.
 
-This should stay evidence-only and export already-built comparison objects:
+This should reuse existing export writers:
 
-- deterministic JSON-compatible comparison export
-- Markdown comparison report
+- write user deck comparison JSON export
+- write user deck comparison Markdown report
+- deterministic paths supplied by caller
 - no DB access
 - no recommendation generation
 - no strategic recommendation language
@@ -69,7 +68,7 @@ This should stay evidence-only and export already-built comparison objects:
 - Do not add strategic claim language.
 - Do not start simulator integration.
 - Do not add schema without explicit migration contract.
-- Do not generate final recommendations in Phase 10D.
+- Do not generate final recommendations in Phase 10E.
 
 ## Required Phase Packet Shape
 
