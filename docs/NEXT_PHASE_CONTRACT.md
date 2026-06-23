@@ -1,21 +1,21 @@
 # Next Phase Contract
 
-Recommended next task: Outside Validation - Phase 12 UI Preparation
+Recommended next task: Outside Validation - Phase 11/12, Then Phase 12C UI Scaffold Contract
 
 ## Current Status
 
-Phase 12B is locally implemented and ready for validation.
+Continuity handoff is locally implemented and ready for validation.
 
-Phase 12B added a checkpoint report for UI preparation and user workflow view models. It did not add code, providers, DB access, recommendations, UI scaffold, schema, or live network dependencies.
+`docs/CODEX_CONTINUITY_HANDOFF.md` now captures the repo URL, latest pushed commit, validation baseline, completed phase status, outside-validation packets, resume prompt, startup commands, architecture boundaries, and next safe options.
 
 ## Files Created Or Modified In Latest Packet
 
-- `docs/CHECKPOINT_PHASE12_UI_PREP_REPORT.md`
+- `docs/CODEX_CONTINUITY_HANDOFF.md`
 - `docs/NEXT_PHASE_CONTRACT.md`
 
 ## Public Functions / Classes Added
 
-None. Documentation-only checkpoint.
+None. Documentation-only continuity packet.
 
 ## Schema Impact
 
@@ -40,20 +40,30 @@ rg -n "codie\.providers|codie\.recommendations|codie\.analytics|source_events|so
 
 ## Known Caveats / Review Notes
 
-- GitHub remote is configured and Phase 12A still needs push after checkpoint validation.
+- GitHub remote is configured and Phase 12B was pushed.
 - CLI requires a local Codie database with card rows before deck import can resolve cards.
 - CLI export docs recommend `--output-root` for normal usage.
 - No UI exists yet.
 
 ## Recommended Next Packet
 
-Outside Validation - Phase 12 UI Preparation.
+Outside Validation - Phase 11/12, then Phase 12C UI Scaffold Contract.
 
-Send:
+First send:
 
+- `docs/CODEX_CONTINUITY_HANDOFF.md`
+- `docs/CHECKPOINT_PHASE11_USER_WORKFLOW_RETRIEVAL_REPORT.md`
+- `docs/PHASE11_PLANNING_CONTRACT.md`
+- `docs/PHASE11A_SAVED_ANALYSIS_RETRIEVAL_CONTRACT.md`
 - `docs/CHECKPOINT_PHASE12_UI_PREP_REPORT.md`
 - `docs/PHASE12_UI_PLANNING_CONTRACT.md`
 - `docs/PHASE12A_USER_WORKFLOW_VIEW_MODELS_CONTRACT.md`
+
+If accepted, draft:
+
+```text
+Phase 12C - UI Scaffold Contract
+```
 
 Keep final recommendation generation separate until the Phase 8/10 boundaries are explicitly carried forward.
 
