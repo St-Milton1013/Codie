@@ -1,28 +1,21 @@
 # Next Phase Contract
 
-Recommended next task: Phase 12B - User Workflow View Model Checkpoint
+Recommended next task: Outside Validation - Phase 12 UI Preparation
 
 ## Current Status
 
-Phase 12A is locally implemented and ready for validation.
+Phase 12B is locally implemented and ready for validation.
 
-Phase 12A added pure Python user workflow view models for saved-analysis list and detail pages. It did not scaffold frontend, install npm packages, read DB tables, call providers, generate recommendations, start simulator integration, or add schema.
+Phase 12B added a checkpoint report for UI preparation and user workflow view models. It did not add code, providers, DB access, recommendations, UI scaffold, schema, or live network dependencies.
 
 ## Files Created Or Modified In Latest Packet
 
-- `codie/pages/__init__.py`
-- `codie/pages/user_workflow.py`
-- `tests/test_pages_user_workflow.py`
-- `docs/PHASE12A_USER_WORKFLOW_VIEW_MODELS_CONTRACT.md`
+- `docs/CHECKPOINT_PHASE12_UI_PREP_REPORT.md`
 - `docs/NEXT_PHASE_CONTRACT.md`
 
 ## Public Functions / Classes Added
 
-- `UserWorkflowSummaryCard`
-- `UserWorkflowTableRow`
-- `UserWorkflowPageModel`
-- `saved_analysis_detail_page_model(...)`
-- `saved_analysis_list_page_model(...)`
+None. Documentation-only checkpoint.
 
 ## Schema Impact
 
@@ -47,22 +40,20 @@ rg -n "codie\.providers|codie\.recommendations|codie\.analytics|source_events|so
 
 ## Known Caveats / Review Notes
 
-- GitHub remote is configured and Phase 12 planning was pushed; Phase 12A still needs commit and push after validation.
+- GitHub remote is configured and Phase 12A still needs push after checkpoint validation.
 - CLI requires a local Codie database with card rows before deck import can resolve cards.
 - CLI export docs recommend `--output-root` for normal usage.
 - No UI exists yet.
 
 ## Recommended Next Packet
 
-Phase 12B - User Workflow View Model Checkpoint.
+Outside Validation - Phase 12 UI Preparation.
 
-Update checkpoint docs to include:
+Send:
 
-- Phase 12 planning
-- Phase 12A view models
-- validation output
-- boundary scans
-- remaining caveats before UI scaffold
+- `docs/CHECKPOINT_PHASE12_UI_PREP_REPORT.md`
+- `docs/PHASE12_UI_PLANNING_CONTRACT.md`
+- `docs/PHASE12A_USER_WORKFLOW_VIEW_MODELS_CONTRACT.md`
 
 Keep final recommendation generation separate until the Phase 8/10 boundaries are explicitly carried forward.
 
