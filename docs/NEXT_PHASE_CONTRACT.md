@@ -1,30 +1,21 @@
 # Next Phase Contract
 
-Recommended next task: Phase 11B - Saved Analysis Retrieval Checkpoint
+Recommended next task: Outside Validation - Phase 11 User Workflow Retrieval
 
 ## Current Status
 
-Phase 11A is locally implemented and ready for validation.
+Phase 11B is locally implemented and ready for validation.
 
-Phase 11A added read-only saved-analysis listing/detail models plus CLI commands for deterministic JSON output. It completes the local user-deck workflow loop before UI, simulator integration, or final recommendation output.
+Phase 11B added a checkpoint report for Phase 11 planning and saved-analysis retrieval/listing. It did not add code, providers, source table reads, recommendations, UI, schema, DB access, or live network dependencies.
 
 ## Files Created Or Modified In Latest Packet
 
-- `codie/user_decks/__init__.py`
-- `codie/user_decks/saved_analysis_listing.py`
-- `codie/cli/user_deck.py`
-- `tests/test_user_deck_saved_analysis_listing.py`
-- `tests/test_cli_user_deck.py`
-- `docs/PHASE11A_SAVED_ANALYSIS_RETRIEVAL_CONTRACT.md`
+- `docs/CHECKPOINT_PHASE11_USER_WORKFLOW_RETRIEVAL_REPORT.md`
 - `docs/NEXT_PHASE_CONTRACT.md`
 
 ## Public Functions / Classes Added
 
-- `SavedAnalysisReadError`
-- `SavedAnalysisSummary`
-- `SavedAnalysisDetail`
-- `list_saved_user_deck_analyses(...)`
-- `get_saved_user_deck_analysis(...)`
+None. Documentation-only checkpoint.
 
 ## Schema Impact
 
@@ -49,22 +40,20 @@ rg -n "codie\.providers|codie\.recommendations|codie\.analytics|source_events|so
 
 ## Known Caveats / Review Notes
 
-- GitHub remote is configured and Phase 11 planning was pushed; Phase 11A still needs commit and push after validation.
+- GitHub remote is configured and Phase 11A still needs push after checkpoint validation.
 - CLI requires a local Codie database with card rows before deck import can resolve cards.
 - CLI export docs recommend `--output-root` for normal usage.
 - No UI exists yet.
 
 ## Recommended Next Packet
 
-Phase 11B - Saved Analysis Retrieval Checkpoint.
+Outside Validation - Phase 11 User Workflow Retrieval.
 
-Update checkpoint docs to include:
+Send:
 
-- saved-analysis retrieval/listing
-- CLI list/show commands
-- latest validation output
-- Phase 11A contract reference
-- remaining caveats
+- `docs/CHECKPOINT_PHASE11_USER_WORKFLOW_RETRIEVAL_REPORT.md`
+- `docs/PHASE11_PLANNING_CONTRACT.md`
+- `docs/PHASE11A_SAVED_ANALYSIS_RETRIEVAL_CONTRACT.md`
 
 Keep final recommendation generation separate until the Phase 8/10 boundaries are explicitly carried forward.
 
