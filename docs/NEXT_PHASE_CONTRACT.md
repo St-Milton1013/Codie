@@ -1,21 +1,28 @@
 # Next Phase Contract
 
-Recommended next task: Phase 12A - User Workflow View Models
+Recommended next task: Phase 12B - User Workflow View Model Checkpoint
 
 ## Current Status
 
-Phase 12 planning is locally implemented and ready for validation.
+Phase 12A is locally implemented and ready for validation.
 
-Phase 12 planning defines the UI path without starting frontend implementation. It recommends a page/view-model layer before any React/Vite scaffold, preserving the rule that UI must not own data or issue raw SQL.
+Phase 12A added pure Python user workflow view models for saved-analysis list and detail pages. It did not scaffold frontend, install npm packages, read DB tables, call providers, generate recommendations, start simulator integration, or add schema.
 
 ## Files Created Or Modified In Latest Packet
 
-- `docs/PHASE12_UI_PLANNING_CONTRACT.md`
+- `codie/pages/__init__.py`
+- `codie/pages/user_workflow.py`
+- `tests/test_pages_user_workflow.py`
+- `docs/PHASE12A_USER_WORKFLOW_VIEW_MODELS_CONTRACT.md`
 - `docs/NEXT_PHASE_CONTRACT.md`
 
 ## Public Functions / Classes Added
 
-None. Documentation-only planning packet.
+- `UserWorkflowSummaryCard`
+- `UserWorkflowTableRow`
+- `UserWorkflowPageModel`
+- `saved_analysis_detail_page_model(...)`
+- `saved_analysis_list_page_model(...)`
 
 ## Schema Impact
 
@@ -40,22 +47,22 @@ rg -n "codie\.providers|codie\.recommendations|codie\.analytics|source_events|so
 
 ## Known Caveats / Review Notes
 
-- GitHub remote is configured and Phase 11B was pushed; Phase 12 planning still needs commit and push after validation.
+- GitHub remote is configured and Phase 12 planning was pushed; Phase 12A still needs commit and push after validation.
 - CLI requires a local Codie database with card rows before deck import can resolve cards.
 - CLI export docs recommend `--output-root` for normal usage.
 - No UI exists yet.
 
 ## Recommended Next Packet
 
-Phase 12A - User Workflow View Models.
+Phase 12B - User Workflow View Model Checkpoint.
 
-Implement display-ready, JSON-compatible models for accepted user workflow outputs:
+Update checkpoint docs to include:
 
-- saved analysis detail page model
-- saved analysis list page model
-- explicit empty states
-- evidence/source metadata preservation
-- no frontend scaffold yet
+- Phase 12 planning
+- Phase 12A view models
+- validation output
+- boundary scans
+- remaining caveats before UI scaffold
 
 Keep final recommendation generation separate until the Phase 8/10 boundaries are explicitly carried forward.
 
