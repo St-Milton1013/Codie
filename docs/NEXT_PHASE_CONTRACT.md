@@ -1,21 +1,21 @@
 # Next Phase Contract
 
-Recommended next task: Outside Validation - Phase 11 User Workflow Retrieval
+Recommended next task: Phase 12A - User Workflow View Models
 
 ## Current Status
 
-Phase 11B is locally implemented and ready for validation.
+Phase 12 planning is locally implemented and ready for validation.
 
-Phase 11B added a checkpoint report for Phase 11 planning and saved-analysis retrieval/listing. It did not add code, providers, source table reads, recommendations, UI, schema, DB access, or live network dependencies.
+Phase 12 planning defines the UI path without starting frontend implementation. It recommends a page/view-model layer before any React/Vite scaffold, preserving the rule that UI must not own data or issue raw SQL.
 
 ## Files Created Or Modified In Latest Packet
 
-- `docs/CHECKPOINT_PHASE11_USER_WORKFLOW_RETRIEVAL_REPORT.md`
+- `docs/PHASE12_UI_PLANNING_CONTRACT.md`
 - `docs/NEXT_PHASE_CONTRACT.md`
 
 ## Public Functions / Classes Added
 
-None. Documentation-only checkpoint.
+None. Documentation-only planning packet.
 
 ## Schema Impact
 
@@ -40,26 +40,28 @@ rg -n "codie\.providers|codie\.recommendations|codie\.analytics|source_events|so
 
 ## Known Caveats / Review Notes
 
-- GitHub remote is configured and Phase 11A still needs push after checkpoint validation.
+- GitHub remote is configured and Phase 11B was pushed; Phase 12 planning still needs commit and push after validation.
 - CLI requires a local Codie database with card rows before deck import can resolve cards.
 - CLI export docs recommend `--output-root` for normal usage.
 - No UI exists yet.
 
 ## Recommended Next Packet
 
-Outside Validation - Phase 11 User Workflow Retrieval.
+Phase 12A - User Workflow View Models.
 
-Send:
+Implement display-ready, JSON-compatible models for accepted user workflow outputs:
 
-- `docs/CHECKPOINT_PHASE11_USER_WORKFLOW_RETRIEVAL_REPORT.md`
-- `docs/PHASE11_PLANNING_CONTRACT.md`
-- `docs/PHASE11A_SAVED_ANALYSIS_RETRIEVAL_CONTRACT.md`
+- saved analysis detail page model
+- saved analysis list page model
+- explicit empty states
+- evidence/source metadata preservation
+- no frontend scaffold yet
 
 Keep final recommendation generation separate until the Phase 8/10 boundaries are explicitly carried forward.
 
 ## Do Not Do
 
-- Do not build UI before saved-analysis retrieval/listing is accepted.
+- Do not scaffold UI before view models are accepted.
 - Do not call providers.
 - Do not read source/provider tables.
 - Do not add strategic claim language.
