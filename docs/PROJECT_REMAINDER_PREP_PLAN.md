@@ -130,6 +130,25 @@ Core acceptance:
 - Every displayed metric has provenance.
 - Exports do not mutate canonical data.
 
+### Deferred Simulation And Knowledge Vault Extensions
+
+Accepted future roadmap packet:
+
+- `docs/ROADMAP_PATCH_SIMULATION_CHALLENGE_AND_KNOWLEDGE_VAULT.md`
+
+Included extensions:
+
+1. Simulation Challenge Mode.
+2. Challenge Mode line review and veto annotations.
+3. Simulation trace review Markdown/JSON export and annotation import.
+4. Obsidian Knowledge Vault historical snapshots and internal linking.
+5. Research Journals and future local retrieval support.
+
+These items are roadmap-only. They do not authorize implementation or schema
+changes. Build them only after the core Probability Simulation Engine and
+immutable trace model are complete and validated. Human reviews remain QA
+annotations and must not become tournament or recommendation evidence.
+
 ## Persistent Quality Gate
 
 Before each implementation phase:
