@@ -4437,6 +4437,58 @@ Markdown export preserves formulas and methodology.
 No export depends on cloud services.
 ```
 
+### 29.6 Deferred Mobile Report Access
+
+Codie should eventually support low-priority mobile viewing of reports while the
+actual program continues to run on the user's PC.
+
+Purpose:
+
+```text
+Run Codie locally on the PC.
+Generate a phone-readable evidence report.
+Let the user view the finished report on a phone without making the phone run Codie.
+```
+
+Allowed delivery options:
+
+```text
+static HTML report file
+Markdown report file
+PDF report file
+QR code linking to a generated report
+local network read-only report URL
+manual file transfer to phone
+Discord message or webhook notification with summary/link
+optional external PDF-to-link service for manually approved uploads
+```
+
+Required rules:
+
+```text
+PC remains the execution host.
+Mobile access is read-only.
+Reports must preserve source attribution and generated_at metadata.
+Reports must use evidence-only language.
+No mobile path may expose write access to the database.
+No cloud delivery is required for V1.
+Discord or other message delivery must be optional and explicitly configured.
+Any webhook/token must live in local config or environment variables, never in code.
+External link services must never receive private deck data unless the user explicitly chooses that export.
+```
+
+Preferred V1 shape:
+
+```text
+Generate a static HTML/Markdown/PDF report.
+Generate a QR code to the local file or local read-only URL.
+Optionally send a Discord notification containing only a short summary and link/file.
+Optionally allow manual export to a PDF-to-link service outside Codie.
+```
+
+This is a convenience feature, not a recommendation feature, analytics source,
+or provider integration.
+
 ---
 
 ## 30. UI TECHNOLOGY DECISION

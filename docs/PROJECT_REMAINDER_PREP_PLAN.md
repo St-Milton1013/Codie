@@ -173,6 +173,33 @@ Forbidden uses:
 Any mined item must become either a fixture, a documented contract addition, or
 a reviewed roadmap item before implementation.
 
+### Deferred Mobile Report Access
+
+Codie should eventually let the user run the program on a PC and view generated
+reports on a phone.
+
+Preferred low-priority path:
+
+1. Generate static HTML, Markdown, or PDF reports from existing export surfaces.
+2. Add a phone-readable report layout.
+3. Generate a QR code for the report file or a local read-only report URL.
+4. Optionally expose a read-only local network report URL.
+5. Optionally send a Discord notification or message with a short summary and
+   link/file, using explicit local configuration only.
+6. Optionally support manual PDF-to-link service upload outside Codie when the
+   user chooses to share a report that way.
+
+Guardrails:
+
+- Mobile access is read-only.
+- The phone does not run Codie.
+- No write access to SQLite is exposed.
+- No cloud dependency is required for V1.
+- Discord/webhook delivery is optional and must never hard-code secrets.
+- External link services must not receive private deck data unless the user
+  explicitly chooses that export.
+- Report wording remains evidence-only.
+
 ## Persistent Quality Gate
 
 Before each implementation phase:
