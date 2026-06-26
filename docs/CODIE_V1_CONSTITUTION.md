@@ -508,6 +508,41 @@ Why existing tools are insufficient
 Acceptance test impact
 ```
 
+### Rule 12A — Legacy Source Mining Is Reference‑Only
+
+Legacy Codie folders, uploaded archives, old scripts, old local databases, and
+old AI implementation attempts may be mined for:
+
+```text
+deck parser edge-case fixtures
+commander alias candidates
+provider fixture leads
+UI workflow ideas
+export/report formatting ideas
+Obsidian vault export planning
+innovation detection threshold candidates
+simulator/rules reference material
+```
+
+Legacy material must not be copied into production modules directly.
+
+Before any legacy idea becomes implementation work, it must pass the normal
+contract gate:
+
+```text
+current architecture placement
+files created or modified
+schema impact
+boundary impact
+test cases
+failure modes
+license or source review if third-party material is involved
+```
+
+Old code remains quarantined reference material unless explicitly migrated
+through Codie's current architecture. Legacy reports, strategy text, and old
+analysis outputs are not evidence and must not be treated as analytics truth.
+
 ### Rule 13 — Raw Payload Preservation
 
 Every externally sourced object must preserve its raw payload or raw source artifact reference.
@@ -5168,6 +5203,7 @@ Claude and ChatGPT must verify that each implementation response includes:
 | "One URL = one deck" vs immutable deck hashes | Source deck = URL/submission; canonical deck = deck hash | Prevents duplicate analytics while preserving source fidelity. |
 | DeepSeek designs schema vs implements schema | DeepSeek implements locked schema | Schema semantics belong to architecture layer, not implementation improvisation. |
 | Old code reuse vs remaster/rebuild | Old code is reference‑only unless explicitly migrated through new architecture | Prevents legacy entropy from infecting the rebuild. |
+| Legacy project archives as upgrade sources | Mine only for fixtures, aliases, workflow ideas, export formats, threshold candidates, and simulator/rules references | Preserves useful history without allowing stale architecture, copied scraper code, or old analysis claims into Codie. |
 | Recommendation/cut language | Evidence candidates and low‑evidence/outlier cards only | Codie must not become an AI coach making unsupported claims. |
 | cEDHStats patch integration | Full merge of Card Performance Metrics, Historical Snapshots, Evidence Counts, Commander/Card Pages, Evidence Stack | Required for Codie's core differentiators. |
 | Evidence Stack source | Visual evidence volume, not AI score | Maintains Evidence First Rule compliance. |

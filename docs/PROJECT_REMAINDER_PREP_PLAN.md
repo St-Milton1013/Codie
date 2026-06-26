@@ -149,6 +149,30 @@ changes. Build them only after the core Probability Simulation Engine and
 immutable trace model are complete and validated. Human reviews remain QA
 annotations and must not become tournament or recommendation evidence.
 
+### Legacy Source Mining Backlog
+
+Legacy Codie folders and archives may improve the current project only as
+reference material. The useful upgrade candidates discovered so far are:
+
+1. Deck parser edge-case fixtures from old sample decklists.
+2. Commander alias candidates from old alias and nickname JSON files.
+3. Provider fixture leads from old scraper attempts.
+4. UI workflow ideas from the old desktop prototype.
+5. Markdown, CSV, PDF, and Obsidian export formatting ideas.
+6. Innovation threshold candidates from old project config.
+7. Simulator and rules reference material for future probability work.
+
+Forbidden uses:
+
+- Do not copy old scraper code into live providers.
+- Do not import old SQLite schemas or local databases as truth.
+- Do not treat old staples reports or strategy text as evidence.
+- Do not vendor old virtual environments, build folders, or third-party repos.
+- Do not bypass the current contract, boundary, and test gates.
+
+Any mined item must become either a fixture, a documented contract addition, or
+a reviewed roadmap item before implementation.
+
 ## Persistent Quality Gate
 
 Before each implementation phase:
