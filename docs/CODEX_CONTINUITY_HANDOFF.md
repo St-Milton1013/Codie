@@ -81,6 +81,7 @@ Phase 11 User Workflow Retrieval: READY FOR OUTSIDE VALIDATION
 Phase 12 UI Preparation/View Models: PASS
 Phase 12C UI Scaffold Contract: PASS
 Phase 12D Minimal React/Vite Local UI Shell: PASS
+Phase 12E Read-Only Local UI Data Contract: PASS
 ```
 
 ## Recent Commits
@@ -230,7 +231,7 @@ Simulation evidence must not enter Evidence Stack unless constitution thresholds
 Preferred next move:
 
 ```text
-Phase 12E - Read-Only Local UI Data Contract
+Phase 12F - Static UI Page Model Export
 ```
 
 Alternate next safe option:
@@ -254,12 +255,13 @@ Current UI packets:
 ```text
 docs/PHASE12C_UI_SCAFFOLD_CONTRACT.md
 docs/PHASE12D_MINIMAL_UI_SHELL_REPORT.md
+docs/PHASE12E_READ_ONLY_UI_DATA_CONTRACT.md
 ```
 
-Next UI contract packet:
+Next UI implementation packet:
 
 ```text
-Phase 12E - Read-Only Local UI Data Contract
+Phase 12F - Static UI Page Model Export
 ```
 
 ## Known Caveats

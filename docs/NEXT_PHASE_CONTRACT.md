@@ -1,26 +1,27 @@
 # Next Phase Contract
 
-Recommended next task: Phase 12E Read-Only Local UI Data Contract
+Recommended next task: Phase 12F Static UI Page Model Export
 
 ## Current Status
 
-Phase 12D Minimal React/Vite Local UI Shell is implemented and ready for validation.
+Phase 12E Read-Only Local UI Data Contract is documented and ready for validation.
 
-The UI scaffold under `ui/` renders fixture-backed saved-analysis list, detail,
-and empty-state views while preserving the rule that UI consumes page models and
-does not own data access.
+`docs/PHASE12E_READ_ONLY_UI_DATA_CONTRACT.md` defines the boundary for moving
+from checked-in UI fixtures to user-generated page model JSON without allowing
+frontend SQLite access.
 
 ## Files Created Or Modified In Latest Packet
 
 - `.gitignore`
 - `ui/`
 - `docs/PHASE12D_MINIMAL_UI_SHELL_REPORT.md`
+- `docs/PHASE12E_READ_ONLY_UI_DATA_CONTRACT.md`
 - `docs/CODEX_CONTINUITY_HANDOFF.md`
 - `docs/NEXT_PHASE_CONTRACT.md`
 
 ## Public Functions / Classes Added
 
-None in Python. Frontend TypeScript interfaces were added under `ui/src/types/`.
+None in latest packet. Documentation-only contract.
 
 ## Schema Impact
 
@@ -58,12 +59,12 @@ rg -n "should play|must include|correct card|breaks the format|secretly optimal|
 - GitHub remote is configured and Phase 12B was pushed.
 - CLI requires a local Codie database with card rows before deck import can resolve cards.
 - CLI export docs recommend `--output-root` for normal usage.
-- UI is fixture-backed only.
-- No local UI API exists yet.
+- UI is fixture-backed only until Phase 12F exports page-model JSON.
+- No local UI API exists yet by design.
 
 ## Recommended Next Packet
 
-Draft Phase 12E Read-Only Local UI Data Contract.
+Implement Phase 12F Static UI Page Model Export.
 
 Validation reference:
 
@@ -72,11 +73,12 @@ Validation reference:
 - `docs/CHECKPOINT_PHASE12_UI_PREP_REPORT.md`
 - `docs/PHASE12C_UI_SCAFFOLD_CONTRACT.md`
 - `docs/PHASE12D_MINIMAL_UI_SHELL_REPORT.md`
+- `docs/PHASE12E_READ_ONLY_UI_DATA_CONTRACT.md`
 
 Define:
 
 ```text
-Phase 12E - Read-Only Local UI Data Contract
+Phase 12F - Static UI Page Model Export
 ```
 
 Keep final recommendation generation separate until the Phase 8/10 boundaries are explicitly carried forward.
@@ -92,6 +94,7 @@ Keep final recommendation generation separate until the Phase 8/10 boundaries ar
 - Do not generate final recommendations before updated Phase 10 outside validation.
 - Do not let UI access SQLite directly.
 - Do not add a local API server without a contract.
+- Do not make frontend fixtures private user deck data.
 
 ## Required Phase Packet Shape
 
