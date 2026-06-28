@@ -1,0 +1,18 @@
+{
+  "title": "Saved Analyses",
+  "generated_at": null,
+  "summary_cards": [
+    {
+      "label": "User deck ID",
+      "value": "7",
+      "detail": null
+    },
+    {
+      "label": "Saved analyses",
+      "value": "0",
+      "detail": null
+    }
+  ],
+  "rows": [],
+  "empty_state": "No saved analyses exist for this user deck."
+}

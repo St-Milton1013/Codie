@@ -20,7 +20,7 @@ Latest pushed commit at handoff creation: 6c6ad63 Add Phase 12 UI prep checkpoin
 Latest full-suite result:
 
 ```text
-Ran 283 tests in 0.723s
+Ran 283 tests in 0.694s
 
 OK
 ```
@@ -45,6 +45,19 @@ returned:
 pages: no matches
 ```
 
+Latest UI boundary scans:
+
+```text
+rg -n "sqlite3|source_events|source_decks|provider_objects|codie\.providers|codie\.db|codie\.recommendations|codie\.analytics" ui
+rg -n "should play|must include|correct card|breaks the format|secretly optimal|cut this" ui
+```
+
+returned:
+
+```text
+ui: no matches
+```
+
 ## Completed Phase Status
 
 ```text
@@ -65,7 +78,9 @@ Phase 8 Readiness/Recommendation Foundations/Innovation: PASS
 Phase 9 Export Surfaces: PASS
 Phase 10 User Deck Workflow: PASS WITH REVIEW NOTES
 Phase 11 User Workflow Retrieval: READY FOR OUTSIDE VALIDATION
-Phase 12 UI Preparation/View Models: READY FOR OUTSIDE VALIDATION
+Phase 12 UI Preparation/View Models: PASS
+Phase 12C UI Scaffold Contract: PASS
+Phase 12D Minimal React/Vite Local UI Shell: PASS
 ```
 
 ## Recent Commits
@@ -189,8 +204,8 @@ no source/provider table reads
 UI:
 
 ```text
-React + TypeScript + Vite is constitutionally selected for later.
-Do not scaffold UI until Phase 12 view-model boundary is validated.
+React + TypeScript + Vite scaffold exists under ui/.
+Current UI is fixture-backed only.
 UI must never issue raw SQL.
 UI must consume application/page models, not own data.
 ```
@@ -215,16 +230,10 @@ Simulation evidence must not enter Evidence Stack unless constitution thresholds
 Preferred next move:
 
 ```text
-Outside validation for Phase 11 and Phase 12.
+Phase 12E - Read-Only Local UI Data Contract
 ```
 
-If continuing implementation after validation:
-
-```text
-Phase 12C - UI Scaffold Contract
-```
-
-or:
+Alternate next safe option:
 
 ```text
 Phase 13 - Simulator Contract Refresh
@@ -233,23 +242,24 @@ Phase 13 - Simulator Contract Refresh
 Avoid starting:
 
 ```text
-React/Vite scaffold without Phase 12 validation
 final recommendation output
 simulator implementation
 provider live backfills
 schema changes
+direct UI database access
 ```
 
-Current UI scaffold packet:
+Current UI packets:
 
 ```text
 docs/PHASE12C_UI_SCAFFOLD_CONTRACT.md
+docs/PHASE12D_MINIMAL_UI_SHELL_REPORT.md
 ```
 
-If Phase 12C is accepted, the next implementation packet is:
+Next UI contract packet:
 
 ```text
-Phase 12D - Minimal React/Vite Local UI Shell
+Phase 12E - Read-Only Local UI Data Contract
 ```
 
 ## Known Caveats
@@ -257,7 +267,8 @@ Phase 12D - Minimal React/Vite Local UI Shell
 - Hareruya live access can hit AWS WAF; treat Hareruya as regional enrichment, not critical path.
 - CLI requires a local Codie SQLite database with card rows before user deck import can resolve cards.
 - CLI export docs recommend `--output-root` for normal usage.
-- No UI exists yet.
+- Minimal fixture-backed UI exists under `ui/`.
+- No local UI API exists yet.
 - No simulator implementation exists yet.
 - Final recommendation output remains intentionally separate.
 

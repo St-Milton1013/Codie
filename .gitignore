@@ -23,3 +23,8 @@ env/
 outputs/
 work/
 data/raw/
+
+node_modules/
+ui/node_modules/
+ui/dist/
+*.tsbuildinfo

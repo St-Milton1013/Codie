@@ -1,0 +1,40 @@
+{
+  "title": "Saved Analysis Detail",
+  "generated_at": "2026-06-22T00:00:00+00:00",
+  "summary_cards": [
+    {
+      "label": "Saved analysis ID",
+      "value": "1",
+      "detail": null
+    },
+    {
+      "label": "Analysis type",
+      "value": "user_deck_evidence_comparison",
+      "detail": null
+    },
+    {
+      "label": "Present evidence cards",
+      "value": "1",
+      "detail": null
+    },
+    {
+      "label": "Absent evidence cards",
+      "value": "1",
+      "detail": null
+    }
+  ],
+  "rows": [
+    {
+      "card_name": "Mystic Remora",
+      "evidence_type": "commander_staple",
+      "presence_status": "absent",
+      "quantity_in_deck": 0,
+      "zones": [],
+      "sample_size": 42,
+      "source_record_id": "staple:remora",
+      "source_url": "https://example.test/evidence",
+      "evidence_line": "Mystic Remora is absent in the imported user deck; evidence type commander_staple; sample size 42."
+    }
+  ],
+  "empty_state": null
+}

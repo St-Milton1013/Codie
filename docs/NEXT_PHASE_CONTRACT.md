@@ -1,21 +1,26 @@
 # Next Phase Contract
 
-Recommended next task: Phase 12C UI Scaffold Contract Validation, Then Phase 12D Minimal UI Shell
+Recommended next task: Phase 12E Read-Only Local UI Data Contract
 
 ## Current Status
 
-Phase 12C UI scaffold contract is documented and ready for validation.
+Phase 12D Minimal React/Vite Local UI Shell is implemented and ready for validation.
 
-`docs/PHASE12C_UI_SCAFFOLD_CONTRACT.md` defines the first UI scaffold boundary without creating frontend files.
+The UI scaffold under `ui/` renders fixture-backed saved-analysis list, detail,
+and empty-state views while preserving the rule that UI consumes page models and
+does not own data access.
 
 ## Files Created Or Modified In Latest Packet
 
-- `docs/PHASE12C_UI_SCAFFOLD_CONTRACT.md`
+- `.gitignore`
+- `ui/`
+- `docs/PHASE12D_MINIMAL_UI_SHELL_REPORT.md`
+- `docs/CODEX_CONTINUITY_HANDOFF.md`
 - `docs/NEXT_PHASE_CONTRACT.md`
 
 ## Public Functions / Classes Added
 
-None. Documentation-only continuity packet.
+None in Python. Frontend TypeScript interfaces were added under `ui/src/types/`.
 
 ## Schema Impact
 
@@ -29,6 +34,14 @@ Use the bundled Python runtime when system Python is unavailable:
 & "C:\Users\Main\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" -m unittest discover -s tests -v
 ```
 
+Frontend validation:
+
+```powershell
+cd ui
+npm install
+npm run build
+```
+
 Static checks:
 
 ```text
@@ -36,6 +49,8 @@ git diff --check
 rg -n "codie\.providers|codie\.db|codie\.ingestion|source_events|source_decks|provider_objects|execute\(|executescript\(|sqlite3" codie\exports
 rg -n "codie\.providers|codie\.recommendations|codie\.analytics|codie\.ingestion|source_events|source_decks|provider_objects" codie\user_decks
 rg -n "codie\.providers|codie\.recommendations|codie\.analytics|source_events|source_decks|provider_objects" codie\cli
+rg -n "sqlite3|source_events|source_decks|provider_objects|codie\.providers|codie\.db|codie\.recommendations|codie\.analytics" ui
+rg -n "should play|must include|correct card|breaks the format|secretly optimal|cut this" ui
 ```
 
 ## Known Caveats / Review Notes
@@ -43,24 +58,25 @@ rg -n "codie\.providers|codie\.recommendations|codie\.analytics|source_events|so
 - GitHub remote is configured and Phase 12B was pushed.
 - CLI requires a local Codie database with card rows before deck import can resolve cards.
 - CLI export docs recommend `--output-root` for normal usage.
-- No UI exists yet.
+- UI is fixture-backed only.
+- No local UI API exists yet.
 
 ## Recommended Next Packet
 
-Validate Phase 12C, then implement Phase 12D Minimal React/Vite Local UI Shell.
+Draft Phase 12E Read-Only Local UI Data Contract.
 
 Validation reference:
 
 - `docs/CODEX_CONTINUITY_HANDOFF.md`
 - `docs/PHASE12A_USER_WORKFLOW_VIEW_MODELS_CONTRACT.md`
 - `docs/CHECKPOINT_PHASE12_UI_PREP_REPORT.md`
-- `docs/OUTSIDE_VALIDATION_PHASE11_12_PROMPT.md`
 - `docs/PHASE12C_UI_SCAFFOLD_CONTRACT.md`
+- `docs/PHASE12D_MINIMAL_UI_SHELL_REPORT.md`
 
-If accepted, implement:
+Define:
 
 ```text
-Phase 12D - Minimal React/Vite Local UI Shell
+Phase 12E - Read-Only Local UI Data Contract
 ```
 
 Keep final recommendation generation separate until the Phase 8/10 boundaries are explicitly carried forward.
@@ -74,6 +90,8 @@ Keep final recommendation generation separate until the Phase 8/10 boundaries ar
 - Do not start simulator integration.
 - Do not add schema without explicit migration contract.
 - Do not generate final recommendations before updated Phase 10 outside validation.
+- Do not let UI access SQLite directly.
+- Do not add a local API server without a contract.
 
 ## Required Phase Packet Shape
 

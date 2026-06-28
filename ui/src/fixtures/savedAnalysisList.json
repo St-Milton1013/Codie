@@ -1,0 +1,33 @@
+{
+  "title": "Saved Analyses",
+  "generated_at": "2026-06-22T00:00:00+00:00",
+  "summary_cards": [
+    {
+      "label": "User deck ID",
+      "value": "7",
+      "detail": null
+    },
+    {
+      "label": "Saved analyses",
+      "value": "2",
+      "detail": null
+    }
+  ],
+  "rows": [
+    {
+      "saved_analysis_id": 1,
+      "analysis_type": "user_deck_evidence_comparison",
+      "generated_at": "2026-06-22T00:00:00+00:00",
+      "deck_hash": "deck-hash-alpha",
+      "report_path": "reports/comparison-alpha.md"
+    },
+    {
+      "saved_analysis_id": 2,
+      "analysis_type": "user_deck_evidence_comparison",
+      "generated_at": "2026-06-23T00:00:00+00:00",
+      "deck_hash": "deck-hash-beta",
+      "report_path": "reports/comparison-beta.md"
+    }
+  ],
+  "empty_state": null
+}
