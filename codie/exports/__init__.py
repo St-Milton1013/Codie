@@ -15,6 +15,13 @@ from .reports import (
     outside_review_markdown,
     recommendation_run_markdown,
 )
+from .share_bundle import (
+    ShareBundleAsset,
+    ShareBundleWriteResult,
+    build_share_bundle_manifest,
+    share_bundle_index_html,
+    write_local_share_bundle,
+)
 from .user_deck_reports import (
     UserDeckComparisonWriteResult,
     user_deck_comparison_export,
@@ -27,6 +34,8 @@ __all__ = [
     "CheckpointExport",
     "ExportMetadata",
     "ExportWriteResult",
+    "ShareBundleAsset",
+    "ShareBundleWriteResult",
     "UserDeckComparisonWriteResult",
     "ValidationSummary",
     "build_checkpoint_export",
@@ -36,10 +45,13 @@ __all__ = [
     "innovation_snapshot_markdown",
     "outside_review_markdown",
     "recommendation_run_markdown",
+    "build_share_bundle_manifest",
+    "share_bundle_index_html",
     "user_deck_comparison_export",
     "user_deck_comparison_markdown",
     "write_checkpoint_markdown",
     "write_json_export",
     "write_markdown_export",
+    "write_local_share_bundle",
     "write_user_deck_comparison_exports",
 ]

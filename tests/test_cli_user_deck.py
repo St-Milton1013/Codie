@@ -276,6 +276,39 @@ class UserDeckCliTest(unittest.TestCase):
             self.assertEqual(payload["source"]["saved_analysis_id"], saved_id)
             self.assertEqual(payload["rows"][0]["card_name"], "Mystic Remora")
 
+    def test_build_share_bundle_writes_static_index_and_manifest(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            report = root / "comparison.md"
+            report.write_text("# Evidence\n", encoding="utf-8")
+
+            stdout = StringIO()
+            with redirect_stdout(stdout):
+                exit_code = main(
+                    [
+                        "build-share-bundle",
+                        "--title",
+                        "Codie Evidence Bundle",
+                        "--generated-at",
+                        NOW,
+                        "--asset",
+                        str(report),
+                        "--asset-label",
+                        "Comparison",
+                        "--output-dir",
+                        str(root / "bundle"),
+                        "--output-root",
+                        str(root),
+                    ]
+                )
+
+            self.assertEqual(exit_code, 0)
+            result = json.loads(stdout.getvalue())
+            self.assertTrue((root / "bundle" / "index.html").exists())
+            self.assertTrue((root / "bundle" / "manifest.json").exists())
+            self.assertTrue((root / "bundle" / "assets" / "comparison.md").exists())
+            self.assertEqual(result["asset_paths"], [str(root / "bundle" / "assets" / "comparison.md")])
+
     def test_cli_module_has_no_provider_or_recommendation_imports(self) -> None:
         import codie.cli.user_deck as cli_module
 

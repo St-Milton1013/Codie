@@ -13,8 +13,10 @@ from codie.db.connection import connect
 from codie.db.repositories.core import CoreRepository
 from codie.db.repositories.user import UserRepository
 from codie.exports import (
+    ShareBundleAsset,
     user_deck_comparison_export,
     user_deck_comparison_markdown,
+    write_local_share_bundle,
     write_user_deck_comparison_exports,
 )
 from codie.pages import (
@@ -88,6 +90,21 @@ def build_parser() -> argparse.ArgumentParser:
         default="1970-01-01T00:00:00+00:00",
         help="Timestamp to stamp the UI page model export with.",
     )
+
+    share_bundle = subparsers.add_parser(
+        "build-share-bundle",
+        help="Build a static local report bundle from existing export files.",
+    )
+    share_bundle.add_argument("--title", required=True, help="Display title for the bundle.")
+    share_bundle.add_argument("--generated-at", required=True, help="Timestamp to stamp the bundle with.")
+    share_bundle.add_argument("--asset", action="append", required=True, help="Report/export file to include.")
+    share_bundle.add_argument(
+        "--asset-label",
+        action="append",
+        help="Optional label for an asset. Labels are applied in asset order.",
+    )
+    share_bundle.add_argument("--output-dir", required=True, help="Bundle output directory.")
+    share_bundle.add_argument("--output-root", help="Optional root directory that output path must stay inside.")
     return parser
 
 
@@ -115,6 +132,10 @@ def main(argv: list[str] | None = None) -> int:
         return 0
     if args.command == "export-ui-saved-analysis-detail":
         result = _export_ui_saved_analysis_detail(args)
+        print(json.dumps(result, sort_keys=True))
+        return 0
+    if args.command == "build-share-bundle":
+        result = _build_share_bundle(args)
         print(json.dumps(result, sort_keys=True))
         return 0
     parser.error(f"Unsupported command: {args.command}")
@@ -251,6 +272,29 @@ def _write_result_to_dict(result) -> dict[str, Any]:
         "path": result.path,
         "bytes_written": result.bytes_written,
         "content_type": result.content_type,
+    }
+
+
+def _build_share_bundle(args: argparse.Namespace) -> dict[str, Any]:
+    labels = args.asset_label or []
+    if len(labels) > len(args.asset):
+        raise ValueError("--asset-label cannot be supplied more times than --asset")
+    assets = tuple(
+        ShareBundleAsset(path=asset_path, label=labels[index] if index < len(labels) else None)
+        for index, asset_path in enumerate(args.asset)
+    )
+    result = write_local_share_bundle(
+        title=args.title,
+        generated_at=args.generated_at,
+        assets=assets,
+        output_dir=args.output_dir,
+        output_root=args.output_root,
+    )
+    return {
+        "output_dir": result.output_dir,
+        "index_path": result.index_path,
+        "manifest_path": result.manifest_path,
+        "asset_paths": list(result.asset_paths),
     }
 
 
