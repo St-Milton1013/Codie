@@ -1,16 +1,16 @@
 # Next Phase Contract
 
-Recommended next task: Outside Validation - Phase 11/12, Then Phase 12C UI Scaffold Contract
+Recommended next task: Phase 12C UI Scaffold Contract Validation, Then Phase 12D Minimal UI Shell
 
 ## Current Status
 
-Continuity handoff is locally implemented and ready for validation.
+Phase 12C UI scaffold contract is documented and ready for validation.
 
-`docs/CODEX_CONTINUITY_HANDOFF.md` now captures the repo URL, latest pushed commit, validation baseline, completed phase status, outside-validation packets, resume prompt, startup commands, architecture boundaries, and next safe options.
+`docs/PHASE12C_UI_SCAFFOLD_CONTRACT.md` defines the first UI scaffold boundary without creating frontend files.
 
 ## Files Created Or Modified In Latest Packet
 
-- `docs/CODEX_CONTINUITY_HANDOFF.md`
+- `docs/PHASE12C_UI_SCAFFOLD_CONTRACT.md`
 - `docs/NEXT_PHASE_CONTRACT.md`
 
 ## Public Functions / Classes Added
@@ -47,23 +47,20 @@ rg -n "codie\.providers|codie\.recommendations|codie\.analytics|source_events|so
 
 ## Recommended Next Packet
 
-Outside Validation - Phase 11/12, then Phase 12C UI Scaffold Contract.
+Validate Phase 12C, then implement Phase 12D Minimal React/Vite Local UI Shell.
 
-First send:
+Validation reference:
 
-- `docs/OUTSIDE_VALIDATION_PHASE11_12_PROMPT.md`
 - `docs/CODEX_CONTINUITY_HANDOFF.md`
-- `docs/CHECKPOINT_PHASE11_USER_WORKFLOW_RETRIEVAL_REPORT.md`
-- `docs/PHASE11_PLANNING_CONTRACT.md`
-- `docs/PHASE11A_SAVED_ANALYSIS_RETRIEVAL_CONTRACT.md`
-- `docs/CHECKPOINT_PHASE12_UI_PREP_REPORT.md`
-- `docs/PHASE12_UI_PLANNING_CONTRACT.md`
 - `docs/PHASE12A_USER_WORKFLOW_VIEW_MODELS_CONTRACT.md`
+- `docs/CHECKPOINT_PHASE12_UI_PREP_REPORT.md`
+- `docs/OUTSIDE_VALIDATION_PHASE11_12_PROMPT.md`
+- `docs/PHASE12C_UI_SCAFFOLD_CONTRACT.md`
 
-If accepted, draft:
+If accepted, implement:
 
 ```text
-Phase 12C - UI Scaffold Contract
+Phase 12D - Minimal React/Vite Local UI Shell
 ```
 
 Keep final recommendation generation separate until the Phase 8/10 boundaries are explicitly carried forward.

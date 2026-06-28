@@ -240,6 +240,18 @@ provider live backfills
 schema changes
 ```
 
+Current UI scaffold packet:
+
+```text
+docs/PHASE12C_UI_SCAFFOLD_CONTRACT.md
+```
+
+If Phase 12C is accepted, the next implementation packet is:
+
+```text
+Phase 12D - Minimal React/Vite Local UI Shell
+```
+
 ## Known Caveats
 
 - Hareruya live access can hit AWS WAF; treat Hareruya as regional enrichment, not critical path.
