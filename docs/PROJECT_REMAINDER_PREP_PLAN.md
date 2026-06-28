@@ -187,8 +187,8 @@ Included extensions:
    configured upload.
 3. Ratio-aware confidence gating that considers both absolute sample count and
    coverage percentage of available data.
-4. LLM-assisted naming and alias review with strict human/deterministic review
-   before persistence.
+4. LLM-assisted naming and alias review with a two-part writer/auditor LLM
+   reliability flow plus strict human/deterministic review before persistence.
 
 These items are roadmap-only. They do not authorize final recommendations,
 schema changes, cloud LLM usage, Moxfield API uploads, or private decklist

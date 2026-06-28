@@ -230,12 +230,44 @@ draft candidate mappings for alias_registry review
 summarize unresolved naming conflicts
 ```
 
+Reliability model:
+
+```text
+LLM writer proposes candidate names, aliases, clusters, or cleanup mappings.
+LLM auditor reviews the writer output against deterministic context.
+Neither LLM may write directly to project tables.
+Only reviewed outputs may enter a human/deterministic approval queue.
+```
+
+Writer responsibilities:
+
+```text
+produce candidate aliases
+explain why each alias may match
+identify source strings that triggered the suggestion
+mark uncertainty and ambiguity
+avoid strategic interpretation
+```
+
+Auditor responsibilities:
+
+```text
+check candidates against Scryfall-resolved names
+check candidates against existing alias_registry entries
+flag partner-pair ambiguity
+flag single-commander vs partner-pair mismatch
+flag unsupported or hallucinated names
+reject candidates without source strings
+return approve_for_review / reject / needs_human_review
+```
+
 Forbidden uses:
 
 ```text
 LLM output as card identity truth
 LLM output as commander identity truth
 LLM output writing directly to alias_registry
+LLM auditor output writing directly to alias_registry
 LLM output bypassing Scryfall resolution
 LLM output making strategic claims
 LLM output sending private user decklists to cloud services without explicit consent
@@ -247,7 +279,8 @@ Required review workflow:
 source name observed
 Scryfall exact or fuzzy resolution attempted
 existing alias registry checked
-LLM suggests candidate only if unresolved or ambiguous
+LLM writer suggests candidate only if unresolved or ambiguous
+LLM auditor reviews writer output against deterministic context
 human or deterministic validator accepts/rejects candidate
 accepted alias is persisted with provenance
 rejected alias is logged to prevent repeated noise
@@ -260,12 +293,18 @@ Local/free models are preferred.
 Cloud LLM use is optional and must be explicitly configured.
 Private user decklists must not be sent to a cloud LLM unless the user explicitly opts in.
 LLM assistance must be disabled by default for sensitive inputs.
+Writer and auditor roles must be independently logged.
+The same response object must not be treated as both writer and auditor output.
 ```
 
 Acceptance tests:
 
 ```text
 LLM suggestion cannot directly write alias registry
+LLM auditor cannot directly write alias registry
+writer output without auditor review cannot be persisted
+auditor rejection blocks candidate persistence
+auditor needs_human_review status requires explicit approval
 accepted alias records provenance
 rejected alias does not resolve future imports
 Scryfall exact match outranks LLM suggestion
