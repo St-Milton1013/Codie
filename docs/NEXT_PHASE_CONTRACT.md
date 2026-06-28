@@ -1,14 +1,14 @@
 # Next Phase Contract
 
-Recommended next task: Phase 12K PDF-Ready Share Bundle Output
+Recommended next task: Phase 12L Optional Delivery Integrations Planning
 
 ## Current Status
 
-Phase 12J QR Code Asset Generation is implemented and validated.
+Phase 12K PDF-Ready Share Bundle Output is implemented and validated.
 
-Codie can now optionally generate a local QR PNG for an explicit share bundle
-entry target. The QR target is recorded in the manifest and report contents are
-not encoded in the QR payload.
+Codie can now write a print-friendly `print.html` entry in local share bundles
+for browser Print / Save as PDF workflows, without adding a PDF dependency or
+remote conversion service.
 
 ## Files Created Or Modified In Latest Packet
 
@@ -26,6 +26,8 @@ not encoded in the QR payload.
 - `docs/PHASE12I_SHARE_BUNDLE_QR_PDF_PLANNING_REPORT.md`
 - `docs/PHASE12J_QR_CODE_ASSET_GENERATION_CONTRACT.md`
 - `docs/PHASE12J_QR_CODE_ASSET_GENERATION_REPORT.md`
+- `docs/PHASE12K_PDF_READY_SHARE_BUNDLE_CONTRACT.md`
+- `docs/PHASE12K_PDF_READY_SHARE_BUNDLE_REPORT.md`
 - `requirements.txt`
 - `codie/exports/share_bundle.py`
 - `codie/exports/__init__.py`
@@ -46,8 +48,8 @@ not encoded in the QR payload.
 
 ## Public Functions / Classes Added
 
-QR generation functions and the `build-share-bundle --qr-target` CLI option
-were added.
+PDF-ready static print view functions and the `build-share-bundle --no-print-entry`
+CLI option were added.
 
 ## Schema Impact
 
@@ -88,12 +90,13 @@ rg -n "should play|must include|correct card|breaks the format|secretly optimal|
 - UI loads static generated page-model JSON with fixture fallback.
 - Local report bundles can be built from existing export files.
 - QR generation is implemented as local PNG asset generation.
+- PDF-ready output is implemented as static print-friendly HTML.
 - PDF/mobile delivery work remains split into future packets with privacy gates.
 - No local UI API exists yet by design.
 
 ## Recommended Next Packet
 
-Implement Phase 12K PDF-Ready Share Bundle Output.
+Implement Phase 12L Optional Delivery Integrations Planning.
 
 Validation reference:
 
@@ -113,11 +116,13 @@ Validation reference:
 - `docs/PHASE12I_SHARE_BUNDLE_QR_PDF_PLANNING_REPORT.md`
 - `docs/PHASE12J_QR_CODE_ASSET_GENERATION_CONTRACT.md`
 - `docs/PHASE12J_QR_CODE_ASSET_GENERATION_REPORT.md`
+- `docs/PHASE12K_PDF_READY_SHARE_BUNDLE_CONTRACT.md`
+- `docs/PHASE12K_PDF_READY_SHARE_BUNDLE_REPORT.md`
 
 Define:
 
 ```text
-Phase 12K - PDF-Ready Share Bundle Output
+Phase 12L - Optional Delivery Integrations Planning
 ```
 
 Keep final recommendation generation separate until the Phase 8/10 boundaries are explicitly carried forward.
@@ -135,7 +140,7 @@ Keep final recommendation generation separate until the Phase 8/10 boundaries ar
 - Do not add a local API server without a contract.
 - Do not make frontend fixtures private user deck data.
 - Do not add hosted/mobile sharing without a separate privacy contract.
-- Do not add hosted/mobile delivery integrations during PDF-ready implementation.
+- Do not add hosted/mobile delivery integrations without an opt-in planning contract.
 
 ## Required Phase Packet Shape
 

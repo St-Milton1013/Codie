@@ -307,11 +307,13 @@ class UserDeckCliTest(unittest.TestCase):
             self.assertEqual(exit_code, 0)
             result = json.loads(stdout.getvalue())
             self.assertTrue((root / "bundle" / "index.html").exists())
+            self.assertTrue((root / "bundle" / "print.html").exists())
             self.assertTrue((root / "bundle" / "manifest.json").exists())
             self.assertTrue((root / "bundle" / "assets" / "comparison.md").exists())
             self.assertTrue((root / "bundle" / "assets" / "bundle-entry-qr.png").exists())
             self.assertEqual(result["asset_paths"], [str(root / "bundle" / "assets" / "comparison.md")])
             self.assertEqual(result["qr_asset_path"], str(root / "bundle" / "assets" / "bundle-entry-qr.png"))
+            self.assertEqual(result["print_path"], str(root / "bundle" / "print.html"))
 
     def test_cli_module_has_no_provider_or_recommendation_imports(self) -> None:
         import codie.cli.user_deck as cli_module

@@ -20,6 +20,7 @@ from .share_bundle import (
     ShareBundleWriteResult,
     build_share_bundle_manifest,
     share_bundle_index_html,
+    share_bundle_print_html,
     write_local_share_bundle,
     write_qr_png,
 )
@@ -48,6 +49,7 @@ __all__ = [
     "recommendation_run_markdown",
     "build_share_bundle_manifest",
     "share_bundle_index_html",
+    "share_bundle_print_html",
     "user_deck_comparison_export",
     "user_deck_comparison_markdown",
     "write_checkpoint_markdown",

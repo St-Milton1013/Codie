@@ -9,6 +9,7 @@ from codie.exports import (
     ShareBundleAsset,
     build_share_bundle_manifest,
     share_bundle_index_html,
+    share_bundle_print_html,
     write_local_share_bundle,
     write_qr_png,
 )
@@ -28,8 +29,21 @@ class ShareBundleExportTest(unittest.TestCase):
         self.assertEqual(manifest["bundle_version"], "1")
         self.assertEqual(manifest["entry_file"], "index.html")
         self.assertEqual(manifest["qr_ready_entry"], "index.html")
+        self.assertIsNone(manifest["print_entry"])
+        self.assertEqual(manifest["pdf_assets"], [])
         self.assertEqual(manifest["assets"][0]["bundle_path"], "assets/comparison.md")
         self.assertIn("static", " ".join(manifest["notes"]).lower())
+
+    def test_manifest_records_print_entry_when_requested(self) -> None:
+        manifest = build_share_bundle_manifest(
+            title="Codie Evidence Bundle",
+            generated_at=GENERATED_AT,
+            assets=(ShareBundleAsset(path="comparison.md", label="Comparison"),),
+            include_print_entry=True,
+        )
+
+        self.assertEqual(manifest["print_entry"], "print.html")
+        self.assertEqual(manifest["pdf_assets"], [{"label": "PDF-ready print view", "bundle_path": "print.html"}])
 
     def test_manifest_records_explicit_qr_target(self) -> None:
         manifest = build_share_bundle_manifest(
@@ -58,6 +72,21 @@ class ShareBundleExportTest(unittest.TestCase):
         self.assertNotIn("<Codie>", html)
         self.assertIn("No network service is required", html)
 
+    def test_print_html_is_pdf_ready_without_remote_conversion_language(self) -> None:
+        manifest = build_share_bundle_manifest(
+            title="Codie Evidence Bundle",
+            generated_at=GENERATED_AT,
+            assets=(ShareBundleAsset(path="comparison.md", label="Comparison"),),
+            include_print_entry=True,
+        )
+
+        html = share_bundle_print_html(manifest)
+
+        self.assertIn("@media print", html)
+        self.assertIn("Save as PDF", html)
+        self.assertIn("<code>assets/comparison.md</code>", html)
+        self.assertIn("does not call a remote conversion service", html)
+
     def test_write_local_share_bundle_copies_assets_and_writes_index(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
@@ -76,9 +105,12 @@ class ShareBundleExportTest(unittest.TestCase):
             index = (root / "bundle" / "index.html").read_text(encoding="utf-8")
             copied = root / "bundle" / "assets" / "comparison.md"
             self.assertEqual(result.index_path, str(root / "bundle" / "index.html"))
+            self.assertEqual(result.print_path, str(root / "bundle" / "print.html"))
             self.assertTrue(copied.exists())
+            self.assertTrue((root / "bundle" / "print.html").exists())
             self.assertEqual(copied.read_text(encoding="utf-8"), "# Evidence\n")
             self.assertEqual(manifest["assets"][0]["label"], "Comparison")
+            self.assertEqual(manifest["print_entry"], "print.html")
             self.assertIn("Codie Evidence Bundle", index)
 
     def test_write_local_share_bundle_can_include_qr_asset_without_encoding_report_contents(self) -> None:
@@ -103,6 +135,27 @@ class ShareBundleExportTest(unittest.TestCase):
             self.assertGreater(qr_asset.stat().st_size, 100)
             self.assertEqual(manifest["encoded_targets"], ["http://127.0.0.1:4173/index.html"])
             self.assertNotIn("Private Deck Evidence", json.dumps(manifest))
+
+    def test_write_local_share_bundle_can_disable_print_entry(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            report = root / "comparison.md"
+            report.write_text("# Evidence\n", encoding="utf-8")
+
+            result = write_local_share_bundle(
+                title="Codie Evidence Bundle",
+                generated_at=GENERATED_AT,
+                assets=(ShareBundleAsset(path=str(report), label="Comparison"),),
+                output_dir=root / "bundle",
+                output_root=root,
+                include_print_entry=False,
+            )
+
+            manifest = json.loads((root / "bundle" / "manifest.json").read_text(encoding="utf-8"))
+            self.assertIsNone(result.print_path)
+            self.assertFalse((root / "bundle" / "print.html").exists())
+            self.assertIsNone(manifest["print_entry"])
+            self.assertEqual(manifest["pdf_assets"], [])
 
     def test_write_qr_png_respects_output_root_and_suffix(self) -> None:
         with tempfile.TemporaryDirectory() as directory:

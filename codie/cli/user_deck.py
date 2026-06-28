@@ -109,6 +109,11 @@ def build_parser() -> argparse.ArgumentParser:
         "--qr-target",
         help="Optional explicit path or URL to encode as a local QR PNG in the bundle.",
     )
+    share_bundle.add_argument(
+        "--no-print-entry",
+        action="store_true",
+        help="Do not write the print-friendly HTML entry.",
+    )
     return parser
 
 
@@ -294,10 +299,12 @@ def _build_share_bundle(args: argparse.Namespace) -> dict[str, Any]:
         output_dir=args.output_dir,
         output_root=args.output_root,
         qr_target=args.qr_target,
+        include_print_entry=not args.no_print_entry,
     )
     return {
         "output_dir": result.output_dir,
         "index_path": result.index_path,
+        "print_path": result.print_path,
         "manifest_path": result.manifest_path,
         "asset_paths": list(result.asset_paths),
         "qr_asset_path": result.qr_asset_path,

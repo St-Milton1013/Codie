@@ -27,6 +27,7 @@ class ShareBundleAsset:
 class ShareBundleWriteResult:
     output_dir: str
     index_path: str
+    print_path: str | None
     manifest_path: str
     asset_paths: tuple[str, ...]
     qr_asset_path: str | None = None
@@ -36,6 +37,8 @@ class ShareBundleWriteResult:
             raise ValueError("output_dir is required")
         if not self.index_path.strip():
             raise ValueError("index_path is required")
+        if self.print_path is not None and not self.print_path.strip():
+            raise ValueError("print_path cannot be empty")
         if not self.manifest_path.strip():
             raise ValueError("manifest_path is required")
         if self.qr_asset_path is not None and not self.qr_asset_path.strip():
@@ -50,12 +53,15 @@ def build_share_bundle_manifest(
     entry_file: str = "index.html",
     qr_target: str | None = None,
     qr_asset_path: str | None = None,
+    include_print_entry: bool = False,
+    print_entry: str = "print.html",
 ) -> dict:
     """Return deterministic metadata for a local static report bundle."""
 
     _require_text(title, "title")
     _require_text(generated_at, "generated_at")
     _require_text(entry_file, "entry_file")
+    _require_text(print_entry, "print_entry")
     if not assets:
         raise ValueError("at least one asset is required")
 
@@ -65,6 +71,8 @@ def build_share_bundle_manifest(
         "generated_at": generated_at,
         "entry_file": entry_file,
         "qr_ready_entry": entry_file,
+        "print_entry": print_entry if include_print_entry else None,
+        "pdf_assets": [{"label": "PDF-ready print view", "bundle_path": print_entry}] if include_print_entry else [],
         "assets": [
             {
                 "label": asset.label or Path(asset.path).name,
@@ -139,6 +147,14 @@ def share_bundle_index_html(manifest: dict) -> str:
             "    </ul>",
             *(
                 [
+                    "    <h2>PDF-Ready View</h2>",
+                    f'    <p><a href="{_html_attr(manifest["print_entry"])}">Open print-friendly report view</a></p>',
+                ]
+                if manifest.get("print_entry")
+                else []
+            ),
+            *(
+                [
                     "    <h2>Phone Access</h2>",
                     "    <ul>",
                     *[f"      {item}" for item in qr_items],
@@ -156,6 +172,80 @@ def share_bundle_index_html(manifest: dict) -> str:
     )
 
 
+def share_bundle_print_html(manifest: dict) -> str:
+    """Return print-friendly static HTML for browser Save as PDF workflows."""
+
+    title = _html_text(manifest["title"])
+    generated_at = _html_text(manifest["generated_at"])
+    asset_rows = []
+    for asset in manifest["assets"]:
+        label = _html_text(asset["label"])
+        bundle_path = _html_text(asset["bundle_path"])
+        asset_rows.append(f"<tr><td>{label}</td><td><code>{bundle_path}</code></td></tr>")
+    qr_rows = []
+    for qr_asset in manifest.get("qr_assets", []):
+        label = _html_text(qr_asset["label"])
+        encoded_target = _html_text(qr_asset["encoded_target"])
+        bundle_path = _html_text(qr_asset["bundle_path"])
+        qr_rows.append(f"<tr><td>{label}</td><td><code>{encoded_target}</code></td><td><code>{bundle_path}</code></td></tr>")
+
+    return "\n".join(
+        [
+            "<!doctype html>",
+            '<html lang="en">',
+            "<head>",
+            '  <meta charset="utf-8">',
+            '  <meta name="viewport" content="width=device-width, initial-scale=1">',
+            f"  <title>{title} - Print View</title>",
+            "  <style>",
+            "    body { color: #111827; font-family: Georgia, 'Times New Roman', serif; margin: 2rem; }",
+            "    main { max-width: 760px; }",
+            "    h1, h2 { font-family: system-ui, sans-serif; }",
+            "    table { border-collapse: collapse; width: 100%; }",
+            "    th, td { border-bottom: 1px solid #d1d5db; padding: 0.55rem; text-align: left; }",
+            "    code { overflow-wrap: anywhere; }",
+            "    .meta { color: #4b5563; }",
+            "    @media print {",
+            "      body { margin: 0.65in; }",
+            "      a { color: inherit; text-decoration: none; }",
+            "      h2 { break-after: avoid; }",
+            "      tr { break-inside: avoid; }",
+            "    }",
+            "  </style>",
+            "</head>",
+            "<body>",
+            "  <main>",
+            f"    <h1>{title}</h1>",
+            f'    <p class="meta">Generated at: {generated_at}</p>',
+            "    <h2>Included Files</h2>",
+            "    <table>",
+            "      <thead><tr><th>Label</th><th>Bundle path</th></tr></thead>",
+            "      <tbody>",
+            *[f"        {row}" for row in asset_rows],
+            "      </tbody>",
+            "    </table>",
+            *(
+                [
+                    "    <h2>QR Targets</h2>",
+                    "    <table>",
+                    "      <thead><tr><th>Label</th><th>Encoded target</th><th>QR asset</th></tr></thead>",
+                    "      <tbody>",
+                    *[f"        {row}" for row in qr_rows],
+                    "      </tbody>",
+                    "    </table>",
+                ]
+                if qr_rows
+                else []
+            ),
+            "    <p class=\"meta\">Use the browser print dialog or Save as PDF. This page does not call a remote conversion service.</p>",
+            "  </main>",
+            "</body>",
+            "</html>",
+            "",
+        ]
+    )
+
+
 def write_local_share_bundle(
     *,
     title: str,
@@ -164,6 +254,7 @@ def write_local_share_bundle(
     output_dir: str | Path,
     output_root: str | Path | None = None,
     qr_target: str | None = None,
+    include_print_entry: bool = True,
 ) -> ShareBundleWriteResult:
     """Write a static local share bundle with copied report assets."""
 
@@ -175,6 +266,7 @@ def write_local_share_bundle(
         assets=assets,
         qr_target=qr_target,
         qr_asset_path=qr_asset_path,
+        include_print_entry=include_print_entry,
     )
     assets_dir = target_dir / "assets"
     target_dir.mkdir(parents=True, exist_ok=True)
@@ -196,11 +288,15 @@ def write_local_share_bundle(
 
     manifest_path = target_dir / "manifest.json"
     index_path = target_dir / "index.html"
+    print_path = target_dir / "print.html" if include_print_entry else None
     manifest_path.write_text(json.dumps(manifest, sort_keys=True, indent=2) + "\n", encoding="utf-8", newline="\n")
     index_path.write_text(share_bundle_index_html(manifest), encoding="utf-8", newline="\n")
+    if print_path is not None:
+        print_path.write_text(share_bundle_print_html(manifest), encoding="utf-8", newline="\n")
     return ShareBundleWriteResult(
         output_dir=str(target_dir),
         index_path=str(index_path),
+        print_path=str(print_path) if print_path is not None else None,
         manifest_path=str(manifest_path),
         asset_paths=tuple(copied_paths),
         qr_asset_path=str(qr_path) if qr_path is not None else None,
