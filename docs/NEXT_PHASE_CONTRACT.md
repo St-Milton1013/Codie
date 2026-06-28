@@ -1,14 +1,14 @@
 # Next Phase Contract
 
-Recommended next task: Phase 12N Optional Local LAN Preview Contract
+Recommended next task: Phase 12O Optional Local LAN Preview Implementation
 
 ## Current Status
 
-Phase 12M Delivery Usage Documentation is implemented and validated.
+Phase 12N Optional Local LAN Preview Contract is implemented and validated.
 
-Codie now has user-facing PowerShell instructions for building local report
-bundles, opening `index.html` / `print.html`, using QR assets, saving as PDF,
-and manually moving reports to a phone.
+Codie now has a safety contract for a future local LAN preview server: selected
+bundle only, read-only, explicit LAN binding, no providers/db/analytics/
+recommendations, and no hosted delivery.
 
 ## Files Created Or Modified In Latest Packet
 
@@ -33,6 +33,8 @@ and manually moving reports to a phone.
 - `docs/PHASE12M_DELIVERY_USAGE_DOCUMENTATION_CONTRACT.md`
 - `docs/PHASE12M_DELIVERY_USAGE_DOCUMENTATION_REPORT.md`
 - `docs/USER_GUIDE_LOCAL_REPORT_SHARING.md`
+- `docs/PHASE12N_OPTIONAL_LOCAL_LAN_PREVIEW_CONTRACT.md`
+- `docs/PHASE12N_OPTIONAL_LOCAL_LAN_PREVIEW_REPORT.md`
 - `requirements.txt`
 - `codie/exports/share_bundle.py`
 - `codie/exports/__init__.py`
@@ -53,8 +55,8 @@ and manually moving reports to a phone.
 
 ## Public Functions / Classes Added
 
-No public code was added in Phase 12M. User-facing local delivery usage docs
-were added.
+No public code was added in Phase 12N. The optional local LAN preview server
+contract was documented.
 
 ## Schema Impact
 
@@ -98,11 +100,12 @@ rg -n "should play|must include|correct card|breaks the format|secretly optimal|
 - PDF-ready output is implemented as static print-friendly HTML.
 - Delivery integrations remain split into future opt-in packets with privacy gates.
 - Local report sharing has a PowerShell usage guide.
+- Local LAN preview has a safety contract but no implementation yet.
 - No local UI API exists yet by design.
 
 ## Recommended Next Packet
 
-Implement Phase 12N Optional Local LAN Preview Contract.
+Implement Phase 12O Optional Local LAN Preview Implementation.
 
 Validation reference:
 
@@ -129,11 +132,13 @@ Validation reference:
 - `docs/PHASE12M_DELIVERY_USAGE_DOCUMENTATION_CONTRACT.md`
 - `docs/PHASE12M_DELIVERY_USAGE_DOCUMENTATION_REPORT.md`
 - `docs/USER_GUIDE_LOCAL_REPORT_SHARING.md`
+- `docs/PHASE12N_OPTIONAL_LOCAL_LAN_PREVIEW_CONTRACT.md`
+- `docs/PHASE12N_OPTIONAL_LOCAL_LAN_PREVIEW_REPORT.md`
 
 Define:
 
 ```text
-Phase 12N - Optional Local LAN Preview Contract
+Phase 12O - Optional Local LAN Preview Implementation
 ```
 
 Keep final recommendation generation separate until the Phase 8/10 boundaries are explicitly carried forward.
@@ -152,7 +157,7 @@ Keep final recommendation generation separate until the Phase 8/10 boundaries ar
 - Do not make frontend fixtures private user deck data.
 - Do not add hosted/mobile sharing without a separate privacy contract.
 - Do not add hosted/mobile delivery integrations without an opt-in planning contract.
-- Do not add local LAN serving until Phase 12N/12O explicitly approves it.
+- Do not add outbound delivery or public tunnels during local LAN preview implementation.
 
 ## Required Phase Packet Shape
 

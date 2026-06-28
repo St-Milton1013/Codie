@@ -12,7 +12,7 @@ Use the repository and this handoff as the source of truth. Do not rely on prior
 GitHub: https://github.com/St-Milton1013/Codie
 Local path: C:\Users\Main\Documents\Codex\2026-06-22\next-phase-contract-recommended-next-task
 Branch: main
-Latest pushed commit before Phase 12M closure: dd91aed Add Phase 12L delivery integration plan
+Latest pushed commit before Phase 12N closure: 9d18797 Add Phase 12M local report sharing guide
 ```
 
 ## Current Validation Baseline
@@ -20,7 +20,7 @@ Latest pushed commit before Phase 12M closure: dd91aed Add Phase 12L delivery in
 Latest full-suite result:
 
 ```text
-Ran 302 tests in 1.235s
+Ran 302 tests in 1.253s
 
 OK
 ```
@@ -90,6 +90,7 @@ Phase 12J QR Code Asset Generation: PASS
 Phase 12K PDF-Ready Share Bundle Output: PASS
 Phase 12L Optional Delivery Integrations Planning: PASS
 Phase 12M Delivery Usage Documentation: PASS
+Phase 12N Optional Local LAN Preview Contract: PASS
 ```
 
 ## Recent Commits
@@ -237,7 +238,7 @@ Simulation evidence must not enter Evidence Stack unless constitution thresholds
 Preferred next move:
 
 ```text
-Phase 12N - Optional Local LAN Preview Contract
+Phase 12O - Optional Local LAN Preview Implementation
 ```
 
 Alternate next safe option:
@@ -279,12 +280,14 @@ docs/PHASE12L_OPTIONAL_DELIVERY_INTEGRATIONS_PLANNING_REPORT.md
 docs/PHASE12M_DELIVERY_USAGE_DOCUMENTATION_CONTRACT.md
 docs/PHASE12M_DELIVERY_USAGE_DOCUMENTATION_REPORT.md
 docs/USER_GUIDE_LOCAL_REPORT_SHARING.md
+docs/PHASE12N_OPTIONAL_LOCAL_LAN_PREVIEW_CONTRACT.md
+docs/PHASE12N_OPTIONAL_LOCAL_LAN_PREVIEW_REPORT.md
 ```
 
 Next UI implementation packet:
 
 ```text
-Phase 12N - Optional Local LAN Preview Contract
+Phase 12O - Optional Local LAN Preview Implementation
 ```
 
 ## Known Caveats
@@ -299,6 +302,7 @@ Phase 12N - Optional Local LAN Preview Contract
 - PDF-ready output is static HTML only; no PDF binary generation yet.
 - Delivery integrations are planning-only and disabled by default.
 - Local report sharing has a PowerShell-oriented usage guide.
+- Local LAN preview has a safety contract but no implementation yet.
 - No local UI API exists yet.
 - No simulator implementation exists yet.
 - Final recommendation output remains intentionally separate.
