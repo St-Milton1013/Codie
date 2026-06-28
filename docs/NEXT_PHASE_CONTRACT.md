@@ -1,14 +1,14 @@
 # Next Phase Contract
 
-Recommended next task: Phase 12I Share Bundle QR/PDF Planning Contract
+Recommended next task: Phase 12J QR Code Asset Generation
 
 ## Current Status
 
-Phase 12H Local Report Share Bundle is implemented and validated.
+Phase 12I Share Bundle QR/PDF Planning Contract is implemented and validated.
 
-Codie can now gather existing export files into a static local share bundle
-with `index.html`, `manifest.json`, and copied assets. The bundle is suitable
-for opening on another trusted device after the user moves or shares the folder.
+Codie now has a documented split for phone-friendly report access:
+QR generation, PDF-ready output, and optional delivery integrations must be
+implemented as separate packets with explicit privacy and dependency gates.
 
 ## Files Created Or Modified In Latest Packet
 
@@ -22,6 +22,8 @@ for opening on another trusted device after the user moves or shares the folder.
 - `docs/PHASE12G_UI_FIXTURE_LOADER_REPORT.md`
 - `docs/PHASE12H_LOCAL_REPORT_SHARE_BUNDLE_CONTRACT.md`
 - `docs/PHASE12H_LOCAL_REPORT_SHARE_BUNDLE_REPORT.md`
+- `docs/PHASE12I_SHARE_BUNDLE_QR_PDF_PLANNING_CONTRACT.md`
+- `docs/PHASE12I_SHARE_BUNDLE_QR_PDF_PLANNING_REPORT.md`
 - `codie/exports/share_bundle.py`
 - `codie/exports/__init__.py`
 - `tests/test_exports_share_bundle.py`
@@ -41,7 +43,8 @@ for opening on another trusted device after the user moves or shares the folder.
 
 ## Public Functions / Classes Added
 
-Static local share bundle functions and CLI command were added.
+No public code was added in Phase 12I. The QR/PDF sharing split and future
+contracts were documented.
 
 ## Schema Impact
 
@@ -81,11 +84,12 @@ rg -n "should play|must include|correct card|breaks the format|secretly optimal|
 - CLI export docs recommend `--output-root` for normal usage.
 - UI loads static generated page-model JSON with fixture fallback.
 - Local report bundles can be built from existing export files.
+- QR/PDF/mobile delivery work is split into future packets with privacy gates.
 - No local UI API exists yet by design.
 
 ## Recommended Next Packet
 
-Implement Phase 12I Share Bundle QR/PDF Planning Contract.
+Implement Phase 12J QR Code Asset Generation.
 
 Validation reference:
 
@@ -101,11 +105,13 @@ Validation reference:
 - `docs/PHASE12G_UI_FIXTURE_LOADER_REPORT.md`
 - `docs/PHASE12H_LOCAL_REPORT_SHARE_BUNDLE_CONTRACT.md`
 - `docs/PHASE12H_LOCAL_REPORT_SHARE_BUNDLE_REPORT.md`
+- `docs/PHASE12I_SHARE_BUNDLE_QR_PDF_PLANNING_CONTRACT.md`
+- `docs/PHASE12I_SHARE_BUNDLE_QR_PDF_PLANNING_REPORT.md`
 
 Define:
 
 ```text
-Phase 12I - Share Bundle QR/PDF Planning Contract
+Phase 12J - QR Code Asset Generation
 ```
 
 Keep final recommendation generation separate until the Phase 8/10 boundaries are explicitly carried forward.
@@ -123,7 +129,7 @@ Keep final recommendation generation separate until the Phase 8/10 boundaries ar
 - Do not add a local API server without a contract.
 - Do not make frontend fixtures private user deck data.
 - Do not add hosted/mobile sharing without a separate privacy contract.
-- Do not add QR/PDF generation without an explicit dependency and privacy contract.
+- Do not add PDF generation or delivery integrations during QR implementation.
 
 ## Required Phase Packet Shape
 

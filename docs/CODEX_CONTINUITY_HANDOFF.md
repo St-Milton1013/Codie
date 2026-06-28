@@ -12,7 +12,7 @@ Use the repository and this handoff as the source of truth. Do not rely on prior
 GitHub: https://github.com/St-Milton1013/Codie
 Local path: C:\Users\Main\Documents\Codex\2026-06-22\next-phase-contract-recommended-next-task
 Branch: main
-Latest pushed commit before Phase 12H closure: bdfd897 Add Phase 12G UI export loader
+Latest pushed commit before Phase 12I closure: 62e5fbd Add Phase 12H local share bundles
 ```
 
 ## Current Validation Baseline
@@ -20,7 +20,7 @@ Latest pushed commit before Phase 12H closure: bdfd897 Add Phase 12G UI export l
 Latest full-suite result:
 
 ```text
-Ran 296 tests in 0.833s
+Ran 296 tests in 0.852s
 
 OK
 ```
@@ -85,6 +85,7 @@ Phase 12E Read-Only Local UI Data Contract: PASS
 Phase 12F Static UI Page Model Export: PASS
 Phase 12G UI Fixture Loader / Generated Export Preview: PASS
 Phase 12H Local Report Share Bundle: PASS
+Phase 12I Share Bundle QR/PDF Planning Contract: PASS
 ```
 
 ## Recent Commits
@@ -232,7 +233,7 @@ Simulation evidence must not enter Evidence Stack unless constitution thresholds
 Preferred next move:
 
 ```text
-Phase 12I - Share Bundle QR/PDF Planning Contract
+Phase 12J - QR Code Asset Generation
 ```
 
 Alternate next safe option:
@@ -263,12 +264,14 @@ docs/PHASE12G_UI_FIXTURE_LOADER_CONTRACT.md
 docs/PHASE12G_UI_FIXTURE_LOADER_REPORT.md
 docs/PHASE12H_LOCAL_REPORT_SHARE_BUNDLE_CONTRACT.md
 docs/PHASE12H_LOCAL_REPORT_SHARE_BUNDLE_REPORT.md
+docs/PHASE12I_SHARE_BUNDLE_QR_PDF_PLANNING_CONTRACT.md
+docs/PHASE12I_SHARE_BUNDLE_QR_PDF_PLANNING_REPORT.md
 ```
 
 Next UI implementation packet:
 
 ```text
-Phase 12I - Share Bundle QR/PDF Planning Contract
+Phase 12J - QR Code Asset Generation
 ```
 
 ## Known Caveats
@@ -278,6 +281,7 @@ Phase 12I - Share Bundle QR/PDF Planning Contract
 - CLI export docs recommend `--output-root` for normal usage.
 - Minimal static-export-backed UI exists under `ui/`.
 - Static local report bundles can be built from existing export files.
+- QR/PDF/mobile report sharing has a planning contract and must remain opt-in.
 - No local UI API exists yet.
 - No simulator implementation exists yet.
 - Final recommendation output remains intentionally separate.
