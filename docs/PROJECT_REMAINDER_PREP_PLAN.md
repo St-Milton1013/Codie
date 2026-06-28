@@ -173,6 +173,27 @@ Forbidden uses:
 Any mined item must become either a fixture, a documented contract addition, or
 a reviewed roadmap item before implementation.
 
+### Deferred User Workflow And Confidence Extensions
+
+Accepted future roadmap packet:
+
+- `docs/ROADMAP_PATCH_DECK_MEMORY_MOXFIELD_CONFIDENCE_NAMING.md`
+
+Included extensions:
+
+1. User deck analysis memory for retrieving prior analyzed decklists by
+   commander identity and date.
+2. Moxfield-compatible staples export for manual sharing or later explicitly
+   configured upload.
+3. Ratio-aware confidence gating that considers both absolute sample count and
+   coverage percentage of available data.
+4. LLM-assisted naming and alias review with strict human/deterministic review
+   before persistence.
+
+These items are roadmap-only. They do not authorize final recommendations,
+schema changes, cloud LLM usage, Moxfield API uploads, or private decklist
+sharing until a contract explicitly approves the path and tests the guardrails.
+
 ### Deferred Mobile Report Access
 
 Codie should eventually let the user run the program on a PC and view generated

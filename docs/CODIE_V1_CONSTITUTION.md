@@ -5256,6 +5256,7 @@ Claude and ChatGPT must verify that each implementation response includes:
 | DeepSeek designs schema vs implements schema | DeepSeek implements locked schema | Schema semantics belong to architecture layer, not implementation improvisation. |
 | Old code reuse vs remaster/rebuild | Old code is reference‑only unless explicitly migrated through new architecture | Prevents legacy entropy from infecting the rebuild. |
 | Legacy project archives as upgrade sources | Mine only for fixtures, aliases, workflow ideas, export formats, threshold candidates, and simulator/rules references | Preserves useful history without allowing stale architecture, copied scraper code, or old analysis claims into Codie. |
+| User workflow extension patches | Deck memory, Moxfield-compatible export, ratio-aware confidence, and LLM-assisted naming are deferred contract-first roadmap items | Preserves useful product direction while blocking private deck leakage, unsupported uploads, LLM-as-truth behavior, and premature schema churn. |
 | Recommendation/cut language | Evidence candidates and low‑evidence/outlier cards only | Codie must not become an AI coach making unsupported claims. |
 | cEDHStats patch integration | Full merge of Card Performance Metrics, Historical Snapshots, Evidence Counts, Commander/Card Pages, Evidence Stack | Required for Codie's core differentiators. |
 | Evidence Stack source | Visual evidence volume, not AI score | Maintains Evidence First Rule compliance. |
