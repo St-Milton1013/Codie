@@ -1,14 +1,14 @@
 # Next Phase Contract
 
-Recommended next task: Phase 12M Delivery Usage Documentation
+Recommended next task: Phase 12N Optional Local LAN Preview Contract
 
 ## Current Status
 
-Phase 12L Optional Delivery Integrations Planning is implemented and validated.
+Phase 12M Delivery Usage Documentation is implemented and validated.
 
-Codie now has a documented delivery decision framework: manual local transfer
-is recommended near-term, optional LAN preview requires a separate contract,
-and outbound delivery remains deferred pending credential and privacy rules.
+Codie now has user-facing PowerShell instructions for building local report
+bundles, opening `index.html` / `print.html`, using QR assets, saving as PDF,
+and manually moving reports to a phone.
 
 ## Files Created Or Modified In Latest Packet
 
@@ -30,6 +30,9 @@ and outbound delivery remains deferred pending credential and privacy rules.
 - `docs/PHASE12K_PDF_READY_SHARE_BUNDLE_REPORT.md`
 - `docs/PHASE12L_OPTIONAL_DELIVERY_INTEGRATIONS_PLANNING_CONTRACT.md`
 - `docs/PHASE12L_OPTIONAL_DELIVERY_INTEGRATIONS_PLANNING_REPORT.md`
+- `docs/PHASE12M_DELIVERY_USAGE_DOCUMENTATION_CONTRACT.md`
+- `docs/PHASE12M_DELIVERY_USAGE_DOCUMENTATION_REPORT.md`
+- `docs/USER_GUIDE_LOCAL_REPORT_SHARING.md`
 - `requirements.txt`
 - `codie/exports/share_bundle.py`
 - `codie/exports/__init__.py`
@@ -50,8 +53,8 @@ and outbound delivery remains deferred pending credential and privacy rules.
 
 ## Public Functions / Classes Added
 
-No public code was added in Phase 12L. Delivery tiers, forbidden defaults, and
-future contracts were documented.
+No public code was added in Phase 12M. User-facing local delivery usage docs
+were added.
 
 ## Schema Impact
 
@@ -94,11 +97,12 @@ rg -n "should play|must include|correct card|breaks the format|secretly optimal|
 - QR generation is implemented as local PNG asset generation.
 - PDF-ready output is implemented as static print-friendly HTML.
 - Delivery integrations remain split into future opt-in packets with privacy gates.
+- Local report sharing has a PowerShell usage guide.
 - No local UI API exists yet by design.
 
 ## Recommended Next Packet
 
-Implement Phase 12M Delivery Usage Documentation.
+Implement Phase 12N Optional Local LAN Preview Contract.
 
 Validation reference:
 
@@ -122,11 +126,14 @@ Validation reference:
 - `docs/PHASE12K_PDF_READY_SHARE_BUNDLE_REPORT.md`
 - `docs/PHASE12L_OPTIONAL_DELIVERY_INTEGRATIONS_PLANNING_CONTRACT.md`
 - `docs/PHASE12L_OPTIONAL_DELIVERY_INTEGRATIONS_PLANNING_REPORT.md`
+- `docs/PHASE12M_DELIVERY_USAGE_DOCUMENTATION_CONTRACT.md`
+- `docs/PHASE12M_DELIVERY_USAGE_DOCUMENTATION_REPORT.md`
+- `docs/USER_GUIDE_LOCAL_REPORT_SHARING.md`
 
 Define:
 
 ```text
-Phase 12M - Delivery Usage Documentation
+Phase 12N - Optional Local LAN Preview Contract
 ```
 
 Keep final recommendation generation separate until the Phase 8/10 boundaries are explicitly carried forward.

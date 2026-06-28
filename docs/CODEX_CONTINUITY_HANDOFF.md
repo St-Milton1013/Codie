@@ -12,7 +12,7 @@ Use the repository and this handoff as the source of truth. Do not rely on prior
 GitHub: https://github.com/St-Milton1013/Codie
 Local path: C:\Users\Main\Documents\Codex\2026-06-22\next-phase-contract-recommended-next-task
 Branch: main
-Latest pushed commit before Phase 12L closure: 7665aa0 Add Phase 12K PDF ready share bundles
+Latest pushed commit before Phase 12M closure: dd91aed Add Phase 12L delivery integration plan
 ```
 
 ## Current Validation Baseline
@@ -20,7 +20,7 @@ Latest pushed commit before Phase 12L closure: 7665aa0 Add Phase 12K PDF ready s
 Latest full-suite result:
 
 ```text
-Ran 302 tests in 1.276s
+Ran 302 tests in 1.235s
 
 OK
 ```
@@ -89,6 +89,7 @@ Phase 12I Share Bundle QR/PDF Planning Contract: PASS
 Phase 12J QR Code Asset Generation: PASS
 Phase 12K PDF-Ready Share Bundle Output: PASS
 Phase 12L Optional Delivery Integrations Planning: PASS
+Phase 12M Delivery Usage Documentation: PASS
 ```
 
 ## Recent Commits
@@ -236,7 +237,7 @@ Simulation evidence must not enter Evidence Stack unless constitution thresholds
 Preferred next move:
 
 ```text
-Phase 12M - Delivery Usage Documentation
+Phase 12N - Optional Local LAN Preview Contract
 ```
 
 Alternate next safe option:
@@ -275,12 +276,15 @@ docs/PHASE12K_PDF_READY_SHARE_BUNDLE_CONTRACT.md
 docs/PHASE12K_PDF_READY_SHARE_BUNDLE_REPORT.md
 docs/PHASE12L_OPTIONAL_DELIVERY_INTEGRATIONS_PLANNING_CONTRACT.md
 docs/PHASE12L_OPTIONAL_DELIVERY_INTEGRATIONS_PLANNING_REPORT.md
+docs/PHASE12M_DELIVERY_USAGE_DOCUMENTATION_CONTRACT.md
+docs/PHASE12M_DELIVERY_USAGE_DOCUMENTATION_REPORT.md
+docs/USER_GUIDE_LOCAL_REPORT_SHARING.md
 ```
 
 Next UI implementation packet:
 
 ```text
-Phase 12M - Delivery Usage Documentation
+Phase 12N - Optional Local LAN Preview Contract
 ```
 
 ## Known Caveats
@@ -294,6 +298,7 @@ Phase 12M - Delivery Usage Documentation
 - QR generation is local-only and encodes explicit targets only.
 - PDF-ready output is static HTML only; no PDF binary generation yet.
 - Delivery integrations are planning-only and disabled by default.
+- Local report sharing has a PowerShell-oriented usage guide.
 - No local UI API exists yet.
 - No simulator implementation exists yet.
 - Final recommendation output remains intentionally separate.
