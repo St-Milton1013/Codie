@@ -17,6 +17,10 @@ from codie.exports import (
     user_deck_comparison_markdown,
     write_user_deck_comparison_exports,
 )
+from codie.pages import (
+    export_saved_analysis_detail_page_model,
+    export_saved_analysis_list_page_model,
+)
 from codie.user_decks import (
     UserDeckEvidenceCandidate,
     UserDeckImporter,
@@ -56,6 +60,34 @@ def build_parser() -> argparse.ArgumentParser:
     show_saved = subparsers.add_parser("show-saved-analysis", help="Show one saved analysis detail.")
     show_saved.add_argument("--db", required=True, help="Existing Codie SQLite database path.")
     show_saved.add_argument("--saved-analysis-id", required=True, type=int, help="Saved analysis ID to show.")
+
+    export_ui_list = subparsers.add_parser(
+        "export-ui-saved-analysis-list",
+        help="Export saved-analysis list page model JSON for the UI.",
+    )
+    export_ui_list.add_argument("--db", required=True, help="Existing Codie SQLite database path.")
+    export_ui_list.add_argument("--user-deck-id", required=True, type=int, help="User deck ID to export.")
+    export_ui_list.add_argument("--output", required=True, help="JSON output path.")
+    export_ui_list.add_argument("--output-root", help="Optional root directory that output path must stay inside.")
+    export_ui_list.add_argument(
+        "--exported-at",
+        default="1970-01-01T00:00:00+00:00",
+        help="Timestamp to stamp the UI page model export with.",
+    )
+
+    export_ui_detail = subparsers.add_parser(
+        "export-ui-saved-analysis-detail",
+        help="Export saved-analysis detail page model JSON for the UI.",
+    )
+    export_ui_detail.add_argument("--db", required=True, help="Existing Codie SQLite database path.")
+    export_ui_detail.add_argument("--saved-analysis-id", required=True, type=int, help="Saved analysis ID to export.")
+    export_ui_detail.add_argument("--output", required=True, help="JSON output path.")
+    export_ui_detail.add_argument("--output-root", help="Optional root directory that output path must stay inside.")
+    export_ui_detail.add_argument(
+        "--exported-at",
+        default="1970-01-01T00:00:00+00:00",
+        help="Timestamp to stamp the UI page model export with.",
+    )
     return parser
 
 
@@ -76,6 +108,14 @@ def main(argv: list[str] | None = None) -> int:
     if args.command == "show-saved-analysis":
         detail = _show_saved_analysis(args)
         print(json.dumps(detail, sort_keys=True))
+        return 0
+    if args.command == "export-ui-saved-analysis-list":
+        result = _export_ui_saved_analysis_list(args)
+        print(json.dumps(result, sort_keys=True))
+        return 0
+    if args.command == "export-ui-saved-analysis-detail":
+        result = _export_ui_saved_analysis_detail(args)
+        print(json.dumps(result, sort_keys=True))
         return 0
     parser.error(f"Unsupported command: {args.command}")
     return 2
@@ -172,6 +212,46 @@ def _show_saved_analysis(args: argparse.Namespace) -> dict[str, Any]:
         }
     finally:
         connection.close()
+
+
+def _export_ui_saved_analysis_list(args: argparse.Namespace) -> dict[str, Any]:
+    connection = connect(args.db)
+    try:
+        user_repository = UserRepository(connection)
+        result = export_saved_analysis_list_page_model(
+            user_repository,
+            args.user_deck_id,
+            path=args.output,
+            output_root=args.output_root,
+            exported_at=args.exported_at,
+        )
+        return _write_result_to_dict(result)
+    finally:
+        connection.close()
+
+
+def _export_ui_saved_analysis_detail(args: argparse.Namespace) -> dict[str, Any]:
+    connection = connect(args.db)
+    try:
+        user_repository = UserRepository(connection)
+        result = export_saved_analysis_detail_page_model(
+            user_repository,
+            args.saved_analysis_id,
+            path=args.output,
+            output_root=args.output_root,
+            exported_at=args.exported_at,
+        )
+        return _write_result_to_dict(result)
+    finally:
+        connection.close()
+
+
+def _write_result_to_dict(result) -> dict[str, Any]:
+    return {
+        "path": result.path,
+        "bytes_written": result.bytes_written,
+        "content_type": result.content_type,
+    }
 
 
 def _summary_to_dict(summary) -> dict[str, Any]:

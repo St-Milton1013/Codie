@@ -12,7 +12,7 @@ Use the repository and this handoff as the source of truth. Do not rely on prior
 GitHub: https://github.com/St-Milton1013/Codie
 Local path: C:\Users\Main\Documents\Codex\2026-06-22\next-phase-contract-recommended-next-task
 Branch: main
-Latest pushed commit at handoff creation: 6c6ad63 Add Phase 12 UI prep checkpoint
+Latest pushed commit before Phase 12F closure: 702c3a9 Add Phase 12E UI data contract
 ```
 
 ## Current Validation Baseline
@@ -20,7 +20,7 @@ Latest pushed commit at handoff creation: 6c6ad63 Add Phase 12 UI prep checkpoin
 Latest full-suite result:
 
 ```text
-Ran 283 tests in 0.694s
+Ran 290 tests in 0.812s
 
 OK
 ```
@@ -36,13 +36,13 @@ passed.
 Latest relevant boundary scan:
 
 ```text
-rg -n "codie\.providers|codie\.db|codie\.recommendations|codie\.analytics|source_events|source_decks|provider_objects|sqlite3" codie\pages
+rg -n "codie\.providers|codie\.recommendations|codie\.analytics|source_events|source_decks|provider_objects" codie\pages codie\cli
 ```
 
 returned:
 
 ```text
-pages: no matches
+pages/cli: no matches
 ```
 
 Latest UI boundary scans:
@@ -82,23 +82,22 @@ Phase 12 UI Preparation/View Models: PASS
 Phase 12C UI Scaffold Contract: PASS
 Phase 12D Minimal React/Vite Local UI Shell: PASS
 Phase 12E Read-Only Local UI Data Contract: PASS
+Phase 12F Static UI Page Model Export: PASS
 ```
 
 ## Recent Commits
 
 ```text
+702c3a9 Add Phase 12E UI data contract
+651a48b Ignore UI dev server logs
+ca2b6fd Add Phase 12D minimal UI shell
+cd93b42 Add Phase 12C UI scaffold contract
+1da325e Add Phase 11 12 validation prompt
+f431115 Add LLM naming audit workflow
+77059ed Add user workflow roadmap patch
+8938b7e Add mobile report access roadmap
 6c6ad63 Add Phase 12 UI prep checkpoint
 7f928c1 Add user workflow view models
-d6c89bd Add Phase 12 UI planning contract
-d256c3a Add Phase 11 retrieval checkpoint
-3dacbfa Add saved analysis retrieval
-c039ec0 Add Phase 11 planning contract
-174e0c8 Document CLI output root guidance
-b322119 Update Phase 10 checkpoint for saved analysis
-aed9bc8 Add saved user deck analysis persistence
-9ed6871 Update Phase 10 checkpoint for CLI
-2ae69ac Add user deck CLI wrapper
-cfabf94 Add Phase 10 user deck workflow checkpoint
 ```
 
 ## Current Outside Validation Packets
@@ -231,7 +230,7 @@ Simulation evidence must not enter Evidence Stack unless constitution thresholds
 Preferred next move:
 
 ```text
-Phase 12F - Static UI Page Model Export
+Phase 12G - UI Fixture Loader / Generated Export Preview
 ```
 
 Alternate next safe option:
@@ -256,12 +255,14 @@ Current UI packets:
 docs/PHASE12C_UI_SCAFFOLD_CONTRACT.md
 docs/PHASE12D_MINIMAL_UI_SHELL_REPORT.md
 docs/PHASE12E_READ_ONLY_UI_DATA_CONTRACT.md
+docs/PHASE12F_STATIC_UI_PAGE_MODEL_EXPORT_CONTRACT.md
+docs/PHASE12F_STATIC_UI_PAGE_MODEL_EXPORT_REPORT.md
 ```
 
 Next UI implementation packet:
 
 ```text
-Phase 12F - Static UI Page Model Export
+Phase 12G - UI Fixture Loader / Generated Export Preview
 ```
 
 ## Known Caveats

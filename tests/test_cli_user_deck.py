@@ -211,6 +211,71 @@ class UserDeckCliTest(unittest.TestCase):
             self.assertEqual(payload["summary_payload"]["absent_count"], 1)
             self.assertEqual(payload["summary_payload"]["rows"][0]["card_name"], "Mystic Remora")
 
+    def test_export_ui_saved_analysis_list_writes_page_model_json(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            db_path = root / "codie.sqlite"
+            output = root / "ui" / "saved-analyses.json"
+            main(["init-db", "--db", str(db_path)])
+            user_deck_id, saved_id = self._seed_saved_analysis(db_path)
+
+            stdout = StringIO()
+            with redirect_stdout(stdout):
+                exit_code = main(
+                    [
+                        "export-ui-saved-analysis-list",
+                        "--db",
+                        str(db_path),
+                        "--user-deck-id",
+                        str(user_deck_id),
+                        "--output",
+                        str(output),
+                        "--output-root",
+                        str(root),
+                        "--exported-at",
+                        NOW,
+                    ]
+                )
+
+            self.assertEqual(exit_code, 0)
+            summary = json.loads(stdout.getvalue())
+            payload = json.loads(output.read_text(encoding="utf-8"))
+            self.assertEqual(summary["content_type"], "application/json")
+            self.assertEqual(payload["source"]["export_type"], "saved_analysis_list")
+            self.assertEqual(payload["rows"][0]["saved_analysis_id"], saved_id)
+
+    def test_export_ui_saved_analysis_detail_writes_page_model_json(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            db_path = root / "codie.sqlite"
+            output = root / "ui" / "saved-analysis-detail.json"
+            main(["init-db", "--db", str(db_path)])
+            _, saved_id = self._seed_saved_analysis(db_path)
+
+            stdout = StringIO()
+            with redirect_stdout(stdout):
+                exit_code = main(
+                    [
+                        "export-ui-saved-analysis-detail",
+                        "--db",
+                        str(db_path),
+                        "--saved-analysis-id",
+                        str(saved_id),
+                        "--output",
+                        str(output),
+                        "--output-root",
+                        str(root),
+                        "--exported-at",
+                        NOW,
+                    ]
+                )
+
+            self.assertEqual(exit_code, 0)
+            payload = json.loads(output.read_text(encoding="utf-8"))
+            self.assertEqual(payload["source"]["export_type"], "saved_analysis_detail")
+            self.assertEqual(payload["source"]["saved_analysis_id"], saved_id)
+            self.assertEqual(payload["rows"][0]["card_name"], "Mystic Remora")
+
     def test_cli_module_has_no_provider_or_recommendation_imports(self) -> None:
         import codie.cli.user_deck as cli_module
 

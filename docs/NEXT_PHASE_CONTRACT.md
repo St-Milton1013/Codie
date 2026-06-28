@@ -1,14 +1,13 @@
 # Next Phase Contract
 
-Recommended next task: Phase 12F Static UI Page Model Export
+Recommended next task: Phase 12G UI Fixture Loader / Generated Export Preview
 
 ## Current Status
 
-Phase 12E Read-Only Local UI Data Contract is documented and ready for validation.
+Phase 12F Static UI Page Model Export is implemented and validated.
 
-`docs/PHASE12E_READ_ONLY_UI_DATA_CONTRACT.md` defines the boundary for moving
-from checked-in UI fixtures to user-generated page model JSON without allowing
-frontend SQLite access.
+Python can export saved-analysis list/detail page models as deterministic JSON
+files for the UI without letting frontend code access SQLite.
 
 ## Files Created Or Modified In Latest Packet
 
@@ -16,12 +15,19 @@ frontend SQLite access.
 - `ui/`
 - `docs/PHASE12D_MINIMAL_UI_SHELL_REPORT.md`
 - `docs/PHASE12E_READ_ONLY_UI_DATA_CONTRACT.md`
+- `docs/PHASE12F_STATIC_UI_PAGE_MODEL_EXPORT_CONTRACT.md`
+- `docs/PHASE12F_STATIC_UI_PAGE_MODEL_EXPORT_REPORT.md`
+- `codie/pages/export_user_workflow.py`
+- `codie/pages/__init__.py`
+- `codie/cli/user_deck.py`
+- `tests/test_pages_user_workflow_export.py`
+- `tests/test_cli_user_deck.py`
 - `docs/CODEX_CONTINUITY_HANDOFF.md`
 - `docs/NEXT_PHASE_CONTRACT.md`
 
 ## Public Functions / Classes Added
 
-None in latest packet. Documentation-only contract.
+Python page export functions and CLI export commands were added.
 
 ## Schema Impact
 
@@ -59,12 +65,12 @@ rg -n "should play|must include|correct card|breaks the format|secretly optimal|
 - GitHub remote is configured and Phase 12B was pushed.
 - CLI requires a local Codie database with card rows before deck import can resolve cards.
 - CLI export docs recommend `--output-root` for normal usage.
-- UI is fixture-backed only until Phase 12F exports page-model JSON.
+- UI is fixture-backed only until Phase 12G teaches it to load generated page-model JSON.
 - No local UI API exists yet by design.
 
 ## Recommended Next Packet
 
-Implement Phase 12F Static UI Page Model Export.
+Implement Phase 12G UI Fixture Loader / Generated Export Preview.
 
 Validation reference:
 
@@ -74,11 +80,13 @@ Validation reference:
 - `docs/PHASE12C_UI_SCAFFOLD_CONTRACT.md`
 - `docs/PHASE12D_MINIMAL_UI_SHELL_REPORT.md`
 - `docs/PHASE12E_READ_ONLY_UI_DATA_CONTRACT.md`
+- `docs/PHASE12F_STATIC_UI_PAGE_MODEL_EXPORT_CONTRACT.md`
+- `docs/PHASE12F_STATIC_UI_PAGE_MODEL_EXPORT_REPORT.md`
 
 Define:
 
 ```text
-Phase 12F - Static UI Page Model Export
+Phase 12G - UI Fixture Loader / Generated Export Preview
 ```
 
 Keep final recommendation generation separate until the Phase 8/10 boundaries are explicitly carried forward.
