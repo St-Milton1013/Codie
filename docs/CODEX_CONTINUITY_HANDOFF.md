@@ -12,7 +12,7 @@ Use the repository and this handoff as the source of truth. Do not rely on prior
 GitHub: https://github.com/St-Milton1013/Codie
 Local path: C:\Users\Main\Documents\Codex\2026-06-22\next-phase-contract-recommended-next-task
 Branch: main
-Latest pushed commit before Phase 12N closure: 9d18797 Add Phase 12M local report sharing guide
+Latest pushed commit before Phase 12O closure: e2e3a6a Add Phase 12N LAN preview contract
 ```
 
 ## Current Validation Baseline
@@ -20,7 +20,7 @@ Latest pushed commit before Phase 12N closure: 9d18797 Add Phase 12M local repor
 Latest full-suite result:
 
 ```text
-Ran 302 tests in 1.253s
+Ran 311 tests in 2.847s
 
 OK
 ```
@@ -91,6 +91,7 @@ Phase 12K PDF-Ready Share Bundle Output: PASS
 Phase 12L Optional Delivery Integrations Planning: PASS
 Phase 12M Delivery Usage Documentation: PASS
 Phase 12N Optional Local LAN Preview Contract: PASS
+Phase 12O Optional Local LAN Preview Implementation: PASS
 ```
 
 ## Recent Commits
@@ -238,7 +239,7 @@ Simulation evidence must not enter Evidence Stack unless constitution thresholds
 Preferred next move:
 
 ```text
-Phase 12O - Optional Local LAN Preview Implementation
+Phase 12P - Optional Outbound Delivery Contract
 ```
 
 Alternate next safe option:
@@ -282,12 +283,14 @@ docs/PHASE12M_DELIVERY_USAGE_DOCUMENTATION_REPORT.md
 docs/USER_GUIDE_LOCAL_REPORT_SHARING.md
 docs/PHASE12N_OPTIONAL_LOCAL_LAN_PREVIEW_CONTRACT.md
 docs/PHASE12N_OPTIONAL_LOCAL_LAN_PREVIEW_REPORT.md
+docs/PHASE12O_OPTIONAL_LOCAL_LAN_PREVIEW_IMPLEMENTATION_CONTRACT.md
+docs/PHASE12O_OPTIONAL_LOCAL_LAN_PREVIEW_IMPLEMENTATION_REPORT.md
 ```
 
 Next UI implementation packet:
 
 ```text
-Phase 12O - Optional Local LAN Preview Implementation
+Phase 12P - Optional Outbound Delivery Contract
 ```
 
 ## Known Caveats
@@ -302,7 +305,7 @@ Phase 12O - Optional Local LAN Preview Implementation
 - PDF-ready output is static HTML only; no PDF binary generation yet.
 - Delivery integrations are planning-only and disabled by default.
 - Local report sharing has a PowerShell-oriented usage guide.
-- Local LAN preview has a safety contract but no implementation yet.
+- Local LAN preview is implemented as selected-bundle read-only static serving.
 - No local UI API exists yet.
 - No simulator implementation exists yet.
 - Final recommendation output remains intentionally separate.

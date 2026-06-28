@@ -143,6 +143,49 @@ future local LAN URL, after a separate LAN-preview feature exists
 Current Codie does not start a local web server. LAN preview is a future
 optional feature and requires a separate contract.
 
+## Optional Local LAN Preview
+
+Codie can serve one existing share bundle through a local read-only preview
+server.
+
+Localhost-only preview:
+
+```powershell
+& $python -m codie.cli.user_deck serve-share-bundle `
+  --bundle-dir $bundle
+```
+
+The command prints JSON containing:
+
+```text
+bundle_dir
+host
+port
+url
+privacy_warning
+```
+
+Open the printed `url` from the same PC.
+
+LAN-visible preview requires an explicit host and opt-in flag:
+
+```powershell
+& $python -m codie.cli.user_deck serve-share-bundle `
+  --bundle-dir $bundle `
+  --host "0.0.0.0" `
+  --allow-lan
+```
+
+Only use LAN-visible preview on a trusted network. Anyone who can reach the
+bound host and port may be able to read the bundle files while the command is
+running.
+
+Stop the preview with:
+
+```text
+Ctrl+C
+```
+
 ## Troubleshooting
 
 If the command says an asset does not exist, check the report path:

@@ -12,6 +12,7 @@ from codie.db.bootstrap import bootstrap_database
 from codie.db.connection import connect
 from codie.db.repositories.core import CoreRepository
 from codie.db.repositories.user import UserRepository
+from codie.delivery import LocalPreviewConfig, LocalPreviewServer
 from codie.exports import (
     ShareBundleAsset,
     user_deck_comparison_export,
@@ -114,6 +115,19 @@ def build_parser() -> argparse.ArgumentParser:
         action="store_true",
         help="Do not write the print-friendly HTML entry.",
     )
+
+    serve_bundle = subparsers.add_parser(
+        "serve-share-bundle",
+        help="Serve one local share bundle directory until interrupted.",
+    )
+    serve_bundle.add_argument("--bundle-dir", required=True, help="Share bundle directory containing index.html.")
+    serve_bundle.add_argument("--host", default="127.0.0.1", help="Host to bind. Default: 127.0.0.1.")
+    serve_bundle.add_argument("--port", type=int, default=0, help="Port to bind. Default: 0 picks an available port.")
+    serve_bundle.add_argument(
+        "--allow-lan",
+        action="store_true",
+        help="Required when binding a LAN-visible host such as 0.0.0.0.",
+    )
     return parser
 
 
@@ -147,6 +161,8 @@ def main(argv: list[str] | None = None) -> int:
         result = _build_share_bundle(args)
         print(json.dumps(result, sort_keys=True))
         return 0
+    if args.command == "serve-share-bundle":
+        return _serve_share_bundle(args)
     parser.error(f"Unsupported command: {args.command}")
     return 2
 
@@ -309,6 +325,36 @@ def _build_share_bundle(args: argparse.Namespace) -> dict[str, Any]:
         "asset_paths": list(result.asset_paths),
         "qr_asset_path": result.qr_asset_path,
     }
+
+
+def _serve_share_bundle(args: argparse.Namespace) -> int:
+    config = LocalPreviewConfig(
+        bundle_dir=args.bundle_dir,
+        host=args.host,
+        port=args.port,
+        allow_lan=args.allow_lan,
+    )
+    server = LocalPreviewServer(config)
+    try:
+        print(
+            json.dumps(
+                {
+                    "bundle_dir": str(server.root),
+                    "host": server.host,
+                    "port": server.port,
+                    "url": server.url,
+                    "privacy_warning": "Serving this bundle exposes its files to clients that can reach the bound host and port.",
+                },
+                sort_keys=True,
+            ),
+            flush=True,
+        )
+        server.serve_forever()
+    except KeyboardInterrupt:
+        return 0
+    finally:
+        server.close()
+    return 0
 
 
 def _summary_to_dict(summary) -> dict[str, Any]:

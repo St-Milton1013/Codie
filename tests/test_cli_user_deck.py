@@ -7,7 +7,7 @@ from contextlib import redirect_stdout
 from io import StringIO
 from pathlib import Path
 
-from codie.cli.user_deck import main
+from codie.cli.user_deck import build_parser, main
 from codie.db.connection import connect
 from codie.db.repositories.core import CoreRepository
 from codie.db.repositories.user import UserRepository
@@ -314,6 +314,17 @@ class UserDeckCliTest(unittest.TestCase):
             self.assertEqual(result["asset_paths"], [str(root / "bundle" / "assets" / "comparison.md")])
             self.assertEqual(result["qr_asset_path"], str(root / "bundle" / "assets" / "bundle-entry-qr.png"))
             self.assertEqual(result["print_path"], str(root / "bundle" / "print.html"))
+
+    def test_serve_share_bundle_parser_defaults_to_localhost(self) -> None:
+        parser = build_parser()
+
+        args = parser.parse_args(["serve-share-bundle", "--bundle-dir", "bundle"])
+
+        self.assertEqual(args.command, "serve-share-bundle")
+        self.assertEqual(args.bundle_dir, "bundle")
+        self.assertEqual(args.host, "127.0.0.1")
+        self.assertEqual(args.port, 0)
+        self.assertFalse(args.allow_lan)
 
     def test_cli_module_has_no_provider_or_recommendation_imports(self) -> None:
         import codie.cli.user_deck as cli_module

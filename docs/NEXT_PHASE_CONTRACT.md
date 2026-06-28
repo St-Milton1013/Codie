@@ -1,14 +1,15 @@
 # Next Phase Contract
 
-Recommended next task: Phase 12O Optional Local LAN Preview Implementation
+Recommended next task: Phase 12P Optional Outbound Delivery Contract
 
 ## Current Status
 
-Phase 12N Optional Local LAN Preview Contract is implemented and validated.
+Phase 12O Optional Local LAN Preview Implementation is implemented and
+validated.
 
-Codie now has a safety contract for a future local LAN preview server: selected
-bundle only, read-only, explicit LAN binding, no providers/db/analytics/
-recommendations, and no hosted delivery.
+Codie can now serve one selected share bundle through a read-only local preview
+server. It defaults to `127.0.0.1`, requires explicit opt-in for LAN-visible
+binding, and has no provider/db/analytics/recommendation access.
 
 ## Files Created Or Modified In Latest Packet
 
@@ -35,6 +36,11 @@ recommendations, and no hosted delivery.
 - `docs/USER_GUIDE_LOCAL_REPORT_SHARING.md`
 - `docs/PHASE12N_OPTIONAL_LOCAL_LAN_PREVIEW_CONTRACT.md`
 - `docs/PHASE12N_OPTIONAL_LOCAL_LAN_PREVIEW_REPORT.md`
+- `docs/PHASE12O_OPTIONAL_LOCAL_LAN_PREVIEW_IMPLEMENTATION_CONTRACT.md`
+- `docs/PHASE12O_OPTIONAL_LOCAL_LAN_PREVIEW_IMPLEMENTATION_REPORT.md`
+- `codie/delivery/__init__.py`
+- `codie/delivery/local_preview.py`
+- `tests/test_delivery_local_preview.py`
 - `requirements.txt`
 - `codie/exports/share_bundle.py`
 - `codie/exports/__init__.py`
@@ -55,8 +61,8 @@ recommendations, and no hosted delivery.
 
 ## Public Functions / Classes Added
 
-No public code was added in Phase 12N. The optional local LAN preview server
-contract was documented.
+Local preview server functions and the `serve-share-bundle` CLI command were
+added.
 
 ## Schema Impact
 
@@ -100,12 +106,12 @@ rg -n "should play|must include|correct card|breaks the format|secretly optimal|
 - PDF-ready output is implemented as static print-friendly HTML.
 - Delivery integrations remain split into future opt-in packets with privacy gates.
 - Local report sharing has a PowerShell usage guide.
-- Local LAN preview has a safety contract but no implementation yet.
+- Local LAN preview is implemented as selected-bundle read-only static serving.
 - No local UI API exists yet by design.
 
 ## Recommended Next Packet
 
-Implement Phase 12O Optional Local LAN Preview Implementation.
+Implement Phase 12P Optional Outbound Delivery Contract.
 
 Validation reference:
 
@@ -134,11 +140,13 @@ Validation reference:
 - `docs/USER_GUIDE_LOCAL_REPORT_SHARING.md`
 - `docs/PHASE12N_OPTIONAL_LOCAL_LAN_PREVIEW_CONTRACT.md`
 - `docs/PHASE12N_OPTIONAL_LOCAL_LAN_PREVIEW_REPORT.md`
+- `docs/PHASE12O_OPTIONAL_LOCAL_LAN_PREVIEW_IMPLEMENTATION_CONTRACT.md`
+- `docs/PHASE12O_OPTIONAL_LOCAL_LAN_PREVIEW_IMPLEMENTATION_REPORT.md`
 
 Define:
 
 ```text
-Phase 12O - Optional Local LAN Preview Implementation
+Phase 12P - Optional Outbound Delivery Contract
 ```
 
 Keep final recommendation generation separate until the Phase 8/10 boundaries are explicitly carried forward.
