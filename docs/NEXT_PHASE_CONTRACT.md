@@ -1,14 +1,14 @@
 # Next Phase Contract
 
-Recommended next task: Phase 12L Optional Delivery Integrations Planning
+Recommended next task: Phase 12M Delivery Usage Documentation
 
 ## Current Status
 
-Phase 12K PDF-Ready Share Bundle Output is implemented and validated.
+Phase 12L Optional Delivery Integrations Planning is implemented and validated.
 
-Codie can now write a print-friendly `print.html` entry in local share bundles
-for browser Print / Save as PDF workflows, without adding a PDF dependency or
-remote conversion service.
+Codie now has a documented delivery decision framework: manual local transfer
+is recommended near-term, optional LAN preview requires a separate contract,
+and outbound delivery remains deferred pending credential and privacy rules.
 
 ## Files Created Or Modified In Latest Packet
 
@@ -28,6 +28,8 @@ remote conversion service.
 - `docs/PHASE12J_QR_CODE_ASSET_GENERATION_REPORT.md`
 - `docs/PHASE12K_PDF_READY_SHARE_BUNDLE_CONTRACT.md`
 - `docs/PHASE12K_PDF_READY_SHARE_BUNDLE_REPORT.md`
+- `docs/PHASE12L_OPTIONAL_DELIVERY_INTEGRATIONS_PLANNING_CONTRACT.md`
+- `docs/PHASE12L_OPTIONAL_DELIVERY_INTEGRATIONS_PLANNING_REPORT.md`
 - `requirements.txt`
 - `codie/exports/share_bundle.py`
 - `codie/exports/__init__.py`
@@ -48,8 +50,8 @@ remote conversion service.
 
 ## Public Functions / Classes Added
 
-PDF-ready static print view functions and the `build-share-bundle --no-print-entry`
-CLI option were added.
+No public code was added in Phase 12L. Delivery tiers, forbidden defaults, and
+future contracts were documented.
 
 ## Schema Impact
 
@@ -91,12 +93,12 @@ rg -n "should play|must include|correct card|breaks the format|secretly optimal|
 - Local report bundles can be built from existing export files.
 - QR generation is implemented as local PNG asset generation.
 - PDF-ready output is implemented as static print-friendly HTML.
-- PDF/mobile delivery work remains split into future packets with privacy gates.
+- Delivery integrations remain split into future opt-in packets with privacy gates.
 - No local UI API exists yet by design.
 
 ## Recommended Next Packet
 
-Implement Phase 12L Optional Delivery Integrations Planning.
+Implement Phase 12M Delivery Usage Documentation.
 
 Validation reference:
 
@@ -118,11 +120,13 @@ Validation reference:
 - `docs/PHASE12J_QR_CODE_ASSET_GENERATION_REPORT.md`
 - `docs/PHASE12K_PDF_READY_SHARE_BUNDLE_CONTRACT.md`
 - `docs/PHASE12K_PDF_READY_SHARE_BUNDLE_REPORT.md`
+- `docs/PHASE12L_OPTIONAL_DELIVERY_INTEGRATIONS_PLANNING_CONTRACT.md`
+- `docs/PHASE12L_OPTIONAL_DELIVERY_INTEGRATIONS_PLANNING_REPORT.md`
 
 Define:
 
 ```text
-Phase 12L - Optional Delivery Integrations Planning
+Phase 12M - Delivery Usage Documentation
 ```
 
 Keep final recommendation generation separate until the Phase 8/10 boundaries are explicitly carried forward.
@@ -141,6 +145,7 @@ Keep final recommendation generation separate until the Phase 8/10 boundaries ar
 - Do not make frontend fixtures private user deck data.
 - Do not add hosted/mobile sharing without a separate privacy contract.
 - Do not add hosted/mobile delivery integrations without an opt-in planning contract.
+- Do not add local LAN serving until Phase 12N/12O explicitly approves it.
 
 ## Required Phase Packet Shape
 
