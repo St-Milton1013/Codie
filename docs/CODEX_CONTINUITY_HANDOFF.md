@@ -12,7 +12,7 @@ Use the repository and this handoff as the source of truth. Do not rely on prior
 GitHub: https://github.com/St-Milton1013/Codie
 Local path: C:\Users\Main\Documents\Codex\2026-06-22\next-phase-contract-recommended-next-task
 Branch: main
-Latest pushed commit before Phase 12F closure: 702c3a9 Add Phase 12E UI data contract
+Latest pushed commit before Phase 12G closure: 799af4f Add Phase 12F static UI page model exports
 ```
 
 ## Current Validation Baseline
@@ -20,7 +20,7 @@ Latest pushed commit before Phase 12F closure: 702c3a9 Add Phase 12E UI data con
 Latest full-suite result:
 
 ```text
-Ran 290 tests in 0.812s
+Ran 290 tests in 0.791s
 
 OK
 ```
@@ -83,6 +83,7 @@ Phase 12C UI Scaffold Contract: PASS
 Phase 12D Minimal React/Vite Local UI Shell: PASS
 Phase 12E Read-Only Local UI Data Contract: PASS
 Phase 12F Static UI Page Model Export: PASS
+Phase 12G UI Fixture Loader / Generated Export Preview: PASS
 ```
 
 ## Recent Commits
@@ -230,7 +231,7 @@ Simulation evidence must not enter Evidence Stack unless constitution thresholds
 Preferred next move:
 
 ```text
-Phase 12G - UI Fixture Loader / Generated Export Preview
+Phase 12H - Local Report Share Bundle
 ```
 
 Alternate next safe option:
@@ -257,12 +258,14 @@ docs/PHASE12D_MINIMAL_UI_SHELL_REPORT.md
 docs/PHASE12E_READ_ONLY_UI_DATA_CONTRACT.md
 docs/PHASE12F_STATIC_UI_PAGE_MODEL_EXPORT_CONTRACT.md
 docs/PHASE12F_STATIC_UI_PAGE_MODEL_EXPORT_REPORT.md
+docs/PHASE12G_UI_FIXTURE_LOADER_CONTRACT.md
+docs/PHASE12G_UI_FIXTURE_LOADER_REPORT.md
 ```
 
 Next UI implementation packet:
 
 ```text
-Phase 12G - UI Fixture Loader / Generated Export Preview
+Phase 12H - Local Report Share Bundle
 ```
 
 ## Known Caveats
@@ -270,7 +273,7 @@ Phase 12G - UI Fixture Loader / Generated Export Preview
 - Hareruya live access can hit AWS WAF; treat Hareruya as regional enrichment, not critical path.
 - CLI requires a local Codie SQLite database with card rows before user deck import can resolve cards.
 - CLI export docs recommend `--output-root` for normal usage.
-- Minimal fixture-backed UI exists under `ui/`.
+- Minimal static-export-backed UI exists under `ui/`.
 - No local UI API exists yet.
 - No simulator implementation exists yet.
 - Final recommendation output remains intentionally separate.

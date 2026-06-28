@@ -22,3 +22,10 @@ export interface UserWorkflowPageModel {
   rows: readonly UserWorkflowTableRow[];
   empty_state: string | null;
 }
+
+export interface PageModelExport {
+  page_model_version: "1";
+  exported_at: string;
+  source: Record<string, unknown>;
+  page_model: UserWorkflowPageModel;
+}

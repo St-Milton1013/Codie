@@ -1,13 +1,16 @@
 # Next Phase Contract
 
-Recommended next task: Phase 12G UI Fixture Loader / Generated Export Preview
+Recommended next task: Phase 12H Local Report Share Bundle
 
 ## Current Status
 
-Phase 12F Static UI Page Model Export is implemented and validated.
+Phase 12G UI Fixture Loader / Generated Export Preview is implemented and
+validated.
 
-Python can export saved-analysis list/detail page models as deterministic JSON
-files for the UI without letting frontend code access SQLite.
+The UI can now load Phase 12F page-model export envelopes from static JSON
+under `ui/public/page-models/`, with fixture fallback and visible source
+status. Frontend code still does not access SQLite, providers, analytics, or
+recommendations.
 
 ## Files Created Or Modified In Latest Packet
 
@@ -17,17 +20,25 @@ files for the UI without letting frontend code access SQLite.
 - `docs/PHASE12E_READ_ONLY_UI_DATA_CONTRACT.md`
 - `docs/PHASE12F_STATIC_UI_PAGE_MODEL_EXPORT_CONTRACT.md`
 - `docs/PHASE12F_STATIC_UI_PAGE_MODEL_EXPORT_REPORT.md`
+- `docs/PHASE12G_UI_FIXTURE_LOADER_CONTRACT.md`
+- `docs/PHASE12G_UI_FIXTURE_LOADER_REPORT.md`
 - `codie/pages/export_user_workflow.py`
 - `codie/pages/__init__.py`
 - `codie/cli/user_deck.py`
 - `tests/test_pages_user_workflow_export.py`
 - `tests/test_cli_user_deck.py`
+- `ui/public/page-models/saved-analysis-list.json`
+- `ui/public/page-models/saved-analysis-detail.json`
+- `ui/src/data/pageModelLoader.ts`
+- `ui/src/types/userWorkflow.ts`
+- `ui/src/App.tsx`
+- `ui/src/styles.css`
 - `docs/CODEX_CONTINUITY_HANDOFF.md`
 - `docs/NEXT_PHASE_CONTRACT.md`
 
 ## Public Functions / Classes Added
 
-Python page export functions and CLI export commands were added.
+Static UI export loading types/functions were added.
 
 ## Schema Impact
 
@@ -65,12 +76,12 @@ rg -n "should play|must include|correct card|breaks the format|secretly optimal|
 - GitHub remote is configured and Phase 12B was pushed.
 - CLI requires a local Codie database with card rows before deck import can resolve cards.
 - CLI export docs recommend `--output-root` for normal usage.
-- UI is fixture-backed only until Phase 12G teaches it to load generated page-model JSON.
+- UI loads static generated page-model JSON with fixture fallback.
 - No local UI API exists yet by design.
 
 ## Recommended Next Packet
 
-Implement Phase 12G UI Fixture Loader / Generated Export Preview.
+Implement Phase 12H Local Report Share Bundle.
 
 Validation reference:
 
@@ -82,11 +93,13 @@ Validation reference:
 - `docs/PHASE12E_READ_ONLY_UI_DATA_CONTRACT.md`
 - `docs/PHASE12F_STATIC_UI_PAGE_MODEL_EXPORT_CONTRACT.md`
 - `docs/PHASE12F_STATIC_UI_PAGE_MODEL_EXPORT_REPORT.md`
+- `docs/PHASE12G_UI_FIXTURE_LOADER_CONTRACT.md`
+- `docs/PHASE12G_UI_FIXTURE_LOADER_REPORT.md`
 
 Define:
 
 ```text
-Phase 12G - UI Fixture Loader / Generated Export Preview
+Phase 12H - Local Report Share Bundle
 ```
 
 Keep final recommendation generation separate until the Phase 8/10 boundaries are explicitly carried forward.
@@ -103,6 +116,7 @@ Keep final recommendation generation separate until the Phase 8/10 boundaries ar
 - Do not let UI access SQLite directly.
 - Do not add a local API server without a contract.
 - Do not make frontend fixtures private user deck data.
+- Do not add hosted/mobile sharing without a separate privacy contract.
 
 ## Required Phase Packet Shape
 
