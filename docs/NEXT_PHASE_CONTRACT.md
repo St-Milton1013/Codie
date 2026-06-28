@@ -1,14 +1,14 @@
 # Next Phase Contract
 
-Recommended next task: Phase 12J QR Code Asset Generation
+Recommended next task: Phase 12K PDF-Ready Share Bundle Output
 
 ## Current Status
 
-Phase 12I Share Bundle QR/PDF Planning Contract is implemented and validated.
+Phase 12J QR Code Asset Generation is implemented and validated.
 
-Codie now has a documented split for phone-friendly report access:
-QR generation, PDF-ready output, and optional delivery integrations must be
-implemented as separate packets with explicit privacy and dependency gates.
+Codie can now optionally generate a local QR PNG for an explicit share bundle
+entry target. The QR target is recorded in the manifest and report contents are
+not encoded in the QR payload.
 
 ## Files Created Or Modified In Latest Packet
 
@@ -24,6 +24,9 @@ implemented as separate packets with explicit privacy and dependency gates.
 - `docs/PHASE12H_LOCAL_REPORT_SHARE_BUNDLE_REPORT.md`
 - `docs/PHASE12I_SHARE_BUNDLE_QR_PDF_PLANNING_CONTRACT.md`
 - `docs/PHASE12I_SHARE_BUNDLE_QR_PDF_PLANNING_REPORT.md`
+- `docs/PHASE12J_QR_CODE_ASSET_GENERATION_CONTRACT.md`
+- `docs/PHASE12J_QR_CODE_ASSET_GENERATION_REPORT.md`
+- `requirements.txt`
 - `codie/exports/share_bundle.py`
 - `codie/exports/__init__.py`
 - `tests/test_exports_share_bundle.py`
@@ -43,8 +46,8 @@ implemented as separate packets with explicit privacy and dependency gates.
 
 ## Public Functions / Classes Added
 
-No public code was added in Phase 12I. The QR/PDF sharing split and future
-contracts were documented.
+QR generation functions and the `build-share-bundle --qr-target` CLI option
+were added.
 
 ## Schema Impact
 
@@ -84,12 +87,13 @@ rg -n "should play|must include|correct card|breaks the format|secretly optimal|
 - CLI export docs recommend `--output-root` for normal usage.
 - UI loads static generated page-model JSON with fixture fallback.
 - Local report bundles can be built from existing export files.
-- QR/PDF/mobile delivery work is split into future packets with privacy gates.
+- QR generation is implemented as local PNG asset generation.
+- PDF/mobile delivery work remains split into future packets with privacy gates.
 - No local UI API exists yet by design.
 
 ## Recommended Next Packet
 
-Implement Phase 12J QR Code Asset Generation.
+Implement Phase 12K PDF-Ready Share Bundle Output.
 
 Validation reference:
 
@@ -107,11 +111,13 @@ Validation reference:
 - `docs/PHASE12H_LOCAL_REPORT_SHARE_BUNDLE_REPORT.md`
 - `docs/PHASE12I_SHARE_BUNDLE_QR_PDF_PLANNING_CONTRACT.md`
 - `docs/PHASE12I_SHARE_BUNDLE_QR_PDF_PLANNING_REPORT.md`
+- `docs/PHASE12J_QR_CODE_ASSET_GENERATION_CONTRACT.md`
+- `docs/PHASE12J_QR_CODE_ASSET_GENERATION_REPORT.md`
 
 Define:
 
 ```text
-Phase 12J - QR Code Asset Generation
+Phase 12K - PDF-Ready Share Bundle Output
 ```
 
 Keep final recommendation generation separate until the Phase 8/10 boundaries are explicitly carried forward.
@@ -129,7 +135,7 @@ Keep final recommendation generation separate until the Phase 8/10 boundaries ar
 - Do not add a local API server without a contract.
 - Do not make frontend fixtures private user deck data.
 - Do not add hosted/mobile sharing without a separate privacy contract.
-- Do not add PDF generation or delivery integrations during QR implementation.
+- Do not add hosted/mobile delivery integrations during PDF-ready implementation.
 
 ## Required Phase Packet Shape
 

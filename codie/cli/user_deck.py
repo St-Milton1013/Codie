@@ -105,6 +105,10 @@ def build_parser() -> argparse.ArgumentParser:
     )
     share_bundle.add_argument("--output-dir", required=True, help="Bundle output directory.")
     share_bundle.add_argument("--output-root", help="Optional root directory that output path must stay inside.")
+    share_bundle.add_argument(
+        "--qr-target",
+        help="Optional explicit path or URL to encode as a local QR PNG in the bundle.",
+    )
     return parser
 
 
@@ -289,12 +293,14 @@ def _build_share_bundle(args: argparse.Namespace) -> dict[str, Any]:
         assets=assets,
         output_dir=args.output_dir,
         output_root=args.output_root,
+        qr_target=args.qr_target,
     )
     return {
         "output_dir": result.output_dir,
         "index_path": result.index_path,
         "manifest_path": result.manifest_path,
         "asset_paths": list(result.asset_paths),
+        "qr_asset_path": result.qr_asset_path,
     }
 
 

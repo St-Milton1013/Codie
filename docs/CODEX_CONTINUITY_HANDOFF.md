@@ -12,7 +12,7 @@ Use the repository and this handoff as the source of truth. Do not rely on prior
 GitHub: https://github.com/St-Milton1013/Codie
 Local path: C:\Users\Main\Documents\Codex\2026-06-22\next-phase-contract-recommended-next-task
 Branch: main
-Latest pushed commit before Phase 12I closure: 62e5fbd Add Phase 12H local share bundles
+Latest pushed commit before Phase 12J closure: bac2a6c Add Phase 12I QR PDF sharing plan
 ```
 
 ## Current Validation Baseline
@@ -20,7 +20,7 @@ Latest pushed commit before Phase 12I closure: 62e5fbd Add Phase 12H local share
 Latest full-suite result:
 
 ```text
-Ran 296 tests in 0.852s
+Ran 299 tests in 1.278s
 
 OK
 ```
@@ -86,6 +86,7 @@ Phase 12F Static UI Page Model Export: PASS
 Phase 12G UI Fixture Loader / Generated Export Preview: PASS
 Phase 12H Local Report Share Bundle: PASS
 Phase 12I Share Bundle QR/PDF Planning Contract: PASS
+Phase 12J QR Code Asset Generation: PASS
 ```
 
 ## Recent Commits
@@ -233,7 +234,7 @@ Simulation evidence must not enter Evidence Stack unless constitution thresholds
 Preferred next move:
 
 ```text
-Phase 12J - QR Code Asset Generation
+Phase 12K - PDF-Ready Share Bundle Output
 ```
 
 Alternate next safe option:
@@ -266,12 +267,14 @@ docs/PHASE12H_LOCAL_REPORT_SHARE_BUNDLE_CONTRACT.md
 docs/PHASE12H_LOCAL_REPORT_SHARE_BUNDLE_REPORT.md
 docs/PHASE12I_SHARE_BUNDLE_QR_PDF_PLANNING_CONTRACT.md
 docs/PHASE12I_SHARE_BUNDLE_QR_PDF_PLANNING_REPORT.md
+docs/PHASE12J_QR_CODE_ASSET_GENERATION_CONTRACT.md
+docs/PHASE12J_QR_CODE_ASSET_GENERATION_REPORT.md
 ```
 
 Next UI implementation packet:
 
 ```text
-Phase 12J - QR Code Asset Generation
+Phase 12K - PDF-Ready Share Bundle Output
 ```
 
 ## Known Caveats
@@ -282,6 +285,7 @@ Phase 12J - QR Code Asset Generation
 - Minimal static-export-backed UI exists under `ui/`.
 - Static local report bundles can be built from existing export files.
 - QR/PDF/mobile report sharing has a planning contract and must remain opt-in.
+- QR generation is local-only and encodes explicit targets only.
 - No local UI API exists yet.
 - No simulator implementation exists yet.
 - Final recommendation output remains intentionally separate.

@@ -299,6 +299,8 @@ class UserDeckCliTest(unittest.TestCase):
                         str(root / "bundle"),
                         "--output-root",
                         str(root),
+                        "--qr-target",
+                        "http://127.0.0.1:4173/index.html",
                     ]
                 )
 
@@ -307,7 +309,9 @@ class UserDeckCliTest(unittest.TestCase):
             self.assertTrue((root / "bundle" / "index.html").exists())
             self.assertTrue((root / "bundle" / "manifest.json").exists())
             self.assertTrue((root / "bundle" / "assets" / "comparison.md").exists())
+            self.assertTrue((root / "bundle" / "assets" / "bundle-entry-qr.png").exists())
             self.assertEqual(result["asset_paths"], [str(root / "bundle" / "assets" / "comparison.md")])
+            self.assertEqual(result["qr_asset_path"], str(root / "bundle" / "assets" / "bundle-entry-qr.png"))
 
     def test_cli_module_has_no_provider_or_recommendation_imports(self) -> None:
         import codie.cli.user_deck as cli_module

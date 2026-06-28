@@ -21,6 +21,7 @@ from .share_bundle import (
     build_share_bundle_manifest,
     share_bundle_index_html,
     write_local_share_bundle,
+    write_qr_png,
 )
 from .user_deck_reports import (
     UserDeckComparisonWriteResult,
@@ -53,5 +54,6 @@ __all__ = [
     "write_json_export",
     "write_markdown_export",
     "write_local_share_bundle",
+    "write_qr_png",
     "write_user_deck_comparison_exports",
 ]
