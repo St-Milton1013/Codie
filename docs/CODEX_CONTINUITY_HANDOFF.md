@@ -87,6 +87,12 @@ cfabf94 Add Phase 10 user deck workflow checkpoint
 
 ## Current Outside Validation Packets
 
+Use this combined validation prompt:
+
+```text
+docs/OUTSIDE_VALIDATION_PHASE11_12_PROMPT.md
+```
+
 Send Phase 11:
 
 ```text

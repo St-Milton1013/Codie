@@ -51,6 +51,7 @@ Outside Validation - Phase 11/12, then Phase 12C UI Scaffold Contract.
 
 First send:
 
+- `docs/OUTSIDE_VALIDATION_PHASE11_12_PROMPT.md`
 - `docs/CODEX_CONTINUITY_HANDOFF.md`
 - `docs/CHECKPOINT_PHASE11_USER_WORKFLOW_RETRIEVAL_REPORT.md`
 - `docs/PHASE11_PLANNING_CONTRACT.md`
