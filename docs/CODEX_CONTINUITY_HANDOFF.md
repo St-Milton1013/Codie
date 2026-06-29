@@ -334,6 +334,7 @@ Phase 13 simulator contracts or a new UI/API contract is explicitly selected.
 - Simulator contract refresh is complete; next simulator packet is pure core models.
 - cEDHData reference files were inspected locally only; do not copy the JavaScript bundle or full card catalog into Codie.
 - Simulator Card Definition Manager roadmap patch is accepted; implement it after core models and before action search.
+- cEDHData public asset metadata and local reference hashes are recorded in docs/CEDHDATA_SIMULATOR_REFERENCE_CAPTURE_MANIFEST.md.
 - Final recommendation output remains intentionally separate.
 
 ## Quality Gate

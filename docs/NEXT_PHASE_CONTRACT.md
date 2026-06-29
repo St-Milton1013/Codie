@@ -50,6 +50,7 @@ locally only and were not copied into Codie.
 - `docs/PHASE13_SIMULATOR_CONTRACT_REFRESH_REPORT.md`
 - `docs/PHASE13A_CEDHDATA_REFERENCE_EXTRACTION_AND_CORE_MODEL_DESIGN.md`
 - `docs/PHASE13A_CEDHDATA_REFERENCE_EXTRACTION_AND_CORE_MODEL_DESIGN_REPORT.md`
+- `docs/CEDHDATA_SIMULATOR_REFERENCE_CAPTURE_MANIFEST.md`
 - `codie/exports/share_bundle_zip.py`
 - `codie/delivery/__init__.py`
 - `codie/delivery/local_preview.py`
@@ -128,6 +129,7 @@ rg -n "should play|must include|correct card|breaks the format|secretly optimal|
 - Challenge Mode and line review need future schema contracts before implementation.
 - cEDHData reference files remain local research inputs only; do not copy the JavaScript bundle or full card catalog into Codie.
 - Simulator Card Definition Manager is accepted as a future roadmap patch and should land after core models, before action search.
+- cEDHData public asset metadata and local reference hashes are recorded; full assets remain outside the repo.
 - No local UI API exists yet by design.
 
 ## Recommended Next Packet
