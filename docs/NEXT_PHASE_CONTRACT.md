@@ -127,6 +127,7 @@ rg -n "should play|must include|correct card|breaks the format|secretly optimal|
 - Simulator schema currently stores reproducibility metadata implicitly through JSON payload fields; explicit seed/version columns should be reviewed before broad simulator usage.
 - Challenge Mode and line review need future schema contracts before implementation.
 - cEDHData reference files remain local research inputs only; do not copy the JavaScript bundle or full card catalog into Codie.
+- Simulator Card Definition Manager is accepted as a future roadmap patch and should land after core models, before action search.
 - No local UI API exists yet by design.
 
 ## Recommended Next Packet
@@ -174,6 +175,7 @@ Validation reference:
 - `docs/PHASE13_SIMULATOR_CONTRACT_REFRESH_REPORT.md`
 - `docs/PHASE13A_CEDHDATA_REFERENCE_EXTRACTION_AND_CORE_MODEL_DESIGN.md`
 - `docs/PHASE13A_CEDHDATA_REFERENCE_EXTRACTION_AND_CORE_MODEL_DESIGN_REPORT.md`
+- `docs/ROADMAP_PATCH_SIMULATOR_CARD_DEFINITION_MANAGER.md`
 
 Define:
 
@@ -204,6 +206,7 @@ are explicitly carried forward.
 - Do not implement simulator search before core models are accepted.
 - Do not implement Challenge Mode before the core simulator trace model exists.
 - Do not copy cEDHData source code or full reference payloads into Codie.
+- Do not make the simulator model every card; use target relevance and unsupported reporting.
 
 ## Required Phase Packet Shape
 

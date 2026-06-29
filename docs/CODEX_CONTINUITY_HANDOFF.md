@@ -333,6 +333,7 @@ Phase 13 simulator contracts or a new UI/API contract is explicitly selected.
 - No simulator implementation exists yet.
 - Simulator contract refresh is complete; next simulator packet is pure core models.
 - cEDHData reference files were inspected locally only; do not copy the JavaScript bundle or full card catalog into Codie.
+- Simulator Card Definition Manager roadmap patch is accepted; implement it after core models and before action search.
 - Final recommendation output remains intentionally separate.
 
 ## Quality Gate
