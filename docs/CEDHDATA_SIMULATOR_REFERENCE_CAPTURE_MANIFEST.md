@@ -116,11 +116,82 @@ Captured trace fixtures:
 
 ```text
 reference/cedhdata_simulator/fixtures/success_trace_ad_nauseam_t1_win1.json
+reference/cedhdata_simulator/fixtures/rhystic-traces-ad-nauseam-2026-06-29T23-05-19-764Z.json
 ```
 
-This fixture records a visible cEDHData success line for Ad Nauseam by turn 1.
-It is reference material only and must not be treated as Codie logic or
-tournament evidence.
+The first fixture records a visible cEDHData success line for Ad Nauseam by
+turn 1.
+
+The raw trace export contains:
+
+```text
+version
+exportedAt
+traceLimit
+traceCount
+activeFilter
+run
+progress
+traces
+```
+
+Observed run fields:
+
+```text
+startedAt
+target
+targetCardId
+zone
+turn
+games
+minMull
+mulliganMode
+compareMulliganModes
+ultraHighPrecision
+replacementCount
+```
+
+Observed progress fields:
+
+```text
+engineMode
+gamesCompleted
+targetGames
+wins
+losses
+winRate
+marginOfError
+avgMulligansPerWin
+elapsedMs
+warnings
+missingCards
+cardHistogram
+```
+
+Observed trace item fields:
+
+```text
+gameNum
+mode
+hand
+trace
+```
+
+Observed action fields:
+
+```text
+turn
+description
+cardId
+actionType
+```
+
+The raw export captured two winning traces for Ad Nauseam by turn 1 and one
+unsupported-card warning for `Sticker cards`. cEDHData did not expose failed
+action traces in the captured UI flow.
+
+These fixtures are reference material only and must not be treated as Codie
+logic or tournament evidence.
 
 Preferred future filenames outside the repo:
 

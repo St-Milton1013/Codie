@@ -1,0 +1,279 @@
+{
+  "version": 1,
+  "exportedAt": "2026-06-29T23:05:19.764Z",
+  "traceLimit": 5000,
+  "traceCount": 2,
+  "activeFilter": null,
+  "run": {
+    "startedAt": "2026-06-29T22:25:37.415Z",
+    "target": "Ad Nauseam",
+    "targetCardId": "ad_nauseam",
+    "zone": "stack",
+    "turn": 1,
+    "games": 1000,
+    "minMull": 7,
+    "mulliganMode": "policy",
+    "compareMulliganModes": false,
+    "ultraHighPrecision": false,
+    "replacementCount": 0
+  },
+  "progress": {
+    "engineMode": "policy",
+    "gamesCompleted": 1000,
+    "targetGames": 1000,
+    "wins": 2,
+    "losses": 998,
+    "winRate": 0.002,
+    "marginOfError": 0.0027690853363520596,
+    "avgMulligansPerWin": 0.5,
+    "elapsedMs": 2713,
+    "warnings": [
+      "Unknown card (will be treated as blank): \"Sticker cards\" (id: \"sticker_cards\")"
+    ],
+    "missingCards": [
+      {
+        "id": "sticker_cards",
+        "name": "Sticker cards"
+      }
+    ],
+    "cardHistogram": [
+      {
+        "id": "dark_ritual",
+        "count": 2,
+        "pct": 100
+      },
+      {
+        "id": "mana_vault",
+        "count": 2,
+        "pct": 100
+      },
+      {
+        "id": "ad_nauseam",
+        "count": 2,
+        "pct": 100
+      },
+      {
+        "id": "mox_diamond",
+        "count": 1,
+        "pct": 50
+      },
+      {
+        "id": "demonic_consultation",
+        "count": 1,
+        "pct": 50
+      },
+      {
+        "id": "glimmervoid",
+        "count": 1,
+        "pct": 50
+      },
+      {
+        "id": "mox_opal",
+        "count": 1,
+        "pct": 50
+      },
+      {
+        "id": "scrubland",
+        "count": 1,
+        "pct": 50
+      },
+      {
+        "id": "cabal_ritual",
+        "count": 1,
+        "pct": 50
+      }
+    ]
+  },
+  "traces": [
+    {
+      "gameNum": 1,
+      "mode": "policy",
+      "hand": [
+        "dark_ritual",
+        "final_fortune",
+        "cabal_ritual",
+        "mana_vault",
+        "scrubland",
+        "ad_nauseam",
+        "ancient_tomb"
+      ],
+      "trace": [
+        {
+          "turn": 1,
+          "description": "Opening draw: Mox Opal",
+          "cardId": "mox_opal"
+        },
+        {
+          "turn": 1,
+          "description": "Cast Mox Opal",
+          "cardId": "mox_opal",
+          "actionType": "cast_spell"
+        },
+        {
+          "turn": 1,
+          "description": "Resolve Mox Opal",
+          "cardId": "mox_opal",
+          "actionType": "resolve_stack"
+        },
+        {
+          "turn": 1,
+          "description": "Play Scrubland",
+          "cardId": "scrubland",
+          "actionType": "play_land"
+        },
+        {
+          "turn": 1,
+          "description": "Tap Scrubland → B",
+          "cardId": "scrubland",
+          "actionType": "tap_for_mana"
+        },
+        {
+          "turn": 1,
+          "description": "Cast Dark Ritual",
+          "cardId": "dark_ritual",
+          "actionType": "cast_spell"
+        },
+        {
+          "turn": 1,
+          "description": "Resolve Dark Ritual → BBB",
+          "cardId": "dark_ritual",
+          "actionType": "resolve_stack"
+        },
+        {
+          "turn": 1,
+          "description": "Cast Cabal Ritual",
+          "cardId": "cabal_ritual",
+          "actionType": "cast_spell"
+        },
+        {
+          "turn": 1,
+          "description": "Resolve Cabal Ritual → BBB",
+          "cardId": "cabal_ritual",
+          "actionType": "resolve_stack"
+        },
+        {
+          "turn": 1,
+          "description": "Cast Mana Vault",
+          "cardId": "mana_vault",
+          "actionType": "cast_spell"
+        },
+        {
+          "turn": 1,
+          "description": "Resolve Mana Vault",
+          "cardId": "mana_vault",
+          "actionType": "resolve_stack"
+        },
+        {
+          "turn": 1,
+          "description": "Tap Mana Vault → CCC",
+          "cardId": "mana_vault",
+          "actionType": "tap_for_mana"
+        },
+        {
+          "turn": 1,
+          "description": "Cast Ad Nauseam",
+          "cardId": "ad_nauseam",
+          "actionType": "cast_spell"
+        }
+      ]
+    },
+    {
+      "gameNum": 2,
+      "mode": "policy",
+      "hand": [
+        "flamescroll_celebrant",
+        "glimmervoid",
+        "exotic_orchard",
+        "pact_of_negation",
+        "dark_ritual",
+        "ad_nauseam",
+        "mox_diamond"
+      ],
+      "trace": [
+        {
+          "turn": 1,
+          "description": "Opening draw: Demonic Consultation",
+          "cardId": "demonic_consultation"
+        },
+        {
+          "turn": 1,
+          "description": "Cast Mox Diamond (discard exotic_orchard)",
+          "cardId": "mox_diamond",
+          "actionType": "cast_spell"
+        },
+        {
+          "turn": 1,
+          "description": "Resolve Mox Diamond",
+          "cardId": "mox_diamond",
+          "actionType": "resolve_stack"
+        },
+        {
+          "turn": 1,
+          "description": "Tap Mox Diamond → B",
+          "cardId": "mox_diamond",
+          "actionType": "tap_for_mana"
+        },
+        {
+          "turn": 1,
+          "description": "Cast Dark Ritual",
+          "cardId": "dark_ritual",
+          "actionType": "cast_spell"
+        },
+        {
+          "turn": 1,
+          "description": "Resolve Dark Ritual → BBB",
+          "cardId": "dark_ritual",
+          "actionType": "resolve_stack"
+        },
+        {
+          "turn": 1,
+          "description": "Cast Demonic Consultation",
+          "cardId": "demonic_consultation",
+          "actionType": "cast_spell"
+        },
+        {
+          "turn": 1,
+          "description": "Resolve Demonic Consultation → fetch mana_vault",
+          "cardId": "demonic_consultation",
+          "actionType": "resolve_stack"
+        },
+        {
+          "turn": 1,
+          "description": "Cast Mana Vault",
+          "cardId": "mana_vault",
+          "actionType": "cast_spell"
+        },
+        {
+          "turn": 1,
+          "description": "Resolve Mana Vault",
+          "cardId": "mana_vault",
+          "actionType": "resolve_stack"
+        },
+        {
+          "turn": 1,
+          "description": "Tap Mana Vault → CCC",
+          "cardId": "mana_vault",
+          "actionType": "tap_for_mana"
+        },
+        {
+          "turn": 1,
+          "description": "Play Glimmervoid",
+          "cardId": "glimmervoid",
+          "actionType": "play_land"
+        },
+        {
+          "turn": 1,
+          "description": "Tap Glimmervoid → B",
+          "cardId": "glimmervoid",
+          "actionType": "tap_for_mana"
+        },
+        {
+          "turn": 1,
+          "description": "Cast Ad Nauseam",
+          "cardId": "ad_nauseam",
+          "actionType": "cast_spell"
+        }
+      ]
+    }
+  ]
+}
