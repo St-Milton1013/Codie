@@ -20,7 +20,7 @@ Latest pushed commit before local Phase 13 work: 1cfccba Add Phase 13 simulator 
 Latest full-suite result:
 
 ```text
-Ran 355 tests in 2.499s
+Ran 355 tests in 2.554s
 
 OK (skipped=1)
 ```
@@ -104,6 +104,7 @@ Phase 13C Simulator Card Definition Manager Contract: PASS
 Phase 13D Simulator Card Definition Manager Implementation: PASS
 Phase 13E Deck And Target Parser Contract: PASS
 Phase 13F Deck And Target Parser Implementation: PASS
+Phase 13G Seeded Shuffle And Opening Hand Contract: PASS
 ```
 
 ## Recent Commits
@@ -251,13 +252,13 @@ Simulation evidence must not enter Evidence Stack unless constitution thresholds
 Preferred next move:
 
 ```text
-Phase 13G - Seeded Shuffle And Opening Hand Contract
+Phase 13H - Seeded Shuffle And Opening Hand Implementation
 ```
 
 Alternate next safe option:
 
 ```text
-Phase 13H - Seeded Shuffle And Opening Hand Implementation
+Phase 13I - Mulligan Policy Contract
 ```
 
 Avoid starting:
@@ -317,6 +318,8 @@ docs/PHASE13D_SIMULATOR_CARD_DEFINITION_MANAGER_IMPLEMENTATION_REPORT.md
 docs/PHASE13E_DECK_AND_TARGET_PARSER_CONTRACT.md
 docs/PHASE13E_DECK_AND_TARGET_PARSER_CONTRACT_REPORT.md
 docs/PHASE13F_DECK_AND_TARGET_PARSER_IMPLEMENTATION_REPORT.md
+docs/PHASE13G_SEEDED_SHUFFLE_AND_OPENING_HAND_CONTRACT.md
+docs/PHASE13G_SEEDED_SHUFFLE_AND_OPENING_HAND_CONTRACT_REPORT.md
 ```
 
 Next UI implementation packet:
@@ -352,9 +355,10 @@ Phase 13 simulator contracts or a new UI/API contract is explicitly selected.
   in-memory only and does not execute card actions.
 - Deck and target parser contract is complete.
 - Deck and target parser implementation is complete.
-- Next packet should define deterministic seeded shuffle and opening-hand
-  generation before mulligan policy, target search, action execution, or
-  Challenge Mode.
+- Seeded shuffle and opening-hand contract is complete.
+- Next packet should implement deterministic library expansion, seeded shuffle,
+  opening-hand drawing, and hand identity before mulligan policy, target search,
+  action execution, or Challenge Mode.
 - cEDHData public asset metadata and local reference hashes are recorded in docs/CEDHDATA_SIMULATOR_REFERENCE_CAPTURE_MANIFEST.md.
 - Final recommendation output remains intentionally separate.
 

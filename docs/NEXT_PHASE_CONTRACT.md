@@ -1,16 +1,15 @@
 # Next Phase Contract
 
-Recommended next task: Phase 13G Seeded Shuffle And Opening Hand Contract
+Recommended next task: Phase 13H Seeded Shuffle And Opening Hand Implementation
 
 ## Current Status
 
-Phase 13F Deck And Target Parser Implementation is implemented and
+Phase 13G Seeded Shuffle And Opening Hand Contract is implemented and
 validated.
 
-Codie now has pure in-memory parsing from deck text/rows and target fields into
-`SimulationDeck` and `SimulationTargetCondition`, including parse issue
-reporting, ignored section handling, unresolved-card preservation, and stable
-deck hashing.
+Codie now has a contract for deterministic library expansion, seeded shuffle,
+opening-hand drawing, hand identity, and reproducibility checks before any
+mulligan, target search, action execution, persistence, or Challenge Mode work.
 
 ## Files Created Or Modified In Latest Packet
 
@@ -70,6 +69,8 @@ deck hashing.
 - `tests/fixtures/probability_engine/deck_parser/moxfield_plaintext_deck.txt`
 - `tests/fixtures/probability_engine/deck_parser/malformed_deck.txt`
 - `docs/PHASE13F_DECK_AND_TARGET_PARSER_IMPLEMENTATION_REPORT.md`
+- `docs/PHASE13G_SEEDED_SHUFFLE_AND_OPENING_HAND_CONTRACT.md`
+- `docs/PHASE13G_SEEDED_SHUFFLE_AND_OPENING_HAND_CONTRACT_REPORT.md`
 - `codie/probability_engine/__init__.py`
 - `codie/probability_engine/models.py`
 - `tests/test_probability_engine_models.py`
@@ -99,14 +100,7 @@ deck hashing.
 ## Public Functions / Classes Added
 
 ```text
-ParsedDeckInput
-ParsedTargetInput
-DeckParseIssue
-parse_simulation_deck_text
-parse_simulation_deck_rows
-parse_target_condition
-build_simulation_deck
-stable_deck_hash
+None. Phase 13G is contract-only.
 ```
 
 ## Schema Impact
@@ -164,7 +158,7 @@ rg -n "should play|must include|correct card|breaks the format|secretly optimal|
 
 ## Recommended Next Packet
 
-Write Phase 13G Seeded Shuffle And Opening Hand Contract.
+Implement Phase 13H Seeded Shuffle And Opening Hand Implementation.
 
 Validation reference:
 
@@ -216,17 +210,19 @@ Validation reference:
 - `docs/PHASE13E_DECK_AND_TARGET_PARSER_CONTRACT.md`
 - `docs/PHASE13E_DECK_AND_TARGET_PARSER_CONTRACT_REPORT.md`
 - `docs/PHASE13F_DECK_AND_TARGET_PARSER_IMPLEMENTATION_REPORT.md`
+- `docs/PHASE13G_SEEDED_SHUFFLE_AND_OPENING_HAND_CONTRACT.md`
+- `docs/PHASE13G_SEEDED_SHUFFLE_AND_OPENING_HAND_CONTRACT_REPORT.md`
 
 Define:
 
 ```text
-Phase 13G - Seeded Shuffle And Opening Hand Contract
+Phase 13H - Seeded Shuffle And Opening Hand Implementation
 ```
 
-Define deterministic library expansion, seeded shuffle, opening-hand drawing,
-hand identity, and reproducibility checks before implementation. Keep it
-contract-only before mulligan policy, target search, action execution,
-Monte Carlo batches, persistence, and Challenge Mode.
+Implement deterministic library expansion, seeded shuffle, opening-hand drawing,
+and hand identity. Keep it independent from mulligan policy, target search,
+action execution, Monte Carlo batches, persistence, schema changes, and
+Challenge Mode.
 
 ## Do Not Do
 
