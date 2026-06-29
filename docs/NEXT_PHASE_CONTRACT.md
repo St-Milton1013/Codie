@@ -1,16 +1,16 @@
 # Next Phase Contract
 
-Recommended next task: Phase 13E Deck And Target Parser Contract
+Recommended next task: Phase 13F Deck And Target Parser Implementation
 
 ## Current Status
 
-Phase 13D Simulator Card Definition Manager Implementation is implemented and
+Phase 13E Deck And Target Parser Contract is implemented and
 validated.
 
-Codie now has an in-memory card definition manager that loads declarative
-behavior overlays, classifies target relevance, reports unsupported relevant
-and irrelevant cards, emits pending-review records, and produces confidence
-summaries without executing simulator actions.
+Codie now has a contract for parsing simulator deck input and target settings
+into `SimulationDeck` and `SimulationTargetCondition` without card lookup,
+shuffle, mulligans, target search, action execution, persistence, or Challenge
+Mode.
 
 ## Files Created Or Modified In Latest Packet
 
@@ -62,6 +62,8 @@ summaries without executing simulator actions.
 - `tests/fixtures/probability_engine/card_definitions/simple_behavior_overlays.json`
 - `tests/fixtures/probability_engine/card_definitions/pending_review_seed.json`
 - `docs/PHASE13D_SIMULATOR_CARD_DEFINITION_MANAGER_IMPLEMENTATION_REPORT.md`
+- `docs/PHASE13E_DECK_AND_TARGET_PARSER_CONTRACT.md`
+- `docs/PHASE13E_DECK_AND_TARGET_PARSER_CONTRACT_REPORT.md`
 - `codie/probability_engine/__init__.py`
 - `codie/probability_engine/models.py`
 - `tests/test_probability_engine_models.py`
@@ -91,14 +93,7 @@ summaries without executing simulator actions.
 ## Public Functions / Classes Added
 
 ```text
-CardRelevanceResult
-CardDefinitionStatus
-UnsupportedCardRecord
-CardDefinitionLoadResult
-CardDefinitionManager
-classify_card_relevance
-load_behavior_overlay_rows
-build_card_definition_load_result
+None. Phase 13E is contract-only.
 ```
 
 ## Schema Impact
@@ -156,7 +151,7 @@ rg -n "should play|must include|correct card|breaks the format|secretly optimal|
 
 ## Recommended Next Packet
 
-Write Phase 13E Deck And Target Parser Contract.
+Implement Phase 13F Deck And Target Parser Implementation.
 
 Validation reference:
 
@@ -205,18 +200,21 @@ Validation reference:
 - `docs/PHASE13C_SIMULATOR_CARD_DEFINITION_MANAGER_CONTRACT.md`
 - `docs/PHASE13C_SIMULATOR_CARD_DEFINITION_MANAGER_REPORT.md`
 - `docs/PHASE13D_SIMULATOR_CARD_DEFINITION_MANAGER_IMPLEMENTATION_REPORT.md`
+- `docs/PHASE13E_DECK_AND_TARGET_PARSER_CONTRACT.md`
+- `docs/PHASE13E_DECK_AND_TARGET_PARSER_CONTRACT_REPORT.md`
 
 Define:
 
 ```text
-Phase 13E - Deck And Target Parser Contract
+Phase 13F - Deck And Target Parser Implementation
 ```
 
-Define how user deck inputs, commander rows, unresolved cards, target card,
-target zone, target turn, and target condition type become the Phase 13B
-in-memory `SimulationDeck` and `SimulationTargetCondition` models. Keep it
-contract-only before parsing implementation, opening-hand generation, seeded
-shuffle, mulligans, target search, action execution, and Challenge Mode.
+Implement pure in-memory parsing from deck text/rows and target fields into
+`SimulationDeck` and `SimulationTargetCondition`, with stable deck hashing,
+parse issue reporting, ignored section handling, and unresolved-card
+preservation. Keep it independent from card lookup, databases, providers,
+analytics, recommendations, network calls, shuffle, mulligans, target search,
+action execution, and Challenge Mode.
 
 ## Do Not Do
 

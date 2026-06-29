@@ -20,7 +20,7 @@ Latest pushed commit before local Phase 13 work: 1cfccba Add Phase 13 simulator 
 Latest full-suite result:
 
 ```text
-Ran 343 tests in 2.482s
+Ran 343 tests in 2.466s
 
 OK (skipped=1)
 ```
@@ -102,6 +102,7 @@ Phase 13A cEDHData Reference Extraction And Core Model Design: PASS
 Phase 13B Probability Engine Core Models: PASS
 Phase 13C Simulator Card Definition Manager Contract: PASS
 Phase 13D Simulator Card Definition Manager Implementation: PASS
+Phase 13E Deck And Target Parser Contract: PASS
 ```
 
 ## Recent Commits
@@ -249,13 +250,13 @@ Simulation evidence must not enter Evidence Stack unless constitution thresholds
 Preferred next move:
 
 ```text
-Phase 13E - Deck And Target Parser Contract
+Phase 13F - Deck And Target Parser Implementation
 ```
 
 Alternate next safe option:
 
 ```text
-Phase 13F - Seeded Shuffle And Opening Hand Contract
+Phase 13G - Seeded Shuffle And Opening Hand Contract
 ```
 
 Avoid starting:
@@ -312,6 +313,8 @@ docs/PHASE13B_PROBABILITY_ENGINE_CORE_MODELS_REPORT.md
 docs/PHASE13C_SIMULATOR_CARD_DEFINITION_MANAGER_CONTRACT.md
 docs/PHASE13C_SIMULATOR_CARD_DEFINITION_MANAGER_REPORT.md
 docs/PHASE13D_SIMULATOR_CARD_DEFINITION_MANAGER_IMPLEMENTATION_REPORT.md
+docs/PHASE13E_DECK_AND_TARGET_PARSER_CONTRACT.md
+docs/PHASE13E_DECK_AND_TARGET_PARSER_CONTRACT_REPORT.md
 ```
 
 Next UI implementation packet:
@@ -345,7 +348,8 @@ Phase 13 simulator contracts or a new UI/API contract is explicitly selected.
 - cEDHData reference files were inspected locally only; do not copy the JavaScript bundle or full card catalog into Codie.
 - Simulator Card Definition Manager implementation is complete. It is
   in-memory only and does not execute card actions.
-- Next packet should define deck and target parsing before opening-hand
+- Deck and target parser contract is complete.
+- Next packet should implement pure in-memory parsing before opening-hand
   generation, seeded shuffle, mulligan policy, target search, or Challenge Mode.
 - cEDHData public asset metadata and local reference hashes are recorded in docs/CEDHDATA_SIMULATOR_REFERENCE_CAPTURE_MANIFEST.md.
 - Final recommendation output remains intentionally separate.
