@@ -1,14 +1,13 @@
 # Next Phase Contract
 
-Recommended next task: Phase 12Q Share Bundle Zip Export Contract
+Recommended next task: Phase 12R Share Bundle Zip Export Implementation
 
 ## Current Status
 
-Phase 12P Optional Outbound Delivery Contract is implemented and validated.
+Phase 12Q Share Bundle Zip Export Contract is implemented and validated.
 
-Codie now has an outbound delivery safety contract. Any future Discord,
-email, cloud upload, file sync, or public-link feature must be opt-in, dry-run
-by default, explicit-destination only, and credential-safe.
+Codie now has a zip packaging contract for local share bundles. Future outbound
+delivery may only use reviewed package outputs, not arbitrary local directories.
 
 ## Files Created Or Modified In Latest Packet
 
@@ -39,6 +38,8 @@ by default, explicit-destination only, and credential-safe.
 - `docs/PHASE12O_OPTIONAL_LOCAL_LAN_PREVIEW_IMPLEMENTATION_REPORT.md`
 - `docs/PHASE12P_OPTIONAL_OUTBOUND_DELIVERY_CONTRACT.md`
 - `docs/PHASE12P_OPTIONAL_OUTBOUND_DELIVERY_REPORT.md`
+- `docs/PHASE12Q_SHARE_BUNDLE_ZIP_EXPORT_CONTRACT.md`
+- `docs/PHASE12Q_SHARE_BUNDLE_ZIP_EXPORT_REPORT.md`
 - `codie/delivery/__init__.py`
 - `codie/delivery/local_preview.py`
 - `tests/test_delivery_local_preview.py`
@@ -62,8 +63,8 @@ by default, explicit-destination only, and credential-safe.
 
 ## Public Functions / Classes Added
 
-No public code was added in Phase 12P. Outbound delivery rules and future
-contracts were documented.
+No public code was added in Phase 12Q. Zip packaging rules and future
+implementation contracts were documented.
 
 ## Schema Impact
 
@@ -109,11 +110,12 @@ rg -n "should play|must include|correct card|breaks the format|secretly optimal|
 - Local report sharing has a PowerShell usage guide.
 - Local LAN preview is implemented as selected-bundle read-only static serving.
 - Outbound delivery is contract-gated and not implemented.
+- Zip export is contract-gated and not implemented.
 - No local UI API exists yet by design.
 
 ## Recommended Next Packet
 
-Implement Phase 12Q Share Bundle Zip Export Contract.
+Implement Phase 12R Share Bundle Zip Export Implementation.
 
 Validation reference:
 
@@ -146,11 +148,13 @@ Validation reference:
 - `docs/PHASE12O_OPTIONAL_LOCAL_LAN_PREVIEW_IMPLEMENTATION_REPORT.md`
 - `docs/PHASE12P_OPTIONAL_OUTBOUND_DELIVERY_CONTRACT.md`
 - `docs/PHASE12P_OPTIONAL_OUTBOUND_DELIVERY_REPORT.md`
+- `docs/PHASE12Q_SHARE_BUNDLE_ZIP_EXPORT_CONTRACT.md`
+- `docs/PHASE12Q_SHARE_BUNDLE_ZIP_EXPORT_REPORT.md`
 
 Define:
 
 ```text
-Phase 12Q - Share Bundle Zip Export Contract
+Phase 12R - Share Bundle Zip Export Implementation
 ```
 
 Keep final recommendation generation separate until the Phase 8/10 boundaries are explicitly carried forward.
