@@ -1,0 +1,75 @@
+{
+  "source": "cEDHData simulator",
+  "capture_type": "visible_success_trace",
+  "fixture_purpose": "reference only; do not treat as Codie logic or tournament evidence",
+  "target_card": "Ad Nauseam",
+  "target_zone": "stack",
+  "target_turn": 1,
+  "result": "success",
+  "label": "Win #1",
+  "action_count": 13,
+  "kept_hand": [
+    "Dark Ritual",
+    "Final Fortune",
+    "Cabal Ritual",
+    "Mana Vault",
+    "Scrubland",
+    "Ad Nauseam",
+    "Ancient Tomb"
+  ],
+  "actions": [
+    {
+      "turn": 1,
+      "text": "Opening draw: Mox Opal"
+    },
+    {
+      "turn": 1,
+      "text": "Cast Mox Opal"
+    },
+    {
+      "turn": 1,
+      "text": "Resolve Mox Opal"
+    },
+    {
+      "turn": 1,
+      "text": "Play Scrubland"
+    },
+    {
+      "turn": 1,
+      "text": "Tap Scrubland -> B"
+    },
+    {
+      "turn": 1,
+      "text": "Cast Dark Ritual"
+    },
+    {
+      "turn": 1,
+      "text": "Resolve Dark Ritual -> BBB"
+    },
+    {
+      "turn": 1,
+      "text": "Cast Cabal Ritual"
+    },
+    {
+      "turn": 1,
+      "text": "Resolve Cabal Ritual -> BBB"
+    },
+    {
+      "turn": 1,
+      "text": "Cast Mana Vault"
+    },
+    {
+      "turn": 1,
+      "text": "Resolve Mana Vault"
+    },
+    {
+      "turn": 1,
+      "text": "Tap Mana Vault -> CCC"
+    },
+    {
+      "turn": 1,
+      "text": "Cast Ad Nauseam"
+    }
+  ],
+  "raw_visible_text": "Win #1\n13 actions\nKept Hand: { Dark Ritual, Final Fortune, Cabal Ritual, Mana Vault, Scrubland, Ad Nauseam, Ancient Tomb }\nT1 Opening draw: Mox Opal\nT1 Cast Mox Opal\nT1 Resolve Mox Opal\nT1 Play Scrubland\nT1 Tap Scrubland -> B\nT1 Cast Dark Ritual\nT1 Resolve Dark Ritual -> BBB\nT1 Cast Cabal Ritual\nT1 Resolve Cabal Ritual -> BBB\nT1 Cast Mana Vault\nT1 Resolve Mana Vault\nT1 Tap Mana Vault -> CCC\nT1 Cast Ad Nauseam"
+}

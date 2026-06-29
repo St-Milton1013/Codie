@@ -112,6 +112,16 @@ one unsupported-card warning/output
 screenshots of simulator settings and results
 ```
 
+Captured trace fixtures:
+
+```text
+reference/cedhdata_simulator/fixtures/success_trace_ad_nauseam_t1_win1.json
+```
+
+This fixture records a visible cEDHData success line for Ad Nauseam by turn 1.
+It is reference material only and must not be treated as Codie logic or
+tournament evidence.
+
 Preferred future filenames outside the repo:
 
 ```text
