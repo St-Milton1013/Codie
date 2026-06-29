@@ -1,14 +1,13 @@
 # Next Phase Contract
 
-Recommended next task: Phase 12S Share Bundle Zip Usage Documentation
+Recommended next task: Phase 13 Simulator Contract Refresh
 
 ## Current Status
 
-Phase 12R Share Bundle Zip Export Implementation is implemented and validated.
+Phase 12S Share Bundle Zip Usage Documentation is implemented and validated.
 
-Codie now has deterministic local zip packaging for static share bundles.
-Future outbound delivery may use this reviewed package output instead of
-arbitrary local directories.
+Phase 12 is now closed from local UI/report sharing through static bundle,
+QR, PDF-ready HTML, LAN preview, and deterministic zip export documentation.
 
 ## Files Created Or Modified In Latest Packet
 
@@ -43,6 +42,8 @@ arbitrary local directories.
 - `docs/PHASE12Q_SHARE_BUNDLE_ZIP_EXPORT_REPORT.md`
 - `docs/PHASE12R_SHARE_BUNDLE_ZIP_EXPORT_IMPLEMENTATION_CONTRACT.md`
 - `docs/PHASE12R_SHARE_BUNDLE_ZIP_EXPORT_IMPLEMENTATION_REPORT.md`
+- `docs/PHASE12S_SHARE_BUNDLE_ZIP_USAGE_DOCUMENTATION_CONTRACT.md`
+- `docs/PHASE12S_SHARE_BUNDLE_ZIP_USAGE_DOCUMENTATION_REPORT.md`
 - `codie/exports/share_bundle_zip.py`
 - `codie/delivery/__init__.py`
 - `codie/delivery/local_preview.py`
@@ -68,13 +69,8 @@ arbitrary local directories.
 
 ## Public Functions / Classes Added
 
-Phase 12R added:
-
-- `ShareBundleZipResult`
-- `build_share_bundle_zip_manifest(...)`
-- `validate_share_bundle_zip_payload(...)`
-- `write_share_bundle_zip(...)`
-- `zip-share-bundle` CLI command
+No public code was added in Phase 12S. The local/mobile report sharing guide
+was updated for deterministic zip usage.
 
 ## Schema Impact
 
@@ -121,11 +117,12 @@ rg -n "should play|must include|correct card|breaks the format|secretly optimal|
 - Local LAN preview is implemented as selected-bundle read-only static serving.
 - Outbound delivery is contract-gated and not implemented.
 - Zip export is implemented as local-only deterministic packaging.
+- Phase 12 local/mobile report sharing documentation is complete.
 - No local UI API exists yet by design.
 
 ## Recommended Next Packet
 
-Implement Phase 12S Share Bundle Zip Usage Documentation.
+Implement Phase 13 Simulator Contract Refresh.
 
 Validation reference:
 
@@ -162,14 +159,18 @@ Validation reference:
 - `docs/PHASE12Q_SHARE_BUNDLE_ZIP_EXPORT_REPORT.md`
 - `docs/PHASE12R_SHARE_BUNDLE_ZIP_EXPORT_IMPLEMENTATION_CONTRACT.md`
 - `docs/PHASE12R_SHARE_BUNDLE_ZIP_EXPORT_IMPLEMENTATION_REPORT.md`
+- `docs/PHASE12S_SHARE_BUNDLE_ZIP_USAGE_DOCUMENTATION_CONTRACT.md`
+- `docs/PHASE12S_SHARE_BUNDLE_ZIP_USAGE_DOCUMENTATION_REPORT.md`
 
 Define:
 
 ```text
-Phase 12S - Share Bundle Zip Usage Documentation
+Phase 13 - Simulator Contract Refresh
 ```
 
-Keep final recommendation generation separate until the Phase 8/10 boundaries are explicitly carried forward.
+Refresh the simulator/probability/challenge-mode contracts before implementation.
+Keep final recommendation generation separate until the Phase 8/10 boundaries
+are explicitly carried forward.
 
 ## Do Not Do
 
@@ -187,6 +188,7 @@ Keep final recommendation generation separate until the Phase 8/10 boundaries ar
 - Do not add hosted/mobile delivery integrations without an opt-in planning contract.
 - Do not add outbound delivery or public tunnels during local LAN preview implementation.
 - Do not make zip export send files anywhere.
+- Do not start simulator implementation before Phase 13 contract refresh is accepted.
 
 ## Required Phase Packet Shape
 

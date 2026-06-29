@@ -1,10 +1,10 @@
 # User Guide - Local Report Sharing
 
-This guide shows how to build a local Codie report bundle and view it on your
-PC or phone.
+This guide shows how to build a local Codie report bundle, zip it, and view it
+on your PC or phone.
 
-The current workflow is local and manual. It does not upload reports, post to
-Discord, create public links, or start a server.
+The current workflow is local and manual by default. It does not upload
+reports, post to Discord, create public links, or send files to your phone.
 
 ## Requirements
 
@@ -112,14 +112,55 @@ Save the PDF somewhere under your report folder, for example:
 C:\Users\Main\Documents\CodieReports\Codie Evidence Report.pdf
 ```
 
+## Zip The Share Bundle
+
+Use this when you want one portable file to move to another device.
+
+```powershell
+$zip = "$out\codie-evidence-bundle.zip"
+```
+
+Create the zip:
+
+```powershell
+& $python -m codie.cli.user_deck zip-share-bundle `
+  --bundle-dir $bundle `
+  --output $zip `
+  --output-root $out `
+  --generated-at "2026-06-28T00:00:00+00:00"
+```
+
+The zip contains accepted bundle files plus:
+
+```text
+zip-manifest.json
+```
+
+The zip exporter excludes database files, secret-like files, raw provider
+payload archives, and symlinks. Rejected files are listed in
+`zip-manifest.json` when safe to record.
+
+Inspect the zip path:
+
+```powershell
+Test-Path $zip
+```
+
+Open the zip folder:
+
+```powershell
+Start-Process $out
+```
+
 ## Move The Report To Your Phone
 
 Safe manual options:
 
 ```text
+copy the generated zip to your phone
 copy the generated PDF to your phone
 copy the whole share-bundle folder to your phone
-send the PDF manually through your preferred app
+send the zip or PDF manually through your preferred app
 open index.html after moving the folder
 open print.html after moving the folder
 ```
@@ -137,11 +178,11 @@ Examples:
 ```text
 index.html
 file path copied to your phone
-future local LAN URL, after a separate LAN-preview feature exists
+local LAN preview URL, while the preview command is running
 ```
 
-Current Codie does not start a local web server. LAN preview is a future
-optional feature and requires a separate contract.
+Current Codie starts a local preview server only when you explicitly run the
+LAN preview command below.
 
 ## Optional Local LAN Preview
 
@@ -198,7 +239,10 @@ If the command says the output path is outside `output_root`, make sure
 `--output-dir` is inside the folder passed to `--output-root`.
 
 If your phone cannot open the QR target, move the bundle or PDF to the phone
-first, or wait for the future local LAN preview feature.
+first, or use local LAN preview on a trusted network.
+
+If the zip command rejects a file, check `zip-manifest.json` inside the created
+zip or remove private/database/secret-like files from the bundle folder.
 
 If `qrcode` is missing, install project requirements into the bundled runtime:
 
@@ -214,6 +258,8 @@ Before sharing:
 confirm the report file is the one you intend to share
 open print.html locally and inspect it
 save a PDF only if you want a portable copy
+open the zip locally before sending it
 do not post private reports publicly by accident
 remember QR targets are paths or URLs, not report contents
+remember LAN preview exposes the selected bundle to clients that can reach the bound host and port
 ```
