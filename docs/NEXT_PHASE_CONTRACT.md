@@ -1,14 +1,15 @@
 # Next Phase Contract
 
-Recommended next task: Phase 13A Probability Engine Core Models
+Recommended next task: Phase 13B Probability Engine Core Models Implementation
 
 ## Current Status
 
-Phase 13 Simulator Contract Refresh is implemented and validated.
+Phase 13A cEDHData Reference Extraction And Core Model Design is implemented
+and validated.
 
-Codie now has a refreshed simulator/probability/challenge-mode contract. The
-next step is pure in-memory probability engine models only, with no simulator
-search behavior yet.
+Codie now has a derived, Python-native model design informed by the supplied
+cEDHData reference files. The original reference source files were inspected
+locally only and were not copied into Codie.
 
 ## Files Created Or Modified In Latest Packet
 
@@ -47,6 +48,8 @@ search behavior yet.
 - `docs/PHASE12S_SHARE_BUNDLE_ZIP_USAGE_DOCUMENTATION_REPORT.md`
 - `docs/PHASE13_SIMULATOR_CONTRACT_REFRESH.md`
 - `docs/PHASE13_SIMULATOR_CONTRACT_REFRESH_REPORT.md`
+- `docs/PHASE13A_CEDHDATA_REFERENCE_EXTRACTION_AND_CORE_MODEL_DESIGN.md`
+- `docs/PHASE13A_CEDHDATA_REFERENCE_EXTRACTION_AND_CORE_MODEL_DESIGN_REPORT.md`
 - `codie/exports/share_bundle_zip.py`
 - `codie/delivery/__init__.py`
 - `codie/delivery/local_preview.py`
@@ -72,8 +75,8 @@ search behavior yet.
 
 ## Public Functions / Classes Added
 
-No public code was added in Phase 13. Simulator contracts and build order were
-refreshed.
+No public code was added in Phase 13A. Reference extraction and model design
+were documented only.
 
 ## Schema Impact
 
@@ -123,11 +126,12 @@ rg -n "should play|must include|correct card|breaks the format|secretly optimal|
 - Phase 12 local/mobile report sharing documentation is complete.
 - Simulator schema currently stores reproducibility metadata implicitly through JSON payload fields; explicit seed/version columns should be reviewed before broad simulator usage.
 - Challenge Mode and line review need future schema contracts before implementation.
+- cEDHData reference files remain local research inputs only; do not copy the JavaScript bundle or full card catalog into Codie.
 - No local UI API exists yet by design.
 
 ## Recommended Next Packet
 
-Implement Phase 13A Probability Engine Core Models.
+Implement Phase 13B Probability Engine Core Models Implementation.
 
 Validation reference:
 
@@ -168,14 +172,16 @@ Validation reference:
 - `docs/PHASE12S_SHARE_BUNDLE_ZIP_USAGE_DOCUMENTATION_REPORT.md`
 - `docs/PHASE13_SIMULATOR_CONTRACT_REFRESH.md`
 - `docs/PHASE13_SIMULATOR_CONTRACT_REFRESH_REPORT.md`
+- `docs/PHASE13A_CEDHDATA_REFERENCE_EXTRACTION_AND_CORE_MODEL_DESIGN.md`
+- `docs/PHASE13A_CEDHDATA_REFERENCE_EXTRACTION_AND_CORE_MODEL_DESIGN_REPORT.md`
 
 Define:
 
 ```text
-Phase 13A - Probability Engine Core Models
+Phase 13B - Probability Engine Core Models Implementation
 ```
 
-Implement pure in-memory probability engine dataclasses/typed models only.
+Implement the pure in-memory Python-native models from Phase 13A only.
 Keep final recommendation generation separate until the Phase 8/10 boundaries
 are explicitly carried forward.
 
@@ -197,6 +203,7 @@ are explicitly carried forward.
 - Do not make zip export send files anywhere.
 - Do not implement simulator search before core models are accepted.
 - Do not implement Challenge Mode before the core simulator trace model exists.
+- Do not copy cEDHData source code or full reference payloads into Codie.
 
 ## Required Phase Packet Shape
 

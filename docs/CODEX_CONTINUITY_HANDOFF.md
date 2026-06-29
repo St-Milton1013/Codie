@@ -12,7 +12,7 @@ Use the repository and this handoff as the source of truth. Do not rely on prior
 GitHub: https://github.com/St-Milton1013/Codie
 Local path: C:\Users\Main\Documents\Codex\2026-06-22\next-phase-contract-recommended-next-task
 Branch: main
-Latest pushed commit before Phase 13 closure: 94d4fbe Close Phase 12 report sharing docs
+Latest pushed commit before Phase 13A closure: 1cfccba Add Phase 13 simulator contract refresh
 ```
 
 ## Current Validation Baseline
@@ -20,7 +20,7 @@ Latest pushed commit before Phase 13 closure: 94d4fbe Close Phase 12 report shar
 Latest full-suite result:
 
 ```text
-Ran 319 tests in 2.547s
+Ran 319 tests in 2.482s
 
 OK (skipped=1)
 ```
@@ -98,6 +98,7 @@ Phase 12R Share Bundle Zip Export Implementation: PASS
 Phase 12S Share Bundle Zip Usage Documentation: PASS
 Phase 12 Local UI/Report Sharing Track: COMPLETE
 Phase 13 Simulator Contract Refresh: PASS
+Phase 13A cEDHData Reference Extraction And Core Model Design: PASS
 ```
 
 ## Recent Commits
@@ -245,7 +246,7 @@ Simulation evidence must not enter Evidence Stack unless constitution thresholds
 Preferred next move:
 
 ```text
-Phase 13A - Probability Engine Core Models
+Phase 13B - Probability Engine Core Models Implementation
 ```
 
 Alternate next safe option:
@@ -301,6 +302,8 @@ docs/PHASE12S_SHARE_BUNDLE_ZIP_USAGE_DOCUMENTATION_CONTRACT.md
 docs/PHASE12S_SHARE_BUNDLE_ZIP_USAGE_DOCUMENTATION_REPORT.md
 docs/PHASE13_SIMULATOR_CONTRACT_REFRESH.md
 docs/PHASE13_SIMULATOR_CONTRACT_REFRESH_REPORT.md
+docs/PHASE13A_CEDHDATA_REFERENCE_EXTRACTION_AND_CORE_MODEL_DESIGN.md
+docs/PHASE13A_CEDHDATA_REFERENCE_EXTRACTION_AND_CORE_MODEL_DESIGN_REPORT.md
 ```
 
 Next UI implementation packet:
@@ -329,6 +332,7 @@ Phase 13 simulator contracts or a new UI/API contract is explicitly selected.
 - No local UI API exists yet.
 - No simulator implementation exists yet.
 - Simulator contract refresh is complete; next simulator packet is pure core models.
+- cEDHData reference files were inspected locally only; do not copy the JavaScript bundle or full card catalog into Codie.
 - Final recommendation output remains intentionally separate.
 
 ## Quality Gate
