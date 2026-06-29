@@ -1,0 +1,16 @@
+# Example simulator deck
+Commander
+1 Tymna the Weaver
+1 Kraum, Ludevic's Opus
+
+Deck
+1 Sol Ring
+1 Rhystic Study
+1 Demonic Tutor
+Sol Ring
+
+Sideboard
+1 Ad Nauseam
+
+Considering
+1 Mystic Remora

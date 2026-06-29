@@ -25,6 +25,16 @@ from .card_definition_manager import (
     load_behavior_overlay_rows,
 )
 from .relevance import CardRelevanceResult, classify_card_relevance
+from .deck_parser import (
+    DeckParseIssue,
+    ParsedDeckInput,
+    ParsedTargetInput,
+    build_simulation_deck,
+    parse_simulation_deck_rows,
+    parse_simulation_deck_text,
+    parse_target_condition,
+    stable_deck_hash,
+)
 
 __all__ = [
     "MANA_COLOR_KEYS",
@@ -49,4 +59,12 @@ __all__ = [
     "build_card_definition_load_result",
     "classify_card_relevance",
     "load_behavior_overlay_rows",
+    "DeckParseIssue",
+    "ParsedDeckInput",
+    "ParsedTargetInput",
+    "build_simulation_deck",
+    "parse_simulation_deck_rows",
+    "parse_simulation_deck_text",
+    "parse_target_condition",
+    "stable_deck_hash",
 ]

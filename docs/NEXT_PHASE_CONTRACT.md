@@ -1,16 +1,16 @@
 # Next Phase Contract
 
-Recommended next task: Phase 13F Deck And Target Parser Implementation
+Recommended next task: Phase 13G Seeded Shuffle And Opening Hand Contract
 
 ## Current Status
 
-Phase 13E Deck And Target Parser Contract is implemented and
+Phase 13F Deck And Target Parser Implementation is implemented and
 validated.
 
-Codie now has a contract for parsing simulator deck input and target settings
-into `SimulationDeck` and `SimulationTargetCondition` without card lookup,
-shuffle, mulligans, target search, action execution, persistence, or Challenge
-Mode.
+Codie now has pure in-memory parsing from deck text/rows and target fields into
+`SimulationDeck` and `SimulationTargetCondition`, including parse issue
+reporting, ignored section handling, unresolved-card preservation, and stable
+deck hashing.
 
 ## Files Created Or Modified In Latest Packet
 
@@ -64,6 +64,12 @@ Mode.
 - `docs/PHASE13D_SIMULATOR_CARD_DEFINITION_MANAGER_IMPLEMENTATION_REPORT.md`
 - `docs/PHASE13E_DECK_AND_TARGET_PARSER_CONTRACT.md`
 - `docs/PHASE13E_DECK_AND_TARGET_PARSER_CONTRACT_REPORT.md`
+- `codie/probability_engine/deck_parser.py`
+- `tests/test_probability_engine_deck_parser.py`
+- `tests/fixtures/probability_engine/deck_parser/plaintext_deck.txt`
+- `tests/fixtures/probability_engine/deck_parser/moxfield_plaintext_deck.txt`
+- `tests/fixtures/probability_engine/deck_parser/malformed_deck.txt`
+- `docs/PHASE13F_DECK_AND_TARGET_PARSER_IMPLEMENTATION_REPORT.md`
 - `codie/probability_engine/__init__.py`
 - `codie/probability_engine/models.py`
 - `tests/test_probability_engine_models.py`
@@ -93,7 +99,14 @@ Mode.
 ## Public Functions / Classes Added
 
 ```text
-None. Phase 13E is contract-only.
+ParsedDeckInput
+ParsedTargetInput
+DeckParseIssue
+parse_simulation_deck_text
+parse_simulation_deck_rows
+parse_target_condition
+build_simulation_deck
+stable_deck_hash
 ```
 
 ## Schema Impact
@@ -151,7 +164,7 @@ rg -n "should play|must include|correct card|breaks the format|secretly optimal|
 
 ## Recommended Next Packet
 
-Implement Phase 13F Deck And Target Parser Implementation.
+Write Phase 13G Seeded Shuffle And Opening Hand Contract.
 
 Validation reference:
 
@@ -202,19 +215,18 @@ Validation reference:
 - `docs/PHASE13D_SIMULATOR_CARD_DEFINITION_MANAGER_IMPLEMENTATION_REPORT.md`
 - `docs/PHASE13E_DECK_AND_TARGET_PARSER_CONTRACT.md`
 - `docs/PHASE13E_DECK_AND_TARGET_PARSER_CONTRACT_REPORT.md`
+- `docs/PHASE13F_DECK_AND_TARGET_PARSER_IMPLEMENTATION_REPORT.md`
 
 Define:
 
 ```text
-Phase 13F - Deck And Target Parser Implementation
+Phase 13G - Seeded Shuffle And Opening Hand Contract
 ```
 
-Implement pure in-memory parsing from deck text/rows and target fields into
-`SimulationDeck` and `SimulationTargetCondition`, with stable deck hashing,
-parse issue reporting, ignored section handling, and unresolved-card
-preservation. Keep it independent from card lookup, databases, providers,
-analytics, recommendations, network calls, shuffle, mulligans, target search,
-action execution, and Challenge Mode.
+Define deterministic library expansion, seeded shuffle, opening-hand drawing,
+hand identity, and reproducibility checks before implementation. Keep it
+contract-only before mulligan policy, target search, action execution,
+Monte Carlo batches, persistence, and Challenge Mode.
 
 ## Do Not Do
 

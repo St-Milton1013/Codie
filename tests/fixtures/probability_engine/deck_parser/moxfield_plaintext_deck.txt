@@ -1,0 +1,9 @@
+// Moxfield plain text style
+1x Tymna the Weaver
+1x Kraum, Ludevic's Opus
+
+Main
+1x Sol Ring
+1x Chrome Mox
+1x Rhystic Study
+1x Demonic Tutor
