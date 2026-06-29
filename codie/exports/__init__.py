@@ -24,6 +24,12 @@ from .share_bundle import (
     write_local_share_bundle,
     write_qr_png,
 )
+from .share_bundle_zip import (
+    ShareBundleZipResult,
+    build_share_bundle_zip_manifest,
+    validate_share_bundle_zip_payload,
+    write_share_bundle_zip,
+)
 from .user_deck_reports import (
     UserDeckComparisonWriteResult,
     user_deck_comparison_export,
@@ -38,6 +44,7 @@ __all__ = [
     "ExportWriteResult",
     "ShareBundleAsset",
     "ShareBundleWriteResult",
+    "ShareBundleZipResult",
     "UserDeckComparisonWriteResult",
     "ValidationSummary",
     "build_checkpoint_export",
@@ -48,6 +55,7 @@ __all__ = [
     "outside_review_markdown",
     "recommendation_run_markdown",
     "build_share_bundle_manifest",
+    "build_share_bundle_zip_manifest",
     "share_bundle_index_html",
     "share_bundle_print_html",
     "user_deck_comparison_export",
@@ -57,5 +65,7 @@ __all__ = [
     "write_markdown_export",
     "write_local_share_bundle",
     "write_qr_png",
+    "validate_share_bundle_zip_payload",
+    "write_share_bundle_zip",
     "write_user_deck_comparison_exports",
 ]

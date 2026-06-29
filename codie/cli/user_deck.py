@@ -18,6 +18,7 @@ from codie.exports import (
     user_deck_comparison_export,
     user_deck_comparison_markdown,
     write_local_share_bundle,
+    write_share_bundle_zip,
     write_user_deck_comparison_exports,
 )
 from codie.pages import (
@@ -128,6 +129,19 @@ def build_parser() -> argparse.ArgumentParser:
         action="store_true",
         help="Required when binding a LAN-visible host such as 0.0.0.0.",
     )
+
+    zip_bundle = subparsers.add_parser(
+        "zip-share-bundle",
+        help="Package a static local report bundle into a deterministic zip file.",
+    )
+    zip_bundle.add_argument("--bundle-dir", required=True, help="Share bundle directory containing index.html.")
+    zip_bundle.add_argument("--output", required=True, help="Zip output path.")
+    zip_bundle.add_argument("--output-root", help="Optional root directory that output path must stay inside.")
+    zip_bundle.add_argument(
+        "--generated-at",
+        required=True,
+        help="Timestamp to stamp the zip manifest with.",
+    )
     return parser
 
 
@@ -163,6 +177,10 @@ def main(argv: list[str] | None = None) -> int:
         return 0
     if args.command == "serve-share-bundle":
         return _serve_share_bundle(args)
+    if args.command == "zip-share-bundle":
+        result = _zip_share_bundle(args)
+        print(json.dumps(result, sort_keys=True))
+        return 0
     parser.error(f"Unsupported command: {args.command}")
     return 2
 
@@ -355,6 +373,22 @@ def _serve_share_bundle(args: argparse.Namespace) -> int:
     finally:
         server.close()
     return 0
+
+
+def _zip_share_bundle(args: argparse.Namespace) -> dict[str, Any]:
+    result = write_share_bundle_zip(
+        bundle_dir=args.bundle_dir,
+        output=args.output,
+        output_root=args.output_root,
+        generated_at=args.generated_at,
+    )
+    return {
+        "zip_path": result.zip_path,
+        "bytes_written": result.bytes_written,
+        "file_count": result.file_count,
+        "total_bytes": result.total_bytes,
+        "rejected_files": list(result.rejected_files),
+    }
 
 
 def _summary_to_dict(summary) -> dict[str, Any]:

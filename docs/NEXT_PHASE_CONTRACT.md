@@ -1,13 +1,14 @@
 # Next Phase Contract
 
-Recommended next task: Phase 12R Share Bundle Zip Export Implementation
+Recommended next task: Phase 12S Share Bundle Zip Usage Documentation
 
 ## Current Status
 
-Phase 12Q Share Bundle Zip Export Contract is implemented and validated.
+Phase 12R Share Bundle Zip Export Implementation is implemented and validated.
 
-Codie now has a zip packaging contract for local share bundles. Future outbound
-delivery may only use reviewed package outputs, not arbitrary local directories.
+Codie now has deterministic local zip packaging for static share bundles.
+Future outbound delivery may use this reviewed package output instead of
+arbitrary local directories.
 
 ## Files Created Or Modified In Latest Packet
 
@@ -40,9 +41,13 @@ delivery may only use reviewed package outputs, not arbitrary local directories.
 - `docs/PHASE12P_OPTIONAL_OUTBOUND_DELIVERY_REPORT.md`
 - `docs/PHASE12Q_SHARE_BUNDLE_ZIP_EXPORT_CONTRACT.md`
 - `docs/PHASE12Q_SHARE_BUNDLE_ZIP_EXPORT_REPORT.md`
+- `docs/PHASE12R_SHARE_BUNDLE_ZIP_EXPORT_IMPLEMENTATION_CONTRACT.md`
+- `docs/PHASE12R_SHARE_BUNDLE_ZIP_EXPORT_IMPLEMENTATION_REPORT.md`
+- `codie/exports/share_bundle_zip.py`
 - `codie/delivery/__init__.py`
 - `codie/delivery/local_preview.py`
 - `tests/test_delivery_local_preview.py`
+- `tests/test_exports_share_bundle_zip.py`
 - `requirements.txt`
 - `codie/exports/share_bundle.py`
 - `codie/exports/__init__.py`
@@ -63,8 +68,13 @@ delivery may only use reviewed package outputs, not arbitrary local directories.
 
 ## Public Functions / Classes Added
 
-No public code was added in Phase 12Q. Zip packaging rules and future
-implementation contracts were documented.
+Phase 12R added:
+
+- `ShareBundleZipResult`
+- `build_share_bundle_zip_manifest(...)`
+- `validate_share_bundle_zip_payload(...)`
+- `write_share_bundle_zip(...)`
+- `zip-share-bundle` CLI command
 
 ## Schema Impact
 
@@ -110,12 +120,12 @@ rg -n "should play|must include|correct card|breaks the format|secretly optimal|
 - Local report sharing has a PowerShell usage guide.
 - Local LAN preview is implemented as selected-bundle read-only static serving.
 - Outbound delivery is contract-gated and not implemented.
-- Zip export is contract-gated and not implemented.
+- Zip export is implemented as local-only deterministic packaging.
 - No local UI API exists yet by design.
 
 ## Recommended Next Packet
 
-Implement Phase 12R Share Bundle Zip Export Implementation.
+Implement Phase 12S Share Bundle Zip Usage Documentation.
 
 Validation reference:
 
@@ -150,11 +160,13 @@ Validation reference:
 - `docs/PHASE12P_OPTIONAL_OUTBOUND_DELIVERY_REPORT.md`
 - `docs/PHASE12Q_SHARE_BUNDLE_ZIP_EXPORT_CONTRACT.md`
 - `docs/PHASE12Q_SHARE_BUNDLE_ZIP_EXPORT_REPORT.md`
+- `docs/PHASE12R_SHARE_BUNDLE_ZIP_EXPORT_IMPLEMENTATION_CONTRACT.md`
+- `docs/PHASE12R_SHARE_BUNDLE_ZIP_EXPORT_IMPLEMENTATION_REPORT.md`
 
 Define:
 
 ```text
-Phase 12R - Share Bundle Zip Export Implementation
+Phase 12S - Share Bundle Zip Usage Documentation
 ```
 
 Keep final recommendation generation separate until the Phase 8/10 boundaries are explicitly carried forward.
@@ -174,6 +186,7 @@ Keep final recommendation generation separate until the Phase 8/10 boundaries ar
 - Do not add hosted/mobile sharing without a separate privacy contract.
 - Do not add hosted/mobile delivery integrations without an opt-in planning contract.
 - Do not add outbound delivery or public tunnels during local LAN preview implementation.
+- Do not make zip export send files anywhere.
 
 ## Required Phase Packet Shape
 
