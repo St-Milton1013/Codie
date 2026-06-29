@@ -1,16 +1,16 @@
 # Next Phase Contract
 
-Recommended next task: Phase 13C Simulator Card Definition Manager Contract
+Recommended next task: Phase 13D Simulator Card Definition Manager Implementation
 
 ## Current Status
 
-Phase 13B Probability Engine Core Models Implementation is implemented and
+Phase 13C Simulator Card Definition Manager Contract is implemented and
 validated.
 
-Codie now has pure in-memory, Python-native probability engine dataclasses for
-mana costs, mana options, action declarations, simulation card models, target
-conditions, configs, decks, unsupported items, traces, and results. These models
-preserve reference payload shapes without executing simulator behavior.
+Codie now has a contract for the card definition manager that separates
+Scryfall identity data from simulator behavior overlays, defines relevance
+classification, requires unsupported-card reporting, and preserves the
+recommendation/evidence boundaries before action execution begins.
 
 ## Files Created Or Modified In Latest Packet
 
@@ -54,6 +54,8 @@ preserve reference payload shapes without executing simulator behavior.
 - `docs/CEDHDATA_SIMULATOR_REFERENCE_CAPTURE_MANIFEST.md`
 - `docs/PHASE13B_PROBABILITY_ENGINE_CORE_MODELS_CONTRACT.md`
 - `docs/PHASE13B_PROBABILITY_ENGINE_CORE_MODELS_REPORT.md`
+- `docs/PHASE13C_SIMULATOR_CARD_DEFINITION_MANAGER_CONTRACT.md`
+- `docs/PHASE13C_SIMULATOR_CARD_DEFINITION_MANAGER_REPORT.md`
 - `codie/probability_engine/__init__.py`
 - `codie/probability_engine/models.py`
 - `tests/test_probability_engine_models.py`
@@ -82,20 +84,7 @@ preserve reference payload shapes without executing simulator behavior.
 
 ## Public Functions / Classes Added
 
-```text
-ManaCost
-ManaOption
-SimulationActionModel
-SimulationCardModel
-SimulationTargetCondition
-SimulationConfig
-SimulationDeckCard
-SimulationDeck
-SimulationUnsupportedItem
-SimulationTraceAction
-SimulationTrace
-SimulationResult
-```
+None. Phase 13C is contract-only.
 
 ## Schema Impact
 
@@ -152,7 +141,7 @@ rg -n "should play|must include|correct card|breaks the format|secretly optimal|
 
 ## Recommended Next Packet
 
-Write Phase 13C Simulator Card Definition Manager Contract.
+Implement Phase 13D Simulator Card Definition Manager Implementation.
 
 Validation reference:
 
@@ -198,17 +187,20 @@ Validation reference:
 - `docs/ROADMAP_PATCH_SIMULATOR_CARD_DEFINITION_MANAGER.md`
 - `docs/PHASE13B_PROBABILITY_ENGINE_CORE_MODELS_CONTRACT.md`
 - `docs/PHASE13B_PROBABILITY_ENGINE_CORE_MODELS_REPORT.md`
+- `docs/PHASE13C_SIMULATOR_CARD_DEFINITION_MANAGER_CONTRACT.md`
+- `docs/PHASE13C_SIMULATOR_CARD_DEFINITION_MANAGER_REPORT.md`
 
 Define:
 
 ```text
-Phase 13C - Simulator Card Definition Manager Contract
+Phase 13D - Simulator Card Definition Manager Implementation
 ```
 
-Define the card behavior definition manager before simulator action execution.
-This packet should remain contract-first and cover behavior overlays, relevance
-classification, unsupported-card reporting, pending-review cards, local fixture
-shape, and migration boundaries.
+Implement pure in-memory behavior overlay loading, relevance classification,
+unsupported-card reporting, pending-review output, and confidence summaries.
+Keep it independent from databases, providers, analytics, recommendations,
+network calls, action execution, target search, shuffle, mulligans, and
+Challenge Mode.
 
 ## Do Not Do
 
