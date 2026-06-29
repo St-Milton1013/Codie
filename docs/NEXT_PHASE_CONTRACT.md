@@ -1,16 +1,16 @@
 # Next Phase Contract
 
-Recommended next task: Phase 13D Simulator Card Definition Manager Implementation
+Recommended next task: Phase 13E Deck And Target Parser Contract
 
 ## Current Status
 
-Phase 13C Simulator Card Definition Manager Contract is implemented and
+Phase 13D Simulator Card Definition Manager Implementation is implemented and
 validated.
 
-Codie now has a contract for the card definition manager that separates
-Scryfall identity data from simulator behavior overlays, defines relevance
-classification, requires unsupported-card reporting, and preserves the
-recommendation/evidence boundaries before action execution begins.
+Codie now has an in-memory card definition manager that loads declarative
+behavior overlays, classifies target relevance, reports unsupported relevant
+and irrelevant cards, emits pending-review records, and produces confidence
+summaries without executing simulator actions.
 
 ## Files Created Or Modified In Latest Packet
 
@@ -56,6 +56,12 @@ recommendation/evidence boundaries before action execution begins.
 - `docs/PHASE13B_PROBABILITY_ENGINE_CORE_MODELS_REPORT.md`
 - `docs/PHASE13C_SIMULATOR_CARD_DEFINITION_MANAGER_CONTRACT.md`
 - `docs/PHASE13C_SIMULATOR_CARD_DEFINITION_MANAGER_REPORT.md`
+- `codie/probability_engine/card_definition_manager.py`
+- `codie/probability_engine/relevance.py`
+- `tests/test_probability_engine_card_definition_manager.py`
+- `tests/fixtures/probability_engine/card_definitions/simple_behavior_overlays.json`
+- `tests/fixtures/probability_engine/card_definitions/pending_review_seed.json`
+- `docs/PHASE13D_SIMULATOR_CARD_DEFINITION_MANAGER_IMPLEMENTATION_REPORT.md`
 - `codie/probability_engine/__init__.py`
 - `codie/probability_engine/models.py`
 - `tests/test_probability_engine_models.py`
@@ -84,7 +90,16 @@ recommendation/evidence boundaries before action execution begins.
 
 ## Public Functions / Classes Added
 
-None. Phase 13C is contract-only.
+```text
+CardRelevanceResult
+CardDefinitionStatus
+UnsupportedCardRecord
+CardDefinitionLoadResult
+CardDefinitionManager
+classify_card_relevance
+load_behavior_overlay_rows
+build_card_definition_load_result
+```
 
 ## Schema Impact
 
@@ -141,7 +156,7 @@ rg -n "should play|must include|correct card|breaks the format|secretly optimal|
 
 ## Recommended Next Packet
 
-Implement Phase 13D Simulator Card Definition Manager Implementation.
+Write Phase 13E Deck And Target Parser Contract.
 
 Validation reference:
 
@@ -189,18 +204,19 @@ Validation reference:
 - `docs/PHASE13B_PROBABILITY_ENGINE_CORE_MODELS_REPORT.md`
 - `docs/PHASE13C_SIMULATOR_CARD_DEFINITION_MANAGER_CONTRACT.md`
 - `docs/PHASE13C_SIMULATOR_CARD_DEFINITION_MANAGER_REPORT.md`
+- `docs/PHASE13D_SIMULATOR_CARD_DEFINITION_MANAGER_IMPLEMENTATION_REPORT.md`
 
 Define:
 
 ```text
-Phase 13D - Simulator Card Definition Manager Implementation
+Phase 13E - Deck And Target Parser Contract
 ```
 
-Implement pure in-memory behavior overlay loading, relevance classification,
-unsupported-card reporting, pending-review output, and confidence summaries.
-Keep it independent from databases, providers, analytics, recommendations,
-network calls, action execution, target search, shuffle, mulligans, and
-Challenge Mode.
+Define how user deck inputs, commander rows, unresolved cards, target card,
+target zone, target turn, and target condition type become the Phase 13B
+in-memory `SimulationDeck` and `SimulationTargetCondition` models. Keep it
+contract-only before parsing implementation, opening-hand generation, seeded
+shuffle, mulligans, target search, action execution, and Challenge Mode.
 
 ## Do Not Do
 

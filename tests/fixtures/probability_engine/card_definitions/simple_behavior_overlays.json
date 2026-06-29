@@ -1,0 +1,122 @@
+[
+  {
+    "id": "sol_ring",
+    "name": "Sol Ring",
+    "behavior_version": "sim-card-v1",
+    "types": ["artifact"],
+    "mana_cost": {"Generic": 1},
+    "board_abilities": [
+      {"type": "tap_for_mana", "tap": true, "produces": {"C": 2}}
+    ]
+  },
+  {
+    "id": "chrome_mox",
+    "name": "Chrome Mox",
+    "behavior_version": "sim-card-v1",
+    "types": ["artifact"],
+    "cast_actions": [
+      {
+        "type": "exile_from_hand",
+        "exclude_types": ["artifact", "land"],
+        "optional": true,
+        "store_memory_as": "imprint"
+      }
+    ],
+    "board_abilities": [
+      {
+        "type": "tap_for_mana",
+        "tap": true,
+        "produces": "any",
+        "requires_memory": true
+      }
+    ]
+  },
+  {
+    "id": "mox_diamond",
+    "name": "Mox Diamond",
+    "behavior_version": "sim-card-v1",
+    "types": ["artifact"],
+    "cast_actions": [
+      {
+        "type": "discard_from_hand",
+        "require_type": "land",
+        "store_memory_as": "discarded_land"
+      }
+    ],
+    "board_abilities": [
+      {
+        "type": "tap_for_mana",
+        "tap": true,
+        "produces": "any",
+        "requires_memory": true
+      }
+    ]
+  },
+  {
+    "id": "demonic_tutor",
+    "name": "Demonic Tutor",
+    "behavior_version": "sim-card-v1",
+    "types": ["sorcery"],
+    "mana_cost": {"B": 1, "Generic": 1},
+    "cast_actions": [
+      {
+        "type": "search_library",
+        "destination": "hand",
+        "search_targets": ["any_card"]
+      }
+    ]
+  },
+  {
+    "id": "vampiric_tutor",
+    "name": "Vampiric Tutor",
+    "behavior_version": "sim-card-v1",
+    "types": ["instant"],
+    "mana_cost": {"B": 1},
+    "cast_actions": [
+      {
+        "type": "search_library",
+        "destination": "top",
+        "search_targets": ["any_card"]
+      }
+    ]
+  },
+  {
+    "id": "rhystic_study",
+    "name": "Rhystic Study",
+    "behavior_version": "sim-card-v1",
+    "types": ["enchantment"],
+    "mana_cost": {"U": 1, "Generic": 2}
+  },
+  {
+    "id": "memnite",
+    "name": "Memnite",
+    "behavior_version": "sim-card-v1",
+    "types": ["artifact", "creature"]
+  },
+  {
+    "id": "storm_kiln_artist",
+    "name": "Storm-Kiln Artist",
+    "behavior_version": "sim-card-v1",
+    "types": ["creature"],
+    "static_effects": [
+      {
+        "type": "create_token",
+        "token_id": "treasure",
+        "trigger": "magecraft"
+      }
+    ]
+  },
+  {
+    "id": "mystery_card",
+    "name": "Mystery Card",
+    "behavior_version": "sim-card-v1",
+    "types": ["artifact"],
+    "board_abilities": [
+      {
+        "type": "tap_for_mana",
+        "produces": {"C": 1},
+        "unmodeled_future_field": {"kept": true}
+      }
+    ]
+  }
+]
