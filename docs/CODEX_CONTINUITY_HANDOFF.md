@@ -12,7 +12,7 @@ Use the repository and this handoff as the source of truth. Do not rely on prior
 GitHub: https://github.com/St-Milton1013/Codie
 Local path: C:\Users\Main\Documents\Codex\2026-06-22\next-phase-contract-recommended-next-task
 Branch: main
-Latest pushed commit before Phase 12O closure: e2e3a6a Add Phase 12N LAN preview contract
+Latest pushed commit before Phase 12P closure: a68b77e Add Phase 12O local LAN preview
 ```
 
 ## Current Validation Baseline
@@ -20,7 +20,7 @@ Latest pushed commit before Phase 12O closure: e2e3a6a Add Phase 12N LAN preview
 Latest full-suite result:
 
 ```text
-Ran 311 tests in 2.847s
+Ran 311 tests in 3.393s
 
 OK
 ```
@@ -92,6 +92,7 @@ Phase 12L Optional Delivery Integrations Planning: PASS
 Phase 12M Delivery Usage Documentation: PASS
 Phase 12N Optional Local LAN Preview Contract: PASS
 Phase 12O Optional Local LAN Preview Implementation: PASS
+Phase 12P Optional Outbound Delivery Contract: PASS
 ```
 
 ## Recent Commits
@@ -239,7 +240,7 @@ Simulation evidence must not enter Evidence Stack unless constitution thresholds
 Preferred next move:
 
 ```text
-Phase 12P - Optional Outbound Delivery Contract
+Phase 12Q - Share Bundle Zip Export Contract
 ```
 
 Alternate next safe option:
@@ -285,12 +286,14 @@ docs/PHASE12N_OPTIONAL_LOCAL_LAN_PREVIEW_CONTRACT.md
 docs/PHASE12N_OPTIONAL_LOCAL_LAN_PREVIEW_REPORT.md
 docs/PHASE12O_OPTIONAL_LOCAL_LAN_PREVIEW_IMPLEMENTATION_CONTRACT.md
 docs/PHASE12O_OPTIONAL_LOCAL_LAN_PREVIEW_IMPLEMENTATION_REPORT.md
+docs/PHASE12P_OPTIONAL_OUTBOUND_DELIVERY_CONTRACT.md
+docs/PHASE12P_OPTIONAL_OUTBOUND_DELIVERY_REPORT.md
 ```
 
 Next UI implementation packet:
 
 ```text
-Phase 12P - Optional Outbound Delivery Contract
+Phase 12Q - Share Bundle Zip Export Contract
 ```
 
 ## Known Caveats
@@ -306,6 +309,7 @@ Phase 12P - Optional Outbound Delivery Contract
 - Delivery integrations are planning-only and disabled by default.
 - Local report sharing has a PowerShell-oriented usage guide.
 - Local LAN preview is implemented as selected-bundle read-only static serving.
+- Outbound delivery is contract-gated and not implemented.
 - No local UI API exists yet.
 - No simulator implementation exists yet.
 - Final recommendation output remains intentionally separate.

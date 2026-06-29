@@ -1,15 +1,14 @@
 # Next Phase Contract
 
-Recommended next task: Phase 12P Optional Outbound Delivery Contract
+Recommended next task: Phase 12Q Share Bundle Zip Export Contract
 
 ## Current Status
 
-Phase 12O Optional Local LAN Preview Implementation is implemented and
-validated.
+Phase 12P Optional Outbound Delivery Contract is implemented and validated.
 
-Codie can now serve one selected share bundle through a read-only local preview
-server. It defaults to `127.0.0.1`, requires explicit opt-in for LAN-visible
-binding, and has no provider/db/analytics/recommendation access.
+Codie now has an outbound delivery safety contract. Any future Discord,
+email, cloud upload, file sync, or public-link feature must be opt-in, dry-run
+by default, explicit-destination only, and credential-safe.
 
 ## Files Created Or Modified In Latest Packet
 
@@ -38,6 +37,8 @@ binding, and has no provider/db/analytics/recommendation access.
 - `docs/PHASE12N_OPTIONAL_LOCAL_LAN_PREVIEW_REPORT.md`
 - `docs/PHASE12O_OPTIONAL_LOCAL_LAN_PREVIEW_IMPLEMENTATION_CONTRACT.md`
 - `docs/PHASE12O_OPTIONAL_LOCAL_LAN_PREVIEW_IMPLEMENTATION_REPORT.md`
+- `docs/PHASE12P_OPTIONAL_OUTBOUND_DELIVERY_CONTRACT.md`
+- `docs/PHASE12P_OPTIONAL_OUTBOUND_DELIVERY_REPORT.md`
 - `codie/delivery/__init__.py`
 - `codie/delivery/local_preview.py`
 - `tests/test_delivery_local_preview.py`
@@ -61,8 +62,8 @@ binding, and has no provider/db/analytics/recommendation access.
 
 ## Public Functions / Classes Added
 
-Local preview server functions and the `serve-share-bundle` CLI command were
-added.
+No public code was added in Phase 12P. Outbound delivery rules and future
+contracts were documented.
 
 ## Schema Impact
 
@@ -107,11 +108,12 @@ rg -n "should play|must include|correct card|breaks the format|secretly optimal|
 - Delivery integrations remain split into future opt-in packets with privacy gates.
 - Local report sharing has a PowerShell usage guide.
 - Local LAN preview is implemented as selected-bundle read-only static serving.
+- Outbound delivery is contract-gated and not implemented.
 - No local UI API exists yet by design.
 
 ## Recommended Next Packet
 
-Implement Phase 12P Optional Outbound Delivery Contract.
+Implement Phase 12Q Share Bundle Zip Export Contract.
 
 Validation reference:
 
@@ -142,11 +144,13 @@ Validation reference:
 - `docs/PHASE12N_OPTIONAL_LOCAL_LAN_PREVIEW_REPORT.md`
 - `docs/PHASE12O_OPTIONAL_LOCAL_LAN_PREVIEW_IMPLEMENTATION_CONTRACT.md`
 - `docs/PHASE12O_OPTIONAL_LOCAL_LAN_PREVIEW_IMPLEMENTATION_REPORT.md`
+- `docs/PHASE12P_OPTIONAL_OUTBOUND_DELIVERY_CONTRACT.md`
+- `docs/PHASE12P_OPTIONAL_OUTBOUND_DELIVERY_REPORT.md`
 
 Define:
 
 ```text
-Phase 12P - Optional Outbound Delivery Contract
+Phase 12Q - Share Bundle Zip Export Contract
 ```
 
 Keep final recommendation generation separate until the Phase 8/10 boundaries are explicitly carried forward.
