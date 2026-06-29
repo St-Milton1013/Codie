@@ -1,13 +1,14 @@
 # Next Phase Contract
 
-Recommended next task: Phase 13 Simulator Contract Refresh
+Recommended next task: Phase 13A Probability Engine Core Models
 
 ## Current Status
 
-Phase 12S Share Bundle Zip Usage Documentation is implemented and validated.
+Phase 13 Simulator Contract Refresh is implemented and validated.
 
-Phase 12 is now closed from local UI/report sharing through static bundle,
-QR, PDF-ready HTML, LAN preview, and deterministic zip export documentation.
+Codie now has a refreshed simulator/probability/challenge-mode contract. The
+next step is pure in-memory probability engine models only, with no simulator
+search behavior yet.
 
 ## Files Created Or Modified In Latest Packet
 
@@ -44,6 +45,8 @@ QR, PDF-ready HTML, LAN preview, and deterministic zip export documentation.
 - `docs/PHASE12R_SHARE_BUNDLE_ZIP_EXPORT_IMPLEMENTATION_REPORT.md`
 - `docs/PHASE12S_SHARE_BUNDLE_ZIP_USAGE_DOCUMENTATION_CONTRACT.md`
 - `docs/PHASE12S_SHARE_BUNDLE_ZIP_USAGE_DOCUMENTATION_REPORT.md`
+- `docs/PHASE13_SIMULATOR_CONTRACT_REFRESH.md`
+- `docs/PHASE13_SIMULATOR_CONTRACT_REFRESH_REPORT.md`
 - `codie/exports/share_bundle_zip.py`
 - `codie/delivery/__init__.py`
 - `codie/delivery/local_preview.py`
@@ -69,8 +72,8 @@ QR, PDF-ready HTML, LAN preview, and deterministic zip export documentation.
 
 ## Public Functions / Classes Added
 
-No public code was added in Phase 12S. The local/mobile report sharing guide
-was updated for deterministic zip usage.
+No public code was added in Phase 13. Simulator contracts and build order were
+refreshed.
 
 ## Schema Impact
 
@@ -118,11 +121,13 @@ rg -n "should play|must include|correct card|breaks the format|secretly optimal|
 - Outbound delivery is contract-gated and not implemented.
 - Zip export is implemented as local-only deterministic packaging.
 - Phase 12 local/mobile report sharing documentation is complete.
+- Simulator schema currently stores reproducibility metadata implicitly through JSON payload fields; explicit seed/version columns should be reviewed before broad simulator usage.
+- Challenge Mode and line review need future schema contracts before implementation.
 - No local UI API exists yet by design.
 
 ## Recommended Next Packet
 
-Implement Phase 13 Simulator Contract Refresh.
+Implement Phase 13A Probability Engine Core Models.
 
 Validation reference:
 
@@ -161,14 +166,16 @@ Validation reference:
 - `docs/PHASE12R_SHARE_BUNDLE_ZIP_EXPORT_IMPLEMENTATION_REPORT.md`
 - `docs/PHASE12S_SHARE_BUNDLE_ZIP_USAGE_DOCUMENTATION_CONTRACT.md`
 - `docs/PHASE12S_SHARE_BUNDLE_ZIP_USAGE_DOCUMENTATION_REPORT.md`
+- `docs/PHASE13_SIMULATOR_CONTRACT_REFRESH.md`
+- `docs/PHASE13_SIMULATOR_CONTRACT_REFRESH_REPORT.md`
 
 Define:
 
 ```text
-Phase 13 - Simulator Contract Refresh
+Phase 13A - Probability Engine Core Models
 ```
 
-Refresh the simulator/probability/challenge-mode contracts before implementation.
+Implement pure in-memory probability engine dataclasses/typed models only.
 Keep final recommendation generation separate until the Phase 8/10 boundaries
 are explicitly carried forward.
 
@@ -188,7 +195,8 @@ are explicitly carried forward.
 - Do not add hosted/mobile delivery integrations without an opt-in planning contract.
 - Do not add outbound delivery or public tunnels during local LAN preview implementation.
 - Do not make zip export send files anywhere.
-- Do not start simulator implementation before Phase 13 contract refresh is accepted.
+- Do not implement simulator search before core models are accepted.
+- Do not implement Challenge Mode before the core simulator trace model exists.
 
 ## Required Phase Packet Shape
 

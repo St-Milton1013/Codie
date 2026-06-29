@@ -12,7 +12,7 @@ Use the repository and this handoff as the source of truth. Do not rely on prior
 GitHub: https://github.com/St-Milton1013/Codie
 Local path: C:\Users\Main\Documents\Codex\2026-06-22\next-phase-contract-recommended-next-task
 Branch: main
-Latest pushed commit before Phase 12S closure: 4e8b1c0 Add Phase 12R share bundle zip export
+Latest pushed commit before Phase 13 closure: 94d4fbe Close Phase 12 report sharing docs
 ```
 
 ## Current Validation Baseline
@@ -20,7 +20,7 @@ Latest pushed commit before Phase 12S closure: 4e8b1c0 Add Phase 12R share bundl
 Latest full-suite result:
 
 ```text
-Ran 319 tests in 2.458s
+Ran 319 tests in 2.547s
 
 OK (skipped=1)
 ```
@@ -97,6 +97,7 @@ Phase 12Q Share Bundle Zip Export Contract: PASS
 Phase 12R Share Bundle Zip Export Implementation: PASS
 Phase 12S Share Bundle Zip Usage Documentation: PASS
 Phase 12 Local UI/Report Sharing Track: COMPLETE
+Phase 13 Simulator Contract Refresh: PASS
 ```
 
 ## Recent Commits
@@ -244,7 +245,7 @@ Simulation evidence must not enter Evidence Stack unless constitution thresholds
 Preferred next move:
 
 ```text
-Phase 13 - Simulator Contract Refresh
+Phase 13A - Probability Engine Core Models
 ```
 
 Alternate next safe option:
@@ -298,6 +299,8 @@ docs/PHASE12R_SHARE_BUNDLE_ZIP_EXPORT_IMPLEMENTATION_CONTRACT.md
 docs/PHASE12R_SHARE_BUNDLE_ZIP_EXPORT_IMPLEMENTATION_REPORT.md
 docs/PHASE12S_SHARE_BUNDLE_ZIP_USAGE_DOCUMENTATION_CONTRACT.md
 docs/PHASE12S_SHARE_BUNDLE_ZIP_USAGE_DOCUMENTATION_REPORT.md
+docs/PHASE13_SIMULATOR_CONTRACT_REFRESH.md
+docs/PHASE13_SIMULATOR_CONTRACT_REFRESH_REPORT.md
 ```
 
 Next UI implementation packet:
@@ -325,6 +328,7 @@ Phase 13 simulator contracts or a new UI/API contract is explicitly selected.
 - Phase 12 local/mobile report sharing documentation is complete.
 - No local UI API exists yet.
 - No simulator implementation exists yet.
+- Simulator contract refresh is complete; next simulator packet is pure core models.
 - Final recommendation output remains intentionally separate.
 
 ## Quality Gate
