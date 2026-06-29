@@ -1,15 +1,16 @@
 # Next Phase Contract
 
-Recommended next task: Phase 13B Probability Engine Core Models Implementation
+Recommended next task: Phase 13C Simulator Card Definition Manager Contract
 
 ## Current Status
 
-Phase 13A cEDHData Reference Extraction And Core Model Design is implemented
-and validated.
+Phase 13B Probability Engine Core Models Implementation is implemented and
+validated.
 
-Codie now has a derived, Python-native model design informed by the supplied
-cEDHData reference files. The original reference source files were inspected
-locally only and were not copied into Codie.
+Codie now has pure in-memory, Python-native probability engine dataclasses for
+mana costs, mana options, action declarations, simulation card models, target
+conditions, configs, decks, unsupported items, traces, and results. These models
+preserve reference payload shapes without executing simulator behavior.
 
 ## Files Created Or Modified In Latest Packet
 
@@ -51,6 +52,11 @@ locally only and were not copied into Codie.
 - `docs/PHASE13A_CEDHDATA_REFERENCE_EXTRACTION_AND_CORE_MODEL_DESIGN.md`
 - `docs/PHASE13A_CEDHDATA_REFERENCE_EXTRACTION_AND_CORE_MODEL_DESIGN_REPORT.md`
 - `docs/CEDHDATA_SIMULATOR_REFERENCE_CAPTURE_MANIFEST.md`
+- `docs/PHASE13B_PROBABILITY_ENGINE_CORE_MODELS_CONTRACT.md`
+- `docs/PHASE13B_PROBABILITY_ENGINE_CORE_MODELS_REPORT.md`
+- `codie/probability_engine/__init__.py`
+- `codie/probability_engine/models.py`
+- `tests/test_probability_engine_models.py`
 - `codie/exports/share_bundle_zip.py`
 - `codie/delivery/__init__.py`
 - `codie/delivery/local_preview.py`
@@ -76,8 +82,20 @@ locally only and were not copied into Codie.
 
 ## Public Functions / Classes Added
 
-No public code was added in Phase 13A. Reference extraction and model design
-were documented only.
+```text
+ManaCost
+ManaOption
+SimulationActionModel
+SimulationCardModel
+SimulationTargetCondition
+SimulationConfig
+SimulationDeckCard
+SimulationDeck
+SimulationUnsupportedItem
+SimulationTraceAction
+SimulationTrace
+SimulationResult
+```
 
 ## Schema Impact
 
@@ -134,7 +152,7 @@ rg -n "should play|must include|correct card|breaks the format|secretly optimal|
 
 ## Recommended Next Packet
 
-Implement Phase 13B Probability Engine Core Models Implementation.
+Write Phase 13C Simulator Card Definition Manager Contract.
 
 Validation reference:
 
@@ -178,16 +196,19 @@ Validation reference:
 - `docs/PHASE13A_CEDHDATA_REFERENCE_EXTRACTION_AND_CORE_MODEL_DESIGN.md`
 - `docs/PHASE13A_CEDHDATA_REFERENCE_EXTRACTION_AND_CORE_MODEL_DESIGN_REPORT.md`
 - `docs/ROADMAP_PATCH_SIMULATOR_CARD_DEFINITION_MANAGER.md`
+- `docs/PHASE13B_PROBABILITY_ENGINE_CORE_MODELS_CONTRACT.md`
+- `docs/PHASE13B_PROBABILITY_ENGINE_CORE_MODELS_REPORT.md`
 
 Define:
 
 ```text
-Phase 13B - Probability Engine Core Models Implementation
+Phase 13C - Simulator Card Definition Manager Contract
 ```
 
-Implement the pure in-memory Python-native models from Phase 13A only.
-Keep final recommendation generation separate until the Phase 8/10 boundaries
-are explicitly carried forward.
+Define the card behavior definition manager before simulator action execution.
+This packet should remain contract-first and cover behavior overlays, relevance
+classification, unsupported-card reporting, pending-review cards, local fixture
+shape, and migration boundaries.
 
 ## Do Not Do
 
@@ -206,7 +227,8 @@ are explicitly carried forward.
 - Do not add outbound delivery or public tunnels during local LAN preview implementation.
 - Do not make zip export send files anywhere.
 - Do not implement simulator search before core models are accepted.
-- Do not implement Challenge Mode before the core simulator trace model exists.
+- Do not implement Challenge Mode before action execution and trace validation
+  exist.
 - Do not copy cEDHData source code or full reference payloads into Codie.
 - Do not make the simulator model every card; use target relevance and unsupported reporting.
 

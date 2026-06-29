@@ -12,7 +12,7 @@ Use the repository and this handoff as the source of truth. Do not rely on prior
 GitHub: https://github.com/St-Milton1013/Codie
 Local path: C:\Users\Main\Documents\Codex\2026-06-22\next-phase-contract-recommended-next-task
 Branch: main
-Latest pushed commit before Phase 13A closure: 1cfccba Add Phase 13 simulator contract refresh
+Latest pushed commit before local Phase 13 work: 1cfccba Add Phase 13 simulator contract refresh
 ```
 
 ## Current Validation Baseline
@@ -20,7 +20,7 @@ Latest pushed commit before Phase 13A closure: 1cfccba Add Phase 13 simulator co
 Latest full-suite result:
 
 ```text
-Ran 319 tests in 2.482s
+Ran 331 tests in 2.595s
 
 OK (skipped=1)
 ```
@@ -99,6 +99,7 @@ Phase 12S Share Bundle Zip Usage Documentation: PASS
 Phase 12 Local UI/Report Sharing Track: COMPLETE
 Phase 13 Simulator Contract Refresh: PASS
 Phase 13A cEDHData Reference Extraction And Core Model Design: PASS
+Phase 13B Probability Engine Core Models: PASS
 ```
 
 ## Recent Commits
@@ -246,13 +247,13 @@ Simulation evidence must not enter Evidence Stack unless constitution thresholds
 Preferred next move:
 
 ```text
-Phase 13B - Probability Engine Core Models Implementation
+Phase 13C - Simulator Card Definition Manager Contract
 ```
 
 Alternate next safe option:
 
 ```text
-Phase 13 - Simulator Contract Refresh
+Phase 13D - Seeded Shuffle And Opening Hand Contract
 ```
 
 Avoid starting:
@@ -304,6 +305,8 @@ docs/PHASE13_SIMULATOR_CONTRACT_REFRESH.md
 docs/PHASE13_SIMULATOR_CONTRACT_REFRESH_REPORT.md
 docs/PHASE13A_CEDHDATA_REFERENCE_EXTRACTION_AND_CORE_MODEL_DESIGN.md
 docs/PHASE13A_CEDHDATA_REFERENCE_EXTRACTION_AND_CORE_MODEL_DESIGN_REPORT.md
+docs/PHASE13B_PROBABILITY_ENGINE_CORE_MODELS_CONTRACT.md
+docs/PHASE13B_PROBABILITY_ENGINE_CORE_MODELS_REPORT.md
 ```
 
 Next UI implementation packet:
@@ -331,9 +334,12 @@ Phase 13 simulator contracts or a new UI/API contract is explicitly selected.
 - Phase 12 local/mobile report sharing documentation is complete.
 - No local UI API exists yet.
 - No simulator implementation exists yet.
-- Simulator contract refresh is complete; next simulator packet is pure core models.
+- Simulator contract refresh and pure core models are complete.
+- Probability engine currently has pure dataclasses only; no seeded shuffle,
+  mulligan policy, action execution, target search, or Challenge Mode exists.
 - cEDHData reference files were inspected locally only; do not copy the JavaScript bundle or full card catalog into Codie.
-- Simulator Card Definition Manager roadmap patch is accepted; implement it after core models and before action search.
+- Simulator Card Definition Manager roadmap patch is accepted; next packet should
+  define it before action search.
 - cEDHData public asset metadata and local reference hashes are recorded in docs/CEDHDATA_SIMULATOR_REFERENCE_CAPTURE_MANIFEST.md.
 - Final recommendation output remains intentionally separate.
 
