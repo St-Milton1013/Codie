@@ -1,15 +1,16 @@
 # Next Phase Contract
 
-Recommended next task: Phase 13K Target Access Search Contract
+Recommended next task: Phase 13L Target Access Search MVP Implementation
 
 ## Current Status
 
-Phase 13J Mulligan Policy Implementation is implemented and
-validated.
+Phase 13K Target Access Search Contract is documented and validated.
 
-Codie now has deterministic London mulligan policy evaluation, attempt tracking,
-bottoming, and result serialization. It still has no target search, action
-execution, Monte Carlo batches, persistence, or Challenge Mode.
+Codie now has a bounded target access search contract covering state shape,
+allowed action categories, target condition semantics, trace output,
+unsupported behavior handling, and deterministic termination rules. It still has
+no target search implementation, action execution implementation, Monte Carlo
+batches, persistence, Challenge Mode, or line review.
 
 ## Files Created Or Modified In Latest Packet
 
@@ -81,6 +82,8 @@ execution, Monte Carlo batches, persistence, or Challenge Mode.
 - `tests/test_probability_engine_mulligan.py`
 - `tests/fixtures/probability_engine/mulligan/mulligan_deck.txt`
 - `docs/PHASE13J_MULLIGAN_POLICY_IMPLEMENTATION_REPORT.md`
+- `docs/PHASE13K_TARGET_ACCESS_SEARCH_CONTRACT.md`
+- `docs/PHASE13K_TARGET_ACCESS_SEARCH_CONTRACT_REPORT.md`
 - `codie/probability_engine/__init__.py`
 - `codie/probability_engine/models.py`
 - `tests/test_probability_engine_models.py`
@@ -110,13 +113,7 @@ execution, Monte Carlo batches, persistence, or Challenge Mode.
 ## Public Functions / Classes Added
 
 ```text
-MulliganPolicyConfig
-MulliganDecision
-MulliganStep
-MulliganResult
-evaluate_opening_hand
-select_bottom_cards
-simulate_london_mulligan
+None. Latest packet is contract-only.
 ```
 
 ## Schema Impact
@@ -171,10 +168,11 @@ rg -n "should play|must include|correct card|breaks the format|secretly optimal|
 - Simulator Card Definition Manager is accepted as a future roadmap patch and should land after core models, before action search.
 - cEDHData public asset metadata and local reference hashes are recorded; full assets remain outside the repo.
 - No local UI API exists yet by design.
+- Target access search is contract-gated but not implemented.
 
 ## Recommended Next Packet
 
-Write Phase 13K Target Access Search Contract.
+Implement Phase 13L Target Access Search MVP.
 
 Validation reference:
 
@@ -232,17 +230,20 @@ Validation reference:
 - `docs/PHASE13I_MULLIGAN_POLICY_CONTRACT.md`
 - `docs/PHASE13I_MULLIGAN_POLICY_CONTRACT_REPORT.md`
 - `docs/PHASE13J_MULLIGAN_POLICY_IMPLEMENTATION_REPORT.md`
+- `docs/PHASE13K_TARGET_ACCESS_SEARCH_CONTRACT.md`
+- `docs/PHASE13K_TARGET_ACCESS_SEARCH_CONTRACT_REPORT.md`
 
 Define:
 
 ```text
-Phase 13K - Target Access Search Contract
+Phase 13L - Target Access Search MVP Implementation
 ```
 
-Define target access search MVP scope, state representation, allowed action
-execution categories, trace output, unsupported behavior handling, and
-termination rules before implementation. Keep it contract-only before Monte
-Carlo batches, persistence, Challenge Mode, and line review.
+Build the first bounded deterministic target access search implementation.
+Follow the Phase 13K contract for state/action ordering, target condition
+semantics, trace output, unsupported behavior reporting, and termination rules.
+Keep Monte Carlo batches, persistence, Challenge Mode, and line review out of
+scope.
 
 ## Do Not Do
 

@@ -12,7 +12,7 @@ Use the repository and this handoff as the source of truth. Do not rely on prior
 GitHub: https://github.com/St-Milton1013/Codie
 Local path: C:\Users\Main\Documents\Codex\2026-06-22\next-phase-contract-recommended-next-task
 Branch: main
-Latest pushed commit before local Phase 13 work: 1cfccba Add Phase 13 simulator contract refresh
+Latest pushed commit before local Phase 13K work: dbbb255 Add Phase 13J mulligan policy
 ```
 
 ## Current Validation Baseline
@@ -20,7 +20,7 @@ Latest pushed commit before local Phase 13 work: 1cfccba Add Phase 13 simulator 
 Latest full-suite result:
 
 ```text
-Ran 383 tests in 2.696s
+Ran 383 tests in 2.909s
 
 OK (skipped=1)
 ```
@@ -108,6 +108,7 @@ Phase 13G Seeded Shuffle And Opening Hand Contract: PASS
 Phase 13H Seeded Shuffle And Opening Hand Implementation: PASS
 Phase 13I Mulligan Policy Contract: PASS
 Phase 13J Mulligan Policy Implementation: PASS
+Phase 13K Target Access Search Contract: PASS
 ```
 
 ## Recent Commits
@@ -255,13 +256,13 @@ Simulation evidence must not enter Evidence Stack unless constitution thresholds
 Preferred next move:
 
 ```text
-Phase 13K - Target Access Search Contract
+Phase 13L - Target Access Search MVP Implementation
 ```
 
 Alternate next safe option:
 
 ```text
-Phase 13L - Target Access Search MVP Implementation
+Phase 13M - Monte Carlo Batch Runner Contract
 ```
 
 Avoid starting:
@@ -327,7 +328,21 @@ docs/PHASE13H_SEEDED_SHUFFLE_AND_OPENING_HAND_IMPLEMENTATION_REPORT.md
 docs/PHASE13I_MULLIGAN_POLICY_CONTRACT.md
 docs/PHASE13I_MULLIGAN_POLICY_CONTRACT_REPORT.md
 docs/PHASE13J_MULLIGAN_POLICY_IMPLEMENTATION_REPORT.md
+docs/PHASE13K_TARGET_ACCESS_SEARCH_CONTRACT.md
+docs/PHASE13K_TARGET_ACCESS_SEARCH_CONTRACT_REPORT.md
 ```
+
+Latest Phase 13K packet:
+
+```text
+docs/PHASE13K_TARGET_ACCESS_SEARCH_CONTRACT.md
+docs/PHASE13K_TARGET_ACCESS_SEARCH_CONTRACT_REPORT.md
+```
+
+Phase 13K defines the bounded deterministic target access search MVP, including
+state shape, action categories, target condition modes, trace shape,
+unsupported behavior handling, and termination rules. It adds no implementation
+code.
 
 Next UI implementation packet:
 
@@ -355,8 +370,9 @@ Phase 13 simulator contracts or a new UI/API contract is explicitly selected.
 - No local UI API exists yet.
 - No simulator implementation exists yet.
 - Simulator contract refresh and pure core models are complete.
-- Probability engine currently has pure dataclasses only; no seeded shuffle,
-  mulligan policy, action execution, target search, or Challenge Mode exists.
+- Probability engine currently has core dataclasses, card definition manager,
+  deck/target parsing, seeded shuffle/opening hands, and mulligan policy. It
+  has no target search implementation, action execution, or Challenge Mode.
 - cEDHData reference files were inspected locally only; do not copy the JavaScript bundle or full card catalog into Codie.
 - Simulator Card Definition Manager implementation is complete. It is
   in-memory only and does not execute card actions.
@@ -366,8 +382,9 @@ Phase 13 simulator contracts or a new UI/API contract is explicitly selected.
 - Seeded shuffle and opening-hand implementation is complete.
 - Mulligan policy contract is complete.
 - Mulligan policy implementation is complete.
-- Next packet should define target access search MVP before action execution,
-  Monte Carlo batches, persistence, Challenge Mode, or line review.
+- Target access search MVP contract is complete.
+- Next packet should implement target access search MVP before Monte Carlo
+  batches, persistence, Challenge Mode, or line review.
 - cEDHData public asset metadata and local reference hashes are recorded in docs/CEDHDATA_SIMULATOR_REFERENCE_CAPTURE_MANIFEST.md.
 - Final recommendation output remains intentionally separate.
 
