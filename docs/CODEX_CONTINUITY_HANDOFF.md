@@ -12,7 +12,7 @@ Use the repository and this handoff as the source of truth. Do not rely on prior
 GitHub: https://github.com/St-Milton1013/Codie
 Local path: C:\Users\Main\Documents\Codex\2026-06-22\next-phase-contract-recommended-next-task
 Branch: main
-Latest pushed commit before local Phase 13L work: 1af5b10 Add Phase 13K target access search contract
+Latest pushed commit before local Phase 13M work: f297b23 Add Phase 13L target access search MVP
 ```
 
 ## Current Validation Baseline
@@ -20,7 +20,7 @@ Latest pushed commit before local Phase 13L work: 1af5b10 Add Phase 13K target a
 Latest full-suite result:
 
 ```text
-Ran 398 tests in 2.624s
+Ran 398 tests in 2.726s
 
 OK (skipped=1)
 ```
@@ -110,6 +110,7 @@ Phase 13I Mulligan Policy Contract: PASS
 Phase 13J Mulligan Policy Implementation: PASS
 Phase 13K Target Access Search Contract: PASS
 Phase 13L Target Access Search MVP Implementation: PASS
+Phase 13M Monte Carlo Batch Runner Contract: PASS
 ```
 
 ## Recent Commits
@@ -257,13 +258,13 @@ Simulation evidence must not enter Evidence Stack unless constitution thresholds
 Preferred next move:
 
 ```text
-Phase 13M - Monte Carlo Batch Runner Contract
+Phase 13N - Monte Carlo Batch Runner Implementation
 ```
 
 Alternate next safe option:
 
 ```text
-Phase 13N - Monte Carlo Batch Runner Implementation
+Phase 13O - Simulator Persistence Contract
 ```
 
 Avoid starting:
@@ -332,6 +333,8 @@ docs/PHASE13J_MULLIGAN_POLICY_IMPLEMENTATION_REPORT.md
 docs/PHASE13K_TARGET_ACCESS_SEARCH_CONTRACT.md
 docs/PHASE13K_TARGET_ACCESS_SEARCH_CONTRACT_REPORT.md
 docs/PHASE13L_TARGET_ACCESS_SEARCH_MVP_IMPLEMENTATION_REPORT.md
+docs/PHASE13M_MONTE_CARLO_BATCH_RUNNER_CONTRACT.md
+docs/PHASE13M_MONTE_CARLO_BATCH_RUNNER_CONTRACT_REPORT.md
 ```
 
 Latest Phase 13K packet:
@@ -358,6 +361,18 @@ docs/PHASE13L_TARGET_ACCESS_SEARCH_MVP_IMPLEMENTATION_REPORT.md
 Phase 13L implements bounded deterministic target access search for exact hands
 and known library order. It reports success, failure, unsupported behavior,
 invalid targets, and limits with serializable traces.
+
+Latest Phase 13M packet:
+
+```text
+docs/PHASE13M_MONTE_CARLO_BATCH_RUNNER_CONTRACT.md
+docs/PHASE13M_MONTE_CARLO_BATCH_RUNNER_CONTRACT_REPORT.md
+```
+
+Phase 13M defines deterministic batch execution over seeded games, connecting
+shuffle, mulligan policy, and target access search while preserving trace
+samples, reproducibility metadata, and unsupported behavior accounting. It adds
+no implementation code.
 
 Next UI implementation packet:
 
@@ -400,7 +415,9 @@ Phase 13 simulator contracts or a new UI/API contract is explicitly selected.
 - Mulligan policy implementation is complete.
 - Target access search MVP contract is complete.
 - Target access search MVP implementation is complete.
-- Next packet should define Monte Carlo batch execution before implementation.
+- Monte Carlo batch runner contract is complete.
+- Next packet should implement deterministic Monte Carlo batch execution before
+  persistence, Challenge Mode, line review, UI, or recommendations.
 - cEDHData public asset metadata and local reference hashes are recorded in docs/CEDHDATA_SIMULATOR_REFERENCE_CAPTURE_MANIFEST.md.
 - Final recommendation output remains intentionally separate.
 
