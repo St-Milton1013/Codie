@@ -78,6 +78,16 @@ from .search import (
     is_target_accessed,
     serialize_search_trace,
 )
+from .batch import (
+    BATCH_VERSION,
+    BatchGameResult,
+    BatchRunConfig,
+    BatchRunResult,
+    BatchTraceSample,
+    run_simulation_batch,
+    run_single_simulation_game,
+    summarize_batch_results,
+)
 
 __all__ = [
     "MANA_COLOR_KEYS",
@@ -147,4 +157,12 @@ __all__ = [
     "find_target_access_line",
     "is_target_accessed",
     "serialize_search_trace",
+    "BATCH_VERSION",
+    "BatchGameResult",
+    "BatchRunConfig",
+    "BatchRunResult",
+    "BatchTraceSample",
+    "run_simulation_batch",
+    "run_single_simulation_game",
+    "summarize_batch_results",
 ]

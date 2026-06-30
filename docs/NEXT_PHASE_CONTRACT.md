@@ -1,16 +1,16 @@
 # Next Phase Contract
 
-Recommended next task: Phase 13N Monte Carlo Batch Runner Implementation
+Recommended next task: Phase 13O Simulator Persistence Contract
 
 ## Current Status
 
-Phase 13M Monte Carlo Batch Runner Contract is documented and validated.
+Phase 13N Monte Carlo Batch Runner Implementation is implemented and validated.
 
-Codie now has a contract for deterministic Monte Carlo batch execution over
-seeded games, connecting shuffle, mulligan policy, and target access search
-while preserving trace samples, reproducibility metadata, and unsupported
-behavior accounting. It still has no batch runner implementation, persistence,
-Challenge Mode, or line review.
+Codie now has deterministic Monte Carlo batch execution over seeded games,
+connecting shuffle, mulligan policy, and target access search with aggregate
+status counts, trace samples, unsupported accounting, and reproducibility
+metadata. It still has no simulator persistence, Challenge Mode, line review,
+UI, or recommendation output.
 
 ## Files Created Or Modified In Latest Packet
 
@@ -90,6 +90,10 @@ Challenge Mode, or line review.
 - `docs/PHASE13L_TARGET_ACCESS_SEARCH_MVP_IMPLEMENTATION_REPORT.md`
 - `docs/PHASE13M_MONTE_CARLO_BATCH_RUNNER_CONTRACT.md`
 - `docs/PHASE13M_MONTE_CARLO_BATCH_RUNNER_CONTRACT_REPORT.md`
+- `codie/probability_engine/batch.py`
+- `tests/test_probability_engine_batch.py`
+- `tests/fixtures/probability_engine/batch/batch_deck.txt`
+- `docs/PHASE13N_MONTE_CARLO_BATCH_RUNNER_IMPLEMENTATION_REPORT.md`
 - `codie/probability_engine/__init__.py`
 - `codie/probability_engine/models.py`
 - `tests/test_probability_engine_models.py`
@@ -119,7 +123,13 @@ Challenge Mode, or line review.
 ## Public Functions / Classes Added
 
 ```text
-None. Latest packet is contract-only.
+BatchRunConfig
+BatchTraceSample
+BatchGameResult
+BatchRunResult
+run_simulation_batch
+run_single_simulation_game
+summarize_batch_results
 ```
 
 ## Schema Impact
@@ -175,13 +185,13 @@ rg -n "should play|must include|correct card|breaks the format|secretly optimal|
 - cEDHData public asset metadata and local reference hashes are recorded; full assets remain outside the repo.
 - No local UI API exists yet by design.
 - Target access search MVP is implemented for exact hands and known library order.
-- Monte Carlo batch runner is contract-gated but not implemented.
-- Monte Carlo batches, persistence, Challenge Mode, and line review are not
-  implemented.
+- Monte Carlo batch runner is implemented.
+- Simulator persistence, Challenge Mode, line review, UI, and recommendation
+  output are not implemented.
 
 ## Recommended Next Packet
 
-Implement Phase 13N Monte Carlo Batch Runner.
+Write Phase 13O Simulator Persistence Contract.
 
 Validation reference:
 
@@ -244,18 +254,17 @@ Validation reference:
 - `docs/PHASE13L_TARGET_ACCESS_SEARCH_MVP_IMPLEMENTATION_REPORT.md`
 - `docs/PHASE13M_MONTE_CARLO_BATCH_RUNNER_CONTRACT.md`
 - `docs/PHASE13M_MONTE_CARLO_BATCH_RUNNER_CONTRACT_REPORT.md`
+- `docs/PHASE13N_MONTE_CARLO_BATCH_RUNNER_IMPLEMENTATION_REPORT.md`
 
 Define:
 
 ```text
-Phase 13N - Monte Carlo Batch Runner Implementation
+Phase 13O - Simulator Persistence Contract
 ```
 
-Build deterministic batch execution over seeded games, including shuffle,
-mulligan policy, target access search, aggregation, success/failure/unsupported
-trace sampling, unsupported accounting, and reproducibility metadata. Keep
-persistence, Challenge Mode, line review, UI, and recommendation output out of
-scope.
+Define schema/repository boundaries for storing simulator batch results,
+per-game metadata, trace samples, unsupported behavior, seeds, and version
+metadata. Keep it contract-only before adding persistence code.
 
 ## Do Not Do
 

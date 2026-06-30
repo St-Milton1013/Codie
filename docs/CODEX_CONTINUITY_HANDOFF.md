@@ -12,7 +12,7 @@ Use the repository and this handoff as the source of truth. Do not rely on prior
 GitHub: https://github.com/St-Milton1013/Codie
 Local path: C:\Users\Main\Documents\Codex\2026-06-22\next-phase-contract-recommended-next-task
 Branch: main
-Latest pushed commit before local Phase 13M work: f297b23 Add Phase 13L target access search MVP
+Latest pushed commit before local Phase 13N work: c067f16 Add Phase 13M Monte Carlo batch contract
 ```
 
 ## Current Validation Baseline
@@ -20,7 +20,7 @@ Latest pushed commit before local Phase 13M work: f297b23 Add Phase 13L target a
 Latest full-suite result:
 
 ```text
-Ran 398 tests in 2.726s
+Ran 413 tests in 3.260s
 
 OK (skipped=1)
 ```
@@ -111,6 +111,7 @@ Phase 13J Mulligan Policy Implementation: PASS
 Phase 13K Target Access Search Contract: PASS
 Phase 13L Target Access Search MVP Implementation: PASS
 Phase 13M Monte Carlo Batch Runner Contract: PASS
+Phase 13N Monte Carlo Batch Runner Implementation: PASS
 ```
 
 ## Recent Commits
@@ -258,13 +259,13 @@ Simulation evidence must not enter Evidence Stack unless constitution thresholds
 Preferred next move:
 
 ```text
-Phase 13N - Monte Carlo Batch Runner Implementation
+Phase 13O - Simulator Persistence Contract
 ```
 
 Alternate next safe option:
 
 ```text
-Phase 13O - Simulator Persistence Contract
+Phase 13P - Simulator Persistence Implementation
 ```
 
 Avoid starting:
@@ -335,6 +336,7 @@ docs/PHASE13K_TARGET_ACCESS_SEARCH_CONTRACT_REPORT.md
 docs/PHASE13L_TARGET_ACCESS_SEARCH_MVP_IMPLEMENTATION_REPORT.md
 docs/PHASE13M_MONTE_CARLO_BATCH_RUNNER_CONTRACT.md
 docs/PHASE13M_MONTE_CARLO_BATCH_RUNNER_CONTRACT_REPORT.md
+docs/PHASE13N_MONTE_CARLO_BATCH_RUNNER_IMPLEMENTATION_REPORT.md
 ```
 
 Latest Phase 13K packet:
@@ -374,6 +376,19 @@ shuffle, mulligan policy, and target access search while preserving trace
 samples, reproducibility metadata, and unsupported behavior accounting. It adds
 no implementation code.
 
+Latest Phase 13N packet:
+
+```text
+codie/probability_engine/batch.py
+tests/test_probability_engine_batch.py
+tests/fixtures/probability_engine/batch/batch_deck.txt
+docs/PHASE13N_MONTE_CARLO_BATCH_RUNNER_IMPLEMENTATION_REPORT.md
+```
+
+Phase 13N implements deterministic batch execution over seeded games, connecting
+shuffle, mulligan policy, and target access search. It reports aggregate status
+counts, trace samples, unsupported behavior, and reproducibility metadata.
+
 Next UI implementation packet:
 
 ```text
@@ -402,8 +417,8 @@ Phase 13 simulator contracts or a new UI/API contract is explicitly selected.
 - Simulator contract refresh and pure core models are complete.
 - Probability engine currently has core dataclasses, card definition manager,
   deck/target parsing, seeded shuffle/opening hands, mulligan policy, and target
-  access search. It has no Monte Carlo batch runner, persistence, Challenge
-  Mode, or line review.
+  access search, and Monte Carlo batch execution. It has no simulator
+  persistence, Challenge Mode, or line review.
 - cEDHData reference files were inspected locally only; do not copy the JavaScript bundle or full card catalog into Codie.
 - Simulator Card Definition Manager implementation is complete. It is
   in-memory only and does not execute card actions.
@@ -416,8 +431,9 @@ Phase 13 simulator contracts or a new UI/API contract is explicitly selected.
 - Target access search MVP contract is complete.
 - Target access search MVP implementation is complete.
 - Monte Carlo batch runner contract is complete.
-- Next packet should implement deterministic Monte Carlo batch execution before
-  persistence, Challenge Mode, line review, UI, or recommendations.
+- Monte Carlo batch runner implementation is complete.
+- Next packet should define simulator persistence before adding schema or
+  repository code.
 - cEDHData public asset metadata and local reference hashes are recorded in docs/CEDHDATA_SIMULATOR_REFERENCE_CAPTURE_MANIFEST.md.
 - Final recommendation output remains intentionally separate.
 
