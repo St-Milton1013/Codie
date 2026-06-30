@@ -133,6 +133,16 @@ from .reviewed_accuracy import (
     build_reviewed_accuracy_summary,
     summarize_line_review_rows,
 )
+from .review_export import (
+    REVIEW_EXPORT_SCHEMA_VERSION,
+    SimulationReviewExportBundle,
+    SimulationReviewMarkdownDocument,
+    build_simulation_review_export_bundle,
+    line_review_fixture_to_json_payload,
+    line_review_fixture_to_markdown,
+    simulation_review_summary_to_json_payload,
+    simulation_review_summary_to_markdown,
+)
 
 __all__ = [
     "MANA_COLOR_KEYS",
@@ -245,4 +255,12 @@ __all__ = [
     "ReviewStatusCount",
     "build_reviewed_accuracy_summary",
     "summarize_line_review_rows",
+    "REVIEW_EXPORT_SCHEMA_VERSION",
+    "SimulationReviewExportBundle",
+    "SimulationReviewMarkdownDocument",
+    "build_simulation_review_export_bundle",
+    "line_review_fixture_to_json_payload",
+    "line_review_fixture_to_markdown",
+    "simulation_review_summary_to_json_payload",
+    "simulation_review_summary_to_markdown",
 ]
