@@ -95,6 +95,20 @@ from .persistence import (
     persist_batch_run_result,
     trace_sample_to_repository_row,
 )
+from .challenge_mode import (
+    ANSWER_NO,
+    ANSWER_UNKNOWN,
+    ANSWER_YES,
+    CHALLENGE_VERSION,
+    ChallengeAnswer,
+    ChallengeConfig,
+    ChallengePrompt,
+    ChallengeResult,
+    generate_challenge_prompt,
+    record_challenge_answer,
+    serialize_challenge_result,
+    verify_challenge_answer,
+)
 
 __all__ = [
     "MANA_COLOR_KEYS",
@@ -177,4 +191,16 @@ __all__ = [
     "deterministic_batch_id",
     "persist_batch_run_result",
     "trace_sample_to_repository_row",
+    "ANSWER_NO",
+    "ANSWER_UNKNOWN",
+    "ANSWER_YES",
+    "CHALLENGE_VERSION",
+    "ChallengeAnswer",
+    "ChallengeConfig",
+    "ChallengePrompt",
+    "ChallengeResult",
+    "generate_challenge_prompt",
+    "record_challenge_answer",
+    "serialize_challenge_result",
+    "verify_challenge_answer",
 ]
