@@ -1,16 +1,15 @@
 # Next Phase Contract
 
-Recommended next task: Phase 13L Target Access Search MVP Implementation
+Recommended next task: Phase 13M Monte Carlo Batch Runner Contract
 
 ## Current Status
 
-Phase 13K Target Access Search Contract is documented and validated.
+Phase 13L Target Access Search MVP Implementation is implemented and validated.
 
-Codie now has a bounded target access search contract covering state shape,
-allowed action categories, target condition semantics, trace output,
-unsupported behavior handling, and deterministic termination rules. It still has
-no target search implementation, action execution implementation, Monte Carlo
-batches, persistence, Challenge Mode, or line review.
+Codie now has bounded deterministic target access search over exact opening
+hands and known library order. It can report success, failure, unsupported
+behavior, invalid targets, and search limits with serializable traces. It still
+has no Monte Carlo batch runner, persistence, Challenge Mode, or line review.
 
 ## Files Created Or Modified In Latest Packet
 
@@ -84,6 +83,10 @@ batches, persistence, Challenge Mode, or line review.
 - `docs/PHASE13J_MULLIGAN_POLICY_IMPLEMENTATION_REPORT.md`
 - `docs/PHASE13K_TARGET_ACCESS_SEARCH_CONTRACT.md`
 - `docs/PHASE13K_TARGET_ACCESS_SEARCH_CONTRACT_REPORT.md`
+- `codie/probability_engine/search.py`
+- `tests/test_probability_engine_search.py`
+- `tests/fixtures/probability_engine/search/target_access_deck.txt`
+- `docs/PHASE13L_TARGET_ACCESS_SEARCH_MVP_IMPLEMENTATION_REPORT.md`
 - `codie/probability_engine/__init__.py`
 - `codie/probability_engine/models.py`
 - `tests/test_probability_engine_models.py`
@@ -113,7 +116,16 @@ batches, persistence, Challenge Mode, or line review.
 ## Public Functions / Classes Added
 
 ```text
-None. Latest packet is contract-only.
+SearchConfig
+SearchAction
+SearchTrace
+SearchState
+SearchResult
+TargetAccessResult
+build_initial_search_state
+find_target_access_line
+is_target_accessed
+serialize_search_trace
 ```
 
 ## Schema Impact
@@ -168,11 +180,13 @@ rg -n "should play|must include|correct card|breaks the format|secretly optimal|
 - Simulator Card Definition Manager is accepted as a future roadmap patch and should land after core models, before action search.
 - cEDHData public asset metadata and local reference hashes are recorded; full assets remain outside the repo.
 - No local UI API exists yet by design.
-- Target access search is contract-gated but not implemented.
+- Target access search MVP is implemented for exact hands and known library order.
+- Monte Carlo batches, persistence, Challenge Mode, and line review are not
+  implemented.
 
 ## Recommended Next Packet
 
-Implement Phase 13L Target Access Search MVP.
+Write Phase 13M Monte Carlo Batch Runner Contract.
 
 Validation reference:
 
@@ -232,18 +246,18 @@ Validation reference:
 - `docs/PHASE13J_MULLIGAN_POLICY_IMPLEMENTATION_REPORT.md`
 - `docs/PHASE13K_TARGET_ACCESS_SEARCH_CONTRACT.md`
 - `docs/PHASE13K_TARGET_ACCESS_SEARCH_CONTRACT_REPORT.md`
+- `docs/PHASE13L_TARGET_ACCESS_SEARCH_MVP_IMPLEMENTATION_REPORT.md`
 
 Define:
 
 ```text
-Phase 13L - Target Access Search MVP Implementation
+Phase 13M - Monte Carlo Batch Runner Contract
 ```
 
-Build the first bounded deterministic target access search implementation.
-Follow the Phase 13K contract for state/action ordering, target condition
-semantics, trace output, unsupported behavior reporting, and termination rules.
-Keep Monte Carlo batches, persistence, Challenge Mode, and line review out of
-scope.
+Define batch execution over deterministic seeded games, including shuffle,
+mulligan policy, target access search, aggregation, success/failure trace
+sampling, unsupported accounting, and reproducibility metadata. Keep it
+contract-only before persistence, Challenge Mode, and line review.
 
 ## Do Not Do
 
