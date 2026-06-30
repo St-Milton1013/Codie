@@ -109,6 +109,16 @@ from .challenge_mode import (
     serialize_challenge_result,
     verify_challenge_answer,
 )
+from .line_review import (
+    LineReviewAnnotation,
+    LineReviewFixture,
+    LineReviewReason,
+    LineReviewStatus,
+    create_line_review_annotation,
+    export_line_review_fixture,
+    reviewed_line_counts_as_success,
+    serialize_line_review_annotation,
+)
 
 __all__ = [
     "MANA_COLOR_KEYS",
@@ -203,4 +213,12 @@ __all__ = [
     "record_challenge_answer",
     "serialize_challenge_result",
     "verify_challenge_answer",
+    "LineReviewAnnotation",
+    "LineReviewFixture",
+    "LineReviewReason",
+    "LineReviewStatus",
+    "create_line_review_annotation",
+    "export_line_review_fixture",
+    "reviewed_line_counts_as_success",
+    "serialize_line_review_annotation",
 ]
