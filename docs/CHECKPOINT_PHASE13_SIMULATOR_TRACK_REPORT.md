@@ -3,9 +3,12 @@
 ## Verdict
 
 ```text
-Phase 13 Simulator Track: PASS
-Status: Ready for outside validation
+Phase 13 Simulator Track Internal Checkpoint: PASS
+Status: Ready for outside validation before Phase 14
 ```
+
+This is an internal checkpoint, not external proof. Phase 14 should not start
+until the outside validation packet is reviewed and accepted.
 
 ## Scope Reviewed
 
@@ -197,7 +200,7 @@ Full suite:
 ```text
 python -m unittest discover -s tests
 
-Ran 487 tests in 3.131s
+Ran 487 tests in 3.066s
 
 OK (skipped=1)
 ```
@@ -253,3 +256,8 @@ Broad simulator accuracy depends on future card behavior overlay expansion.
 Proceed to outside validation for Phase 13.
 Do not start Phase 14 until the simulator track review is accepted.
 ```
+
+The outside validation prompt requires documentation review, implementation-file
+review, schema/repository inspection, clean-checkout test execution, import
+boundary scans, raw trace immutability checks, unsupported-card negative test
+review, and deterministic replay checks.

@@ -20,7 +20,7 @@ Latest pushed commit before local Phase 13 checkpoint work: 56ac7f9 Add Phase 13
 Latest full-suite result:
 
 ```text
-Ran 487 tests in 3.031s
+Ran 487 tests in 3.066s
 
 OK (skipped=1)
 ```
@@ -576,6 +576,10 @@ docs/OUTSIDE_VALIDATION_PHASE13_SIMULATOR_PROMPT.md
 
 Phase 13 is checkpointed for outside validation. Do not start Phase 14
 implementation until outside validation returns PASS or PASS WITH REVIEW NOTES.
+The outside validation prompt was hardened to require implementation-file
+inspection, import scans, schema checks, clean-checkout test execution, raw
+trace immutability checks, unsupported-card negative test review, and
+deterministic replay checks.
 
 Next UI implementation packet:
 

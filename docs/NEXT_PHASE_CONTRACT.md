@@ -63,6 +63,11 @@ docs/OUTSIDE_VALIDATION_PHASE13_SIMULATOR_PROMPT.md
 docs/CHECKPOINT_PHASE13_SIMULATOR_TRACK_REPORT.md
 ```
 
+The validation prompt requires the reviewer to inspect implementation files,
+database/repository files, tests, schema constraints, clean-checkout test
+execution, import scans, raw trace immutability, unsupported-card negative
+tests, and deterministic replay behavior.
+
 Recommended supporting docs:
 
 ```text
