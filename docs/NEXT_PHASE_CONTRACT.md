@@ -1,15 +1,15 @@
 # Next Phase Contract
 
-Recommended next task: Phase 13Q Challenge Mode Contract
+Recommended next task: Phase 13R Challenge Mode Implementation
 
 ## Current Status
 
-Phase 13P Simulator Persistence Implementation is implemented and validated.
+Phase 13Q Challenge Mode Contract is documented and validated.
 
-Codie now has simulator persistence for batch results through existing
-`simulation_batches`, `simulation_batch_results`, and `simulation_traces`
-tables via `SimulationRepository`. It still has no Challenge Mode, line review,
-UI, or recommendation output.
+Codie now has a Challenge Mode contract for deterministic prompt generation,
+exact-hand simulator verification, unsupported-card disclosure, and user answer
+comparison. It still has no Challenge Mode implementation, line review, UI, or
+recommendation output.
 
 ## Files Created Or Modified In Latest Packet
 
@@ -98,6 +98,8 @@ UI, or recommendation output.
 - `codie/probability_engine/persistence.py`
 - `tests/test_probability_engine_persistence.py`
 - `docs/PHASE13P_SIMULATOR_PERSISTENCE_IMPLEMENTATION_REPORT.md`
+- `docs/PHASE13Q_CHALLENGE_MODE_CONTRACT.md`
+- `docs/PHASE13Q_CHALLENGE_MODE_CONTRACT_REPORT.md`
 - `codie/probability_engine/__init__.py`
 - `codie/probability_engine/models.py`
 - `tests/test_probability_engine_models.py`
@@ -127,11 +129,7 @@ UI, or recommendation output.
 ## Public Functions / Classes Added
 
 ```text
-PersistedSimulationBatch
-persist_batch_run_result
-batch_result_to_repository_rows
-trace_sample_to_repository_row
-deterministic_batch_id
+None. Latest packet is contract-only.
 ```
 
 ## Schema Impact
@@ -189,12 +187,13 @@ rg -n "should play|must include|correct card|breaks the format|secretly optimal|
 - Target access search MVP is implemented for exact hands and known library order.
 - Monte Carlo batch runner is implemented.
 - Simulator persistence is implemented using existing simulator tables.
+- Challenge Mode is contract-gated but not implemented.
 - Challenge Mode, line review, UI, and recommendation output are not
   implemented.
 
 ## Recommended Next Packet
 
-Write Phase 13Q Challenge Mode Contract.
+Implement Phase 13R Challenge Mode.
 
 Validation reference:
 
@@ -261,16 +260,18 @@ Validation reference:
 - `docs/PHASE13O_SIMULATOR_PERSISTENCE_CONTRACT.md`
 - `docs/PHASE13O_SIMULATOR_PERSISTENCE_CONTRACT_REPORT.md`
 - `docs/PHASE13P_SIMULATOR_PERSISTENCE_IMPLEMENTATION_REPORT.md`
+- `docs/PHASE13Q_CHALLENGE_MODE_CONTRACT.md`
+- `docs/PHASE13Q_CHALLENGE_MODE_CONTRACT_REPORT.md`
 
 Define:
 
 ```text
-Phase 13Q - Challenge Mode Contract
+Phase 13R - Challenge Mode Implementation
 ```
 
-Define generated challenge hands, exact-hand simulator verification, unsupported
-card disclosure, stored seeds/config, and no-recommendation boundaries before
-implementing Challenge Mode.
+Implement serializable Challenge Mode prompt/answer/verification models using
+the existing shuffle and target access search layers. Keep persistence, line
+review, UI, and recommendation output out of scope.
 
 ## Do Not Do
 

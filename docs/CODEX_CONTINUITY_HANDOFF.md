@@ -12,7 +12,7 @@ Use the repository and this handoff as the source of truth. Do not rely on prior
 GitHub: https://github.com/St-Milton1013/Codie
 Local path: C:\Users\Main\Documents\Codex\2026-06-22\next-phase-contract-recommended-next-task
 Branch: main
-Latest pushed commit before local Phase 13P work: 4e39226 Add Phase 13O simulator persistence contract
+Latest pushed commit before local Phase 13Q work: 35ab81d Add Phase 13P simulator persistence
 ```
 
 ## Current Validation Baseline
@@ -20,7 +20,7 @@ Latest pushed commit before local Phase 13P work: 4e39226 Add Phase 13O simulato
 Latest full-suite result:
 
 ```text
-Ran 423 tests in 2.541s
+Ran 423 tests in 2.893s
 
 OK (skipped=1)
 ```
@@ -114,6 +114,7 @@ Phase 13M Monte Carlo Batch Runner Contract: PASS
 Phase 13N Monte Carlo Batch Runner Implementation: PASS
 Phase 13O Simulator Persistence Contract: PASS
 Phase 13P Simulator Persistence Implementation: PASS
+Phase 13Q Challenge Mode Contract: PASS
 ```
 
 ## Recent Commits
@@ -261,13 +262,13 @@ Simulation evidence must not enter Evidence Stack unless constitution thresholds
 Preferred next move:
 
 ```text
-Phase 13Q - Challenge Mode Contract
+Phase 13R - Challenge Mode Implementation
 ```
 
 Alternate next safe option:
 
 ```text
-Phase 13R - Challenge Mode Implementation
+Phase 13S - Challenge Line Review Contract
 ```
 
 Avoid starting:
@@ -342,6 +343,8 @@ docs/PHASE13N_MONTE_CARLO_BATCH_RUNNER_IMPLEMENTATION_REPORT.md
 docs/PHASE13O_SIMULATOR_PERSISTENCE_CONTRACT.md
 docs/PHASE13O_SIMULATOR_PERSISTENCE_CONTRACT_REPORT.md
 docs/PHASE13P_SIMULATOR_PERSISTENCE_IMPLEMENTATION_REPORT.md
+docs/PHASE13Q_CHALLENGE_MODE_CONTRACT.md
+docs/PHASE13Q_CHALLENGE_MODE_CONTRACT_REPORT.md
 ```
 
 Latest Phase 13K packet:
@@ -419,6 +422,17 @@ tables and `SimulationRepository`. It preserves seed/version/config metadata in
 JSON columns, wraps batch/result/trace writes in a savepoint, and does not write
 analytics, evidence_counts, or recommendations.
 
+Latest Phase 13Q packet:
+
+```text
+docs/PHASE13Q_CHALLENGE_MODE_CONTRACT.md
+docs/PHASE13Q_CHALLENGE_MODE_CONTRACT_REPORT.md
+```
+
+Phase 13Q defines Challenge Mode as a serializable prompt/answer/verification
+layer over existing shuffle and target access search. It adds no implementation,
+no schema changes, no persistence, and no UI.
+
 Next UI implementation packet:
 
 ```text
@@ -464,7 +478,9 @@ Phase 13 simulator contracts or a new UI/API contract is explicitly selected.
 - Monte Carlo batch runner implementation is complete.
 - Simulator persistence contract is complete.
 - Simulator persistence implementation is complete.
-- Next packet should define Challenge Mode before implementation.
+- Challenge Mode contract is complete.
+- Next packet should implement Challenge Mode without persistence, line review,
+  UI, or recommendation output.
 - cEDHData public asset metadata and local reference hashes are recorded in docs/CEDHDATA_SIMULATOR_REFERENCE_CAPTURE_MANIFEST.md.
 - Final recommendation output remains intentionally separate.
 
