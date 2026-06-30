@@ -950,6 +950,43 @@ CREATE TABLE simulation_traces (
 );
 ```
 
+#### `simulation_line_reviews`
+
+```sql
+CREATE TABLE simulation_line_reviews (
+    review_id TEXT PRIMARY KEY,
+    challenge_id TEXT NOT NULL,
+    batch_id TEXT,
+    result_id INTEGER,
+    trace_id INTEGER,
+    deck_hash TEXT NOT NULL,
+    target_card TEXT NOT NULL,
+    target_turn INTEGER NOT NULL,
+    simulator_success INTEGER NOT NULL,
+    simulator_status TEXT NOT NULL,
+    action_trace_json TEXT NOT NULL,
+    review_status TEXT NOT NULL,
+    review_reason TEXT NOT NULL,
+    review_note TEXT,
+    affected_cards_json TEXT NOT NULL,
+    affected_actions_json TEXT NOT NULL,
+    created_at TEXT NOT NULL,
+    FOREIGN KEY(batch_id) REFERENCES simulation_batches(batch_id),
+    FOREIGN KEY(result_id) REFERENCES simulation_batch_results(result_id),
+    FOREIGN KEY(trace_id) REFERENCES simulation_traces(trace_id)
+);
+```
+
+Recommended indexes:
+
+```sql
+CREATE INDEX idx_simulation_line_reviews_challenge_id ON simulation_line_reviews(challenge_id);
+CREATE INDEX idx_simulation_line_reviews_deck_hash ON simulation_line_reviews(deck_hash);
+CREATE INDEX idx_simulation_line_reviews_target_card ON simulation_line_reviews(target_card);
+CREATE INDEX idx_simulation_line_reviews_trace_id ON simulation_line_reviews(trace_id);
+CREATE INDEX idx_simulation_line_reviews_review_status ON simulation_line_reviews(review_status);
+```
+
 ### 10.9 User Tables
 
 #### `user_decks`

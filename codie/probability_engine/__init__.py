@@ -119,6 +119,12 @@ from .line_review import (
     reviewed_line_counts_as_success,
     serialize_line_review_annotation,
 )
+from .line_review_persistence import (
+    PersistedLineReview,
+    line_review_annotation_to_repository_row,
+    line_review_repository_row_to_annotation,
+    persist_line_review_annotation,
+)
 
 __all__ = [
     "MANA_COLOR_KEYS",
@@ -221,4 +227,8 @@ __all__ = [
     "export_line_review_fixture",
     "reviewed_line_counts_as_success",
     "serialize_line_review_annotation",
+    "PersistedLineReview",
+    "line_review_annotation_to_repository_row",
+    "line_review_repository_row_to_annotation",
+    "persist_line_review_annotation",
 ]

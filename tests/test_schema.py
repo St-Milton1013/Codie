@@ -74,6 +74,7 @@ class SchemaFoundationTest(unittest.TestCase):
             "simulation_batches",
             "simulation_batch_results",
             "simulation_traces",
+            "simulation_line_reviews",
             "user_decks",
             "user_deck_cards",
             "saved_analysis",
@@ -97,6 +98,11 @@ class SchemaFoundationTest(unittest.TestCase):
             "idx_archetype_label_registry_label",
             "idx_evidence_counts_entity",
             "idx_regional_card_lookup",
+            "idx_simulation_line_reviews_challenge_id",
+            "idx_simulation_line_reviews_deck_hash",
+            "idx_simulation_line_reviews_target_card",
+            "idx_simulation_line_reviews_trace_id",
+            "idx_simulation_line_reviews_review_status",
             "idx_analysis_sessions_deck_hash",
         }
         rows = self.connection.execute(

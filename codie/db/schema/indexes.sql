@@ -27,5 +27,10 @@ CREATE INDEX idx_evidence_counts_entity ON evidence_counts(entity_type, entity_i
 CREATE INDEX idx_regional_commander_lookup ON regional_commander_metrics(region_code, country_code, commander_signature);
 CREATE INDEX idx_regional_card_lookup ON regional_card_metrics(region_code, country_code, oracle_id);
 CREATE INDEX idx_simulation_results_batch ON simulation_batch_results(batch_id);
+CREATE INDEX idx_simulation_line_reviews_challenge_id ON simulation_line_reviews(challenge_id);
+CREATE INDEX idx_simulation_line_reviews_deck_hash ON simulation_line_reviews(deck_hash);
+CREATE INDEX idx_simulation_line_reviews_target_card ON simulation_line_reviews(target_card);
+CREATE INDEX idx_simulation_line_reviews_trace_id ON simulation_line_reviews(trace_id);
+CREATE INDEX idx_simulation_line_reviews_review_status ON simulation_line_reviews(review_status);
 CREATE INDEX idx_user_deck_cards_deck ON user_deck_cards(user_deck_id);
 CREATE INDEX idx_analysis_sessions_deck_hash ON analysis_sessions(deck_hash);
