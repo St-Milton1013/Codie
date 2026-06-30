@@ -12,7 +12,7 @@ Use the repository and this handoff as the source of truth. Do not rely on prior
 GitHub: https://github.com/St-Milton1013/Codie
 Local path: C:\Users\Main\Documents\Codex\2026-06-22\next-phase-contract-recommended-next-task
 Branch: main
-Latest pushed commit before local Phase 13N work: c067f16 Add Phase 13M Monte Carlo batch contract
+Latest pushed commit before local Phase 13O work: d46ca7b Add Phase 13N Monte Carlo batch runner
 ```
 
 ## Current Validation Baseline
@@ -20,7 +20,7 @@ Latest pushed commit before local Phase 13N work: c067f16 Add Phase 13M Monte Ca
 Latest full-suite result:
 
 ```text
-Ran 413 tests in 3.260s
+Ran 413 tests in 2.688s
 
 OK (skipped=1)
 ```
@@ -112,6 +112,7 @@ Phase 13K Target Access Search Contract: PASS
 Phase 13L Target Access Search MVP Implementation: PASS
 Phase 13M Monte Carlo Batch Runner Contract: PASS
 Phase 13N Monte Carlo Batch Runner Implementation: PASS
+Phase 13O Simulator Persistence Contract: PASS
 ```
 
 ## Recent Commits
@@ -259,13 +260,13 @@ Simulation evidence must not enter Evidence Stack unless constitution thresholds
 Preferred next move:
 
 ```text
-Phase 13O - Simulator Persistence Contract
+Phase 13P - Simulator Persistence Implementation
 ```
 
 Alternate next safe option:
 
 ```text
-Phase 13P - Simulator Persistence Implementation
+Phase 13Q - Challenge Mode Contract
 ```
 
 Avoid starting:
@@ -337,6 +338,8 @@ docs/PHASE13L_TARGET_ACCESS_SEARCH_MVP_IMPLEMENTATION_REPORT.md
 docs/PHASE13M_MONTE_CARLO_BATCH_RUNNER_CONTRACT.md
 docs/PHASE13M_MONTE_CARLO_BATCH_RUNNER_CONTRACT_REPORT.md
 docs/PHASE13N_MONTE_CARLO_BATCH_RUNNER_IMPLEMENTATION_REPORT.md
+docs/PHASE13O_SIMULATOR_PERSISTENCE_CONTRACT.md
+docs/PHASE13O_SIMULATOR_PERSISTENCE_CONTRACT_REPORT.md
 ```
 
 Latest Phase 13K packet:
@@ -389,6 +392,18 @@ Phase 13N implements deterministic batch execution over seeded games, connecting
 shuffle, mulligan policy, and target access search. It reports aggregate status
 counts, trace samples, unsupported behavior, and reproducibility metadata.
 
+Latest Phase 13O packet:
+
+```text
+docs/PHASE13O_SIMULATOR_PERSISTENCE_CONTRACT.md
+docs/PHASE13O_SIMULATOR_PERSISTENCE_CONTRACT_REPORT.md
+```
+
+Phase 13O defines simulator persistence boundaries using existing
+`simulation_batches`, `simulation_batch_results`, and `simulation_traces` tables
+through `SimulationRepository`. It adds no implementation code and no schema
+changes.
+
 Next UI implementation packet:
 
 ```text
@@ -432,8 +447,9 @@ Phase 13 simulator contracts or a new UI/API contract is explicitly selected.
 - Target access search MVP implementation is complete.
 - Monte Carlo batch runner contract is complete.
 - Monte Carlo batch runner implementation is complete.
-- Next packet should define simulator persistence before adding schema or
-  repository code.
+- Simulator persistence contract is complete.
+- Next packet should implement simulator persistence using existing schema and
+  repository boundaries.
 - cEDHData public asset metadata and local reference hashes are recorded in docs/CEDHDATA_SIMULATOR_REFERENCE_CAPTURE_MANIFEST.md.
 - Final recommendation output remains intentionally separate.
 

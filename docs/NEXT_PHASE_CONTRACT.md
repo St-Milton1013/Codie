@@ -1,16 +1,15 @@
 # Next Phase Contract
 
-Recommended next task: Phase 13O Simulator Persistence Contract
+Recommended next task: Phase 13P Simulator Persistence Implementation
 
 ## Current Status
 
-Phase 13N Monte Carlo Batch Runner Implementation is implemented and validated.
+Phase 13O Simulator Persistence Contract is documented and validated.
 
-Codie now has deterministic Monte Carlo batch execution over seeded games,
-connecting shuffle, mulligan policy, and target access search with aggregate
-status counts, trace samples, unsupported accounting, and reproducibility
-metadata. It still has no simulator persistence, Challenge Mode, line review,
-UI, or recommendation output.
+Codie now has a simulator persistence contract that uses the existing
+`simulation_batches`, `simulation_batch_results`, and `simulation_traces`
+tables through `SimulationRepository`. It still has no simulator persistence
+implementation, Challenge Mode, line review, UI, or recommendation output.
 
 ## Files Created Or Modified In Latest Packet
 
@@ -94,6 +93,8 @@ UI, or recommendation output.
 - `tests/test_probability_engine_batch.py`
 - `tests/fixtures/probability_engine/batch/batch_deck.txt`
 - `docs/PHASE13N_MONTE_CARLO_BATCH_RUNNER_IMPLEMENTATION_REPORT.md`
+- `docs/PHASE13O_SIMULATOR_PERSISTENCE_CONTRACT.md`
+- `docs/PHASE13O_SIMULATOR_PERSISTENCE_CONTRACT_REPORT.md`
 - `codie/probability_engine/__init__.py`
 - `codie/probability_engine/models.py`
 - `tests/test_probability_engine_models.py`
@@ -123,13 +124,7 @@ UI, or recommendation output.
 ## Public Functions / Classes Added
 
 ```text
-BatchRunConfig
-BatchTraceSample
-BatchGameResult
-BatchRunResult
-run_simulation_batch
-run_single_simulation_game
-summarize_batch_results
+None. Latest packet is contract-only.
 ```
 
 ## Schema Impact
@@ -186,12 +181,13 @@ rg -n "should play|must include|correct card|breaks the format|secretly optimal|
 - No local UI API exists yet by design.
 - Target access search MVP is implemented for exact hands and known library order.
 - Monte Carlo batch runner is implemented.
-- Simulator persistence, Challenge Mode, line review, UI, and recommendation
-  output are not implemented.
+- Simulator persistence is contract-gated but not implemented.
+- Challenge Mode, line review, UI, and recommendation output are not
+  implemented.
 
 ## Recommended Next Packet
 
-Write Phase 13O Simulator Persistence Contract.
+Implement Phase 13P Simulator Persistence.
 
 Validation reference:
 
@@ -255,16 +251,20 @@ Validation reference:
 - `docs/PHASE13M_MONTE_CARLO_BATCH_RUNNER_CONTRACT.md`
 - `docs/PHASE13M_MONTE_CARLO_BATCH_RUNNER_CONTRACT_REPORT.md`
 - `docs/PHASE13N_MONTE_CARLO_BATCH_RUNNER_IMPLEMENTATION_REPORT.md`
+- `docs/PHASE13O_SIMULATOR_PERSISTENCE_CONTRACT.md`
+- `docs/PHASE13O_SIMULATOR_PERSISTENCE_CONTRACT_REPORT.md`
 
 Define:
 
 ```text
-Phase 13O - Simulator Persistence Contract
+Phase 13P - Simulator Persistence Implementation
 ```
 
-Define schema/repository boundaries for storing simulator batch results,
-per-game metadata, trace samples, unsupported behavior, seeds, and version
-metadata. Keep it contract-only before adding persistence code.
+Implement a persistence adapter for Phase 13N batch results using existing
+simulator tables and `SimulationRepository`. Preserve seed/version metadata in
+JSON payload fields, add atomicity tests, and do not add schema changes,
+analytics writes, evidence_counts writes, Challenge Mode, line review, UI, or
+recommendation output.
 
 ## Do Not Do
 
