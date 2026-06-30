@@ -1,44 +1,41 @@
 # Next Phase Contract
 
-Recommended next task: Phase 13 Checkpoint - Simulator Track Validation Packet
+Recommended next task: Outside validation for Phase 13 Simulator Track
 
 ## Current Status
 
-Phase 13Z Simulation Review Export Implementation is complete.
+Phase 13 through Phase 13Z is implemented and checkpointed.
 
-Codie now has pure JSON/Markdown export payload builders for reviewed simulator
-accuracy summaries and line review fixtures. The export layer creates local
-snapshot payloads and deterministic bundle metadata without querying databases,
-writing files, mutating simulator rows, updating analytics, or generating
-recommendations.
+The simulator track now includes:
+
+```text
+core probability engine models
+card definition manager
+deck/target parser
+seeded shuffle/opening hands
+mulligan policy
+target access search
+Monte Carlo batch runner
+simulator persistence
+Challenge Mode
+line review annotations
+line review persistence
+reviewed accuracy summaries
+simulation review export payload builders
+```
 
 ## Files Created Or Modified In Latest Packet
 
 ```text
-codie/probability_engine/review_export.py
-tests/test_probability_engine_review_export.py
-docs/PHASE13Z_SIMULATION_REVIEW_EXPORT_IMPLEMENTATION_REPORT.md
-codie/probability_engine/__init__.py
+docs/CHECKPOINT_PHASE13_SIMULATOR_TRACK_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE13_SIMULATOR_PROMPT.md
 docs/CODEX_CONTINUITY_HANDOFF.md
 docs/NEXT_PHASE_CONTRACT.md
 ```
 
-## Public Functions / Classes Added
-
-```text
-REVIEW_EXPORT_SCHEMA_VERSION
-SimulationReviewExportBundle
-SimulationReviewMarkdownDocument
-simulation_review_summary_to_json_payload(...)
-simulation_review_summary_to_markdown(...)
-line_review_fixture_to_json_payload(...)
-line_review_fixture_to_markdown(...)
-build_simulation_review_export_bundle(...)
-```
-
 ## Schema Impact
 
-None.
+None in this checkpoint packet.
 
 ## Validation Command
 
@@ -46,12 +43,6 @@ Use the bundled Python runtime when system Python is unavailable:
 
 ```powershell
 & "C:\Users\Main\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" -m unittest discover -s tests -v
-```
-
-Focused Phase 13Z tests:
-
-```powershell
-& "C:\Users\Main\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" -m unittest tests.test_probability_engine_review_export -v
 ```
 
 Static checks:
@@ -63,46 +54,39 @@ rg -n "SELECT |INSERT |UPDATE |DELETE |execute\(|executescript\(" codie\probabil
 rg -n "should play|must include|correct card|breaks the format|secretly optimal|cut this|you should" codie\probability_engine\review_export.py tests\test_probability_engine_review_export.py
 ```
 
+## Outside Validation Packet
+
+Send:
+
+```text
+docs/OUTSIDE_VALIDATION_PHASE13_SIMULATOR_PROMPT.md
+docs/CHECKPOINT_PHASE13_SIMULATOR_TRACK_REPORT.md
+```
+
+Recommended supporting docs:
+
+```text
+docs/PHASE13_SIMULATOR_CONTRACT_REFRESH.md
+docs/PHASE13Z_SIMULATION_REVIEW_EXPORT_IMPLEMENTATION_REPORT.md
+docs/CODEX_CONTINUITY_HANDOFF.md
+```
+
 ## Known Caveats / Review Notes
 
-- GitHub remote is configured.
-- CLI requires a local Codie database with card rows before deck import can
-  resolve cards.
-- UI is fixture/static-page-model backed and remains read-only.
-- Local report sharing and zip export are implemented.
-- Simulator persistence is implemented for batch results.
-- Challenge Mode is implemented without UI.
-- Challenge Line Review annotations and persistence are implemented.
-- Reviewed-accuracy summaries are implemented.
-- Simulation review export payload builders are implemented.
+- Challenge Mode has no UI yet.
+- Simulator review exports are payload builders only; no file writer yet.
+- Simulator behavior coverage is intentionally narrow.
+- Unsupported-card behavior must remain visible.
+- Simulation results remain QA/training metadata, not tournament evidence.
 - Final recommendation output remains intentionally separate.
 - cEDHData reference files remain local research inputs only; do not copy the
   JavaScript bundle or full card catalog into Codie.
 
-## Recommended Next Packet
+## Recommended Next Packet After Validation
 
 ```text
-Phase 13 Checkpoint - Simulator Track Validation Packet
+Phase 14 Planning Contract
 ```
 
-Prepare a consolidated validation report and outside-check prompt covering:
-
-```text
-Phase 13A through Phase 13Z
-probability engine model boundaries
-card definition manager
-deck/target parsing
-seeded shuffle/opening hands
-mulligan policy
-target access search
-Monte Carlo batch runner
-simulator persistence
-Challenge Mode
-line review annotations
-line review persistence
-reviewed accuracy summaries
-simulation review export payloads
-DB/provider/analytics/recommendation boundary scans
-full test output
-remaining caveats
-```
+Do not start Phase 14 implementation until Phase 13 outside validation returns
+PASS or PASS WITH REVIEW NOTES.
