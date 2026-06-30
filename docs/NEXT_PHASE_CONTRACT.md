@@ -1,16 +1,15 @@
 # Next Phase Contract
 
-Recommended next task: Phase 13J Mulligan Policy Implementation
+Recommended next task: Phase 13K Target Access Search Contract
 
 ## Current Status
 
-Phase 13I Mulligan Policy Contract is implemented and
+Phase 13J Mulligan Policy Implementation is implemented and
 validated.
 
-Codie now has a contract for London mulligan policy inputs, keep/reject
-boundaries, bottoming behavior, trace metadata, and allowed policy outputs. It
-still has no mulligan implementation, target search, action execution,
-persistence, or Challenge Mode.
+Codie now has deterministic London mulligan policy evaluation, attempt tracking,
+bottoming, and result serialization. It still has no target search, action
+execution, Monte Carlo batches, persistence, or Challenge Mode.
 
 ## Files Created Or Modified In Latest Packet
 
@@ -78,6 +77,10 @@ persistence, or Challenge Mode.
 - `docs/PHASE13H_SEEDED_SHUFFLE_AND_OPENING_HAND_IMPLEMENTATION_REPORT.md`
 - `docs/PHASE13I_MULLIGAN_POLICY_CONTRACT.md`
 - `docs/PHASE13I_MULLIGAN_POLICY_CONTRACT_REPORT.md`
+- `codie/probability_engine/mulligan.py`
+- `tests/test_probability_engine_mulligan.py`
+- `tests/fixtures/probability_engine/mulligan/mulligan_deck.txt`
+- `docs/PHASE13J_MULLIGAN_POLICY_IMPLEMENTATION_REPORT.md`
 - `codie/probability_engine/__init__.py`
 - `codie/probability_engine/models.py`
 - `tests/test_probability_engine_models.py`
@@ -107,7 +110,13 @@ persistence, or Challenge Mode.
 ## Public Functions / Classes Added
 
 ```text
-None. Phase 13I is contract-only.
+MulliganPolicyConfig
+MulliganDecision
+MulliganStep
+MulliganResult
+evaluate_opening_hand
+select_bottom_cards
+simulate_london_mulligan
 ```
 
 ## Schema Impact
@@ -165,7 +174,7 @@ rg -n "should play|must include|correct card|breaks the format|secretly optimal|
 
 ## Recommended Next Packet
 
-Implement Phase 13J Mulligan Policy Implementation.
+Write Phase 13K Target Access Search Contract.
 
 Validation reference:
 
@@ -222,17 +231,18 @@ Validation reference:
 - `docs/PHASE13H_SEEDED_SHUFFLE_AND_OPENING_HAND_IMPLEMENTATION_REPORT.md`
 - `docs/PHASE13I_MULLIGAN_POLICY_CONTRACT.md`
 - `docs/PHASE13I_MULLIGAN_POLICY_CONTRACT_REPORT.md`
+- `docs/PHASE13J_MULLIGAN_POLICY_IMPLEMENTATION_REPORT.md`
 
 Define:
 
 ```text
-Phase 13J - Mulligan Policy Implementation
+Phase 13K - Target Access Search Contract
 ```
 
-Implement deterministic policy evaluation, London mulligan attempt tracking,
-bottoming, and result serialization. Keep it independent from target search,
-action execution, Monte Carlo batches, persistence, schema changes, and
-Challenge Mode.
+Define target access search MVP scope, state representation, allowed action
+execution categories, trace output, unsupported behavior handling, and
+termination rules before implementation. Keep it contract-only before Monte
+Carlo batches, persistence, Challenge Mode, and line review.
 
 ## Do Not Do
 

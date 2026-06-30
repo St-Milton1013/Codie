@@ -20,7 +20,7 @@ Latest pushed commit before local Phase 13 work: 1cfccba Add Phase 13 simulator 
 Latest full-suite result:
 
 ```text
-Ran 369 tests in 2.602s
+Ran 383 tests in 2.696s
 
 OK (skipped=1)
 ```
@@ -107,6 +107,7 @@ Phase 13F Deck And Target Parser Implementation: PASS
 Phase 13G Seeded Shuffle And Opening Hand Contract: PASS
 Phase 13H Seeded Shuffle And Opening Hand Implementation: PASS
 Phase 13I Mulligan Policy Contract: PASS
+Phase 13J Mulligan Policy Implementation: PASS
 ```
 
 ## Recent Commits
@@ -254,13 +255,13 @@ Simulation evidence must not enter Evidence Stack unless constitution thresholds
 Preferred next move:
 
 ```text
-Phase 13J - Mulligan Policy Implementation
+Phase 13K - Target Access Search Contract
 ```
 
 Alternate next safe option:
 
 ```text
-Phase 13K - Target Access Search Contract
+Phase 13L - Target Access Search MVP Implementation
 ```
 
 Avoid starting:
@@ -325,6 +326,7 @@ docs/PHASE13G_SEEDED_SHUFFLE_AND_OPENING_HAND_CONTRACT_REPORT.md
 docs/PHASE13H_SEEDED_SHUFFLE_AND_OPENING_HAND_IMPLEMENTATION_REPORT.md
 docs/PHASE13I_MULLIGAN_POLICY_CONTRACT.md
 docs/PHASE13I_MULLIGAN_POLICY_CONTRACT_REPORT.md
+docs/PHASE13J_MULLIGAN_POLICY_IMPLEMENTATION_REPORT.md
 ```
 
 Next UI implementation packet:
@@ -363,8 +365,9 @@ Phase 13 simulator contracts or a new UI/API contract is explicitly selected.
 - Seeded shuffle and opening-hand contract is complete.
 - Seeded shuffle and opening-hand implementation is complete.
 - Mulligan policy contract is complete.
-- Next packet should implement deterministic mulligan policy before target
-  search, action execution, Monte Carlo batches, persistence, or Challenge Mode.
+- Mulligan policy implementation is complete.
+- Next packet should define target access search MVP before action execution,
+  Monte Carlo batches, persistence, Challenge Mode, or line review.
 - cEDHData public asset metadata and local reference hashes are recorded in docs/CEDHDATA_SIMULATOR_REFERENCE_CAPTURE_MANIFEST.md.
 - Final recommendation output remains intentionally separate.
 
