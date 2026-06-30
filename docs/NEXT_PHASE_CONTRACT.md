@@ -1,29 +1,23 @@
 # Next Phase Contract
 
-Recommended next task: Phase 13W Reviewed Simulator Accuracy Contract
+Recommended next task: Phase 13X Reviewed Simulator Accuracy Implementation
 
 ## Current Status
 
-Phase 13V Challenge Line Review Persistence Implementation is complete.
+Phase 13W Reviewed Simulator Accuracy Contract is documented.
 
-Codie can now persist Challenge Line Review annotations in
-`simulation_line_reviews` through `SimulationRepository` and a probability
-engine persistence adapter. Persisted reviews remain annotations over immutable
-simulator output; they do not rewrite simulator traces, update analytics, or
-generate recommendations.
+Codie now has a contract for read-only reviewed simulator accuracy summaries
+over persisted `simulation_line_reviews`. These summaries are simulator QA
+metadata only. They do not rewrite raw simulator history, update analytics,
+generate recommendations, or create tournament evidence.
+
+This latest packet is contract-only.
 
 ## Files Created Or Modified In Latest Packet
 
 ```text
-codie/probability_engine/line_review_persistence.py
-tests/test_probability_engine_line_review_persistence.py
-docs/PHASE13V_CHALLENGE_LINE_REVIEW_PERSISTENCE_IMPLEMENTATION_REPORT.md
-codie/db/schema/simulation.sql
-codie/db/schema/indexes.sql
-codie/db/repositories/simulation.py
-codie/probability_engine/__init__.py
-docs/SCHEMA_SPEC.md
-tests/test_schema.py
+docs/PHASE13W_REVIEWED_SIMULATOR_ACCURACY_CONTRACT.md
+docs/PHASE13W_REVIEWED_SIMULATOR_ACCURACY_CONTRACT_REPORT.md
 docs/CODEX_CONTINUITY_HANDOFF.md
 docs/NEXT_PHASE_CONTRACT.md
 ```
@@ -31,31 +25,17 @@ docs/NEXT_PHASE_CONTRACT.md
 ## Public Functions / Classes Added
 
 ```text
-PersistedLineReview
-line_review_annotation_to_repository_row(...)
-persist_line_review_annotation(...)
-line_review_repository_row_to_annotation(...)
-```
-
-Repository methods added:
-
-```text
-SimulationRepository.upsert_line_review(...)
-SimulationRepository.get_line_review(...)
-SimulationRepository.list_line_reviews_for_challenge(...)
+None. Latest packet is contract-only.
 ```
 
 ## Schema Impact
 
-Added:
+None.
+
+Phase 13X must use the existing table:
 
 ```text
 simulation_line_reviews
-idx_simulation_line_reviews_challenge_id
-idx_simulation_line_reviews_deck_hash
-idx_simulation_line_reviews_target_card
-idx_simulation_line_reviews_trace_id
-idx_simulation_line_reviews_review_status
 ```
 
 ## Validation Command
@@ -66,20 +46,12 @@ Use the bundled Python runtime when system Python is unavailable:
 & "C:\Users\Main\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" -m unittest discover -s tests -v
 ```
 
-Focused Phase 13V tests:
-
-```powershell
-& "C:\Users\Main\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" -m unittest tests.test_probability_engine_line_review_persistence -v
-```
-
 Static checks:
 
 ```text
 git diff --check
-rg -n "codie\.providers|codie\.analytics|codie\.recommendations|codie\.ingestion|codie\.cards|requests|httpx" codie\probability_engine\line_review_persistence.py tests\test_probability_engine_line_review_persistence.py
-rg -n "codie\.db|SimulationRepository" codie\probability_engine\line_review.py
-rg -n "line_review_persistence|SimulationRepository" codie\probability_engine\batch.py codie\probability_engine\search.py codie\probability_engine\challenge_mode.py
-rg -n "should play|must include|correct card|breaks the format|secretly optimal|cut this|you should" codie\probability_engine\line_review_persistence.py tests\test_probability_engine_line_review_persistence.py
+rg -n "ReviewedAccuracy|reviewed_accuracy|list_line_reviews_for_accuracy" codie tests
+rg -n "should play|must include|correct card|breaks the format|secretly optimal|cut this|you should" docs\PHASE13W_REVIEWED_SIMULATOR_ACCURACY_CONTRACT.md docs\PHASE13W_REVIEWED_SIMULATOR_ACCURACY_CONTRACT_REPORT.md docs\NEXT_PHASE_CONTRACT.md docs\CODEX_CONTINUITY_HANDOFF.md
 ```
 
 ## Known Caveats / Review Notes
@@ -92,7 +64,7 @@ rg -n "should play|must include|correct card|breaks the format|secretly optimal|
 - Simulator persistence is implemented for batch results.
 - Challenge Mode is implemented without UI.
 - Challenge Line Review annotations and persistence are implemented.
-- Reviewed-accuracy reports remain deferred.
+- Reviewed-accuracy reports are contracted but not implemented.
 - Final recommendation output remains intentionally separate.
 - cEDHData reference files remain local research inputs only; do not copy the
   JavaScript bundle or full card catalog into Codie.
@@ -100,21 +72,34 @@ rg -n "should play|must include|correct card|breaks the format|secretly optimal|
 ## Recommended Next Packet
 
 ```text
-Phase 13W - Reviewed Simulator Accuracy Contract
+Phase 13X - Reviewed Simulator Accuracy Implementation
 ```
 
-Define how persisted line review annotations can be summarized without mutating
-raw simulator history:
+Implement:
 
 ```text
-accepted successful lines
-rejected successful lines
-reviewed failures
-reviewed unsupported results
-counts by review_status
-counts by review_reason
-optional filters by deck_hash, target_card, batch_id, challenge_id
+codie/probability_engine/reviewed_accuracy.py
+tests/test_probability_engine_reviewed_accuracy.py
+docs/PHASE13X_REVIEWED_SIMULATOR_ACCURACY_IMPLEMENTATION_REPORT.md
 ```
 
-Do not implement reporting until the contract defines the output shape,
-repository boundaries, and evidence-language restrictions.
+Allowed supporting changes:
+
+```text
+codie/db/repositories/simulation.py
+codie/probability_engine/__init__.py
+docs/CODEX_CONTINUITY_HANDOFF.md
+docs/NEXT_PHASE_CONTRACT.md
+```
+
+Required implementation rules:
+
+```text
+read simulation_line_reviews only
+do not add schema
+do not mutate reviews or simulator traces
+do not write analytics or recommendations
+classify accepted/rejected/failed/unsupported from stored fields
+return counts, rates, filters, and generated_at
+preserve evidence-language restrictions
+```
