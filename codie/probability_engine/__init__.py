@@ -35,6 +35,18 @@ from .deck_parser import (
     parse_target_condition,
     stable_deck_hash,
 )
+from .shuffle import (
+    SHUFFLE_ALGORITHM_VERSION,
+    ExpandedLibrary,
+    ExpandedLibraryCard,
+    OpeningHand,
+    ShuffleResult,
+    derive_game_seed,
+    draw_opening_hand,
+    expand_library,
+    opening_hand_id,
+    shuffle_library,
+)
 
 __all__ = [
     "MANA_COLOR_KEYS",
@@ -67,4 +79,14 @@ __all__ = [
     "parse_simulation_deck_text",
     "parse_target_condition",
     "stable_deck_hash",
+    "SHUFFLE_ALGORITHM_VERSION",
+    "ExpandedLibrary",
+    "ExpandedLibraryCard",
+    "OpeningHand",
+    "ShuffleResult",
+    "derive_game_seed",
+    "draw_opening_hand",
+    "expand_library",
+    "opening_hand_id",
+    "shuffle_library",
 ]

@@ -1,15 +1,16 @@
 # Next Phase Contract
 
-Recommended next task: Phase 13H Seeded Shuffle And Opening Hand Implementation
+Recommended next task: Phase 13I Mulligan Policy Contract
 
 ## Current Status
 
-Phase 13G Seeded Shuffle And Opening Hand Contract is implemented and
+Phase 13H Seeded Shuffle And Opening Hand Implementation is implemented and
 validated.
 
-Codie now has a contract for deterministic library expansion, seeded shuffle,
-opening-hand drawing, hand identity, and reproducibility checks before any
-mulligan, target search, action execution, persistence, or Challenge Mode work.
+Codie now has deterministic library expansion, seeded shuffle, opening-hand
+drawing, unresolved-card disclosure, and order-sensitive hand IDs. It still has
+no mulligan policy, target search, action execution, persistence, or Challenge
+Mode.
 
 ## Files Created Or Modified In Latest Packet
 
@@ -71,6 +72,10 @@ mulligan, target search, action execution, persistence, or Challenge Mode work.
 - `docs/PHASE13F_DECK_AND_TARGET_PARSER_IMPLEMENTATION_REPORT.md`
 - `docs/PHASE13G_SEEDED_SHUFFLE_AND_OPENING_HAND_CONTRACT.md`
 - `docs/PHASE13G_SEEDED_SHUFFLE_AND_OPENING_HAND_CONTRACT_REPORT.md`
+- `codie/probability_engine/shuffle.py`
+- `tests/test_probability_engine_shuffle.py`
+- `tests/fixtures/probability_engine/shuffle/opening_hand_deck.txt`
+- `docs/PHASE13H_SEEDED_SHUFFLE_AND_OPENING_HAND_IMPLEMENTATION_REPORT.md`
 - `codie/probability_engine/__init__.py`
 - `codie/probability_engine/models.py`
 - `tests/test_probability_engine_models.py`
@@ -100,7 +105,15 @@ mulligan, target search, action execution, persistence, or Challenge Mode work.
 ## Public Functions / Classes Added
 
 ```text
-None. Phase 13G is contract-only.
+ExpandedLibraryCard
+ExpandedLibrary
+OpeningHand
+ShuffleResult
+expand_library
+derive_game_seed
+shuffle_library
+draw_opening_hand
+opening_hand_id
 ```
 
 ## Schema Impact
@@ -158,7 +171,7 @@ rg -n "should play|must include|correct card|breaks the format|secretly optimal|
 
 ## Recommended Next Packet
 
-Implement Phase 13H Seeded Shuffle And Opening Hand Implementation.
+Write Phase 13I Mulligan Policy Contract.
 
 Validation reference:
 
@@ -212,17 +225,18 @@ Validation reference:
 - `docs/PHASE13F_DECK_AND_TARGET_PARSER_IMPLEMENTATION_REPORT.md`
 - `docs/PHASE13G_SEEDED_SHUFFLE_AND_OPENING_HAND_CONTRACT.md`
 - `docs/PHASE13G_SEEDED_SHUFFLE_AND_OPENING_HAND_CONTRACT_REPORT.md`
+- `docs/PHASE13H_SEEDED_SHUFFLE_AND_OPENING_HAND_IMPLEMENTATION_REPORT.md`
 
 Define:
 
 ```text
-Phase 13H - Seeded Shuffle And Opening Hand Implementation
+Phase 13I - Mulligan Policy Contract
 ```
 
-Implement deterministic library expansion, seeded shuffle, opening-hand drawing,
-and hand identity. Keep it independent from mulligan policy, target search,
-action execution, Monte Carlo batches, persistence, schema changes, and
-Challenge Mode.
+Define London mulligan policy inputs, keep/reject decision boundaries, trace
+metadata, and allowed policy outputs before implementation. Keep it
+contract-only before target search, action execution, Monte Carlo batches,
+persistence, schema changes, and Challenge Mode.
 
 ## Do Not Do
 

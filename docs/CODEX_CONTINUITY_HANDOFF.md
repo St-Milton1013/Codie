@@ -20,7 +20,7 @@ Latest pushed commit before local Phase 13 work: 1cfccba Add Phase 13 simulator 
 Latest full-suite result:
 
 ```text
-Ran 355 tests in 2.554s
+Ran 369 tests in 2.454s
 
 OK (skipped=1)
 ```
@@ -105,6 +105,7 @@ Phase 13D Simulator Card Definition Manager Implementation: PASS
 Phase 13E Deck And Target Parser Contract: PASS
 Phase 13F Deck And Target Parser Implementation: PASS
 Phase 13G Seeded Shuffle And Opening Hand Contract: PASS
+Phase 13H Seeded Shuffle And Opening Hand Implementation: PASS
 ```
 
 ## Recent Commits
@@ -252,13 +253,13 @@ Simulation evidence must not enter Evidence Stack unless constitution thresholds
 Preferred next move:
 
 ```text
-Phase 13H - Seeded Shuffle And Opening Hand Implementation
+Phase 13I - Mulligan Policy Contract
 ```
 
 Alternate next safe option:
 
 ```text
-Phase 13I - Mulligan Policy Contract
+Phase 13J - Mulligan Policy Implementation
 ```
 
 Avoid starting:
@@ -320,6 +321,7 @@ docs/PHASE13E_DECK_AND_TARGET_PARSER_CONTRACT_REPORT.md
 docs/PHASE13F_DECK_AND_TARGET_PARSER_IMPLEMENTATION_REPORT.md
 docs/PHASE13G_SEEDED_SHUFFLE_AND_OPENING_HAND_CONTRACT.md
 docs/PHASE13G_SEEDED_SHUFFLE_AND_OPENING_HAND_CONTRACT_REPORT.md
+docs/PHASE13H_SEEDED_SHUFFLE_AND_OPENING_HAND_IMPLEMENTATION_REPORT.md
 ```
 
 Next UI implementation packet:
@@ -356,9 +358,9 @@ Phase 13 simulator contracts or a new UI/API contract is explicitly selected.
 - Deck and target parser contract is complete.
 - Deck and target parser implementation is complete.
 - Seeded shuffle and opening-hand contract is complete.
-- Next packet should implement deterministic library expansion, seeded shuffle,
-  opening-hand drawing, and hand identity before mulligan policy, target search,
-  action execution, or Challenge Mode.
+- Seeded shuffle and opening-hand implementation is complete.
+- Next packet should define mulligan policy before target search, action
+  execution, Monte Carlo batches, persistence, or Challenge Mode.
 - cEDHData public asset metadata and local reference hashes are recorded in docs/CEDHDATA_SIMULATOR_REFERENCE_CAPTURE_MANIFEST.md.
 - Final recommendation output remains intentionally separate.
 
