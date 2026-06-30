@@ -1,28 +1,24 @@
 # Next Phase Contract
 
-Recommended next task: Phase 13Y Simulation Review Export Contract
+Recommended next task: Phase 13Z Simulation Review Export Implementation
 
 ## Current Status
 
-Phase 13X Reviewed Simulator Accuracy Implementation is complete.
+Phase 13Y Simulation Review Export Contract is documented.
 
-Codie can now summarize persisted `simulation_line_reviews` into read-only QA
-metrics: accepted successful lines, rejected successful lines, reviewed
-failures, reviewed unsupported results, status/reason counts, affected
-card/action counts, rates, filters, and generation metadata.
-
-These summaries are simulator QA metadata only. They do not rewrite raw
-simulator history, update analytics, generate recommendations, or create
+Codie now has a contract for pure JSON/Markdown export payload builders for
+reviewed simulator accuracy summaries and line review fixtures. Exports remain
+local read-only snapshots and do not write files, import edited reviews, mutate
+simulator rows, update analytics, generate recommendations, or create
 tournament evidence.
+
+This latest packet is contract-only.
 
 ## Files Created Or Modified In Latest Packet
 
 ```text
-codie/probability_engine/reviewed_accuracy.py
-tests/test_probability_engine_reviewed_accuracy.py
-docs/PHASE13X_REVIEWED_SIMULATOR_ACCURACY_IMPLEMENTATION_REPORT.md
-codie/db/repositories/simulation.py
-codie/probability_engine/__init__.py
+docs/PHASE13Y_SIMULATION_REVIEW_EXPORT_CONTRACT.md
+docs/PHASE13Y_SIMULATION_REVIEW_EXPORT_CONTRACT_REPORT.md
 docs/CODEX_CONTINUITY_HANDOFF.md
 docs/NEXT_PHASE_CONTRACT.md
 ```
@@ -30,18 +26,7 @@ docs/NEXT_PHASE_CONTRACT.md
 ## Public Functions / Classes Added
 
 ```text
-ReviewedAccuracyFilters
-ReviewedAccuracySummary
-ReviewStatusCount
-ReviewReasonCount
-build_reviewed_accuracy_summary(...)
-summarize_line_review_rows(...)
-```
-
-Repository method added:
-
-```text
-SimulationRepository.list_line_reviews_for_accuracy(...)
+None. Latest packet is contract-only.
 ```
 
 ## Schema Impact
@@ -56,19 +41,12 @@ Use the bundled Python runtime when system Python is unavailable:
 & "C:\Users\Main\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" -m unittest discover -s tests -v
 ```
 
-Focused Phase 13X tests:
-
-```powershell
-& "C:\Users\Main\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" -m unittest tests.test_probability_engine_reviewed_accuracy -v
-```
-
 Static checks:
 
 ```text
 git diff --check
-rg -n "codie\.providers|codie\.analytics|codie\.recommendations|codie\.ingestion|codie\.cards|requests|httpx" codie\probability_engine\reviewed_accuracy.py tests\test_probability_engine_reviewed_accuracy.py
-rg -n "reviewed_accuracy|ReviewedAccuracySummary" codie\probability_engine\line_review.py codie\probability_engine\batch.py codie\probability_engine\search.py codie\probability_engine\challenge_mode.py
-rg -n "should play|must include|correct card|breaks the format|secretly optimal|cut this|you should" codie\probability_engine\reviewed_accuracy.py tests\test_probability_engine_reviewed_accuracy.py
+rg -n "SimulationReviewExport|review_export|simulation_review_summary_to" codie tests
+rg -n "should play|must include|correct card|breaks the format|secretly optimal|cut this|you should" docs\PHASE13Y_SIMULATION_REVIEW_EXPORT_CONTRACT.md docs\PHASE13Y_SIMULATION_REVIEW_EXPORT_CONTRACT_REPORT.md docs\NEXT_PHASE_CONTRACT.md docs\CODEX_CONTINUITY_HANDOFF.md
 ```
 
 ## Known Caveats / Review Notes
@@ -82,6 +60,7 @@ rg -n "should play|must include|correct card|breaks the format|secretly optimal|
 - Challenge Mode is implemented without UI.
 - Challenge Line Review annotations and persistence are implemented.
 - Reviewed-accuracy summaries are implemented.
+- Simulation review exports are contracted but not implemented.
 - Final recommendation output remains intentionally separate.
 - cEDHData reference files remain local research inputs only; do not copy the
   JavaScript bundle or full card catalog into Codie.
@@ -89,16 +68,35 @@ rg -n "should play|must include|correct card|breaks the format|secretly optimal|
 ## Recommended Next Packet
 
 ```text
-Phase 13Y - Simulation Review Export Contract
+Phase 13Z - Simulation Review Export Implementation
 ```
 
-Define export surfaces before implementation:
+Implement:
 
 ```text
-reviewed accuracy JSON export
-reviewed accuracy Markdown export
-line review regression fixture bundle
-Obsidian/vault-compatible notes if selected
-no mutation of simulator rows
-no recommendation or tournament-evidence claims
+codie/probability_engine/review_export.py
+tests/test_probability_engine_review_export.py
+docs/PHASE13Z_SIMULATION_REVIEW_EXPORT_IMPLEMENTATION_REPORT.md
+```
+
+Allowed supporting changes:
+
+```text
+codie/probability_engine/__init__.py
+docs/CODEX_CONTINUITY_HANDOFF.md
+docs/NEXT_PHASE_CONTRACT.md
+```
+
+Required implementation rules:
+
+```text
+accept already-built summary/fixture objects
+do not query DB
+do not write files
+emit JSON-compatible payloads
+emit Markdown strings
+produce deterministic bundle metadata
+use relative paths only
+preserve action trace copies
+avoid recommendation or tournament-evidence language
 ```
