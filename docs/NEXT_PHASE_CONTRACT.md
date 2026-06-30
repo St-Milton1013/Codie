@@ -1,14 +1,15 @@
 # Next Phase Contract
 
-Recommended next task: Phase 13S Challenge Line Review Contract
+Recommended next task: Phase 13T Challenge Line Review Implementation
 
 ## Current Status
 
-Phase 13R Challenge Mode Implementation is implemented and validated.
+Phase 13S Challenge Line Review Contract is documented and validated.
 
-Codie now has serializable Challenge Mode prompt, answer, and verification
-models using existing shuffle and target access search. It still has no line
-review, Challenge Mode persistence, UI, or recommendation output.
+Codie now has a Challenge Line Review contract defining immutable annotations,
+review statuses, veto reasons, affected cards/actions, reviewed accuracy rules,
+and regression fixture export boundaries. It still has no line review
+implementation, line review persistence, UI, or recommendation output.
 
 ## Files Created Or Modified In Latest Packet
 
@@ -103,6 +104,8 @@ review, Challenge Mode persistence, UI, or recommendation output.
 - `tests/test_probability_engine_challenge_mode.py`
 - `tests/fixtures/probability_engine/challenge_mode/challenge_deck.txt`
 - `docs/PHASE13R_CHALLENGE_MODE_IMPLEMENTATION_REPORT.md`
+- `docs/PHASE13S_CHALLENGE_LINE_REVIEW_CONTRACT.md`
+- `docs/PHASE13S_CHALLENGE_LINE_REVIEW_CONTRACT_REPORT.md`
 - `codie/probability_engine/__init__.py`
 - `codie/probability_engine/models.py`
 - `tests/test_probability_engine_models.py`
@@ -132,14 +135,7 @@ review, Challenge Mode persistence, UI, or recommendation output.
 ## Public Functions / Classes Added
 
 ```text
-ChallengeConfig
-ChallengePrompt
-ChallengeAnswer
-ChallengeResult
-generate_challenge_prompt
-record_challenge_answer
-verify_challenge_answer
-serialize_challenge_result
+None. Latest packet is contract-only.
 ```
 
 ## Schema Impact
@@ -198,12 +194,12 @@ rg -n "should play|must include|correct card|breaks the format|secretly optimal|
 - Monte Carlo batch runner is implemented.
 - Simulator persistence is implemented using existing simulator tables.
 - Challenge Mode is implemented without persistence or UI.
-- Line review, Challenge Mode persistence, UI, and recommendation output are not
-  implemented.
+- Line review is contract-gated but not implemented.
+- Line review persistence, UI, and recommendation output are not implemented.
 
 ## Recommended Next Packet
 
-Write Phase 13S Challenge Line Review Contract.
+Implement Phase 13T Challenge Line Review.
 
 Validation reference:
 
@@ -273,16 +269,18 @@ Validation reference:
 - `docs/PHASE13Q_CHALLENGE_MODE_CONTRACT.md`
 - `docs/PHASE13Q_CHALLENGE_MODE_CONTRACT_REPORT.md`
 - `docs/PHASE13R_CHALLENGE_MODE_IMPLEMENTATION_REPORT.md`
+- `docs/PHASE13S_CHALLENGE_LINE_REVIEW_CONTRACT.md`
+- `docs/PHASE13S_CHALLENGE_LINE_REVIEW_CONTRACT_REPORT.md`
 
 Define:
 
 ```text
-Phase 13S - Challenge Line Review Contract
+Phase 13T - Challenge Line Review Implementation
 ```
 
-Define immutable simulator-line review annotations, veto reasons, affected
-cards/actions, regression fixture export boundaries, and no-rewrite rules before
-implementing line review.
+Implement serializable line review annotations and regression fixture export.
+Keep persistence, schema changes, UI, recommendation output, and simulator
+result mutation out of scope.
 
 ## Do Not Do
 

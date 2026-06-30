@@ -12,7 +12,7 @@ Use the repository and this handoff as the source of truth. Do not rely on prior
 GitHub: https://github.com/St-Milton1013/Codie
 Local path: C:\Users\Main\Documents\Codex\2026-06-22\next-phase-contract-recommended-next-task
 Branch: main
-Latest pushed commit before local Phase 13R work: 93e9286 Add Phase 13Q challenge mode contract
+Latest pushed commit before local Phase 13S work: d508363 Add Phase 13R challenge mode
 ```
 
 ## Current Validation Baseline
@@ -20,7 +20,7 @@ Latest pushed commit before local Phase 13R work: 93e9286 Add Phase 13Q challeng
 Latest full-suite result:
 
 ```text
-Ran 436 tests in 3.105s
+Ran 436 tests in 2.977s
 
 OK (skipped=1)
 ```
@@ -116,6 +116,7 @@ Phase 13O Simulator Persistence Contract: PASS
 Phase 13P Simulator Persistence Implementation: PASS
 Phase 13Q Challenge Mode Contract: PASS
 Phase 13R Challenge Mode Implementation: PASS
+Phase 13S Challenge Line Review Contract: PASS
 ```
 
 ## Recent Commits
@@ -263,13 +264,13 @@ Simulation evidence must not enter Evidence Stack unless constitution thresholds
 Preferred next move:
 
 ```text
-Phase 13S - Challenge Line Review Contract
+Phase 13T - Challenge Line Review Implementation
 ```
 
 Alternate next safe option:
 
 ```text
-Phase 13T - Challenge Line Review Implementation
+Phase 13U - Challenge Line Review Persistence Contract
 ```
 
 Avoid starting:
@@ -347,6 +348,8 @@ docs/PHASE13P_SIMULATOR_PERSISTENCE_IMPLEMENTATION_REPORT.md
 docs/PHASE13Q_CHALLENGE_MODE_CONTRACT.md
 docs/PHASE13Q_CHALLENGE_MODE_CONTRACT_REPORT.md
 docs/PHASE13R_CHALLENGE_MODE_IMPLEMENTATION_REPORT.md
+docs/PHASE13S_CHALLENGE_LINE_REVIEW_CONTRACT.md
+docs/PHASE13S_CHALLENGE_LINE_REVIEW_CONTRACT_REPORT.md
 ```
 
 Latest Phase 13K packet:
@@ -448,6 +451,18 @@ Phase 13R implements serializable Challenge Mode prompt, answer, and
 verification models using existing shuffle and target access search. It adds no
 persistence, line review, UI, or recommendation output.
 
+Latest Phase 13S packet:
+
+```text
+docs/PHASE13S_CHALLENGE_LINE_REVIEW_CONTRACT.md
+docs/PHASE13S_CHALLENGE_LINE_REVIEW_CONTRACT_REPORT.md
+```
+
+Phase 13S defines Challenge Line Review as immutable annotations over simulator
+output, including review statuses, veto reasons, affected cards/actions,
+reviewed accuracy rules, and regression fixture export boundaries. It adds no
+implementation, no persistence, no schema changes, and no UI.
+
 Next UI implementation packet:
 
 ```text
@@ -495,7 +510,9 @@ Phase 13 simulator contracts or a new UI/API contract is explicitly selected.
 - Simulator persistence implementation is complete.
 - Challenge Mode contract is complete.
 - Challenge Mode implementation is complete.
-- Next packet should define Challenge Line Review before implementation.
+- Challenge Line Review contract is complete.
+- Next packet should implement Challenge Line Review without persistence, schema
+  changes, UI, or simulator-result mutation.
 - cEDHData public asset metadata and local reference hashes are recorded in docs/CEDHDATA_SIMULATOR_REFERENCE_CAPTURE_MANIFEST.md.
 - Final recommendation output remains intentionally separate.
 
