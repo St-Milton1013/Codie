@@ -12,7 +12,7 @@ Use the repository and this handoff as the source of truth. Do not rely on prior
 GitHub: https://github.com/St-Milton1013/Codie
 Local path: C:\Users\Main\Documents\Codex\2026-06-22\next-phase-contract-recommended-next-task
 Branch: main
-Latest pushed commit before local Phase 13O work: d46ca7b Add Phase 13N Monte Carlo batch runner
+Latest pushed commit before local Phase 13P work: 4e39226 Add Phase 13O simulator persistence contract
 ```
 
 ## Current Validation Baseline
@@ -20,7 +20,7 @@ Latest pushed commit before local Phase 13O work: d46ca7b Add Phase 13N Monte Ca
 Latest full-suite result:
 
 ```text
-Ran 413 tests in 2.688s
+Ran 423 tests in 2.541s
 
 OK (skipped=1)
 ```
@@ -113,6 +113,7 @@ Phase 13L Target Access Search MVP Implementation: PASS
 Phase 13M Monte Carlo Batch Runner Contract: PASS
 Phase 13N Monte Carlo Batch Runner Implementation: PASS
 Phase 13O Simulator Persistence Contract: PASS
+Phase 13P Simulator Persistence Implementation: PASS
 ```
 
 ## Recent Commits
@@ -260,13 +261,13 @@ Simulation evidence must not enter Evidence Stack unless constitution thresholds
 Preferred next move:
 
 ```text
-Phase 13P - Simulator Persistence Implementation
+Phase 13Q - Challenge Mode Contract
 ```
 
 Alternate next safe option:
 
 ```text
-Phase 13Q - Challenge Mode Contract
+Phase 13R - Challenge Mode Implementation
 ```
 
 Avoid starting:
@@ -340,6 +341,7 @@ docs/PHASE13M_MONTE_CARLO_BATCH_RUNNER_CONTRACT_REPORT.md
 docs/PHASE13N_MONTE_CARLO_BATCH_RUNNER_IMPLEMENTATION_REPORT.md
 docs/PHASE13O_SIMULATOR_PERSISTENCE_CONTRACT.md
 docs/PHASE13O_SIMULATOR_PERSISTENCE_CONTRACT_REPORT.md
+docs/PHASE13P_SIMULATOR_PERSISTENCE_IMPLEMENTATION_REPORT.md
 ```
 
 Latest Phase 13K packet:
@@ -404,6 +406,19 @@ Phase 13O defines simulator persistence boundaries using existing
 through `SimulationRepository`. It adds no implementation code and no schema
 changes.
 
+Latest Phase 13P packet:
+
+```text
+codie/probability_engine/persistence.py
+tests/test_probability_engine_persistence.py
+docs/PHASE13P_SIMULATOR_PERSISTENCE_IMPLEMENTATION_REPORT.md
+```
+
+Phase 13P implements simulator batch-result persistence using existing simulator
+tables and `SimulationRepository`. It preserves seed/version/config metadata in
+JSON columns, wraps batch/result/trace writes in a savepoint, and does not write
+analytics, evidence_counts, or recommendations.
+
 Next UI implementation packet:
 
 ```text
@@ -432,8 +447,8 @@ Phase 13 simulator contracts or a new UI/API contract is explicitly selected.
 - Simulator contract refresh and pure core models are complete.
 - Probability engine currently has core dataclasses, card definition manager,
   deck/target parsing, seeded shuffle/opening hands, mulligan policy, and target
-  access search, and Monte Carlo batch execution. It has no simulator
-  persistence, Challenge Mode, or line review.
+  access search, Monte Carlo batch execution, and simulator persistence. It has
+  no Challenge Mode or line review.
 - cEDHData reference files were inspected locally only; do not copy the JavaScript bundle or full card catalog into Codie.
 - Simulator Card Definition Manager implementation is complete. It is
   in-memory only and does not execute card actions.
@@ -448,8 +463,8 @@ Phase 13 simulator contracts or a new UI/API contract is explicitly selected.
 - Monte Carlo batch runner contract is complete.
 - Monte Carlo batch runner implementation is complete.
 - Simulator persistence contract is complete.
-- Next packet should implement simulator persistence using existing schema and
-  repository boundaries.
+- Simulator persistence implementation is complete.
+- Next packet should define Challenge Mode before implementation.
 - cEDHData public asset metadata and local reference hashes are recorded in docs/CEDHDATA_SIMULATOR_REFERENCE_CAPTURE_MANIFEST.md.
 - Final recommendation output remains intentionally separate.
 

@@ -1,15 +1,15 @@
 # Next Phase Contract
 
-Recommended next task: Phase 13P Simulator Persistence Implementation
+Recommended next task: Phase 13Q Challenge Mode Contract
 
 ## Current Status
 
-Phase 13O Simulator Persistence Contract is documented and validated.
+Phase 13P Simulator Persistence Implementation is implemented and validated.
 
-Codie now has a simulator persistence contract that uses the existing
+Codie now has simulator persistence for batch results through existing
 `simulation_batches`, `simulation_batch_results`, and `simulation_traces`
-tables through `SimulationRepository`. It still has no simulator persistence
-implementation, Challenge Mode, line review, UI, or recommendation output.
+tables via `SimulationRepository`. It still has no Challenge Mode, line review,
+UI, or recommendation output.
 
 ## Files Created Or Modified In Latest Packet
 
@@ -95,6 +95,9 @@ implementation, Challenge Mode, line review, UI, or recommendation output.
 - `docs/PHASE13N_MONTE_CARLO_BATCH_RUNNER_IMPLEMENTATION_REPORT.md`
 - `docs/PHASE13O_SIMULATOR_PERSISTENCE_CONTRACT.md`
 - `docs/PHASE13O_SIMULATOR_PERSISTENCE_CONTRACT_REPORT.md`
+- `codie/probability_engine/persistence.py`
+- `tests/test_probability_engine_persistence.py`
+- `docs/PHASE13P_SIMULATOR_PERSISTENCE_IMPLEMENTATION_REPORT.md`
 - `codie/probability_engine/__init__.py`
 - `codie/probability_engine/models.py`
 - `tests/test_probability_engine_models.py`
@@ -124,7 +127,11 @@ implementation, Challenge Mode, line review, UI, or recommendation output.
 ## Public Functions / Classes Added
 
 ```text
-None. Latest packet is contract-only.
+PersistedSimulationBatch
+persist_batch_run_result
+batch_result_to_repository_rows
+trace_sample_to_repository_row
+deterministic_batch_id
 ```
 
 ## Schema Impact
@@ -181,13 +188,13 @@ rg -n "should play|must include|correct card|breaks the format|secretly optimal|
 - No local UI API exists yet by design.
 - Target access search MVP is implemented for exact hands and known library order.
 - Monte Carlo batch runner is implemented.
-- Simulator persistence is contract-gated but not implemented.
+- Simulator persistence is implemented using existing simulator tables.
 - Challenge Mode, line review, UI, and recommendation output are not
   implemented.
 
 ## Recommended Next Packet
 
-Implement Phase 13P Simulator Persistence.
+Write Phase 13Q Challenge Mode Contract.
 
 Validation reference:
 
@@ -253,18 +260,17 @@ Validation reference:
 - `docs/PHASE13N_MONTE_CARLO_BATCH_RUNNER_IMPLEMENTATION_REPORT.md`
 - `docs/PHASE13O_SIMULATOR_PERSISTENCE_CONTRACT.md`
 - `docs/PHASE13O_SIMULATOR_PERSISTENCE_CONTRACT_REPORT.md`
+- `docs/PHASE13P_SIMULATOR_PERSISTENCE_IMPLEMENTATION_REPORT.md`
 
 Define:
 
 ```text
-Phase 13P - Simulator Persistence Implementation
+Phase 13Q - Challenge Mode Contract
 ```
 
-Implement a persistence adapter for Phase 13N batch results using existing
-simulator tables and `SimulationRepository`. Preserve seed/version metadata in
-JSON payload fields, add atomicity tests, and do not add schema changes,
-analytics writes, evidence_counts writes, Challenge Mode, line review, UI, or
-recommendation output.
+Define generated challenge hands, exact-hand simulator verification, unsupported
+card disclosure, stored seeds/config, and no-recommendation boundaries before
+implementing Challenge Mode.
 
 ## Do Not Do
 

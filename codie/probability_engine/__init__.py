@@ -88,6 +88,13 @@ from .batch import (
     run_single_simulation_game,
     summarize_batch_results,
 )
+from .persistence import (
+    PersistedSimulationBatch,
+    batch_result_to_repository_rows,
+    deterministic_batch_id,
+    persist_batch_run_result,
+    trace_sample_to_repository_row,
+)
 
 __all__ = [
     "MANA_COLOR_KEYS",
@@ -165,4 +172,9 @@ __all__ = [
     "run_simulation_batch",
     "run_single_simulation_game",
     "summarize_batch_results",
+    "PersistedSimulationBatch",
+    "batch_result_to_repository_rows",
+    "deterministic_batch_id",
+    "persist_batch_run_result",
+    "trace_sample_to_repository_row",
 ]
