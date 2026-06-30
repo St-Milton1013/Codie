@@ -117,3 +117,42 @@ class SimulationRepository(BaseRepository):
             (challenge_id,),
         )
         return cursor.fetchall()
+
+    def list_line_reviews_for_accuracy(self, filters: Mapping[str, Any] | None = None):
+        filters = filters or {}
+        clauses = []
+        values = []
+        exact_filters = {
+            "deck_hash": "deck_hash",
+            "target_card": "target_card",
+            "batch_id": "batch_id",
+            "challenge_id": "challenge_id",
+            "trace_id": "trace_id",
+            "review_status": "review_status",
+            "review_reason": "review_reason",
+        }
+        for filter_key, column in exact_filters.items():
+            value = filters.get(filter_key)
+            if value in (None, ""):
+                continue
+            clauses.append(f"{column} = ?")
+            values.append(value)
+        created_at_from = filters.get("created_at_from")
+        if created_at_from not in (None, ""):
+            clauses.append("created_at >= ?")
+            values.append(created_at_from)
+        created_at_to = filters.get("created_at_to")
+        if created_at_to not in (None, ""):
+            clauses.append("created_at <= ?")
+            values.append(created_at_to)
+        where = f"WHERE {' AND '.join(clauses)}" if clauses else ""
+        cursor = self.connection.execute(
+            f"""
+            SELECT *
+            FROM simulation_line_reviews
+            {where}
+            ORDER BY created_at, review_id
+            """,
+            tuple(values),
+        )
+        return cursor.fetchall()

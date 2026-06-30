@@ -125,6 +125,14 @@ from .line_review_persistence import (
     line_review_repository_row_to_annotation,
     persist_line_review_annotation,
 )
+from .reviewed_accuracy import (
+    ReviewedAccuracyFilters,
+    ReviewedAccuracySummary,
+    ReviewReasonCount,
+    ReviewStatusCount,
+    build_reviewed_accuracy_summary,
+    summarize_line_review_rows,
+)
 
 __all__ = [
     "MANA_COLOR_KEYS",
@@ -231,4 +239,10 @@ __all__ = [
     "line_review_annotation_to_repository_row",
     "line_review_repository_row_to_annotation",
     "persist_line_review_annotation",
+    "ReviewedAccuracyFilters",
+    "ReviewedAccuracySummary",
+    "ReviewReasonCount",
+    "ReviewStatusCount",
+    "build_reviewed_accuracy_summary",
+    "summarize_line_review_rows",
 ]

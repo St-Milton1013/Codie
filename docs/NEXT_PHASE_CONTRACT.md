@@ -1,23 +1,28 @@
 # Next Phase Contract
 
-Recommended next task: Phase 13X Reviewed Simulator Accuracy Implementation
+Recommended next task: Phase 13Y Simulation Review Export Contract
 
 ## Current Status
 
-Phase 13W Reviewed Simulator Accuracy Contract is documented.
+Phase 13X Reviewed Simulator Accuracy Implementation is complete.
 
-Codie now has a contract for read-only reviewed simulator accuracy summaries
-over persisted `simulation_line_reviews`. These summaries are simulator QA
-metadata only. They do not rewrite raw simulator history, update analytics,
-generate recommendations, or create tournament evidence.
+Codie can now summarize persisted `simulation_line_reviews` into read-only QA
+metrics: accepted successful lines, rejected successful lines, reviewed
+failures, reviewed unsupported results, status/reason counts, affected
+card/action counts, rates, filters, and generation metadata.
 
-This latest packet is contract-only.
+These summaries are simulator QA metadata only. They do not rewrite raw
+simulator history, update analytics, generate recommendations, or create
+tournament evidence.
 
 ## Files Created Or Modified In Latest Packet
 
 ```text
-docs/PHASE13W_REVIEWED_SIMULATOR_ACCURACY_CONTRACT.md
-docs/PHASE13W_REVIEWED_SIMULATOR_ACCURACY_CONTRACT_REPORT.md
+codie/probability_engine/reviewed_accuracy.py
+tests/test_probability_engine_reviewed_accuracy.py
+docs/PHASE13X_REVIEWED_SIMULATOR_ACCURACY_IMPLEMENTATION_REPORT.md
+codie/db/repositories/simulation.py
+codie/probability_engine/__init__.py
 docs/CODEX_CONTINUITY_HANDOFF.md
 docs/NEXT_PHASE_CONTRACT.md
 ```
@@ -25,18 +30,23 @@ docs/NEXT_PHASE_CONTRACT.md
 ## Public Functions / Classes Added
 
 ```text
-None. Latest packet is contract-only.
+ReviewedAccuracyFilters
+ReviewedAccuracySummary
+ReviewStatusCount
+ReviewReasonCount
+build_reviewed_accuracy_summary(...)
+summarize_line_review_rows(...)
+```
+
+Repository method added:
+
+```text
+SimulationRepository.list_line_reviews_for_accuracy(...)
 ```
 
 ## Schema Impact
 
 None.
-
-Phase 13X must use the existing table:
-
-```text
-simulation_line_reviews
-```
 
 ## Validation Command
 
@@ -46,12 +56,19 @@ Use the bundled Python runtime when system Python is unavailable:
 & "C:\Users\Main\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" -m unittest discover -s tests -v
 ```
 
+Focused Phase 13X tests:
+
+```powershell
+& "C:\Users\Main\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" -m unittest tests.test_probability_engine_reviewed_accuracy -v
+```
+
 Static checks:
 
 ```text
 git diff --check
-rg -n "ReviewedAccuracy|reviewed_accuracy|list_line_reviews_for_accuracy" codie tests
-rg -n "should play|must include|correct card|breaks the format|secretly optimal|cut this|you should" docs\PHASE13W_REVIEWED_SIMULATOR_ACCURACY_CONTRACT.md docs\PHASE13W_REVIEWED_SIMULATOR_ACCURACY_CONTRACT_REPORT.md docs\NEXT_PHASE_CONTRACT.md docs\CODEX_CONTINUITY_HANDOFF.md
+rg -n "codie\.providers|codie\.analytics|codie\.recommendations|codie\.ingestion|codie\.cards|requests|httpx" codie\probability_engine\reviewed_accuracy.py tests\test_probability_engine_reviewed_accuracy.py
+rg -n "reviewed_accuracy|ReviewedAccuracySummary" codie\probability_engine\line_review.py codie\probability_engine\batch.py codie\probability_engine\search.py codie\probability_engine\challenge_mode.py
+rg -n "should play|must include|correct card|breaks the format|secretly optimal|cut this|you should" codie\probability_engine\reviewed_accuracy.py tests\test_probability_engine_reviewed_accuracy.py
 ```
 
 ## Known Caveats / Review Notes
@@ -64,7 +81,7 @@ rg -n "should play|must include|correct card|breaks the format|secretly optimal|
 - Simulator persistence is implemented for batch results.
 - Challenge Mode is implemented without UI.
 - Challenge Line Review annotations and persistence are implemented.
-- Reviewed-accuracy reports are contracted but not implemented.
+- Reviewed-accuracy summaries are implemented.
 - Final recommendation output remains intentionally separate.
 - cEDHData reference files remain local research inputs only; do not copy the
   JavaScript bundle or full card catalog into Codie.
@@ -72,34 +89,16 @@ rg -n "should play|must include|correct card|breaks the format|secretly optimal|
 ## Recommended Next Packet
 
 ```text
-Phase 13X - Reviewed Simulator Accuracy Implementation
+Phase 13Y - Simulation Review Export Contract
 ```
 
-Implement:
+Define export surfaces before implementation:
 
 ```text
-codie/probability_engine/reviewed_accuracy.py
-tests/test_probability_engine_reviewed_accuracy.py
-docs/PHASE13X_REVIEWED_SIMULATOR_ACCURACY_IMPLEMENTATION_REPORT.md
-```
-
-Allowed supporting changes:
-
-```text
-codie/db/repositories/simulation.py
-codie/probability_engine/__init__.py
-docs/CODEX_CONTINUITY_HANDOFF.md
-docs/NEXT_PHASE_CONTRACT.md
-```
-
-Required implementation rules:
-
-```text
-read simulation_line_reviews only
-do not add schema
-do not mutate reviews or simulator traces
-do not write analytics or recommendations
-classify accepted/rejected/failed/unsupported from stored fields
-return counts, rates, filters, and generated_at
-preserve evidence-language restrictions
+reviewed accuracy JSON export
+reviewed accuracy Markdown export
+line review regression fixture bundle
+Obsidian/vault-compatible notes if selected
+no mutation of simulator rows
+no recommendation or tournament-evidence claims
 ```

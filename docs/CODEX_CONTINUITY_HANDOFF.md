@@ -12,7 +12,7 @@ Use the repository and this handoff as the source of truth. Do not rely on prior
 GitHub: https://github.com/St-Milton1013/Codie
 Local path: C:\Users\Main\Documents\Codex\2026-06-22\next-phase-contract-recommended-next-task
 Branch: main
-Latest pushed commit before local Phase 13W work: c81177b Add Phase 13V line review persistence
+Latest pushed commit before local Phase 13X work: ad44ccc Add Phase 13W reviewed accuracy contract
 ```
 
 ## Current Validation Baseline
@@ -20,7 +20,7 @@ Latest pushed commit before local Phase 13W work: c81177b Add Phase 13V line rev
 Latest full-suite result:
 
 ```text
-Ran 467 tests in 2.802s
+Ran 477 tests in 2.957s
 
 OK (skipped=1)
 ```
@@ -129,6 +129,7 @@ Phase 13T Challenge Line Review Implementation: PASS
 Phase 13U Challenge Line Review Persistence Contract: PASS
 Phase 13V Challenge Line Review Persistence Implementation: PASS
 Phase 13W Reviewed Simulator Accuracy Contract: PASS
+Phase 13X Reviewed Simulator Accuracy Implementation: PASS
 ```
 
 ## Recent Commits
@@ -278,13 +279,13 @@ Do not mutate raw simulator traces when reviews are created.
 Preferred next move:
 
 ```text
-Phase 13X - Reviewed Simulator Accuracy Implementation
+Phase 13Y - Simulation Review Export Contract
 ```
 
 Alternate next safe option:
 
 ```text
-Phase 13Y - Simulation Review Export Contract
+Phase 13Z - Simulation Review Export Implementation
 ```
 
 Avoid starting:
@@ -525,6 +526,19 @@ Phase 13W defines read-only reviewed simulator accuracy summaries over
 persisted line reviews. It adds no schema changes, report code, UI,
 recommendation output, analytics writes, or simulator trace mutation.
 
+Latest Phase 13X packet:
+
+```text
+codie/probability_engine/reviewed_accuracy.py
+tests/test_probability_engine_reviewed_accuracy.py
+docs/PHASE13X_REVIEWED_SIMULATOR_ACCURACY_IMPLEMENTATION_REPORT.md
+```
+
+Phase 13X implements read-only reviewed simulator accuracy summaries, filters,
+status/reason counts, affected-card/action counts, rates, and repository query
+support. It adds no schema changes, UI, recommendations, analytics writes, or
+simulator trace mutation.
+
 Next UI implementation packet:
 
 ```text
@@ -577,8 +591,9 @@ Phase 13 simulator contracts or a new UI/API contract is explicitly selected.
 - Challenge Line Review persistence contract is complete.
 - Challenge Line Review persistence implementation is complete.
 - Reviewed Simulator Accuracy contract is complete.
-- Next packet should implement reviewed simulator accuracy reporting using the
-  Phase 13W contract.
+- Reviewed Simulator Accuracy implementation is complete.
+- Next packet should define simulation review export surfaces before adding
+  Markdown, JSON, vault, or fixture-bundle exports.
 - cEDHData public asset metadata and local reference hashes are recorded in docs/CEDHDATA_SIMULATOR_REFERENCE_CAPTURE_MANIFEST.md.
 - Final recommendation output remains intentionally separate.
 
