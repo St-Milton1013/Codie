@@ -12,7 +12,7 @@ Use the repository and this handoff as the source of truth. Do not rely on prior
 GitHub: https://github.com/St-Milton1013/Codie
 Local path: C:\Users\Main\Documents\Codex\2026-06-22\next-phase-contract-recommended-next-task
 Branch: main
-Latest pushed commit before local Phase 13T work: ee2cdd6 Add Phase 13S challenge line review contract
+Latest pushed commit before local Phase 13U work: fc85075 Add Phase 13T challenge line review
 ```
 
 ## Current Validation Baseline
@@ -20,7 +20,7 @@ Latest pushed commit before local Phase 13T work: ee2cdd6 Add Phase 13S challeng
 Latest full-suite result:
 
 ```text
-Ran 450 tests in 3.038s
+Ran 450 tests in 2.783s
 
 OK (skipped=1)
 ```
@@ -126,6 +126,7 @@ Phase 13Q Challenge Mode Contract: PASS
 Phase 13R Challenge Mode Implementation: PASS
 Phase 13S Challenge Line Review Contract: PASS
 Phase 13T Challenge Line Review Implementation: PASS
+Phase 13U Challenge Line Review Persistence Contract: PASS
 ```
 
 ## Recent Commits
@@ -275,13 +276,13 @@ Do not mutate raw simulator traces when reviews are created.
 Preferred next move:
 
 ```text
-Phase 13U - Challenge Line Review Persistence Contract
+Phase 13V - Challenge Line Review Persistence Implementation
 ```
 
 Alternate next safe option:
 
 ```text
-Phase 13V - Challenge Line Review Persistence Implementation
+Phase 13W - Reviewed Simulator Accuracy Contract
 ```
 
 Avoid starting:
@@ -486,6 +487,18 @@ Phase 13T implements serializable line review annotations and regression
 fixture export. It adds no persistence, no schema changes, no UI, no
 recommendation output, and no simulator-result mutation.
 
+Latest Phase 13U packet:
+
+```text
+docs/PHASE13U_CHALLENGE_LINE_REVIEW_PERSISTENCE_CONTRACT.md
+docs/PHASE13U_CHALLENGE_LINE_REVIEW_PERSISTENCE_CONTRACT_REPORT.md
+```
+
+Phase 13U defines the storage contract for `simulation_line_reviews`, including
+repository methods, idempotent `review_id` upserts, nullable
+batch/result/trace linkage, raw trace immutability, and reviewed-accuracy
+semantics. It adds no schema changes or persistence code.
+
 Next UI implementation packet:
 
 ```text
@@ -535,8 +548,9 @@ Phase 13 simulator contracts or a new UI/API contract is explicitly selected.
 - Challenge Mode implementation is complete.
 - Challenge Line Review contract is complete.
 - Challenge Line Review implementation is complete.
-- Next packet should define Challenge Line Review persistence before adding
-  schema or repository writes.
+- Challenge Line Review persistence contract is complete.
+- Next packet should implement Challenge Line Review persistence using the
+  Phase 13U contract.
 - cEDHData public asset metadata and local reference hashes are recorded in docs/CEDHDATA_SIMULATOR_REFERENCE_CAPTURE_MANIFEST.md.
 - Final recommendation output remains intentionally separate.
 
