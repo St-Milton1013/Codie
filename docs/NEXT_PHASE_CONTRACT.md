@@ -1,41 +1,43 @@
 # Next Phase Contract
 
-Recommended next task: Outside validation for Phase 13 Simulator Track
+Recommended next task: Phase 14B - Simulation Review Export CLI Contract
 
 ## Current Status
 
-Phase 13 through Phase 13Z is implemented and checkpointed.
+Phase 13 through Phase 13Z is implemented, checkpointed, and externally
+accepted with review notes.
 
-The simulator track now includes:
+Phase 14A is implemented:
 
 ```text
-core probability engine models
-card definition manager
-deck/target parser
-seeded shuffle/opening hands
-mulligan policy
-target access search
-Monte Carlo batch runner
-simulator persistence
-Challenge Mode
-line review annotations
-line review persistence
+Simulation Review Export File Writer
+```
+
+The simulator review export track now includes:
+
+```text
 reviewed accuracy summaries
-simulation review export payload builders
+line review regression fixtures
+pure JSON/Markdown export payload builders
+deterministic export bundle metadata
+safe local file writer for accepted bundles
 ```
 
 ## Files Created Or Modified In Latest Packet
 
 ```text
-docs/CHECKPOINT_PHASE13_SIMULATOR_TRACK_REPORT.md
-docs/OUTSIDE_VALIDATION_PHASE13_SIMULATOR_PROMPT.md
+codie/probability_engine/review_export_writer.py
+codie/probability_engine/__init__.py
+tests/test_probability_engine_review_export_writer.py
+docs/PHASE14A_SIMULATION_REVIEW_EXPORT_FILE_WRITER_CONTRACT.md
+docs/PHASE14A_SIMULATION_REVIEW_EXPORT_FILE_WRITER_REPORT.md
 docs/CODEX_CONTINUITY_HANDOFF.md
 docs/NEXT_PHASE_CONTRACT.md
 ```
 
 ## Schema Impact
 
-None in this checkpoint packet.
+None.
 
 ## Validation Command
 
@@ -49,49 +51,38 @@ Static checks:
 
 ```text
 git diff --check
-rg -n "codie\.db|codie\.providers|codie\.analytics|codie\.recommendations|codie\.ingestion|codie\.cards|requests|httpx" codie\probability_engine\review_export.py tests\test_probability_engine_review_export.py
-rg -n "SELECT |INSERT |UPDATE |DELETE |execute\(|executescript\(" codie\probability_engine\review_export.py
-rg -n "should play|must include|correct card|breaks the format|secretly optimal|cut this|you should" codie\probability_engine\review_export.py tests\test_probability_engine_review_export.py
-```
-
-## Outside Validation Packet
-
-Send:
-
-```text
-docs/OUTSIDE_VALIDATION_PHASE13_SIMULATOR_PROMPT.md
-docs/CHECKPOINT_PHASE13_SIMULATOR_TRACK_REPORT.md
-```
-
-The validation prompt requires the reviewer to inspect implementation files,
-database/repository files, tests, schema constraints, clean-checkout test
-execution, import scans, raw trace immutability, unsupported-card negative
-tests, and deterministic replay behavior.
-
-Recommended supporting docs:
-
-```text
-docs/PHASE13_SIMULATOR_CONTRACT_REFRESH.md
-docs/PHASE13Z_SIMULATION_REVIEW_EXPORT_IMPLEMENTATION_REPORT.md
-docs/CODEX_CONTINUITY_HANDOFF.md
+rg -n "codie\.db|codie\.providers|codie\.analytics|codie\.recommendations|codie\.ingestion|codie\.cards|requests|httpx|sqlite3" codie\probability_engine\review_export_writer.py tests\test_probability_engine_review_export_writer.py
+rg -n "SELECT |INSERT |UPDATE |DELETE |execute\(|executescript\(" codie\probability_engine\review_export_writer.py
+rg -n "should play|must include|correct card|breaks the format|secretly optimal|cut this|you should" codie\probability_engine\review_export_writer.py tests\test_probability_engine_review_export_writer.py
 ```
 
 ## Known Caveats / Review Notes
 
 - Challenge Mode has no UI yet.
-- Simulator review exports are payload builders only; no file writer yet.
 - Simulator behavior coverage is intentionally narrow.
 - Unsupported-card behavior must remain visible.
 - Simulation results remain QA/training metadata, not tournament evidence.
 - Final recommendation output remains intentionally separate.
+- The Phase 14A writer accepts already-built bundles only; it does not query DB
+  or build export payloads.
 - cEDHData reference files remain local research inputs only; do not copy the
   JavaScript bundle or full card catalog into Codie.
 
-## Recommended Next Packet After Validation
+## Recommended Next Packet
 
 ```text
-Phase 14 Planning Contract
+Phase 14B - Simulation Review Export CLI Contract
 ```
 
-Do not start Phase 14 implementation until Phase 13 outside validation returns
-PASS or PASS WITH REVIEW NOTES.
+Define a command-line wrapper for writing already-built simulator review export
+bundles. Keep the CLI boundary narrow:
+
+```text
+read accepted local bundle JSON
+write bundle files under explicit output root
+print written file manifest
+no DB reads
+no providers
+no simulator mutation
+no recommendations
+```

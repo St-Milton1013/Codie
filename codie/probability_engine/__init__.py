@@ -143,6 +143,10 @@ from .review_export import (
     simulation_review_summary_to_json_payload,
     simulation_review_summary_to_markdown,
 )
+from .review_export_writer import (
+    SimulationReviewExportWriteResult,
+    write_simulation_review_export_bundle,
+)
 
 __all__ = [
     "MANA_COLOR_KEYS",
@@ -258,9 +262,11 @@ __all__ = [
     "REVIEW_EXPORT_SCHEMA_VERSION",
     "SimulationReviewExportBundle",
     "SimulationReviewMarkdownDocument",
+    "SimulationReviewExportWriteResult",
     "build_simulation_review_export_bundle",
     "line_review_fixture_to_json_payload",
     "line_review_fixture_to_markdown",
     "simulation_review_summary_to_json_payload",
     "simulation_review_summary_to_markdown",
+    "write_simulation_review_export_bundle",
 ]
