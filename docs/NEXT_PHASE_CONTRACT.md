@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: Phase 15G - Deck Memory Track Checkpoint
+Recommended next task: Send Phase 15 Deck Memory for outside validation
 
 ## Current Status
 
@@ -16,6 +16,8 @@ Phase 15E deck memory CLI usage documentation contract is complete.
 
 Phase 15F deck memory CLI usage documentation is complete.
 
+Phase 15G deck memory track checkpoint is complete.
+
 Phase 15 planning is complete:
 
 ```text
@@ -29,6 +31,8 @@ docs/PHASE15E_DECK_MEMORY_CLI_USAGE_DOCUMENTATION_CONTRACT.md
 docs/PHASE15E_DECK_MEMORY_CLI_USAGE_DOCUMENTATION_CONTRACT_REPORT.md
 docs/USER_GUIDE_DECK_MEMORY_CLI.md
 docs/PHASE15F_DECK_MEMORY_CLI_USAGE_DOCUMENTATION_REPORT.md
+docs/CHECKPOINT_PHASE15_DECK_MEMORY_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE15_DECK_MEMORY_PROMPT.md
 ```
 
 ## Phase 15 Direction
@@ -64,6 +68,8 @@ docs/PHASE15E_DECK_MEMORY_CLI_USAGE_DOCUMENTATION_CONTRACT.md
 docs/PHASE15E_DECK_MEMORY_CLI_USAGE_DOCUMENTATION_CONTRACT_REPORT.md
 docs/USER_GUIDE_DECK_MEMORY_CLI.md
 docs/PHASE15F_DECK_MEMORY_CLI_USAGE_DOCUMENTATION_REPORT.md
+docs/CHECKPOINT_PHASE15_DECK_MEMORY_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE15_DECK_MEMORY_PROMPT.md
 docs/CODEX_CONTINUITY_HANDOFF.md
 docs/NEXT_PHASE_CONTRACT.md
 ```
@@ -209,9 +215,9 @@ that user deck memory is not tournament evidence
 that no recommendations are generated
 ```
 
-## Next Checkpoint Scope
+## Completed Phase 15G Scope
 
-Phase 15G should create:
+Phase 15G created:
 
 ```text
 docs/CHECKPOINT_PHASE15_DECK_MEMORY_REPORT.md
@@ -231,6 +237,22 @@ no provider/source reads
 no recommendations
 full test output
 boundary scans
+```
+
+## Next Validation Scope
+
+Send:
+
+```text
+docs/CHECKPOINT_PHASE15_DECK_MEMORY_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE15_DECK_MEMORY_PROMPT.md
+```
+
+Phase 16 should not start until outside validation returns:
+
+```text
+PASS
+PASS WITH REVIEW NOTES
 ```
 
 ## Validation Command
@@ -343,4 +365,16 @@ do not call providers
 do not call LLMs
 do not generate recommendations
 do not weaken raw_input privacy defaults
+```
+
+## Do Not Do Before Outside Validation
+
+```text
+do not start Phase 16
+do not add code
+do not add schema
+do not add UI
+do not call providers
+do not call LLMs
+do not generate recommendations
 ```

@@ -20,7 +20,7 @@ Latest pushed commit before local Phase 13 checkpoint work: 56ac7f9 Add Phase 13
 Latest full-suite result:
 
 ```text
-Ran 526 tests in 3.075s
+Ran 526 tests in 3.355s
 
 OK (skipped=1)
 ```
@@ -723,6 +723,17 @@ that `raw_input` contains original imported deck text, is omitted by default,
 and appears only with `--include-raw-input`. It adds no code, schema, UI,
 provider access, simulator execution, LLM calls, analytics, or recommendations.
 
+Latest Phase 15G packet:
+
+```text
+docs/CHECKPOINT_PHASE15_DECK_MEMORY_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE15_DECK_MEMORY_PROMPT.md
+```
+
+Phase 15G checkpointed the deck memory track and created the outside validation
+prompt. It is an internal checkpoint, not external proof. Phase 16 should not
+start until outside validation returns PASS or PASS WITH REVIEW NOTES.
+
 Next UI implementation packet:
 
 ```text
@@ -790,7 +801,8 @@ Phase 13 simulator contracts or a new UI/API contract is explicitly selected.
 - Phase 15D Deck Memory CLI implementation is complete.
 - Phase 15E Deck Memory CLI Usage Documentation contract is complete.
 - Phase 15F Deck Memory CLI Usage Documentation is complete.
-- Next packet should be Phase 15G - Deck Memory Track Checkpoint.
+- Phase 15G Deck Memory Track Checkpoint is complete.
+- Next step should be sending Phase 15 for outside validation before Phase 16.
 - cEDHData public asset metadata and local reference hashes are recorded in docs/CEDHDATA_SIMULATOR_REFERENCE_CAPTURE_MANIFEST.md.
 - Final recommendation output remains intentionally separate.
 
