@@ -630,8 +630,20 @@ docs/CHECKPOINT_PHASE14_SIMULATION_REVIEW_EXPORT_REPORT.md
 docs/OUTSIDE_VALIDATION_PHASE14_SIMULATION_REVIEW_EXPORT_PROMPT.md
 ```
 
-Phase 14 is checkpointed for outside validation. Do not start Phase 15
-implementation until outside validation returns PASS or PASS WITH REVIEW NOTES.
+Phase 14 passed outside validation. Phase 15 may proceed contract-first.
+
+Latest Phase 15 planning packet:
+
+```text
+docs/PHASE15_PLANNING_CONTRACT.md
+docs/PHASE15A_DECK_MEMORY_LISTING_RETRIEVAL_CONTRACT.md
+```
+
+Phase 15 planning selects deck memory as the next dependency-safe foundation for
+future interactive intelligence. Phase 15A defines read-only deck memory
+listing and retrieval over existing `user_decks`, `user_deck_cards`,
+`analysis_sessions`, and `saved_analysis` tables. It adds no code, schema, CLI,
+UI, LLM calls, recommendations, provider reads, or source-table reads.
 
 Next UI implementation packet:
 
@@ -692,9 +704,11 @@ Phase 13 simulator contracts or a new UI/API contract is explicitly selected.
 - Simulation Review Export File Writer implementation is complete.
 - Simulation Review Export CLI implementation is complete.
 - Simulation Review Export Usage Documentation is complete.
-- Phase 14 simulator review export checkpoint is ready for outside validation.
-- Next packet should be Phase 15 planning only after Phase 14 validation is
-  accepted.
+- Phase 14 simulator review export checkpoint passed outside validation.
+- Phase 15 planning contract is complete.
+- Phase 15A Deck Memory Listing And Retrieval contract is complete.
+- Next packet should be Phase 15B - Deck Memory Listing And Retrieval
+  Implementation.
 - cEDHData public asset metadata and local reference hashes are recorded in docs/CEDHDATA_SIMULATOR_REFERENCE_CAPTURE_MANIFEST.md.
 - Final recommendation output remains intentionally separate.
 

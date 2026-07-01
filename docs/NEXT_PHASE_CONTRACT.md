@@ -1,25 +1,39 @@
 # Next Phase Contract
 
-Recommended next task: Outside validation for Phase 14 Simulation Review Export
+Recommended next task: Phase 15B - Deck Memory Listing And Retrieval Implementation
 
 ## Current Status
 
-Phase 13 through Phase 13Z is implemented, checkpointed, and externally
-accepted with review notes.
+Phase 14 has passed outside validation.
 
-Phase 14A through 14C are implemented and checkpointed:
+Phase 15 planning is complete:
 
 ```text
-Simulation Review Export File Writer
-Simulation Review Export CLI
-Simulation Review Export Usage Documentation
+docs/PHASE15_PLANNING_CONTRACT.md
+docs/PHASE15A_DECK_MEMORY_LISTING_RETRIEVAL_CONTRACT.md
 ```
+
+## Phase 15 Direction
+
+Start with deck memory over existing user tables before building chat or LLM
+features.
+
+Use existing tables first:
+
+```text
+user_decks
+user_deck_cards
+analysis_sessions
+saved_analysis
+```
+
+Do not add schema in Phase 15B.
 
 ## Files Created Or Modified In Latest Packet
 
 ```text
-docs/CHECKPOINT_PHASE14_SIMULATION_REVIEW_EXPORT_REPORT.md
-docs/OUTSIDE_VALIDATION_PHASE14_SIMULATION_REVIEW_EXPORT_PROMPT.md
+docs/PHASE15_PLANNING_CONTRACT.md
+docs/PHASE15A_DECK_MEMORY_LISTING_RETRIEVAL_CONTRACT.md
 docs/CODEX_CONTINUITY_HANDOFF.md
 docs/NEXT_PHASE_CONTRACT.md
 ```
@@ -27,6 +41,47 @@ docs/NEXT_PHASE_CONTRACT.md
 ## Schema Impact
 
 None.
+
+## Next Implementation Scope
+
+Phase 15B should add:
+
+```text
+codie/user_decks/deck_memory.py
+codie/user_decks/__init__.py
+tests/test_user_deck_memory.py
+docs/PHASE15B_DECK_MEMORY_LISTING_RETRIEVAL_IMPLEMENTATION_REPORT.md
+```
+
+## Required Behavior
+
+Implement:
+
+```text
+DeckMemoryReadError
+DeckMemoryFilters
+DeckMemorySummary
+DeckMemoryCard
+DeckMemoryAnalysisSummary
+DeckMemorySessionSummary
+DeckMemoryDetail
+list_deck_memory(...)
+get_deck_memory_detail(...)
+```
+
+The implementation must:
+
+```text
+list saved/imported user decks
+filter by commander_hash
+filter by deck_hash
+filter temporary vs persistent deck records
+show deck memory detail
+include linked saved_analysis summaries
+include linked analysis_sessions
+include resolved card rows
+include raw_input only in detail view
+```
 
 ## Validation Command
 
@@ -36,53 +91,35 @@ Use the bundled Python runtime when system Python is unavailable:
 & "C:\Users\Main\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" -m unittest discover -s tests -v
 ```
 
-Static checks:
+Static checks for Phase 15B:
 
 ```text
 git diff --check
-rg -n "codie\.db|codie\.providers|codie\.analytics|codie\.recommendations|codie\.ingestion|codie\.cards|requests|httpx|sqlite3" codie\probability_engine\review_export_writer.py tests\test_probability_engine_review_export_writer.py codie\cli\simulation_review.py tests\test_cli_simulation_review.py
-rg -n "SELECT |INSERT |UPDATE |DELETE |execute\(|executescript\(" codie\probability_engine\review_export_writer.py codie\cli\simulation_review.py
-rg -n "should play|must include|correct card|breaks the format|secretly optimal|cut this|strict upgrade|auto-include|recommended cut|recommended include" codie\probability_engine\review_export_writer.py tests\test_probability_engine_review_export_writer.py codie\cli\simulation_review.py tests\test_cli_simulation_review.py docs\USER_GUIDE_SIMULATION_REVIEW_EXPORTS.md
-```
-
-## Outside Validation Packet
-
-Send:
-
-```text
-docs/OUTSIDE_VALIDATION_PHASE14_SIMULATION_REVIEW_EXPORT_PROMPT.md
-docs/CHECKPOINT_PHASE14_SIMULATION_REVIEW_EXPORT_REPORT.md
-```
-
-Recommended supporting docs:
-
-```text
-docs/PHASE14A_SIMULATION_REVIEW_EXPORT_FILE_WRITER_CONTRACT.md
-docs/PHASE14A_SIMULATION_REVIEW_EXPORT_FILE_WRITER_REPORT.md
-docs/PHASE14B_SIMULATION_REVIEW_EXPORT_CLI_CONTRACT.md
-docs/PHASE14B_SIMULATION_REVIEW_EXPORT_CLI_REPORT.md
-docs/PHASE14C_SIMULATION_REVIEW_EXPORT_USAGE_DOCUMENTATION_CONTRACT.md
-docs/PHASE14C_SIMULATION_REVIEW_EXPORT_USAGE_DOCUMENTATION_REPORT.md
-docs/USER_GUIDE_SIMULATION_REVIEW_EXPORTS.md
+rg -n "codie\.providers|codie\.analytics|codie\.recommendations|codie\.ingestion|codie\.cards|codie\.probability_engine|codie\.canonical|requests|httpx|sqlite3" codie\user_decks\deck_memory.py tests\test_user_deck_memory.py
+rg -n "source_events|source_decks|source_deck_cards|provider_objects" codie\user_decks\deck_memory.py tests\test_user_deck_memory.py
+rg -n "should play|must include|correct card|breaks the format|secretly optimal|cut this|strict upgrade|auto-include|recommended cut|recommended include" codie\user_decks\deck_memory.py tests\test_user_deck_memory.py
 ```
 
 ## Known Caveats / Review Notes
 
-- Challenge Mode has no UI yet.
-- Simulator behavior coverage is intentionally narrow.
-- Unsupported-card behavior must remain visible.
-- Simulation results remain QA/training metadata, not tournament evidence.
-- Final recommendation output remains intentionally separate.
-- The Phase 14B CLI accepts already-built local bundle JSON only.
-- Phase 14 does not add persisted export rows or import tracking.
-- cEDHData reference files remain local research inputs only; do not copy the
-  JavaScript bundle or full card catalog into Codie.
+- Deck memory is user-local only.
+- User decks are not tournament evidence.
+- User deck memory must not read source/provider tables.
+- Chat UI and LLM features remain deferred.
+- Private deck text must not be exported or uploaded without explicit user
+  action and a future contract.
 
-## Recommended Next Packet After Validation
+## Do Not Do In Phase 15B
 
 ```text
-Phase 15 Planning Contract
+do not add schema
+do not add CLI
+do not add UI
+do not export private deck text
+do not call providers
+do not read source/provider tables
+do not run simulator
+do not calculate recommendations
+do not call LLMs
+do not treat user decks as tournament evidence
 ```
-
-Do not start Phase 15 implementation until Phase 14 outside validation returns
-PASS or PASS WITH REVIEW NOTES.
