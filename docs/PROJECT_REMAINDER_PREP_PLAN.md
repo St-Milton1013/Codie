@@ -221,6 +221,31 @@ Guardrails:
   explicitly chooses that export.
 - Report wording remains evidence-only.
 
+### Deferred Interactive Intelligence Layer
+
+Accepted future roadmap packet:
+
+- `docs/ROADMAP_PATCH_INTERACTIVE_INTELLIGENCE_LAYER.md`
+
+Included extensions:
+
+1. Structured "Chat with Codie" UI tab and optional side panel.
+2. Tool-first chat routing over Codie data, evidence nodes, simulations, package
+   health, deck snapshots, source conflicts, primer summaries, and unsupported
+   simulator cards.
+3. Evidence graph output for major answers.
+4. Simulation confidence reports with modeled and unsupported relevant cards.
+5. Package health and change impact summaries.
+6. Deck memory snapshots searchable from chat.
+7. Unsupported relevant card queue for simulator expansion.
+8. Source conflict reporting before analytics.
+9. Primer summaries without storing full primer bodies.
+
+These items are roadmap-only. They do not authorize chat UI work, schema
+changes, LLM calls, primer body storage, recommendation output changes, or
+cloud processing of private decklists. Future chat must use Codie tools first
+and LLM language second. LLM output is never a source of truth.
+
 ## Persistent Quality Gate
 
 Before each implementation phase:
