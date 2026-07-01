@@ -594,6 +594,22 @@ payload files, and Markdown files under an explicit output root. It adds no DB
 reads, providers, analytics writes, recommendations, schema changes, UI, CLI, or
 simulator trace mutation.
 
+Latest Phase 14B packet:
+
+```text
+codie/cli/simulation_review.py
+tests/test_cli_simulation_review.py
+docs/PHASE14B_SIMULATION_REVIEW_EXPORT_CLI_CONTRACT.md
+docs/PHASE14B_SIMULATION_REVIEW_EXPORT_CLI_REPORT.md
+```
+
+Phase 14B implements a narrow local CLI for writing already-built simulator
+review export bundle JSON files. It reads a local bundle JSON file, reconstructs
+`SimulationReviewExportBundle`, delegates writing to the Phase 14A writer, and
+prints a deterministic JSON write manifest. It adds no DB reads, providers,
+analytics writes, recommendations, schema changes, UI, simulator execution, or
+simulator trace mutation.
+
 Next UI implementation packet:
 
 ```text
@@ -651,7 +667,8 @@ Phase 13 simulator contracts or a new UI/API contract is explicitly selected.
 - Simulation Review Export implementation is complete.
 - Phase 13 simulator track checkpoint is externally accepted with review notes.
 - Simulation Review Export File Writer implementation is complete.
-- Next packet should be Phase 14B - Simulation Review Export CLI Contract.
+- Simulation Review Export CLI implementation is complete.
+- Next packet should be Phase 14C - Simulation Review Export Usage Documentation.
 - cEDHData public asset metadata and local reference hashes are recorded in docs/CEDHDATA_SIMULATOR_REFERENCE_CAPTURE_MANIFEST.md.
 - Final recommendation output remains intentionally separate.
 
