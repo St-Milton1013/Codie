@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: Phase 15D - Deck Memory CLI Implementation
+Recommended next task: Phase 15E - Deck Memory CLI Usage Documentation Contract
 
 ## Current Status
 
@@ -10,6 +10,8 @@ Phase 15B deck memory listing and retrieval is implemented.
 
 Phase 15C deck memory CLI contract is complete.
 
+Phase 15D deck memory CLI implementation is complete.
+
 Phase 15 planning is complete:
 
 ```text
@@ -18,6 +20,7 @@ docs/PHASE15A_DECK_MEMORY_LISTING_RETRIEVAL_CONTRACT.md
 docs/PHASE15B_DECK_MEMORY_LISTING_RETRIEVAL_IMPLEMENTATION_REPORT.md
 docs/PHASE15C_DECK_MEMORY_CLI_CONTRACT.md
 docs/PHASE15C_DECK_MEMORY_CLI_CONTRACT_REPORT.md
+docs/PHASE15D_DECK_MEMORY_CLI_IMPLEMENTATION_REPORT.md
 ```
 
 ## Phase 15 Direction
@@ -46,6 +49,9 @@ tests/test_user_deck_memory.py
 docs/PHASE15B_DECK_MEMORY_LISTING_RETRIEVAL_IMPLEMENTATION_REPORT.md
 docs/PHASE15C_DECK_MEMORY_CLI_CONTRACT.md
 docs/PHASE15C_DECK_MEMORY_CLI_CONTRACT_REPORT.md
+codie/cli/user_deck_memory.py
+tests/test_cli_user_deck_memory.py
+docs/PHASE15D_DECK_MEMORY_CLI_IMPLEMENTATION_REPORT.md
 docs/CODEX_CONTINUITY_HANDOFF.md
 docs/NEXT_PHASE_CONTRACT.md
 ```
@@ -115,9 +121,9 @@ output JSON only by default
 do not export raw_input unless explicitly requested
 ```
 
-## Next Implementation Scope
+## Completed Phase 15D Scope
 
-Phase 15D should add:
+Phase 15D added:
 
 ```text
 codie/cli/user_deck_memory.py
@@ -130,6 +136,43 @@ Commands:
 ```text
 list-deck-memory
 show-deck-memory
+```
+
+Phase 15D behavior:
+
+```text
+list remembered deck summaries as JSON
+show one remembered deck detail as JSON
+omit raw_input by default
+include raw_input only with --include-raw-input
+fail cleanly for missing database paths
+fail cleanly for unknown user_deck_id
+```
+
+## Next Planning Scope
+
+Phase 15E should be contract-only unless explicitly accepted:
+
+```text
+Deck Memory CLI Usage Documentation Contract
+```
+
+Likely documentation:
+
+```text
+docs/USER_GUIDE_DECK_MEMORY_CLI.md
+docs/PHASE15F_DECK_MEMORY_CLI_USAGE_DOCUMENTATION_REPORT.md
+```
+
+The usage guide should explain:
+
+```text
+how to list remembered decks
+how to show a remembered deck
+privacy warning for --include-raw-input
+JSON output examples
+that user deck memory is not tournament evidence
+that CLI does not generate recommendations
 ```
 
 ## Validation Command
@@ -205,4 +248,16 @@ do not run simulator
 do not calculate analytics
 do not generate recommendations
 do not export private deck text by default
+```
+
+## Do Not Do In Phase 15E Contract
+
+```text
+do not implement new code
+do not add schema
+do not add UI
+do not call providers
+do not call LLMs
+do not generate recommendations
+do not tell users to upload or share raw deck text
 ```

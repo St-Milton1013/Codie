@@ -35,6 +35,7 @@ The CLI may use:
 
 ```text
 codie.db.bootstrap
+codie.db.connection.connect
 codie.db.repositories.user.UserRepository
 codie.user_decks.deck_memory
 standard library argparse/json/pathlib

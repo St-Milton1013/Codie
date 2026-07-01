@@ -20,15 +20,15 @@ Latest pushed commit before local Phase 13 checkpoint work: 56ac7f9 Add Phase 13
 Latest full-suite result:
 
 ```text
-Ran 515 tests in 2.920s
+Ran 526 tests in 3.075s
 
 OK (skipped=1)
 ```
 
-Latest focused Phase 15B result:
+Latest focused Phase 15D result:
 
 ```text
-Ran 12 tests in 0.040s
+Ran 11 tests in 0.184s
 
 OK
 ```
@@ -47,6 +47,9 @@ Latest relevant boundary scans:
 rg -n "codie\.providers|codie\.analytics|codie\.recommendations|codie\.ingestion|codie\.cards|codie\.probability_engine|codie\.canonical|requests|httpx|sqlite3" codie\user_decks\deck_memory.py tests\test_user_deck_memory.py
 rg -n "source_events|source_decks|source_deck_cards|provider_objects" codie\user_decks\deck_memory.py tests\test_user_deck_memory.py
 rg -n "should play|must include|correct card|breaks the format|secretly optimal|cut this|strict upgrade|auto-include|recommended cut|recommended include" codie\user_decks\deck_memory.py tests\test_user_deck_memory.py
+rg -n "codie\.providers|codie\.analytics|codie\.recommendations|codie\.ingestion|codie\.cards|codie\.probability_engine|codie\.canonical|requests|httpx|sqlite3" codie\cli\user_deck_memory.py tests\test_cli_user_deck_memory.py
+rg -n "source_events|source_decks|source_deck_cards|provider_objects" codie\cli\user_deck_memory.py tests\test_cli_user_deck_memory.py
+rg -n "should play|must include|correct card|breaks the format|secretly optimal|cut this|strict upgrade|auto-include|recommended cut|recommended include" codie\cli\user_deck_memory.py tests\test_cli_user_deck_memory.py
 ```
 
 returned:
@@ -678,6 +681,21 @@ text, avoid source/provider tables, and generate no recommendations. It adds no
 implementation code, schema, UI, LLM calls, providers, simulator execution, or
 analytics writes.
 
+Latest Phase 15D packet:
+
+```text
+codie/cli/user_deck_memory.py
+tests/test_cli_user_deck_memory.py
+docs/PHASE15D_DECK_MEMORY_CLI_IMPLEMENTATION_REPORT.md
+```
+
+Phase 15D implements the local read-only deck memory CLI with
+`list-deck-memory` and `show-deck-memory`. It outputs deterministic JSON, omits
+`raw_input` by default, includes `raw_input` only with `--include-raw-input`,
+fails cleanly for missing database paths and unknown deck IDs, and does not
+create schema, mutate records, read source/provider tables, run simulator logic,
+call LLMs, calculate analytics, or generate recommendations.
+
 Next UI implementation packet:
 
 ```text
@@ -742,7 +760,9 @@ Phase 13 simulator contracts or a new UI/API contract is explicitly selected.
 - Phase 15A Deck Memory Listing And Retrieval contract is complete.
 - Phase 15B Deck Memory Listing And Retrieval implementation is complete.
 - Phase 15C Deck Memory CLI contract is complete.
-- Next packet should be Phase 15D - Deck Memory CLI Implementation.
+- Phase 15D Deck Memory CLI implementation is complete.
+- Next packet should be Phase 15E - Deck Memory CLI Usage Documentation
+  Contract.
 - cEDHData public asset metadata and local reference hashes are recorded in docs/CEDHDATA_SIMULATOR_REFERENCE_CAPTURE_MANIFEST.md.
 - Final recommendation output remains intentionally separate.
 
