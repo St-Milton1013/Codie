@@ -610,6 +610,19 @@ prints a deterministic JSON write manifest. It adds no DB reads, providers,
 analytics writes, recommendations, schema changes, UI, simulator execution, or
 simulator trace mutation.
 
+Latest Phase 14C packet:
+
+```text
+docs/USER_GUIDE_SIMULATION_REVIEW_EXPORTS.md
+docs/PHASE14C_SIMULATION_REVIEW_EXPORT_USAGE_DOCUMENTATION_CONTRACT.md
+docs/PHASE14C_SIMULATION_REVIEW_EXPORT_USAGE_DOCUMENTATION_REPORT.md
+```
+
+Phase 14C documents the local workflow for building, writing, inspecting, and
+locally sharing simulator review export bundles. It adds no code, DB reads,
+providers, analytics writes, recommendations, schema changes, UI, simulator
+execution, or simulator trace mutation.
+
 Next UI implementation packet:
 
 ```text
@@ -668,7 +681,8 @@ Phase 13 simulator contracts or a new UI/API contract is explicitly selected.
 - Phase 13 simulator track checkpoint is externally accepted with review notes.
 - Simulation Review Export File Writer implementation is complete.
 - Simulation Review Export CLI implementation is complete.
-- Next packet should be Phase 14C - Simulation Review Export Usage Documentation.
+- Simulation Review Export Usage Documentation is complete.
+- Next packet should be Phase 14D - Simulator Review Export Checkpoint.
 - cEDHData public asset metadata and local reference hashes are recorded in docs/CEDHDATA_SIMULATOR_REFERENCE_CAPTURE_MANIFEST.md.
 - Final recommendation output remains intentionally separate.
 
