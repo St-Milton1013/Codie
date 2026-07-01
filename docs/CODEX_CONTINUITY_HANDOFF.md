@@ -696,6 +696,20 @@ fails cleanly for missing database paths and unknown deck IDs, and does not
 create schema, mutate records, read source/provider tables, run simulator logic,
 call LLMs, calculate analytics, or generate recommendations.
 
+Latest Phase 15E packet:
+
+```text
+docs/PHASE15E_DECK_MEMORY_CLI_USAGE_DOCUMENTATION_CONTRACT.md
+docs/PHASE15E_DECK_MEMORY_CLI_USAGE_DOCUMENTATION_CONTRACT_REPORT.md
+```
+
+Phase 15E defines the usage-documentation contract for the deck memory CLI. The
+future guide must document list/show commands, database path requirements,
+filters, JSON output shapes, failure behavior, and the privacy rule that
+`raw_input` is omitted by default and appears only with `--include-raw-input`.
+It adds no code, schema, UI, provider access, simulator execution, LLM calls,
+analytics, or recommendations.
+
 Next UI implementation packet:
 
 ```text
@@ -761,8 +775,8 @@ Phase 13 simulator contracts or a new UI/API contract is explicitly selected.
 - Phase 15B Deck Memory Listing And Retrieval implementation is complete.
 - Phase 15C Deck Memory CLI contract is complete.
 - Phase 15D Deck Memory CLI implementation is complete.
-- Next packet should be Phase 15E - Deck Memory CLI Usage Documentation
-  Contract.
+- Phase 15E Deck Memory CLI Usage Documentation contract is complete.
+- Next packet should be Phase 15F - Deck Memory CLI Usage Documentation.
 - cEDHData public asset metadata and local reference hashes are recorded in docs/CEDHDATA_SIMULATOR_REFERENCE_CAPTURE_MANIFEST.md.
 - Final recommendation output remains intentionally separate.
 

@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: Phase 15E - Deck Memory CLI Usage Documentation Contract
+Recommended next task: Phase 15F - Deck Memory CLI Usage Documentation
 
 ## Current Status
 
@@ -12,6 +12,8 @@ Phase 15C deck memory CLI contract is complete.
 
 Phase 15D deck memory CLI implementation is complete.
 
+Phase 15E deck memory CLI usage documentation contract is complete.
+
 Phase 15 planning is complete:
 
 ```text
@@ -21,6 +23,8 @@ docs/PHASE15B_DECK_MEMORY_LISTING_RETRIEVAL_IMPLEMENTATION_REPORT.md
 docs/PHASE15C_DECK_MEMORY_CLI_CONTRACT.md
 docs/PHASE15C_DECK_MEMORY_CLI_CONTRACT_REPORT.md
 docs/PHASE15D_DECK_MEMORY_CLI_IMPLEMENTATION_REPORT.md
+docs/PHASE15E_DECK_MEMORY_CLI_USAGE_DOCUMENTATION_CONTRACT.md
+docs/PHASE15E_DECK_MEMORY_CLI_USAGE_DOCUMENTATION_CONTRACT_REPORT.md
 ```
 
 ## Phase 15 Direction
@@ -52,6 +56,8 @@ docs/PHASE15C_DECK_MEMORY_CLI_CONTRACT_REPORT.md
 codie/cli/user_deck_memory.py
 tests/test_cli_user_deck_memory.py
 docs/PHASE15D_DECK_MEMORY_CLI_IMPLEMENTATION_REPORT.md
+docs/PHASE15E_DECK_MEMORY_CLI_USAGE_DOCUMENTATION_CONTRACT.md
+docs/PHASE15E_DECK_MEMORY_CLI_USAGE_DOCUMENTATION_CONTRACT_REPORT.md
 docs/CODEX_CONTINUITY_HANDOFF.md
 docs/NEXT_PHASE_CONTRACT.md
 ```
@@ -149,15 +155,15 @@ fail cleanly for missing database paths
 fail cleanly for unknown user_deck_id
 ```
 
-## Next Planning Scope
+## Completed Phase 15E Scope
 
-Phase 15E should be contract-only unless explicitly accepted:
+Phase 15E defined the contract for:
 
 ```text
 Deck Memory CLI Usage Documentation Contract
 ```
 
-Likely documentation:
+Required future documentation:
 
 ```text
 docs/USER_GUIDE_DECK_MEMORY_CLI.md
@@ -173,6 +179,28 @@ privacy warning for --include-raw-input
 JSON output examples
 that user deck memory is not tournament evidence
 that CLI does not generate recommendations
+```
+
+## Next Documentation Scope
+
+Phase 15F should add:
+
+```text
+docs/USER_GUIDE_DECK_MEMORY_CLI.md
+docs/PHASE15F_DECK_MEMORY_CLI_USAGE_DOCUMENTATION_REPORT.md
+```
+
+Phase 15F must document:
+
+```text
+list-deck-memory usage
+show-deck-memory usage
+privacy warning for --include-raw-input
+JSON examples using synthetic data only
+failure behavior
+that user deck memory is local user data
+that user deck memory is not tournament evidence
+that no recommendations are generated
 ```
 
 ## Validation Command
@@ -259,5 +287,18 @@ do not add UI
 do not call providers
 do not call LLMs
 do not generate recommendations
+do not tell users to upload or share raw deck text
+```
+
+## Do Not Do In Phase 15F
+
+```text
+do not add code
+do not add schema
+do not add UI
+do not call providers
+do not call LLMs
+do not generate recommendations
+do not include real private deck text in examples
 do not tell users to upload or share raw deck text
 ```
