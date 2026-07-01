@@ -92,6 +92,17 @@ probability_engine.persistence -> SimulationRepository
 probability_engine.line_review_persistence -> SimulationRepository
 ```
 
+Read-only repository readers:
+
+```text
+probability_engine.reviewed_accuracy -> SimulationRepository
+```
+
+`reviewed_accuracy.py` should remain pure when possible. If it imports
+`SimulationRepository`, it is limited to read-only summary generation and must
+not mutate simulator, review, analytics, recommendation, evidence, source,
+provider, or user tables.
+
 Repository-owned tables:
 
 ```text
@@ -200,7 +211,7 @@ Full suite:
 ```text
 python -m unittest discover -s tests
 
-Ran 487 tests in 3.066s
+Ran 487 tests in 3.145s
 
 OK (skipped=1)
 ```

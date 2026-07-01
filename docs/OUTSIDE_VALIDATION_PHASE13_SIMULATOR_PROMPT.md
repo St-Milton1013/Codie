@@ -134,7 +134,8 @@ rg -n "codie\.db|SimulationRepository|repositories|persistence" codie/probabilit
 
 Interpretation:
 - persistence.py and line_review_persistence.py may import SimulationRepository.
-- reviewed_accuracy.py may import SimulationRepository for read-only summaries.
+- reviewed_accuracy.py should remain pure when possible.
+- If reviewed_accuracy.py imports SimulationRepository, it must be read-only and must not mutate simulator, review, analytics, recommendation, evidence, source, provider, or user tables.
 - raw SQL is allowed inside codie/db only.
 - test files may contain SQL for assertions, but production raw SQL must stay in codie/db.
 
