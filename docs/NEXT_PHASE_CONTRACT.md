@@ -42,7 +42,7 @@ Static checks:
 git diff --check
 rg -n "codie\.db|codie\.providers|codie\.analytics|codie\.recommendations|codie\.ingestion|codie\.cards|requests|httpx|sqlite3" codie\probability_engine\review_export_writer.py tests\test_probability_engine_review_export_writer.py codie\cli\simulation_review.py tests\test_cli_simulation_review.py
 rg -n "SELECT |INSERT |UPDATE |DELETE |execute\(|executescript\(" codie\probability_engine\review_export_writer.py codie\cli\simulation_review.py
-rg -n "should play|must include|correct card|breaks the format|secretly optimal|cut this|you should" codie\probability_engine\review_export_writer.py tests\test_probability_engine_review_export_writer.py codie\cli\simulation_review.py tests\test_cli_simulation_review.py docs\USER_GUIDE_SIMULATION_REVIEW_EXPORTS.md
+rg -n "should play|must include|correct card|breaks the format|secretly optimal|cut this|strict upgrade|auto-include|recommended cut|recommended include" codie\probability_engine\review_export_writer.py tests\test_probability_engine_review_export_writer.py codie\cli\simulation_review.py tests\test_cli_simulation_review.py docs\USER_GUIDE_SIMULATION_REVIEW_EXPORTS.md
 ```
 
 ## Outside Validation Packet

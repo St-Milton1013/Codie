@@ -87,6 +87,7 @@ class ProbabilityEngineReviewExportWriterTest(unittest.TestCase):
             fixture = json.loads(fixture_path.read_text(encoding="utf-8"))
 
             self.assertEqual(manifest["bundle_id"], self.bundle.bundle_id)
+            self.assertEqual(result.files[-1]["path"], "manifest.json")
             self.assertEqual(summary["kind"], "reviewed_simulator_accuracy_summary")
             self.assertTrue(markdown.endswith("\n"))
             self.assertEqual(fixture["action_trace"], self.fixture.action_trace)
@@ -151,6 +152,27 @@ class ProbabilityEngineReviewExportWriterTest(unittest.TestCase):
 
             self.assertFalse((root / "manifest.json").exists())
             self.assertFalse((root / "reviewed_accuracy_summary.json").exists())
+
+    def test_writer_rejects_output_root_that_is_file(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            output_file = root / "not-a-directory"
+            output_file.write_text("occupied", encoding="utf-8")
+
+            with self.assertRaises(ValueError):
+                write_simulation_review_export_bundle(self.bundle, output_file)
+
+    def test_repeated_export_to_same_root_is_deterministic(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+
+            first = write_simulation_review_export_bundle(self.bundle, root)
+            first_manifest = (root / "manifest.json").read_text(encoding="utf-8")
+            second = write_simulation_review_export_bundle(self.bundle, root)
+            second_manifest = (root / "manifest.json").read_text(encoding="utf-8")
+
+            self.assertEqual(first.to_dict(), second.to_dict())
+            self.assertEqual(first_manifest, second_manifest)
 
     def test_writer_does_not_mutate_bundle(self) -> None:
         before = copy.deepcopy(self.bundle.to_dict())

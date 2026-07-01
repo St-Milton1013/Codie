@@ -54,7 +54,7 @@ ingestion, cards, SQLite, or network clients.
 ## Work Completed
 
 - Added safe writer for `SimulationReviewExportBundle`.
-- Added deterministic `manifest.json` writing.
+- Added deterministic `manifest.json` writing after bundle files.
 - Added JSON payload file writing with sorted keys and stable indentation.
 - Added Markdown file writing with final newline normalization.
 - Added output-root containment enforcement.
@@ -62,6 +62,8 @@ ingestion, cards, SQLite, or network clients.
   paths, duplicate paths, unsupported content types, invalid JSON payloads, and
   empty Markdown bodies.
 - Added full-bundle validation before writing bundle files.
+- Added rejection for output roots that point to existing files.
+- Added deterministic repeated export behavior for the same output root.
 - Added temp-file replacement for each write.
 - Exported the writer API from `codie.probability_engine`.
 
@@ -72,7 +74,7 @@ Focused tests:
 ```text
 python -m unittest tests.test_probability_engine_review_export_writer -v
 
-Ran 7 tests in 0.035s
+Ran 9 tests in 0.034s
 
 OK
 ```
@@ -100,7 +102,7 @@ Boundary scans:
 ```text
 rg -n "codie\.db|codie\.providers|codie\.analytics|codie\.recommendations|codie\.ingestion|codie\.cards|requests|httpx|sqlite3" codie\probability_engine\review_export_writer.py tests\test_probability_engine_review_export_writer.py
 rg -n "SELECT |INSERT |UPDATE |DELETE |execute\(|executescript\(" codie\probability_engine\review_export_writer.py
-rg -n "should play|must include|correct card|breaks the format|secretly optimal|cut this|you should" codie\probability_engine\review_export_writer.py tests\test_probability_engine_review_export_writer.py
+rg -n "should play|must include|correct card|breaks the format|secretly optimal|cut this|strict upgrade|auto-include|recommended cut|recommended include" codie\probability_engine\review_export_writer.py tests\test_probability_engine_review_export_writer.py
 ```
 
 returned no matches.

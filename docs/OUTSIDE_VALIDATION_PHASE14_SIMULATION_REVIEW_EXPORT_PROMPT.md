@@ -1,6 +1,6 @@
 # Outside Validation Prompt - Phase 14 Simulation Review Export
 
-Validate Codex Phase 14 work against `CODIE_V1_CONSTITUTION.md` and the Phase
+Validate Codie Phase 14 work against `CODIE_V1_CONSTITUTION.md` and the Phase
 14 contracts.
 
 Return:
@@ -59,6 +59,22 @@ docs/CODEX_CONTINUITY_HANDOFF.md
 
 ## Validation Tasks
 
+### 0. Phase 13 Export Builder Dependency
+
+Confirm Phase 14 does not weaken Phase 13 export-builder guarantees:
+
+```text
+review_export.py remains pure
+review_export.py still does not write files
+review_export.py still does not query DB
+review_export.py still produces deterministic bundle payloads
+Phase 14 writer consumes bundles but does not change bundle construction semantics
+```
+
+Reject if Phase 14 changes `review_export.py` to add file writing, DB access,
+repository access, provider access, simulator execution, or nondeterministic
+bundle construction.
+
 ### 1. File Writer
 
 Confirm:
@@ -80,7 +96,27 @@ writer rejects unsupported content types
 writer rejects invalid JSON payloads
 writer rejects empty Markdown bodies
 writer validates full bundle before writing bundle files
+writer writes manifest.json last
 writer does not mutate bundle input
+```
+
+Confirm writer behavior on write failure:
+
+```text
+validates all bundle paths before writing any bundle files
+does not leave a misleading manifest if later file writes fail
+either writes manifest last or documents why manifest timing is safe
+reports partial-write failures clearly
+```
+
+Confirm output-root behavior:
+
+```text
+output root creation behavior is documented
+parent directory creation behavior is tested
+output root path pointing to a file is rejected
+existing output folder collision behavior is tested
+repeated export to the same output root is deterministic or rejected intentionally
 ```
 
 Reject if:
@@ -105,6 +141,12 @@ python -m codie.cli.simulation_review export-review-bundle exists
 --output-root is required
 CLI rejects non-object JSON
 CLI rejects wrong bundle kind
+CLI handles missing bundle-json path
+CLI handles unreadable bundle-json path
+CLI handles malformed JSON
+CLI handles valid JSON with missing required fields
+CLI handles output-root path that points to a file
+CLI handles permission failure on output-root
 CLI reconstructs SimulationReviewExportBundle
 CLI delegates writing to write_simulation_review_export_bundle(...)
 CLI prints deterministic JSON write summary
@@ -169,7 +211,7 @@ Or, if system Python is unavailable:
 Confirm the expected result:
 
 ```text
-Ran 498 tests
+Ran 503 tests
 OK (skipped=1)
 ```
 
@@ -188,7 +230,7 @@ Run:
 git diff --check
 rg -n "codie\.db|codie\.providers|codie\.analytics|codie\.recommendations|codie\.ingestion|codie\.cards|requests|httpx|sqlite3" codie/probability_engine/review_export_writer.py tests/test_probability_engine_review_export_writer.py codie/cli/simulation_review.py tests/test_cli_simulation_review.py
 rg -n "SELECT |INSERT |UPDATE |DELETE |execute\(|executescript\(" codie/probability_engine/review_export_writer.py codie/cli/simulation_review.py
-rg -n "should play|must include|correct card|breaks the format|secretly optimal|cut this|you should" codie/probability_engine/review_export_writer.py tests/test_probability_engine_review_export_writer.py codie/cli/simulation_review.py tests/test_cli_simulation_review.py docs/USER_GUIDE_SIMULATION_REVIEW_EXPORTS.md
+rg -n "should play|must include|correct card|breaks the format|secretly optimal|cut this|strict upgrade|auto-include|recommended cut|recommended include" codie/probability_engine/review_export_writer.py tests/test_probability_engine_review_export_writer.py codie/cli/simulation_review.py tests/test_cli_simulation_review.py docs/USER_GUIDE_SIMULATION_REVIEW_EXPORTS.md
 ```
 
 Expected:

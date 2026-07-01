@@ -58,6 +58,7 @@ ingestion, cards, SQLite, or network clients.
 - Delegates writing to `write_simulation_review_export_bundle(...)`.
 - Prints deterministic JSON write summary.
 - Added CLI tests for successful export, invalid bundle payloads, required args,
+  missing paths, malformed JSON, missing fields, output-root file collisions,
   and import boundaries.
 
 ## Validation Performed
@@ -67,7 +68,7 @@ Focused tests:
 ```text
 python -m unittest tests.test_cli_simulation_review -v
 
-Ran 4 tests in 0.022s
+Ran 7 tests in 0.021s
 
 OK
 ```
@@ -95,7 +96,7 @@ Boundary scans:
 ```text
 rg -n "codie\.db|codie\.providers|codie\.analytics|codie\.recommendations|codie\.ingestion|codie\.cards|requests|httpx|sqlite3" codie\cli\simulation_review.py tests\test_cli_simulation_review.py
 rg -n "SELECT |INSERT |UPDATE |DELETE |execute\(|executescript\(" codie\cli\simulation_review.py
-rg -n "should play|must include|correct card|breaks the format|secretly optimal|cut this|you should" codie\cli\simulation_review.py tests\test_cli_simulation_review.py
+rg -n "should play|must include|correct card|breaks the format|secretly optimal|cut this|strict upgrade|auto-include|recommended cut|recommended include" codie\cli\simulation_review.py tests\test_cli_simulation_review.py
 ```
 
 returned no matches.

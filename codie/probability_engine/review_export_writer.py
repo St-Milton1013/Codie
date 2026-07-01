@@ -42,9 +42,11 @@ def write_simulation_review_export_bundle(
 ) -> SimulationReviewExportWriteResult:
     """Write an already-built simulator review export bundle under output_root."""
 
-    root = Path(output_root).expanduser().resolve()
     if str(output_root).strip() == "":
         raise ValueError("output_root is required")
+    root = Path(output_root).expanduser().resolve()
+    if root.exists() and not root.is_dir():
+        raise ValueError("output_root must be a directory")
     writes = _prepare_bundle_writes(bundle, root)
 
     written: list[dict[str, Any]] = []
@@ -74,14 +76,7 @@ def _prepare_bundle_writes(
     bundle: SimulationReviewExportBundle,
     root: Path,
 ) -> tuple[tuple[str, Path, str, str], ...]:
-    prepared: list[tuple[str, Path, str, str]] = [
-        (
-            "manifest.json",
-            _resolve_relative_target("manifest.json", root),
-            "application/json",
-            _json_text(bundle.to_dict()),
-        )
-    ]
+    prepared: list[tuple[str, Path, str, str]] = []
     seen_paths = {"manifest.json"}
 
     for file in bundle.files:
@@ -109,6 +104,14 @@ def _prepare_bundle_writes(
 
         prepared.append((relative_path, _resolve_relative_target(relative_path, root), content_type, text))
 
+    prepared.append(
+        (
+            "manifest.json",
+            _resolve_relative_target("manifest.json", root),
+            "application/json",
+            _json_text(bundle.to_dict()),
+        )
+    )
     return tuple(prepared)
 
 

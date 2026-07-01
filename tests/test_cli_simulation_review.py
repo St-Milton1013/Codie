@@ -108,6 +108,69 @@ class SimulationReviewCliTest(unittest.TestCase):
                     ]
                 )
 
+    def test_export_review_bundle_rejects_missing_bundle_path(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+
+            with self.assertRaises(FileNotFoundError):
+                main(
+                    [
+                        "export-review-bundle",
+                        "--bundle-json",
+                        str(root / "missing.json"),
+                        "--output-root",
+                        str(root / "out"),
+                    ]
+                )
+
+    def test_export_review_bundle_rejects_malformed_json_and_missing_fields(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            malformed = root / "malformed.json"
+            missing_fields = root / "missing-fields.json"
+            malformed.write_text("{", encoding="utf-8")
+            missing_fields.write_text(json.dumps({"kind": "simulation_review_export_bundle"}), encoding="utf-8")
+
+            with self.assertRaises(json.JSONDecodeError):
+                main(
+                    [
+                        "export-review-bundle",
+                        "--bundle-json",
+                        str(malformed),
+                        "--output-root",
+                        str(root / "out"),
+                    ]
+                )
+            with self.assertRaises(ValueError):
+                main(
+                    [
+                        "export-review-bundle",
+                        "--bundle-json",
+                        str(missing_fields),
+                        "--output-root",
+                        str(root / "out"),
+                    ]
+                )
+
+    def test_export_review_bundle_rejects_output_root_that_is_file(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            bundle_json = root / "bundle.json"
+            output_file = root / "not-a-directory"
+            bundle_json.write_text(json.dumps(self.bundle.to_dict(), sort_keys=True), encoding="utf-8")
+            output_file.write_text("occupied", encoding="utf-8")
+
+            with self.assertRaises(ValueError):
+                main(
+                    [
+                        "export-review-bundle",
+                        "--bundle-json",
+                        str(bundle_json),
+                        "--output-root",
+                        str(output_file),
+                    ]
+                )
+
     def test_parser_requires_output_root(self) -> None:
         parser = build_parser()
 

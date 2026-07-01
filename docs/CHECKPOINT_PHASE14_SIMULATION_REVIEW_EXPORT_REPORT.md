@@ -143,6 +143,7 @@ The file writer:
 requires explicit output root
 validates full bundle before writing bundle files
 writes manifest.json
+writes manifest.json after bundle files
 writes deterministic JSON with sorted keys
 writes Markdown with final newline
 rejects absolute paths
@@ -153,6 +154,8 @@ rejects duplicate relative paths
 rejects unsupported content types
 rejects invalid JSON payloads
 rejects empty Markdown bodies
+rejects output roots that point to existing files
+allows repeated exports to the same output root deterministically
 does not mutate bundle input
 ```
 
@@ -163,7 +166,10 @@ requires --bundle-json
 requires --output-root
 rejects non-object JSON
 rejects wrong bundle kind
+handles missing bundle-json paths
+handles malformed JSON
 rejects missing required bundle fields
+rejects output roots that point to existing files
 delegates file writing to Phase 14A writer
 prints deterministic JSON write summary
 ```
@@ -203,15 +209,22 @@ Coverage includes:
 
 ```text
 writer creates manifest, JSON, Markdown, and fixture files
+writer writes manifest last
 writer preserves bundle ID
 writer rejects unsafe paths
 writer rejects duplicate paths
 writer rejects unsupported content types
 writer validates before writing bundle files
+writer rejects output root paths that point to files
+writer repeats exports to the same root deterministically
 writer does not mutate bundle input
 CLI writes files from bundle JSON
 CLI prints bundle ID and byte count
 CLI rejects non-bundle JSON
+CLI rejects missing bundle path
+CLI rejects malformed JSON
+CLI rejects missing required fields
+CLI rejects output-root file paths
 CLI requires output root
 import boundary checks
 raw SQL / strategic language checks
@@ -224,7 +237,7 @@ Latest full suite:
 ```text
 python -m unittest discover -s tests -v
 
-Ran 498 tests in 2.901s
+Ran 503 tests in 2.970s
 
 OK (skipped=1)
 ```
@@ -242,7 +255,7 @@ Boundary scans:
 ```text
 rg -n "codie\.db|codie\.providers|codie\.analytics|codie\.recommendations|codie\.ingestion|codie\.cards|requests|httpx|sqlite3" codie\probability_engine\review_export_writer.py tests\test_probability_engine_review_export_writer.py codie\cli\simulation_review.py tests\test_cli_simulation_review.py
 rg -n "SELECT |INSERT |UPDATE |DELETE |execute\(|executescript\(" codie\probability_engine\review_export_writer.py codie\cli\simulation_review.py
-rg -n "should play|must include|correct card|breaks the format|secretly optimal|cut this|you should" codie\probability_engine\review_export_writer.py tests\test_probability_engine_review_export_writer.py codie\cli\simulation_review.py tests\test_cli_simulation_review.py docs\USER_GUIDE_SIMULATION_REVIEW_EXPORTS.md
+rg -n "should play|must include|correct card|breaks the format|secretly optimal|cut this|strict upgrade|auto-include|recommended cut|recommended include" codie\probability_engine\review_export_writer.py tests\test_probability_engine_review_export_writer.py codie\cli\simulation_review.py tests\test_cli_simulation_review.py docs\USER_GUIDE_SIMULATION_REVIEW_EXPORTS.md
 ```
 
 returned no matches.
