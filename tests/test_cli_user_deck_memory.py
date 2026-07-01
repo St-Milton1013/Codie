@@ -121,6 +121,24 @@ class UserDeckMemoryCliTest(unittest.TestCase):
             self.assertEqual(stdout, "")
             self.assertIn("limit", stderr)
 
+    def test_list_command_rejects_excluding_all_visibility_classes(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            db_path, _, _ = self._seed_memory(Path(directory))
+
+            exit_code, stdout, stderr = self._run_cli(
+                [
+                    "list-deck-memory",
+                    "--db",
+                    str(db_path),
+                    "--exclude-temporary",
+                    "--exclude-persistent",
+                ]
+            )
+
+            self.assertEqual(exit_code, 1)
+            self.assertEqual(stdout, "")
+            self.assertIn("visibility", stderr)
+
     def test_show_command_prints_deck_detail_without_raw_input_by_default(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             db_path, first_id, _ = self._seed_memory(Path(directory))

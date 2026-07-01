@@ -86,6 +86,7 @@ lists remembered user decks
 filters by commander_hash
 filters by deck_hash
 filters temporary vs persistent records
+rejects excluding both temporary and persistent records
 filters by created_at window
 validates limit
 returns deterministic summary ordering
@@ -129,6 +130,7 @@ shows one remembered deck detail
 supports commander_hash filter
 supports deck_hash filter
 supports temporary/persistent filters
+rejects excluding both temporary and persistent records
 validates limit
 omits raw_input by default
 includes raw_input only with --include-raw-input
@@ -226,7 +228,7 @@ deck memory does not generate recommendation claims
 Focused Phase 15B tests:
 
 ```text
-Ran 12 tests in 0.040s
+Ran 13 tests
 
 OK
 ```
@@ -234,7 +236,7 @@ OK
 Focused Phase 15D tests:
 
 ```text
-Ran 11 tests in 0.184s
+Ran 12 tests
 
 OK
 ```
@@ -242,7 +244,7 @@ OK
 Latest full suite:
 
 ```text
-Ran 526 tests in 3.355s
+Ran 528 tests in 3.452s
 
 OK (skipped=1)
 ```
@@ -257,6 +259,8 @@ deck_memory strategic language scan: no matches
 deck memory CLI forbidden import scan: no matches
 deck memory CLI source/provider table scan: no matches
 deck memory CLI strategic language scan: no matches
+raw SQL scan for deck_memory/CLI implementation: no matches
+mutation-call scan for deck_memory/CLI implementation: no matches
 usage guide strategic language scan: no matches
 usage guide privacy phrase scan: raw_input and --include-raw-input warnings present
 ```

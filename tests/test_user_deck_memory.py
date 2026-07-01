@@ -176,6 +176,10 @@ class UserDeckMemoryTest(unittest.TestCase):
         summaries = list_deck_memory(self.user, DeckMemoryFilters(limit=1))
         self.assertEqual(len(summaries), 1)
 
+    def test_list_deck_memory_rejects_excluding_all_visibility_classes(self) -> None:
+        with self.assertRaises(DeckMemoryReadError):
+            DeckMemoryFilters(include_temporary=False, include_persistent=False)
+
     def test_get_deck_memory_detail_returns_raw_input(self) -> None:
         detail = get_deck_memory_detail(self.user, self.first_deck_id)
 

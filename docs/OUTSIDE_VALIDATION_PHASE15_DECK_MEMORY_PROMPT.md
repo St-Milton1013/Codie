@@ -67,6 +67,7 @@ Check:
   created_at_from
   created_at_to
   limit
+- Confirm include_temporary=false and include_persistent=false fails with a documented validation error.
 - Confirm deterministic ordering:
   summaries by updated_at DESC, created_at DESC, user_deck_id DESC
   cards by user_deck_card_id ASC
@@ -133,7 +134,7 @@ python -m unittest discover -s tests -v
 
 Expected current result:
 
-Ran 526 tests
+Ran 528 tests
 OK (skipped=1)
 
 Also run or equivalent-check these scans:
@@ -153,6 +154,16 @@ rg -n "should play|must include|correct card|breaks the format|secretly optimal|
 rg -n "should play|should be played|should be cut|must include|correct card|breaks the format|secretly optimal|cut this|strict upgrade|auto-include|recommended cut|recommended include|tournament evidence" docs\USER_GUIDE_DECK_MEMORY_CLI.md
 
 rg -n "raw_input|--include-raw-input|original imported deck text|omitted by default" docs\USER_GUIDE_DECK_MEMORY_CLI.md
+
+rg -n "SELECT |INSERT |UPDATE |DELETE |execute\(|executescript\(" codie\user_decks\deck_memory.py codie\cli\user_deck_memory.py
+
+Expected:
+no matches
+
+rg -n "create_|insert_|update_|delete_|save_|persist_|commit\(|rollback\(" codie\user_decks\deck_memory.py codie\cli\user_deck_memory.py
+
+Expected:
+no matches
 
 9. Clean checkout concerns
 - Confirm the test suite does not depend on local-only SQLite artifacts.
