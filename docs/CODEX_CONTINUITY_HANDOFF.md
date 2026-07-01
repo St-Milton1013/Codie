@@ -623,6 +623,16 @@ locally sharing simulator review export bundles. It adds no code, DB reads,
 providers, analytics writes, recommendations, schema changes, UI, simulator
 execution, or simulator trace mutation.
 
+Latest Phase 14 checkpoint packet:
+
+```text
+docs/CHECKPOINT_PHASE14_SIMULATION_REVIEW_EXPORT_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE14_SIMULATION_REVIEW_EXPORT_PROMPT.md
+```
+
+Phase 14 is checkpointed for outside validation. Do not start Phase 15
+implementation until outside validation returns PASS or PASS WITH REVIEW NOTES.
+
 Next UI implementation packet:
 
 ```text
@@ -682,7 +692,9 @@ Phase 13 simulator contracts or a new UI/API contract is explicitly selected.
 - Simulation Review Export File Writer implementation is complete.
 - Simulation Review Export CLI implementation is complete.
 - Simulation Review Export Usage Documentation is complete.
-- Next packet should be Phase 14D - Simulator Review Export Checkpoint.
+- Phase 14 simulator review export checkpoint is ready for outside validation.
+- Next packet should be Phase 15 planning only after Phase 14 validation is
+  accepted.
 - cEDHData public asset metadata and local reference hashes are recorded in docs/CEDHDATA_SIMULATOR_REFERENCE_CAPTURE_MANIFEST.md.
 - Final recommendation output remains intentionally separate.
 
