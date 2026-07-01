@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: Phase 15C - Deck Memory CLI Contract
+Recommended next task: Phase 15D - Deck Memory CLI Implementation
 
 ## Current Status
 
@@ -8,12 +8,16 @@ Phase 14 has passed outside validation.
 
 Phase 15B deck memory listing and retrieval is implemented.
 
+Phase 15C deck memory CLI contract is complete.
+
 Phase 15 planning is complete:
 
 ```text
 docs/PHASE15_PLANNING_CONTRACT.md
 docs/PHASE15A_DECK_MEMORY_LISTING_RETRIEVAL_CONTRACT.md
 docs/PHASE15B_DECK_MEMORY_LISTING_RETRIEVAL_IMPLEMENTATION_REPORT.md
+docs/PHASE15C_DECK_MEMORY_CLI_CONTRACT.md
+docs/PHASE15C_DECK_MEMORY_CLI_CONTRACT_REPORT.md
 ```
 
 ## Phase 15 Direction
@@ -40,6 +44,8 @@ codie/user_decks/deck_memory.py
 codie/user_decks/__init__.py
 tests/test_user_deck_memory.py
 docs/PHASE15B_DECK_MEMORY_LISTING_RETRIEVAL_IMPLEMENTATION_REPORT.md
+docs/PHASE15C_DECK_MEMORY_CLI_CONTRACT.md
+docs/PHASE15C_DECK_MEMORY_CLI_CONTRACT_REPORT.md
 docs/CODEX_CONTINUITY_HANDOFF.md
 docs/NEXT_PHASE_CONTRACT.md
 ```
@@ -89,15 +95,15 @@ include resolved card rows
 include raw_input only in detail view
 ```
 
-## Next Planning Scope
+## Completed Phase 15C Scope
 
-Phase 15C should be contract-only unless explicitly accepted:
+Phase 15C defined the contract for:
 
 ```text
 Deck Memory CLI Contract
 ```
 
-Potential CLI behavior:
+Required future CLI behavior:
 
 ```text
 list remembered decks
@@ -107,6 +113,23 @@ filter by deck_hash
 include/exclude temporary decks
 output JSON only by default
 do not export raw_input unless explicitly requested
+```
+
+## Next Implementation Scope
+
+Phase 15D should add:
+
+```text
+codie/cli/user_deck_memory.py
+tests/test_cli_user_deck_memory.py
+docs/PHASE15D_DECK_MEMORY_CLI_IMPLEMENTATION_REPORT.md
+```
+
+Commands:
+
+```text
+list-deck-memory
+show-deck-memory
 ```
 
 ## Validation Command
@@ -124,6 +147,15 @@ git diff --check
 rg -n "codie\.providers|codie\.analytics|codie\.recommendations|codie\.ingestion|codie\.cards|codie\.probability_engine|codie\.canonical|requests|httpx|sqlite3" codie\user_decks\deck_memory.py tests\test_user_deck_memory.py
 rg -n "source_events|source_decks|source_deck_cards|provider_objects" codie\user_decks\deck_memory.py tests\test_user_deck_memory.py
 rg -n "should play|must include|correct card|breaks the format|secretly optimal|cut this|strict upgrade|auto-include|recommended cut|recommended include" codie\user_decks\deck_memory.py tests\test_user_deck_memory.py
+```
+
+Static checks for Phase 15D:
+
+```text
+git diff --check
+rg -n "codie\.providers|codie\.analytics|codie\.recommendations|codie\.ingestion|codie\.cards|codie\.probability_engine|codie\.canonical|requests|httpx|sqlite3" codie\cli\user_deck_memory.py tests\test_cli_user_deck_memory.py
+rg -n "source_events|source_decks|source_deck_cards|provider_objects" codie\cli\user_deck_memory.py tests\test_cli_user_deck_memory.py
+rg -n "should play|must include|correct card|breaks the format|secretly optimal|cut this|strict upgrade|auto-include|recommended cut|recommended include" codie\cli\user_deck_memory.py tests\test_cli_user_deck_memory.py
 ```
 
 ## Known Caveats / Review Notes
@@ -159,4 +191,18 @@ do not add UI
 do not call LLMs
 do not export private deck text by default
 do not generate recommendations
+```
+
+## Do Not Do In Phase 15D
+
+```text
+do not add schema
+do not add UI
+do not call LLMs
+do not call providers
+do not read source/provider tables
+do not run simulator
+do not calculate analytics
+do not generate recommendations
+do not export private deck text by default
 ```

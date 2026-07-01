@@ -664,6 +664,20 @@ analysis summaries, and analysis sessions. It adds no schema changes, CLI, UI,
 LLM calls, provider reads, source-table reads, simulator execution, or
 recommendations.
 
+Latest Phase 15C packet:
+
+```text
+docs/PHASE15C_DECK_MEMORY_CLI_CONTRACT.md
+docs/PHASE15C_DECK_MEMORY_CLI_CONTRACT_REPORT.md
+```
+
+Phase 15C defines a local deck memory CLI contract for listing remembered decks
+and showing one remembered deck detail. The future CLI must output JSON, omit
+`raw_input` by default, require explicit `--include-raw-input` for private deck
+text, avoid source/provider tables, and generate no recommendations. It adds no
+implementation code, schema, UI, LLM calls, providers, simulator execution, or
+analytics writes.
+
 Next UI implementation packet:
 
 ```text
@@ -727,7 +741,8 @@ Phase 13 simulator contracts or a new UI/API contract is explicitly selected.
 - Phase 15 planning contract is complete.
 - Phase 15A Deck Memory Listing And Retrieval contract is complete.
 - Phase 15B Deck Memory Listing And Retrieval implementation is complete.
-- Next packet should be Phase 15C - Deck Memory CLI Contract.
+- Phase 15C Deck Memory CLI contract is complete.
+- Next packet should be Phase 15D - Deck Memory CLI Implementation.
 - cEDHData public asset metadata and local reference hashes are recorded in docs/CEDHDATA_SIMULATOR_REFERENCE_CAPTURE_MANIFEST.md.
 - Final recommendation output remains intentionally separate.
 
