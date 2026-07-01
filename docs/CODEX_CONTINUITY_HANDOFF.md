@@ -710,6 +710,19 @@ filters, JSON output shapes, failure behavior, and the privacy rule that
 It adds no code, schema, UI, provider access, simulator execution, LLM calls,
 analytics, or recommendations.
 
+Latest Phase 15F packet:
+
+```text
+docs/USER_GUIDE_DECK_MEMORY_CLI.md
+docs/PHASE15F_DECK_MEMORY_CLI_USAGE_DOCUMENTATION_REPORT.md
+```
+
+Phase 15F adds the user-facing deck memory CLI guide. It documents list/show
+commands, filters, JSON output examples, failure examples, and the privacy rule
+that `raw_input` contains original imported deck text, is omitted by default,
+and appears only with `--include-raw-input`. It adds no code, schema, UI,
+provider access, simulator execution, LLM calls, analytics, or recommendations.
+
 Next UI implementation packet:
 
 ```text
@@ -776,7 +789,8 @@ Phase 13 simulator contracts or a new UI/API contract is explicitly selected.
 - Phase 15C Deck Memory CLI contract is complete.
 - Phase 15D Deck Memory CLI implementation is complete.
 - Phase 15E Deck Memory CLI Usage Documentation contract is complete.
-- Next packet should be Phase 15F - Deck Memory CLI Usage Documentation.
+- Phase 15F Deck Memory CLI Usage Documentation is complete.
+- Next packet should be Phase 15G - Deck Memory Track Checkpoint.
 - cEDHData public asset metadata and local reference hashes are recorded in docs/CEDHDATA_SIMULATOR_REFERENCE_CAPTURE_MANIFEST.md.
 - Final recommendation output remains intentionally separate.
 

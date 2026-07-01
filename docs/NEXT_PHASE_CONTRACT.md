@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: Phase 15F - Deck Memory CLI Usage Documentation
+Recommended next task: Phase 15G - Deck Memory Track Checkpoint
 
 ## Current Status
 
@@ -14,6 +14,8 @@ Phase 15D deck memory CLI implementation is complete.
 
 Phase 15E deck memory CLI usage documentation contract is complete.
 
+Phase 15F deck memory CLI usage documentation is complete.
+
 Phase 15 planning is complete:
 
 ```text
@@ -25,6 +27,8 @@ docs/PHASE15C_DECK_MEMORY_CLI_CONTRACT_REPORT.md
 docs/PHASE15D_DECK_MEMORY_CLI_IMPLEMENTATION_REPORT.md
 docs/PHASE15E_DECK_MEMORY_CLI_USAGE_DOCUMENTATION_CONTRACT.md
 docs/PHASE15E_DECK_MEMORY_CLI_USAGE_DOCUMENTATION_CONTRACT_REPORT.md
+docs/USER_GUIDE_DECK_MEMORY_CLI.md
+docs/PHASE15F_DECK_MEMORY_CLI_USAGE_DOCUMENTATION_REPORT.md
 ```
 
 ## Phase 15 Direction
@@ -58,6 +62,8 @@ tests/test_cli_user_deck_memory.py
 docs/PHASE15D_DECK_MEMORY_CLI_IMPLEMENTATION_REPORT.md
 docs/PHASE15E_DECK_MEMORY_CLI_USAGE_DOCUMENTATION_CONTRACT.md
 docs/PHASE15E_DECK_MEMORY_CLI_USAGE_DOCUMENTATION_CONTRACT_REPORT.md
+docs/USER_GUIDE_DECK_MEMORY_CLI.md
+docs/PHASE15F_DECK_MEMORY_CLI_USAGE_DOCUMENTATION_REPORT.md
 docs/CODEX_CONTINUITY_HANDOFF.md
 docs/NEXT_PHASE_CONTRACT.md
 ```
@@ -181,9 +187,9 @@ that user deck memory is not tournament evidence
 that CLI does not generate recommendations
 ```
 
-## Next Documentation Scope
+## Completed Phase 15F Scope
 
-Phase 15F should add:
+Phase 15F added:
 
 ```text
 docs/USER_GUIDE_DECK_MEMORY_CLI.md
@@ -201,6 +207,30 @@ failure behavior
 that user deck memory is local user data
 that user deck memory is not tournament evidence
 that no recommendations are generated
+```
+
+## Next Checkpoint Scope
+
+Phase 15G should create:
+
+```text
+docs/CHECKPOINT_PHASE15_DECK_MEMORY_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE15_DECK_MEMORY_PROMPT.md
+```
+
+The checkpoint should cover:
+
+```text
+Phase 15 planning
+Phase 15B deck memory read layer
+Phase 15D deck memory CLI
+Phase 15F usage documentation
+privacy defaults
+no schema changes
+no provider/source reads
+no recommendations
+full test output
+boundary scans
 ```
 
 ## Validation Command
@@ -301,4 +331,16 @@ do not call LLMs
 do not generate recommendations
 do not include real private deck text in examples
 do not tell users to upload or share raw deck text
+```
+
+## Do Not Do In Phase 15G
+
+```text
+do not add code
+do not add schema
+do not add UI
+do not call providers
+do not call LLMs
+do not generate recommendations
+do not weaken raw_input privacy defaults
 ```
