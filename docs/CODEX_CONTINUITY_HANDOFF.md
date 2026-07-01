@@ -20,15 +20,15 @@ Latest pushed commit before local Phase 13 checkpoint work: 56ac7f9 Add Phase 13
 Latest full-suite result:
 
 ```text
-Ran 487 tests in 3.145s
+Ran 515 tests in 2.920s
 
 OK (skipped=1)
 ```
 
-Latest focused Phase 13T result:
+Latest focused Phase 15B result:
 
 ```text
-Ran 14 tests in 0.032s
+Ran 12 tests in 0.040s
 
 OK
 ```
@@ -41,16 +41,18 @@ git diff --check
 
 passed.
 
-Latest relevant boundary scan:
+Latest relevant boundary scans:
 
 ```text
-rg -n "codie\.providers|codie\.recommendations|codie\.analytics|source_events|source_decks|provider_objects" codie\pages codie\cli
+rg -n "codie\.providers|codie\.analytics|codie\.recommendations|codie\.ingestion|codie\.cards|codie\.probability_engine|codie\.canonical|requests|httpx|sqlite3" codie\user_decks\deck_memory.py tests\test_user_deck_memory.py
+rg -n "source_events|source_decks|source_deck_cards|provider_objects" codie\user_decks\deck_memory.py tests\test_user_deck_memory.py
+rg -n "should play|must include|correct card|breaks the format|secretly optimal|cut this|strict upgrade|auto-include|recommended cut|recommended include" codie\user_decks\deck_memory.py tests\test_user_deck_memory.py
 ```
 
 returned:
 
 ```text
-pages/cli: no matches
+no matches
 ```
 
 Latest UI boundary scans:
@@ -645,6 +647,23 @@ listing and retrieval over existing `user_decks`, `user_deck_cards`,
 `analysis_sessions`, and `saved_analysis` tables. It adds no code, schema, CLI,
 UI, LLM calls, recommendations, provider reads, or source-table reads.
 
+Latest Phase 15B packet:
+
+```text
+codie/db/repositories/user.py
+codie/user_decks/deck_memory.py
+codie/user_decks/__init__.py
+tests/test_user_deck_memory.py
+docs/PHASE15B_DECK_MEMORY_LISTING_RETRIEVAL_IMPLEMENTATION_REPORT.md
+```
+
+Phase 15B implements read-only deck memory listing and retrieval over existing
+user deck tables. It supports commander/deck/date/temporary filters, deterministic
+summary ordering, detail retrieval with raw input, imported cards, saved
+analysis summaries, and analysis sessions. It adds no schema changes, CLI, UI,
+LLM calls, provider reads, source-table reads, simulator execution, or
+recommendations.
+
 Next UI implementation packet:
 
 ```text
@@ -707,8 +726,8 @@ Phase 13 simulator contracts or a new UI/API contract is explicitly selected.
 - Phase 14 simulator review export checkpoint passed outside validation.
 - Phase 15 planning contract is complete.
 - Phase 15A Deck Memory Listing And Retrieval contract is complete.
-- Next packet should be Phase 15B - Deck Memory Listing And Retrieval
-  Implementation.
+- Phase 15B Deck Memory Listing And Retrieval implementation is complete.
+- Next packet should be Phase 15C - Deck Memory CLI Contract.
 - cEDHData public asset metadata and local reference hashes are recorded in docs/CEDHDATA_SIMULATOR_REFERENCE_CAPTURE_MANIFEST.md.
 - Final recommendation output remains intentionally separate.
 

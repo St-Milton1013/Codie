@@ -6,6 +6,17 @@ from .analysis_input import (
     UserDeckAnalysisInputError,
     build_user_deck_analysis_input,
 )
+from .deck_memory import (
+    DeckMemoryAnalysisSummary,
+    DeckMemoryCard,
+    DeckMemoryDetail,
+    DeckMemoryFilters,
+    DeckMemoryReadError,
+    DeckMemorySessionSummary,
+    DeckMemorySummary,
+    get_deck_memory_detail,
+    list_deck_memory,
+)
 from .evidence_comparison import (
     UserDeckEvidenceCandidate,
     UserDeckEvidenceComparison,
@@ -32,6 +43,13 @@ from .saved_analysis_listing import (
 __all__ = [
     "ParsedUserDeck",
     "ParsedUserDeckCard",
+    "DeckMemoryAnalysisSummary",
+    "DeckMemoryCard",
+    "DeckMemoryDetail",
+    "DeckMemoryFilters",
+    "DeckMemoryReadError",
+    "DeckMemorySessionSummary",
+    "DeckMemorySummary",
     "UserDeckAnalysisCard",
     "UserDeckAnalysisInput",
     "UserDeckAnalysisInputError",
@@ -47,7 +65,9 @@ __all__ = [
     "SavedAnalysisSummary",
     "build_user_deck_analysis_input",
     "compare_user_deck_to_evidence",
+    "get_deck_memory_detail",
     "get_saved_user_deck_analysis",
+    "list_deck_memory",
     "list_saved_user_deck_analyses",
     "parse_user_deck_text",
     "save_user_deck_comparison_analysis",

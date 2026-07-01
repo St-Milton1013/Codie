@@ -1,16 +1,19 @@
 # Next Phase Contract
 
-Recommended next task: Phase 15B - Deck Memory Listing And Retrieval Implementation
+Recommended next task: Phase 15C - Deck Memory CLI Contract
 
 ## Current Status
 
 Phase 14 has passed outside validation.
+
+Phase 15B deck memory listing and retrieval is implemented.
 
 Phase 15 planning is complete:
 
 ```text
 docs/PHASE15_PLANNING_CONTRACT.md
 docs/PHASE15A_DECK_MEMORY_LISTING_RETRIEVAL_CONTRACT.md
+docs/PHASE15B_DECK_MEMORY_LISTING_RETRIEVAL_IMPLEMENTATION_REPORT.md
 ```
 
 ## Phase 15 Direction
@@ -32,8 +35,11 @@ Do not add schema in Phase 15B.
 ## Files Created Or Modified In Latest Packet
 
 ```text
-docs/PHASE15_PLANNING_CONTRACT.md
-docs/PHASE15A_DECK_MEMORY_LISTING_RETRIEVAL_CONTRACT.md
+codie/db/repositories/user.py
+codie/user_decks/deck_memory.py
+codie/user_decks/__init__.py
+tests/test_user_deck_memory.py
+docs/PHASE15B_DECK_MEMORY_LISTING_RETRIEVAL_IMPLEMENTATION_REPORT.md
 docs/CODEX_CONTINUITY_HANDOFF.md
 docs/NEXT_PHASE_CONTRACT.md
 ```
@@ -42,9 +48,9 @@ docs/NEXT_PHASE_CONTRACT.md
 
 None.
 
-## Next Implementation Scope
+## Completed Phase 15B Scope
 
-Phase 15B should add:
+Phase 15B added:
 
 ```text
 codie/user_decks/deck_memory.py
@@ -69,7 +75,7 @@ list_deck_memory(...)
 get_deck_memory_detail(...)
 ```
 
-The implementation must:
+The implementation:
 
 ```text
 list saved/imported user decks
@@ -81,6 +87,26 @@ include linked saved_analysis summaries
 include linked analysis_sessions
 include resolved card rows
 include raw_input only in detail view
+```
+
+## Next Planning Scope
+
+Phase 15C should be contract-only unless explicitly accepted:
+
+```text
+Deck Memory CLI Contract
+```
+
+Potential CLI behavior:
+
+```text
+list remembered decks
+show one remembered deck detail
+filter by commander_hash
+filter by deck_hash
+include/exclude temporary decks
+output JSON only by default
+do not export raw_input unless explicitly requested
 ```
 
 ## Validation Command
@@ -122,4 +148,15 @@ do not run simulator
 do not calculate recommendations
 do not call LLMs
 do not treat user decks as tournament evidence
+```
+
+## Do Not Do In Phase 15C Contract
+
+```text
+do not implement CLI code until the contract is accepted
+do not add schema
+do not add UI
+do not call LLMs
+do not export private deck text by default
+do not generate recommendations
 ```
