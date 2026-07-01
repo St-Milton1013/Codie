@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: Send Phase 15 Deck Memory for outside validation
+Recommended next task: Phase 16A - Evidence Graph Contract
 
 ## Current Status
 
@@ -18,6 +18,10 @@ Phase 15F deck memory CLI usage documentation is complete.
 
 Phase 15G deck memory track checkpoint is complete.
 
+Phase 15 outside validation is accepted.
+
+Phase 16 interactive intelligence planning is complete.
+
 Phase 15 planning is complete:
 
 ```text
@@ -33,6 +37,8 @@ docs/USER_GUIDE_DECK_MEMORY_CLI.md
 docs/PHASE15F_DECK_MEMORY_CLI_USAGE_DOCUMENTATION_REPORT.md
 docs/CHECKPOINT_PHASE15_DECK_MEMORY_REPORT.md
 docs/OUTSIDE_VALIDATION_PHASE15_DECK_MEMORY_PROMPT.md
+docs/PHASE16_INTERACTIVE_INTELLIGENCE_PLANNING_CONTRACT.md
+docs/PHASE16_INTERACTIVE_INTELLIGENCE_PLANNING_REPORT.md
 ```
 
 ## Phase 15 Direction
@@ -70,6 +76,8 @@ docs/USER_GUIDE_DECK_MEMORY_CLI.md
 docs/PHASE15F_DECK_MEMORY_CLI_USAGE_DOCUMENTATION_REPORT.md
 docs/CHECKPOINT_PHASE15_DECK_MEMORY_REPORT.md
 docs/OUTSIDE_VALIDATION_PHASE15_DECK_MEMORY_PROMPT.md
+docs/PHASE16_INTERACTIVE_INTELLIGENCE_PLANNING_CONTRACT.md
+docs/PHASE16_INTERACTIVE_INTELLIGENCE_PLANNING_REPORT.md
 docs/CODEX_CONTINUITY_HANDOFF.md
 docs/NEXT_PHASE_CONTRACT.md
 ```
@@ -239,20 +247,48 @@ full test output
 boundary scans
 ```
 
-## Next Validation Scope
+## Completed Phase 15 Validation Scope
 
-Send:
-
-```text
-docs/CHECKPOINT_PHASE15_DECK_MEMORY_REPORT.md
-docs/OUTSIDE_VALIDATION_PHASE15_DECK_MEMORY_PROMPT.md
-```
-
-Phase 16 should not start until outside validation returns:
+Phase 15 outside validation accepted:
 
 ```text
 PASS
-PASS WITH REVIEW NOTES
+```
+
+## Completed Phase 16 Planning Scope
+
+Phase 16 planning created:
+
+```text
+docs/PHASE16_INTERACTIVE_INTELLIGENCE_PLANNING_CONTRACT.md
+docs/PHASE16_INTERACTIVE_INTELLIGENCE_PLANNING_REPORT.md
+```
+
+Planning decision:
+
+```text
+Start with Phase 16A - Evidence Graph Contract.
+Do not start with chat UI or LLM calls.
+```
+
+## Next Contract Scope
+
+Phase 16A should define:
+
+```text
+EvidenceGraph
+EvidenceNode
+EvidenceEdge
+EvidenceCitation
+EvidenceCaveat
+EvidenceGraphBuildError
+graph construction inputs
+serialization shape
+allowed node/edge types
+privacy flags
+confidence/caveat fields
+strategic-language restrictions
+tests for future implementation
 ```
 
 ## Validation Command
@@ -367,14 +403,15 @@ do not generate recommendations
 do not weaken raw_input privacy defaults
 ```
 
-## Do Not Do Before Outside Validation
+## Do Not Do In Phase 16A
 
 ```text
-do not start Phase 16
-do not add code
 do not add schema
+do not add implementation code
 do not add UI
 do not call providers
 do not call LLMs
 do not generate recommendations
+do not read source/provider payloads directly
+do not export private raw_input
 ```

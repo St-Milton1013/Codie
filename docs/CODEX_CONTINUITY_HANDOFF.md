@@ -734,6 +734,24 @@ Phase 15G checkpointed the deck memory track and created the outside validation
 prompt. It is an internal checkpoint, not external proof. Phase 16 should not
 start until outside validation returns PASS or PASS WITH REVIEW NOTES.
 
+Phase 15 outside validation:
+
+```text
+PASS
+```
+
+Latest Phase 16 planning packet:
+
+```text
+docs/PHASE16_INTERACTIVE_INTELLIGENCE_PLANNING_CONTRACT.md
+docs/PHASE16_INTERACTIVE_INTELLIGENCE_PLANNING_REPORT.md
+```
+
+Phase 16 planning selects the evidence graph as the next dependency-safe
+foundation for the Interactive Intelligence Layer. It explicitly blocks chat UI,
+LLM calls, schema changes, provider calls, direct source/provider payload reads,
+simulator execution, recommendation generation, and private raw_input export.
+
 Next UI implementation packet:
 
 ```text
@@ -802,7 +820,9 @@ Phase 13 simulator contracts or a new UI/API contract is explicitly selected.
 - Phase 15E Deck Memory CLI Usage Documentation contract is complete.
 - Phase 15F Deck Memory CLI Usage Documentation is complete.
 - Phase 15G Deck Memory Track Checkpoint is complete.
-- Next step should be sending Phase 15 for outside validation before Phase 16.
+- Phase 15 outside validation is accepted.
+- Phase 16 Interactive Intelligence Foundation Planning is complete.
+- Next packet should be Phase 16A - Evidence Graph Contract.
 - cEDHData public asset metadata and local reference hashes are recorded in docs/CEDHDATA_SIMULATOR_REFERENCE_CAPTURE_MANIFEST.md.
 - Final recommendation output remains intentionally separate.
 
