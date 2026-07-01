@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: Phase 16A - Evidence Graph Contract
+Recommended next task: Phase 16B - Evidence Graph Implementation
 
 ## Current Status
 
@@ -22,6 +22,8 @@ Phase 15 outside validation is accepted.
 
 Phase 16 interactive intelligence planning is complete.
 
+Phase 16A evidence graph contract is complete.
+
 Phase 15 planning is complete:
 
 ```text
@@ -39,6 +41,8 @@ docs/CHECKPOINT_PHASE15_DECK_MEMORY_REPORT.md
 docs/OUTSIDE_VALIDATION_PHASE15_DECK_MEMORY_PROMPT.md
 docs/PHASE16_INTERACTIVE_INTELLIGENCE_PLANNING_CONTRACT.md
 docs/PHASE16_INTERACTIVE_INTELLIGENCE_PLANNING_REPORT.md
+docs/PHASE16A_EVIDENCE_GRAPH_CONTRACT.md
+docs/PHASE16A_EVIDENCE_GRAPH_CONTRACT_REPORT.md
 ```
 
 ## Phase 15 Direction
@@ -78,6 +82,8 @@ docs/CHECKPOINT_PHASE15_DECK_MEMORY_REPORT.md
 docs/OUTSIDE_VALIDATION_PHASE15_DECK_MEMORY_PROMPT.md
 docs/PHASE16_INTERACTIVE_INTELLIGENCE_PLANNING_CONTRACT.md
 docs/PHASE16_INTERACTIVE_INTELLIGENCE_PLANNING_REPORT.md
+docs/PHASE16A_EVIDENCE_GRAPH_CONTRACT.md
+docs/PHASE16A_EVIDENCE_GRAPH_CONTRACT_REPORT.md
 docs/CODEX_CONTINUITY_HANDOFF.md
 docs/NEXT_PHASE_CONTRACT.md
 ```
@@ -271,9 +277,26 @@ Start with Phase 16A - Evidence Graph Contract.
 Do not start with chat UI or LLM calls.
 ```
 
-## Next Contract Scope
+## Completed Phase 16A Scope
 
-Phase 16A should define:
+Phase 16A defined:
+
+```text
+Evidence Graph Contract
+```
+
+Future implementation files:
+
+```text
+codie/intelligence/__init__.py
+codie/intelligence/evidence_graph.py
+tests/test_intelligence_evidence_graph.py
+docs/PHASE16B_EVIDENCE_GRAPH_IMPLEMENTATION_REPORT.md
+```
+
+## Next Implementation Scope
+
+Phase 16B should implement:
 
 ```text
 EvidenceGraph
@@ -289,6 +312,16 @@ privacy flags
 confidence/caveat fields
 strategic-language restrictions
 tests for future implementation
+```
+
+Phase 16B should remain:
+
+```text
+in-memory
+deterministic
+JSON-compatible
+privacy-aware
+evidence-first
 ```
 
 ## Validation Command
@@ -403,15 +436,16 @@ do not generate recommendations
 do not weaken raw_input privacy defaults
 ```
 
-## Do Not Do In Phase 16A
+## Do Not Do In Phase 16B
 
 ```text
 do not add schema
-do not add implementation code
 do not add UI
+do not add DB reads or writes
 do not call providers
 do not call LLMs
 do not generate recommendations
 do not read source/provider payloads directly
 do not export private raw_input
+do not import recommendation generation or persistence
 ```

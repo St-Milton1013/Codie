@@ -752,6 +752,19 @@ foundation for the Interactive Intelligence Layer. It explicitly blocks chat UI,
 LLM calls, schema changes, provider calls, direct source/provider payload reads,
 simulator execution, recommendation generation, and private raw_input export.
 
+Latest Phase 16A packet:
+
+```text
+docs/PHASE16A_EVIDENCE_GRAPH_CONTRACT.md
+docs/PHASE16A_EVIDENCE_GRAPH_CONTRACT_REPORT.md
+```
+
+Phase 16A defines the in-memory evidence graph contract for structured claims,
+nodes, edges, citations, caveats, privacy scopes, deterministic serialization,
+and strategic-language restrictions. It adds no implementation code, schema,
+UI, LLM calls, provider access, source-table reads, simulator execution,
+recommendation generation, or persistence.
+
 Next UI implementation packet:
 
 ```text
@@ -822,7 +835,8 @@ Phase 13 simulator contracts or a new UI/API contract is explicitly selected.
 - Phase 15G Deck Memory Track Checkpoint is complete.
 - Phase 15 outside validation is accepted.
 - Phase 16 Interactive Intelligence Foundation Planning is complete.
-- Next packet should be Phase 16A - Evidence Graph Contract.
+- Phase 16A Evidence Graph Contract is complete.
+- Next packet should be Phase 16B - Evidence Graph Implementation.
 - cEDHData public asset metadata and local reference hashes are recorded in docs/CEDHDATA_SIMULATOR_REFERENCE_CAPTURE_MANIFEST.md.
 - Final recommendation output remains intentionally separate.
 
