@@ -678,6 +678,80 @@ A task is complete only when it includes:
 - Architecture compliance notes
 - A completion report
 
+### Rule 43 - Tag Graph Lab
+
+Codie supports a future Tag Graph Lab for graphing deck and commander data by
+functional tags.
+
+Primary tag source:
+
+```text
+Scryfall Tagger
+```
+
+Secondary tag sources:
+
+```text
+Curated Functional Registry
+Role Fusion Engine
+User corrections
+```
+
+Purpose:
+
+```text
+allow users to select one to six functional tags and graph frequency, adoption,
+density, and trend across decks, commanders, time windows, regions, tournament
+results, and frequency pools
+```
+
+Required rules:
+
+```text
+all tag graphs are generated from canonical card identities
+Scryfall Tagger tags map to oracle_id
+graphs expose underlying card lists
+graphs expose underlying numeric tables
+tags preserve source provenance
+user decks never enter commander averages
+frequency pool graphs show the deck pool used
+low sample and low tag coverage are labeled
+tag graphs do not produce strategic claims
+LLMs may summarize tag graphs only in meta/report modes, not single-deck reports
+```
+
+Supported scopes:
+
+```text
+single analyzed deck
+saved deck snapshot
+commander average
+exact partner-pair average
+Top 16 commander pool
+winner pool
+regional pool
+meta snapshot
+frequency pool
+personal deck history
+```
+
+Default comparison:
+
+```text
+Analyzed deck vs Commander Top 16 average
+```
+
+The selected-tag limit is:
+
+```text
+minimum: 1
+maximum: 6
+```
+
+Any schema, repository, UI, Scryfall Tagger import, chart export, LLM summary,
+or persistence work for Tag Graph Lab requires a future contract. This rule is
+authoritative product direction, not immediate implementation approval.
+
 ---
 
 ## 4. SOURCE CLASSIFICATION MATRIX
@@ -5259,6 +5333,7 @@ Claude and ChatGPT must verify that each implementation response includes:
 | User workflow extension patches | Deck memory, Moxfield-compatible export, ratio-aware confidence, and LLM-assisted naming are deferred contract-first roadmap items | Preserves useful product direction while blocking private deck leakage, unsupported uploads, LLM-as-truth behavior, and premature schema churn. |
 | LLM naming reliability | Use separate writer and auditor roles before human/deterministic approval | Reduces hallucinated aliases and prevents a single model output from becoming project truth. |
 | Interactive Intelligence Layer | Deferred contract-first roadmap item; chat must use Codie tools, evidence graphs, citations, and uncertainty before LLM language | Preserves the value of an in-app assistant while blocking generic LLM guessing, primer body retention, private deck leakage, provider/source bypasses, and unsupported recommendation claims. |
+| Tag Graph Lab | Deferred contract-first roadmap item; functional tag graphs must use canonical card identities, provenance, numeric tables, underlying card lists, and low-sample/coverage caveats | Preserves the value of functional deck visualization while blocking strategic claims, user-deck leakage into commander averages, and premature schema/UI work. |
 | Recommendation/cut language | Evidence candidates and low‑evidence/outlier cards only | Codie must not become an AI coach making unsupported claims. |
 | cEDHStats patch integration | Full merge of Card Performance Metrics, Historical Snapshots, Evidence Counts, Commander/Card Pages, Evidence Stack | Required for Codie's core differentiators. |
 | Evidence Stack source | Visual evidence volume, not AI score | Maintains Evidence First Rule compliance. |

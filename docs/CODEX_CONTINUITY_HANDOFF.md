@@ -969,11 +969,16 @@ Latest roadmap patch logged:
 
 ```text
 docs/ROADMAP_PATCH_MOXFIELD_FREQUENCY_POOL_BUILDER.md
+docs/ROADMAP_PATCH_TAG_GRAPH_LAB.md
 ```
 
 The Moxfield Frequency Pool Builder is roadmap-only. It does not authorize
 schema, UI, live Moxfield fetching, provider implementation, persistence, or
 recommendation output.
+
+The Tag Graph Lab is roadmap-only. It does not authorize schema, UI, Scryfall
+Tagger import, chart export, LLM summaries, persistence, or recommendation
+output without a future contract.
 
 Next UI implementation packet:
 
