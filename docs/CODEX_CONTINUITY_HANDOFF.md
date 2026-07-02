@@ -20,7 +20,7 @@ Latest pushed commit before local Phase 13 checkpoint work: 56ac7f9 Add Phase 13
 Latest full-suite result:
 
 ```text
-Ran 566 tests in 3.121s
+Ran 566 tests in 3.147s
 
 OK (skipped=1)
 ```
@@ -284,13 +284,13 @@ Do not mutate raw simulator traces when reviews are created.
 Preferred next move:
 
 ```text
-Phase 17C - Evidence Graph Input Assembly Checkpoint
+Send Phase 17 evidence graph input assembly track for outside validation
 ```
 
 Alternate next safe option:
 
 ```text
-Outside validation packet planning for Phase 17
+Wait for outside validation response and prepare Phase 18 planning options only
 ```
 
 Avoid starting:
@@ -840,6 +840,18 @@ record-to-node mapping. It adds no schema, DB access, provider access, LLM
 calls, UI, simulator execution, analytics calculation, recommendation
 generation, file writing, or private raw_input export.
 
+Latest Phase 17C packet:
+
+```text
+docs/CHECKPOINT_PHASE17_INPUT_ASSEMBLY_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE17_INPUT_ASSEMBLY_PROMPT.md
+```
+
+Phase 17C checkpoints the input assembly track and creates the outside
+validation prompt. It is an internal checkpoint, not external proof. Phase 18
+should not start until outside validation returns PASS or PASS WITH REVIEW
+NOTES.
+
 Latest roadmap patch logged:
 
 ```text
@@ -927,7 +939,8 @@ Phase 13 simulator contracts or a new UI/API contract is explicitly selected.
 - Phase 17 Interactive Intelligence Input Assembly Planning is complete.
 - Phase 17A Evidence Graph Input Assembly Contract is complete.
 - Phase 17B Evidence Graph Input Assembly Implementation is complete.
-- Next packet should be Phase 17C - Evidence Graph Input Assembly Checkpoint.
+- Phase 17C Evidence Graph Input Assembly Checkpoint is complete.
+- Next packet should be outside validation for Phase 17.
 - cEDHData public asset metadata and local reference hashes are recorded in docs/CEDHDATA_SIMULATOR_REFERENCE_CAPTURE_MANIFEST.md.
 - Final recommendation output remains intentionally separate.
 

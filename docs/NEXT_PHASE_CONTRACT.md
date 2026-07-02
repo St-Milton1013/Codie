@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: Phase 17C - Evidence Graph Input Assembly Checkpoint
+Recommended next task: Outside validation for Phase 17 Evidence Graph Input Assembly
 
 ## Current Status
 
@@ -35,6 +35,8 @@ Phase 17 interactive intelligence input assembly planning is complete.
 Phase 17A evidence graph input assembly contract is complete.
 
 Phase 17B evidence graph input assembly implementation is complete.
+
+Phase 17C evidence graph input assembly checkpoint is complete.
 
 Roadmap patch logged:
 
@@ -75,6 +77,8 @@ docs/PHASE17A_EVIDENCE_GRAPH_INPUT_ASSEMBLY_CONTRACT_REPORT.md
 codie/intelligence/evidence_inputs.py
 tests/test_intelligence_evidence_inputs.py
 docs/PHASE17B_EVIDENCE_GRAPH_INPUT_ASSEMBLY_IMPLEMENTATION_REPORT.md
+docs/CHECKPOINT_PHASE17_INPUT_ASSEMBLY_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE17_INPUT_ASSEMBLY_PROMPT.md
 ```
 
 ## Phase 15 Direction
@@ -130,6 +134,8 @@ docs/PHASE17A_EVIDENCE_GRAPH_INPUT_ASSEMBLY_CONTRACT_REPORT.md
 codie/intelligence/evidence_inputs.py
 tests/test_intelligence_evidence_inputs.py
 docs/PHASE17B_EVIDENCE_GRAPH_INPUT_ASSEMBLY_IMPLEMENTATION_REPORT.md
+docs/CHECKPOINT_PHASE17_INPUT_ASSEMBLY_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE17_INPUT_ASSEMBLY_PROMPT.md
 docs/CODEX_CONTINUITY_HANDOFF.md
 docs/NEXT_PHASE_CONTRACT.md
 ```
@@ -394,6 +400,54 @@ no LLM calls
 no recommendation generation
 full test output
 static scans
+```
+
+## Completed Phase 17C Scope
+
+Phase 17C created:
+
+```text
+docs/CHECKPOINT_PHASE17_INPUT_ASSEMBLY_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE17_INPUT_ASSEMBLY_PROMPT.md
+```
+
+The checkpoint covers:
+
+```text
+Phase 17 planning
+Phase 17A input assembly contract
+Phase 17B input assembly implementation
+input assembly boundaries
+private metadata rejection
+sensitive filtering
+local_user_data privacy preservation
+no schema changes
+no DB access
+no provider/source reads
+no LLM calls
+no recommendation generation
+full test output
+static scans
+```
+
+Phase 18 is blocked until Phase 17 outside validation returns:
+
+```text
+PASS
+PASS WITH REVIEW NOTES
+```
+
+## Do Not Do Before Phase 17 Outside Validation
+
+```text
+do not start Phase 18
+do not add chat UI
+do not add LLM calls
+do not add evidence graph persistence
+do not connect input assembly to DB/repository reads
+do not connect input assembly to provider/source payloads
+do not generate recommendations
+do not export private raw_input
 ```
 
 ## Completed Phase 16C Scope

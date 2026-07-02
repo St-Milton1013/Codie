@@ -126,7 +126,7 @@ Full suite command:
 Final full-suite result:
 
 ```text
-Ran 566 tests in 3.121s
+Ran 566 tests in 3.147s
 
 OK (skipped=1)
 ```
