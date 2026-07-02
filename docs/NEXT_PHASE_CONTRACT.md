@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: Phase 17B - Evidence Graph Input Assembly Implementation
+Recommended next task: Phase 17C - Evidence Graph Input Assembly Checkpoint
 
 ## Current Status
 
@@ -33,6 +33,8 @@ Phase 16 outside validation is accepted.
 Phase 17 interactive intelligence input assembly planning is complete.
 
 Phase 17A evidence graph input assembly contract is complete.
+
+Phase 17B evidence graph input assembly implementation is complete.
 
 Roadmap patch logged:
 
@@ -70,6 +72,9 @@ docs/PHASE17_INTERACTIVE_INTELLIGENCE_INPUT_ASSEMBLY_PLANNING_CONTRACT.md
 docs/PHASE17_INTERACTIVE_INTELLIGENCE_INPUT_ASSEMBLY_PLANNING_REPORT.md
 docs/PHASE17A_EVIDENCE_GRAPH_INPUT_ASSEMBLY_CONTRACT.md
 docs/PHASE17A_EVIDENCE_GRAPH_INPUT_ASSEMBLY_CONTRACT_REPORT.md
+codie/intelligence/evidence_inputs.py
+tests/test_intelligence_evidence_inputs.py
+docs/PHASE17B_EVIDENCE_GRAPH_INPUT_ASSEMBLY_IMPLEMENTATION_REPORT.md
 ```
 
 ## Phase 15 Direction
@@ -122,6 +127,9 @@ docs/PHASE17_INTERACTIVE_INTELLIGENCE_INPUT_ASSEMBLY_PLANNING_CONTRACT.md
 docs/PHASE17_INTERACTIVE_INTELLIGENCE_INPUT_ASSEMBLY_PLANNING_REPORT.md
 docs/PHASE17A_EVIDENCE_GRAPH_INPUT_ASSEMBLY_CONTRACT.md
 docs/PHASE17A_EVIDENCE_GRAPH_INPUT_ASSEMBLY_CONTRACT_REPORT.md
+codie/intelligence/evidence_inputs.py
+tests/test_intelligence_evidence_inputs.py
+docs/PHASE17B_EVIDENCE_GRAPH_INPUT_ASSEMBLY_IMPLEMENTATION_REPORT.md
 docs/CODEX_CONTINUITY_HANDOFF.md
 docs/NEXT_PHASE_CONTRACT.md
 ```
@@ -631,4 +639,58 @@ do not calculate analytics
 do not generate recommendations
 do not write files
 do not export private raw_input
+```
+
+## Completed Phase 17B Scope
+
+Phase 17B implemented:
+
+```text
+EvidenceInputBuildError
+EvidenceRecordRef
+EvidenceInputRecord
+EvidenceInputBundle
+EvidenceGraphAssemblyOptions
+evidence_record_from_dict(...)
+validate_evidence_input_bundle(...)
+build_graph_input_from_records(...)
+```
+
+Phase 17B remains:
+
+```text
+pure
+in-memory
+sanitized-input only
+deterministic
+privacy-aware
+evidence-first
+```
+
+## Next Checkpoint Scope
+
+Phase 17C should create:
+
+```text
+docs/CHECKPOINT_PHASE17_INPUT_ASSEMBLY_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE17_INPUT_ASSEMBLY_PROMPT.md
+```
+
+The checkpoint should cover:
+
+```text
+Phase 17 planning
+Phase 17A contract
+Phase 17B implementation
+input assembly boundaries
+private metadata rejection
+sensitive filtering
+local_user_data privacy preservation
+no schema changes
+no DB access
+no provider/source reads
+no LLM calls
+no recommendation generation
+full test output
+static scans
 ```

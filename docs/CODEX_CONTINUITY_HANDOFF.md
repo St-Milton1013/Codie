@@ -20,15 +20,15 @@ Latest pushed commit before local Phase 13 checkpoint work: 56ac7f9 Add Phase 13
 Latest full-suite result:
 
 ```text
-Ran 547 tests in 3.190s
+Ran 566 tests in 3.121s
 
 OK (skipped=1)
 ```
 
-Latest focused Phase 16B evidence graph result:
+Latest focused Phase 17B evidence input assembly result:
 
 ```text
-Ran 19 tests in 0.002s
+Ran 19 tests in 0.003s
 
 OK
 ```
@@ -284,13 +284,13 @@ Do not mutate raw simulator traces when reviews are created.
 Preferred next move:
 
 ```text
-Phase 17B - Evidence Graph Input Assembly Implementation
+Phase 17C - Evidence Graph Input Assembly Checkpoint
 ```
 
 Alternate next safe option:
 
 ```text
-Phase 17B implementation planning review before coding
+Outside validation packet planning for Phase 17
 ```
 
 Avoid starting:
@@ -825,6 +825,21 @@ access, provider access, LLM calls, UI, simulator execution, analytics
 calculation, recommendation generation, file writing, or private raw_input
 export.
 
+Latest Phase 17B packet:
+
+```text
+codie/intelligence/evidence_inputs.py
+tests/test_intelligence_evidence_inputs.py
+docs/PHASE17B_EVIDENCE_GRAPH_INPUT_ASSEMBLY_IMPLEMENTATION_REPORT.md
+```
+
+Phase 17B implements the pure input assembly layer for converting sanitized
+records into `EvidenceGraphInput`. It preserves private metadata rejection,
+sensitive filtering, local_user_data privacy scope, caveats, citations, and
+record-to-node mapping. It adds no schema, DB access, provider access, LLM
+calls, UI, simulator execution, analytics calculation, recommendation
+generation, file writing, or private raw_input export.
+
 Latest roadmap patch logged:
 
 ```text
@@ -911,7 +926,8 @@ Phase 13 simulator contracts or a new UI/API contract is explicitly selected.
 - Phase 16 outside validation is accepted.
 - Phase 17 Interactive Intelligence Input Assembly Planning is complete.
 - Phase 17A Evidence Graph Input Assembly Contract is complete.
-- Next packet should be Phase 17B - Evidence Graph Input Assembly Implementation.
+- Phase 17B Evidence Graph Input Assembly Implementation is complete.
+- Next packet should be Phase 17C - Evidence Graph Input Assembly Checkpoint.
 - cEDHData public asset metadata and local reference hashes are recorded in docs/CEDHDATA_SIMULATOR_REFERENCE_CAPTURE_MANIFEST.md.
 - Final recommendation output remains intentionally separate.
 
