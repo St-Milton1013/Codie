@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: Phase 16B - Evidence Graph Implementation
+Recommended next task: Outside validation for Phase 16 Evidence Graph
 
 ## Current Status
 
@@ -25,6 +25,8 @@ Phase 16 interactive intelligence planning is complete.
 Phase 16A evidence graph contract is complete.
 
 Phase 16B evidence graph implementation is complete.
+
+Phase 16C evidence graph checkpoint is complete.
 
 Roadmap patch logged:
 
@@ -55,6 +57,8 @@ codie/intelligence/__init__.py
 codie/intelligence/evidence_graph.py
 tests/test_intelligence_evidence_graph.py
 docs/PHASE16B_EVIDENCE_GRAPH_IMPLEMENTATION_REPORT.md
+docs/CHECKPOINT_PHASE16_EVIDENCE_GRAPH_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE16_EVIDENCE_GRAPH_PROMPT.md
 docs/ROADMAP_PATCH_MOXFIELD_FREQUENCY_POOL_BUILDER.md
 ```
 
@@ -101,6 +105,8 @@ codie/intelligence/__init__.py
 codie/intelligence/evidence_graph.py
 tests/test_intelligence_evidence_graph.py
 docs/PHASE16B_EVIDENCE_GRAPH_IMPLEMENTATION_REPORT.md
+docs/CHECKPOINT_PHASE16_EVIDENCE_GRAPH_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE16_EVIDENCE_GRAPH_PROMPT.md
 docs/ROADMAP_PATCH_MOXFIELD_FREQUENCY_POOL_BUILDER.md
 docs/CODEX_CONTINUITY_HANDOFF.md
 docs/NEXT_PHASE_CONTRACT.md
@@ -368,6 +374,40 @@ full test output
 static scans
 ```
 
+## Completed Phase 16C Scope
+
+Phase 16C created:
+
+```text
+docs/CHECKPOINT_PHASE16_EVIDENCE_GRAPH_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE16_EVIDENCE_GRAPH_PROMPT.md
+```
+
+The checkpoint covers:
+
+```text
+Phase 16 planning
+Phase 16A evidence graph contract
+Phase 16B evidence graph implementation
+evidence graph boundaries
+privacy metadata rejection
+deterministic serialization
+no schema changes
+no DB access
+no provider/source reads
+no LLM calls
+no recommendation generation
+full test output
+static scans
+```
+
+Phase 17 is blocked until Phase 16 outside validation returns:
+
+```text
+PASS
+PASS WITH REVIEW NOTES
+```
+
 ## Validation Command
 
 Use the bundled Python runtime when system Python is unavailable:
@@ -493,4 +533,15 @@ do not generate recommendations
 do not read source/provider payloads directly
 do not export private raw_input
 do not import recommendation generation or persistence
+```
+
+## Do Not Do Before Phase 16 Outside Validation
+
+```text
+do not start Phase 17
+do not add evidence graph persistence
+do not add chat UI
+do not add LLM writer/auditor workflows
+do not connect evidence graphs to recommendation output
+do not treat roadmap-only Moxfield Frequency Pool Builder as approved implementation scope
 ```

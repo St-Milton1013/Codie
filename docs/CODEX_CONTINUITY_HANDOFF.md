@@ -20,7 +20,7 @@ Latest pushed commit before local Phase 13 checkpoint work: 56ac7f9 Add Phase 13
 Latest full-suite result:
 
 ```text
-Ran 547 tests in 3.309s
+Ran 547 tests in 3.305s
 
 OK (skipped=1)
 ```
@@ -284,20 +284,22 @@ Do not mutate raw simulator traces when reviews are created.
 Preferred next move:
 
 ```text
-Send Phase 13 simulator track for outside validation
+Send Phase 16 evidence graph track for outside validation
 ```
 
 Alternate next safe option:
 
 ```text
-Phase 14 Planning Contract
+Wait for outside validation response and prepare Phase 17 planning options only
 ```
 
 Avoid starting:
 
 ```text
 final recommendation output
-simulator implementation
+evidence graph persistence
+chat UI
+LLM writer/auditor workflows
 provider live backfills
 schema changes
 direct UI database access
@@ -779,6 +781,18 @@ JSON-compatible metadata validation. It adds no schema, DB access, provider
 calls, source/provider reads, LLM calls, simulator execution, recommendation
 generation, or persistence.
 
+Latest Phase 16C packet:
+
+```text
+docs/CHECKPOINT_PHASE16_EVIDENCE_GRAPH_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE16_EVIDENCE_GRAPH_PROMPT.md
+```
+
+Phase 16C checkpoints the evidence graph track and creates the outside
+validation prompt. It is an internal checkpoint, not external proof. Phase 17
+should not start until outside validation returns PASS or PASS WITH REVIEW
+NOTES.
+
 Latest roadmap patch logged:
 
 ```text
@@ -861,7 +875,8 @@ Phase 13 simulator contracts or a new UI/API contract is explicitly selected.
 - Phase 16 Interactive Intelligence Foundation Planning is complete.
 - Phase 16A Evidence Graph Contract is complete.
 - Phase 16B Evidence Graph Implementation is complete.
-- Next packet should be Phase 16C - Evidence Graph Checkpoint.
+- Phase 16C Evidence Graph Checkpoint is complete.
+- Next packet should be outside validation for Phase 16.
 - cEDHData public asset metadata and local reference hashes are recorded in docs/CEDHDATA_SIMULATOR_REFERENCE_CAPTURE_MANIFEST.md.
 - Final recommendation output remains intentionally separate.
 
