@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: Phase 18B - Source Conflict Report Implementation
+Recommended next task: Phase 18C - Source Conflict Report Checkpoint
 
 ## Current Status
 
@@ -43,6 +43,8 @@ Phase 17 outside validation is accepted.
 Phase 18 source conflict report planning is complete.
 
 Phase 18A source conflict report contract is complete.
+
+Phase 18B source conflict report implementation is complete.
 
 Roadmap patch logged:
 
@@ -89,6 +91,9 @@ docs/PHASE18_SOURCE_CONFLICT_REPORT_PLANNING_CONTRACT.md
 docs/PHASE18_SOURCE_CONFLICT_REPORT_PLANNING_REPORT.md
 docs/PHASE18A_SOURCE_CONFLICT_REPORT_CONTRACT.md
 docs/PHASE18A_SOURCE_CONFLICT_REPORT_CONTRACT_REPORT.md
+codie/intelligence/source_conflicts.py
+tests/test_intelligence_source_conflicts.py
+docs/PHASE18B_SOURCE_CONFLICT_REPORT_IMPLEMENTATION_REPORT.md
 ```
 
 ## Phase 15 Direction
@@ -150,6 +155,9 @@ docs/PHASE18_SOURCE_CONFLICT_REPORT_PLANNING_CONTRACT.md
 docs/PHASE18_SOURCE_CONFLICT_REPORT_PLANNING_REPORT.md
 docs/PHASE18A_SOURCE_CONFLICT_REPORT_CONTRACT.md
 docs/PHASE18A_SOURCE_CONFLICT_REPORT_CONTRACT_REPORT.md
+codie/intelligence/source_conflicts.py
+tests/test_intelligence_source_conflicts.py
+docs/PHASE18B_SOURCE_CONFLICT_REPORT_IMPLEMENTATION_REPORT.md
 docs/CODEX_CONTINUITY_HANDOFF.md
 docs/NEXT_PHASE_CONTRACT.md
 ```
@@ -535,6 +543,62 @@ do not calculate analytics
 do not generate recommendations
 do not write files
 do not export private raw_input
+```
+
+## Completed Phase 18B Scope
+
+Phase 18B implemented:
+
+```text
+SourceConflictBuildError
+SourceConflictEvidenceRef
+SourceConflictItem
+SourceConflictReport
+SourceConflictReportOptions
+build_source_conflict_report(...)
+source_conflict_report_to_input_records(...)
+source_conflict_report_to_dict(...)
+```
+
+Phase 18B remains:
+
+```text
+pure
+in-memory
+sanitized-input only
+deterministic
+privacy-aware
+evidence-first
+```
+
+## Next Checkpoint Scope
+
+Phase 18C should create:
+
+```text
+docs/CHECKPOINT_PHASE18_SOURCE_CONFLICT_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE18_SOURCE_CONFLICT_PROMPT.md
+```
+
+The checkpoint should cover:
+
+```text
+Phase 18 planning
+Phase 18A source conflict contract
+Phase 18B source conflict implementation
+source conflict boundaries
+private metadata rejection
+sensitive evidence filtering
+resolved conflict filtering
+blocking conflict preservation
+conversion to EvidenceInputRecord values
+no schema changes
+no DB access
+no provider/source reads
+no LLM calls
+no recommendation generation
+full test output
+static scans
 ```
 
 ## Completed Phase 16C Scope

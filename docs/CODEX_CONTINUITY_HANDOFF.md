@@ -20,15 +20,15 @@ Latest pushed commit before local Phase 13 checkpoint work: 56ac7f9 Add Phase 13
 Latest full-suite result:
 
 ```text
-Ran 566 tests in 3.192s
+Ran 587 tests in 4.317s
 
 OK (skipped=1)
 ```
 
-Latest focused Phase 17B evidence input assembly result:
+Latest focused Phase 18B source conflict result:
 
 ```text
-Ran 19 tests in 0.003s
+Ran 21 tests in 0.003s
 
 OK
 ```
@@ -284,13 +284,13 @@ Do not mutate raw simulator traces when reviews are created.
 Preferred next move:
 
 ```text
-Phase 18B - Source Conflict Report Implementation
+Phase 18C - Source Conflict Report Checkpoint
 ```
 
 Alternate next safe option:
 
 ```text
-Phase 18B implementation planning review before coding
+Outside validation packet planning for Phase 18
 ```
 
 Avoid starting:
@@ -884,6 +884,22 @@ EvidenceInputRecord values. It adds no implementation code, schema, DB access,
 provider access, LLM calls, UI, simulator execution, analytics calculation,
 recommendation generation, file writing, or private raw_input export.
 
+Latest Phase 18B packet:
+
+```text
+codie/intelligence/source_conflicts.py
+tests/test_intelligence_source_conflicts.py
+docs/PHASE18B_SOURCE_CONFLICT_REPORT_IMPLEMENTATION_REPORT.md
+```
+
+Phase 18B implements pure source conflict reports for sanitized evidence refs.
+It preserves deterministic serialization, blocking conflicts, sensitive
+evidence filtering, resolved conflict filtering, conversion to source_conflict
+EvidenceInputRecord values, and private metadata rejection. It adds no schema,
+DB access, provider access, LLM calls, UI, simulator execution, analytics
+calculation, recommendation generation, file writing, or private raw_input
+export.
+
 Latest roadmap patch logged:
 
 ```text
@@ -975,7 +991,8 @@ Phase 13 simulator contracts or a new UI/API contract is explicitly selected.
 - Phase 17 outside validation is accepted.
 - Phase 18 Source Conflict Report Planning is complete.
 - Phase 18A Source Conflict Report Contract is complete.
-- Next packet should be Phase 18B - Source Conflict Report Implementation.
+- Phase 18B Source Conflict Report Implementation is complete.
+- Next packet should be Phase 18C - Source Conflict Report Checkpoint.
 - cEDHData public asset metadata and local reference hashes are recorded in docs/CEDHDATA_SIMULATOR_REFERENCE_CAPTURE_MANIFEST.md.
 - Final recommendation output remains intentionally separate.
 

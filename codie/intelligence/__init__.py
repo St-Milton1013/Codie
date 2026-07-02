@@ -22,6 +22,16 @@ from .evidence_inputs import (
     evidence_record_from_dict,
     validate_evidence_input_bundle,
 )
+from .source_conflicts import (
+    SourceConflictBuildError,
+    SourceConflictEvidenceRef,
+    SourceConflictItem,
+    SourceConflictReport,
+    SourceConflictReportOptions,
+    build_source_conflict_report,
+    source_conflict_report_to_dict,
+    source_conflict_report_to_input_records,
+)
 
 __all__ = [
     "EvidenceGraphAssemblyOptions",
@@ -36,10 +46,18 @@ __all__ = [
     "EvidenceInputRecord",
     "EvidenceNode",
     "EvidenceRecordRef",
+    "SourceConflictBuildError",
+    "SourceConflictEvidenceRef",
+    "SourceConflictItem",
+    "SourceConflictReport",
+    "SourceConflictReportOptions",
     "build_graph_input_from_records",
     "build_evidence_graph",
+    "build_source_conflict_report",
     "evidence_record_from_dict",
     "evidence_graph_to_dict",
+    "source_conflict_report_to_dict",
+    "source_conflict_report_to_input_records",
     "validate_evidence_input_bundle",
     "validate_evidence_graph",
 ]
