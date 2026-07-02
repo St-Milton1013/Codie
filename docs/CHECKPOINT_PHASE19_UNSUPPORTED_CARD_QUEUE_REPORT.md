@@ -79,6 +79,8 @@ references map to EvidenceRecordRef values
 blocking items are preserved
 resolved items are excluded by default
 resolved items are included only with option
+resolved and ignored-by-policy statuses are excluded by default through the same inactive-status filter
+ignored-by-policy items are included only with explicit option
 sensitive evidence is excluded by default
 sensitive evidence is included only with option
 filtered evidence creates caveat/count metadata
@@ -138,7 +140,7 @@ Focused tests:
 ```text
 python -m unittest tests.test_intelligence_unsupported_cards -v
 
-Ran 23 tests in 0.005s
+Ran 24 tests in 0.013s
 
 OK
 ```
@@ -148,7 +150,7 @@ Full suite:
 ```text
 python -m unittest discover -s tests
 
-Ran 610 tests in 4.060s
+Ran 611 tests in 4.441s
 
 OK (skipped=1)
 ```
@@ -160,6 +162,8 @@ git diff --check: PASS
 forbidden import scan: no matches
 raw SQL scan: no matches
 production file-write scan: no matches
+source/provider table scan: no matches
+private metadata production scan: matches only blocked-key constants/rejection logic
 strategic-language scan: no matches
 schema/repository drift scan: no matches
 ```

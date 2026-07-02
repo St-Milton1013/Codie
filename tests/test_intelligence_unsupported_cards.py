@@ -121,6 +121,15 @@ class IntelligenceUnsupportedCardsTest(unittest.TestCase):
 
         self.assertEqual([record.record_id for record in records], ["unsupported-card:open", "unsupported-card-filtered:unsupported-card-queue:1"])
 
+    def test_ignored_by_policy_items_use_same_inactive_filter(self) -> None:
+        open_item = item(item_id="open")
+        ignored_item = item(item_id="ignored", status="ignored_by_policy")
+
+        records = unsupported_card_queue_to_input_records(queue(items=(open_item, ignored_item)))
+
+        self.assertEqual([record.record_id for record in records], ["unsupported-card:open", "unsupported-card-filtered:unsupported-card-queue:1"])
+        self.assertEqual(records[1].metadata["filtered_item_ids"], ["ignored"])
+
     def test_resolved_items_included_only_with_option(self) -> None:
         resolved_item = item(item_id="resolved", status="resolved")
 

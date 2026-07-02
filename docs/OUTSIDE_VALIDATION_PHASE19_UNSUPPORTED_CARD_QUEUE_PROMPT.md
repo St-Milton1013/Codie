@@ -97,7 +97,7 @@ python -m unittest discover -s tests
 Confirm:
 
 ```text
-Ran 610 tests
+Ran 611 tests
 OK (skipped=1)
 ```
 
@@ -110,7 +110,7 @@ python -m unittest tests.test_intelligence_unsupported_cards -v
 Confirm:
 
 ```text
-Ran 23 tests
+Ran 24 tests
 OK
 ```
 
