@@ -32,6 +32,16 @@ from .source_conflicts import (
     source_conflict_report_to_dict,
     source_conflict_report_to_input_records,
 )
+from .unsupported_cards import (
+    UnsupportedCardEvidenceRef,
+    UnsupportedCardQueue,
+    UnsupportedCardQueueBuildError,
+    UnsupportedCardQueueItem,
+    UnsupportedCardQueueOptions,
+    build_unsupported_card_queue,
+    unsupported_card_queue_to_dict,
+    unsupported_card_queue_to_input_records,
+)
 
 __all__ = [
     "EvidenceGraphAssemblyOptions",
@@ -51,13 +61,21 @@ __all__ = [
     "SourceConflictItem",
     "SourceConflictReport",
     "SourceConflictReportOptions",
+    "UnsupportedCardEvidenceRef",
+    "UnsupportedCardQueue",
+    "UnsupportedCardQueueBuildError",
+    "UnsupportedCardQueueItem",
+    "UnsupportedCardQueueOptions",
     "build_graph_input_from_records",
     "build_evidence_graph",
     "build_source_conflict_report",
+    "build_unsupported_card_queue",
     "evidence_record_from_dict",
     "evidence_graph_to_dict",
     "source_conflict_report_to_dict",
     "source_conflict_report_to_input_records",
+    "unsupported_card_queue_to_dict",
+    "unsupported_card_queue_to_input_records",
     "validate_evidence_input_bundle",
     "validate_evidence_graph",
 ]

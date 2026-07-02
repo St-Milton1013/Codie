@@ -20,15 +20,15 @@ Latest pushed commit before local Phase 13 checkpoint work: 56ac7f9 Add Phase 13
 Latest full-suite result:
 
 ```text
-Ran 587 tests in 3.464s
+Ran 610 tests in 4.060s
 
 OK (skipped=1)
 ```
 
-Latest focused Phase 18B source conflict result:
+Latest focused Phase 19B unsupported relevant card queue result:
 
 ```text
-Ran 21 tests in 0.004s
+Ran 23 tests in 0.005s
 
 OK
 ```
@@ -44,9 +44,11 @@ passed.
 Latest relevant boundary scans:
 
 ```text
-rg -n "codie\.db|codie\.providers|codie\.analytics|codie\.recommendations\.generation|codie\.recommendations\.persistence|codie\.ingestion|codie\.cards|codie\.probability_engine|codie\.canonical|requests|httpx|sqlite3" codie\intelligence\evidence_graph.py tests\test_intelligence_evidence_graph.py
-rg -n "SELECT |INSERT |UPDATE |DELETE |execute\(|executescript\(" codie\intelligence\evidence_graph.py tests\test_intelligence_evidence_graph.py
-rg -n "should play|should be played|should be cut|must include|correct card|breaks the format|secretly optimal|cut this|strict upgrade|auto-include|recommended cut|recommended include" codie\intelligence\evidence_graph.py tests\test_intelligence_evidence_graph.py docs\PHASE16B_EVIDENCE_GRAPH_IMPLEMENTATION_REPORT.md docs\ROADMAP_PATCH_MOXFIELD_FREQUENCY_POOL_BUILDER.md
+rg -n "codie\.db|codie\.providers|codie\.analytics|codie\.recommendations\.generation|codie\.recommendations\.persistence|codie\.ingestion|codie\.cards|codie\.probability_engine|codie\.canonical|requests|httpx|sqlite3" codie\intelligence\unsupported_cards.py tests\test_intelligence_unsupported_cards.py
+rg -n "SELECT |INSERT |UPDATE |DELETE |execute\(|executescript\(" codie\intelligence\unsupported_cards.py tests\test_intelligence_unsupported_cards.py
+rg -n "open\(|write_text\(|write_bytes\(|Path\(|mkdir\(|touch\(|unlink\(" codie\intelligence\unsupported_cards.py
+rg -n "source_events|source_decks|source_deck_cards|provider_objects" codie\intelligence\unsupported_cards.py tests\test_intelligence_unsupported_cards.py
+rg -n "should play|should be played|should be cut|must include|correct card|breaks the format|secretly optimal|cut this|strict upgrade|auto-include|recommended cut|recommended include" codie\intelligence\unsupported_cards.py tests\test_intelligence_unsupported_cards.py docs\PHASE19B_UNSUPPORTED_RELEVANT_CARD_QUEUE_IMPLEMENTATION_REPORT.md docs\CHECKPOINT_PHASE19_UNSUPPORTED_CARD_QUEUE_REPORT.md
 ```
 
 returned:
@@ -284,13 +286,13 @@ Do not mutate raw simulator traces when reviews are created.
 Preferred next move:
 
 ```text
-Implement Phase 19B Unsupported Relevant Card Queue
+Send Phase 19 unsupported relevant card queue track for outside validation
 ```
 
 Alternate next safe option:
 
 ```text
-Prepare Phase 19 checkpoint packet after Phase 19B implementation
+Wait for outside validation response and prepare Phase 20 planning options only
 ```
 
 Avoid starting:
@@ -937,6 +939,32 @@ implementation code, schema, DB access, provider access, LLM calls, UI,
 simulator execution, card behavior implementation, analytics calculation,
 recommendation generation, file writing, or private raw_input export.
 
+Latest Phase 19B packet:
+
+```text
+codie/intelligence/unsupported_cards.py
+tests/test_intelligence_unsupported_cards.py
+docs/PHASE19B_UNSUPPORTED_RELEVANT_CARD_QUEUE_IMPLEMENTATION_REPORT.md
+```
+
+Phase 19B implements the pure unsupported relevant card queue and conversion to
+EvidenceInputRecord(record_type=unsupported_card). It adds no schema, DB access,
+provider access, source/provider reads, LLM calls, UI, simulator execution, card
+behavior implementation, analytics calculation, recommendation generation, file
+writing, or private raw_input export.
+
+Latest Phase 19 checkpoint packet:
+
+```text
+docs/CHECKPOINT_PHASE19_UNSUPPORTED_CARD_QUEUE_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE19_UNSUPPORTED_CARD_QUEUE_PROMPT.md
+```
+
+Phase 19C checkpoints the unsupported relevant card queue track and creates the
+outside validation prompt. It is an internal checkpoint, not external proof.
+Phase 20 should not start until outside validation returns PASS or PASS WITH
+REVIEW NOTES.
+
 Latest roadmap patch logged:
 
 ```text
@@ -1033,7 +1061,9 @@ Phase 13 simulator contracts or a new UI/API contract is explicitly selected.
 - Phase 18 outside validation is accepted.
 - Phase 19 Unsupported Relevant Card Queue Planning is complete.
 - Phase 19A Unsupported Relevant Card Queue Contract is complete.
-- Next packet should be Phase 19B Unsupported Relevant Card Queue Implementation.
+- Phase 19B Unsupported Relevant Card Queue Implementation is complete.
+- Phase 19C Unsupported Relevant Card Queue Checkpoint is complete.
+- Next packet should be outside validation for Phase 19.
 - cEDHData public asset metadata and local reference hashes are recorded in docs/CEDHDATA_SIMULATOR_REFERENCE_CAPTURE_MANIFEST.md.
 - Final recommendation output remains intentionally separate.
 

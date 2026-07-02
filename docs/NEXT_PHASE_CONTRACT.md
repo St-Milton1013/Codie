@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: Phase 19B - Unsupported Relevant Card Queue Implementation
+Recommended next task: Outside validation for Phase 19 Unsupported Relevant Card Queue
 
 ## Current Status
 
@@ -53,6 +53,10 @@ Phase 18 outside validation is accepted.
 Phase 19 unsupported relevant card queue planning is complete.
 
 Phase 19A unsupported relevant card queue contract is complete.
+
+Phase 19B unsupported relevant card queue implementation is complete.
+
+Phase 19C unsupported relevant card queue checkpoint is complete.
 
 Roadmap patch logged:
 
@@ -108,6 +112,11 @@ docs/PHASE19_UNSUPPORTED_RELEVANT_CARD_QUEUE_PLANNING_CONTRACT.md
 docs/PHASE19_UNSUPPORTED_RELEVANT_CARD_QUEUE_PLANNING_REPORT.md
 docs/PHASE19A_UNSUPPORTED_RELEVANT_CARD_QUEUE_CONTRACT.md
 docs/PHASE19A_UNSUPPORTED_RELEVANT_CARD_QUEUE_CONTRACT_REPORT.md
+codie/intelligence/unsupported_cards.py
+tests/test_intelligence_unsupported_cards.py
+docs/PHASE19B_UNSUPPORTED_RELEVANT_CARD_QUEUE_IMPLEMENTATION_REPORT.md
+docs/CHECKPOINT_PHASE19_UNSUPPORTED_CARD_QUEUE_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE19_UNSUPPORTED_CARD_QUEUE_PROMPT.md
 ```
 
 ## Phase 15 Direction
@@ -540,6 +549,86 @@ do not implement card behavior
 do not calculate analytics
 do not generate recommendations
 do not write files
+do not export private raw_input
+```
+
+## Completed Phase 19B Scope
+
+Phase 19B implemented:
+
+```text
+UnsupportedCardQueueBuildError
+UnsupportedCardEvidenceRef
+UnsupportedCardQueueItem
+UnsupportedCardQueue
+UnsupportedCardQueueOptions
+build_unsupported_card_queue(...)
+unsupported_card_queue_to_input_records(...)
+unsupported_card_queue_to_dict(...)
+```
+
+Phase 19B remains:
+
+```text
+pure
+in-memory
+sanitized-input only
+deterministic
+privacy-aware
+evidence-first
+```
+
+## Completed Phase 19C Scope
+
+Phase 19C created:
+
+```text
+docs/CHECKPOINT_PHASE19_UNSUPPORTED_CARD_QUEUE_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE19_UNSUPPORTED_CARD_QUEUE_PROMPT.md
+```
+
+The checkpoint covers:
+
+```text
+Phase 19 planning
+Phase 19A unsupported-card queue contract
+Phase 19B unsupported-card queue implementation
+unsupported-card queue boundaries
+private metadata rejection
+sensitive evidence filtering
+resolved item filtering
+blocking item preservation
+conversion to EvidenceInputRecord values
+no schema changes
+no DB access
+no provider/source reads
+no LLM calls
+no simulator execution
+no card behavior implementation
+no recommendation generation
+full test output
+static scans
+```
+
+Phase 20 is blocked until Phase 19 outside validation returns:
+
+```text
+PASS
+PASS WITH REVIEW NOTES
+```
+
+## Do Not Do Before Phase 19 Outside Validation
+
+```text
+do not start Phase 20
+do not add chat UI
+do not add LLM calls
+do not add evidence graph persistence
+do not connect unsupported-card queues to DB/repository reads
+do not connect unsupported-card queues to provider/source payloads
+do not run simulator logic from unsupported-card queues
+do not implement card behavior from unsupported-card queues
+do not generate recommendations
 do not export private raw_input
 ```
 
