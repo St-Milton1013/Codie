@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: Phase 18C - Source Conflict Report Checkpoint
+Recommended next task: Outside validation for Phase 18 Source Conflict Report
 
 ## Current Status
 
@@ -45,6 +45,8 @@ Phase 18 source conflict report planning is complete.
 Phase 18A source conflict report contract is complete.
 
 Phase 18B source conflict report implementation is complete.
+
+Phase 18C source conflict report checkpoint is complete.
 
 Roadmap patch logged:
 
@@ -94,6 +96,8 @@ docs/PHASE18A_SOURCE_CONFLICT_REPORT_CONTRACT_REPORT.md
 codie/intelligence/source_conflicts.py
 tests/test_intelligence_source_conflicts.py
 docs/PHASE18B_SOURCE_CONFLICT_REPORT_IMPLEMENTATION_REPORT.md
+docs/CHECKPOINT_PHASE18_SOURCE_CONFLICT_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE18_SOURCE_CONFLICT_PROMPT.md
 ```
 
 ## Phase 15 Direction
@@ -158,6 +162,8 @@ docs/PHASE18A_SOURCE_CONFLICT_REPORT_CONTRACT_REPORT.md
 codie/intelligence/source_conflicts.py
 tests/test_intelligence_source_conflicts.py
 docs/PHASE18B_SOURCE_CONFLICT_REPORT_IMPLEMENTATION_REPORT.md
+docs/CHECKPOINT_PHASE18_SOURCE_CONFLICT_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE18_SOURCE_CONFLICT_PROMPT.md
 docs/CODEX_CONTINUITY_HANDOFF.md
 docs/NEXT_PHASE_CONTRACT.md
 ```
@@ -422,6 +428,57 @@ no LLM calls
 no recommendation generation
 full test output
 static scans
+```
+
+## Completed Phase 18C Scope
+
+Phase 18C created:
+
+```text
+docs/CHECKPOINT_PHASE18_SOURCE_CONFLICT_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE18_SOURCE_CONFLICT_PROMPT.md
+```
+
+The checkpoint covers:
+
+```text
+Phase 18 planning
+Phase 18A source conflict contract
+Phase 18B source conflict implementation
+source conflict boundaries
+private metadata rejection
+sensitive evidence filtering
+resolved conflict filtering
+blocking conflict preservation
+conversion to EvidenceInputRecord values
+no schema changes
+no DB access
+no provider/source reads
+no LLM calls
+no recommendation generation
+full test output
+static scans
+```
+
+Phase 19 is blocked until Phase 18 outside validation returns:
+
+```text
+PASS
+PASS WITH REVIEW NOTES
+```
+
+## Do Not Do Before Phase 18 Outside Validation
+
+```text
+do not start Phase 19
+do not add unsupported relevant card queue implementation
+do not add chat UI
+do not add LLM calls
+do not add evidence graph persistence
+do not connect source conflicts to DB/repository reads
+do not connect source conflicts to provider/source payloads
+do not generate recommendations
+do not export private raw_input
 ```
 
 ## Completed Phase 17C Scope

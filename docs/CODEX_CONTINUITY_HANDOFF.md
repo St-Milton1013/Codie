@@ -20,7 +20,7 @@ Latest pushed commit before local Phase 13 checkpoint work: 56ac7f9 Add Phase 13
 Latest full-suite result:
 
 ```text
-Ran 587 tests in 4.317s
+Ran 587 tests in 3.403s
 
 OK (skipped=1)
 ```
@@ -28,7 +28,7 @@ OK (skipped=1)
 Latest focused Phase 18B source conflict result:
 
 ```text
-Ran 21 tests in 0.003s
+Ran 21 tests in 0.005s
 
 OK
 ```
@@ -284,13 +284,13 @@ Do not mutate raw simulator traces when reviews are created.
 Preferred next move:
 
 ```text
-Phase 18C - Source Conflict Report Checkpoint
+Send Phase 18 source conflict report track for outside validation
 ```
 
 Alternate next safe option:
 
 ```text
-Outside validation packet planning for Phase 18
+Wait for outside validation response and prepare Phase 19 planning options only
 ```
 
 Avoid starting:
@@ -900,6 +900,18 @@ DB access, provider access, LLM calls, UI, simulator execution, analytics
 calculation, recommendation generation, file writing, or private raw_input
 export.
 
+Latest Phase 18C packet:
+
+```text
+docs/CHECKPOINT_PHASE18_SOURCE_CONFLICT_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE18_SOURCE_CONFLICT_PROMPT.md
+```
+
+Phase 18C checkpoints the source conflict report track and creates the outside
+validation prompt. It is an internal checkpoint, not external proof. Phase 19
+should not start until outside validation returns PASS or PASS WITH REVIEW
+NOTES.
+
 Latest roadmap patch logged:
 
 ```text
@@ -992,7 +1004,8 @@ Phase 13 simulator contracts or a new UI/API contract is explicitly selected.
 - Phase 18 Source Conflict Report Planning is complete.
 - Phase 18A Source Conflict Report Contract is complete.
 - Phase 18B Source Conflict Report Implementation is complete.
-- Next packet should be Phase 18C - Source Conflict Report Checkpoint.
+- Phase 18C Source Conflict Report Checkpoint is complete.
+- Next packet should be outside validation for Phase 18.
 - cEDHData public asset metadata and local reference hashes are recorded in docs/CEDHDATA_SIMULATOR_REFERENCE_CAPTURE_MANIFEST.md.
 - Final recommendation output remains intentionally separate.
 

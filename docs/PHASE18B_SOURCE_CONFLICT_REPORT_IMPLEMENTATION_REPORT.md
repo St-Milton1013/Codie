@@ -112,7 +112,7 @@ Focused command:
 Focused result:
 
 ```text
-Ran 21 tests in 0.003s
+Ran 21 tests in 0.005s
 
 OK
 ```
@@ -126,7 +126,7 @@ Full suite command:
 Final full-suite result:
 
 ```text
-Ran 587 tests in 4.317s
+Ran 587 tests in 3.403s
 
 OK (skipped=1)
 ```
