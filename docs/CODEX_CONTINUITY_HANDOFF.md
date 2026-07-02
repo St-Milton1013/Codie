@@ -20,7 +20,7 @@ Latest pushed commit before local Phase 13 checkpoint work: 56ac7f9 Add Phase 13
 Latest full-suite result:
 
 ```text
-Ran 566 tests in 3.185s
+Ran 566 tests in 3.192s
 
 OK (skipped=1)
 ```
@@ -284,13 +284,13 @@ Do not mutate raw simulator traces when reviews are created.
 Preferred next move:
 
 ```text
-Send Phase 17 evidence graph input assembly track for outside validation
+Phase 18B - Source Conflict Report Implementation
 ```
 
 Alternate next safe option:
 
 ```text
-Wait for outside validation response and prepare Phase 18 planning options only
+Phase 18B implementation planning review before coding
 ```
 
 Avoid starting:
@@ -852,6 +852,38 @@ validation prompt. It is an internal checkpoint, not external proof. Phase 18
 should not start until outside validation returns PASS or PASS WITH REVIEW
 NOTES.
 
+Phase 17 outside validation:
+
+```text
+PASS
+```
+
+Latest Phase 18 planning packet:
+
+```text
+docs/PHASE18_SOURCE_CONFLICT_REPORT_PLANNING_CONTRACT.md
+docs/PHASE18_SOURCE_CONFLICT_REPORT_PLANNING_REPORT.md
+```
+
+Phase 18 planning selects Source Conflict Report as the next dependency-safe
+Interactive Intelligence layer. It explicitly blocks chat UI, LLM calls,
+evidence graph persistence, provider calls, source/provider payload reads,
+simulator execution, analytics calculation, recommendation generation, and
+private raw_input export.
+
+Latest Phase 18A packet:
+
+```text
+docs/PHASE18A_SOURCE_CONFLICT_REPORT_CONTRACT.md
+docs/PHASE18A_SOURCE_CONFLICT_REPORT_CONTRACT_REPORT.md
+```
+
+Phase 18A defines the pure contract for representing conflicts between
+already-sanitized evidence records and converting them to source_conflict
+EvidenceInputRecord values. It adds no implementation code, schema, DB access,
+provider access, LLM calls, UI, simulator execution, analytics calculation,
+recommendation generation, file writing, or private raw_input export.
+
 Latest roadmap patch logged:
 
 ```text
@@ -940,7 +972,10 @@ Phase 13 simulator contracts or a new UI/API contract is explicitly selected.
 - Phase 17A Evidence Graph Input Assembly Contract is complete.
 - Phase 17B Evidence Graph Input Assembly Implementation is complete.
 - Phase 17C Evidence Graph Input Assembly Checkpoint is complete.
-- Next packet should be outside validation for Phase 17.
+- Phase 17 outside validation is accepted.
+- Phase 18 Source Conflict Report Planning is complete.
+- Phase 18A Source Conflict Report Contract is complete.
+- Next packet should be Phase 18B - Source Conflict Report Implementation.
 - cEDHData public asset metadata and local reference hashes are recorded in docs/CEDHDATA_SIMULATOR_REFERENCE_CAPTURE_MANIFEST.md.
 - Final recommendation output remains intentionally separate.
 

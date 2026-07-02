@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: Outside validation for Phase 17 Evidence Graph Input Assembly
+Recommended next task: Phase 18B - Source Conflict Report Implementation
 
 ## Current Status
 
@@ -37,6 +37,12 @@ Phase 17A evidence graph input assembly contract is complete.
 Phase 17B evidence graph input assembly implementation is complete.
 
 Phase 17C evidence graph input assembly checkpoint is complete.
+
+Phase 17 outside validation is accepted.
+
+Phase 18 source conflict report planning is complete.
+
+Phase 18A source conflict report contract is complete.
 
 Roadmap patch logged:
 
@@ -79,6 +85,10 @@ tests/test_intelligence_evidence_inputs.py
 docs/PHASE17B_EVIDENCE_GRAPH_INPUT_ASSEMBLY_IMPLEMENTATION_REPORT.md
 docs/CHECKPOINT_PHASE17_INPUT_ASSEMBLY_REPORT.md
 docs/OUTSIDE_VALIDATION_PHASE17_INPUT_ASSEMBLY_PROMPT.md
+docs/PHASE18_SOURCE_CONFLICT_REPORT_PLANNING_CONTRACT.md
+docs/PHASE18_SOURCE_CONFLICT_REPORT_PLANNING_REPORT.md
+docs/PHASE18A_SOURCE_CONFLICT_REPORT_CONTRACT.md
+docs/PHASE18A_SOURCE_CONFLICT_REPORT_CONTRACT_REPORT.md
 ```
 
 ## Phase 15 Direction
@@ -136,6 +146,10 @@ tests/test_intelligence_evidence_inputs.py
 docs/PHASE17B_EVIDENCE_GRAPH_INPUT_ASSEMBLY_IMPLEMENTATION_REPORT.md
 docs/CHECKPOINT_PHASE17_INPUT_ASSEMBLY_REPORT.md
 docs/OUTSIDE_VALIDATION_PHASE17_INPUT_ASSEMBLY_PROMPT.md
+docs/PHASE18_SOURCE_CONFLICT_REPORT_PLANNING_CONTRACT.md
+docs/PHASE18_SOURCE_CONFLICT_REPORT_PLANNING_REPORT.md
+docs/PHASE18A_SOURCE_CONFLICT_REPORT_CONTRACT.md
+docs/PHASE18A_SOURCE_CONFLICT_REPORT_CONTRACT_REPORT.md
 docs/CODEX_CONTINUITY_HANDOFF.md
 docs/NEXT_PHASE_CONTRACT.md
 ```
@@ -447,6 +461,79 @@ do not add evidence graph persistence
 do not connect input assembly to DB/repository reads
 do not connect input assembly to provider/source payloads
 do not generate recommendations
+do not export private raw_input
+```
+
+## Completed Phase 17 Outside Validation
+
+Phase 17 outside validation returned:
+
+```text
+PASS
+```
+
+Phase 18 may proceed contract-first.
+
+## Completed Phase 18 Planning Scope
+
+Phase 18 planning created:
+
+```text
+docs/PHASE18_SOURCE_CONFLICT_REPORT_PLANNING_CONTRACT.md
+docs/PHASE18_SOURCE_CONFLICT_REPORT_PLANNING_REPORT.md
+```
+
+Planning decision:
+
+```text
+Start with Phase 18A - Source Conflict Report Contract.
+Do not start with chat UI, LLM calls, persistence, or recommendation generation.
+```
+
+## Completed Phase 18A Scope
+
+Phase 18A created:
+
+```text
+docs/PHASE18A_SOURCE_CONFLICT_REPORT_CONTRACT.md
+docs/PHASE18A_SOURCE_CONFLICT_REPORT_CONTRACT_REPORT.md
+```
+
+Future implementation files:
+
+```text
+codie/intelligence/source_conflicts.py
+tests/test_intelligence_source_conflicts.py
+docs/PHASE18B_SOURCE_CONFLICT_REPORT_IMPLEMENTATION_REPORT.md
+```
+
+Future public interface:
+
+```text
+SourceConflictBuildError
+SourceConflictEvidenceRef
+SourceConflictItem
+SourceConflictReport
+SourceConflictReportOptions
+build_source_conflict_report(...)
+source_conflict_report_to_input_records(...)
+source_conflict_report_to_dict(...)
+```
+
+## Do Not Do In Phase 18B
+
+```text
+do not add schema
+do not add DB reads or writes
+do not add repository imports
+do not call providers
+do not read source/provider payloads directly
+do not add UI
+do not call LLMs
+do not run simulator logic
+do not calculate analytics
+do not generate recommendations
+do not write files
 do not export private raw_input
 ```
 
