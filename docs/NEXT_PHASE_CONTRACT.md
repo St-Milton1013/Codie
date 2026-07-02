@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: Outside validation for Phase 16 Evidence Graph
+Recommended next task: Phase 17B - Evidence Graph Input Assembly Implementation
 
 ## Current Status
 
@@ -27,6 +27,12 @@ Phase 16A evidence graph contract is complete.
 Phase 16B evidence graph implementation is complete.
 
 Phase 16C evidence graph checkpoint is complete.
+
+Phase 16 outside validation is accepted.
+
+Phase 17 interactive intelligence input assembly planning is complete.
+
+Phase 17A evidence graph input assembly contract is complete.
 
 Roadmap patch logged:
 
@@ -60,6 +66,10 @@ docs/PHASE16B_EVIDENCE_GRAPH_IMPLEMENTATION_REPORT.md
 docs/CHECKPOINT_PHASE16_EVIDENCE_GRAPH_REPORT.md
 docs/OUTSIDE_VALIDATION_PHASE16_EVIDENCE_GRAPH_PROMPT.md
 docs/ROADMAP_PATCH_MOXFIELD_FREQUENCY_POOL_BUILDER.md
+docs/PHASE17_INTERACTIVE_INTELLIGENCE_INPUT_ASSEMBLY_PLANNING_CONTRACT.md
+docs/PHASE17_INTERACTIVE_INTELLIGENCE_INPUT_ASSEMBLY_PLANNING_REPORT.md
+docs/PHASE17A_EVIDENCE_GRAPH_INPUT_ASSEMBLY_CONTRACT.md
+docs/PHASE17A_EVIDENCE_GRAPH_INPUT_ASSEMBLY_CONTRACT_REPORT.md
 ```
 
 ## Phase 15 Direction
@@ -108,6 +118,10 @@ docs/PHASE16B_EVIDENCE_GRAPH_IMPLEMENTATION_REPORT.md
 docs/CHECKPOINT_PHASE16_EVIDENCE_GRAPH_REPORT.md
 docs/OUTSIDE_VALIDATION_PHASE16_EVIDENCE_GRAPH_PROMPT.md
 docs/ROADMAP_PATCH_MOXFIELD_FREQUENCY_POOL_BUILDER.md
+docs/PHASE17_INTERACTIVE_INTELLIGENCE_INPUT_ASSEMBLY_PLANNING_CONTRACT.md
+docs/PHASE17_INTERACTIVE_INTELLIGENCE_INPUT_ASSEMBLY_PLANNING_REPORT.md
+docs/PHASE17A_EVIDENCE_GRAPH_INPUT_ASSEMBLY_CONTRACT.md
+docs/PHASE17A_EVIDENCE_GRAPH_INPUT_ASSEMBLY_CONTRACT_REPORT.md
 docs/CODEX_CONTINUITY_HANDOFF.md
 docs/NEXT_PHASE_CONTRACT.md
 ```
@@ -544,4 +558,77 @@ do not add chat UI
 do not add LLM writer/auditor workflows
 do not connect evidence graphs to recommendation output
 do not treat roadmap-only Moxfield Frequency Pool Builder as approved implementation scope
+```
+
+## Completed Phase 16 Outside Validation
+
+Phase 16 outside validation returned:
+
+```text
+PASS
+```
+
+Phase 17 may proceed contract-first.
+
+## Completed Phase 17 Planning Scope
+
+Phase 17 planning created:
+
+```text
+docs/PHASE17_INTERACTIVE_INTELLIGENCE_INPUT_ASSEMBLY_PLANNING_CONTRACT.md
+docs/PHASE17_INTERACTIVE_INTELLIGENCE_INPUT_ASSEMBLY_PLANNING_REPORT.md
+```
+
+Planning decision:
+
+```text
+Start with Phase 17A - Evidence Graph Input Assembly Contract.
+Do not start with chat UI, LLM calls, persistence, or recommendation generation.
+```
+
+## Completed Phase 17A Scope
+
+Phase 17A created:
+
+```text
+docs/PHASE17A_EVIDENCE_GRAPH_INPUT_ASSEMBLY_CONTRACT.md
+docs/PHASE17A_EVIDENCE_GRAPH_INPUT_ASSEMBLY_CONTRACT_REPORT.md
+```
+
+Future implementation files:
+
+```text
+codie/intelligence/evidence_inputs.py
+tests/test_intelligence_evidence_inputs.py
+docs/PHASE17B_EVIDENCE_GRAPH_INPUT_ASSEMBLY_IMPLEMENTATION_REPORT.md
+```
+
+Future public interface:
+
+```text
+EvidenceInputBuildError
+EvidenceRecordRef
+EvidenceInputRecord
+EvidenceInputBundle
+EvidenceGraphAssemblyOptions
+evidence_record_from_dict(...)
+validate_evidence_input_bundle(...)
+build_graph_input_from_records(...)
+```
+
+## Do Not Do In Phase 17B
+
+```text
+do not add schema
+do not add DB reads or writes
+do not add repository imports
+do not call providers
+do not read source/provider payloads directly
+do not add UI
+do not call LLMs
+do not run simulator logic
+do not calculate analytics
+do not generate recommendations
+do not write files
+do not export private raw_input
 ```

@@ -20,7 +20,7 @@ Latest pushed commit before local Phase 13 checkpoint work: 56ac7f9 Add Phase 13
 Latest full-suite result:
 
 ```text
-Ran 547 tests in 3.194s
+Ran 547 tests in 3.190s
 
 OK (skipped=1)
 ```
@@ -284,13 +284,13 @@ Do not mutate raw simulator traces when reviews are created.
 Preferred next move:
 
 ```text
-Send Phase 16 evidence graph track for outside validation
+Phase 17B - Evidence Graph Input Assembly Implementation
 ```
 
 Alternate next safe option:
 
 ```text
-Wait for outside validation response and prepare Phase 17 planning options only
+Phase 17B implementation planning review before coding
 ```
 
 Avoid starting:
@@ -793,6 +793,38 @@ validation prompt. It is an internal checkpoint, not external proof. Phase 17
 should not start until outside validation returns PASS or PASS WITH REVIEW
 NOTES.
 
+Phase 16 outside validation:
+
+```text
+PASS
+```
+
+Latest Phase 17 planning packet:
+
+```text
+docs/PHASE17_INTERACTIVE_INTELLIGENCE_INPUT_ASSEMBLY_PLANNING_CONTRACT.md
+docs/PHASE17_INTERACTIVE_INTELLIGENCE_INPUT_ASSEMBLY_PLANNING_REPORT.md
+```
+
+Phase 17 planning selects Evidence Graph Input Assembly as the next
+dependency-safe Interactive Intelligence layer. It explicitly blocks chat UI,
+LLM calls, evidence graph persistence, provider calls, source/provider payload
+reads, simulator execution, recommendation generation, and private raw_input
+export.
+
+Latest Phase 17A packet:
+
+```text
+docs/PHASE17A_EVIDENCE_GRAPH_INPUT_ASSEMBLY_CONTRACT.md
+docs/PHASE17A_EVIDENCE_GRAPH_INPUT_ASSEMBLY_CONTRACT_REPORT.md
+```
+
+Phase 17A defines the pure contract for converting already-sanitized read-model
+records into `EvidenceGraphInput`. It adds no implementation code, schema, DB
+access, provider access, LLM calls, UI, simulator execution, analytics
+calculation, recommendation generation, file writing, or private raw_input
+export.
+
 Latest roadmap patch logged:
 
 ```text
@@ -876,7 +908,10 @@ Phase 13 simulator contracts or a new UI/API contract is explicitly selected.
 - Phase 16A Evidence Graph Contract is complete.
 - Phase 16B Evidence Graph Implementation is complete.
 - Phase 16C Evidence Graph Checkpoint is complete.
-- Next packet should be outside validation for Phase 16.
+- Phase 16 outside validation is accepted.
+- Phase 17 Interactive Intelligence Input Assembly Planning is complete.
+- Phase 17A Evidence Graph Input Assembly Contract is complete.
+- Next packet should be Phase 17B - Evidence Graph Input Assembly Implementation.
 - cEDHData public asset metadata and local reference hashes are recorded in docs/CEDHDATA_SIMULATOR_REFERENCE_CAPTURE_MANIFEST.md.
 - Final recommendation output remains intentionally separate.
 
