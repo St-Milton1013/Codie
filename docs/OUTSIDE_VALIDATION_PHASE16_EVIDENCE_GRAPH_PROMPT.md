@@ -55,6 +55,7 @@ Check:
 - Confirm Phase 16 adds no schema changes.
 - Confirm no tables, columns, indexes, migrations, or repository methods were added for evidence graphs.
 - Confirm evidence graph remains in-memory only.
+- Confirm schema and repository files did not drift during Phase 16 unless explicitly documented as nonfunctional.
 
 3. Public interface
 - Confirm these public objects exist:
@@ -101,6 +102,13 @@ Check:
 - Confirm private deck text metadata is rejected by default.
 - Confirm full primer body metadata is rejected by default.
 - Confirm raw provider payload metadata is rejected by default.
+- Confirm tests reject private metadata keys such as:
+  raw_input
+  private_deck_text
+  full_primer_body
+  raw_provider_payload
+  provider_payload
+  original_import_text
 - Confirm evidence graph serialization does not expose private raw_input.
 - Confirm privacy redactions and blocking caveats are not hidden.
 
@@ -122,6 +130,9 @@ Reject if Phase 16 code imports any of:
 Confirm no raw SQL is present in:
 - codie/intelligence/evidence_graph.py
 - tests/test_intelligence_evidence_graph.py
+
+Confirm no production file-writing behavior is present in:
+- codie/intelligence/evidence_graph.py
 
 8. Recommendation/evidence boundaries
 Reject if Phase 16:
@@ -168,10 +179,20 @@ rg -n "codie\.db|codie\.providers|codie\.analytics|codie\.recommendations\.gener
 
 rg -n "SELECT |INSERT |UPDATE |DELETE |execute\(|executescript\(" codie\intelligence\evidence_graph.py tests\test_intelligence_evidence_graph.py
 
+rg -n "open\(|write_text\(|write_bytes\(|Path\(|mkdir\(|touch\(|unlink\(" codie\intelligence\evidence_graph.py
+
 rg -n "should play|should be played|should be cut|must include|correct card|breaks the format|secretly optimal|cut this|strict upgrade|auto-include|recommended cut|recommended include" codie\intelligence\evidence_graph.py tests\test_intelligence_evidence_graph.py docs\PHASE16B_EVIDENCE_GRAPH_IMPLEMENTATION_REPORT.md docs\CHECKPOINT_PHASE16_EVIDENCE_GRAPH_REPORT.md docs\ROADMAP_PATCH_MOXFIELD_FREQUENCY_POOL_BUILDER.md
 
 Expected:
-no matches
+no matches for production file-writing behavior in codie\intelligence\evidence_graph.py
+otherwise no matches
+
+Also run:
+
+git diff --name-only -- codie/db/schema docs/SCHEMA_SPEC.md codie/db/repositories
+
+Expected:
+no Phase 16 schema, repository, migration, or schema-spec changes unless explicitly documented as nonfunctional
 
 11. Clean checkout concerns
 - Confirm the test suite does not depend on local-only SQLite artifacts.

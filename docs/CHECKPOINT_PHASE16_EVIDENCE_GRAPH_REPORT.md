@@ -196,6 +196,8 @@ raw_input is rejected by default
 full primer body metadata is rejected by default
 raw provider payload metadata is rejected by default
 private deck text metadata is rejected by default
+provider payload aliases are rejected by default
+original import text aliases are rejected by default
 blocking caveats are preserved, not hidden
 manual notes are allowed but do not become tournament evidence
 ```
@@ -223,7 +225,7 @@ OK
 Latest full suite:
 
 ```text
-Ran 547 tests in 3.305s
+Ran 547 tests in 3.194s
 
 OK (skipped=1)
 ```
@@ -234,6 +236,8 @@ Static checks:
 git diff --check: PASS
 forbidden intelligence import scan: no matches
 raw SQL scan: no matches
+production file-write scan: no matches
+schema/repository drift scan: no matches
 strategic language scan: no matches
 ```
 

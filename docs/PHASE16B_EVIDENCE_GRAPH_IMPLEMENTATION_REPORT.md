@@ -71,6 +71,7 @@ non-manual citation requirement
 strategic-language rejection
 raw_input metadata rejection
 private metadata key rejection
+private metadata alias rejection
 local_user_data privacy preservation
 blocking caveat preservation
 JSON-compatible metadata validation
@@ -124,7 +125,7 @@ Full suite command:
 Final full-suite result:
 
 ```text
-Ran 547 tests in 3.309s
+Ran 547 tests in 3.194s
 
 OK (skipped=1)
 ```
@@ -135,6 +136,8 @@ Static checks:
 git diff --check: PASS
 forbidden intelligence import scan: no matches
 raw SQL scan: no matches
+production file-write scan: no matches
+schema/repository drift scan: no matches
 strategic language scan: no matches
 ```
 

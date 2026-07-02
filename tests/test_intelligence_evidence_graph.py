@@ -202,10 +202,20 @@ class IntelligenceEvidenceGraphTest(unittest.TestCase):
             node(citations=())
 
     def test_raw_input_metadata_is_rejected_by_default(self) -> None:
-        with self.assertRaises(EvidenceGraphBuildError):
-            node(metadata={"raw_input": "1 Example Card"})
-        with self.assertRaises(EvidenceGraphBuildError):
-            build_evidence_graph(graph_input(metadata={"private_deck_text": "1 Example Card"}))
+        blocked_keys = (
+            "raw_input",
+            "private_deck_text",
+            "full_primer_body",
+            "raw_provider_payload",
+            "provider_payload",
+            "original_import_text",
+        )
+        for blocked_key in blocked_keys:
+            with self.subTest(blocked_key=blocked_key):
+                with self.assertRaises(EvidenceGraphBuildError):
+                    node(metadata={blocked_key: "1 Example Card"})
+                with self.assertRaises(EvidenceGraphBuildError):
+                    build_evidence_graph(graph_input(metadata={blocked_key: "1 Example Card"}))
 
     def test_local_user_data_node_is_preserved_with_privacy_scope(self) -> None:
         local_node = node(
@@ -280,6 +290,13 @@ class IntelligenceEvidenceGraphTest(unittest.TestCase):
             "DEL" + "ETE ",
             "exec" + "ute(",
             "execute" + "script(",
+            "open(",
+            "write_text(",
+            "write_bytes(",
+            "Path(",
+            "mkdir(",
+            "touch(",
+            "unlink(",
         )
         for pattern in forbidden:
             self.assertNotIn(pattern, source)
