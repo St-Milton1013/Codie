@@ -110,6 +110,7 @@ Check:
 - Confirm sensitive evidence refs are excluded by default.
 - Confirm sensitive evidence refs are included only with explicit option.
 - Confirm filtered evidence creates caveats or counts.
+- Confirm filtered conflicts create explicit caveats, counts, or filtered-conflict records so filtering is visible and auditable.
 - Confirm minimum_severity filters lower-severity conflicts.
 - Confirm blocking conflicts remain visible.
 
@@ -193,12 +194,21 @@ rg -n "SELECT |INSERT |UPDATE |DELETE |execute\(|executescript\(" codie\intellig
 
 rg -n "open\(|write_text\(|write_bytes\(|Path\(|mkdir\(|touch\(|unlink\(" codie\intelligence\source_conflicts.py
 
-rg -n "source_events|source_decks|source_deck_cards|provider_objects|raw_provider_payload" codie\intelligence\source_conflicts.py tests\test_intelligence_source_conflicts.py
+Provider/source table scan:
+
+rg -n "source_events|source_decks|source_deck_cards|provider_objects" codie\intelligence\source_conflicts.py tests\test_intelligence_source_conflicts.py
+
+Private metadata production scan:
+
+rg -n "raw_provider_payload|provider_payload|original_import_text|raw_input|private_deck_text|full_primer_body" codie\intelligence\source_conflicts.py
 
 rg -n "should play|should be played|should be cut|must include|correct card|breaks the format|secretly optimal|cut this|strict upgrade|auto-include|recommended cut|recommended include" codie\intelligence\source_conflicts.py tests\test_intelligence_source_conflicts.py docs\PHASE18B_SOURCE_CONFLICT_REPORT_IMPLEMENTATION_REPORT.md docs\CHECKPOINT_PHASE18_SOURCE_CONFLICT_REPORT.md
 
 Expected:
-no matches
+no source/provider table matches
+private metadata production matches are allowed only if they are blocked-key validation constants or rejection logic
+tests may contain private metadata keys when proving rejection behavior
+otherwise no matches
 
 Also run:
 

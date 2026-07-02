@@ -210,7 +210,7 @@ recommendation candidates, or create play/cut/include/upgrade instructions.
 Focused Phase 18B tests:
 
 ```text
-Ran 21 tests in 0.005s
+Ran 21 tests in 0.004s
 
 OK
 ```
@@ -218,7 +218,7 @@ OK
 Latest full suite:
 
 ```text
-Ran 587 tests in 3.403s
+Ran 587 tests in 3.464s
 
 OK (skipped=1)
 ```
@@ -230,7 +230,8 @@ git diff --check: PASS
 forbidden source conflict import scan: no matches
 raw SQL scan: no matches
 production file-write scan: no matches
-source/provider table term scan: no matches
+source/provider table scan: no matches
+private metadata production scan: matches only blocked-key constants/rejection logic
 strategic language scan: no matches
 schema/repository drift scan: no matches
 ```

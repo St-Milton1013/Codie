@@ -20,7 +20,7 @@ Latest pushed commit before local Phase 13 checkpoint work: 56ac7f9 Add Phase 13
 Latest full-suite result:
 
 ```text
-Ran 587 tests in 3.403s
+Ran 587 tests in 3.464s
 
 OK (skipped=1)
 ```
@@ -28,7 +28,7 @@ OK (skipped=1)
 Latest focused Phase 18B source conflict result:
 
 ```text
-Ran 21 tests in 0.005s
+Ran 21 tests in 0.004s
 
 OK
 ```
