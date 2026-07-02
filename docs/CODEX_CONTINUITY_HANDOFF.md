@@ -284,13 +284,13 @@ Do not mutate raw simulator traces when reviews are created.
 Preferred next move:
 
 ```text
-Send Phase 18 source conflict report track for outside validation
+Implement Phase 19B Unsupported Relevant Card Queue
 ```
 
 Alternate next safe option:
 
 ```text
-Wait for outside validation response and prepare Phase 19 planning options only
+Prepare Phase 19 checkpoint packet after Phase 19B implementation
 ```
 
 Avoid starting:
@@ -908,9 +908,34 @@ docs/OUTSIDE_VALIDATION_PHASE18_SOURCE_CONFLICT_PROMPT.md
 ```
 
 Phase 18C checkpoints the source conflict report track and creates the outside
-validation prompt. It is an internal checkpoint, not external proof. Phase 19
-should not start until outside validation returns PASS or PASS WITH REVIEW
-NOTES.
+validation prompt. Phase 18 outside validation returned PASS.
+
+Latest Phase 19 planning packet:
+
+```text
+docs/PHASE19_UNSUPPORTED_RELEVANT_CARD_QUEUE_PLANNING_CONTRACT.md
+docs/PHASE19_UNSUPPORTED_RELEVANT_CARD_QUEUE_PLANNING_REPORT.md
+```
+
+Phase 19 planning selects Unsupported Relevant Card Queue as the next
+dependency-safe Interactive Intelligence layer. It explicitly blocks chat UI,
+LLM calls, evidence graph persistence, provider calls, source/provider payload
+reads, simulator execution, card behavior implementation, analytics
+calculation, recommendation generation, and private raw_input export.
+
+Latest Phase 19A packet:
+
+```text
+docs/PHASE19A_UNSUPPORTED_RELEVANT_CARD_QUEUE_CONTRACT.md
+docs/PHASE19A_UNSUPPORTED_RELEVANT_CARD_QUEUE_CONTRACT_REPORT.md
+```
+
+Phase 19A defines the pure contract for representing unresolved relevant
+cards, unsupported simulator behaviors, model gaps, rules-text gaps, privacy
+redactions, source-conflict card gaps, and manual-review needs. It adds no
+implementation code, schema, DB access, provider access, LLM calls, UI,
+simulator execution, card behavior implementation, analytics calculation,
+recommendation generation, file writing, or private raw_input export.
 
 Latest roadmap patch logged:
 
@@ -1005,7 +1030,10 @@ Phase 13 simulator contracts or a new UI/API contract is explicitly selected.
 - Phase 18A Source Conflict Report Contract is complete.
 - Phase 18B Source Conflict Report Implementation is complete.
 - Phase 18C Source Conflict Report Checkpoint is complete.
-- Next packet should be outside validation for Phase 18.
+- Phase 18 outside validation is accepted.
+- Phase 19 Unsupported Relevant Card Queue Planning is complete.
+- Phase 19A Unsupported Relevant Card Queue Contract is complete.
+- Next packet should be Phase 19B Unsupported Relevant Card Queue Implementation.
 - cEDHData public asset metadata and local reference hashes are recorded in docs/CEDHDATA_SIMULATOR_REFERENCE_CAPTURE_MANIFEST.md.
 - Final recommendation output remains intentionally separate.
 

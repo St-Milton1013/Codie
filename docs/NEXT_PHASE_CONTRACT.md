@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: Outside validation for Phase 18 Source Conflict Report
+Recommended next task: Phase 19B - Unsupported Relevant Card Queue Implementation
 
 ## Current Status
 
@@ -47,6 +47,12 @@ Phase 18A source conflict report contract is complete.
 Phase 18B source conflict report implementation is complete.
 
 Phase 18C source conflict report checkpoint is complete.
+
+Phase 18 outside validation is accepted.
+
+Phase 19 unsupported relevant card queue planning is complete.
+
+Phase 19A unsupported relevant card queue contract is complete.
 
 Roadmap patch logged:
 
@@ -98,6 +104,10 @@ tests/test_intelligence_source_conflicts.py
 docs/PHASE18B_SOURCE_CONFLICT_REPORT_IMPLEMENTATION_REPORT.md
 docs/CHECKPOINT_PHASE18_SOURCE_CONFLICT_REPORT.md
 docs/OUTSIDE_VALIDATION_PHASE18_SOURCE_CONFLICT_PROMPT.md
+docs/PHASE19_UNSUPPORTED_RELEVANT_CARD_QUEUE_PLANNING_CONTRACT.md
+docs/PHASE19_UNSUPPORTED_RELEVANT_CARD_QUEUE_PLANNING_REPORT.md
+docs/PHASE19A_UNSUPPORTED_RELEVANT_CARD_QUEUE_CONTRACT.md
+docs/PHASE19A_UNSUPPORTED_RELEVANT_CARD_QUEUE_CONTRACT_REPORT.md
 ```
 
 ## Phase 15 Direction
@@ -460,24 +470,76 @@ full test output
 static scans
 ```
 
-Phase 19 is blocked until Phase 18 outside validation returns:
+Phase 18 outside validation returned:
 
 ```text
 PASS
-PASS WITH REVIEW NOTES
 ```
 
-## Do Not Do Before Phase 18 Outside Validation
+Phase 19 may proceed contract-first.
+
+## Completed Phase 19 Planning Scope
+
+Phase 19 planning created:
 
 ```text
-do not start Phase 19
-do not add unsupported relevant card queue implementation
-do not add chat UI
-do not add LLM calls
-do not add evidence graph persistence
-do not connect source conflicts to DB/repository reads
-do not connect source conflicts to provider/source payloads
+docs/PHASE19_UNSUPPORTED_RELEVANT_CARD_QUEUE_PLANNING_CONTRACT.md
+docs/PHASE19_UNSUPPORTED_RELEVANT_CARD_QUEUE_PLANNING_REPORT.md
+```
+
+Planning decision:
+
+```text
+Start with Phase 19A - Unsupported Relevant Card Queue Contract.
+Do not start with chat UI, LLM calls, persistence, card behavior implementation,
+or recommendation generation.
+```
+
+## Completed Phase 19A Scope
+
+Phase 19A created:
+
+```text
+docs/PHASE19A_UNSUPPORTED_RELEVANT_CARD_QUEUE_CONTRACT.md
+docs/PHASE19A_UNSUPPORTED_RELEVANT_CARD_QUEUE_CONTRACT_REPORT.md
+```
+
+Future implementation files:
+
+```text
+codie/intelligence/unsupported_cards.py
+tests/test_intelligence_unsupported_cards.py
+docs/PHASE19B_UNSUPPORTED_RELEVANT_CARD_QUEUE_IMPLEMENTATION_REPORT.md
+```
+
+Future public interface:
+
+```text
+UnsupportedCardQueueBuildError
+UnsupportedCardEvidenceRef
+UnsupportedCardQueueItem
+UnsupportedCardQueue
+UnsupportedCardQueueOptions
+build_unsupported_card_queue(...)
+unsupported_card_queue_to_input_records(...)
+unsupported_card_queue_to_dict(...)
+```
+
+## Do Not Do In Phase 19B
+
+```text
+do not add schema
+do not add DB reads or writes
+do not add repository imports
+do not call providers
+do not read source/provider payloads directly
+do not add UI
+do not call LLMs
+do not run simulator logic
+do not implement card behavior
+do not calculate analytics
 do not generate recommendations
+do not write files
 do not export private raw_input
 ```
 
