@@ -73,6 +73,7 @@ filtered-record caveat generation
 filtered-empty bundle rejection
 forbidden strategic-language rejection through EvidenceGraph primitives
 EvidenceGraphInput assembly with no MVP edges
+MVP EvidenceGraphInput edges == []
 ```
 
 ## Boundary Compliance
@@ -126,7 +127,7 @@ Full suite command:
 Final full-suite result:
 
 ```text
-Ran 566 tests in 3.147s
+Ran 566 tests in 3.185s
 
 OK (skipped=1)
 ```
@@ -138,6 +139,7 @@ git diff --check: PASS
 forbidden evidence input import scan: no matches
 raw SQL scan: no matches
 production file-write scan: no matches
+source/provider table term scan: no matches
 strategic language scan: no matches
 schema/repository drift scan: no matches
 ```

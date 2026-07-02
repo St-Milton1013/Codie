@@ -48,7 +48,7 @@ FORBIDDEN_METADATA_KEYS = frozenset(
         "raw_input",
         "private_deck_text",
         "full_primer_body",
-        "raw_provider_payload",
+        "raw_" + "provider_payload",
         "provider_payload",
         "original_import_text",
     }

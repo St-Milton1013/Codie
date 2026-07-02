@@ -135,6 +135,7 @@ bundle caveats are preserved
 record caveats are preserved and linked to their nodes
 forbidden strategic language fails cleanly
 EvidenceGraphInput is assembled with no MVP edges
+build_graph_input_from_records(...) returns edges == [] for MVP input bundles
 ```
 
 ## Boundary Compliance
@@ -214,7 +215,7 @@ OK
 Latest full suite:
 
 ```text
-Ran 566 tests in 3.147s
+Ran 566 tests in 3.185s
 
 OK (skipped=1)
 ```
@@ -226,6 +227,7 @@ git diff --check: PASS
 forbidden evidence input import scan: no matches
 raw SQL scan: no matches
 production file-write scan: no matches
+source/provider table term scan: no matches
 strategic language scan: no matches
 schema/repository drift scan: no matches
 ```

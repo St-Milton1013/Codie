@@ -109,6 +109,7 @@ Check:
 - Confirm bundle caveats map to EvidenceCaveat values.
 - Confirm record caveats map to EvidenceCaveat values and link to their node.
 - Confirm MVP assembly emits no edges unless a future contract adds relationship construction.
+- Confirm build_graph_input_from_records(...) returns EvidenceGraphInput with edges == [] for MVP input bundles.
 
 6. Privacy
 - Confirm local_user_data records preserve privacy_scope.
@@ -151,9 +152,14 @@ Confirm no production file-writing behavior is present in:
 - codie/intelligence/evidence_inputs.py
 
 8. Recommendation/evidence boundaries
+Recommendation_candidate records may be consumed only if they are already-built
+sanitized input records. Phase 17 must not create, rank, score, or recommend
+them.
+
 Reject if Phase 17:
 - generates recommendations
 - ranks cards
+- scores recommendation candidates
 - creates recommendation candidate records
 - tells a user what to play or cut
 - treats manual notes as tournament evidence
@@ -189,6 +195,8 @@ rg -n "codie\.db|codie\.providers|codie\.analytics|codie\.recommendations\.gener
 rg -n "SELECT |INSERT |UPDATE |DELETE |execute\(|executescript\(" codie\intelligence\evidence_inputs.py tests\test_intelligence_evidence_inputs.py
 
 rg -n "open\(|write_text\(|write_bytes\(|Path\(|mkdir\(|touch\(|unlink\(" codie\intelligence\evidence_inputs.py
+
+rg -n "source_events|source_decks|source_deck_cards|provider_objects|raw_provider_payload" codie\intelligence\evidence_inputs.py tests\test_intelligence_evidence_inputs.py
 
 rg -n "should play|should be played|should be cut|must include|correct card|breaks the format|secretly optimal|cut this|strict upgrade|auto-include|recommended cut|recommended include" codie\intelligence\evidence_inputs.py tests\test_intelligence_evidence_inputs.py docs\PHASE17B_EVIDENCE_GRAPH_INPUT_ASSEMBLY_IMPLEMENTATION_REPORT.md docs\CHECKPOINT_PHASE17_INPUT_ASSEMBLY_REPORT.md
 
