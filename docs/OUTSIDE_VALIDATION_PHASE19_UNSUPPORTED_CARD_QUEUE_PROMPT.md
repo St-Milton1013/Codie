@@ -65,6 +65,27 @@ Private metadata keys are rejected, including nested keys.
 Forbidden strategic language is rejected.
 ```
 
+Confirm these public objects exist:
+
+```text
+UnsupportedCardQueueBuildError
+UnsupportedCardEvidenceRef
+UnsupportedCardQueueItem
+UnsupportedCardQueue
+UnsupportedCardQueueOptions
+build_unsupported_card_queue(...)
+unsupported_card_queue_to_input_records(...)
+unsupported_card_queue_to_dict(...)
+```
+
+Confirm schema discipline:
+
+```text
+Phase 19 adds no schema changes.
+No tables, columns, indexes, migrations, or repository methods were added for unsupported card queues.
+Unsupported card queues remain in-memory only.
+```
+
 ## Required Test Command
 
 From a clean checkout, run:

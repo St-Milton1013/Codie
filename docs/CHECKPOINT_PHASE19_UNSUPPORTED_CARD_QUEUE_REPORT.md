@@ -82,6 +82,10 @@ resolved items are included only with option
 sensitive evidence is excluded by default
 sensitive evidence is included only with option
 filtered evidence creates caveat/count metadata
+deduplication by card identity is deterministic
+deduplication preserves stable output ordering
+deduplication can be disabled with option
+deduplicated items preserve visible caveat/count metadata
 duplicate item IDs fail cleanly
 unsupported reason fails cleanly
 unsupported severity fails cleanly
