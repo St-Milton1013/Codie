@@ -20,15 +20,15 @@ Latest pushed commit before local Phase 13 checkpoint work: 56ac7f9 Add Phase 13
 Latest full-suite result:
 
 ```text
-Ran 528 tests in 3.452s
+Ran 547 tests in 3.309s
 
 OK (skipped=1)
 ```
 
-Latest focused Phase 15 deck memory result:
+Latest focused Phase 16B evidence graph result:
 
 ```text
-Ran 25 tests in 0.284s
+Ran 19 tests in 0.002s
 
 OK
 ```
@@ -44,12 +44,9 @@ passed.
 Latest relevant boundary scans:
 
 ```text
-rg -n "codie\.providers|codie\.analytics|codie\.recommendations|codie\.ingestion|codie\.cards|codie\.probability_engine|codie\.canonical|requests|httpx|sqlite3" codie\user_decks\deck_memory.py tests\test_user_deck_memory.py
-rg -n "source_events|source_decks|source_deck_cards|provider_objects" codie\user_decks\deck_memory.py tests\test_user_deck_memory.py
-rg -n "should play|must include|correct card|breaks the format|secretly optimal|cut this|strict upgrade|auto-include|recommended cut|recommended include" codie\user_decks\deck_memory.py tests\test_user_deck_memory.py
-rg -n "codie\.providers|codie\.analytics|codie\.recommendations|codie\.ingestion|codie\.cards|codie\.probability_engine|codie\.canonical|requests|httpx|sqlite3" codie\cli\user_deck_memory.py tests\test_cli_user_deck_memory.py
-rg -n "source_events|source_decks|source_deck_cards|provider_objects" codie\cli\user_deck_memory.py tests\test_cli_user_deck_memory.py
-rg -n "should play|must include|correct card|breaks the format|secretly optimal|cut this|strict upgrade|auto-include|recommended cut|recommended include" codie\cli\user_deck_memory.py tests\test_cli_user_deck_memory.py
+rg -n "codie\.db|codie\.providers|codie\.analytics|codie\.recommendations\.generation|codie\.recommendations\.persistence|codie\.ingestion|codie\.cards|codie\.probability_engine|codie\.canonical|requests|httpx|sqlite3" codie\intelligence\evidence_graph.py tests\test_intelligence_evidence_graph.py
+rg -n "SELECT |INSERT |UPDATE |DELETE |execute\(|executescript\(" codie\intelligence\evidence_graph.py tests\test_intelligence_evidence_graph.py
+rg -n "should play|should be played|should be cut|must include|correct card|breaks the format|secretly optimal|cut this|strict upgrade|auto-include|recommended cut|recommended include" codie\intelligence\evidence_graph.py tests\test_intelligence_evidence_graph.py docs\PHASE16B_EVIDENCE_GRAPH_IMPLEMENTATION_REPORT.md docs\ROADMAP_PATCH_MOXFIELD_FREQUENCY_POOL_BUILDER.md
 ```
 
 returned:
@@ -765,6 +762,33 @@ and strategic-language restrictions. It adds no implementation code, schema,
 UI, LLM calls, provider access, source-table reads, simulator execution,
 recommendation generation, or persistence.
 
+Latest Phase 16B packet:
+
+```text
+codie/intelligence/__init__.py
+codie/intelligence/evidence_graph.py
+tests/test_intelligence_evidence_graph.py
+docs/PHASE16B_EVIDENCE_GRAPH_IMPLEMENTATION_REPORT.md
+```
+
+Phase 16B implements the in-memory evidence graph primitives. It adds
+deterministic graph serialization, node/edge/citation/caveat ordering,
+reference validation, strategic-language rejection, private metadata rejection,
+local_user_data privacy preservation, blocking caveat preservation, and
+JSON-compatible metadata validation. It adds no schema, DB access, provider
+calls, source/provider reads, LLM calls, simulator execution, recommendation
+generation, or persistence.
+
+Latest roadmap patch logged:
+
+```text
+docs/ROADMAP_PATCH_MOXFIELD_FREQUENCY_POOL_BUILDER.md
+```
+
+The Moxfield Frequency Pool Builder is roadmap-only. It does not authorize
+schema, UI, live Moxfield fetching, provider implementation, persistence, or
+recommendation output.
+
 Next UI implementation packet:
 
 ```text
@@ -836,7 +860,8 @@ Phase 13 simulator contracts or a new UI/API contract is explicitly selected.
 - Phase 15 outside validation is accepted.
 - Phase 16 Interactive Intelligence Foundation Planning is complete.
 - Phase 16A Evidence Graph Contract is complete.
-- Next packet should be Phase 16B - Evidence Graph Implementation.
+- Phase 16B Evidence Graph Implementation is complete.
+- Next packet should be Phase 16C - Evidence Graph Checkpoint.
 - cEDHData public asset metadata and local reference hashes are recorded in docs/CEDHDATA_SIMULATOR_REFERENCE_CAPTURE_MANIFEST.md.
 - Final recommendation output remains intentionally separate.
 

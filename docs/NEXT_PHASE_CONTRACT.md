@@ -24,6 +24,14 @@ Phase 16 interactive intelligence planning is complete.
 
 Phase 16A evidence graph contract is complete.
 
+Phase 16B evidence graph implementation is complete.
+
+Roadmap patch logged:
+
+```text
+docs/ROADMAP_PATCH_MOXFIELD_FREQUENCY_POOL_BUILDER.md
+```
+
 Phase 15 planning is complete:
 
 ```text
@@ -43,6 +51,11 @@ docs/PHASE16_INTERACTIVE_INTELLIGENCE_PLANNING_CONTRACT.md
 docs/PHASE16_INTERACTIVE_INTELLIGENCE_PLANNING_REPORT.md
 docs/PHASE16A_EVIDENCE_GRAPH_CONTRACT.md
 docs/PHASE16A_EVIDENCE_GRAPH_CONTRACT_REPORT.md
+codie/intelligence/__init__.py
+codie/intelligence/evidence_graph.py
+tests/test_intelligence_evidence_graph.py
+docs/PHASE16B_EVIDENCE_GRAPH_IMPLEMENTATION_REPORT.md
+docs/ROADMAP_PATCH_MOXFIELD_FREQUENCY_POOL_BUILDER.md
 ```
 
 ## Phase 15 Direction
@@ -84,6 +97,11 @@ docs/PHASE16_INTERACTIVE_INTELLIGENCE_PLANNING_CONTRACT.md
 docs/PHASE16_INTERACTIVE_INTELLIGENCE_PLANNING_REPORT.md
 docs/PHASE16A_EVIDENCE_GRAPH_CONTRACT.md
 docs/PHASE16A_EVIDENCE_GRAPH_CONTRACT_REPORT.md
+codie/intelligence/__init__.py
+codie/intelligence/evidence_graph.py
+tests/test_intelligence_evidence_graph.py
+docs/PHASE16B_EVIDENCE_GRAPH_IMPLEMENTATION_REPORT.md
+docs/ROADMAP_PATCH_MOXFIELD_FREQUENCY_POOL_BUILDER.md
 docs/CODEX_CONTINUITY_HANDOFF.md
 docs/NEXT_PHASE_CONTRACT.md
 ```
@@ -294,9 +312,9 @@ tests/test_intelligence_evidence_graph.py
 docs/PHASE16B_EVIDENCE_GRAPH_IMPLEMENTATION_REPORT.md
 ```
 
-## Next Implementation Scope
+## Completed Phase 16B Scope
 
-Phase 16B should implement:
+Phase 16B implemented:
 
 ```text
 EvidenceGraph
@@ -314,7 +332,7 @@ strategic-language restrictions
 tests for future implementation
 ```
 
-Phase 16B should remain:
+Phase 16B remains:
 
 ```text
 in-memory
@@ -322,6 +340,32 @@ deterministic
 JSON-compatible
 privacy-aware
 evidence-first
+```
+
+## Next Checkpoint Scope
+
+Phase 16C should create:
+
+```text
+docs/CHECKPOINT_PHASE16_EVIDENCE_GRAPH_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE16_EVIDENCE_GRAPH_PROMPT.md
+```
+
+The checkpoint should cover:
+
+```text
+Phase 16 planning
+Phase 16A contract
+Phase 16B implementation
+evidence graph boundaries
+privacy metadata rejection
+no schema changes
+no DB access
+no provider/source reads
+no LLM calls
+no recommendation generation
+full test output
+static scans
 ```
 
 ## Validation Command
@@ -436,10 +480,11 @@ do not generate recommendations
 do not weaken raw_input privacy defaults
 ```
 
-## Do Not Do In Phase 16B
+## Do Not Do In Phase 16C
 
 ```text
 do not add schema
+do not add implementation code
 do not add UI
 do not add DB reads or writes
 do not call providers
