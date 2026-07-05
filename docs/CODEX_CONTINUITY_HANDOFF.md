@@ -286,13 +286,13 @@ Do not mutate raw simulator traces when reviews are created.
 Preferred next move:
 
 ```text
-Send Phase 19 unsupported relevant card queue track for outside validation
+Implement Phase 20B Chat Query Planner
 ```
 
 Alternate next safe option:
 
 ```text
-Wait for outside validation response and prepare Phase 20 planning options only
+Prepare Phase 20 checkpoint packet after Phase 20B implementation
 ```
 
 Avoid starting:
@@ -961,9 +961,34 @@ docs/OUTSIDE_VALIDATION_PHASE19_UNSUPPORTED_CARD_QUEUE_PROMPT.md
 ```
 
 Phase 19C checkpoints the unsupported relevant card queue track and creates the
-outside validation prompt. It is an internal checkpoint, not external proof.
-Phase 20 should not start until outside validation returns PASS or PASS WITH
-REVIEW NOTES.
+outside validation prompt. Phase 19 outside validation returned PASS.
+
+Latest Phase 20 planning packet:
+
+```text
+docs/PHASE20_CHAT_QUERY_PLANNER_PLANNING_CONTRACT.md
+docs/PHASE20_CHAT_QUERY_PLANNER_PLANNING_REPORT.md
+```
+
+Phase 20 planning selects Chat Query Planner as the next dependency-safe
+Interactive Intelligence layer. It explicitly blocks chat UI, LLM calls,
+answer generation, evidence graph persistence, provider calls, source/provider
+payload reads, simulator execution, card behavior implementation, analytics
+calculation, recommendation generation, and private raw_input export.
+
+Latest Phase 20A packet:
+
+```text
+docs/PHASE20A_CHAT_QUERY_PLANNER_CONTRACT.md
+docs/PHASE20A_CHAT_QUERY_PLANNER_CONTRACT_REPORT.md
+```
+
+Phase 20A defines the pure contract for transforming a sanitized user question
+into a deterministic `ChatQueryPlan` for future answer builders. It adds no
+implementation code, schema, DB access, provider access, LLM calls, UI, answer
+generation, simulator execution, card behavior implementation, analytics
+calculation, recommendation generation, file writing, or private raw_input
+export.
 
 Latest roadmap patch logged:
 
@@ -1068,7 +1093,10 @@ Phase 13 simulator contracts or a new UI/API contract is explicitly selected.
 - Phase 19A Unsupported Relevant Card Queue Contract is complete.
 - Phase 19B Unsupported Relevant Card Queue Implementation is complete.
 - Phase 19C Unsupported Relevant Card Queue Checkpoint is complete.
-- Next packet should be outside validation for Phase 19.
+- Phase 19 outside validation is accepted.
+- Phase 20 Chat Query Planner Planning is complete.
+- Phase 20A Chat Query Planner Contract is complete.
+- Next packet should be Phase 20B Chat Query Planner Implementation.
 - cEDHData public asset metadata and local reference hashes are recorded in docs/CEDHDATA_SIMULATOR_REFERENCE_CAPTURE_MANIFEST.md.
 - Final recommendation output remains intentionally separate.
 

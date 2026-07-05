@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: Outside validation for Phase 19 Unsupported Relevant Card Queue
+Recommended next task: Phase 20B - Chat Query Planner Implementation
 
 ## Current Status
 
@@ -57,6 +57,12 @@ Phase 19A unsupported relevant card queue contract is complete.
 Phase 19B unsupported relevant card queue implementation is complete.
 
 Phase 19C unsupported relevant card queue checkpoint is complete.
+
+Phase 19 outside validation is accepted.
+
+Phase 20 chat query planner planning is complete.
+
+Phase 20A chat query planner contract is complete.
 
 Roadmap patch logged:
 
@@ -119,6 +125,10 @@ tests/test_intelligence_unsupported_cards.py
 docs/PHASE19B_UNSUPPORTED_RELEVANT_CARD_QUEUE_IMPLEMENTATION_REPORT.md
 docs/CHECKPOINT_PHASE19_UNSUPPORTED_CARD_QUEUE_REPORT.md
 docs/OUTSIDE_VALIDATION_PHASE19_UNSUPPORTED_CARD_QUEUE_PROMPT.md
+docs/PHASE20_CHAT_QUERY_PLANNER_PLANNING_CONTRACT.md
+docs/PHASE20_CHAT_QUERY_PLANNER_PLANNING_REPORT.md
+docs/PHASE20A_CHAT_QUERY_PLANNER_CONTRACT.md
+docs/PHASE20A_CHAT_QUERY_PLANNER_CONTRACT_REPORT.md
 ```
 
 ## Phase 15 Direction
@@ -612,25 +622,78 @@ full test output
 static scans
 ```
 
-Phase 20 is blocked until Phase 19 outside validation returns:
+Phase 19 outside validation returned:
 
 ```text
 PASS
-PASS WITH REVIEW NOTES
 ```
 
-## Do Not Do Before Phase 19 Outside Validation
+Phase 20 may proceed contract-first.
+
+## Completed Phase 20 Planning Scope
+
+Phase 20 planning created:
 
 ```text
-do not start Phase 20
-do not add chat UI
-do not add LLM calls
-do not add evidence graph persistence
-do not connect unsupported-card queues to DB/repository reads
-do not connect unsupported-card queues to provider/source payloads
-do not run simulator logic from unsupported-card queues
-do not implement card behavior from unsupported-card queues
+docs/PHASE20_CHAT_QUERY_PLANNER_PLANNING_CONTRACT.md
+docs/PHASE20_CHAT_QUERY_PLANNER_PLANNING_REPORT.md
+```
+
+Planning decision:
+
+```text
+Start with Phase 20A - Chat Query Planner Contract.
+Do not start with chat UI, LLM calls, answer generation, persistence, or
+recommendation generation.
+```
+
+## Completed Phase 20A Scope
+
+Phase 20A created:
+
+```text
+docs/PHASE20A_CHAT_QUERY_PLANNER_CONTRACT.md
+docs/PHASE20A_CHAT_QUERY_PLANNER_CONTRACT_REPORT.md
+```
+
+Future implementation files:
+
+```text
+codie/intelligence/query_planner.py
+tests/test_intelligence_query_planner.py
+docs/PHASE20B_CHAT_QUERY_PLANNER_IMPLEMENTATION_REPORT.md
+```
+
+Future public interface:
+
+```text
+ChatQueryPlanBuildError
+ChatQueryRequest
+ChatQuerySubject
+ChatEvidenceNeed
+ChatQueryConstraint
+ChatQueryPlan
+ChatQueryPlannerOptions
+build_chat_query_plan(...)
+chat_query_plan_to_dict(...)
+```
+
+## Do Not Do In Phase 20B
+
+```text
+do not add schema
+do not add DB reads or writes
+do not add repository imports
+do not call providers
+do not read source/provider payloads directly
+do not add UI
+do not call LLMs
+do not generate final answer text
+do not run simulator logic
+do not implement card behavior
+do not calculate analytics
 do not generate recommendations
+do not write files
 do not export private raw_input
 ```
 
