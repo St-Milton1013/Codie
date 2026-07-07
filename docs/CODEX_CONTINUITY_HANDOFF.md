@@ -20,7 +20,7 @@ Latest pushed commit before local Phase 20 checkpoint work: 68c463e Implement Ph
 Latest full-suite result:
 
 ```text
-Ran 631 tests in 3.223s
+Ran 633 tests in 3.293s
 
 OK (skipped=1)
 ```
@@ -28,7 +28,7 @@ OK (skipped=1)
 Latest focused Phase 20B chat query planner result:
 
 ```text
-Ran 20 tests in 0.002s
+Ran 22 tests in 0.003s
 
 OK
 ```

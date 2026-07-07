@@ -70,8 +70,17 @@ unsupported card request creates unsupported_card plan
 simulation review request creates simulation_review plan
 tag graph request creates tag_graph plan
 unknown request creates caveated unknown plan
+subject data is preserved
 plans serialize deterministically
 explicit constraints are preserved
+question class derives deterministic evidence needs
+deck_summary plans derive deck-summary evidence needs
+card_evidence plans derive card-level evidence needs
+commander_evidence plans derive commander-level evidence needs
+source_conflict plans derive source-conflict evidence needs
+unsupported_card plans derive unsupported-card evidence needs
+simulation_review plans derive simulation-review evidence needs
+unknown plans emit caveats instead of confident evidence needs
 privacy scopes are enforced
 sensitive scope is blocked by default
 local_user_data scope is blocked by default
@@ -125,7 +134,7 @@ Focused tests:
 ```text
 python -m unittest tests.test_intelligence_query_planner -v
 
-Ran 20 tests in 0.002s
+Ran 22 tests in 0.003s
 
 OK
 ```
@@ -135,7 +144,7 @@ Full suite:
 ```text
 python -m unittest discover -s tests
 
-Ran 631 tests in 3.223s
+Ran 633 tests in 3.293s
 
 OK (skipped=1)
 ```

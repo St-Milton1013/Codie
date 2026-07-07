@@ -170,6 +170,39 @@ class IntelligenceQueryPlannerTest(unittest.TestCase):
         self.assertEqual(plan.constraints[0].constraint_type, "region")
         self.assertEqual(plan.evidence_needs[0].filters["region"], "Japan")
 
+    def test_subject_data_is_preserved(self) -> None:
+        plan = build_chat_query_plan(
+            request(
+                subject=subject(
+                    subject_type="partner_pair",
+                    subject_key="tymna|kraum",
+                    display_name="Tymna/Kraum",
+                    metadata={"source": "fixture", "scope": "top_16"},
+                )
+            )
+        )
+
+        self.assertEqual(plan.subject.subject_type, "partner_pair")
+        self.assertEqual(plan.subject.subject_key, "tymna|kraum")
+        self.assertEqual(plan.subject.display_name, "Tymna/Kraum")
+        self.assertEqual(plan.subject.metadata["scope"], "top_16")
+
+    def test_question_class_derives_deterministic_evidence_needs(self) -> None:
+        cases = (
+            ("Summarize this deck.", ("deck_memory", "evidence_input_records")),
+            ("Why is this card appearing in evidence?", ("evidence_graph", "source_conflicts")),
+            ("Show commander staples for Tymna Kraum.", ("evidence_graph", "frequency_pool")),
+            ("Compare this deck against top lists.", ("deck_memory", "frequency_pool")),
+            ("Show source conflict for this deck.", ("source_conflicts",)),
+            ("Show unsupported cards affecting this result.", ("unsupported_cards",)),
+            ("What does the simulator say about this opening hand?", ("simulation_review_summary", "unsupported_cards")),
+            ("Show tag graph trends for draw engine and ramp.", ("tag_graph",)),
+        )
+        for question_text, expected_need_types in cases:
+            with self.subTest(question_text=question_text):
+                plan = build_chat_query_plan(request(question_text=question_text))
+                self.assertEqual(tuple(need.need_type for need in plan.evidence_needs), expected_need_types)
+
     def test_privacy_scopes_are_enforced(self) -> None:
         plan = build_chat_query_plan(
             request(

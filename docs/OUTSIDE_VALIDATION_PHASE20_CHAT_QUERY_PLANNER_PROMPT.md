@@ -100,7 +100,7 @@ python -m unittest discover -s tests
 Confirm:
 
 ```text
-Ran 631 tests
+Ran 633 tests
 OK (skipped=1)
 ```
 
@@ -113,7 +113,7 @@ python -m unittest tests.test_intelligence_query_planner -v
 Confirm:
 
 ```text
-Ran 20 tests
+Ran 22 tests
 OK
 ```
 
