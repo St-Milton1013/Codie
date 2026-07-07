@@ -286,13 +286,13 @@ Do not mutate raw simulator traces when reviews are created.
 Preferred next move:
 
 ```text
-Implement Phase 20B Chat Query Planner
+Create Phase 20C Chat Query Planner checkpoint
 ```
 
 Alternate next safe option:
 
 ```text
-Prepare Phase 20 checkpoint packet after Phase 20B implementation
+Wait for outside validation response after Phase 20C checkpoint
 ```
 
 Avoid starting:
@@ -989,6 +989,20 @@ implementation code, schema, DB access, provider access, LLM calls, UI, answer
 generation, simulator execution, card behavior implementation, analytics
 calculation, recommendation generation, file writing, or private raw_input
 export.
+
+Latest Phase 20B packet:
+
+```text
+codie/intelligence/query_planner.py
+tests/test_intelligence_query_planner.py
+docs/PHASE20B_CHAT_QUERY_PLANNER_IMPLEMENTATION_REPORT.md
+```
+
+Phase 20B implements the pure deterministic query planner and conversion to a
+serializable `ChatQueryPlan`. It adds no schema, DB access, provider access,
+source/provider reads, LLM calls, UI, answer generation, simulator execution,
+card behavior implementation, analytics calculation, recommendation
+generation, file writing, or private raw_input export.
 
 Latest roadmap patch logged:
 

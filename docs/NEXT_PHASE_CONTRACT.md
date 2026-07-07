@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: Phase 20B - Chat Query Planner Implementation
+Recommended next task: Phase 20C - Chat Query Planner Checkpoint
 
 ## Current Status
 
@@ -63,6 +63,8 @@ Phase 19 outside validation is accepted.
 Phase 20 chat query planner planning is complete.
 
 Phase 20A chat query planner contract is complete.
+
+Phase 20B chat query planner implementation is complete.
 
 Roadmap patch logged:
 
@@ -139,6 +141,9 @@ docs/PHASE20_CHAT_QUERY_PLANNER_PLANNING_CONTRACT.md
 docs/PHASE20_CHAT_QUERY_PLANNER_PLANNING_REPORT.md
 docs/PHASE20A_CHAT_QUERY_PLANNER_CONTRACT.md
 docs/PHASE20A_CHAT_QUERY_PLANNER_CONTRACT_REPORT.md
+codie/intelligence/query_planner.py
+tests/test_intelligence_query_planner.py
+docs/PHASE20B_CHAT_QUERY_PLANNER_IMPLEMENTATION_REPORT.md
 ```
 
 ## Phase 15 Direction
@@ -705,6 +710,63 @@ do not calculate analytics
 do not generate recommendations
 do not write files
 do not export private raw_input
+```
+
+## Completed Phase 20B Scope
+
+Phase 20B implemented:
+
+```text
+ChatQueryPlanBuildError
+ChatQueryRequest
+ChatQuerySubject
+ChatEvidenceNeed
+ChatQueryConstraint
+ChatQueryPlan
+ChatQueryPlannerOptions
+build_chat_query_plan(...)
+chat_query_plan_to_dict(...)
+```
+
+Phase 20B remains:
+
+```text
+pure
+in-memory
+sanitized-input only
+deterministic
+privacy-aware
+evidence-first
+```
+
+## Next Checkpoint Scope
+
+Phase 20C should create:
+
+```text
+docs/CHECKPOINT_PHASE20_CHAT_QUERY_PLANNER_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE20_CHAT_QUERY_PLANNER_PROMPT.md
+```
+
+The checkpoint should cover:
+
+```text
+Phase 20 planning
+Phase 20A chat query planner contract
+Phase 20B chat query planner implementation
+query planner boundaries
+private metadata rejection
+privacy-scope blockers
+unknown-question caveats
+no schema changes
+no DB access
+no provider/source reads
+no LLM calls
+no answer generation
+no simulator execution
+no recommendation generation
+full test output
+static scans
 ```
 
 ## Completed Phase 17C Scope
