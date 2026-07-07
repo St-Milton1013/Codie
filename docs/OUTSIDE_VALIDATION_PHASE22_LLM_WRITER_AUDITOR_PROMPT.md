@@ -115,7 +115,7 @@ python -m unittest discover -s tests
 Confirm:
 
 ```text
-Ran 670 tests
+Ran 672 tests
 OK (skipped=1)
 ```
 
@@ -128,7 +128,7 @@ python -m unittest tests.test_intelligence_llm_writer_auditor -v
 Confirm:
 
 ```text
-Ran 19 tests
+Ran 21 tests
 OK
 ```
 

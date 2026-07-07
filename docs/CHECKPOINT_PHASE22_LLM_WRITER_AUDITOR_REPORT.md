@@ -88,7 +88,9 @@ mock writer draft treating unsupported card as modeled is rejected
 mock writer draft resolving source conflict is rejected
 private metadata keys fail cleanly
 nested private metadata keys fail cleanly
-unknown citation fails cleanly
+unknown citation IDs fail cleanly
+unknown caveat IDs fail cleanly
+unknown missing_evidence IDs fail cleanly
 invalid option limits fail cleanly
 accepted audit result cannot contain blocking findings
 serialization is deterministic
@@ -139,7 +141,7 @@ Focused tests:
 ```text
 python -m unittest tests.test_intelligence_llm_writer_auditor -v
 
-Ran 19 tests in 0.004s
+Ran 21 tests in 0.004s
 
 OK
 ```
@@ -149,7 +151,7 @@ Full suite:
 ```text
 python -m unittest discover -s tests
 
-Ran 670 tests in 3.996s
+Ran 672 tests in 3.908s
 
 OK (skipped=1)
 ```

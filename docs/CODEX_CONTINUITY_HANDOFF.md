@@ -20,7 +20,7 @@ Latest pushed commit before local Phase 21 pass marker: 6f7a351 Patch Phase 21 v
 Latest full-suite result:
 
 ```text
-Ran 670 tests in 3.996s
+Ran 672 tests in 3.908s
 
 OK (skipped=1)
 ```
@@ -28,7 +28,7 @@ OK (skipped=1)
 Latest focused Phase 22B LLM writer/auditor result:
 
 ```text
-Ran 19 tests in 0.004s
+Ran 21 tests in 0.004s
 
 OK
 ```

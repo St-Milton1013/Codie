@@ -296,6 +296,14 @@ class IntelligenceLLMWriterAuditorTest(unittest.TestCase):
         with self.assertRaises(LLMWriterAuditorBuildError):
             validate_writer_draft(draft(citation_ids=("citation:missing",)), writer_input())
 
+    def test_unknown_caveat_fails_cleanly(self) -> None:
+        with self.assertRaises(LLMWriterAuditorBuildError):
+            validate_writer_draft(draft(caveat_ids=("caveat:missing",)), writer_input())
+
+    def test_unknown_missing_evidence_fails_cleanly(self) -> None:
+        with self.assertRaises(LLMWriterAuditorBuildError):
+            validate_writer_draft(draft(missing_evidence_ids=("missing:absent",)), writer_input())
+
     def test_options_reject_invalid_limits(self) -> None:
         with self.assertRaises(LLMWriterAuditorBuildError):
             LLMWriterAuditorOptions(maximum_sections=0)
