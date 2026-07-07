@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: Phase 22A - LLM Writer/Auditor Boundary Contract
+Recommended next task: Phase 22B - LLM Writer/Auditor Packet Implementation
 
 ## Current Status
 
@@ -85,6 +85,8 @@ Phase 21 outside validation is accepted.
 Phase 22 may proceed contract-first.
 
 Phase 22 LLM writer/auditor planning is complete.
+
+Phase 22A LLM writer/auditor boundary contract is complete.
 
 Roadmap patch logged:
 
@@ -177,6 +179,8 @@ docs/CHECKPOINT_PHASE21_CHAT_ANSWER_BUILDER_REPORT.md
 docs/OUTSIDE_VALIDATION_PHASE21_CHAT_ANSWER_BUILDER_PROMPT.md
 docs/PHASE22_LLM_WRITER_AUDITOR_PLANNING_CONTRACT.md
 docs/PHASE22_LLM_WRITER_AUDITOR_PLANNING_REPORT.md
+docs/PHASE22A_LLM_WRITER_AUDITOR_CONTRACT.md
+docs/PHASE22A_LLM_WRITER_AUDITOR_CONTRACT_REPORT.md
 ```
 
 ## Phase 15 Direction
@@ -996,6 +1000,59 @@ Future implementation files, after contract acceptance:
 codie/intelligence/llm_writer_auditor.py
 tests/test_intelligence_llm_writer_auditor.py
 docs/PHASE22B_LLM_WRITER_AUDITOR_IMPLEMENTATION_REPORT.md
+```
+
+## Completed Phase 22A Scope
+
+Phase 22A created:
+
+```text
+docs/PHASE22A_LLM_WRITER_AUDITOR_CONTRACT.md
+docs/PHASE22A_LLM_WRITER_AUDITOR_CONTRACT_REPORT.md
+```
+
+Future implementation files:
+
+```text
+codie/intelligence/llm_writer_auditor.py
+tests/test_intelligence_llm_writer_auditor.py
+docs/PHASE22B_LLM_WRITER_AUDITOR_IMPLEMENTATION_REPORT.md
+```
+
+Future public interface:
+
+```text
+LLMWriterAuditorBuildError
+LLMWriterInput
+LLMWriterDraft
+LLMAuditFinding
+LLMAuditResult
+LLMWriterAuditorOptions
+build_writer_input_from_answer(...)
+validate_writer_draft(...)
+audit_writer_draft(...)
+llm_writer_input_to_dict(...)
+llm_writer_draft_to_dict(...)
+llm_audit_result_to_dict(...)
+```
+
+## Do Not Do In Phase 22B
+
+```text
+do not add schema
+do not add DB reads or writes
+do not add repository imports
+do not call providers
+do not read source/provider payloads directly
+do not add UI
+do not call real LLM APIs
+do not import LLM SDKs
+do not run simulator logic
+do not implement card behavior
+do not calculate analytics
+do not generate recommendations
+do not write files
+do not export private raw_input
 ```
 
 ## Completed Phase 17C Scope
