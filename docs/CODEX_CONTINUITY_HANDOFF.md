@@ -20,7 +20,7 @@ Latest pushed commit before local Phase 21 pass marker: 6f7a351 Patch Phase 21 v
 Latest full-suite result:
 
 ```text
-Ran 690 tests in 3.798s
+Ran 690 tests in 3.812s
 
 OK (skipped=1)
 ```
@@ -154,7 +154,8 @@ Phase 22B LLM Writer/Auditor Packet Implementation: PASS
 Phase 22 LLM Writer/Auditor: PASS
 Phase 23A Chat/Intelligence UI/API Boundary Contract: PASS
 Phase 23B Chat/Intelligence UI/API Boundary Packet Implementation: PASS
-Phase 23 Chat/Intelligence UI/API Boundary: READY FOR OUTSIDE VALIDATION
+Phase 23 Chat/Intelligence UI/API Boundary: PASS
+Phase 24A Chat/Intelligence Local API Contract: PASS
 ```
 
 ## Recent Commits
@@ -304,13 +305,13 @@ Do not mutate raw simulator traces when reviews are created.
 Preferred next move:
 
 ```text
-Send Phase 23 Chat/Intelligence UI/API Boundary outside validation packet
+Implement Phase 24B Chat/Intelligence local API packet models
 ```
 
 Alternate next safe option:
 
 ```text
-Review Phase 23 checkpoint packet before sending for validation
+Review Phase 24A contract before implementation
 ```
 
 Avoid starting:
@@ -1166,8 +1167,21 @@ docs/CHECKPOINT_PHASE23_CHAT_INTELLIGENCE_UI_API_BOUNDARY_REPORT.md
 docs/OUTSIDE_VALIDATION_PHASE23_CHAT_INTELLIGENCE_UI_API_BOUNDARY_PROMPT.md
 ```
 
-Phase 24 is blocked until Phase 23 outside validation returns PASS or PASS
-WITH REVIEW NOTES.
+Phase 23 outside validation is accepted.
+
+Latest Phase 24A packet:
+
+```text
+docs/PHASE24A_CHAT_INTELLIGENCE_LOCAL_API_CONTRACT.md
+docs/PHASE24A_CHAT_INTELLIGENCE_LOCAL_API_CONTRACT_REPORT.md
+```
+
+Phase 24A defines the pure local API envelope boundary over Phase 23 UI/API
+packets. It adds no implementation code, schema, DB access, provider access,
+UI code, HTTP server, server framework imports, network client imports, real
+LLM calls, LLM SDK imports, simulator execution, card behavior implementation,
+analytics calculation, recommendation generation, file writing, or private
+raw_input export.
 
 Latest roadmap patch logged:
 
@@ -1299,7 +1313,9 @@ Phase 13 simulator contracts or a new UI/API contract is explicitly selected.
 - Phase 23A Chat/Intelligence UI/API Boundary Contract is complete.
 - Phase 23B Chat/Intelligence UI/API Boundary Packet Implementation is complete.
 - Phase 23 Chat/Intelligence UI/API Boundary checkpoint packet is complete.
-- Next step should be outside validation for Phase 23.
+- Phase 23 outside validation is accepted.
+- Phase 24A Chat/Intelligence Local API Contract is complete.
+- Next packet should be Phase 24B Chat/Intelligence Local API Packet Implementation.
 - cEDHData public asset metadata and local reference hashes are recorded in docs/CEDHDATA_SIMULATOR_REFERENCE_CAPTURE_MANIFEST.md.
 - Final recommendation output remains intentionally separate.
 

@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: Phase 23 outside validation
+Recommended next task: Phase 24B - Chat/Intelligence Local API Packet Implementation
 
 ## Current Status
 
@@ -102,7 +102,11 @@ Phase 23B Chat/Intelligence UI/API Boundary Packet Implementation is complete.
 
 Phase 23C Chat/Intelligence UI/API Boundary checkpoint packet is complete.
 
-Phase 24 is blocked until Phase 23 outside validation returns PASS or PASS WITH REVIEW NOTES.
+Phase 23 outside validation is accepted.
+
+Phase 24 may proceed contract-first.
+
+Phase 24A Chat/Intelligence Local API Contract is complete.
 
 Roadmap patch logged:
 
@@ -1151,6 +1155,8 @@ docs/PHASE23A_CHAT_INTELLIGENCE_UI_API_BOUNDARY_CONTRACT_REPORT.md
 docs/PHASE23B_CHAT_INTELLIGENCE_UI_API_BOUNDARY_IMPLEMENTATION_REPORT.md
 docs/CHECKPOINT_PHASE23_CHAT_INTELLIGENCE_UI_API_BOUNDARY_REPORT.md
 docs/OUTSIDE_VALIDATION_PHASE23_CHAT_INTELLIGENCE_UI_API_BOUNDARY_PROMPT.md
+docs/PHASE24A_CHAT_INTELLIGENCE_LOCAL_API_CONTRACT.md
+docs/PHASE24A_CHAT_INTELLIGENCE_LOCAL_API_CONTRACT_REPORT.md
 codie/intelligence/ui_api_boundary.py
 tests/test_intelligence_ui_api_boundary.py
 ```
@@ -1260,6 +1266,63 @@ codie/intelligence/query_planner.py
 codie/intelligence/answer_builder.py
 codie/intelligence/llm_writer_auditor.py
 codie/intelligence/__init__.py
+```
+
+## Completed Phase 24A Scope
+
+Phase 24A created:
+
+```text
+docs/PHASE24A_CHAT_INTELLIGENCE_LOCAL_API_CONTRACT.md
+docs/PHASE24A_CHAT_INTELLIGENCE_LOCAL_API_CONTRACT_REPORT.md
+```
+
+Future implementation files:
+
+```text
+codie/intelligence/local_api.py
+tests/test_intelligence_local_api.py
+docs/PHASE24B_CHAT_INTELLIGENCE_LOCAL_API_IMPLEMENTATION_REPORT.md
+```
+
+Future public interface:
+
+```text
+LocalAPIContractError
+LocalAPIRouteSpec
+LocalAPIRequestEnvelope
+LocalAPIResponseEnvelope
+LocalAPIErrorEnvelope
+LocalAPIOptions
+build_chat_route_spec(...)
+build_local_api_request_envelope(...)
+build_local_api_response_envelope(...)
+build_local_api_error_envelope(...)
+local_api_route_spec_to_dict(...)
+local_api_request_envelope_to_dict(...)
+local_api_response_envelope_to_dict(...)
+local_api_error_envelope_to_dict(...)
+```
+
+## Do Not Do In Phase 24B
+
+```text
+do not add schema
+do not add DB reads or writes
+do not add repository imports
+do not call providers
+do not read source/provider payloads directly
+do not add UI
+do not add a live HTTP server
+do not import Flask/FastAPI/Starlette/Uvicorn
+do not call real LLM APIs
+do not import LLM SDKs
+do not run simulator logic
+do not implement card behavior
+do not calculate analytics
+do not generate recommendations
+do not write files
+do not export private raw_input
 ```
 
 ## Completed Phase 17C Scope
