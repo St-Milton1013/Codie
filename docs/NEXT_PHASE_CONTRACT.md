@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: Outside validation for Phase 21 Chat Answer Builder
+Recommended next task: Phase 22 planning
 
 ## Current Status
 
@@ -80,7 +80,9 @@ Phase 21B chat answer builder implementation is complete.
 
 Phase 21C chat answer builder checkpoint is complete.
 
-Phase 22 is blocked until Phase 21 outside validation returns PASS or PASS WITH REVIEW NOTES.
+Phase 21 outside validation is accepted.
+
+Phase 22 may proceed contract-first.
 
 Roadmap patch logged:
 
@@ -952,8 +954,9 @@ static scans
 ## Phase 22 Gate
 
 ```text
-Do not start Phase 22 until Phase 21 outside validation returns PASS or PASS WITH REVIEW NOTES.
-Do not start LLM writer/auditor workflows, chat UI, persistence, simulator integration, analytics, or recommendations from this packet.
+Phase 21 outside validation returned PASS.
+Phase 22 may proceed contract-first.
+Do not start LLM writer/auditor workflows, chat UI, persistence, simulator integration, analytics, or recommendations without a Phase 22 contract.
 ```
 
 ## Completed Phase 17C Scope
