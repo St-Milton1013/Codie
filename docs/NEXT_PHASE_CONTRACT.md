@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: Phase 22 outside validation
+Recommended next task: Phase 23B - Chat/Intelligence UI/API Boundary Packet Implementation
 
 ## Current Status
 
@@ -92,7 +92,11 @@ Phase 22B LLM writer/auditor packet implementation is complete.
 
 Phase 22C LLM writer/auditor checkpoint packet is complete.
 
-Phase 23 is blocked until Phase 22 outside validation returns PASS or PASS WITH REVIEW NOTES.
+Phase 22 outside validation is accepted.
+
+Phase 23 may proceed contract-first.
+
+Phase 23A Chat/Intelligence UI/API Boundary Contract is complete.
 
 Roadmap patch logged:
 
@@ -190,6 +194,8 @@ docs/PHASE22A_LLM_WRITER_AUDITOR_CONTRACT_REPORT.md
 docs/PHASE22B_LLM_WRITER_AUDITOR_IMPLEMENTATION_REPORT.md
 docs/CHECKPOINT_PHASE22_LLM_WRITER_AUDITOR_REPORT.md
 docs/OUTSIDE_VALIDATION_PHASE22_LLM_WRITER_AUDITOR_PROMPT.md
+docs/PHASE23A_CHAT_INTELLIGENCE_UI_API_BOUNDARY_CONTRACT.md
+docs/PHASE23A_CHAT_INTELLIGENCE_UI_API_BOUNDARY_CONTRACT_REPORT.md
 codie/intelligence/llm_writer_auditor.py
 tests/test_intelligence_llm_writer_auditor.py
 ```
@@ -1127,6 +1133,59 @@ codie/intelligence/llm_writer_auditor.py
 tests/test_intelligence_llm_writer_auditor.py
 codie/intelligence/answer_builder.py
 codie/intelligence/__init__.py
+```
+
+## Completed Phase 23A Scope
+
+Phase 23A created:
+
+```text
+docs/PHASE23A_CHAT_INTELLIGENCE_UI_API_BOUNDARY_CONTRACT.md
+docs/PHASE23A_CHAT_INTELLIGENCE_UI_API_BOUNDARY_CONTRACT_REPORT.md
+```
+
+Future implementation files:
+
+```text
+codie/intelligence/ui_api_boundary.py
+tests/test_intelligence_ui_api_boundary.py
+docs/PHASE23B_CHAT_INTELLIGENCE_UI_API_BOUNDARY_IMPLEMENTATION_REPORT.md
+```
+
+Future public interface:
+
+```text
+ChatUIBoundaryBuildError
+ChatUIRequestPacket
+ChatUIResponsePacket
+ChatUIErrorPacket
+ChatUIBoundaryOptions
+build_chat_ui_request_packet(...)
+build_chat_ui_response_packet(...)
+build_chat_ui_error_packet(...)
+chat_ui_request_packet_to_dict(...)
+chat_ui_response_packet_to_dict(...)
+chat_ui_error_packet_to_dict(...)
+```
+
+## Do Not Do In Phase 23B
+
+```text
+do not add schema
+do not add DB reads or writes
+do not add repository imports
+do not call providers
+do not read source/provider payloads directly
+do not add UI
+do not add an HTTP server
+do not call real LLM APIs
+do not import LLM SDKs
+do not run simulator logic
+do not implement card behavior
+do not calculate analytics
+do not generate recommendations
+do not write files
+do not export private raw_input
 ```
 
 ## Completed Phase 17C Scope

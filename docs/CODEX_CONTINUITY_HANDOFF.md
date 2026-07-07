@@ -20,7 +20,7 @@ Latest pushed commit before local Phase 21 pass marker: 6f7a351 Patch Phase 21 v
 Latest full-suite result:
 
 ```text
-Ran 672 tests in 3.908s
+Ran 672 tests in 3.906s
 
 OK (skipped=1)
 ```
@@ -151,7 +151,8 @@ Phase 21 Chat Answer Builder: PASS
 Phase 22 LLM Writer/Auditor Planning: PASS
 Phase 22A LLM Writer/Auditor Boundary Contract: PASS
 Phase 22B LLM Writer/Auditor Packet Implementation: PASS
-Phase 22 LLM Writer/Auditor: READY FOR OUTSIDE VALIDATION
+Phase 22 LLM Writer/Auditor: PASS
+Phase 23A Chat/Intelligence UI/API Boundary Contract: PASS
 ```
 
 ## Recent Commits
@@ -301,13 +302,13 @@ Do not mutate raw simulator traces when reviews are created.
 Preferred next move:
 
 ```text
-Send Phase 22 LLM Writer/Auditor outside validation packet
+Implement Phase 23B Chat/Intelligence UI/API boundary packet models
 ```
 
 Alternate next safe option:
 
 ```text
-Review Phase 22 checkpoint packet before sending for validation
+Review Phase 23A contract before implementation
 ```
 
 Avoid starting:
@@ -1127,8 +1128,20 @@ docs/CHECKPOINT_PHASE22_LLM_WRITER_AUDITOR_REPORT.md
 docs/OUTSIDE_VALIDATION_PHASE22_LLM_WRITER_AUDITOR_PROMPT.md
 ```
 
-Phase 23 is blocked until Phase 22 outside validation returns PASS or PASS
-WITH REVIEW NOTES.
+Phase 22 outside validation is accepted.
+
+Latest Phase 23A packet:
+
+```text
+docs/PHASE23A_CHAT_INTELLIGENCE_UI_API_BOUNDARY_CONTRACT.md
+docs/PHASE23A_CHAT_INTELLIGENCE_UI_API_BOUNDARY_CONTRACT_REPORT.md
+```
+
+Phase 23A defines the pure local UI/API packet boundary for exposing
+interactive intelligence outputs. It adds no implementation code, schema, DB
+access, provider access, UI code, HTTP server, real LLM calls, LLM SDK imports,
+simulator execution, card behavior implementation, analytics calculation,
+recommendation generation, file writing, or private raw_input export.
 
 Latest roadmap patch logged:
 
@@ -1256,7 +1269,9 @@ Phase 13 simulator contracts or a new UI/API contract is explicitly selected.
 - Phase 22A LLM Writer/Auditor Boundary Contract is complete.
 - Phase 22B LLM Writer/Auditor Packet Implementation is complete.
 - Phase 22 LLM Writer/Auditor checkpoint packet is complete.
-- Next step should be outside validation for Phase 22.
+- Phase 22 outside validation is accepted.
+- Phase 23A Chat/Intelligence UI/API Boundary Contract is complete.
+- Next packet should be Phase 23B Chat/Intelligence UI/API Boundary Packet Implementation.
 - cEDHData public asset metadata and local reference hashes are recorded in docs/CEDHDATA_SIMULATOR_REFERENCE_CAPTURE_MANIFEST.md.
 - Final recommendation output remains intentionally separate.
 
