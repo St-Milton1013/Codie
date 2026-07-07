@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: Phase 22 planning
+Recommended next task: Phase 22A - LLM Writer/Auditor Boundary Contract
 
 ## Current Status
 
@@ -83,6 +83,8 @@ Phase 21C chat answer builder checkpoint is complete.
 Phase 21 outside validation is accepted.
 
 Phase 22 may proceed contract-first.
+
+Phase 22 LLM writer/auditor planning is complete.
 
 Roadmap patch logged:
 
@@ -173,6 +175,8 @@ tests/test_intelligence_answer_builder.py
 docs/PHASE21B_CHAT_ANSWER_BUILDER_IMPLEMENTATION_REPORT.md
 docs/CHECKPOINT_PHASE21_CHAT_ANSWER_BUILDER_REPORT.md
 docs/OUTSIDE_VALIDATION_PHASE21_CHAT_ANSWER_BUILDER_PROMPT.md
+docs/PHASE22_LLM_WRITER_AUDITOR_PLANNING_CONTRACT.md
+docs/PHASE22_LLM_WRITER_AUDITOR_PLANNING_REPORT.md
 ```
 
 ## Phase 15 Direction
@@ -957,6 +961,41 @@ static scans
 Phase 21 outside validation returned PASS.
 Phase 22 may proceed contract-first.
 Do not start LLM writer/auditor workflows, chat UI, persistence, simulator integration, analytics, or recommendations without a Phase 22 contract.
+```
+
+## Completed Phase 22 Planning Scope
+
+Phase 22 planning created:
+
+```text
+docs/PHASE22_LLM_WRITER_AUDITOR_PLANNING_CONTRACT.md
+docs/PHASE22_LLM_WRITER_AUDITOR_PLANNING_REPORT.md
+```
+
+Planning decision:
+
+```text
+Start with Phase 22A - LLM Writer/Auditor Boundary Contract.
+Do not start with real LLM calls, chat UI, cloud provider wiring, answer
+persistence, DB/repository readers, provider calls, source/provider payload
+reads, simulator execution, analytics, or recommendation generation.
+```
+
+Recommended Phase 22A contract files:
+
+```text
+docs/PHASE22A_LLM_WRITER_AUDITOR_CONTRACT.md
+docs/PHASE22A_LLM_WRITER_AUDITOR_CONTRACT_REPORT.md
+docs/NEXT_PHASE_CONTRACT.md
+docs/CODEX_CONTINUITY_HANDOFF.md
+```
+
+Future implementation files, after contract acceptance:
+
+```text
+codie/intelligence/llm_writer_auditor.py
+tests/test_intelligence_llm_writer_auditor.py
+docs/PHASE22B_LLM_WRITER_AUDITOR_IMPLEMENTATION_REPORT.md
 ```
 
 ## Completed Phase 17C Scope
