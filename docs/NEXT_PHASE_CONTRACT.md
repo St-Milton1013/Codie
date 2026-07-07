@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: Phase 22B - LLM Writer/Auditor Packet Implementation
+Recommended next task: Phase 22C - LLM Writer/Auditor Checkpoint
 
 ## Current Status
 
@@ -87,6 +87,8 @@ Phase 22 may proceed contract-first.
 Phase 22 LLM writer/auditor planning is complete.
 
 Phase 22A LLM writer/auditor boundary contract is complete.
+
+Phase 22B LLM writer/auditor packet implementation is complete.
 
 Roadmap patch logged:
 
@@ -181,6 +183,9 @@ docs/PHASE22_LLM_WRITER_AUDITOR_PLANNING_CONTRACT.md
 docs/PHASE22_LLM_WRITER_AUDITOR_PLANNING_REPORT.md
 docs/PHASE22A_LLM_WRITER_AUDITOR_CONTRACT.md
 docs/PHASE22A_LLM_WRITER_AUDITOR_CONTRACT_REPORT.md
+docs/PHASE22B_LLM_WRITER_AUDITOR_IMPLEMENTATION_REPORT.md
+codie/intelligence/llm_writer_auditor.py
+tests/test_intelligence_llm_writer_auditor.py
 ```
 
 ## Phase 15 Direction
@@ -1053,6 +1058,46 @@ do not calculate analytics
 do not generate recommendations
 do not write files
 do not export private raw_input
+```
+
+## Completed Phase 22B Scope
+
+Phase 22B created:
+
+```text
+codie/intelligence/llm_writer_auditor.py
+tests/test_intelligence_llm_writer_auditor.py
+docs/PHASE22B_LLM_WRITER_AUDITOR_IMPLEMENTATION_REPORT.md
+```
+
+Phase 22B modified:
+
+```text
+codie/intelligence/__init__.py
+```
+
+Implemented public interface:
+
+```text
+LLMWriterAuditorBuildError
+LLMWriterInput
+LLMWriterDraft
+LLMAuditFinding
+LLMAuditResult
+LLMWriterAuditorOptions
+build_writer_input_from_answer(...)
+validate_writer_draft(...)
+audit_writer_draft(...)
+llm_writer_input_to_dict(...)
+llm_writer_draft_to_dict(...)
+llm_audit_result_to_dict(...)
+```
+
+Next checkpoint should create:
+
+```text
+docs/CHECKPOINT_PHASE22_LLM_WRITER_AUDITOR_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE22_LLM_WRITER_AUDITOR_PROMPT.md
 ```
 
 ## Completed Phase 17C Scope
