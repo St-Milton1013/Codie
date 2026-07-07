@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: Phase 23B - Chat/Intelligence UI/API Boundary Packet Implementation
+Recommended next task: Phase 23C - Chat/Intelligence UI/API Boundary Checkpoint
 
 ## Current Status
 
@@ -97,6 +97,8 @@ Phase 22 outside validation is accepted.
 Phase 23 may proceed contract-first.
 
 Phase 23A Chat/Intelligence UI/API Boundary Contract is complete.
+
+Phase 23B Chat/Intelligence UI/API Boundary Packet Implementation is complete.
 
 Roadmap patch logged:
 
@@ -1142,6 +1144,9 @@ Phase 23A created:
 ```text
 docs/PHASE23A_CHAT_INTELLIGENCE_UI_API_BOUNDARY_CONTRACT.md
 docs/PHASE23A_CHAT_INTELLIGENCE_UI_API_BOUNDARY_CONTRACT_REPORT.md
+docs/PHASE23B_CHAT_INTELLIGENCE_UI_API_BOUNDARY_IMPLEMENTATION_REPORT.md
+codie/intelligence/ui_api_boundary.py
+tests/test_intelligence_ui_api_boundary.py
 ```
 
 Future implementation files:
@@ -1186,6 +1191,45 @@ do not calculate analytics
 do not generate recommendations
 do not write files
 do not export private raw_input
+```
+
+## Completed Phase 23B Scope
+
+Phase 23B created:
+
+```text
+codie/intelligence/ui_api_boundary.py
+tests/test_intelligence_ui_api_boundary.py
+docs/PHASE23B_CHAT_INTELLIGENCE_UI_API_BOUNDARY_IMPLEMENTATION_REPORT.md
+```
+
+Phase 23B modified:
+
+```text
+codie/intelligence/__init__.py
+```
+
+Implemented public interface:
+
+```text
+ChatUIBoundaryBuildError
+ChatUIRequestPacket
+ChatUIResponsePacket
+ChatUIErrorPacket
+ChatUIBoundaryOptions
+build_chat_ui_request_packet(...)
+build_chat_ui_response_packet(...)
+build_chat_ui_error_packet(...)
+chat_ui_request_packet_to_dict(...)
+chat_ui_response_packet_to_dict(...)
+chat_ui_error_packet_to_dict(...)
+```
+
+Next checkpoint should create:
+
+```text
+docs/CHECKPOINT_PHASE23_CHAT_INTELLIGENCE_UI_API_BOUNDARY_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE23_CHAT_INTELLIGENCE_UI_API_BOUNDARY_PROMPT.md
 ```
 
 ## Completed Phase 17C Scope
