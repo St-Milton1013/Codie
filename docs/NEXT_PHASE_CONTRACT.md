@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: Phase 21A - Chat Answer Builder Contract
+Recommended next task: Phase 21B - Chat Answer Builder Implementation
 
 ## Current Status
 
@@ -73,6 +73,8 @@ Phase 20 outside validation is accepted.
 Phase 21 may proceed contract-first.
 
 Phase 21 chat answer builder planning is complete.
+
+Phase 21A chat answer builder contract is complete.
 
 Roadmap patch logged:
 
@@ -156,6 +158,8 @@ docs/CHECKPOINT_PHASE20_CHAT_QUERY_PLANNER_REPORT.md
 docs/OUTSIDE_VALIDATION_PHASE20_CHAT_QUERY_PLANNER_PROMPT.md
 docs/PHASE21_CHAT_ANSWER_BUILDER_PLANNING_CONTRACT.md
 docs/PHASE21_CHAT_ANSWER_BUILDER_PLANNING_REPORT.md
+docs/PHASE21A_CHAT_ANSWER_BUILDER_CONTRACT.md
+docs/PHASE21A_CHAT_ANSWER_BUILDER_CONTRACT_REPORT.md
 ```
 
 ## Phase 15 Direction
@@ -822,6 +826,56 @@ Future implementation files, after contract acceptance:
 codie/intelligence/answer_builder.py
 tests/test_intelligence_answer_builder.py
 docs/PHASE21B_CHAT_ANSWER_BUILDER_IMPLEMENTATION_REPORT.md
+```
+
+## Completed Phase 21A Scope
+
+Phase 21A created:
+
+```text
+docs/PHASE21A_CHAT_ANSWER_BUILDER_CONTRACT.md
+docs/PHASE21A_CHAT_ANSWER_BUILDER_CONTRACT_REPORT.md
+```
+
+Future implementation files:
+
+```text
+codie/intelligence/answer_builder.py
+tests/test_intelligence_answer_builder.py
+docs/PHASE21B_CHAT_ANSWER_BUILDER_IMPLEMENTATION_REPORT.md
+```
+
+Future public interface:
+
+```text
+ChatAnswerBuildError
+ChatAnswerInput
+ChatAnswerSection
+ChatAnswerCitation
+ChatAnswerCaveat
+ChatAnswerMissingEvidence
+ChatAnswer
+ChatAnswerBuilderOptions
+build_chat_answer(...)
+chat_answer_to_dict(...)
+```
+
+## Do Not Do In Phase 21B
+
+```text
+do not add schema
+do not add DB reads or writes
+do not add repository imports
+do not call providers
+do not read source/provider payloads directly
+do not add UI
+do not call LLMs
+do not run simulator logic
+do not implement card behavior
+do not calculate analytics
+do not generate recommendations
+do not write files
+do not export private raw_input
 ```
 
 ## Completed Phase 17C Scope

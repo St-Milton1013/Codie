@@ -20,7 +20,7 @@ Latest pushed commit before local Phase 20 pass marker: bcae8cc Patch Phase 20 v
 Latest full-suite result:
 
 ```text
-Ran 633 tests in 3.188s
+Ran 633 tests in 3.230s
 
 OK (skipped=1)
 ```
@@ -145,6 +145,7 @@ Phase 18 Source Conflict Report: PASS
 Phase 19 Unsupported Relevant Card Queue: PASS
 Phase 20 Chat Query Planner: PASS
 Phase 21 Chat Answer Builder Planning: PASS
+Phase 21A Chat Answer Builder Contract: PASS
 ```
 
 ## Recent Commits
@@ -294,13 +295,13 @@ Do not mutate raw simulator traces when reviews are created.
 Preferred next move:
 
 ```text
-Create Phase 21A Chat Answer Builder contract
+Implement Phase 21B Chat Answer Builder
 ```
 
 Alternate next safe option:
 
 ```text
-Review Phase 21 planning docs before writing the Phase 21A contract
+Review Phase 21A contract before implementation
 ```
 
 Avoid starting:
@@ -1035,6 +1036,19 @@ answer persistence, DB/repository readers, provider calls, source/provider
 payload reads, simulator execution, card behavior implementation, analytics
 calculation, recommendation generation, and private raw_input export.
 
+Latest Phase 21A packet:
+
+```text
+docs/PHASE21A_CHAT_ANSWER_BUILDER_CONTRACT.md
+docs/PHASE21A_CHAT_ANSWER_BUILDER_CONTRACT_REPORT.md
+```
+
+Phase 21A defines the pure contract for converting a `ChatQueryPlan` plus
+already-sanitized evidence inputs into a structured cited `ChatAnswer`. It
+adds no implementation code, schema, DB access, provider access, LLM calls,
+UI, simulator execution, card behavior implementation, analytics calculation,
+recommendation generation, file writing, or private raw_input export.
+
 Latest roadmap patch logged:
 
 ```text
@@ -1153,7 +1167,8 @@ Phase 13 simulator contracts or a new UI/API contract is explicitly selected.
 - Phase 20C Chat Query Planner Checkpoint is complete.
 - Phase 20 outside validation is accepted.
 - Phase 21 Chat Answer Builder Planning is complete.
-- Next packet should be Phase 21A Chat Answer Builder Contract.
+- Phase 21A Chat Answer Builder Contract is complete.
+- Next packet should be Phase 21B Chat Answer Builder Implementation.
 - cEDHData public asset metadata and local reference hashes are recorded in docs/CEDHDATA_SIMULATOR_REFERENCE_CAPTURE_MANIFEST.md.
 - Final recommendation output remains intentionally separate.
 
