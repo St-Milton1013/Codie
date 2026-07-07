@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: Outside validation for Phase 20 Chat Query Planner
+Recommended next task: Phase 21 planning
 
 ## Current Status
 
@@ -68,7 +68,9 @@ Phase 20B chat query planner implementation is complete.
 
 Phase 20C chat query planner checkpoint is complete.
 
-Phase 21 is blocked until Phase 20 outside validation returns PASS or PASS WITH REVIEW NOTES.
+Phase 20 outside validation is accepted.
+
+Phase 21 may proceed contract-first.
 
 Roadmap patch logged:
 
@@ -778,8 +780,9 @@ static scans
 ## Phase 21 Gate
 
 ```text
-Do not start Phase 21 until Phase 20 outside validation returns PASS or PASS WITH REVIEW NOTES.
-Do not start answer generation, chat UI, LLM workflows, persistence, simulator integration, or recommendations from this packet.
+Phase 20 outside validation returned PASS.
+Phase 21 may proceed contract-first.
+Do not start answer generation, chat UI, LLM workflows, persistence, simulator integration, or recommendations without a Phase 21 contract.
 ```
 
 ## Completed Phase 17C Scope

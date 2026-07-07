@@ -12,7 +12,7 @@ Use the repository and this handoff as the source of truth. Do not rely on prior
 GitHub: https://github.com/St-Milton1013/Codie
 Local path: C:\Users\Main\Documents\Codex\2026-06-22\next-phase-contract-recommended-next-task
 Branch: main
-Latest pushed commit before local Phase 20 checkpoint work: 68c463e Implement Phase 20 query planner
+Latest pushed commit before local Phase 20 pass marker: bcae8cc Patch Phase 20 validation coverage
 ```
 
 ## Current Validation Baseline
@@ -143,7 +143,7 @@ Phase 16 Evidence Graph: PASS
 Phase 17 Evidence Graph Input Assembly: PASS
 Phase 18 Source Conflict Report: PASS
 Phase 19 Unsupported Relevant Card Queue: PASS
-Phase 20 Chat Query Planner: READY FOR OUTSIDE VALIDATION
+Phase 20 Chat Query Planner: PASS
 ```
 
 ## Recent Commits
@@ -293,13 +293,13 @@ Do not mutate raw simulator traces when reviews are created.
 Preferred next move:
 
 ```text
-Send Phase 20 Chat Query Planner packet for outside validation
+Create Phase 21 planning contract
 ```
 
 Alternate next safe option:
 
 ```text
-Wait for outside validation response and prepare Phase 21 planning options only
+Prepare Phase 21 planning options only
 ```
 
 Avoid starting:
@@ -1019,8 +1019,7 @@ docs/OUTSIDE_VALIDATION_PHASE20_CHAT_QUERY_PLANNER_PROMPT.md
 ```
 
 Phase 20C checkpoints the chat query planner track and creates the outside
-validation prompt. It is an internal checkpoint, not external proof. Phase 21
-is blocked until outside validation returns PASS or PASS WITH REVIEW NOTES.
+validation prompt. Phase 20 outside validation returned PASS.
 
 Latest roadmap patch logged:
 
@@ -1138,7 +1137,8 @@ Phase 13 simulator contracts or a new UI/API contract is explicitly selected.
 - Phase 20A Chat Query Planner Contract is complete.
 - Phase 20B Chat Query Planner Implementation is complete.
 - Phase 20C Chat Query Planner Checkpoint is complete.
-- Next packet should be outside validation for Phase 20 Chat Query Planner.
+- Phase 20 outside validation is accepted.
+- Next packet should be Phase 21 planning.
 - cEDHData public asset metadata and local reference hashes are recorded in docs/CEDHDATA_SIMULATOR_REFERENCE_CAPTURE_MANIFEST.md.
 - Final recommendation output remains intentionally separate.
 
