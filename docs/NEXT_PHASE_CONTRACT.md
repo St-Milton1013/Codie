@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: Phase 23C - Chat/Intelligence UI/API Boundary Checkpoint
+Recommended next task: Phase 23 outside validation
 
 ## Current Status
 
@@ -99,6 +99,10 @@ Phase 23 may proceed contract-first.
 Phase 23A Chat/Intelligence UI/API Boundary Contract is complete.
 
 Phase 23B Chat/Intelligence UI/API Boundary Packet Implementation is complete.
+
+Phase 23C Chat/Intelligence UI/API Boundary checkpoint packet is complete.
+
+Phase 24 is blocked until Phase 23 outside validation returns PASS or PASS WITH REVIEW NOTES.
 
 Roadmap patch logged:
 
@@ -1145,6 +1149,8 @@ Phase 23A created:
 docs/PHASE23A_CHAT_INTELLIGENCE_UI_API_BOUNDARY_CONTRACT.md
 docs/PHASE23A_CHAT_INTELLIGENCE_UI_API_BOUNDARY_CONTRACT_REPORT.md
 docs/PHASE23B_CHAT_INTELLIGENCE_UI_API_BOUNDARY_IMPLEMENTATION_REPORT.md
+docs/CHECKPOINT_PHASE23_CHAT_INTELLIGENCE_UI_API_BOUNDARY_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE23_CHAT_INTELLIGENCE_UI_API_BOUNDARY_PROMPT.md
 codie/intelligence/ui_api_boundary.py
 tests/test_intelligence_ui_api_boundary.py
 ```
@@ -1225,11 +1231,35 @@ chat_ui_response_packet_to_dict(...)
 chat_ui_error_packet_to_dict(...)
 ```
 
-Next checkpoint should create:
+Phase 23C created:
 
 ```text
 docs/CHECKPOINT_PHASE23_CHAT_INTELLIGENCE_UI_API_BOUNDARY_REPORT.md
 docs/OUTSIDE_VALIDATION_PHASE23_CHAT_INTELLIGENCE_UI_API_BOUNDARY_PROMPT.md
+```
+
+## Completed Phase 23C Scope
+
+Phase 23C created:
+
+```text
+docs/CHECKPOINT_PHASE23_CHAT_INTELLIGENCE_UI_API_BOUNDARY_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE23_CHAT_INTELLIGENCE_UI_API_BOUNDARY_PROMPT.md
+```
+
+Phase 23 outside validation packet:
+
+```text
+docs/CHECKPOINT_PHASE23_CHAT_INTELLIGENCE_UI_API_BOUNDARY_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE23_CHAT_INTELLIGENCE_UI_API_BOUNDARY_PROMPT.md
+docs/PHASE23A_CHAT_INTELLIGENCE_UI_API_BOUNDARY_CONTRACT.md
+docs/PHASE23B_CHAT_INTELLIGENCE_UI_API_BOUNDARY_IMPLEMENTATION_REPORT.md
+codie/intelligence/ui_api_boundary.py
+tests/test_intelligence_ui_api_boundary.py
+codie/intelligence/query_planner.py
+codie/intelligence/answer_builder.py
+codie/intelligence/llm_writer_auditor.py
+codie/intelligence/__init__.py
 ```
 
 ## Completed Phase 17C Scope
