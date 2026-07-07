@@ -12,7 +12,7 @@ Use the repository and this handoff as the source of truth. Do not rely on prior
 GitHub: https://github.com/St-Milton1013/Codie
 Local path: C:\Users\Main\Documents\Codex\2026-06-22\next-phase-contract-recommended-next-task
 Branch: main
-Latest pushed commit before local Phase 21B implementation work: 5fe09a2 Add Phase 21A answer builder contract
+Latest pushed commit before local Phase 21C checkpoint work: fa5b9e2 Implement Phase 21B answer builder
 ```
 
 ## Current Validation Baseline
@@ -20,7 +20,7 @@ Latest pushed commit before local Phase 21B implementation work: 5fe09a2 Add Pha
 Latest full-suite result:
 
 ```text
-Ran 651 tests in 3.192s
+Ran 651 tests in 3.232s
 
 OK (skipped=1)
 ```
@@ -147,6 +147,7 @@ Phase 20 Chat Query Planner: PASS
 Phase 21 Chat Answer Builder Planning: PASS
 Phase 21A Chat Answer Builder Contract: PASS
 Phase 21B Chat Answer Builder Implementation: PASS
+Phase 21 Chat Answer Builder Checkpoint: READY FOR OUTSIDE VALIDATION
 ```
 
 ## Recent Commits
@@ -296,13 +297,13 @@ Do not mutate raw simulator traces when reviews are created.
 Preferred next move:
 
 ```text
-Create Phase 21C Chat Answer Builder checkpoint
+Send Phase 21 Chat Answer Builder packet for outside validation
 ```
 
 Alternate next safe option:
 
 ```text
-Review Phase 21B implementation before checkpointing
+Wait for outside validation response and prepare Phase 22 planning options only
 ```
 
 Avoid starting:
@@ -1064,6 +1065,17 @@ source/provider reads, LLM calls, UI, simulator execution, card behavior
 implementation, analytics calculation, recommendation generation, file
 writing, or private raw_input export.
 
+Latest Phase 21 checkpoint packet:
+
+```text
+docs/CHECKPOINT_PHASE21_CHAT_ANSWER_BUILDER_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE21_CHAT_ANSWER_BUILDER_PROMPT.md
+```
+
+Phase 21C checkpoints the chat answer builder track and creates the outside
+validation prompt. It is an internal checkpoint, not external proof. Phase 22
+is blocked until outside validation returns PASS or PASS WITH REVIEW NOTES.
+
 Latest roadmap patch logged:
 
 ```text
@@ -1184,7 +1196,8 @@ Phase 13 simulator contracts or a new UI/API contract is explicitly selected.
 - Phase 21 Chat Answer Builder Planning is complete.
 - Phase 21A Chat Answer Builder Contract is complete.
 - Phase 21B Chat Answer Builder Implementation is complete.
-- Next packet should be Phase 21C Chat Answer Builder Checkpoint.
+- Phase 21C Chat Answer Builder Checkpoint is complete.
+- Next packet should be outside validation for Phase 21 Chat Answer Builder.
 - cEDHData public asset metadata and local reference hashes are recorded in docs/CEDHDATA_SIMULATOR_REFERENCE_CAPTURE_MANIFEST.md.
 - Final recommendation output remains intentionally separate.
 

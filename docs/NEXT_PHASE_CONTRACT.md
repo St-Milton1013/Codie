@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: Phase 21C - Chat Answer Builder Checkpoint
+Recommended next task: Outside validation for Phase 21 Chat Answer Builder
 
 ## Current Status
 
@@ -77,6 +77,10 @@ Phase 21 chat answer builder planning is complete.
 Phase 21A chat answer builder contract is complete.
 
 Phase 21B chat answer builder implementation is complete.
+
+Phase 21C chat answer builder checkpoint is complete.
+
+Phase 22 is blocked until Phase 21 outside validation returns PASS or PASS WITH REVIEW NOTES.
 
 Roadmap patch logged:
 
@@ -165,6 +169,8 @@ docs/PHASE21A_CHAT_ANSWER_BUILDER_CONTRACT_REPORT.md
 codie/intelligence/answer_builder.py
 tests/test_intelligence_answer_builder.py
 docs/PHASE21B_CHAT_ANSWER_BUILDER_IMPLEMENTATION_REPORT.md
+docs/CHECKPOINT_PHASE21_CHAT_ANSWER_BUILDER_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE21_CHAT_ANSWER_BUILDER_PROMPT.md
 ```
 
 ## Phase 15 Direction
@@ -911,16 +917,16 @@ privacy-aware
 evidence-first
 ```
 
-## Next Checkpoint Scope
+## Completed Phase 21C Scope
 
-Phase 21C should create:
+Phase 21C created:
 
 ```text
 docs/CHECKPOINT_PHASE21_CHAT_ANSWER_BUILDER_REPORT.md
 docs/OUTSIDE_VALIDATION_PHASE21_CHAT_ANSWER_BUILDER_PROMPT.md
 ```
 
-The checkpoint should cover:
+The checkpoint covers:
 
 ```text
 Phase 21 planning
@@ -941,6 +947,13 @@ no simulator execution
 no recommendation generation
 full test output
 static scans
+```
+
+## Phase 22 Gate
+
+```text
+Do not start Phase 22 until Phase 21 outside validation returns PASS or PASS WITH REVIEW NOTES.
+Do not start LLM writer/auditor workflows, chat UI, persistence, simulator integration, analytics, or recommendations from this packet.
 ```
 
 ## Completed Phase 17C Scope

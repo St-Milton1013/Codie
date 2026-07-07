@@ -1,24 +1,45 @@
-# Phase 21B - Chat Answer Builder Implementation Report
+# Checkpoint - Phase 21 Chat Answer Builder
 
 ## Status
 
 ```text
-Phase 21B Chat Answer Builder Implementation: COMPLETE
-Recommended next task: Phase 21C - Chat Answer Builder Checkpoint (completed by checkpoint packet)
+Phase 21 Chat Answer Builder Internal Checkpoint: PASS
+Status: Ready for outside validation before Phase 22
 ```
 
-## Files Created Or Modified
+This is an internal checkpoint, not external proof. Phase 22 should not start
+until outside validation returns PASS or PASS WITH REVIEW NOTES.
+
+## Scope Covered
+
+Phase 21 includes:
 
 ```text
+Phase 21 planning
+Phase 21A Chat Answer Builder contract
+Phase 21B Chat Answer Builder implementation
+```
+
+Files created or modified:
+
+```text
+docs/PHASE21_CHAT_ANSWER_BUILDER_PLANNING_CONTRACT.md
+docs/PHASE21_CHAT_ANSWER_BUILDER_PLANNING_REPORT.md
+docs/PHASE21A_CHAT_ANSWER_BUILDER_CONTRACT.md
+docs/PHASE21A_CHAT_ANSWER_BUILDER_CONTRACT_REPORT.md
 codie/intelligence/answer_builder.py
-codie/intelligence/__init__.py
 tests/test_intelligence_answer_builder.py
 docs/PHASE21B_CHAT_ANSWER_BUILDER_IMPLEMENTATION_REPORT.md
+docs/CHECKPOINT_PHASE21_CHAT_ANSWER_BUILDER_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE21_CHAT_ANSWER_BUILDER_PROMPT.md
+codie/intelligence/__init__.py
 docs/NEXT_PHASE_CONTRACT.md
 docs/CODEX_CONTINUITY_HANDOFF.md
 ```
 
-## Public Interface Implemented
+## Implementation Summary
+
+Phase 21B implements a pure deterministic chat answer builder:
 
 ```text
 ChatAnswerBuildError
@@ -33,18 +54,13 @@ build_chat_answer(...)
 chat_answer_to_dict(...)
 ```
 
-## Implementation Summary
+The builder maps accepted `ChatQueryPlan` values plus already-sanitized
+evidence inputs into structured cited `ChatAnswer` values. It does not retrieve
+evidence itself.
 
-The implementation is a pure in-memory answer builder:
+## Behavior Verified
 
-```text
-ChatQueryPlan + already-sanitized evidence inputs -> structured cited ChatAnswer
-```
-
-It consumes accepted query plans and already-built sanitized evidence objects.
-It does not retrieve evidence itself.
-
-## Behavior Implemented
+Tests verify:
 
 ```text
 deck_summary plans build cited answer sections
@@ -65,11 +81,14 @@ private metadata keys fail cleanly
 nested private metadata keys fail cleanly
 forbidden strategic language fails cleanly
 answer serialization is deterministic
+module has no forbidden imports
+module has no raw SQL
+module has no file-writing behavior
 ```
 
 ## Boundary Summary
 
-Phase 21B remains:
+Phase 21 remains:
 
 ```text
 pure
@@ -138,20 +157,31 @@ schema/repository drift scan: no matches
 
 ```text
 ChatAnswer is a structured answer object, not an LLM message.
-The builder does not query SQLite.
+The builder does not call an LLM.
+The builder does not retrieve data from SQLite.
 The builder does not call providers.
 The builder does not run simulator logic.
 The builder does not generate recommendations.
 The builder does not export private deck text.
 ```
 
-## Next Step
+## Required Outside Validation
 
-Proceed to:
+Send:
 
 ```text
-Phase 21C - Chat Answer Builder Checkpoint
+docs/CHECKPOINT_PHASE21_CHAT_ANSWER_BUILDER_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE21_CHAT_ANSWER_BUILDER_PROMPT.md
+docs/PHASE21_CHAT_ANSWER_BUILDER_PLANNING_CONTRACT.md
+docs/PHASE21A_CHAT_ANSWER_BUILDER_CONTRACT.md
+docs/PHASE21B_CHAT_ANSWER_BUILDER_IMPLEMENTATION_REPORT.md
+codie/intelligence/answer_builder.py
+tests/test_intelligence_answer_builder.py
+codie/intelligence/__init__.py
 ```
 
-The checkpoint should cover Phase 21 planning, Phase 21A contract, Phase 21B
-implementation, boundary scans, test output, and outside validation prompt.
+## Phase 22 Gate
+
+```text
+Phase 22 is blocked until outside validation returns PASS or PASS WITH REVIEW NOTES.
+```
