@@ -995,6 +995,7 @@ Latest roadmap patch logged:
 ```text
 docs/ROADMAP_PATCH_MOXFIELD_FREQUENCY_POOL_BUILDER.md
 docs/ROADMAP_PATCH_TAG_GRAPH_LAB.md
+docs/PATCH_EVIDENCE_INTELLIGENCE_AND_LOCAL_REPORTS.md
 ```
 
 The Moxfield Frequency Pool Builder is roadmap-only. It does not authorize
@@ -1004,6 +1005,13 @@ recommendation output.
 The Tag Graph Lab is roadmap-only. It does not authorize schema, UI, Scryfall
 Tagger import, chart export, LLM summaries, persistence, or recommendation
 output without a future contract.
+
+The Evidence Intelligence / Frequency Pools / Local Reports patch is
+roadmap-only. It removes Stream Deck Game Tracker from Codie V1 scope and logs
+reference repositories plus future specs for frequency pools, commander
+staples, co-occurrence metrics, evidence graphs, Codie chat, and LocalSend
+delivery. It does not authorize schema, provider, UI, vector search, LocalSend,
+or recommendation implementation without future contracts.
 
 Next UI implementation packet:
 
