@@ -20,7 +20,7 @@ Latest pushed commit before local Phase 20 pass marker: bcae8cc Patch Phase 20 v
 Latest full-suite result:
 
 ```text
-Ran 633 tests in 3.293s
+Ran 633 tests in 3.188s
 
 OK (skipped=1)
 ```
@@ -144,6 +144,7 @@ Phase 17 Evidence Graph Input Assembly: PASS
 Phase 18 Source Conflict Report: PASS
 Phase 19 Unsupported Relevant Card Queue: PASS
 Phase 20 Chat Query Planner: PASS
+Phase 21 Chat Answer Builder Planning: PASS
 ```
 
 ## Recent Commits
@@ -293,13 +294,13 @@ Do not mutate raw simulator traces when reviews are created.
 Preferred next move:
 
 ```text
-Create Phase 21 planning contract
+Create Phase 21A Chat Answer Builder contract
 ```
 
 Alternate next safe option:
 
 ```text
-Prepare Phase 21 planning options only
+Review Phase 21 planning docs before writing the Phase 21A contract
 ```
 
 Avoid starting:
@@ -1021,6 +1022,19 @@ docs/OUTSIDE_VALIDATION_PHASE20_CHAT_QUERY_PLANNER_PROMPT.md
 Phase 20C checkpoints the chat query planner track and creates the outside
 validation prompt. Phase 20 outside validation returned PASS.
 
+Latest Phase 21 planning packet:
+
+```text
+docs/PHASE21_CHAT_ANSWER_BUILDER_PLANNING_CONTRACT.md
+docs/PHASE21_CHAT_ANSWER_BUILDER_PLANNING_REPORT.md
+```
+
+Phase 21 planning selects Chat Answer Builder as the next dependency-safe
+Interactive Intelligence layer. It explicitly blocks chat UI, LLM calls,
+answer persistence, DB/repository readers, provider calls, source/provider
+payload reads, simulator execution, card behavior implementation, analytics
+calculation, recommendation generation, and private raw_input export.
+
 Latest roadmap patch logged:
 
 ```text
@@ -1138,7 +1152,8 @@ Phase 13 simulator contracts or a new UI/API contract is explicitly selected.
 - Phase 20B Chat Query Planner Implementation is complete.
 - Phase 20C Chat Query Planner Checkpoint is complete.
 - Phase 20 outside validation is accepted.
-- Next packet should be Phase 21 planning.
+- Phase 21 Chat Answer Builder Planning is complete.
+- Next packet should be Phase 21A Chat Answer Builder Contract.
 - cEDHData public asset metadata and local reference hashes are recorded in docs/CEDHDATA_SIMULATOR_REFERENCE_CAPTURE_MANIFEST.md.
 - Final recommendation output remains intentionally separate.
 

@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: Phase 21 planning
+Recommended next task: Phase 21A - Chat Answer Builder Contract
 
 ## Current Status
 
@@ -71,6 +71,8 @@ Phase 20C chat query planner checkpoint is complete.
 Phase 20 outside validation is accepted.
 
 Phase 21 may proceed contract-first.
+
+Phase 21 chat answer builder planning is complete.
 
 Roadmap patch logged:
 
@@ -152,6 +154,8 @@ tests/test_intelligence_query_planner.py
 docs/PHASE20B_CHAT_QUERY_PLANNER_IMPLEMENTATION_REPORT.md
 docs/CHECKPOINT_PHASE20_CHAT_QUERY_PLANNER_REPORT.md
 docs/OUTSIDE_VALIDATION_PHASE20_CHAT_QUERY_PLANNER_PROMPT.md
+docs/PHASE21_CHAT_ANSWER_BUILDER_PLANNING_CONTRACT.md
+docs/PHASE21_CHAT_ANSWER_BUILDER_PLANNING_REPORT.md
 ```
 
 ## Phase 15 Direction
@@ -783,6 +787,41 @@ static scans
 Phase 20 outside validation returned PASS.
 Phase 21 may proceed contract-first.
 Do not start answer generation, chat UI, LLM workflows, persistence, simulator integration, or recommendations without a Phase 21 contract.
+```
+
+## Completed Phase 21 Planning Scope
+
+Phase 21 planning created:
+
+```text
+docs/PHASE21_CHAT_ANSWER_BUILDER_PLANNING_CONTRACT.md
+docs/PHASE21_CHAT_ANSWER_BUILDER_PLANNING_REPORT.md
+```
+
+Planning decision:
+
+```text
+Start with Phase 21A - Chat Answer Builder Contract.
+Do not start with chat UI, LLM calls, answer persistence, DB/repository readers,
+provider calls, source/provider payload reads, simulator execution, analytics,
+or recommendation generation.
+```
+
+Recommended Phase 21A contract files:
+
+```text
+docs/PHASE21A_CHAT_ANSWER_BUILDER_CONTRACT.md
+docs/PHASE21A_CHAT_ANSWER_BUILDER_CONTRACT_REPORT.md
+docs/NEXT_PHASE_CONTRACT.md
+docs/CODEX_CONTINUITY_HANDOFF.md
+```
+
+Future implementation files, after contract acceptance:
+
+```text
+codie/intelligence/answer_builder.py
+tests/test_intelligence_answer_builder.py
+docs/PHASE21B_CHAT_ANSWER_BUILDER_IMPLEMENTATION_REPORT.md
 ```
 
 ## Completed Phase 17C Scope
