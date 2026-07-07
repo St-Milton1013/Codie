@@ -12,7 +12,7 @@ Use the repository and this handoff as the source of truth. Do not rely on prior
 GitHub: https://github.com/St-Milton1013/Codie
 Local path: C:\Users\Main\Documents\Codex\2026-06-22\next-phase-contract-recommended-next-task
 Branch: main
-Latest pushed commit before local Phase 13 checkpoint work: 56ac7f9 Add Phase 13Z simulation review exports
+Latest pushed commit before local Phase 20 checkpoint work: 68c463e Implement Phase 20 query planner
 ```
 
 ## Current Validation Baseline
@@ -20,15 +20,15 @@ Latest pushed commit before local Phase 13 checkpoint work: 56ac7f9 Add Phase 13
 Latest full-suite result:
 
 ```text
-Ran 611 tests in 4.441s
+Ran 631 tests in 3.223s
 
 OK (skipped=1)
 ```
 
-Latest focused Phase 19B unsupported relevant card queue result:
+Latest focused Phase 20B chat query planner result:
 
 ```text
-Ran 24 tests in 0.013s
+Ran 20 tests in 0.002s
 
 OK
 ```
@@ -44,11 +44,11 @@ passed.
 Latest relevant boundary scans:
 
 ```text
-rg -n "codie\.db|codie\.providers|codie\.analytics|codie\.recommendations\.generation|codie\.recommendations\.persistence|codie\.ingestion|codie\.cards|codie\.probability_engine|codie\.canonical|requests|httpx|sqlite3" codie\intelligence\unsupported_cards.py tests\test_intelligence_unsupported_cards.py
-rg -n "SELECT |INSERT |UPDATE |DELETE |execute\(|executescript\(" codie\intelligence\unsupported_cards.py tests\test_intelligence_unsupported_cards.py
-rg -n "open\(|write_text\(|write_bytes\(|Path\(|mkdir\(|touch\(|unlink\(" codie\intelligence\unsupported_cards.py
-rg -n "source_events|source_decks|source_deck_cards|provider_objects" codie\intelligence\unsupported_cards.py tests\test_intelligence_unsupported_cards.py
-rg -n "should play|should be played|should be cut|must include|correct card|breaks the format|secretly optimal|cut this|strict upgrade|auto-include|recommended cut|recommended include" codie\intelligence\unsupported_cards.py tests\test_intelligence_unsupported_cards.py docs\PHASE19B_UNSUPPORTED_RELEVANT_CARD_QUEUE_IMPLEMENTATION_REPORT.md docs\CHECKPOINT_PHASE19_UNSUPPORTED_CARD_QUEUE_REPORT.md
+rg -n "codie\.db|codie\.providers|codie\.analytics|codie\.recommendations\.generation|codie\.recommendations\.persistence|codie\.ingestion|codie\.cards|codie\.probability_engine|codie\.canonical|requests|httpx|sqlite3" codie\intelligence\query_planner.py tests\test_intelligence_query_planner.py
+rg -n "SELECT |INSERT |UPDATE |DELETE |execute\(|executescript\(" codie\intelligence\query_planner.py tests\test_intelligence_query_planner.py
+rg -n "open\(|write_text\(|write_bytes\(|Path\(|mkdir\(|touch\(|unlink\(" codie\intelligence\query_planner.py
+rg -n "source_events|source_decks|source_deck_cards|provider_objects" codie\intelligence\query_planner.py tests\test_intelligence_query_planner.py
+rg -n "should play|should be played|should be cut|must include|correct card|breaks the format|secretly optimal|cut this|strict upgrade|auto-include|recommended cut|recommended include" codie\intelligence\query_planner.py tests\test_intelligence_query_planner.py docs\PHASE20B_CHAT_QUERY_PLANNER_IMPLEMENTATION_REPORT.md
 ```
 
 returned:
@@ -136,7 +136,14 @@ Phase 13W Reviewed Simulator Accuracy Contract: PASS
 Phase 13X Reviewed Simulator Accuracy Implementation: PASS
 Phase 13Y Simulation Review Export Contract: PASS
 Phase 13Z Simulation Review Export Implementation: PASS
-Phase 13 Simulator Track Checkpoint: READY FOR OUTSIDE VALIDATION
+Phase 13 Simulator Track Checkpoint: PASS WITH REVIEW NOTES
+Phase 14 Simulator Review Export Writer: PASS
+Phase 15 Deck Memory Track: PASS
+Phase 16 Evidence Graph: PASS
+Phase 17 Evidence Graph Input Assembly: PASS
+Phase 18 Source Conflict Report: PASS
+Phase 19 Unsupported Relevant Card Queue: PASS
+Phase 20 Chat Query Planner: READY FOR OUTSIDE VALIDATION
 ```
 
 ## Recent Commits
@@ -286,13 +293,13 @@ Do not mutate raw simulator traces when reviews are created.
 Preferred next move:
 
 ```text
-Create Phase 20C Chat Query Planner checkpoint
+Send Phase 20 Chat Query Planner packet for outside validation
 ```
 
 Alternate next safe option:
 
 ```text
-Wait for outside validation response after Phase 20C checkpoint
+Wait for outside validation response and prepare Phase 21 planning options only
 ```
 
 Avoid starting:
@@ -1004,6 +1011,17 @@ source/provider reads, LLM calls, UI, answer generation, simulator execution,
 card behavior implementation, analytics calculation, recommendation
 generation, file writing, or private raw_input export.
 
+Latest Phase 20 checkpoint packet:
+
+```text
+docs/CHECKPOINT_PHASE20_CHAT_QUERY_PLANNER_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE20_CHAT_QUERY_PLANNER_PROMPT.md
+```
+
+Phase 20C checkpoints the chat query planner track and creates the outside
+validation prompt. It is an internal checkpoint, not external proof. Phase 21
+is blocked until outside validation returns PASS or PASS WITH REVIEW NOTES.
+
 Latest roadmap patch logged:
 
 ```text
@@ -1118,7 +1136,9 @@ Phase 13 simulator contracts or a new UI/API contract is explicitly selected.
 - Phase 19 outside validation is accepted.
 - Phase 20 Chat Query Planner Planning is complete.
 - Phase 20A Chat Query Planner Contract is complete.
-- Next packet should be Phase 20B Chat Query Planner Implementation.
+- Phase 20B Chat Query Planner Implementation is complete.
+- Phase 20C Chat Query Planner Checkpoint is complete.
+- Next packet should be outside validation for Phase 20 Chat Query Planner.
 - cEDHData public asset metadata and local reference hashes are recorded in docs/CEDHDATA_SIMULATOR_REFERENCE_CAPTURE_MANIFEST.md.
 - Final recommendation output remains intentionally separate.
 

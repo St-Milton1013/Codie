@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: Phase 20C - Chat Query Planner Checkpoint
+Recommended next task: Outside validation for Phase 20 Chat Query Planner
 
 ## Current Status
 
@@ -65,6 +65,10 @@ Phase 20 chat query planner planning is complete.
 Phase 20A chat query planner contract is complete.
 
 Phase 20B chat query planner implementation is complete.
+
+Phase 20C chat query planner checkpoint is complete.
+
+Phase 21 is blocked until Phase 20 outside validation returns PASS or PASS WITH REVIEW NOTES.
 
 Roadmap patch logged:
 
@@ -144,6 +148,8 @@ docs/PHASE20A_CHAT_QUERY_PLANNER_CONTRACT_REPORT.md
 codie/intelligence/query_planner.py
 tests/test_intelligence_query_planner.py
 docs/PHASE20B_CHAT_QUERY_PLANNER_IMPLEMENTATION_REPORT.md
+docs/CHECKPOINT_PHASE20_CHAT_QUERY_PLANNER_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE20_CHAT_QUERY_PLANNER_PROMPT.md
 ```
 
 ## Phase 15 Direction
@@ -739,16 +745,16 @@ privacy-aware
 evidence-first
 ```
 
-## Next Checkpoint Scope
+## Completed Phase 20C Scope
 
-Phase 20C should create:
+Phase 20C created:
 
 ```text
 docs/CHECKPOINT_PHASE20_CHAT_QUERY_PLANNER_REPORT.md
 docs/OUTSIDE_VALIDATION_PHASE20_CHAT_QUERY_PLANNER_PROMPT.md
 ```
 
-The checkpoint should cover:
+The checkpoint covers:
 
 ```text
 Phase 20 planning
@@ -767,6 +773,13 @@ no simulator execution
 no recommendation generation
 full test output
 static scans
+```
+
+## Phase 21 Gate
+
+```text
+Do not start Phase 21 until Phase 20 outside validation returns PASS or PASS WITH REVIEW NOTES.
+Do not start answer generation, chat UI, LLM workflows, persistence, simulator integration, or recommendations from this packet.
 ```
 
 ## Completed Phase 17C Scope
