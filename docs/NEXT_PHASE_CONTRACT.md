@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: Phase 21B - Chat Answer Builder Implementation
+Recommended next task: Phase 21C - Chat Answer Builder Checkpoint
 
 ## Current Status
 
@@ -75,6 +75,8 @@ Phase 21 may proceed contract-first.
 Phase 21 chat answer builder planning is complete.
 
 Phase 21A chat answer builder contract is complete.
+
+Phase 21B chat answer builder implementation is complete.
 
 Roadmap patch logged:
 
@@ -160,6 +162,9 @@ docs/PHASE21_CHAT_ANSWER_BUILDER_PLANNING_CONTRACT.md
 docs/PHASE21_CHAT_ANSWER_BUILDER_PLANNING_REPORT.md
 docs/PHASE21A_CHAT_ANSWER_BUILDER_CONTRACT.md
 docs/PHASE21A_CHAT_ANSWER_BUILDER_CONTRACT_REPORT.md
+codie/intelligence/answer_builder.py
+tests/test_intelligence_answer_builder.py
+docs/PHASE21B_CHAT_ANSWER_BUILDER_IMPLEMENTATION_REPORT.md
 ```
 
 ## Phase 15 Direction
@@ -876,6 +881,66 @@ do not calculate analytics
 do not generate recommendations
 do not write files
 do not export private raw_input
+```
+
+## Completed Phase 21B Scope
+
+Phase 21B implemented:
+
+```text
+ChatAnswerBuildError
+ChatAnswerInput
+ChatAnswerSection
+ChatAnswerCitation
+ChatAnswerCaveat
+ChatAnswerMissingEvidence
+ChatAnswer
+ChatAnswerBuilderOptions
+build_chat_answer(...)
+chat_answer_to_dict(...)
+```
+
+Phase 21B remains:
+
+```text
+pure
+in-memory
+sanitized-input only
+deterministic
+privacy-aware
+evidence-first
+```
+
+## Next Checkpoint Scope
+
+Phase 21C should create:
+
+```text
+docs/CHECKPOINT_PHASE21_CHAT_ANSWER_BUILDER_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE21_CHAT_ANSWER_BUILDER_PROMPT.md
+```
+
+The checkpoint should cover:
+
+```text
+Phase 21 planning
+Phase 21A chat answer builder contract
+Phase 21B chat answer builder implementation
+answer builder boundaries
+citation requirements
+missing-evidence handling
+source-conflict caveat preservation
+unsupported-card caveat preservation
+unknown-question caveats
+private metadata rejection
+no schema changes
+no DB access
+no provider/source reads
+no LLM calls
+no simulator execution
+no recommendation generation
+full test output
+static scans
 ```
 
 ## Completed Phase 17C Scope

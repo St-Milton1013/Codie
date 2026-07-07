@@ -12,7 +12,7 @@ Use the repository and this handoff as the source of truth. Do not rely on prior
 GitHub: https://github.com/St-Milton1013/Codie
 Local path: C:\Users\Main\Documents\Codex\2026-06-22\next-phase-contract-recommended-next-task
 Branch: main
-Latest pushed commit before local Phase 20 pass marker: bcae8cc Patch Phase 20 validation coverage
+Latest pushed commit before local Phase 21B implementation work: 5fe09a2 Add Phase 21A answer builder contract
 ```
 
 ## Current Validation Baseline
@@ -20,15 +20,15 @@ Latest pushed commit before local Phase 20 pass marker: bcae8cc Patch Phase 20 v
 Latest full-suite result:
 
 ```text
-Ran 633 tests in 3.230s
+Ran 651 tests in 3.192s
 
 OK (skipped=1)
 ```
 
-Latest focused Phase 20B chat query planner result:
+Latest focused Phase 21B chat answer builder result:
 
 ```text
-Ran 22 tests in 0.003s
+Ran 18 tests in 0.003s
 
 OK
 ```
@@ -44,11 +44,11 @@ passed.
 Latest relevant boundary scans:
 
 ```text
-rg -n "codie\.db|codie\.providers|codie\.analytics|codie\.recommendations\.generation|codie\.recommendations\.persistence|codie\.ingestion|codie\.cards|codie\.probability_engine|codie\.canonical|requests|httpx|sqlite3" codie\intelligence\query_planner.py tests\test_intelligence_query_planner.py
-rg -n "SELECT |INSERT |UPDATE |DELETE |execute\(|executescript\(" codie\intelligence\query_planner.py tests\test_intelligence_query_planner.py
-rg -n "open\(|write_text\(|write_bytes\(|Path\(|mkdir\(|touch\(|unlink\(" codie\intelligence\query_planner.py
-rg -n "source_events|source_decks|source_deck_cards|provider_objects" codie\intelligence\query_planner.py tests\test_intelligence_query_planner.py
-rg -n "should play|should be played|should be cut|must include|correct card|breaks the format|secretly optimal|cut this|strict upgrade|auto-include|recommended cut|recommended include" codie\intelligence\query_planner.py tests\test_intelligence_query_planner.py docs\PHASE20B_CHAT_QUERY_PLANNER_IMPLEMENTATION_REPORT.md
+rg -n "codie\.db|codie\.providers|codie\.analytics|codie\.recommendations|codie\.ingestion|codie\.cards|codie\.probability_engine|codie\.canonical|requests|httpx|sqlite3" codie\intelligence\answer_builder.py tests\test_intelligence_answer_builder.py
+rg -n "SELECT |INSERT |UPDATE |DELETE |execute\(|executescript\(" codie\intelligence\answer_builder.py tests\test_intelligence_answer_builder.py
+rg -n "open\(|write_text\(|write_bytes\(|Path\(|mkdir\(|touch\(|unlink\(" codie\intelligence\answer_builder.py
+rg -n "source_events|source_decks|source_deck_cards|provider_objects" codie\intelligence\answer_builder.py tests\test_intelligence_answer_builder.py
+rg -n "should play|should be played|should be cut|must include|correct card|breaks the format|secretly optimal|cut this|strict upgrade|auto-include|recommended cut|recommended include" codie\intelligence\answer_builder.py tests\test_intelligence_answer_builder.py docs\PHASE21B_CHAT_ANSWER_BUILDER_IMPLEMENTATION_REPORT.md
 ```
 
 returned:
@@ -146,6 +146,7 @@ Phase 19 Unsupported Relevant Card Queue: PASS
 Phase 20 Chat Query Planner: PASS
 Phase 21 Chat Answer Builder Planning: PASS
 Phase 21A Chat Answer Builder Contract: PASS
+Phase 21B Chat Answer Builder Implementation: PASS
 ```
 
 ## Recent Commits
@@ -295,13 +296,13 @@ Do not mutate raw simulator traces when reviews are created.
 Preferred next move:
 
 ```text
-Implement Phase 21B Chat Answer Builder
+Create Phase 21C Chat Answer Builder checkpoint
 ```
 
 Alternate next safe option:
 
 ```text
-Review Phase 21A contract before implementation
+Review Phase 21B implementation before checkpointing
 ```
 
 Avoid starting:
@@ -1049,6 +1050,20 @@ adds no implementation code, schema, DB access, provider access, LLM calls,
 UI, simulator execution, card behavior implementation, analytics calculation,
 recommendation generation, file writing, or private raw_input export.
 
+Latest Phase 21B packet:
+
+```text
+codie/intelligence/answer_builder.py
+tests/test_intelligence_answer_builder.py
+docs/PHASE21B_CHAT_ANSWER_BUILDER_IMPLEMENTATION_REPORT.md
+```
+
+Phase 21B implements the pure deterministic answer builder and conversion to a
+serializable `ChatAnswer`. It adds no schema, DB access, provider access,
+source/provider reads, LLM calls, UI, simulator execution, card behavior
+implementation, analytics calculation, recommendation generation, file
+writing, or private raw_input export.
+
 Latest roadmap patch logged:
 
 ```text
@@ -1168,7 +1183,8 @@ Phase 13 simulator contracts or a new UI/API contract is explicitly selected.
 - Phase 20 outside validation is accepted.
 - Phase 21 Chat Answer Builder Planning is complete.
 - Phase 21A Chat Answer Builder Contract is complete.
-- Next packet should be Phase 21B Chat Answer Builder Implementation.
+- Phase 21B Chat Answer Builder Implementation is complete.
+- Next packet should be Phase 21C Chat Answer Builder Checkpoint.
 - cEDHData public asset metadata and local reference hashes are recorded in docs/CEDHDATA_SIMULATOR_REFERENCE_CAPTURE_MANIFEST.md.
 - Final recommendation output remains intentionally separate.
 

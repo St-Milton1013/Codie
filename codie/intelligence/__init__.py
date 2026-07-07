@@ -1,5 +1,17 @@
 """Interactive intelligence primitives."""
 
+from .answer_builder import (
+    ChatAnswer,
+    ChatAnswerBuildError,
+    ChatAnswerBuilderOptions,
+    ChatAnswerCaveat,
+    ChatAnswerCitation,
+    ChatAnswerInput,
+    ChatAnswerMissingEvidence,
+    ChatAnswerSection,
+    build_chat_answer,
+    chat_answer_to_dict,
+)
 from .evidence_graph import (
     EvidenceCaveat,
     EvidenceCitation,
@@ -56,6 +68,14 @@ from .unsupported_cards import (
 
 __all__ = [
     "EvidenceGraphAssemblyOptions",
+    "ChatAnswer",
+    "ChatAnswerBuildError",
+    "ChatAnswerBuilderOptions",
+    "ChatAnswerCaveat",
+    "ChatAnswerCitation",
+    "ChatAnswerInput",
+    "ChatAnswerMissingEvidence",
+    "ChatAnswerSection",
     "EvidenceCaveat",
     "EvidenceCitation",
     "EvidenceEdge",
@@ -85,10 +105,12 @@ __all__ = [
     "UnsupportedCardQueueItem",
     "UnsupportedCardQueueOptions",
     "build_graph_input_from_records",
+    "build_chat_answer",
     "build_evidence_graph",
     "build_chat_query_plan",
     "build_source_conflict_report",
     "chat_query_plan_to_dict",
+    "chat_answer_to_dict",
     "build_unsupported_card_queue",
     "evidence_record_from_dict",
     "evidence_graph_to_dict",
