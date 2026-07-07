@@ -86,7 +86,7 @@ private raw input export
 ## Focused Test Result
 
 ```text
-Ran 19 tests in 0.005s
+Ran 19 tests in 0.004s
 
 OK
 ```
@@ -94,7 +94,7 @@ OK
 ## Full Test Result
 
 ```text
-Ran 670 tests in 3.695s
+Ran 670 tests in 3.996s
 
 OK (skipped=1)
 ```

@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: Phase 22C - LLM Writer/Auditor Checkpoint
+Recommended next task: Phase 22 outside validation
 
 ## Current Status
 
@@ -89,6 +89,10 @@ Phase 22 LLM writer/auditor planning is complete.
 Phase 22A LLM writer/auditor boundary contract is complete.
 
 Phase 22B LLM writer/auditor packet implementation is complete.
+
+Phase 22C LLM writer/auditor checkpoint packet is complete.
+
+Phase 23 is blocked until Phase 22 outside validation returns PASS or PASS WITH REVIEW NOTES.
 
 Roadmap patch logged:
 
@@ -184,6 +188,8 @@ docs/PHASE22_LLM_WRITER_AUDITOR_PLANNING_REPORT.md
 docs/PHASE22A_LLM_WRITER_AUDITOR_CONTRACT.md
 docs/PHASE22A_LLM_WRITER_AUDITOR_CONTRACT_REPORT.md
 docs/PHASE22B_LLM_WRITER_AUDITOR_IMPLEMENTATION_REPORT.md
+docs/CHECKPOINT_PHASE22_LLM_WRITER_AUDITOR_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE22_LLM_WRITER_AUDITOR_PROMPT.md
 codie/intelligence/llm_writer_auditor.py
 tests/test_intelligence_llm_writer_auditor.py
 ```
@@ -1093,11 +1099,34 @@ llm_writer_draft_to_dict(...)
 llm_audit_result_to_dict(...)
 ```
 
-Next checkpoint should create:
+Phase 22C created:
 
 ```text
 docs/CHECKPOINT_PHASE22_LLM_WRITER_AUDITOR_REPORT.md
 docs/OUTSIDE_VALIDATION_PHASE22_LLM_WRITER_AUDITOR_PROMPT.md
+```
+
+## Completed Phase 22C Scope
+
+Phase 22C created:
+
+```text
+docs/CHECKPOINT_PHASE22_LLM_WRITER_AUDITOR_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE22_LLM_WRITER_AUDITOR_PROMPT.md
+```
+
+Phase 22 outside validation packet:
+
+```text
+docs/CHECKPOINT_PHASE22_LLM_WRITER_AUDITOR_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE22_LLM_WRITER_AUDITOR_PROMPT.md
+docs/PHASE22_LLM_WRITER_AUDITOR_PLANNING_CONTRACT.md
+docs/PHASE22A_LLM_WRITER_AUDITOR_CONTRACT.md
+docs/PHASE22B_LLM_WRITER_AUDITOR_IMPLEMENTATION_REPORT.md
+codie/intelligence/llm_writer_auditor.py
+tests/test_intelligence_llm_writer_auditor.py
+codie/intelligence/answer_builder.py
+codie/intelligence/__init__.py
 ```
 
 ## Completed Phase 17C Scope
