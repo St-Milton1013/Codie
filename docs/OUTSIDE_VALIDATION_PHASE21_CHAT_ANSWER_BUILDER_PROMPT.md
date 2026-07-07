@@ -61,6 +61,7 @@ The implementation does not query SQLite or providers.
 The implementation does not generate recommendations.
 The implementation preserves plan blockers and caveats.
 The implementation requires citations or missing_evidence for factual sections.
+Structured ChatAnswer sections are allowed only when backed by citations, missing_evidence, or caveated unknown status.
 The implementation emits missing_evidence for unavailable required evidence.
 The implementation creates non-blocking caveats for unavailable optional evidence.
 The implementation preserves source-conflict caveats.
@@ -221,6 +222,8 @@ answer_builder.py queries SQLite
 answer_builder.py retrieves evidence itself
 answer_builder.py runs simulator logic
 answer_builder.py implements card behavior
+answer_builder.py generates unconstrained final prose outside the structured ChatAnswer model
+answer_builder.py invents facts not backed by citations or missing_evidence
 answer_builder.py generates recommendation or deck-construction language
 answer_builder.py persists chat answers
 factual sections can be emitted without citations or missing_evidence
