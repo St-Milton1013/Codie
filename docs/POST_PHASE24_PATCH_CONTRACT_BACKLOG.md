@@ -19,6 +19,7 @@ Roadmap patches and related specs currently logged:
 
 ```text
 docs/ROADMAP_PATCH_EVIDENCE_ARCHITECTURE_REMASTER.md
+docs/ROADMAP_PATCH_CODIE_ARCHITECTURE_REVISION_III.md
 docs/ROADMAP_PATCH_INTERACTIVE_INTELLIGENCE_LAYER.md
 docs/PATCH_EVIDENCE_INTELLIGENCE_AND_LOCAL_REPORTS.md
 docs/ROADMAP_PATCH_MOXFIELD_FREQUENCY_POOL_BUILDER.md
@@ -36,6 +37,9 @@ docs/CODIE_CHAT_SPEC.md
 
 ## Required Contract Sequence
 
+Codie Architecture Revision III supersedes earlier evidence-architecture
+roadmap drafts where they conflict.
+
 ### 1. Evidence Fusion / Unified Evidence Objects
 
 Recommended phase:
@@ -46,14 +50,15 @@ Phase 25A
 
 Why first:
 
-The Evidence Architecture Remaster requires every downstream reasoning feature
-to consume common evidence instead of reading raw source/provider data or
-building its own reasoning path.
+Codie Architecture Revision III requires every downstream reasoning feature to
+consume Unified Evidence instead of reading raw source/provider data or building
+its own reasoning path.
 
 Contract must define:
 
 ```text
 unified evidence object models
+Authority Layer refs
 source evidence refs
 canonical identity refs
 measured metric refs
@@ -79,6 +84,7 @@ UI rendering
 file writing
 simulator execution
 analytics recalculation
+Jin-Gitaxias theory generation
 ```
 
 ### 2. Decision Intelligence Boundary
@@ -103,6 +109,7 @@ no chat-generated recommendations
 no export-generated recommendations
 all recommendation output flows through Decision Intelligence
 all recommendation output cites unified evidence objects
+Jin-Gitaxias theory output cannot be persisted as recommendation evidence
 ```
 
 ### 3. Weight Profile / Analysis Profile
@@ -136,8 +143,8 @@ Suggested profiles:
 
 ```text
 Competitive Default
-Tournament Focus
-Simulation Focus
+Tournament Heavy
+Simulation Heavy
 Primer Aware
 Budget Aware
 ```
@@ -296,12 +303,57 @@ rejected alias does not resolve future imports
 no unresolved name silently accepted
 ```
 
-### 9. Obsidian / Knowledge Vault Export
+### 9. Jin-Gitaxias Strategist Mode Boundary
 
 Recommended phase:
 
 ```text
 Phase 30A
+```
+
+Purpose:
+
+Define a future conversational theory engine without contaminating measured
+evidence or recommendations.
+
+Contract must define:
+
+```text
+retrieval planner
+evidence retrieval
+primary strategist model packet
+evidence gate
+legality validator
+contradiction scanner
+optional auditor model
+final answer packet
+safety valve fields
+theory note output rules
+experiment queue output rules
+```
+
+Must enforce:
+
+```text
+no writes to tournament evidence
+no writes to measured evidence
+no writes to confidence metrics
+no writes to recommendations
+no writes to staples
+no writes to package statistics
+all factual claims pass evidence validation
+all card suggestions pass legality validation
+speculation level is visible
+unsupported claims removed count is visible
+illegal suggestions blocked count is visible
+```
+
+### 10. Obsidian / Knowledge Vault Export
+
+Recommended phase:
+
+```text
+Phase 31A
 ```
 
 Purpose:
@@ -367,6 +419,7 @@ local API boundary
 exports
 simulator
 primer context extraction
+Jin-Gitaxias Strategist Mode
 ```
 
 ## Recommended Next Move
@@ -377,5 +430,5 @@ After Phase 24 outside validation is accepted:
 Phase 25A - Evidence Fusion / Unified Evidence Objects Contract
 ```
 
-This is the lowest-risk next step because it turns the architecture remaster
-into a concrete contract before any more recommendation or dashboard work.
+This is the lowest-risk next step because it turns Codie Architecture Revision
+III into a concrete contract before any more recommendation or dashboard work.

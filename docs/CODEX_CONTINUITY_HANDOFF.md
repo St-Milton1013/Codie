@@ -1208,6 +1208,7 @@ docs/ROADMAP_PATCH_MOXFIELD_FREQUENCY_POOL_BUILDER.md
 docs/ROADMAP_PATCH_TAG_GRAPH_LAB.md
 docs/PATCH_EVIDENCE_INTELLIGENCE_AND_LOCAL_REPORTS.md
 docs/ROADMAP_PATCH_EVIDENCE_ARCHITECTURE_REMASTER.md
+docs/ROADMAP_PATCH_CODIE_ARCHITECTURE_REVISION_III.md
 docs/POST_PHASE24_PATCH_CONTRACT_BACKLOG.md
 ```
 
@@ -1231,6 +1232,14 @@ classed evidence architecture, Evidence Fusion, Decision Intelligence, versioned
 weight profiles, source agreement, and action-first UI principles. It does not
 authorize schema, repository, provider, recommendation, simulator, UI, LLM, or
 file-writing implementation without future contracts.
+
+Codie Architecture Revision III is roadmap-only and supersedes earlier
+evidence-architecture drafts where they conflict. It promotes Scryfall to Class
+0A card authority, Commander Spellbook to Class 0B combo authority, defines
+Observational Data as Class 1, Measured Evidence as Class 2, Decision
+Intelligence as Class 3, User Context as Class 4, and adds Jin-Gitaxias
+Strategist Mode as future theory-only work that must not contaminate measured
+evidence or recommendations.
 
 The Post-Phase 24 Patch Contract Backlog maps accepted roadmap patches into the
 future contract sequence. After Phase 24 outside validation is accepted, the
