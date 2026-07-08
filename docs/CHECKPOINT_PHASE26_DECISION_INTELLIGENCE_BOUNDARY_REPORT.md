@@ -167,7 +167,7 @@ raw SQL scan: no matches
 production file-write scan: no matches
 strategic-language scan: no matches
 schema/repository drift scan: no matches
-private metadata scan: matches only blocked-key constants and rejection tests
+source/provider/private metadata scan: matches only blocked-key constants and rejection tests
 ```
 
 ## Required Outside Validation
@@ -183,6 +183,10 @@ codie/decision_intelligence/__init__.py
 codie/decision_intelligence/models.py
 codie/decision_intelligence/builders.py
 tests/test_decision_intelligence_boundary.py
+docs/ACTIVE_ROADMAP_INDEX.md
+docs/VALIDATION_STATUS_INDEX.md
+docs/NEXT_PHASE_CONTRACT.md
+docs/CODEX_CONTINUITY_HANDOFF.md
 docs/ROADMAP_PATCH_CODIE_ARCHITECTURE_REVISION_III.md
 docs/POST_PHASE24_PATCH_CONTRACT_BACKLOG.md
 ```
