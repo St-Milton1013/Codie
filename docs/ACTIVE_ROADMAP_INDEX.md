@@ -9,29 +9,29 @@ This file is the compact restart map for Codie. Detailed phase history remains i
 ```text
 Phase 25 Evidence Fusion: externally accepted
 Phase 26A Decision Intelligence Boundary Contract: complete
-Current action: review Phase 26A, then proceed to Phase 26B if accepted
-Phase 26 status: Phase 26B blocked until Phase 26A is reviewed
+Phase 26B Decision Intelligence Boundary Packet Implementation: internally complete
+Current action: send Phase 26 outside validation packet
+Phase 27 status: blocked until Phase 26 outside validation returns PASS or PASS WITH REVIEW NOTES
 ```
 
 ## Next Allowed Phase
 
 ```text
-Phase 26B - Decision Intelligence Boundary Packet Implementation after Phase 26A is accepted
+Phase 27A - Weight Profile / Analysis Profile Contract after Phase 26 outside validation
 ```
 
-Do not start Phase 26B implementation until the Phase 26A boundary contract is complete and reviewed.
+Do not start Phase 27 until the Phase 26 outside validation gate is accepted.
 
 ## Release-Critical Path
 
 ```text
-1. Phase 26A Decision Intelligence Boundary Contract
-2. Phase 26B Decision Intelligence boundary packet implementation
-3. Phase 27A Weight Profile / Analysis Profile Contract
-4. Phase 27B Weight Profile implementation
-5. Phase 28A Deck Health / Recommendation Output Contract
-6. Phase 28B Deck Health / Recommendation Output MVP
-7. Phase 29A CLI / Report integration
-8. Phase 30A Local Alpha release checklist
+1. Phase 26 outside validation
+2. Phase 27A Weight Profile / Analysis Profile Contract
+3. Phase 27B Weight Profile implementation
+4. Phase 28A Deck Health / Recommendation Output Contract
+5. Phase 28B Deck Health / Recommendation Output MVP
+6. Phase 29A CLI / Report integration
+7. Phase 30A Local Alpha release checklist
 ```
 
 ## Post-Alpha / Later Roadmap
@@ -78,13 +78,22 @@ No recommendations directly from primer text.
 No recommendations directly from simulator output.
 No feature should duplicate Decision Intelligence reasoning.
 Recommendation output must flow through Evidence Fusion and Decision Intelligence.
-Phase 26B cannot start until Phase 26A is complete and reviewed.
+Phase 27 cannot start until Phase 26 outside validation is accepted.
 ```
 
-## Current Phase 26A Packet
+## Phase 26 Outside Validation Packet
 
-Current contract file:
+Send these files for the current gate:
 
 ```text
+docs/CHECKPOINT_PHASE26_DECISION_INTELLIGENCE_BOUNDARY_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE26_DECISION_INTELLIGENCE_BOUNDARY_PROMPT.md
 docs/PHASE26A_DECISION_INTELLIGENCE_BOUNDARY_CONTRACT.md
+docs/PHASE26B_DECISION_INTELLIGENCE_BOUNDARY_IMPLEMENTATION_REPORT.md
+codie/decision_intelligence/__init__.py
+codie/decision_intelligence/models.py
+codie/decision_intelligence/builders.py
+tests/test_decision_intelligence_boundary.py
+docs/ROADMAP_PATCH_CODIE_ARCHITECTURE_REVISION_III.md
+docs/POST_PHASE24_PATCH_CONTRACT_BACKLOG.md
 ```
