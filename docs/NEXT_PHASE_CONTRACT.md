@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: Phase 25A - Evidence Fusion / Unified Evidence Objects Contract
+Recommended next task: Phase 25B - Evidence Fusion / Unified Evidence Objects Packet Implementation
 
 ## Current Status
 
@@ -114,6 +114,8 @@ Phase 24C Chat/Intelligence Local API checkpoint packet is complete.
 
 Phase 24 outside validation returned PASS.
 
+Phase 25A Evidence Fusion / Unified Evidence Objects Contract is complete.
+
 Roadmap patch logged:
 
 ```text
@@ -168,6 +170,8 @@ docs/PHASE17_INTERACTIVE_INTELLIGENCE_INPUT_ASSEMBLY_PLANNING_CONTRACT.md
 docs/PHASE17_INTERACTIVE_INTELLIGENCE_INPUT_ASSEMBLY_PLANNING_REPORT.md
 docs/PHASE17A_EVIDENCE_GRAPH_INPUT_ASSEMBLY_CONTRACT.md
 docs/PHASE17A_EVIDENCE_GRAPH_INPUT_ASSEMBLY_CONTRACT_REPORT.md
+docs/PHASE25A_EVIDENCE_FUSION_UNIFIED_EVIDENCE_OBJECTS_CONTRACT.md
+docs/PHASE25A_EVIDENCE_FUSION_UNIFIED_EVIDENCE_OBJECTS_CONTRACT_REPORT.md
 codie/intelligence/evidence_inputs.py
 tests/test_intelligence_evidence_inputs.py
 docs/PHASE17B_EVIDENCE_GRAPH_INPUT_ASSEMBLY_IMPLEMENTATION_REPORT.md
@@ -1420,6 +1424,68 @@ Review notes:
 LocalAPIOptions.allow_non_local_paths and allow_non_local_hosts are currently future-facing only.
 If a future phase wants non-local paths or hosts, it needs a new contract.
 Clean-checkout test execution remains the outside validator's responsibility.
+```
+
+## Completed Phase 25A Scope
+
+Phase 25A created:
+
+```text
+docs/PHASE25A_EVIDENCE_FUSION_UNIFIED_EVIDENCE_OBJECTS_CONTRACT.md
+docs/PHASE25A_EVIDENCE_FUSION_UNIFIED_EVIDENCE_OBJECTS_CONTRACT_REPORT.md
+```
+
+Future implementation files:
+
+```text
+codie/evidence_fusion/__init__.py
+codie/evidence_fusion/models.py
+codie/evidence_fusion/builders.py
+tests/test_evidence_fusion_models.py
+docs/PHASE25B_EVIDENCE_FUSION_UNIFIED_EVIDENCE_OBJECTS_IMPLEMENTATION_REPORT.md
+```
+
+Future public interface:
+
+```text
+EvidenceFusionBuildError
+EvidenceAuthorityRef
+EvidenceObservationRef
+EvidenceMetricRef
+EvidencePrimerContextRef
+EvidenceSimulatorRef
+EvidenceCaveat
+EvidenceConflict
+EvidenceSourceAgreement
+UnifiedEvidenceSubject
+UnifiedEvidenceObject
+UnifiedEvidenceBundle
+EvidenceFusionOptions
+build_unified_evidence_object(...)
+build_unified_evidence_bundle(...)
+unified_evidence_object_to_dict(...)
+unified_evidence_bundle_to_dict(...)
+validate_unified_evidence_bundle(...)
+```
+
+## Do Not Do In Phase 25B
+
+```text
+do not add schema
+do not add repositories
+do not read SQLite
+do not read provider payloads
+do not read source tables directly
+do not recalculate analytics
+do not generate recommendations
+do not score recommendations
+do not run simulator logic
+do not generate Jin-Gitaxias theory answers
+do not call LLMs
+do not import LLM SDKs
+do not add UI
+do not write files
+do not persist evidence objects
 ```
 
 ## Completed Phase 17C Scope

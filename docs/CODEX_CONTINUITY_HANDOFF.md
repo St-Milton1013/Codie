@@ -20,7 +20,7 @@ Latest pushed commit before Phase 24 outside validation acceptance: 432e958 Add 
 Latest full-suite result:
 
 ```text
-Ran 707 tests in 3.567s
+Ran 707 tests in 3.919s
 
 OK (skipped=1)
 ```
@@ -240,7 +240,7 @@ docs/OUTSIDE_VALIDATION_PHASE24_CHAT_INTELLIGENCE_LOCAL_API_PROMPT.md
 Next recommended packet:
 
 ```text
-Phase 25A - Evidence Fusion / Unified Evidence Objects Contract
+Phase 25B - Evidence Fusion / Unified Evidence Objects Packet Implementation
 ```
 
 ## Commands To Run At Start Of A New Session
@@ -1242,9 +1242,15 @@ Strategist Mode as future theory-only work that must not contaminate measured
 evidence or recommendations.
 
 The Post-Phase 24 Patch Contract Backlog maps accepted roadmap patches into the
-future contract sequence. After Phase 24 outside validation is accepted, the
-recommended next packet is Phase 25A - Evidence Fusion / Unified Evidence
-Objects Contract.
+future contract sequence. Phase 25A is now complete, so the recommended next
+packet is Phase 25B - Evidence Fusion / Unified Evidence Objects Packet
+Implementation.
+
+Phase 25A is complete. It defines the Evidence Fusion / Unified Evidence
+Objects contract and keeps Phase 25B implementation limited to pure in-memory
+packet models with no schema, DB reads, provider reads, analytics
+recalculation, recommendations, LLM calls, simulator execution, UI, file
+writing, persistence, or Jin-Gitaxias theory generation.
 
 Next UI implementation packet:
 
