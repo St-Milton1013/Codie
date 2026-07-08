@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: send Phase 26 outside validation packet; after PASS or PASS WITH REVIEW NOTES proceed to Phase 27A - Weight Profile / Analysis Profile Contract
+Recommended next task: Phase 27B - Weight Profile / Analysis Profile Packet Implementation after Phase 27A review
 
 ## Active Indexes
 
@@ -139,6 +139,10 @@ Phase 26B Decision Intelligence Boundary Packet Implementation is complete.
 
 Phase 26 Decision Intelligence Boundary checkpoint packet is complete.
 
+Phase 26 outside validation returned PASS.
+
+Phase 27A Weight Profile / Analysis Profile Contract is complete.
+
 Roadmap patch logged:
 
 ```text
@@ -154,6 +158,7 @@ docs/PHASE26A_DECISION_INTELLIGENCE_BOUNDARY_CONTRACT.md
 docs/PHASE26B_DECISION_INTELLIGENCE_BOUNDARY_IMPLEMENTATION_REPORT.md
 docs/CHECKPOINT_PHASE26_DECISION_INTELLIGENCE_BOUNDARY_REPORT.md
 docs/OUTSIDE_VALIDATION_PHASE26_DECISION_INTELLIGENCE_BOUNDARY_PROMPT.md
+docs/PHASE27A_WEIGHT_PROFILE_ANALYSIS_PROFILE_CONTRACT.md
 ```
 
 Phase 15 planning is complete:

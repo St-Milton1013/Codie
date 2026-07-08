@@ -9,9 +9,9 @@ This file is the compact validation snapshot for Codie. Detailed evidence, comma
 ```text
 Phase 25 Evidence Fusion: PASS
 Outside validation: accepted
-Phase 26 Decision Intelligence Boundary: INTERNAL PASS
-Outside validation: ready to send
-Phase 27: blocked until Phase 26 outside validation returns PASS or PASS WITH REVIEW NOTES
+Phase 26 Decision Intelligence Boundary: PASS
+Outside validation: accepted
+Phase 27A Weight Profile / Analysis Profile Contract: complete; ready for review
 ```
 
 ## Accepted Phase Summary
@@ -48,7 +48,8 @@ Phase 22 LLM Writer / Auditor: PASS
 Phase 23 Chat / Intelligence UI API Boundary: PASS
 Phase 24 Chat / Intelligence Local API: PASS
 Phase 25 Evidence Fusion: PASS
-Phase 26 Decision Intelligence Boundary: INTERNAL PASS; READY FOR OUTSIDE VALIDATION
+Phase 26 Decision Intelligence Boundary: PASS
+Phase 27A Weight Profile / Analysis Profile Contract: COMPLETE; READY FOR REVIEW
 ```
 
 ## Latest Local Validation
@@ -61,7 +62,7 @@ OK
 
 Full suite:
 python -m unittest discover -s tests
-Ran 746 tests in 3.390s
+Ran 746 tests in 3.291s
 OK (skipped=1)
 
 Static check:
@@ -72,12 +73,11 @@ passed
 ## Current Blocker
 
 ```text
-Phase 27A - Weight Profile / Analysis Profile Contract is blocked until Phase 26 outside validation is accepted.
+Phase 27B - Weight Profile / Analysis Profile Packet Implementation is blocked until Phase 27A is complete and reviewed.
 ```
 
-## Current Outside Validation Packet
+## Current Phase Packet
 
 ```text
-docs/CHECKPOINT_PHASE26_DECISION_INTELLIGENCE_BOUNDARY_REPORT.md
-docs/OUTSIDE_VALIDATION_PHASE26_DECISION_INTELLIGENCE_BOUNDARY_PROMPT.md
+docs/PHASE27A_WEIGHT_PROFILE_ANALYSIS_PROFILE_CONTRACT.md
 ```

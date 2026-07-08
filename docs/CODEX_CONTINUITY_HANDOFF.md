@@ -31,7 +31,7 @@ Latest pushed commit before Phase 24 outside validation acceptance: 432e958 Add 
 Latest full-suite result:
 
 ```text
-Ran 746 tests in 3.390s
+Ran 746 tests in 3.291s
 
 OK (skipped=1)
 ```
@@ -174,7 +174,8 @@ Phase 25B Evidence Fusion / Unified Evidence Objects Packet Implementation: PASS
 Phase 25 Evidence Fusion Outside Validation: PASS
 Phase 26A Decision Intelligence Boundary Contract: PASS
 Phase 26B Decision Intelligence Boundary Packet Implementation: PASS
-Phase 26 Decision Intelligence Boundary Checkpoint: READY FOR OUTSIDE VALIDATION
+Phase 26 Decision Intelligence Boundary Outside Validation: PASS
+Phase 27A Weight Profile / Analysis Profile Contract: PASS
 ```
 
 ## Recent Commits
@@ -1296,17 +1297,18 @@ evidence references. It does not generate recommendations, deck health output,
 replacement suggestions, analytics, simulator execution, LLM calls, UI,
 persistence, or file outputs.
 
-Current Phase 26 outside validation packet:
+Phase 26 outside validation returned PASS.
+
+Phase 27A is complete. It defines configurable, versioned, reproducible Weight
+Profile / Analysis Profile packets for future Decision Intelligence while
+remaining contract-only with no implementation, schema, DB reads, provider
+reads, recommendation output, simulator execution, LLM calls, UI, or file
+writing.
+
+Current Phase 27A packet:
 
 ```text
-docs/CHECKPOINT_PHASE26_DECISION_INTELLIGENCE_BOUNDARY_REPORT.md
-docs/OUTSIDE_VALIDATION_PHASE26_DECISION_INTELLIGENCE_BOUNDARY_PROMPT.md
-docs/PHASE26A_DECISION_INTELLIGENCE_BOUNDARY_CONTRACT.md
-docs/PHASE26B_DECISION_INTELLIGENCE_BOUNDARY_IMPLEMENTATION_REPORT.md
-codie/decision_intelligence/__init__.py
-codie/decision_intelligence/models.py
-codie/decision_intelligence/builders.py
-tests/test_decision_intelligence_boundary.py
+docs/PHASE27A_WEIGHT_PROFILE_ANALYSIS_PROFILE_CONTRACT.md
 ```
 
 Next UI implementation packet:
