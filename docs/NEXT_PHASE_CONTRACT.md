@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: send Phase 27 outside validation packet; after PASS or PASS WITH REVIEW NOTES proceed to Phase 28A - Deck Health / Recommendation Output Contract
+Recommended next task: review Phase 28A - Deck Health / Recommendation Output Contract; after acceptance proceed to Phase 28B - Deck Health / Recommendation Output Packet Implementation
 
 ## Active Indexes
 
@@ -11,7 +11,9 @@ docs/ACTIVE_ROADMAP_INDEX.md
 docs/VALIDATION_STATUS_INDEX.md
 ```
 
-They summarize the active roadmap, validation gate, current blocker, and Phase 25 outside validation packet. This document remains the detailed phase contract log.
+They summarize the active roadmap, validation gate, current blocker, and
+current phase review packet. This document remains the detailed phase contract
+log.
 
 ## Current Status
 
@@ -147,6 +149,10 @@ Phase 27B Weight Profile / Analysis Profile Packet Implementation is complete.
 
 Phase 27 Weight Profile / Analysis Profile checkpoint packet is complete.
 
+Phase 27 outside validation returned PASS.
+
+Phase 28A Deck Health / Recommendation Output Contract is complete.
+
 Roadmap patch logged:
 
 ```text
@@ -166,6 +172,7 @@ docs/PHASE27A_WEIGHT_PROFILE_ANALYSIS_PROFILE_CONTRACT.md
 docs/PHASE27B_WEIGHT_PROFILE_IMPLEMENTATION_REPORT.md
 docs/CHECKPOINT_PHASE27_WEIGHT_PROFILE_REPORT.md
 docs/OUTSIDE_VALIDATION_PHASE27_WEIGHT_PROFILE_PROMPT.md
+docs/PHASE28A_DECK_HEALTH_RECOMMENDATION_OUTPUT_CONTRACT.md
 ```
 
 Phase 15 planning is complete:

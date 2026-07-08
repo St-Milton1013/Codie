@@ -15,7 +15,8 @@ docs/ACTIVE_ROADMAP_INDEX.md
 docs/VALIDATION_STATUS_INDEX.md
 ```
 
-They summarize the active roadmap, validation status, current blocker, and Phase 25 outside validation packet. This handoff remains the detailed recovery log.
+They summarize the active roadmap, validation status, current blocker, and
+current phase review packet. This handoff remains the detailed recovery log.
 
 ## Repository
 
@@ -31,17 +32,15 @@ Latest pushed commit before Phase 24 outside validation acceptance: 432e958 Add 
 Latest full-suite result:
 
 ```text
-Ran 761 tests in 3.499s
+Ran 761 tests in 3.539s
 
 OK (skipped=1)
 ```
 
-Latest focused Phase 25B Evidence Fusion result:
+Latest focused Phase 28A result:
 
 ```text
-Ran 23 tests in 0.003s
-
-OK
+docs-only contract packet; no focused implementation test added
 ```
 
 Latest static check:
@@ -177,7 +176,8 @@ Phase 26B Decision Intelligence Boundary Packet Implementation: PASS
 Phase 26 Decision Intelligence Boundary Outside Validation: PASS
 Phase 27A Weight Profile / Analysis Profile Contract: PASS
 Phase 27B Weight Profile / Analysis Profile Packet Implementation: PASS
-Phase 27 Weight Profile / Analysis Profile Checkpoint: READY FOR OUTSIDE VALIDATION
+Phase 27 Weight Profile / Analysis Profile Outside Validation: PASS
+Phase 28A Deck Health / Recommendation Output Contract: PASS
 ```
 
 ## Recent Commits
@@ -1315,17 +1315,24 @@ informational-only. It does not generate recommendations, deck health output,
 replacement suggestions, analytics, simulator execution, LLM calls, UI,
 persistence, or file outputs.
 
-Current Phase 27 outside validation packet:
+Phase 27 outside validation returned PASS.
+
+Phase 28A is complete. It defines the Deck Health / Recommendation Output
+Contract and keeps the first user-facing conclusion layer gated behind Evidence
+Fusion, Decision Intelligence, and versioned Weight / Analysis Profiles. It is
+contract-only and authorizes no implementation, schema, DB reads, provider
+reads, source-table reads, raw provider reads, LLM calls, simulator execution,
+file writing, persistence, deck health output, recommendation output, or
+replacement output.
+
+Current Phase 28A review packet:
 
 ```text
-docs/CHECKPOINT_PHASE27_WEIGHT_PROFILE_REPORT.md
-docs/OUTSIDE_VALIDATION_PHASE27_WEIGHT_PROFILE_PROMPT.md
-docs/PHASE27A_WEIGHT_PROFILE_ANALYSIS_PROFILE_CONTRACT.md
-docs/PHASE27B_WEIGHT_PROFILE_IMPLEMENTATION_REPORT.md
-codie/weight_profiles/__init__.py
-codie/weight_profiles/models.py
-codie/weight_profiles/defaults.py
-tests/test_weight_profiles.py
+docs/PHASE28A_DECK_HEALTH_RECOMMENDATION_OUTPUT_CONTRACT.md
+docs/ACTIVE_ROADMAP_INDEX.md
+docs/VALIDATION_STATUS_INDEX.md
+docs/NEXT_PHASE_CONTRACT.md
+docs/CODEX_CONTINUITY_HANDOFF.md
 ```
 
 Next UI implementation packet:
