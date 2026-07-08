@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: Phase 26A - Decision Intelligence Boundary Contract after Phase 25 outside validation
+Recommended next task: Phase 26B - Decision Intelligence Boundary Packet Implementation after Phase 26A review
 
 ## Active Indexes
 
@@ -131,6 +131,10 @@ Phase 25B Evidence Fusion / Unified Evidence Objects Packet Implementation is co
 
 Phase 25C Evidence Fusion / Unified Evidence Objects checkpoint packet is complete.
 
+Phase 25 outside validation returned PASS.
+
+Phase 26A Decision Intelligence Boundary Contract is complete.
+
 Roadmap patch logged:
 
 ```text
@@ -142,6 +146,7 @@ docs/ROADMAP_PATCH_CODIE_ARCHITECTURE_REVISION_III.md
 docs/POST_PHASE24_PATCH_CONTRACT_BACKLOG.md
 docs/ACTIVE_ROADMAP_INDEX.md
 docs/VALIDATION_STATUS_INDEX.md
+docs/PHASE26A_DECISION_INTELLIGENCE_BOUNDARY_CONTRACT.md
 ```
 
 Phase 15 planning is complete:
