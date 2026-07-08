@@ -2,6 +2,17 @@
 
 Recommended next task: Phase 26A - Decision Intelligence Boundary Contract after Phase 25 outside validation
 
+## Active Indexes
+
+Use these compact index files first when resuming work:
+
+```text
+docs/ACTIVE_ROADMAP_INDEX.md
+docs/VALIDATION_STATUS_INDEX.md
+```
+
+They summarize the active roadmap, validation gate, current blocker, and Phase 25 outside validation packet. This document remains the detailed phase contract log.
+
 ## Current Status
 
 Phase 14 has passed outside validation.
@@ -129,6 +140,8 @@ docs/PATCH_EVIDENCE_INTELLIGENCE_AND_LOCAL_REPORTS.md
 docs/ROADMAP_PATCH_EVIDENCE_ARCHITECTURE_REMASTER.md
 docs/ROADMAP_PATCH_CODIE_ARCHITECTURE_REVISION_III.md
 docs/POST_PHASE24_PATCH_CONTRACT_BACKLOG.md
+docs/ACTIVE_ROADMAP_INDEX.md
+docs/VALIDATION_STATUS_INDEX.md
 ```
 
 Phase 15 planning is complete:

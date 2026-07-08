@@ -6,6 +6,17 @@ This document is the recovery packet for continuing Codie after Codex context/ra
 
 Use the repository and this handoff as the source of truth. Do not rely on prior chat history.
 
+## Active Restart Indexes
+
+Read these compact files first when resuming work:
+
+```text
+docs/ACTIVE_ROADMAP_INDEX.md
+docs/VALIDATION_STATUS_INDEX.md
+```
+
+They summarize the active roadmap, validation status, current blocker, and Phase 25 outside validation packet. This handoff remains the detailed recovery log.
+
 ## Repository
 
 ```text
@@ -1247,6 +1258,13 @@ evidence or recommendations.
 The Post-Phase 24 Patch Contract Backlog maps accepted roadmap patches into the
 future contract sequence. Phase 25C is now complete, so the recommended next
 step is sending the Phase 25 outside validation packet.
+
+The active roadmap and validation indexes are:
+
+```text
+docs/ACTIVE_ROADMAP_INDEX.md
+docs/VALIDATION_STATUS_INDEX.md
+```
 
 Phase 25A is complete. It defines the Evidence Fusion / Unified Evidence
 Objects contract and keeps Phase 25B implementation limited to pure in-memory
