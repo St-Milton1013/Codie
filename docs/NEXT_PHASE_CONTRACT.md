@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: Phase 25 planning after Phase 24 outside validation
+Recommended next task: Phase 25A - Evidence Fusion / Unified Evidence Objects Contract after Phase 24 outside validation
 
 ## Current Status
 
@@ -119,6 +119,7 @@ docs/ROADMAP_PATCH_MOXFIELD_FREQUENCY_POOL_BUILDER.md
 docs/ROADMAP_PATCH_TAG_GRAPH_LAB.md
 docs/PATCH_EVIDENCE_INTELLIGENCE_AND_LOCAL_REPORTS.md
 docs/ROADMAP_PATCH_EVIDENCE_ARCHITECTURE_REMASTER.md
+docs/POST_PHASE24_PATCH_CONTRACT_BACKLOG.md
 ```
 
 Phase 15 planning is complete:
@@ -150,6 +151,7 @@ docs/ROADMAP_PATCH_MOXFIELD_FREQUENCY_POOL_BUILDER.md
 docs/ROADMAP_PATCH_TAG_GRAPH_LAB.md
 docs/PATCH_EVIDENCE_INTELLIGENCE_AND_LOCAL_REPORTS.md
 docs/ROADMAP_PATCH_EVIDENCE_ARCHITECTURE_REMASTER.md
+docs/POST_PHASE24_PATCH_CONTRACT_BACKLOG.md
 docs/REPO_REFERENCE_CATALOG.md
 docs/FEATURE_SCOPE_REMOVALS.md
 docs/LOCAL_REPORT_DELIVERY.md
