@@ -1245,9 +1245,8 @@ Strategist Mode as future theory-only work that must not contaminate measured
 evidence or recommendations.
 
 The Post-Phase 24 Patch Contract Backlog maps accepted roadmap patches into the
-future contract sequence. Phase 25A is now complete, so the recommended next
-packet is Phase 25B - Evidence Fusion / Unified Evidence Objects Packet
-Implementation.
+future contract sequence. Phase 25C is now complete, so the recommended next
+step is sending the Phase 25 outside validation packet.
 
 Phase 25A is complete. It defines the Evidence Fusion / Unified Evidence
 Objects contract and keeps Phase 25B implementation limited to pure in-memory
@@ -1256,8 +1255,7 @@ recalculation, recommendations, LLM calls, simulator execution, UI, file
 writing, persistence, or Jin-Gitaxias theory generation.
 
 Phase 25B is complete. It implements pure in-memory Evidence Fusion packet
-models under codie/evidence_fusion plus focused tests. The next packet should
-be Phase 25C checkpoint and outside validation prompt.
+models under codie/evidence_fusion plus focused tests.
 
 Phase 25C is complete. It creates the internal checkpoint and outside
 validation prompt for Evidence Fusion. Phase 26 is blocked until outside
@@ -1372,7 +1370,8 @@ Phase 13 simulator contracts or a new UI/API contract is explicitly selected.
 - Phase 23 Chat/Intelligence UI/API Boundary checkpoint packet is complete.
 - Phase 23 outside validation is accepted.
 - Phase 24A Chat/Intelligence Local API Contract is complete.
-- Next packet should be Phase 24B Chat/Intelligence Local API Packet Implementation.
+- Phase 24 Chat/Intelligence Local API is accepted.
+- Phase 25 Evidence Fusion is ready for outside validation.
 - cEDHData public asset metadata and local reference hashes are recorded in docs/CEDHDATA_SIMULATOR_REFERENCE_CAPTURE_MANIFEST.md.
 - Final recommendation output remains intentionally separate.
 
