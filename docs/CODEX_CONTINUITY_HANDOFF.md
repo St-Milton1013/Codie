@@ -31,7 +31,7 @@ Latest pushed commit before Phase 24 outside validation acceptance: 432e958 Add 
 Latest full-suite result:
 
 ```text
-Ran 724 tests in 3.230s
+Ran 732 tests in 3.331s
 
 OK (skipped=1)
 ```
@@ -39,7 +39,7 @@ OK (skipped=1)
 Latest focused Phase 25B Evidence Fusion result:
 
 ```text
-Ran 17 tests in 0.002s
+Ran 23 tests in 0.003s
 
 OK
 ```

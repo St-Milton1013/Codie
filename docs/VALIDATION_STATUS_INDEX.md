@@ -53,12 +53,12 @@ Phase 25 Evidence Fusion: INTERNAL PASS; READY FOR OUTSIDE VALIDATION
 ```text
 Focused Phase 25 Evidence Fusion:
 python -m unittest tests.test_evidence_fusion_models -v
-Ran 17 tests in 0.002s
+Ran 23 tests in 0.003s
 OK
 
 Full suite:
 python -m unittest discover -s tests
-Ran 724 tests in 3.230s
+Ran 732 tests in 3.331s
 OK (skipped=1)
 
 Static check:

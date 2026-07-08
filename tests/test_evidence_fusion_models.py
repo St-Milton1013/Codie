@@ -202,6 +202,17 @@ class EvidenceFusionModelTest(unittest.TestCase):
         json.dumps(payload, sort_keys=True)
         self.assertEqual(payload["authority_refs"][0]["authority_source"], "scryfall")
 
+    def test_authority_and_observation_refs_remain_visible(self) -> None:
+        payload = unified_evidence_object_to_dict(evidence_object())
+
+        self.assertEqual(
+            payload["authority_refs"][0]["authority_ref_id"],
+            "authority:scryfall:rhystic-study",
+        )
+        self.assertEqual(payload["authority_refs"][0]["authority_type"], "scryfall_card")
+        self.assertEqual(payload["observation_refs"][0]["observation_ref_id"], "observation:deck:1")
+        self.assertEqual(payload["observation_refs"][0]["observation_type"], "canonical_deck_card")
+
     def test_observation_ref_rejects_raw_provider_payload_metadata(self) -> None:
         with self.assertRaises(EvidenceFusionBuildError):
             observation_ref(metadata={"raw_" + "provider_payload": {"secret": True}})
@@ -217,10 +228,47 @@ class EvidenceFusionModelTest(unittest.TestCase):
         with self.assertRaises(EvidenceFusionBuildError):
             primer_context_ref(metadata={"full_" + "primer_body": "not allowed"})
 
+    def test_primer_context_remains_explanatory_and_cannot_replace_metrics(self) -> None:
+        with self.assertRaises(EvidenceFusionBuildError):
+            evidence_object(
+                metric_refs=(),
+                primer_context_refs=(primer_context_ref(),),
+                evidence_level="high",
+            )
+
+    def test_primer_context_does_not_override_authority_refs(self) -> None:
+        payload = unified_evidence_object_to_dict(
+            evidence_object(
+                authority_refs=(authority_ref(authority_label="Official card identity"),),
+                primer_context_refs=(primer_context_ref(context_label="Primer context only."),),
+            )
+        )
+
+        self.assertEqual(payload["authority_refs"][0]["authority_label"], "Official card identity")
+        self.assertEqual(payload["authority_refs"][0]["authority_type"], "scryfall_card")
+        self.assertEqual(payload["primer_context_refs"][0]["context_label"], "Primer context only.")
+        self.assertEqual(payload["primer_context_refs"][0]["context_type"], "strategy_summary")
+
+    def test_primer_context_cannot_override_source_agreement(self) -> None:
+        with self.assertRaises(EvidenceFusionBuildError):
+            evidence_object(
+                source_agreement=source_agreement(agreement_label="weak"),
+                primer_context_refs=(primer_context_ref(),),
+                evidence_level="high",
+            )
+
     def test_simulator_ref_preserves_unsupported_card_count(self) -> None:
         payload = unified_evidence_object_to_dict(evidence_object())
 
         self.assertEqual(payload["simulator_refs"][0]["unsupported_cards_count"], 2)
+
+    def test_simulator_refs_remain_simulator_evidence_only(self) -> None:
+        payload = unified_evidence_object_to_dict(evidence_object())
+
+        self.assertEqual(payload["simulator_refs"][0]["simulator_ref_id"], "simulator:1")
+        self.assertEqual(payload["simulator_refs"][0]["simulation_type"], "target_access")
+        self.assertNotIn("simulator_ref_id", payload["observation_refs"][0])
+        self.assertNotEqual(payload["observation_refs"][0]["observation_type"], "simulator_statistic")
 
     def test_caveats_conflicts_and_agreement_remain_visible(self) -> None:
         payload = unified_evidence_object_to_dict(evidence_object())
@@ -258,6 +306,25 @@ class EvidenceFusionModelTest(unittest.TestCase):
     def test_high_speculation_cannot_pair_with_medium_evidence(self) -> None:
         with self.assertRaises(EvidenceFusionBuildError):
             evidence_object(evidence_level="medium", speculation_level="high")
+
+    def test_speculation_level_remains_visible_in_object_and_bundle_serialization(self) -> None:
+        item = evidence_object(evidence_level="low", speculation_level="medium")
+        bundle = build_unified_evidence_bundle(
+            bundle_id="bundle:speculation",
+            bundle_type="deck_analysis",
+            subject=subject(),
+            evidence_objects=(item,),
+            generated_at=GENERATED_AT,
+        )
+
+        object_payload = unified_evidence_object_to_dict(item)
+        bundle_payload = unified_evidence_bundle_to_dict(bundle)
+
+        self.assertEqual(object_payload["speculation_level"], "medium")
+        self.assertEqual(
+            bundle_payload["evidence_objects"][0]["speculation_level"],
+            "medium",
+        )
 
     def test_options_reject_invalid_limits(self) -> None:
         with self.assertRaises(EvidenceFusionBuildError):

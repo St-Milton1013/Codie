@@ -123,7 +123,7 @@ python -m unittest discover -s tests
 Confirm:
 
 ```text
-Ran 724 tests
+Ran 732 tests
 OK (skipped=1)
 ```
 
@@ -136,7 +136,7 @@ python -m unittest tests.test_evidence_fusion_models -v
 Confirm:
 
 ```text
-Ran 17 tests
+Ran 23 tests
 OK
 ```
 

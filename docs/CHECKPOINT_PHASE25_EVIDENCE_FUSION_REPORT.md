@@ -71,10 +71,17 @@ Tests verify:
 
 ```text
 authority refs serialize deterministically
+authority refs remain visible in unified evidence objects
+observation refs remain visible in unified evidence objects
 observation refs reject raw provider payload metadata
 metric refs preserve sample size and coverage ratio
 primer context refs reject full primer body metadata
+primer context refs remain explanatory only
+primer context refs cannot override authority refs
+primer context refs cannot override measured metric refs
 simulator refs preserve unsupported-card counts
+simulator refs are not treated as tournament evidence
+simulator refs remain simulator evidence only
 caveats remain visible
 conflicts remain visible
 source agreement remains visible
@@ -82,6 +89,8 @@ unified evidence bundles serialize deterministically
 high evidence requires metric refs
 high evidence requires sufficient source agreement
 high speculation cannot pair with medium or high evidence
+speculation level remains visible in unified evidence object serialization
+speculation level remains visible in unified evidence bundle serialization
 options reject invalid limits
 options can disable primer context refs
 options can disable simulator refs
@@ -149,7 +158,7 @@ Focused tests:
 ```text
 python -m unittest tests.test_evidence_fusion_models -v
 
-Ran 17 tests in 0.002s
+Ran 23 tests in 0.003s
 
 OK
 ```
@@ -159,7 +168,7 @@ Full suite:
 ```text
 python -m unittest discover -s tests
 
-Ran 724 tests in 3.230s
+Ran 732 tests in 3.331s
 
 OK (skipped=1)
 ```
