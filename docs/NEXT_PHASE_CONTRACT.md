@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: Phase 25B - Evidence Fusion / Unified Evidence Objects Packet Implementation
+Recommended next task: Phase 26A - Decision Intelligence Boundary Contract after Phase 25 outside validation
 
 ## Current Status
 
@@ -115,6 +115,10 @@ Phase 24C Chat/Intelligence Local API checkpoint packet is complete.
 Phase 24 outside validation returned PASS.
 
 Phase 25A Evidence Fusion / Unified Evidence Objects Contract is complete.
+
+Phase 25B Evidence Fusion / Unified Evidence Objects Packet Implementation is complete.
+
+Phase 25C Evidence Fusion / Unified Evidence Objects checkpoint packet is complete.
 
 Roadmap patch logged:
 
@@ -1486,6 +1490,72 @@ do not import LLM SDKs
 do not add UI
 do not write files
 do not persist evidence objects
+```
+
+## Completed Phase 25B Scope
+
+Phase 25B created:
+
+```text
+codie/evidence_fusion/__init__.py
+codie/evidence_fusion/models.py
+codie/evidence_fusion/builders.py
+tests/test_evidence_fusion_models.py
+docs/PHASE25B_EVIDENCE_FUSION_UNIFIED_EVIDENCE_OBJECTS_IMPLEMENTATION_REPORT.md
+```
+
+Implemented public interface:
+
+```text
+EvidenceFusionBuildError
+EvidenceAuthorityRef
+EvidenceObservationRef
+EvidenceMetricRef
+EvidencePrimerContextRef
+EvidenceSimulatorRef
+EvidenceCaveat
+EvidenceConflict
+EvidenceSourceAgreement
+UnifiedEvidenceSubject
+UnifiedEvidenceObject
+UnifiedEvidenceBundle
+EvidenceFusionOptions
+build_unified_evidence_object(...)
+build_unified_evidence_bundle(...)
+unified_evidence_object_to_dict(...)
+unified_evidence_bundle_to_dict(...)
+validate_unified_evidence_bundle(...)
+```
+
+Next checkpoint should create:
+
+```text
+docs/CHECKPOINT_PHASE25_EVIDENCE_FUSION_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE25_EVIDENCE_FUSION_PROMPT.md
+```
+
+## Completed Phase 25C Scope
+
+Phase 25C created:
+
+```text
+docs/CHECKPOINT_PHASE25_EVIDENCE_FUSION_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE25_EVIDENCE_FUSION_PROMPT.md
+```
+
+Phase 25 outside validation packet:
+
+```text
+docs/CHECKPOINT_PHASE25_EVIDENCE_FUSION_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE25_EVIDENCE_FUSION_PROMPT.md
+docs/PHASE25A_EVIDENCE_FUSION_UNIFIED_EVIDENCE_OBJECTS_CONTRACT.md
+docs/PHASE25B_EVIDENCE_FUSION_UNIFIED_EVIDENCE_OBJECTS_IMPLEMENTATION_REPORT.md
+codie/evidence_fusion/__init__.py
+codie/evidence_fusion/models.py
+codie/evidence_fusion/builders.py
+tests/test_evidence_fusion_models.py
+docs/ROADMAP_PATCH_CODIE_ARCHITECTURE_REVISION_III.md
+docs/POST_PHASE24_PATCH_CONTRACT_BACKLOG.md
 ```
 
 ## Completed Phase 17C Scope

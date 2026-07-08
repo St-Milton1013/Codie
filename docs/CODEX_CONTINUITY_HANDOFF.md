@@ -20,12 +20,12 @@ Latest pushed commit before Phase 24 outside validation acceptance: 432e958 Add 
 Latest full-suite result:
 
 ```text
-Ran 707 tests in 3.919s
+Ran 724 tests in 3.230s
 
 OK (skipped=1)
 ```
 
-Latest focused Phase 24B local API result:
+Latest focused Phase 25B Evidence Fusion result:
 
 ```text
 Ran 17 tests in 0.002s
@@ -158,6 +158,8 @@ Phase 23 Chat/Intelligence UI/API Boundary: PASS
 Phase 24A Chat/Intelligence Local API Contract: PASS
 Phase 24B Chat/Intelligence Local API Packet Implementation: PASS
 Phase 24 Chat/Intelligence Local API: PASS
+Phase 25A Evidence Fusion / Unified Evidence Objects Contract: PASS
+Phase 25B Evidence Fusion / Unified Evidence Objects Packet Implementation: PASS
 ```
 
 ## Recent Commits
@@ -240,7 +242,8 @@ docs/OUTSIDE_VALIDATION_PHASE24_CHAT_INTELLIGENCE_LOCAL_API_PROMPT.md
 Next recommended packet:
 
 ```text
-Phase 25B - Evidence Fusion / Unified Evidence Objects Packet Implementation
+Send Phase 25 outside validation packet.
+After PASS or PASS WITH REVIEW NOTES, proceed to Phase 26A - Decision Intelligence Boundary Contract.
 ```
 
 ## Commands To Run At Start Of A New Session
@@ -1251,6 +1254,14 @@ Objects contract and keeps Phase 25B implementation limited to pure in-memory
 packet models with no schema, DB reads, provider reads, analytics
 recalculation, recommendations, LLM calls, simulator execution, UI, file
 writing, persistence, or Jin-Gitaxias theory generation.
+
+Phase 25B is complete. It implements pure in-memory Evidence Fusion packet
+models under codie/evidence_fusion plus focused tests. The next packet should
+be Phase 25C checkpoint and outside validation prompt.
+
+Phase 25C is complete. It creates the internal checkpoint and outside
+validation prompt for Evidence Fusion. Phase 26 is blocked until outside
+validation returns PASS or PASS WITH REVIEW NOTES.
 
 Next UI implementation packet:
 
