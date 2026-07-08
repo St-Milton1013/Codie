@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: Phase 24B - Chat/Intelligence Local API Packet Implementation
+Recommended next task: Phase 24C - Chat/Intelligence Local API Checkpoint
 
 ## Current Status
 
@@ -107,6 +107,8 @@ Phase 23 outside validation is accepted.
 Phase 24 may proceed contract-first.
 
 Phase 24A Chat/Intelligence Local API Contract is complete.
+
+Phase 24B Chat/Intelligence Local API Packet Implementation is complete.
 
 Roadmap patch logged:
 
@@ -1323,6 +1325,48 @@ do not calculate analytics
 do not generate recommendations
 do not write files
 do not export private raw_input
+```
+
+## Completed Phase 24B Scope
+
+Phase 24B created:
+
+```text
+codie/intelligence/local_api.py
+tests/test_intelligence_local_api.py
+docs/PHASE24B_CHAT_INTELLIGENCE_LOCAL_API_IMPLEMENTATION_REPORT.md
+```
+
+Phase 24B modified:
+
+```text
+codie/intelligence/__init__.py
+```
+
+Implemented public interface:
+
+```text
+LocalAPIContractError
+LocalAPIRouteSpec
+LocalAPIRequestEnvelope
+LocalAPIResponseEnvelope
+LocalAPIErrorEnvelope
+LocalAPIOptions
+build_chat_route_spec(...)
+build_local_api_request_envelope(...)
+build_local_api_response_envelope(...)
+build_local_api_error_envelope(...)
+local_api_route_spec_to_dict(...)
+local_api_request_envelope_to_dict(...)
+local_api_response_envelope_to_dict(...)
+local_api_error_envelope_to_dict(...)
+```
+
+Next checkpoint should create:
+
+```text
+docs/CHECKPOINT_PHASE24_CHAT_INTELLIGENCE_LOCAL_API_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE24_CHAT_INTELLIGENCE_LOCAL_API_PROMPT.md
 ```
 
 ## Completed Phase 17C Scope
