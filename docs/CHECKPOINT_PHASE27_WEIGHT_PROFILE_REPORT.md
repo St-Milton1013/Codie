@@ -145,6 +145,7 @@ raw SQL scan: no matches
 production file-write scan: no matches
 strategic-language scan: no matches
 source/provider/private metadata scan: matches only blocked-key constants and rejection tests
+schema/repository drift scan: no matches
 ```
 
 ## Required Outside Validation
