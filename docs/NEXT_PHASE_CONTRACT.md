@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: Phase 24C - Chat/Intelligence Local API Checkpoint
+Recommended next task: Phase 25 planning after Phase 24 outside validation
 
 ## Current Status
 
@@ -109,6 +109,8 @@ Phase 24 may proceed contract-first.
 Phase 24A Chat/Intelligence Local API Contract is complete.
 
 Phase 24B Chat/Intelligence Local API Packet Implementation is complete.
+
+Phase 24C Chat/Intelligence Local API checkpoint packet is complete.
 
 Roadmap patch logged:
 
@@ -1367,6 +1369,31 @@ Next checkpoint should create:
 ```text
 docs/CHECKPOINT_PHASE24_CHAT_INTELLIGENCE_LOCAL_API_REPORT.md
 docs/OUTSIDE_VALIDATION_PHASE24_CHAT_INTELLIGENCE_LOCAL_API_PROMPT.md
+```
+
+## Completed Phase 24C Scope
+
+Phase 24C created:
+
+```text
+docs/CHECKPOINT_PHASE24_CHAT_INTELLIGENCE_LOCAL_API_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE24_CHAT_INTELLIGENCE_LOCAL_API_PROMPT.md
+```
+
+Phase 24 outside validation packet:
+
+```text
+docs/CHECKPOINT_PHASE24_CHAT_INTELLIGENCE_LOCAL_API_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE24_CHAT_INTELLIGENCE_LOCAL_API_PROMPT.md
+docs/PHASE24A_CHAT_INTELLIGENCE_LOCAL_API_CONTRACT.md
+docs/PHASE24B_CHAT_INTELLIGENCE_LOCAL_API_IMPLEMENTATION_REPORT.md
+codie/intelligence/local_api.py
+tests/test_intelligence_local_api.py
+codie/intelligence/ui_api_boundary.py
+codie/intelligence/query_planner.py
+codie/intelligence/answer_builder.py
+codie/intelligence/llm_writer_auditor.py
+codie/intelligence/__init__.py
 ```
 
 ## Completed Phase 17C Scope
