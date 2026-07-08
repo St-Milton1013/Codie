@@ -17,6 +17,36 @@ test planning
 
 They must not be copied into Codie or treated as architecture authorities.
 
+## Magic Rules References
+
+Official Magic documentation remains authoritative. GitHub repositories may
+only support rule-shape discovery, fixture planning, parser comparison, and
+simulator validation research.
+
+Reference candidates:
+
+```text
+sethwoodworth/mtg-comprehensive-rules
+dgulyas/RulesParser
+pit142857/mtg-cr
+machinaut/mtg-rules
+MTGRuler
+```
+
+Use only for:
+
+```text
+rules parsing ideas
+rule reference indexing
+card interaction explanation fixtures
+simulator validation test planning
+chat answers about game mechanics
+```
+
+Do not use GitHub rule repositories to override official Comprehensive Rules,
+official Oracle rulings, official release notes, or official format legality
+announcements.
+
 ## MTG Deck Analyzer References
 
 Reference candidates:
@@ -61,6 +91,7 @@ Reference candidate:
 
 ```text
 Jorazon/moxfield-scraper
+Moxfield parser references
 ```
 
 Use only for Moxfield URL handling, deck extraction patterns, and failure
@@ -191,6 +222,7 @@ Reference candidates:
 ```text
 Kejikus/interactive-graph
 mrzahaki/dynagraph
+Cytoscape / graph visualization references
 ```
 
 Use for:

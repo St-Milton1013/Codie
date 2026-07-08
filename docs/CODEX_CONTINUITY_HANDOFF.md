@@ -1208,6 +1208,7 @@ Latest roadmap patch logged:
 docs/ROADMAP_PATCH_MOXFIELD_FREQUENCY_POOL_BUILDER.md
 docs/ROADMAP_PATCH_TAG_GRAPH_LAB.md
 docs/PATCH_EVIDENCE_INTELLIGENCE_AND_LOCAL_REPORTS.md
+docs/ROADMAP_PATCH_EVIDENCE_ARCHITECTURE_REMASTER.md
 ```
 
 The Moxfield Frequency Pool Builder is roadmap-only. It does not authorize
@@ -1224,6 +1225,12 @@ reference repositories plus future specs for frequency pools, commander
 staples, co-occurrence metrics, evidence graphs, Codie chat, and LocalSend
 delivery. It does not authorize schema, provider, UI, vector search, LocalSend,
 or recommendation implementation without future contracts.
+
+The Evidence Architecture Remaster is roadmap-only. It establishes the future
+classed evidence architecture, Evidence Fusion, Decision Intelligence, versioned
+weight profiles, source agreement, and action-first UI principles. It does not
+authorize schema, repository, provider, recommendation, simulator, UI, LLM, or
+file-writing implementation without future contracts.
 
 Next UI implementation packet:
 
