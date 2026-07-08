@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: Phase 25A - Evidence Fusion / Unified Evidence Objects Contract after Phase 24 outside validation
+Recommended next task: Phase 25A - Evidence Fusion / Unified Evidence Objects Contract
 
 ## Current Status
 
@@ -111,6 +111,8 @@ Phase 24A Chat/Intelligence Local API Contract is complete.
 Phase 24B Chat/Intelligence Local API Packet Implementation is complete.
 
 Phase 24C Chat/Intelligence Local API checkpoint packet is complete.
+
+Phase 24 outside validation returned PASS WITH REVIEW NOTES.
 
 Roadmap patch logged:
 
@@ -1398,6 +1400,24 @@ codie/intelligence/query_planner.py
 codie/intelligence/answer_builder.py
 codie/intelligence/llm_writer_auditor.py
 codie/intelligence/__init__.py
+```
+
+## Completed Phase 24 Outside Validation
+
+Phase 24 outside validation returned:
+
+```text
+PASS WITH REVIEW NOTES
+```
+
+No required fixes remain.
+
+Review notes:
+
+```text
+LocalAPIOptions.allow_non_local_paths and allow_non_local_hosts are currently future-facing only.
+If a future phase wants non-local paths or hosts, it needs a new contract.
+Clean-checkout test execution remains the outside validator's responsibility.
 ```
 
 ## Completed Phase 17C Scope
