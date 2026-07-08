@@ -31,7 +31,7 @@ Latest pushed commit before Phase 24 outside validation acceptance: 432e958 Add 
 Latest full-suite result:
 
 ```text
-Ran 746 tests in 3.291s
+Ran 761 tests in 3.499s
 
 OK (skipped=1)
 ```
@@ -176,6 +176,8 @@ Phase 26A Decision Intelligence Boundary Contract: PASS
 Phase 26B Decision Intelligence Boundary Packet Implementation: PASS
 Phase 26 Decision Intelligence Boundary Outside Validation: PASS
 Phase 27A Weight Profile / Analysis Profile Contract: PASS
+Phase 27B Weight Profile / Analysis Profile Packet Implementation: PASS
+Phase 27 Weight Profile / Analysis Profile Checkpoint: READY FOR OUTSIDE VALIDATION
 ```
 
 ## Recent Commits
@@ -1305,10 +1307,25 @@ remaining contract-only with no implementation, schema, DB reads, provider
 reads, recommendation output, simulator execution, LLM calls, UI, or file
 writing.
 
-Current Phase 27A packet:
+Phase 27B is complete. It implements pure in-memory Weight Profile / Analysis
+Profile packets under codie/weight_profiles. The packet layer serializes all
+weight-affecting components visibly, preserves versions, keeps default profiles
+deterministic, keeps Budget Aware generic only, and keeps compatibility reports
+informational-only. It does not generate recommendations, deck health output,
+replacement suggestions, analytics, simulator execution, LLM calls, UI,
+persistence, or file outputs.
+
+Current Phase 27 outside validation packet:
 
 ```text
+docs/CHECKPOINT_PHASE27_WEIGHT_PROFILE_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE27_WEIGHT_PROFILE_PROMPT.md
 docs/PHASE27A_WEIGHT_PROFILE_ANALYSIS_PROFILE_CONTRACT.md
+docs/PHASE27B_WEIGHT_PROFILE_IMPLEMENTATION_REPORT.md
+codie/weight_profiles/__init__.py
+codie/weight_profiles/models.py
+codie/weight_profiles/defaults.py
+tests/test_weight_profiles.py
 ```
 
 Next UI implementation packet:

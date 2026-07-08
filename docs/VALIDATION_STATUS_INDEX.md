@@ -11,7 +11,9 @@ Phase 25 Evidence Fusion: PASS
 Outside validation: accepted
 Phase 26 Decision Intelligence Boundary: PASS
 Outside validation: accepted
-Phase 27A Weight Profile / Analysis Profile Contract: complete; ready for review
+Phase 27 Weight Profile / Analysis Profile: INTERNAL PASS
+Outside validation: ready to send
+Phase 28: blocked until Phase 27 outside validation returns PASS or PASS WITH REVIEW NOTES
 ```
 
 ## Accepted Phase Summary
@@ -49,7 +51,7 @@ Phase 23 Chat / Intelligence UI API Boundary: PASS
 Phase 24 Chat / Intelligence Local API: PASS
 Phase 25 Evidence Fusion: PASS
 Phase 26 Decision Intelligence Boundary: PASS
-Phase 27A Weight Profile / Analysis Profile Contract: COMPLETE; READY FOR REVIEW
+Phase 27 Weight Profile / Analysis Profile: INTERNAL PASS; READY FOR OUTSIDE VALIDATION
 ```
 
 ## Latest Local Validation
@@ -62,7 +64,7 @@ OK
 
 Full suite:
 python -m unittest discover -s tests
-Ran 746 tests in 3.291s
+Ran 761 tests in 3.499s
 OK (skipped=1)
 
 Static check:
@@ -73,11 +75,12 @@ passed
 ## Current Blocker
 
 ```text
-Phase 27B - Weight Profile / Analysis Profile Packet Implementation is blocked until Phase 27A is complete and reviewed.
+Phase 28A - Deck Health / Recommendation Output Contract is blocked until Phase 27 outside validation is accepted.
 ```
 
-## Current Phase Packet
+## Current Outside Validation Packet
 
 ```text
-docs/PHASE27A_WEIGHT_PROFILE_ANALYSIS_PROFILE_CONTRACT.md
+docs/CHECKPOINT_PHASE27_WEIGHT_PROFILE_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE27_WEIGHT_PROFILE_PROMPT.md
 ```

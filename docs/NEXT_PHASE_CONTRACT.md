@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: Phase 27B - Weight Profile / Analysis Profile Packet Implementation after Phase 27A review
+Recommended next task: send Phase 27 outside validation packet; after PASS or PASS WITH REVIEW NOTES proceed to Phase 28A - Deck Health / Recommendation Output Contract
 
 ## Active Indexes
 
@@ -143,6 +143,10 @@ Phase 26 outside validation returned PASS.
 
 Phase 27A Weight Profile / Analysis Profile Contract is complete.
 
+Phase 27B Weight Profile / Analysis Profile Packet Implementation is complete.
+
+Phase 27 Weight Profile / Analysis Profile checkpoint packet is complete.
+
 Roadmap patch logged:
 
 ```text
@@ -159,6 +163,9 @@ docs/PHASE26B_DECISION_INTELLIGENCE_BOUNDARY_IMPLEMENTATION_REPORT.md
 docs/CHECKPOINT_PHASE26_DECISION_INTELLIGENCE_BOUNDARY_REPORT.md
 docs/OUTSIDE_VALIDATION_PHASE26_DECISION_INTELLIGENCE_BOUNDARY_PROMPT.md
 docs/PHASE27A_WEIGHT_PROFILE_ANALYSIS_PROFILE_CONTRACT.md
+docs/PHASE27B_WEIGHT_PROFILE_IMPLEMENTATION_REPORT.md
+docs/CHECKPOINT_PHASE27_WEIGHT_PROFILE_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE27_WEIGHT_PROFILE_PROMPT.md
 ```
 
 Phase 15 planning is complete:
