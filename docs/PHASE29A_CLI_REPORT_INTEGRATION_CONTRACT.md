@@ -347,14 +347,14 @@ manifest writes last if manifest exists
 
 ## Required Static Scans
 
-Future implementation should run:
+Reporting-only Phase 29B implementation should run:
 
 ```text
-rg -n "codie\.db|codie\.providers|codie\.repositories|codie\.ingestion|codie\.canonical|codie\.analytics|codie\.cards|codie\.probability_engine|requests|httpx|sqlite3|openai|anthropic|flask|fastapi|uvicorn|starlette" codie\recommendation_output codie\cli tests\test_recommendation_output_reporting.py tests\test_cli_recommendation_output.py
-rg -n "source_events|source_decks|source_deck_cards|provider_objects" codie\recommendation_output codie\cli tests\test_recommendation_output_reporting.py tests\test_cli_recommendation_output.py
-rg -n "raw_provider_payload|provider_payload|private_deck_text|full_primer_body|original_import_text|raw_input" codie\recommendation_output codie\cli tests\test_recommendation_output_reporting.py tests\test_cli_recommendation_output.py
-rg -n "SELECT |INSERT |UPDATE |DELETE |execute\(|executescript\(" codie\recommendation_output codie\cli tests\test_recommendation_output_reporting.py tests\test_cli_recommendation_output.py
-rg -n "you should play|should be played|should be cut|must include|correct card|breaks the format|secretly optimal|cut this|strict upgrade|auto-include|recommended cut|recommended include|best card|strictly better" codie\recommendation_output codie\cli tests\test_recommendation_output_reporting.py tests\test_cli_recommendation_output.py
+rg -n "codie\.db|codie\.providers|codie\.repositories|codie\.ingestion|codie\.canonical|codie\.analytics|codie\.cards|codie\.probability_engine|requests|httpx|sqlite3|openai|anthropic|flask|fastapi|uvicorn|starlette" codie\recommendation_output tests\test_recommendation_output_reporting.py
+rg -n "source_events|source_decks|source_deck_cards|provider_objects" codie\recommendation_output tests\test_recommendation_output_reporting.py
+rg -n "raw_provider_payload|provider_payload|private_deck_text|full_primer_body|original_import_text|raw_input" codie\recommendation_output tests\test_recommendation_output_reporting.py
+rg -n "SELECT |INSERT |UPDATE |DELETE |execute\(|executescript\(" codie\recommendation_output tests\test_recommendation_output_reporting.py
+rg -n "you should play|should be played|should be cut|must include|correct card|breaks the format|secretly optimal|cut this|strict upgrade|auto-include|recommended cut|recommended include|best card|strictly better" codie\recommendation_output tests\test_recommendation_output_reporting.py
 git diff --name-only -- codie/db/schema docs/SCHEMA_SPEC.md codie/db/repositories
 ```
 
@@ -363,6 +363,27 @@ Expected:
 ```text
 no production matches, except blocked-key constants and rejection tests where explicitly documented
 no schema or repository drift
+```
+
+If CLI is implemented in Phase 29B or a later Phase 29 packet, also scan:
+
+```text
+codie\cli
+tests\test_cli_recommendation_output.py
+```
+
+If file writing is deferred, do not require file-writing behavior tests yet.
+
+If file writing is implemented in Phase 29B or a later Phase 29 packet, add
+tests for:
+
+```text
+output_root containment
+unsafe output path rejection
+unsupported extension rejection
+output-root-is-file rejection
+UTF-8 JSON and Markdown writes
+manifest-last behavior, if a manifest exists
 ```
 
 ## Do Not Do In Phase 29A

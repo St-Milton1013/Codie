@@ -71,7 +71,7 @@ docs-only contract packet; no focused implementation test added
 
 Full suite:
 python -m unittest discover -s tests
-Ran 772 tests in 3.655s
+Ran 772 tests in 3.868s
 OK (skipped=1)
 
 Static check:
