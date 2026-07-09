@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: review Phase 29C - CLI / Safe File Writer Integration Contract; after acceptance proceed to Phase 29D - CLI / safe file writer integration implementation
+Recommended next task: review Phase 29D - Safe Recommendation Report File Writer; after acceptance proceed to Phase 29E - CLI wrapper
 
 ## Active Indexes
 

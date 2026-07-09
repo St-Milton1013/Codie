@@ -32,15 +32,15 @@ Latest pushed commit before Phase 24 outside validation acceptance: 432e958 Add 
 Latest full-suite result:
 
 ```text
-Ran 781 tests in 3.301s
+Ran 790 tests in 3.440s
 
 OK (skipped=1)
 ```
 
-Latest focused Phase 29B result:
+Latest focused Phase 29D result:
 
 ```text
-Ran 9 tests in 0.006s
+Ran 9 tests in 0.041s
 
 OK
 ```
@@ -1376,14 +1376,24 @@ The Phase 29C review fix is applied: writer-only Phase 29D tests/static scans
 are separated from conditional Phase 29E CLI tests/static scans, and explicit
 basenames must reject path separators while preserving `.json` / `.md` rules.
 
-Current Phase 29C review packet:
+Phase 29D is internally complete. It implements only the safe recommendation
+report file writer under codie/recommendation_output/writers.py. It accepts
+already-built RecommendationOutputBundle objects or validated bundle JSON,
+builds reports through Phase 29B serializers, writes JSON/Markdown output under
+an enforced output_root, rejects unsafe basenames and traversal, requires
+explicit overwrite, writes UTF-8, and writes manifest.json last. It does not
+implement CLI, schema, DB reads, provider/source reads, analytics recalculation,
+simulator execution, LLM calls, candidate discovery, candidate ranking, cut
+selection, addition selection, or final recommendation generation.
+
+Current Phase 29D review packet:
 
 ```text
+docs/PHASE29D_CLI_SAFE_FILE_WRITER_IMPLEMENTATION_REPORT.md
 docs/PHASE29C_CLI_SAFE_FILE_WRITER_CONTRACT.md
-docs/PHASE29A_CLI_REPORT_INTEGRATION_CONTRACT.md
-docs/PHASE29B_CLI_REPORT_INTEGRATION_IMPLEMENTATION_REPORT.md
+codie/recommendation_output/writers.py
 codie/recommendation_output/reporting.py
-tests/test_recommendation_output_reporting.py
+tests/test_recommendation_output_writers.py
 docs/ACTIVE_ROADMAP_INDEX.md
 docs/VALIDATION_STATUS_INDEX.md
 docs/NEXT_PHASE_CONTRACT.md

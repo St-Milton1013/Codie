@@ -23,25 +23,25 @@ Phase 29A CLI / Report Integration Contract: complete
 Phase 29A CLI / Report Integration Contract: accepted with required fix applied
 Phase 29B Report Document Implementation: internally complete
 Phase 29C CLI / Safe File Writer Integration Contract: complete
-Current action: review Phase 29C contract packet
-Phase 29D status: blocked until Phase 29C review is accepted
+Phase 29D Safe Recommendation Report File Writer: internally complete
+Current action: review Phase 29D implementation packet
+Phase 29E status: blocked until Phase 29D review is accepted
 ```
 
 ## Next Allowed Phase
 
 ```text
-Phase 29D - CLI / safe file writer integration implementation after Phase 29C review
+Phase 29E - CLI wrapper after Phase 29D review
 ```
 
-Do not implement CLI or file writing until Phase 29C is accepted.
+Do not implement the CLI wrapper until Phase 29D is accepted.
 
 ## Release-Critical Path
 
 ```text
-1. Phase 29C CLI / safe file writer integration contract review
-2. Phase 29D CLI / safe file writer integration implementation
-3. Phase 29E CLI / Report integration checkpoint
-4. Phase 29D CLI / Report integration checkpoint
+1. Phase 29D safe recommendation report file writer review
+2. Phase 29E CLI wrapper contract / implementation
+3. Phase 29F CLI / Report integration checkpoint
 5. Phase 30A Local Alpha release checklist
 ```
 
@@ -90,19 +90,20 @@ No recommendations directly from simulator output.
 No feature should duplicate Decision Intelligence reasoning.
 Recommendation output must flow through Evidence Fusion and Decision Intelligence.
 Phase 29B report documents must not write files.
-Phase 29C must be accepted before CLI or file writing is implemented.
+Phase 29D safe writer must not implement CLI behavior.
+Phase 29E CLI wrapper must not generate recommendations.
 ```
 
-## Phase 29C Contract Packet
+## Phase 29D Review Packet
 
 Review these files for the current gate:
 
 ```text
+docs/PHASE29D_CLI_SAFE_FILE_WRITER_IMPLEMENTATION_REPORT.md
 docs/PHASE29C_CLI_SAFE_FILE_WRITER_CONTRACT.md
-docs/PHASE29A_CLI_REPORT_INTEGRATION_CONTRACT.md
-docs/PHASE29B_CLI_REPORT_INTEGRATION_IMPLEMENTATION_REPORT.md
+codie/recommendation_output/writers.py
 codie/recommendation_output/reporting.py
-tests/test_recommendation_output_reporting.py
+tests/test_recommendation_output_writers.py
 docs/ACTIVE_ROADMAP_INDEX.md
 docs/VALIDATION_STATUS_INDEX.md
 docs/NEXT_PHASE_CONTRACT.md

@@ -33,6 +33,12 @@ from .reporting import (
     recommendation_report_document_to_markdown,
     validate_recommendation_report_document,
 )
+from .writers import (
+    RecommendationReportWriteError,
+    RecommendationReportWriteOptions,
+    RecommendationReportWriteResult,
+    write_recommendation_report_files,
+)
 
 
 __all__ = [
@@ -47,6 +53,9 @@ __all__ = [
     "RecommendationReportDocument",
     "RecommendationReportOptions",
     "RecommendationReportSection",
+    "RecommendationReportWriteError",
+    "RecommendationReportWriteOptions",
+    "RecommendationReportWriteResult",
     "ReplacementSuggestionPacket",
     "build_deck_health_packet",
     "build_evidence_explanation_packet",
@@ -63,6 +72,7 @@ __all__ = [
     "recommendation_report_document_to_markdown",
     "replacement_suggestion_packet_to_dict",
     "build_recommendation_report_document",
+    "write_recommendation_report_files",
     "validate_recommendation_report_document",
     "validate_recommendation_output_bundle",
 ]
