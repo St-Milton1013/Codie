@@ -16,7 +16,9 @@ Outside validation: accepted
 Phase 28A Deck Health / Recommendation Output Contract: PASS WITH REVIEW NOTES
 Phase 28B Deck Health / Recommendation Output Packet Implementation: INTERNAL PASS
 Phase 28C Deck Health / Recommendation Output Checkpoint: COMPLETE
-Phase 29: blocked until Phase 28 outside validation returns PASS or PASS WITH REVIEW NOTES
+Phase 28 Deck Health / Recommendation Output: PASS
+Phase 29A CLI / Report Integration Contract: COMPLETE
+Phase 29B: blocked until Phase 29A review is accepted
 ```
 
 ## Accepted Phase Summary
@@ -57,20 +59,19 @@ Phase 26 Decision Intelligence Boundary: PASS
 Phase 27 Weight Profile / Analysis Profile: PASS
 Phase 28A Deck Health / Recommendation Output Contract: PASS WITH REVIEW NOTES
 Phase 28B Deck Health / Recommendation Output Packet Implementation: INTERNAL PASS
-Phase 28 Deck Health / Recommendation Output: READY FOR OUTSIDE VALIDATION
+Phase 28 Deck Health / Recommendation Output: PASS
+Phase 29A CLI / Report Integration Contract: COMPLETE; READY FOR REVIEW
 ```
 
 ## Latest Local Validation
 
 ```text
-Focused Phase 28B Recommendation Output:
-python -m unittest tests.test_recommendation_output_boundary -v
-Ran 11 tests in 0.005s
-OK
+Focused Phase 29A:
+docs-only contract packet; no focused implementation test added
 
 Full suite:
 python -m unittest discover -s tests
-Ran 772 tests in 3.790s
+Ran 772 tests in 3.655s
 OK (skipped=1)
 
 Static check:
@@ -81,19 +82,13 @@ passed
 ## Current Blocker
 
 ```text
-Phase 29 is blocked until Phase 28 outside validation is accepted.
+Phase 29B - CLI / Report Integration Implementation is blocked until Phase 29A review is accepted.
 ```
 
-## Current Phase 28 Outside Validation Packet
+## Current Phase 29A Review Packet
 
 ```text
-docs/CHECKPOINT_PHASE28_RECOMMENDATION_OUTPUT_REPORT.md
-docs/OUTSIDE_VALIDATION_PHASE28_RECOMMENDATION_OUTPUT_PROMPT.md
-docs/PHASE28A_DECK_HEALTH_RECOMMENDATION_OUTPUT_CONTRACT.md
-docs/PHASE28B_DECK_HEALTH_RECOMMENDATION_OUTPUT_IMPLEMENTATION_REPORT.md
-codie/recommendation_output/__init__.py
-codie/recommendation_output/models.py
-tests/test_recommendation_output_boundary.py
+docs/PHASE29A_CLI_REPORT_INTEGRATION_CONTRACT.md
 docs/ACTIVE_ROADMAP_INDEX.md
 docs/VALIDATION_STATUS_INDEX.md
 docs/NEXT_PHASE_CONTRACT.md

@@ -18,25 +18,27 @@ Phase 28A Deck Health / Recommendation Output Contract: complete
 Phase 28A Deck Health / Recommendation Output Contract: accepted with review notes
 Phase 28B Deck Health / Recommendation Output Packet Implementation: internally complete
 Phase 28C Deck Health / Recommendation Output checkpoint: complete
-Current action: send Phase 28 outside validation packet
-Phase 29 status: blocked until Phase 28 outside validation is accepted
+Phase 28 Deck Health / Recommendation Output: externally accepted
+Phase 29A CLI / Report Integration Contract: complete
+Current action: review Phase 29A contract packet
+Phase 29B status: blocked until Phase 29A review is accepted
 ```
 
 ## Next Allowed Phase
 
 ```text
-Phase 29A - CLI / Report integration contract after Phase 28 outside validation
+Phase 29B - CLI / Report integration implementation after Phase 29A review
 ```
 
-Do not start Phase 29 until Phase 28 outside validation is accepted.
+Do not start Phase 29B until Phase 29A is accepted.
 
 ## Release-Critical Path
 
 ```text
-1. Phase 28 outside validation
-2. Phase 29A CLI / Report integration contract
-3. Phase 29B CLI / Report integration implementation
-4. Phase 29A CLI / Report integration
+1. Phase 29A CLI / Report integration contract review
+2. Phase 29B Report document implementation
+3. Phase 29C CLI / safe file writer integration
+4. Phase 29D CLI / Report integration checkpoint
 5. Phase 30A Local Alpha release checklist
 ```
 
@@ -84,21 +86,15 @@ No recommendations directly from primer text.
 No recommendations directly from simulator output.
 No feature should duplicate Decision Intelligence reasoning.
 Recommendation output must flow through Evidence Fusion and Decision Intelligence.
-Phase 29 cannot start until Phase 28 outside validation is accepted.
+Phase 29B cannot start until Phase 29A is accepted.
 ```
 
-## Phase 28 Outside Validation Packet
+## Phase 29A Contract Packet
 
-Send these files for the current gate:
+Review these files for the current gate:
 
 ```text
-docs/CHECKPOINT_PHASE28_RECOMMENDATION_OUTPUT_REPORT.md
-docs/OUTSIDE_VALIDATION_PHASE28_RECOMMENDATION_OUTPUT_PROMPT.md
-docs/PHASE28A_DECK_HEALTH_RECOMMENDATION_OUTPUT_CONTRACT.md
-docs/PHASE28B_DECK_HEALTH_RECOMMENDATION_OUTPUT_IMPLEMENTATION_REPORT.md
-codie/recommendation_output/__init__.py
-codie/recommendation_output/models.py
-tests/test_recommendation_output_boundary.py
+docs/PHASE29A_CLI_REPORT_INTEGRATION_CONTRACT.md
 docs/ACTIVE_ROADMAP_INDEX.md
 docs/VALIDATION_STATUS_INDEX.md
 docs/NEXT_PHASE_CONTRACT.md

@@ -32,7 +32,7 @@ Latest pushed commit before Phase 24 outside validation acceptance: 432e958 Add 
 Latest full-suite result:
 
 ```text
-Ran 772 tests in 3.790s
+Ran 772 tests in 3.655s
 
 OK (skipped=1)
 ```
@@ -181,7 +181,9 @@ Phase 27B Weight Profile / Analysis Profile Packet Implementation: PASS
 Phase 27 Weight Profile / Analysis Profile Outside Validation: PASS
 Phase 28A Deck Health / Recommendation Output Contract: PASS WITH REVIEW NOTES
 Phase 28B Deck Health / Recommendation Output Packet Implementation: INTERNAL PASS
-Phase 28C Deck Health / Recommendation Output Checkpoint: READY FOR OUTSIDE VALIDATION
+Phase 28C Deck Health / Recommendation Output Checkpoint: PASS
+Phase 28 Deck Health / Recommendation Output Outside Validation: PASS
+Phase 29A CLI / Report Integration Contract: PASS
 ```
 
 ## Recent Commits
@@ -1341,16 +1343,20 @@ Phase 28C is complete. It creates the internal checkpoint and outside
 validation prompt for Phase 28. Phase 29 must not start until Phase 28 outside
 validation returns PASS or PASS WITH REVIEW NOTES.
 
-Current Phase 28 outside validation packet:
+Phase 28 outside validation returned PASS.
+
+Phase 29A is complete. It defines how already-built RecommendationOutputBundle
+payloads may be rendered in future CLI/report layers while keeping Phase 29A
+contract-only. It authorizes no implementation, schema, DB reads, provider
+reads, source-table reads, raw provider reads, LLM calls, simulator execution,
+analytics recalculation, file writing, candidate discovery, candidate ranking,
+candidate scoring, cut selection, addition selection, or final recommendation
+generation.
+
+Current Phase 29A review packet:
 
 ```text
-docs/CHECKPOINT_PHASE28_RECOMMENDATION_OUTPUT_REPORT.md
-docs/OUTSIDE_VALIDATION_PHASE28_RECOMMENDATION_OUTPUT_PROMPT.md
-docs/PHASE28A_DECK_HEALTH_RECOMMENDATION_OUTPUT_CONTRACT.md
-docs/PHASE28B_DECK_HEALTH_RECOMMENDATION_OUTPUT_IMPLEMENTATION_REPORT.md
-codie/recommendation_output/__init__.py
-codie/recommendation_output/models.py
-tests/test_recommendation_output_boundary.py
+docs/PHASE29A_CLI_REPORT_INTEGRATION_CONTRACT.md
 docs/ACTIVE_ROADMAP_INDEX.md
 docs/VALIDATION_STATUS_INDEX.md
 docs/NEXT_PHASE_CONTRACT.md

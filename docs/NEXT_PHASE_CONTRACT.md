@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: send Phase 28 outside validation packet; after PASS or PASS WITH REVIEW NOTES proceed to Phase 29A - CLI / Report integration contract
+Recommended next task: review Phase 29A - CLI / Report Integration Contract; after acceptance proceed to Phase 29B - report document implementation
 
 ## Active Indexes
 
@@ -159,6 +159,10 @@ Phase 28B Deck Health / Recommendation Output Packet Implementation is complete.
 
 Phase 28C Deck Health / Recommendation Output checkpoint packet is complete.
 
+Phase 28 outside validation returned PASS.
+
+Phase 29A CLI / Report Integration Contract is complete.
+
 Roadmap patch logged:
 
 ```text
@@ -185,6 +189,7 @@ docs/OUTSIDE_VALIDATION_PHASE28_RECOMMENDATION_OUTPUT_PROMPT.md
 codie/recommendation_output/__init__.py
 codie/recommendation_output/models.py
 tests/test_recommendation_output_boundary.py
+docs/PHASE29A_CLI_REPORT_INTEGRATION_CONTRACT.md
 ```
 
 Phase 15 planning is complete:
