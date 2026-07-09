@@ -32,15 +32,15 @@ Latest pushed commit before Phase 24 outside validation acceptance: 432e958 Add 
 Latest full-suite result:
 
 ```text
-Ran 772 tests in 3.868s
+Ran 781 tests in 3.722s
 
 OK (skipped=1)
 ```
 
-Latest focused Phase 28A result:
+Latest focused Phase 29B result:
 
 ```text
-Ran 11 tests in 0.005s
+Ran 9 tests in 0.006s
 
 OK
 ```
@@ -184,6 +184,7 @@ Phase 28B Deck Health / Recommendation Output Packet Implementation: INTERNAL PA
 Phase 28C Deck Health / Recommendation Output Checkpoint: PASS
 Phase 28 Deck Health / Recommendation Output Outside Validation: PASS
 Phase 29A CLI / Report Integration Contract: PASS
+Phase 29B Report Document Implementation: INTERNAL PASS
 ```
 
 ## Recent Commits
@@ -1353,10 +1354,24 @@ analytics recalculation, file writing, candidate discovery, candidate ranking,
 candidate scoring, cut selection, addition selection, or final recommendation
 generation.
 
-Current Phase 29A review packet:
+Phase 29A outside review returned PASS WITH REQUIRED FIXES. The required fix
+was applied by splitting reporting-only static scans from conditional CLI and
+file-writing scans.
+
+Phase 29B is complete. It implements pure in-memory report document models and
+deterministic JSON/Markdown serializers under
+codie/recommendation_output/reporting.py. It accepts already-built
+RecommendationOutputBundle payloads and does not implement CLI, file writing,
+DB/provider/source reads, candidate discovery, candidate ranking, candidate
+scoring, cut selection, addition selection, or final recommendations.
+
+Current Phase 29C planning packet:
 
 ```text
 docs/PHASE29A_CLI_REPORT_INTEGRATION_CONTRACT.md
+docs/PHASE29B_CLI_REPORT_INTEGRATION_IMPLEMENTATION_REPORT.md
+codie/recommendation_output/reporting.py
+tests/test_recommendation_output_reporting.py
 docs/ACTIVE_ROADMAP_INDEX.md
 docs/VALIDATION_STATUS_INDEX.md
 docs/NEXT_PHASE_CONTRACT.md

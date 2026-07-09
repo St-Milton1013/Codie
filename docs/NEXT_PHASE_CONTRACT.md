@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: review Phase 29A - CLI / Report Integration Contract; after acceptance proceed to Phase 29B - report document implementation
+Recommended next task: create Phase 29C - CLI / safe file writer integration contract
 
 ## Active Indexes
 
@@ -163,6 +163,11 @@ Phase 28 outside validation returned PASS.
 
 Phase 29A CLI / Report Integration Contract is complete.
 
+Phase 29A outside review returned PASS WITH REQUIRED FIXES and the conditional
+CLI/file-writing scan fix is applied.
+
+Phase 29B Report Document Implementation is complete.
+
 Roadmap patch logged:
 
 ```text
@@ -190,6 +195,9 @@ codie/recommendation_output/__init__.py
 codie/recommendation_output/models.py
 tests/test_recommendation_output_boundary.py
 docs/PHASE29A_CLI_REPORT_INTEGRATION_CONTRACT.md
+docs/PHASE29B_CLI_REPORT_INTEGRATION_IMPLEMENTATION_REPORT.md
+codie/recommendation_output/reporting.py
+tests/test_recommendation_output_reporting.py
 ```
 
 Phase 15 planning is complete:

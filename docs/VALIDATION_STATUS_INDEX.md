@@ -18,7 +18,9 @@ Phase 28B Deck Health / Recommendation Output Packet Implementation: INTERNAL PA
 Phase 28C Deck Health / Recommendation Output Checkpoint: COMPLETE
 Phase 28 Deck Health / Recommendation Output: PASS
 Phase 29A CLI / Report Integration Contract: COMPLETE
-Phase 29B: blocked until Phase 29A review is accepted
+Phase 29A outside review: PASS WITH REQUIRED FIXES; fixes applied
+Phase 29B Report Document Implementation: INTERNAL PASS
+Phase 29C: contract pending
 ```
 
 ## Accepted Phase Summary
@@ -60,18 +62,21 @@ Phase 27 Weight Profile / Analysis Profile: PASS
 Phase 28A Deck Health / Recommendation Output Contract: PASS WITH REVIEW NOTES
 Phase 28B Deck Health / Recommendation Output Packet Implementation: INTERNAL PASS
 Phase 28 Deck Health / Recommendation Output: PASS
-Phase 29A CLI / Report Integration Contract: COMPLETE; READY FOR REVIEW
+Phase 29A CLI / Report Integration Contract: PASS WITH REQUIRED FIXES APPLIED
+Phase 29B Report Document Implementation: INTERNAL PASS
 ```
 
 ## Latest Local Validation
 
 ```text
-Focused Phase 29A:
-docs-only contract packet; no focused implementation test added
+Focused Phase 29B Recommendation Output Reporting:
+python -m unittest tests.test_recommendation_output_reporting -v
+Ran 9 tests in 0.006s
+OK
 
 Full suite:
 python -m unittest discover -s tests
-Ran 772 tests in 3.868s
+Ran 781 tests in 3.722s
 OK (skipped=1)
 
 Static check:
@@ -82,13 +87,16 @@ passed
 ## Current Blocker
 
 ```text
-Phase 29B - CLI / Report Integration Implementation is blocked until Phase 29A review is accepted.
+Phase 29C - CLI / safe file writer integration contract is pending.
 ```
 
-## Current Phase 29A Review Packet
+## Current Phase 29C Planning Packet
 
 ```text
 docs/PHASE29A_CLI_REPORT_INTEGRATION_CONTRACT.md
+docs/PHASE29B_CLI_REPORT_INTEGRATION_IMPLEMENTATION_REPORT.md
+codie/recommendation_output/reporting.py
+tests/test_recommendation_output_reporting.py
 docs/ACTIVE_ROADMAP_INDEX.md
 docs/VALIDATION_STATUS_INDEX.md
 docs/NEXT_PHASE_CONTRACT.md

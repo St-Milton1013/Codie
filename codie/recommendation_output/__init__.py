@@ -24,6 +24,15 @@ from .models import (
     replacement_suggestion_packet_to_dict,
     validate_recommendation_output_bundle,
 )
+from .reporting import (
+    RecommendationReportDocument,
+    RecommendationReportOptions,
+    RecommendationReportSection,
+    build_recommendation_report_document,
+    recommendation_report_document_to_dict,
+    recommendation_report_document_to_markdown,
+    validate_recommendation_report_document,
+)
 
 
 __all__ = [
@@ -35,6 +44,9 @@ __all__ = [
     "RecommendationOutputBuildError",
     "RecommendationOutputBundle",
     "RecommendationOutputOptions",
+    "RecommendationReportDocument",
+    "RecommendationReportOptions",
+    "RecommendationReportSection",
     "ReplacementSuggestionPacket",
     "build_deck_health_packet",
     "build_evidence_explanation_packet",
@@ -47,6 +59,10 @@ __all__ = [
     "package_gap_packet_to_dict",
     "recommendation_candidate_packet_to_dict",
     "recommendation_output_bundle_to_dict",
+    "recommendation_report_document_to_dict",
+    "recommendation_report_document_to_markdown",
     "replacement_suggestion_packet_to_dict",
+    "build_recommendation_report_document",
+    "validate_recommendation_report_document",
     "validate_recommendation_output_bundle",
 ]
