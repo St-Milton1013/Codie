@@ -22,14 +22,15 @@ Phase 28 Deck Health / Recommendation Output: externally accepted
 Phase 29A CLI / Report Integration Contract: complete
 Phase 29A CLI / Report Integration Contract: accepted with required fix applied
 Phase 29B Report Document Implementation: internally complete
-Current action: prepare Phase 29C CLI / safe file writer integration contract
-Phase 29C status: contract pending
+Phase 29C CLI / Safe File Writer Integration Contract: complete
+Current action: review Phase 29C contract packet
+Phase 29D status: blocked until Phase 29C review is accepted
 ```
 
 ## Next Allowed Phase
 
 ```text
-Phase 29C - CLI / safe file writer integration contract
+Phase 29D - CLI / safe file writer integration implementation after Phase 29C review
 ```
 
 Do not implement CLI or file writing until Phase 29C is accepted.
@@ -37,7 +38,7 @@ Do not implement CLI or file writing until Phase 29C is accepted.
 ## Release-Critical Path
 
 ```text
-1. Phase 29C CLI / safe file writer integration contract
+1. Phase 29C CLI / safe file writer integration contract review
 2. Phase 29D CLI / safe file writer integration implementation
 3. Phase 29E CLI / Report integration checkpoint
 4. Phase 29D CLI / Report integration checkpoint
@@ -92,11 +93,12 @@ Phase 29B report documents must not write files.
 Phase 29C must be accepted before CLI or file writing is implemented.
 ```
 
-## Phase 29C Planning Packet
+## Phase 29C Contract Packet
 
-Use these files for the current gate:
+Review these files for the current gate:
 
 ```text
+docs/PHASE29C_CLI_SAFE_FILE_WRITER_CONTRACT.md
 docs/PHASE29A_CLI_REPORT_INTEGRATION_CONTRACT.md
 docs/PHASE29B_CLI_REPORT_INTEGRATION_IMPLEMENTATION_REPORT.md
 codie/recommendation_output/reporting.py

@@ -32,7 +32,7 @@ Latest pushed commit before Phase 24 outside validation acceptance: 432e958 Add 
 Latest full-suite result:
 
 ```text
-Ran 781 tests in 3.722s
+Ran 781 tests in 4.010s
 
 OK (skipped=1)
 ```
@@ -185,6 +185,7 @@ Phase 28C Deck Health / Recommendation Output Checkpoint: PASS
 Phase 28 Deck Health / Recommendation Output Outside Validation: PASS
 Phase 29A CLI / Report Integration Contract: PASS
 Phase 29B Report Document Implementation: INTERNAL PASS
+Phase 29C CLI / Safe File Writer Integration Contract: PASS
 ```
 
 ## Recent Commits
@@ -1365,9 +1366,17 @@ RecommendationOutputBundle payloads and does not implement CLI, file writing,
 DB/provider/source reads, candidate discovery, candidate ranking, candidate
 scoring, cut selection, addition selection, or final recommendations.
 
-Current Phase 29C planning packet:
+Phase 29C is complete. It defines the future CLI and safe local file-writing
+boundary for recommendation report documents while remaining contract-only. It
+authorizes no implementation, schema, DB reads, provider reads, source-table
+reads, raw provider reads, LLM calls, simulator execution, analytics
+recalculation, file writing, candidate discovery, candidate ranking, candidate
+scoring, cut selection, addition selection, or final recommendation generation.
+
+Current Phase 29C review packet:
 
 ```text
+docs/PHASE29C_CLI_SAFE_FILE_WRITER_CONTRACT.md
 docs/PHASE29A_CLI_REPORT_INTEGRATION_CONTRACT.md
 docs/PHASE29B_CLI_REPORT_INTEGRATION_IMPLEMENTATION_REPORT.md
 codie/recommendation_output/reporting.py

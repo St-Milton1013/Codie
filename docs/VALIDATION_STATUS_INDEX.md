@@ -20,7 +20,8 @@ Phase 28 Deck Health / Recommendation Output: PASS
 Phase 29A CLI / Report Integration Contract: COMPLETE
 Phase 29A outside review: PASS WITH REQUIRED FIXES; fixes applied
 Phase 29B Report Document Implementation: INTERNAL PASS
-Phase 29C: contract pending
+Phase 29C CLI / Safe File Writer Integration Contract: COMPLETE
+Phase 29D: blocked until Phase 29C review is accepted
 ```
 
 ## Accepted Phase Summary
@@ -64,6 +65,7 @@ Phase 28B Deck Health / Recommendation Output Packet Implementation: INTERNAL PA
 Phase 28 Deck Health / Recommendation Output: PASS
 Phase 29A CLI / Report Integration Contract: PASS WITH REQUIRED FIXES APPLIED
 Phase 29B Report Document Implementation: INTERNAL PASS
+Phase 29C CLI / Safe File Writer Integration Contract: COMPLETE; READY FOR REVIEW
 ```
 
 ## Latest Local Validation
@@ -76,7 +78,7 @@ OK
 
 Full suite:
 python -m unittest discover -s tests
-Ran 781 tests in 3.722s
+Ran 781 tests in 4.010s
 OK (skipped=1)
 
 Static check:
@@ -87,12 +89,13 @@ passed
 ## Current Blocker
 
 ```text
-Phase 29C - CLI / safe file writer integration contract is pending.
+Phase 29D - CLI / safe file writer integration implementation is blocked until Phase 29C review is accepted.
 ```
 
-## Current Phase 29C Planning Packet
+## Current Phase 29C Review Packet
 
 ```text
+docs/PHASE29C_CLI_SAFE_FILE_WRITER_CONTRACT.md
 docs/PHASE29A_CLI_REPORT_INTEGRATION_CONTRACT.md
 docs/PHASE29B_CLI_REPORT_INTEGRATION_IMPLEMENTATION_REPORT.md
 codie/recommendation_output/reporting.py

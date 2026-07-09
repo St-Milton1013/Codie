@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: create Phase 29C - CLI / safe file writer integration contract
+Recommended next task: review Phase 29C - CLI / Safe File Writer Integration Contract; after acceptance proceed to Phase 29D - CLI / safe file writer integration implementation
 
 ## Active Indexes
 
@@ -168,6 +168,8 @@ CLI/file-writing scan fix is applied.
 
 Phase 29B Report Document Implementation is complete.
 
+Phase 29C CLI / Safe File Writer Integration Contract is complete.
+
 Roadmap patch logged:
 
 ```text
@@ -196,6 +198,7 @@ codie/recommendation_output/models.py
 tests/test_recommendation_output_boundary.py
 docs/PHASE29A_CLI_REPORT_INTEGRATION_CONTRACT.md
 docs/PHASE29B_CLI_REPORT_INTEGRATION_IMPLEMENTATION_REPORT.md
+docs/PHASE29C_CLI_SAFE_FILE_WRITER_CONTRACT.md
 codie/recommendation_output/reporting.py
 tests/test_recommendation_output_reporting.py
 ```
