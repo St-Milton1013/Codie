@@ -15,7 +15,8 @@ Phase 27 Weight Profile / Analysis Profile: PASS
 Outside validation: accepted
 Phase 28A Deck Health / Recommendation Output Contract: PASS WITH REVIEW NOTES
 Phase 28B Deck Health / Recommendation Output Packet Implementation: INTERNAL PASS
-Phase 28C: checkpoint pending
+Phase 28C Deck Health / Recommendation Output Checkpoint: COMPLETE
+Phase 29: blocked until Phase 28 outside validation returns PASS or PASS WITH REVIEW NOTES
 ```
 
 ## Accepted Phase Summary
@@ -55,7 +56,8 @@ Phase 25 Evidence Fusion: PASS
 Phase 26 Decision Intelligence Boundary: PASS
 Phase 27 Weight Profile / Analysis Profile: PASS
 Phase 28A Deck Health / Recommendation Output Contract: PASS WITH REVIEW NOTES
-Phase 28B Deck Health / Recommendation Output Packet Implementation: INTERNAL PASS; CHECKPOINT PENDING
+Phase 28B Deck Health / Recommendation Output Packet Implementation: INTERNAL PASS
+Phase 28 Deck Health / Recommendation Output: READY FOR OUTSIDE VALIDATION
 ```
 
 ## Latest Local Validation
@@ -68,7 +70,7 @@ OK
 
 Full suite:
 python -m unittest discover -s tests
-Ran 772 tests in 5.357s
+Ran 772 tests in 3.798s
 OK (skipped=1)
 
 Static check:
@@ -79,12 +81,14 @@ passed
 ## Current Blocker
 
 ```text
-Phase 29 is blocked until Phase 28 checkpoint and outside validation are accepted.
+Phase 29 is blocked until Phase 28 outside validation is accepted.
 ```
 
-## Current Phase 28C Checkpoint Packet
+## Current Phase 28 Outside Validation Packet
 
 ```text
+docs/CHECKPOINT_PHASE28_RECOMMENDATION_OUTPUT_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE28_RECOMMENDATION_OUTPUT_PROMPT.md
 docs/PHASE28A_DECK_HEALTH_RECOMMENDATION_OUTPUT_CONTRACT.md
 docs/PHASE28B_DECK_HEALTH_RECOMMENDATION_OUTPUT_IMPLEMENTATION_REPORT.md
 codie/recommendation_output/__init__.py

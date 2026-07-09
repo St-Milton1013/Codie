@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: create Phase 28C - Deck Health / Recommendation Output checkpoint and outside validation prompt
+Recommended next task: send Phase 28 outside validation packet; after PASS or PASS WITH REVIEW NOTES proceed to Phase 29A - CLI / Report integration contract
 
 ## Active Indexes
 
@@ -157,6 +157,8 @@ Phase 28A outside review returned PASS WITH REVIEW NOTES.
 
 Phase 28B Deck Health / Recommendation Output Packet Implementation is complete.
 
+Phase 28C Deck Health / Recommendation Output checkpoint packet is complete.
+
 Roadmap patch logged:
 
 ```text
@@ -178,6 +180,8 @@ docs/CHECKPOINT_PHASE27_WEIGHT_PROFILE_REPORT.md
 docs/OUTSIDE_VALIDATION_PHASE27_WEIGHT_PROFILE_PROMPT.md
 docs/PHASE28A_DECK_HEALTH_RECOMMENDATION_OUTPUT_CONTRACT.md
 docs/PHASE28B_DECK_HEALTH_RECOMMENDATION_OUTPUT_IMPLEMENTATION_REPORT.md
+docs/CHECKPOINT_PHASE28_RECOMMENDATION_OUTPUT_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE28_RECOMMENDATION_OUTPUT_PROMPT.md
 codie/recommendation_output/__init__.py
 codie/recommendation_output/models.py
 tests/test_recommendation_output_boundary.py

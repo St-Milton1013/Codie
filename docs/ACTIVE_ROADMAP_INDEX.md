@@ -17,14 +17,15 @@ Phase 27 Weight Profile / Analysis Profile: externally accepted
 Phase 28A Deck Health / Recommendation Output Contract: complete
 Phase 28A Deck Health / Recommendation Output Contract: accepted with review notes
 Phase 28B Deck Health / Recommendation Output Packet Implementation: internally complete
-Current action: prepare Phase 28C checkpoint and outside validation packet
+Phase 28C Deck Health / Recommendation Output checkpoint: complete
+Current action: send Phase 28 outside validation packet
 Phase 29 status: blocked until Phase 28 outside validation is accepted
 ```
 
 ## Next Allowed Phase
 
 ```text
-Phase 28C - Deck Health / Recommendation Output checkpoint and outside validation prompt
+Phase 29A - CLI / Report integration contract after Phase 28 outside validation
 ```
 
 Do not start Phase 29 until Phase 28 outside validation is accepted.
@@ -32,9 +33,9 @@ Do not start Phase 29 until Phase 28 outside validation is accepted.
 ## Release-Critical Path
 
 ```text
-1. Phase 28C Deck Health / Recommendation Output checkpoint
-2. Phase 28 outside validation
-3. Phase 29A CLI / Report integration contract
+1. Phase 28 outside validation
+2. Phase 29A CLI / Report integration contract
+3. Phase 29B CLI / Report integration implementation
 4. Phase 29A CLI / Report integration
 5. Phase 30A Local Alpha release checklist
 ```
@@ -86,11 +87,13 @@ Recommendation output must flow through Evidence Fusion and Decision Intelligenc
 Phase 29 cannot start until Phase 28 outside validation is accepted.
 ```
 
-## Phase 28C Checkpoint Packet
+## Phase 28 Outside Validation Packet
 
-Prepare these files for the current gate:
+Send these files for the current gate:
 
 ```text
+docs/CHECKPOINT_PHASE28_RECOMMENDATION_OUTPUT_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE28_RECOMMENDATION_OUTPUT_PROMPT.md
 docs/PHASE28A_DECK_HEALTH_RECOMMENDATION_OUTPUT_CONTRACT.md
 docs/PHASE28B_DECK_HEALTH_RECOMMENDATION_OUTPUT_IMPLEMENTATION_REPORT.md
 codie/recommendation_output/__init__.py

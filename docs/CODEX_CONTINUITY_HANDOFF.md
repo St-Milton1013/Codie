@@ -32,7 +32,7 @@ Latest pushed commit before Phase 24 outside validation acceptance: 432e958 Add 
 Latest full-suite result:
 
 ```text
-Ran 772 tests in 5.357s
+Ran 772 tests in 3.798s
 
 OK (skipped=1)
 ```
@@ -181,6 +181,7 @@ Phase 27B Weight Profile / Analysis Profile Packet Implementation: PASS
 Phase 27 Weight Profile / Analysis Profile Outside Validation: PASS
 Phase 28A Deck Health / Recommendation Output Contract: PASS WITH REVIEW NOTES
 Phase 28B Deck Health / Recommendation Output Packet Implementation: INTERNAL PASS
+Phase 28C Deck Health / Recommendation Output Checkpoint: READY FOR OUTSIDE VALIDATION
 ```
 
 ## Recent Commits
@@ -1336,9 +1337,15 @@ caveats, contradictions, source agreement, speculation level, and packet
 metadata; and rejects private metadata and forbidden strategic language. It does
 not discover, score, rank, or generate recommendation candidates.
 
-Current Phase 28C checkpoint packet:
+Phase 28C is complete. It creates the internal checkpoint and outside
+validation prompt for Phase 28. Phase 29 must not start until Phase 28 outside
+validation returns PASS or PASS WITH REVIEW NOTES.
+
+Current Phase 28 outside validation packet:
 
 ```text
+docs/CHECKPOINT_PHASE28_RECOMMENDATION_OUTPUT_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE28_RECOMMENDATION_OUTPUT_PROMPT.md
 docs/PHASE28A_DECK_HEALTH_RECOMMENDATION_OUTPUT_CONTRACT.md
 docs/PHASE28B_DECK_HEALTH_RECOMMENDATION_OUTPUT_IMPLEMENTATION_REPORT.md
 codie/recommendation_output/__init__.py
