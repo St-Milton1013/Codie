@@ -280,6 +280,7 @@ class RecommendationOutputBoundaryTest(unittest.TestCase):
             confidence=0.72,
             expected_impact="medium",
             findings=(finding(),),
+            contradicting_ref_ids=("conflict:fixture",),
             **output_context(),
         )
         payload = recommendation_output_bundle_to_dict(
@@ -296,11 +297,14 @@ class RecommendationOutputBoundaryTest(unittest.TestCase):
         json.dumps(payload, sort_keys=True)
         self.assertEqual(item["decision_ids"], ["decision:fixture:signal"])
         self.assertEqual(item["evidence_object_ids"], ["evidence:fixture"])
+        self.assertEqual(item["confidence"], 0.72)
+        self.assertEqual(item["expected_impact"], "medium")
         self.assertEqual(item["weight_profile_id"], "competitive-default")
         self.assertEqual(item["weight_profile_version"], "1.0.0")
         self.assertEqual(item["analysis_profile_id"], "analysis-profile:competitive-default")
         self.assertEqual(item["analysis_profile_version"], "1.0.0")
         self.assertEqual(item["source_agreement"]["agreement_label"], "strong")
+        self.assertEqual(item["contradicting_ref_ids"], ["conflict:fixture"])
         self.assertEqual(item["caveat_ids"], ["caveat:coverage"])
         self.assertEqual(item["speculation_level"], "none")
 

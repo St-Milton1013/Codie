@@ -40,12 +40,17 @@ docs/CODEX_CONTINUITY_HANDOFF.md
 Tests verify:
 
 ```text
-deck health packets serialize required evidence IDs
+deck health packets serialize required UnifiedEvidenceObject IDs
 deck health packets serialize required decision IDs
+recommendation output packets require UnifiedEvidenceObject IDs
 deck health packets serialize weight_profile_id and weight_profile_version
 deck health packets serialize analysis_profile_id and analysis_profile_version
+confidence remains visible
+expected impact remains visible
 source agreement remains visible
 caveats remain visible
+contradictions remain visible
+contradicting_ref_ids remain visible
 speculation level remains visible
 recommendation candidate packets allow monitor / investigate / no_action
 consider_include and consider_replace require at least medium confidence
@@ -160,7 +165,7 @@ Full suite:
 ```text
 python -m unittest discover -s tests
 
-Ran 772 tests in 3.798s
+Ran 772 tests in 3.790s
 
 OK (skipped=1)
 ```
