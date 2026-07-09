@@ -173,6 +173,9 @@ manifest.json, if implemented
 Unsafe filename characters must be normalized or rejected. Filename
 normalization must be deterministic.
 
+Explicit basenames must be normalized deterministically, must not contain path
+separators, and must not override the allowed `.json` / `.md` extension rules.
+
 ## Report Payload Rules
 
 The writer must use:
@@ -272,9 +275,9 @@ Phase 29E - CLI wrapper
 Phase 29F - Checkpoint
 ```
 
-## Required Phase 29D Tests
+## Required Phase 29D / 29E Tests
 
-Future tests should prove:
+If Phase 29D implements only the safe file writer, tests should prove:
 
 ```text
 writer requires RecommendationOutputBundle JSON input
@@ -291,6 +294,11 @@ output roots pointing to files are rejected
 overwrite is explicit
 UTF-8 output is used
 manifest writes last, if manifest exists
+```
+
+If Phase 29E implements the CLI wrapper, also test:
+
+```text
 CLI requires --bundle-json
 CLI requires --format
 CLI requires --output-root
@@ -304,16 +312,26 @@ CLI does not print raw stack traces by default
 
 ## Required Static Scans
 
-Future implementation should run:
+If Phase 29D implements only the safe file writer, scan:
 
 ```text
-rg -n "codie\.db|codie\.providers|codie\.repositories|codie\.ingestion|codie\.canonical|codie\.analytics|codie\.cards|codie\.probability_engine|requests|httpx|sqlite3|openai|anthropic|flask|fastapi|uvicorn|starlette" codie\recommendation_output codie\cli tests\test_recommendation_output_writers.py tests\test_cli_recommendation_output.py
-rg -n "source_events|source_decks|source_deck_cards|provider_objects" codie\recommendation_output codie\cli tests\test_recommendation_output_writers.py tests\test_cli_recommendation_output.py
-rg -n "raw_provider_payload|provider_payload|private_deck_text|full_primer_body|original_import_text|raw_input" codie\recommendation_output codie\cli tests\test_recommendation_output_writers.py tests\test_cli_recommendation_output.py
-rg -n "SELECT |INSERT |UPDATE |DELETE |execute\(|executescript\(" codie\recommendation_output codie\cli tests\test_recommendation_output_writers.py tests\test_cli_recommendation_output.py
-rg -n "you should play|should be played|should be cut|must include|correct card|breaks the format|secretly optimal|cut this|strict upgrade|auto-include|recommended cut|recommended include|best card|strictly better" codie\recommendation_output codie\cli tests\test_recommendation_output_writers.py tests\test_cli_recommendation_output.py
+rg -n "codie\.db|codie\.providers|codie\.repositories|codie\.ingestion|codie\.canonical|codie\.analytics|codie\.cards|codie\.probability_engine|requests|httpx|sqlite3|openai|anthropic|flask|fastapi|uvicorn|starlette" codie\recommendation_output tests\test_recommendation_output_writers.py
+rg -n "source_events|source_decks|source_deck_cards|provider_objects" codie\recommendation_output tests\test_recommendation_output_writers.py
+rg -n "raw_provider_payload|provider_payload|private_deck_text|full_primer_body|original_import_text|raw_input" codie\recommendation_output tests\test_recommendation_output_writers.py
+rg -n "SELECT |INSERT |UPDATE |DELETE |execute\(|executescript\(" codie\recommendation_output tests\test_recommendation_output_writers.py
+rg -n "you should play|should be played|should be cut|must include|correct card|breaks the format|secretly optimal|cut this|strict upgrade|auto-include|recommended cut|recommended include|best card|strictly better" codie\recommendation_output tests\test_recommendation_output_writers.py
 git diff --name-only -- codie/db/schema docs/SCHEMA_SPEC.md codie/db/repositories
 ```
+
+If Phase 29E implements the CLI wrapper, also scan:
+
+```text
+codie\cli
+tests\test_cli_recommendation_output.py
+```
+
+Do not require `codie\cli` or `tests\test_cli_recommendation_output.py` to
+exist when Phase 29D is writer-only.
 
 Expected:
 

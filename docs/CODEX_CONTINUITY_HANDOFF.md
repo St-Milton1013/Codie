@@ -32,7 +32,7 @@ Latest pushed commit before Phase 24 outside validation acceptance: 432e958 Add 
 Latest full-suite result:
 
 ```text
-Ran 781 tests in 4.010s
+Ran 781 tests in 3.301s
 
 OK (skipped=1)
 ```
@@ -1372,6 +1372,9 @@ authorizes no implementation, schema, DB reads, provider reads, source-table
 reads, raw provider reads, LLM calls, simulator execution, analytics
 recalculation, file writing, candidate discovery, candidate ranking, candidate
 scoring, cut selection, addition selection, or final recommendation generation.
+The Phase 29C review fix is applied: writer-only Phase 29D tests/static scans
+are separated from conditional Phase 29E CLI tests/static scans, and explicit
+basenames must reject path separators while preserving `.json` / `.md` rules.
 
 Current Phase 29C review packet:
 

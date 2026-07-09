@@ -65,7 +65,7 @@ Phase 28B Deck Health / Recommendation Output Packet Implementation: INTERNAL PA
 Phase 28 Deck Health / Recommendation Output: PASS
 Phase 29A CLI / Report Integration Contract: PASS WITH REQUIRED FIXES APPLIED
 Phase 29B Report Document Implementation: INTERNAL PASS
-Phase 29C CLI / Safe File Writer Integration Contract: COMPLETE; READY FOR REVIEW
+Phase 29C CLI / Safe File Writer Integration Contract: COMPLETE; REQUIRED FIXES APPLIED
 ```
 
 ## Latest Local Validation
@@ -78,7 +78,7 @@ OK
 
 Full suite:
 python -m unittest discover -s tests
-Ran 781 tests in 4.010s
+Ran 781 tests in 3.301s
 OK (skipped=1)
 
 Static check:
