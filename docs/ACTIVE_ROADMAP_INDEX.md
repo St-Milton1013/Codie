@@ -15,24 +15,26 @@ Phase 27A Weight Profile / Analysis Profile Contract: complete
 Phase 27B Weight Profile / Analysis Profile Packet Implementation: internally complete
 Phase 27 Weight Profile / Analysis Profile: externally accepted
 Phase 28A Deck Health / Recommendation Output Contract: complete
-Current action: review Phase 28A contract packet
-Phase 28B status: blocked until Phase 28A review is accepted
+Phase 28A Deck Health / Recommendation Output Contract: accepted with review notes
+Phase 28B Deck Health / Recommendation Output Packet Implementation: internally complete
+Current action: prepare Phase 28C checkpoint and outside validation packet
+Phase 29 status: blocked until Phase 28 outside validation is accepted
 ```
 
 ## Next Allowed Phase
 
 ```text
-Phase 28B - Deck Health / Recommendation Output Packet Implementation after Phase 28A review
+Phase 28C - Deck Health / Recommendation Output checkpoint and outside validation prompt
 ```
 
-Do not start Phase 28B until the Phase 28A contract is accepted.
+Do not start Phase 29 until Phase 28 outside validation is accepted.
 
 ## Release-Critical Path
 
 ```text
-1. Phase 28A Deck Health / Recommendation Output Contract review
-2. Phase 28B Deck Health / Recommendation Output Packet Implementation
-3. Phase 28C Deck Health / Recommendation Output checkpoint
+1. Phase 28C Deck Health / Recommendation Output checkpoint
+2. Phase 28 outside validation
+3. Phase 29A CLI / Report integration contract
 4. Phase 29A CLI / Report integration
 5. Phase 30A Local Alpha release checklist
 ```
@@ -81,15 +83,19 @@ No recommendations directly from primer text.
 No recommendations directly from simulator output.
 No feature should duplicate Decision Intelligence reasoning.
 Recommendation output must flow through Evidence Fusion and Decision Intelligence.
-Phase 28B cannot start until Phase 28A is accepted.
+Phase 29 cannot start until Phase 28 outside validation is accepted.
 ```
 
-## Phase 28A Contract Packet
+## Phase 28C Checkpoint Packet
 
-Review these files for the current gate:
+Prepare these files for the current gate:
 
 ```text
 docs/PHASE28A_DECK_HEALTH_RECOMMENDATION_OUTPUT_CONTRACT.md
+docs/PHASE28B_DECK_HEALTH_RECOMMENDATION_OUTPUT_IMPLEMENTATION_REPORT.md
+codie/recommendation_output/__init__.py
+codie/recommendation_output/models.py
+tests/test_recommendation_output_boundary.py
 docs/ACTIVE_ROADMAP_INDEX.md
 docs/VALIDATION_STATUS_INDEX.md
 docs/NEXT_PHASE_CONTRACT.md

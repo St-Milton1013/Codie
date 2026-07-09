@@ -13,8 +13,9 @@ Phase 26 Decision Intelligence Boundary: PASS
 Outside validation: accepted
 Phase 27 Weight Profile / Analysis Profile: PASS
 Outside validation: accepted
-Phase 28A Deck Health / Recommendation Output Contract: COMPLETE
-Phase 28B: blocked until Phase 28A review is accepted
+Phase 28A Deck Health / Recommendation Output Contract: PASS WITH REVIEW NOTES
+Phase 28B Deck Health / Recommendation Output Packet Implementation: INTERNAL PASS
+Phase 28C: checkpoint pending
 ```
 
 ## Accepted Phase Summary
@@ -53,18 +54,21 @@ Phase 24 Chat / Intelligence Local API: PASS
 Phase 25 Evidence Fusion: PASS
 Phase 26 Decision Intelligence Boundary: PASS
 Phase 27 Weight Profile / Analysis Profile: PASS
-Phase 28A Deck Health / Recommendation Output Contract: COMPLETE; READY FOR REVIEW
+Phase 28A Deck Health / Recommendation Output Contract: PASS WITH REVIEW NOTES
+Phase 28B Deck Health / Recommendation Output Packet Implementation: INTERNAL PASS; CHECKPOINT PENDING
 ```
 
 ## Latest Local Validation
 
 ```text
-Focused Phase 28A:
-docs-only contract packet; no focused implementation test added
+Focused Phase 28B Recommendation Output:
+python -m unittest tests.test_recommendation_output_boundary -v
+Ran 11 tests in 0.005s
+OK
 
 Full suite:
 python -m unittest discover -s tests
-Ran 761 tests in 3.539s
+Ran 772 tests in 5.357s
 OK (skipped=1)
 
 Static check:
@@ -75,13 +79,17 @@ passed
 ## Current Blocker
 
 ```text
-Phase 28B - Deck Health / Recommendation Output Packet Implementation is blocked until Phase 28A review is accepted.
+Phase 29 is blocked until Phase 28 checkpoint and outside validation are accepted.
 ```
 
-## Current Phase 28A Review Packet
+## Current Phase 28C Checkpoint Packet
 
 ```text
 docs/PHASE28A_DECK_HEALTH_RECOMMENDATION_OUTPUT_CONTRACT.md
+docs/PHASE28B_DECK_HEALTH_RECOMMENDATION_OUTPUT_IMPLEMENTATION_REPORT.md
+codie/recommendation_output/__init__.py
+codie/recommendation_output/models.py
+tests/test_recommendation_output_boundary.py
 docs/ACTIVE_ROADMAP_INDEX.md
 docs/VALIDATION_STATUS_INDEX.md
 docs/NEXT_PHASE_CONTRACT.md

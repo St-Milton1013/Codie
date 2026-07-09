@@ -32,7 +32,7 @@ Latest pushed commit before Phase 24 outside validation acceptance: 432e958 Add 
 Latest full-suite result:
 
 ```text
-Ran 761 tests in 3.539s
+Ran 772 tests in 5.357s
 
 OK (skipped=1)
 ```
@@ -40,7 +40,9 @@ OK (skipped=1)
 Latest focused Phase 28A result:
 
 ```text
-docs-only contract packet; no focused implementation test added
+Ran 11 tests in 0.005s
+
+OK
 ```
 
 Latest static check:
@@ -177,7 +179,8 @@ Phase 26 Decision Intelligence Boundary Outside Validation: PASS
 Phase 27A Weight Profile / Analysis Profile Contract: PASS
 Phase 27B Weight Profile / Analysis Profile Packet Implementation: PASS
 Phase 27 Weight Profile / Analysis Profile Outside Validation: PASS
-Phase 28A Deck Health / Recommendation Output Contract: PASS
+Phase 28A Deck Health / Recommendation Output Contract: PASS WITH REVIEW NOTES
+Phase 28B Deck Health / Recommendation Output Packet Implementation: INTERNAL PASS
 ```
 
 ## Recent Commits
@@ -1325,10 +1328,22 @@ reads, source-table reads, raw provider reads, LLM calls, simulator execution,
 file writing, persistence, deck health output, recommendation output, or
 replacement output.
 
-Current Phase 28A review packet:
+Phase 28B is complete. It implements pure in-memory Deck Health /
+Recommendation Output packet models under codie/recommendation_output. The
+packet layer validates already-provided DecisionPacket, UnifiedEvidenceObject,
+WeightProfile, and AnalysisProfile references; serializes version citations,
+caveats, contradictions, source agreement, speculation level, and packet
+metadata; and rejects private metadata and forbidden strategic language. It does
+not discover, score, rank, or generate recommendation candidates.
+
+Current Phase 28C checkpoint packet:
 
 ```text
 docs/PHASE28A_DECK_HEALTH_RECOMMENDATION_OUTPUT_CONTRACT.md
+docs/PHASE28B_DECK_HEALTH_RECOMMENDATION_OUTPUT_IMPLEMENTATION_REPORT.md
+codie/recommendation_output/__init__.py
+codie/recommendation_output/models.py
+tests/test_recommendation_output_boundary.py
 docs/ACTIVE_ROADMAP_INDEX.md
 docs/VALIDATION_STATUS_INDEX.md
 docs/NEXT_PHASE_CONTRACT.md
