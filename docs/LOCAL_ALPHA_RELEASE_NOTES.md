@@ -8,7 +8,7 @@ Status: local alpha release candidate notes
 Phase 30A Local Alpha Release Checklist: PASS
 Phase 30B Local Alpha Packaging / Usage Documentation: PASS
 Phase 30C Local Alpha Release Candidate Checkpoint: PASS
-Phase 30D Local Alpha Tag / Release Notes / Handoff Finalization: INTERNAL PASS
+Phase 30D Local Alpha Tag / Release Notes / Handoff Finalization: PASS
 ```
 
 This is a local alpha. It is not a production release.
@@ -97,8 +97,7 @@ Roadmap patches are not alpha features until separately contracted.
 local-alpha-0.1.0
 ```
 
-Create the tag only after Phase 30D outside validation returns PASS or PASS WITH
-REVIEW NOTES.
+Phase 30D outside validation returned PASS. The tag is authorized.
 
 ## Next Post-Alpha Choices
 
@@ -112,4 +111,3 @@ Jin-Gitaxias / strategist mode boundary contract
 advanced local UI/dashboard planning
 mobile/local report delivery extension planning
 ```
-

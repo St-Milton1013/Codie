@@ -27,8 +27,8 @@ Phase 29F CLI / Report Integration Checkpoint: PASS
 Phase 30A Local Alpha Release Checklist: PASS
 Phase 30B Local Alpha Packaging / Usage Documentation: PASS
 Phase 30C Local Alpha Release Candidate Checkpoint: PASS
-Phase 30D Local Alpha Tag / Release Notes / Handoff Finalization: INTERNAL PASS
-Local alpha tag: blocked until Phase 30D outside validation is accepted
+Phase 30D Local Alpha Tag / Release Notes / Handoff Finalization: PASS
+Local alpha tag: ready to create
 ```
 
 ## Accepted Phase Summary
@@ -79,7 +79,7 @@ Phase 29F CLI / Report Integration Checkpoint: PASS
 Phase 30A Local Alpha Release Checklist: PASS
 Phase 30B Local Alpha Packaging / Usage Documentation: PASS
 Phase 30C Local Alpha Release Candidate Checkpoint: PASS
-Phase 30D Local Alpha Tag / Release Notes / Handoff Finalization: INTERNAL PASS
+Phase 30D Local Alpha Tag / Release Notes / Handoff Finalization: PASS
 ```
 
 ## Latest Local Validation
@@ -103,15 +103,18 @@ no codie/tests/scripts/ui/schema/dependency/CI changes
 
 Tag absence check:
 local-alpha-0.1.0 does not exist yet
+
+Outside validation:
+Phase 30D returned PASS.
 ```
 
 ## Current Blocker
 
 ```text
-Local alpha tag creation is blocked until Phase 30D outside validation is accepted.
+Local alpha tag creation is the next action.
 ```
 
-## Current Phase 30D Outside Validation Packet
+## Accepted Phase 30D Release Handoff Packet
 
 ```text
 docs/PHASE30D_LOCAL_ALPHA_TAG_RELEASE_HANDOFF_CONTRACT.md

@@ -29,24 +29,24 @@ Phase 29F CLI / Report Integration Checkpoint: externally accepted
 Phase 30A Local Alpha Release Checklist: externally accepted
 Phase 30B Local Alpha Packaging / Usage Documentation: externally accepted
 Phase 30C Local Alpha Release Candidate Checkpoint: externally accepted
-Phase 30D Local Alpha Tag / Release Notes / Handoff Finalization: internally complete
-Current action: send Phase 30D outside validation packet
-Local alpha tag status: blocked until Phase 30D outside validation is accepted
+Phase 30D Local Alpha Tag / Release Notes / Handoff Finalization: externally accepted
+Current action: create and push local-alpha-0.1.0 tag
+Local alpha tag status: ready to create
 ```
 
 ## Next Allowed Phase
 
 ```text
-Local alpha tag creation after Phase 30D outside validation
+Local alpha tag creation
 ```
 
-Do not create the local alpha Git tag until Phase 30D outside validation returns PASS or PASS WITH REVIEW NOTES.
+Phase 30D outside validation returned PASS. The local alpha Git tag is authorized.
 
 ## Release-Critical Path
 
 ```text
-1. Phase 30D outside validation
-2. Create and push local-alpha-0.1.0 tag
+1. Create local-alpha-0.1.0 tag
+2. Push local-alpha-0.1.0 tag
 ```
 
 ## Post-Alpha / Later Roadmap
@@ -102,9 +102,9 @@ SIM-R must not be implemented until the active validation chain completes and a 
 Simulator output remains evidence only and must never generate recommendations.
 ```
 
-## Phase 30D Outside Validation Packet
+## Local Alpha Tag Packet
 
-Send these files for the current gate:
+Use these files as the accepted release handoff packet:
 
 ```text
 docs/PHASE30D_LOCAL_ALPHA_TAG_RELEASE_HANDOFF_CONTRACT.md

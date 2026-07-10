@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: review Phase 30D - Local Alpha tag / release notes / handoff finalization; after acceptance create and push local-alpha-0.1.0 tag
+Recommended next task: create and push local-alpha-0.1.0 tag; then choose the first post-alpha lane contract-first
 
 ## Active Indexes
 

@@ -8,7 +8,7 @@ Status: local alpha handoff candidate
 Phase 30A: PASS
 Phase 30B: PASS
 Phase 30C: PASS
-Phase 30D: INTERNAL PASS
+Phase 30D: PASS
 ```
 
 ## Repository
@@ -16,7 +16,7 @@ Phase 30D: INTERNAL PASS
 ```text
 Repo: https://github.com/St-Milton1013/Codie
 Branch: main
-Recommended tag after Phase 30D validation: local-alpha-0.1.0
+Authorized tag after Phase 30D validation: local-alpha-0.1.0
 ```
 
 ## Local Validation Commands
@@ -71,8 +71,6 @@ Mobile delivery remains optional and contract-gated.
 ## Recommended Next Action
 
 ```text
-Send Phase 30D outside validation packet.
-If accepted, create and push local-alpha-0.1.0 tag.
+Create and push local-alpha-0.1.0 tag.
 Then choose the first post-alpha lane contract-first.
 ```
-
