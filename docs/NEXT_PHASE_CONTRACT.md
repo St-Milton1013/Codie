@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: send Phase 31C SIM-R State Model Contract outside validation packet; do not begin Phase 31D until accepted
+Recommended next task: send Phase 31D SIM-R State Model Implementation Contract outside validation packet; do not begin Phase 31E until accepted
 
 ## Active Indexes
 
