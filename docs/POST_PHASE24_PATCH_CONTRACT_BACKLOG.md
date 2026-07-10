@@ -27,6 +27,7 @@ docs/ROADMAP_PATCH_TAG_GRAPH_LAB.md
 docs/ROADMAP_PATCH_DECK_MEMORY_MOXFIELD_CONFIDENCE_NAMING.md
 docs/ROADMAP_PATCH_SIMULATION_CHALLENGE_AND_KNOWLEDGE_VAULT.md
 docs/ROADMAP_PATCH_SIMULATOR_CARD_DEFINITION_MANAGER.md
+docs/ROADMAP_PATCH_SIMULATOR_REVISION_SIM_R.md
 docs/PHASE8B_ANALYTICS_INNOVATION_DETECTION_PATCH_CONTRACT.md
 docs/FREQUENCY_POOL_SPEC.md
 docs/COMMANDER_STAPLES_SPEC.md
@@ -34,6 +35,39 @@ docs/CO_OCCURRENCE_METRICS_SPEC.md
 docs/EVIDENCE_GRAPH_SPEC.md
 docs/CODIE_CHAT_SPEC.md
 ```
+
+## Deferred Architecture-Approved Track
+
+### Simulator Revision (SIM-R)
+
+Status:
+
+```text
+architecture approved
+implementation deferred
+not part of the active Phase 29 chain
+```
+
+SIM-R is logged in:
+
+```text
+docs/ROADMAP_PATCH_SIMULATOR_REVISION_SIM_R.md
+```
+
+Do not implement SIM-R until:
+
+```text
+current implementation and validation chain is complete
+current checkpoints pass
+existing simulator contracts are frozen
+dedicated SIM-R architecture contract exists
+dedicated SIM-R outside validation returns PASS or PASS WITH REVIEW NOTES
+dedicated SIM-R checkpoint plan is accepted
+```
+
+SIM-R must preserve all existing simulator behavior and historical results.
+It must not turn Codie into a full Magic rules engine, Forge runtime,
+opponent simulator, combat engine, or LLM-generated execution system.
 
 ## Required Contract Sequence
 

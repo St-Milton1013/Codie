@@ -32,7 +32,7 @@ Latest pushed commit before Phase 24 outside validation acceptance: 432e958 Add 
 Latest full-suite result:
 
 ```text
-Ran 790 tests in 3.440s
+Ran 790 tests in 5.173s
 
 OK (skipped=1)
 ```
@@ -1512,6 +1512,8 @@ Phase 13 simulator contracts or a new UI/API contract is explicitly selected.
 - Phase 24 Chat/Intelligence Local API is accepted.
 - Phase 25 Evidence Fusion is ready for outside validation.
 - cEDHData public asset metadata and local reference hashes are recorded in docs/CEDHDATA_SIMULATOR_REFERENCE_CAPTURE_MANIFEST.md.
+- Simulator Revision (SIM-R) is architecture-approved but implementation-deferred in docs/ROADMAP_PATCH_SIMULATOR_REVISION_SIM_R.md.
+- Do not modify existing simulator implementation for SIM-R until the active validation chain completes, current simulator contracts are frozen, and a dedicated SIM-R contract plus outside validation is accepted.
 - Final recommendation output remains intentionally separate.
 
 ## Quality Gate

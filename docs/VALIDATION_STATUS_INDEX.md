@@ -80,7 +80,7 @@ OK
 
 Full suite:
 python -m unittest discover -s tests
-Ran 790 tests in 3.440s
+Ran 790 tests in 5.173s
 OK (skipped=1)
 
 Static check:

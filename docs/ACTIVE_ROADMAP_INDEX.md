@@ -55,6 +55,7 @@ Obsidian / Knowledge Vault
 Advanced UI dashboard
 Mobile-friendly local report delivery
 Optional Discord / LocalSend / QR delivery integrations
+Simulator Revision (SIM-R)
 ```
 
 These items remain roadmap-only until a future contract explicitly authorizes implementation.
@@ -68,6 +69,7 @@ sqlite-vec
 LocalSend
 Moxfield parser references
 MTGJSON references
+Forge references for SIM-R validation only
 ```
 
 Reference repositories are not production dependencies unless a future contract explicitly approves that dependency.
@@ -92,6 +94,8 @@ Recommendation output must flow through Evidence Fusion and Decision Intelligenc
 Phase 29B report documents must not write files.
 Phase 29D safe writer must not implement CLI behavior.
 Phase 29E CLI wrapper must not generate recommendations.
+SIM-R must not be implemented until the active validation chain completes and a dedicated SIM-R contract is accepted.
+Simulator output remains evidence only and must never generate recommendations.
 ```
 
 ## Phase 29D Review Packet
@@ -109,5 +113,6 @@ docs/VALIDATION_STATUS_INDEX.md
 docs/NEXT_PHASE_CONTRACT.md
 docs/CODEX_CONTINUITY_HANDOFF.md
 docs/ROADMAP_PATCH_CODIE_ARCHITECTURE_REVISION_III.md
+docs/ROADMAP_PATCH_SIMULATOR_REVISION_SIM_R.md
 docs/POST_PHASE24_PATCH_CONTRACT_BACKLOG.md
 ```
