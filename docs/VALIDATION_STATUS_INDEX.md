@@ -24,8 +24,9 @@ Phase 29C CLI / Safe File Writer Integration Contract: COMPLETE
 Phase 29D Safe Recommendation Report File Writer: INTERNAL PASS
 Phase 29E Recommendation Output CLI Wrapper: PASS WITH REVIEW NOTES
 Phase 29F CLI / Report Integration Checkpoint: PASS
-Phase 30A Local Alpha Release Checklist: INTERNAL PASS
-Phase 30B: blocked until Phase 30A outside validation is accepted
+Phase 30A Local Alpha Release Checklist: PASS
+Phase 30B Local Alpha Packaging / Usage Documentation: INTERNAL PASS
+Phase 30C: blocked until Phase 30B outside validation is accepted
 ```
 
 ## Accepted Phase Summary
@@ -73,19 +74,20 @@ Phase 29C CLI / Safe File Writer Integration Contract: COMPLETE; REQUIRED FIXES 
 Phase 29D Safe Recommendation Report File Writer: INTERNAL PASS
 Phase 29E Recommendation Output CLI Wrapper: PASS WITH REVIEW NOTES
 Phase 29F CLI / Report Integration Checkpoint: PASS
-Phase 30A Local Alpha Release Checklist: INTERNAL PASS
+Phase 30A Local Alpha Release Checklist: PASS
+Phase 30B Local Alpha Packaging / Usage Documentation: INTERNAL PASS
 ```
 
 ## Latest Local Validation
 
 ```text
-Phase 30A Local Alpha Release Checklist:
+Phase 30B Local Alpha Packaging / Usage Documentation:
 python scripts/check_schema.py
 Schema bootstrap check passed.
 
 Full suite:
 python -m unittest discover -s tests
-Ran 797 tests in 3.377s
+Ran 797 tests in 4.819s
 OK (skipped=1)
 
 Static check:
@@ -93,19 +95,29 @@ git diff --check
 passed
 
 Status drift scans:
-no stale Phase 29F / Phase 30A gate matches
-no patch backlog item still claims Phase 30A
+Phase 30B remains INTERNAL PASS pending outside validation
+Phase 30C remains blocked
+
+Production touch check:
+no codie/tests/scripts/ui/schema/dependency/CI changes
 ```
 
 ## Current Blocker
 
 ```text
-Phase 30B - Local Alpha packaging / usage documentation is blocked until Phase 30A outside validation is accepted.
+Phase 30C - Local Alpha release candidate checkpoint is blocked until Phase 30B outside validation is accepted.
 ```
 
-## Current Phase 30A Outside Validation Packet
+## Current Phase 30B Outside Validation Packet
 
 ```text
+docs/PHASE30B_LOCAL_ALPHA_PACKAGING_USAGE_CONTRACT.md
+docs/LOCAL_ALPHA_README.md
+docs/LOCAL_ALPHA_COMMANDS.md
+docs/LOCAL_ALPHA_KNOWN_CAVEATS.md
+docs/LOCAL_ALPHA_VALIDATION_STEPS.md
+docs/CHECKPOINT_PHASE30B_LOCAL_ALPHA_PACKAGING_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE30B_LOCAL_ALPHA_PACKAGING_PROMPT.md
 docs/PHASE30A_LOCAL_ALPHA_RELEASE_CHECKLIST_CONTRACT.md
 docs/CHECKPOINT_PHASE30A_LOCAL_ALPHA_RELEASE_CHECKLIST_REPORT.md
 docs/OUTSIDE_VALIDATION_PHASE30A_LOCAL_ALPHA_RELEASE_CHECKLIST_PROMPT.md
@@ -127,13 +139,3 @@ docs/VALIDATION_STATUS_INDEX.md
 docs/NEXT_PHASE_CONTRACT.md
 docs/CODEX_CONTINUITY_HANDOFF.md
 ```
-
-## Draft-Only Waiting Room Docs
-
-```text
-docs/PHASE30A_OUTSIDE_VALIDATION_PACKET_MESSAGE.md
-docs/PHASE30B_LOCAL_ALPHA_PACKAGING_PLANNING_DRAFT.md
-docs/LOCAL_ALPHA_USAGE_DOCUMENTATION_OUTLINE_DRAFT.md
-```
-
-These do not authorize Phase 30B before Phase 30A outside validation is accepted.

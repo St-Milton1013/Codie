@@ -1,9 +1,9 @@
 # Phase 30B - Local Alpha Packaging / Usage Documentation Planning Draft
 
-Status: draft only
+Status: superseded by `docs/PHASE30B_LOCAL_ALPHA_PACKAGING_USAGE_CONTRACT.md`
 
-Phase 30B remains blocked until Phase 30A outside validation returns PASS or
-PASS WITH REVIEW NOTES.
+Phase 30A outside validation returned PASS. Phase 30B was converted from this
+planning draft into local alpha packaging / usage documentation.
 
 ## Purpose
 
@@ -138,4 +138,3 @@ do not implement strategist mode
 do not generate recommendations
 do not weaken privacy or evidence boundaries
 ```
-

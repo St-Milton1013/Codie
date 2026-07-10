@@ -32,7 +32,7 @@ Latest pushed commit before Phase 24 outside validation acceptance: 432e958 Add 
 Latest full-suite result:
 
 ```text
-Ran 797 tests in 3.377s
+Ran 797 tests in 4.819s
 
 OK (skipped=1)
 ```
@@ -197,7 +197,8 @@ Phase 29C CLI / Safe File Writer Integration Contract: PASS
 Phase 29D Safe Recommendation Report File Writer: PASS
 Phase 29E Recommendation Output CLI Wrapper: PASS WITH REVIEW NOTES
 Phase 29F CLI / Report Integration Checkpoint: PASS
-Phase 30A Local Alpha Release Checklist: INTERNAL PASS
+Phase 30A Local Alpha Release Checklist: PASS
+Phase 30B Local Alpha Packaging / Usage Documentation: INTERNAL PASS
 ```
 
 ## Recent Commits
@@ -1413,22 +1414,32 @@ validates the Phase 29B report serializers, Phase 29D safe writer, and Phase
 29E CLI wrapper as one local output chain. It adds no runtime behavior.
 Phase 29F outside validation returned PASS.
 
-Phase 30A is internally complete. It is a local alpha readiness checklist only
-and adds no production code, schema, providers, UI, LLM calls, SIM-R behavior,
-or recommendation generation.
+Phase 30A outside validation returned PASS.
 
-While Phase 30A is awaiting outside validation, draft-only Phase 30B planning
-docs were prepared. They do not authorize Phase 30B implementation:
+Phase 30B is internally complete. It is local alpha packaging and usage
+documentation only. It adds no production code, schema, providers, UI, LLM
+calls, SIM-R behavior, or recommendation generation.
 
 ```text
-docs/PHASE30A_OUTSIDE_VALIDATION_PACKET_MESSAGE.md
-docs/PHASE30B_LOCAL_ALPHA_PACKAGING_PLANNING_DRAFT.md
-docs/LOCAL_ALPHA_USAGE_DOCUMENTATION_OUTLINE_DRAFT.md
+docs/PHASE30B_LOCAL_ALPHA_PACKAGING_USAGE_CONTRACT.md
+docs/LOCAL_ALPHA_README.md
+docs/LOCAL_ALPHA_COMMANDS.md
+docs/LOCAL_ALPHA_KNOWN_CAVEATS.md
+docs/LOCAL_ALPHA_VALIDATION_STEPS.md
+docs/CHECKPOINT_PHASE30B_LOCAL_ALPHA_PACKAGING_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE30B_LOCAL_ALPHA_PACKAGING_PROMPT.md
 ```
 
-Current Phase 30A outside validation packet:
+Current Phase 30B outside validation packet:
 
 ```text
+docs/PHASE30B_LOCAL_ALPHA_PACKAGING_USAGE_CONTRACT.md
+docs/LOCAL_ALPHA_README.md
+docs/LOCAL_ALPHA_COMMANDS.md
+docs/LOCAL_ALPHA_KNOWN_CAVEATS.md
+docs/LOCAL_ALPHA_VALIDATION_STEPS.md
+docs/CHECKPOINT_PHASE30B_LOCAL_ALPHA_PACKAGING_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE30B_LOCAL_ALPHA_PACKAGING_PROMPT.md
 docs/PHASE30A_LOCAL_ALPHA_RELEASE_CHECKLIST_CONTRACT.md
 docs/CHECKPOINT_PHASE30A_LOCAL_ALPHA_RELEASE_CHECKLIST_REPORT.md
 docs/OUTSIDE_VALIDATION_PHASE30A_LOCAL_ALPHA_RELEASE_CHECKLIST_PROMPT.md
