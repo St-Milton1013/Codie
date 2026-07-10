@@ -28,7 +28,8 @@ Phase 30A Local Alpha Release Checklist: PASS
 Phase 30B Local Alpha Packaging / Usage Documentation: PASS
 Phase 30C Local Alpha Release Candidate Checkpoint: PASS
 Phase 30D Local Alpha Tag / Release Notes / Handoff Finalization: PASS
-Local alpha tag: ready to create
+Phase 31A SIM-R Architecture Contract: INTERNAL PASS
+Local alpha tag: created locally; remote tag push not verified in this environment
 ```
 
 ## Accepted Phase Summary
@@ -80,75 +81,45 @@ Phase 30A Local Alpha Release Checklist: PASS
 Phase 30B Local Alpha Packaging / Usage Documentation: PASS
 Phase 30C Local Alpha Release Candidate Checkpoint: PASS
 Phase 30D Local Alpha Tag / Release Notes / Handoff Finalization: PASS
+Phase 31A SIM-R Architecture Contract: INTERNAL PASS
 ```
 
 ## Latest Local Validation
 
 ```text
-Phase 30D Local Alpha Tag / Release Notes / Handoff Finalization:
+Phase 31A SIM-R Architecture Contract:
 python scripts/check_schema.py
 Schema bootstrap check passed.
 
-Full suite:
 python -m unittest discover -s tests
-Ran 797 tests in 4.304s
+Ran 797 tests in 5.570s
 OK (skipped=1)
 
-Static check:
 git diff --check
 passed
 
-Production touch check:
-no codie/tests/scripts/ui/schema/dependency/CI changes
-
-Tag absence check:
-local-alpha-0.1.0 does not exist yet
-
-Outside validation:
-Phase 30D returned PASS.
+Static scans:
+simulator runtime diff scan: no matches
+schema/repository/dependency diff scan: no matches
+production Forge / LLM SDK import scan: no matches
 ```
 
 ## Current Blocker
 
 ```text
-Local alpha tag creation is the next action.
+Phase 31B is blocked until Phase 31A outside validation returns PASS or PASS WITH REVIEW NOTES.
 ```
 
-## Accepted Phase 30D Release Handoff Packet
+## Current Phase 31A Outside Validation Packet
 
 ```text
-docs/PHASE30D_LOCAL_ALPHA_TAG_RELEASE_HANDOFF_CONTRACT.md
-docs/LOCAL_ALPHA_RELEASE_NOTES.md
-docs/LOCAL_ALPHA_TAG_PLAN.md
-docs/LOCAL_ALPHA_FINAL_HANDOFF.md
-docs/CHECKPOINT_PHASE30D_LOCAL_ALPHA_TAG_RELEASE_HANDOFF_REPORT.md
-docs/OUTSIDE_VALIDATION_PHASE30D_LOCAL_ALPHA_TAG_RELEASE_HANDOFF_PROMPT.md
-docs/PHASE30C_LOCAL_ALPHA_RELEASE_CANDIDATE_CHECKPOINT_CONTRACT.md
-docs/CHECKPOINT_PHASE30C_LOCAL_ALPHA_RELEASE_CANDIDATE_REPORT.md
-docs/OUTSIDE_VALIDATION_PHASE30C_LOCAL_ALPHA_RELEASE_CANDIDATE_PROMPT.md
-docs/PHASE30B_LOCAL_ALPHA_PACKAGING_USAGE_CONTRACT.md
-docs/LOCAL_ALPHA_README.md
-docs/LOCAL_ALPHA_COMMANDS.md
-docs/LOCAL_ALPHA_KNOWN_CAVEATS.md
-docs/LOCAL_ALPHA_VALIDATION_STEPS.md
-docs/CHECKPOINT_PHASE30B_LOCAL_ALPHA_PACKAGING_REPORT.md
-docs/OUTSIDE_VALIDATION_PHASE30B_LOCAL_ALPHA_PACKAGING_PROMPT.md
-docs/PHASE30A_LOCAL_ALPHA_RELEASE_CHECKLIST_CONTRACT.md
-docs/CHECKPOINT_PHASE30A_LOCAL_ALPHA_RELEASE_CHECKLIST_REPORT.md
-docs/OUTSIDE_VALIDATION_PHASE30A_LOCAL_ALPHA_RELEASE_CHECKLIST_PROMPT.md
-docs/CHECKPOINT_PHASE29F_CLI_REPORT_INTEGRATION_REPORT.md
-docs/PRE_PHASE30_AUDIT_REPORT.md
-docs/OUTSIDE_VALIDATION_PHASE29F_CLI_REPORT_INTEGRATION_PROMPT.md
-docs/PHASE29E_RECOMMENDATION_OUTPUT_CLI_IMPLEMENTATION_REPORT.md
-docs/CHECKPOINT_PHASE29E_RECOMMENDATION_OUTPUT_CLI_REPORT.md
-docs/PHASE29D_CLI_SAFE_FILE_WRITER_IMPLEMENTATION_REPORT.md
-docs/CHECKPOINT_PHASE29D_SAFE_FILE_WRITER_REPORT.md
-docs/PHASE29C_CLI_SAFE_FILE_WRITER_CONTRACT.md
-codie/cli/recommendation_output.py
-codie/recommendation_output/writers.py
-codie/recommendation_output/reporting.py
-tests/test_cli_recommendation_output.py
-tests/test_recommendation_output_writers.py
+docs/PHASE31A_SIM_R_ARCHITECTURE_CONTRACT.md
+docs/CHECKPOINT_PHASE31A_SIM_R_ARCHITECTURE_CONTRACT_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE31A_SIM_R_ARCHITECTURE_PROMPT.md
+docs/ROADMAP_PATCH_SIMULATOR_REVISION_SIM_R.md
+docs/PHASE13_SIMULATOR_CONTRACT_REFRESH.md
+docs/CHECKPOINT_PHASE13_SIMULATOR_TRACK_REPORT.md
+docs/CHECKPOINT_PHASE14_SIMULATION_REVIEW_EXPORT_REPORT.md
 docs/ACTIVE_ROADMAP_INDEX.md
 docs/VALIDATION_STATUS_INDEX.md
 docs/NEXT_PHASE_CONTRACT.md

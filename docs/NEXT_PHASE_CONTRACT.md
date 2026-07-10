@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: create and push local-alpha-0.1.0 tag; then choose the first post-alpha lane contract-first
+Recommended next task: send Phase 31A SIM-R Architecture Contract outside validation packet; do not begin Phase 31B until accepted
 
 ## Active Indexes
 

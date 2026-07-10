@@ -201,6 +201,7 @@ Phase 30A Local Alpha Release Checklist: PASS
 Phase 30B Local Alpha Packaging / Usage Documentation: PASS
 Phase 30C Local Alpha Release Candidate Checkpoint: PASS
 Phase 30D Local Alpha Tag / Release Notes / Handoff Finalization: PASS
+Phase 31A SIM-R Architecture Contract: INTERNAL PASS
 ```
 
 ## Recent Commits
@@ -1431,6 +1432,30 @@ Phase 30C outside validation returned PASS.
 Phase 30D outside validation returned PASS. It finalizes release notes, tag
 plan, and handoff documentation. It does not add production code, schema,
 providers, UI, LLM calls, SIM-R behavior, or recommendation generation.
+
+Phase 31A is internally complete. It is the SIM-R architecture contract only.
+It freezes existing simulator surfaces, defines the future SIM-R state-engine
+boundary, records invariants, and keeps Forge and LLM usage reference-only /
+non-executable. It adds no production simulator code, schema, repositories,
+dependencies, UI, live network behavior, or recommendation output. Phase 31B is
+blocked until Phase 31A outside validation returns PASS or PASS WITH REVIEW
+NOTES.
+
+Current Phase 31A outside validation packet:
+
+```text
+docs/PHASE31A_SIM_R_ARCHITECTURE_CONTRACT.md
+docs/CHECKPOINT_PHASE31A_SIM_R_ARCHITECTURE_CONTRACT_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE31A_SIM_R_ARCHITECTURE_PROMPT.md
+docs/ROADMAP_PATCH_SIMULATOR_REVISION_SIM_R.md
+docs/PHASE13_SIMULATOR_CONTRACT_REFRESH.md
+docs/CHECKPOINT_PHASE13_SIMULATOR_TRACK_REPORT.md
+docs/CHECKPOINT_PHASE14_SIMULATION_REVIEW_EXPORT_REPORT.md
+docs/ACTIVE_ROADMAP_INDEX.md
+docs/VALIDATION_STATUS_INDEX.md
+docs/NEXT_PHASE_CONTRACT.md
+docs/CODEX_CONTINUITY_HANDOFF.md
+```
 
 ```text
 docs/PHASE30D_LOCAL_ALPHA_TAG_RELEASE_HANDOFF_CONTRACT.md

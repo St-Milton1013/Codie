@@ -30,28 +30,30 @@ Phase 30A Local Alpha Release Checklist: externally accepted
 Phase 30B Local Alpha Packaging / Usage Documentation: externally accepted
 Phase 30C Local Alpha Release Candidate Checkpoint: externally accepted
 Phase 30D Local Alpha Tag / Release Notes / Handoff Finalization: externally accepted
-Current action: create and push local-alpha-0.1.0 tag
-Local alpha tag status: ready to create
+Phase 31A SIM-R Architecture Contract: internally complete
+Current action: send Phase 31A outside validation packet
+Local alpha tag status: created locally; remote tag push not verified in this environment
 ```
 
 ## Next Allowed Phase
 
 ```text
-Local alpha tag creation
+Phase 31A outside validation
 ```
 
-Phase 30D outside validation returned PASS. The local alpha Git tag is authorized.
+Do not begin Phase 31B until Phase 31A outside validation returns PASS or PASS WITH REVIEW NOTES.
 
 ## Release-Critical Path
 
 ```text
-1. Create local-alpha-0.1.0 tag
-2. Push local-alpha-0.1.0 tag
+1. Phase 31A outside validation
+2. Phase 31B SIM-R current simulator freeze / validation packet
 ```
 
 ## Post-Alpha / Later Roadmap
 
 ```text
+SIM-R current simulator freeze / validation packet
 Tag Graph Lab
 Moxfield Frequency Pool Builder
 Jin-Gitaxias Strategist Mode
@@ -102,43 +104,18 @@ SIM-R must not be implemented until the active validation chain completes and a 
 Simulator output remains evidence only and must never generate recommendations.
 ```
 
-## Local Alpha Tag Packet
+## Phase 31A Outside Validation Packet
 
-Use these files as the accepted release handoff packet:
+Send these files for the current gate:
 
 ```text
-docs/PHASE30D_LOCAL_ALPHA_TAG_RELEASE_HANDOFF_CONTRACT.md
-docs/LOCAL_ALPHA_RELEASE_NOTES.md
-docs/LOCAL_ALPHA_TAG_PLAN.md
-docs/LOCAL_ALPHA_FINAL_HANDOFF.md
-docs/CHECKPOINT_PHASE30D_LOCAL_ALPHA_TAG_RELEASE_HANDOFF_REPORT.md
-docs/OUTSIDE_VALIDATION_PHASE30D_LOCAL_ALPHA_TAG_RELEASE_HANDOFF_PROMPT.md
-docs/PHASE30C_LOCAL_ALPHA_RELEASE_CANDIDATE_CHECKPOINT_CONTRACT.md
-docs/CHECKPOINT_PHASE30C_LOCAL_ALPHA_RELEASE_CANDIDATE_REPORT.md
-docs/OUTSIDE_VALIDATION_PHASE30C_LOCAL_ALPHA_RELEASE_CANDIDATE_PROMPT.md
-docs/PHASE30B_LOCAL_ALPHA_PACKAGING_USAGE_CONTRACT.md
-docs/LOCAL_ALPHA_README.md
-docs/LOCAL_ALPHA_COMMANDS.md
-docs/LOCAL_ALPHA_KNOWN_CAVEATS.md
-docs/LOCAL_ALPHA_VALIDATION_STEPS.md
-docs/CHECKPOINT_PHASE30B_LOCAL_ALPHA_PACKAGING_REPORT.md
-docs/OUTSIDE_VALIDATION_PHASE30B_LOCAL_ALPHA_PACKAGING_PROMPT.md
-docs/PHASE30A_LOCAL_ALPHA_RELEASE_CHECKLIST_CONTRACT.md
-docs/CHECKPOINT_PHASE30A_LOCAL_ALPHA_RELEASE_CHECKLIST_REPORT.md
-docs/OUTSIDE_VALIDATION_PHASE30A_LOCAL_ALPHA_RELEASE_CHECKLIST_PROMPT.md
-docs/CHECKPOINT_PHASE29F_CLI_REPORT_INTEGRATION_REPORT.md
-docs/PRE_PHASE30_AUDIT_REPORT.md
-docs/OUTSIDE_VALIDATION_PHASE29F_CLI_REPORT_INTEGRATION_PROMPT.md
-docs/PHASE29E_RECOMMENDATION_OUTPUT_CLI_IMPLEMENTATION_REPORT.md
-docs/CHECKPOINT_PHASE29E_RECOMMENDATION_OUTPUT_CLI_REPORT.md
-docs/PHASE29D_CLI_SAFE_FILE_WRITER_IMPLEMENTATION_REPORT.md
-docs/CHECKPOINT_PHASE29D_SAFE_FILE_WRITER_REPORT.md
-docs/PHASE29C_CLI_SAFE_FILE_WRITER_CONTRACT.md
-codie/cli/recommendation_output.py
-codie/recommendation_output/writers.py
-codie/recommendation_output/reporting.py
-tests/test_cli_recommendation_output.py
-tests/test_recommendation_output_writers.py
+docs/PHASE31A_SIM_R_ARCHITECTURE_CONTRACT.md
+docs/CHECKPOINT_PHASE31A_SIM_R_ARCHITECTURE_CONTRACT_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE31A_SIM_R_ARCHITECTURE_PROMPT.md
+docs/ROADMAP_PATCH_SIMULATOR_REVISION_SIM_R.md
+docs/PHASE13_SIMULATOR_CONTRACT_REFRESH.md
+docs/CHECKPOINT_PHASE13_SIMULATOR_TRACK_REPORT.md
+docs/CHECKPOINT_PHASE14_SIMULATION_REVIEW_EXPORT_REPORT.md
 docs/ACTIVE_ROADMAP_INDEX.md
 docs/VALIDATION_STATUS_INDEX.md
 docs/NEXT_PHASE_CONTRACT.md
