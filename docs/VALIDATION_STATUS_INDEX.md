@@ -25,8 +25,8 @@ Phase 29D Safe Recommendation Report File Writer: INTERNAL PASS
 Phase 29E Recommendation Output CLI Wrapper: PASS WITH REVIEW NOTES
 Phase 29F CLI / Report Integration Checkpoint: PASS
 Phase 30A Local Alpha Release Checklist: PASS
-Phase 30B Local Alpha Packaging / Usage Documentation: INTERNAL PASS
-Phase 30C: blocked until Phase 30B outside validation is accepted
+Phase 30B Local Alpha Packaging / Usage Documentation: PASS
+Phase 30C: next allowed phase
 ```
 
 ## Accepted Phase Summary
@@ -75,7 +75,7 @@ Phase 29D Safe Recommendation Report File Writer: INTERNAL PASS
 Phase 29E Recommendation Output CLI Wrapper: PASS WITH REVIEW NOTES
 Phase 29F CLI / Report Integration Checkpoint: PASS
 Phase 30A Local Alpha Release Checklist: PASS
-Phase 30B Local Alpha Packaging / Usage Documentation: INTERNAL PASS
+Phase 30B Local Alpha Packaging / Usage Documentation: PASS
 ```
 
 ## Latest Local Validation
@@ -94,9 +94,8 @@ Static check:
 git diff --check
 passed
 
-Status drift scans:
-Phase 30B remains INTERNAL PASS pending outside validation
-Phase 30C remains blocked
+Outside validation:
+Phase 30B returned PASS
 
 Production touch check:
 no codie/tests/scripts/ui/schema/dependency/CI changes
@@ -105,10 +104,10 @@ no codie/tests/scripts/ui/schema/dependency/CI changes
 ## Current Blocker
 
 ```text
-Phase 30C - Local Alpha release candidate checkpoint is blocked until Phase 30B outside validation is accepted.
+Phase 30C - Local Alpha release candidate checkpoint is the next allowed phase.
 ```
 
-## Current Phase 30B Outside Validation Packet
+## Current Phase 30C Preparation Packet
 
 ```text
 docs/PHASE30B_LOCAL_ALPHA_PACKAGING_USAGE_CONTRACT.md
