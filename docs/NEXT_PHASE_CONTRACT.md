@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: send Phase 31B SIM-R Current Simulator Freeze outside validation packet; do not begin Phase 31C until accepted
+Recommended next task: send Phase 31C SIM-R State Model Contract outside validation packet; do not begin Phase 31D until accepted
 
 ## Active Indexes
 

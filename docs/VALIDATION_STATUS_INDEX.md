@@ -29,7 +29,8 @@ Phase 30B Local Alpha Packaging / Usage Documentation: PASS
 Phase 30C Local Alpha Release Candidate Checkpoint: PASS
 Phase 30D Local Alpha Tag / Release Notes / Handoff Finalization: PASS
 Phase 31A SIM-R Architecture Contract: PASS WITH REVIEW NOTES
-Phase 31B SIM-R Current Simulator Freeze: INTERNAL PASS
+Phase 31B SIM-R Current Simulator Freeze: PASS
+Phase 31C SIM-R State Model Contract: INTERNAL PASS
 Local alpha tag: created locally; remote tag push not verified in this environment
 ```
 
@@ -83,18 +84,19 @@ Phase 30B Local Alpha Packaging / Usage Documentation: PASS
 Phase 30C Local Alpha Release Candidate Checkpoint: PASS
 Phase 30D Local Alpha Tag / Release Notes / Handoff Finalization: PASS
 Phase 31A SIM-R Architecture Contract: PASS WITH REVIEW NOTES
-Phase 31B SIM-R Current Simulator Freeze: INTERNAL PASS
+Phase 31B SIM-R Current Simulator Freeze: PASS
+Phase 31C SIM-R State Model Contract: INTERNAL PASS
 ```
 
 ## Latest Local Validation
 
 ```text
-Phase 31B SIM-R Current Simulator Freeze:
+Phase 31C SIM-R State Model Contract:
 python scripts/check_schema.py
 Schema bootstrap check passed.
 
 python -m unittest discover -s tests
-Ran 797 tests in 4.231s
+Ran 797 tests in 3.862s
 OK (skipped=1)
 
 git diff --check
@@ -109,22 +111,23 @@ production Forge / LLM SDK import scan: no matches
 ## Current Blocker
 
 ```text
-Phase 31C is blocked until Phase 31B outside validation returns PASS or PASS WITH REVIEW NOTES.
+Phase 31D is blocked until Phase 31C outside validation returns PASS or PASS WITH REVIEW NOTES.
 ```
 
-## Current Phase 31B Outside Validation Packet
+## Current Phase 31C Outside Validation Packet
 
 ```text
+docs/PHASE31C_SIM_R_STATE_MODEL_CONTRACT.md
+docs/CHECKPOINT_PHASE31C_SIM_R_STATE_MODEL_CONTRACT_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE31C_SIM_R_STATE_MODEL_PROMPT.md
 docs/PHASE31B_SIM_R_CURRENT_SIMULATOR_FREEZE_CONTRACT.md
 docs/CHECKPOINT_PHASE31B_SIM_R_CURRENT_SIMULATOR_FREEZE_REPORT.md
-docs/OUTSIDE_VALIDATION_PHASE31B_SIM_R_CURRENT_SIMULATOR_FREEZE_PROMPT.md
 docs/PHASE31A_SIM_R_ARCHITECTURE_CONTRACT.md
 docs/CHECKPOINT_PHASE31A_SIM_R_ARCHITECTURE_CONTRACT_REPORT.md
 docs/ROADMAP_PATCH_SIMULATOR_REVISION_SIM_R.md
 docs/PHASE13_SIMULATOR_CONTRACT_REFRESH.md
 docs/CHECKPOINT_PHASE13_SIMULATOR_TRACK_REPORT.md
 docs/CHECKPOINT_PHASE14_SIMULATION_REVIEW_EXPORT_REPORT.md
-docs/USER_GUIDE_SIMULATION_REVIEW_EXPORTS.md
 docs/ACTIVE_ROADMAP_INDEX.md
 docs/VALIDATION_STATUS_INDEX.md
 docs/NEXT_PHASE_CONTRACT.md
