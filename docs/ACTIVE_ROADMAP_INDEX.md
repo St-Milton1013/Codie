@@ -24,24 +24,24 @@ Phase 29A CLI / Report Integration Contract: accepted with required fix applied
 Phase 29B Report Document Implementation: internally complete
 Phase 29C CLI / Safe File Writer Integration Contract: complete
 Phase 29D Safe Recommendation Report File Writer: internally complete
-Current action: review Phase 29D implementation packet
-Phase 29E status: blocked until Phase 29D review is accepted
+Phase 29E Recommendation Output CLI Wrapper: internally complete
+Current action: review Phase 29E implementation packet
+Phase 29F status: blocked until Phase 29E review is accepted
 ```
 
 ## Next Allowed Phase
 
 ```text
-Phase 29E - CLI wrapper after Phase 29D review
+Phase 29F - CLI / Report integration checkpoint after Phase 29E review
 ```
 
-Do not implement the CLI wrapper until Phase 29D is accepted.
+Do not start the Phase 29F checkpoint until Phase 29E is accepted.
 
 ## Release-Critical Path
 
 ```text
-1. Phase 29D safe recommendation report file writer review
-2. Phase 29E CLI wrapper contract / implementation
-3. Phase 29F CLI / Report integration checkpoint
+1. Phase 29E CLI wrapper review
+2. Phase 29F CLI / Report integration checkpoint
 5. Phase 30A Local Alpha release checklist
 ```
 
@@ -98,17 +98,21 @@ SIM-R must not be implemented until the active validation chain completes and a 
 Simulator output remains evidence only and must never generate recommendations.
 ```
 
-## Phase 29D Review Packet
+## Phase 29E Review Packet
 
 Review these files for the current gate:
 
 ```text
+docs/PHASE29E_RECOMMENDATION_OUTPUT_CLI_IMPLEMENTATION_REPORT.md
+docs/CHECKPOINT_PHASE29E_RECOMMENDATION_OUTPUT_CLI_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE29E_RECOMMENDATION_OUTPUT_CLI_PROMPT.md
 docs/PHASE29D_CLI_SAFE_FILE_WRITER_IMPLEMENTATION_REPORT.md
 docs/CHECKPOINT_PHASE29D_SAFE_FILE_WRITER_REPORT.md
-docs/OUTSIDE_VALIDATION_PHASE29D_SAFE_FILE_WRITER_PROMPT.md
 docs/PHASE29C_CLI_SAFE_FILE_WRITER_CONTRACT.md
+codie/cli/recommendation_output.py
 codie/recommendation_output/writers.py
 codie/recommendation_output/reporting.py
+tests/test_cli_recommendation_output.py
 tests/test_recommendation_output_writers.py
 docs/ACTIVE_ROADMAP_INDEX.md
 docs/VALIDATION_STATUS_INDEX.md

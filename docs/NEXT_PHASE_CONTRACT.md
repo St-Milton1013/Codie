@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: review Phase 29D - Safe Recommendation Report File Writer; after acceptance proceed to Phase 29E - CLI wrapper
+Recommended next task: review Phase 29E - Recommendation Output CLI Wrapper; after acceptance proceed to Phase 29F - CLI / Report integration checkpoint
 
 ## Active Indexes
 

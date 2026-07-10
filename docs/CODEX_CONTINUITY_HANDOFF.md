@@ -32,15 +32,15 @@ Latest pushed commit before Phase 24 outside validation acceptance: 432e958 Add 
 Latest full-suite result:
 
 ```text
-Ran 791 tests in 3.398s
+Ran 797 tests in 3.454s
 
 OK (skipped=1)
 ```
 
-Latest focused Phase 29D result:
+Latest focused Phase 29E result:
 
 ```text
-Ran 10 tests in 0.049s
+Ran 6 tests in 0.030s
 
 OK
 ```
@@ -1386,15 +1386,28 @@ implement CLI, schema, DB reads, provider/source reads, analytics recalculation,
 simulator execution, LLM calls, candidate discovery, candidate ranking, cut
 selection, addition selection, or final recommendation generation.
 
-Current Phase 29D review packet:
+Phase 29E is internally complete. It implements only the recommendation output
+CLI wrapper under codie/cli/recommendation_output.py. It loads local
+RecommendationOutputBundle JSON, requires --bundle-json, --format, and
+--output-root, delegates rendering/writing to the Phase 29D safe writer, and
+returns concise JSON success output or nonzero concise errors without raw stack
+traces. It does not implement schema, DB reads, provider/source reads, analytics
+recalculation, simulator execution, LLM calls, candidate discovery, candidate
+ranking, cut selection, addition selection, or final recommendation generation.
+
+Current Phase 29E review packet:
 
 ```text
+docs/PHASE29E_RECOMMENDATION_OUTPUT_CLI_IMPLEMENTATION_REPORT.md
+docs/CHECKPOINT_PHASE29E_RECOMMENDATION_OUTPUT_CLI_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE29E_RECOMMENDATION_OUTPUT_CLI_PROMPT.md
 docs/PHASE29D_CLI_SAFE_FILE_WRITER_IMPLEMENTATION_REPORT.md
 docs/CHECKPOINT_PHASE29D_SAFE_FILE_WRITER_REPORT.md
-docs/OUTSIDE_VALIDATION_PHASE29D_SAFE_FILE_WRITER_PROMPT.md
 docs/PHASE29C_CLI_SAFE_FILE_WRITER_CONTRACT.md
+codie/cli/recommendation_output.py
 codie/recommendation_output/writers.py
 codie/recommendation_output/reporting.py
+tests/test_cli_recommendation_output.py
 tests/test_recommendation_output_writers.py
 docs/ACTIVE_ROADMAP_INDEX.md
 docs/VALIDATION_STATUS_INDEX.md

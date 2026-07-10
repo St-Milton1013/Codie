@@ -22,7 +22,8 @@ Phase 29A outside review: PASS WITH REQUIRED FIXES; fixes applied
 Phase 29B Report Document Implementation: INTERNAL PASS
 Phase 29C CLI / Safe File Writer Integration Contract: COMPLETE
 Phase 29D Safe Recommendation Report File Writer: INTERNAL PASS
-Phase 29E: blocked until Phase 29D outside validation is accepted
+Phase 29E Recommendation Output CLI Wrapper: INTERNAL PASS
+Phase 29F: blocked until Phase 29E outside validation is accepted
 ```
 
 ## Accepted Phase Summary
@@ -68,19 +69,20 @@ Phase 29A CLI / Report Integration Contract: PASS WITH REQUIRED FIXES APPLIED
 Phase 29B Report Document Implementation: INTERNAL PASS
 Phase 29C CLI / Safe File Writer Integration Contract: COMPLETE; REQUIRED FIXES APPLIED
 Phase 29D Safe Recommendation Report File Writer: INTERNAL PASS
+Phase 29E Recommendation Output CLI Wrapper: INTERNAL PASS
 ```
 
 ## Latest Local Validation
 
 ```text
-Focused Phase 29D Recommendation Output Writers:
-python -m unittest tests.test_recommendation_output_writers -v
-Ran 10 tests in 0.049s
+Focused Phase 29E Recommendation Output CLI:
+python -m unittest tests.test_cli_recommendation_output -v
+Ran 6 tests in 0.030s
 OK
 
 Full suite:
 python -m unittest discover -s tests
-Ran 791 tests in 3.398s
+Ran 797 tests in 3.454s
 OK (skipped=1)
 
 Static check:
@@ -91,18 +93,22 @@ passed
 ## Current Blocker
 
 ```text
-Phase 29E - CLI wrapper is blocked until Phase 29D outside validation is accepted.
+Phase 29F - CLI / Report integration checkpoint is blocked until Phase 29E outside validation is accepted.
 ```
 
-## Current Phase 29D Review Packet
+## Current Phase 29E Review Packet
 
 ```text
+docs/PHASE29E_RECOMMENDATION_OUTPUT_CLI_IMPLEMENTATION_REPORT.md
+docs/CHECKPOINT_PHASE29E_RECOMMENDATION_OUTPUT_CLI_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE29E_RECOMMENDATION_OUTPUT_CLI_PROMPT.md
 docs/PHASE29D_CLI_SAFE_FILE_WRITER_IMPLEMENTATION_REPORT.md
 docs/CHECKPOINT_PHASE29D_SAFE_FILE_WRITER_REPORT.md
-docs/OUTSIDE_VALIDATION_PHASE29D_SAFE_FILE_WRITER_PROMPT.md
 docs/PHASE29C_CLI_SAFE_FILE_WRITER_CONTRACT.md
+codie/cli/recommendation_output.py
 codie/recommendation_output/writers.py
 codie/recommendation_output/reporting.py
+tests/test_cli_recommendation_output.py
 tests/test_recommendation_output_writers.py
 docs/ACTIVE_ROADMAP_INDEX.md
 docs/VALIDATION_STATUS_INDEX.md
