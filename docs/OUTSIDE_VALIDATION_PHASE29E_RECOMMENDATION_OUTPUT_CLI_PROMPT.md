@@ -40,6 +40,7 @@ Confirm:
 CLI requires --bundle-json
 CLI requires --format
 CLI requires --output-root
+CLI supports md as an alias for markdown
 CLI rejects malformed JSON
 CLI rejects missing required bundle fields
 CLI rejects unsupported format
@@ -90,7 +91,7 @@ Phase 29E bypasses the Phase 29D safe writer
 Return:
 
 ```text
-PASS / PASS WITH REQUIRED FIXES / FAIL
+PASS / PASS WITH REVIEW NOTES / PASS WITH REQUIRED FIXES / FAIL
 ```
 
 Then list required fixes before Phase 29F.
