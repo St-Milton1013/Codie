@@ -32,15 +32,17 @@ Latest pushed commit before Phase 24 outside validation acceptance: 432e958 Add 
 Latest full-suite result:
 
 ```text
-Ran 797 tests in 3.454s
+Ran 797 tests in 3.372s
 
 OK (skipped=1)
 ```
 
-Latest focused Phase 29E result:
+Latest focused Phase 29F result:
 
 ```text
-Ran 6 tests in 0.030s
+Reporting: Ran 9 tests in 0.005s
+Writer: Ran 10 tests in 0.058s
+CLI: Ran 6 tests in 0.032s
 
 OK
 ```
@@ -1394,13 +1396,19 @@ returns concise JSON success output or nonzero concise errors without raw stack
 traces. It does not implement schema, DB reads, provider/source reads, analytics
 recalculation, simulator execution, LLM calls, candidate discovery, candidate
 ranking, cut selection, addition selection, or final recommendation generation.
+Phase 29E outside validation returned PASS WITH REVIEW NOTES.
 
-Current Phase 29E review packet:
+Phase 29F is internally complete. It is an integration checkpoint only and
+validates the Phase 29B report serializers, Phase 29D safe writer, and Phase
+29E CLI wrapper as one local output chain. It adds no runtime behavior.
+
+Current Phase 29F review packet:
 
 ```text
+docs/CHECKPOINT_PHASE29F_CLI_REPORT_INTEGRATION_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE29F_CLI_REPORT_INTEGRATION_PROMPT.md
 docs/PHASE29E_RECOMMENDATION_OUTPUT_CLI_IMPLEMENTATION_REPORT.md
 docs/CHECKPOINT_PHASE29E_RECOMMENDATION_OUTPUT_CLI_REPORT.md
-docs/OUTSIDE_VALIDATION_PHASE29E_RECOMMENDATION_OUTPUT_CLI_PROMPT.md
 docs/PHASE29D_CLI_SAFE_FILE_WRITER_IMPLEMENTATION_REPORT.md
 docs/CHECKPOINT_PHASE29D_SAFE_FILE_WRITER_REPORT.md
 docs/PHASE29C_CLI_SAFE_FILE_WRITER_CONTRACT.md

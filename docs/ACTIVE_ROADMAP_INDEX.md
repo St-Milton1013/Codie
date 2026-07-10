@@ -24,25 +24,25 @@ Phase 29A CLI / Report Integration Contract: accepted with required fix applied
 Phase 29B Report Document Implementation: internally complete
 Phase 29C CLI / Safe File Writer Integration Contract: complete
 Phase 29D Safe Recommendation Report File Writer: internally complete
-Phase 29E Recommendation Output CLI Wrapper: internally complete
-Current action: review Phase 29E implementation packet
-Phase 29F status: blocked until Phase 29E review is accepted
+Phase 29E Recommendation Output CLI Wrapper: externally accepted
+Phase 29F CLI / Report Integration Checkpoint: internally complete
+Current action: review Phase 29F checkpoint packet
+Phase 30A status: blocked until Phase 29F review is accepted
 ```
 
 ## Next Allowed Phase
 
 ```text
-Phase 29F - CLI / Report integration checkpoint after Phase 29E review
+Phase 30A - Local Alpha release checklist after Phase 29F review
 ```
 
-Do not start the Phase 29F checkpoint until Phase 29E is accepted.
+Do not start Phase 30A until Phase 29F is accepted.
 
 ## Release-Critical Path
 
 ```text
-1. Phase 29E CLI wrapper review
-2. Phase 29F CLI / Report integration checkpoint
-5. Phase 30A Local Alpha release checklist
+1. Phase 29F CLI / Report integration checkpoint review
+2. Phase 30A Local Alpha release checklist
 ```
 
 ## Post-Alpha / Later Roadmap
@@ -98,14 +98,15 @@ SIM-R must not be implemented until the active validation chain completes and a 
 Simulator output remains evidence only and must never generate recommendations.
 ```
 
-## Phase 29E Review Packet
+## Phase 29F Review Packet
 
 Review these files for the current gate:
 
 ```text
+docs/CHECKPOINT_PHASE29F_CLI_REPORT_INTEGRATION_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE29F_CLI_REPORT_INTEGRATION_PROMPT.md
 docs/PHASE29E_RECOMMENDATION_OUTPUT_CLI_IMPLEMENTATION_REPORT.md
 docs/CHECKPOINT_PHASE29E_RECOMMENDATION_OUTPUT_CLI_REPORT.md
-docs/OUTSIDE_VALIDATION_PHASE29E_RECOMMENDATION_OUTPUT_CLI_PROMPT.md
 docs/PHASE29D_CLI_SAFE_FILE_WRITER_IMPLEMENTATION_REPORT.md
 docs/CHECKPOINT_PHASE29D_SAFE_FILE_WRITER_REPORT.md
 docs/PHASE29C_CLI_SAFE_FILE_WRITER_CONTRACT.md

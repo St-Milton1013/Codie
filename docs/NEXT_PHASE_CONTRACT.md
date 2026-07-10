@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: review Phase 29E - Recommendation Output CLI Wrapper; after acceptance proceed to Phase 29F - CLI / Report integration checkpoint
+Recommended next task: review Phase 29F - CLI / Report integration checkpoint; after acceptance proceed to Phase 30A - Local Alpha release checklist
 
 ## Active Indexes
 

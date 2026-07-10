@@ -22,8 +22,9 @@ Phase 29A outside review: PASS WITH REQUIRED FIXES; fixes applied
 Phase 29B Report Document Implementation: INTERNAL PASS
 Phase 29C CLI / Safe File Writer Integration Contract: COMPLETE
 Phase 29D Safe Recommendation Report File Writer: INTERNAL PASS
-Phase 29E Recommendation Output CLI Wrapper: INTERNAL PASS
-Phase 29F: blocked until Phase 29E outside validation is accepted
+Phase 29E Recommendation Output CLI Wrapper: PASS WITH REVIEW NOTES
+Phase 29F CLI / Report Integration Checkpoint: INTERNAL PASS
+Phase 30A: blocked until Phase 29F outside validation is accepted
 ```
 
 ## Accepted Phase Summary
@@ -69,20 +70,29 @@ Phase 29A CLI / Report Integration Contract: PASS WITH REQUIRED FIXES APPLIED
 Phase 29B Report Document Implementation: INTERNAL PASS
 Phase 29C CLI / Safe File Writer Integration Contract: COMPLETE; REQUIRED FIXES APPLIED
 Phase 29D Safe Recommendation Report File Writer: INTERNAL PASS
-Phase 29E Recommendation Output CLI Wrapper: INTERNAL PASS
+Phase 29E Recommendation Output CLI Wrapper: PASS WITH REVIEW NOTES
+Phase 29F CLI / Report Integration Checkpoint: INTERNAL PASS
 ```
 
 ## Latest Local Validation
 
 ```text
-Focused Phase 29E Recommendation Output CLI:
+Focused Phase 29F CLI / Report Integration:
+python -m unittest tests.test_recommendation_output_reporting -v
+Ran 9 tests in 0.005s
+OK
+
+python -m unittest tests.test_recommendation_output_writers -v
+Ran 10 tests in 0.058s
+OK
+
 python -m unittest tests.test_cli_recommendation_output -v
-Ran 6 tests in 0.030s
+Ran 6 tests in 0.032s
 OK
 
 Full suite:
 python -m unittest discover -s tests
-Ran 797 tests in 3.454s
+Ran 797 tests in 3.372s
 OK (skipped=1)
 
 Static check:
@@ -93,15 +103,16 @@ passed
 ## Current Blocker
 
 ```text
-Phase 29F - CLI / Report integration checkpoint is blocked until Phase 29E outside validation is accepted.
+Phase 30A - Local Alpha release checklist is blocked until Phase 29F outside validation is accepted.
 ```
 
-## Current Phase 29E Review Packet
+## Current Phase 29F Review Packet
 
 ```text
+docs/CHECKPOINT_PHASE29F_CLI_REPORT_INTEGRATION_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE29F_CLI_REPORT_INTEGRATION_PROMPT.md
 docs/PHASE29E_RECOMMENDATION_OUTPUT_CLI_IMPLEMENTATION_REPORT.md
 docs/CHECKPOINT_PHASE29E_RECOMMENDATION_OUTPUT_CLI_REPORT.md
-docs/OUTSIDE_VALIDATION_PHASE29E_RECOMMENDATION_OUTPUT_CLI_PROMPT.md
 docs/PHASE29D_CLI_SAFE_FILE_WRITER_IMPLEMENTATION_REPORT.md
 docs/CHECKPOINT_PHASE29D_SAFE_FILE_WRITER_REPORT.md
 docs/PHASE29C_CLI_SAFE_FILE_WRITER_CONTRACT.md
