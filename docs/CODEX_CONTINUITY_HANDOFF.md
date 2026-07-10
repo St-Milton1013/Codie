@@ -32,7 +32,7 @@ Latest pushed commit before Phase 24 outside validation acceptance: 432e958 Add 
 Latest full-suite result:
 
 ```text
-Ran 797 tests in 4.819s
+Ran 797 tests in 3.670s
 
 OK (skipped=1)
 ```
@@ -199,6 +199,7 @@ Phase 29E Recommendation Output CLI Wrapper: PASS WITH REVIEW NOTES
 Phase 29F CLI / Report Integration Checkpoint: PASS
 Phase 30A Local Alpha Release Checklist: PASS
 Phase 30B Local Alpha Packaging / Usage Documentation: PASS
+Phase 30C Local Alpha Release Candidate Checkpoint: INTERNAL PASS
 ```
 
 ## Recent Commits
@@ -1421,7 +1422,14 @@ documentation only. It adds no production code, schema, providers, UI, LLM
 calls, SIM-R behavior, or recommendation generation.
 Phase 30B outside validation returned PASS.
 
+Phase 30C is internally complete. It is a release-candidate checkpoint only and
+adds no production code, schema, providers, UI, LLM calls, SIM-R behavior, or
+recommendation generation.
+
 ```text
+docs/PHASE30C_LOCAL_ALPHA_RELEASE_CANDIDATE_CHECKPOINT_CONTRACT.md
+docs/CHECKPOINT_PHASE30C_LOCAL_ALPHA_RELEASE_CANDIDATE_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE30C_LOCAL_ALPHA_RELEASE_CANDIDATE_PROMPT.md
 docs/PHASE30B_LOCAL_ALPHA_PACKAGING_USAGE_CONTRACT.md
 docs/LOCAL_ALPHA_README.md
 docs/LOCAL_ALPHA_COMMANDS.md
@@ -1431,9 +1439,12 @@ docs/CHECKPOINT_PHASE30B_LOCAL_ALPHA_PACKAGING_REPORT.md
 docs/OUTSIDE_VALIDATION_PHASE30B_LOCAL_ALPHA_PACKAGING_PROMPT.md
 ```
 
-Current Phase 30C preparation packet:
+Current Phase 30C outside validation packet:
 
 ```text
+docs/PHASE30C_LOCAL_ALPHA_RELEASE_CANDIDATE_CHECKPOINT_CONTRACT.md
+docs/CHECKPOINT_PHASE30C_LOCAL_ALPHA_RELEASE_CANDIDATE_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE30C_LOCAL_ALPHA_RELEASE_CANDIDATE_PROMPT.md
 docs/PHASE30B_LOCAL_ALPHA_PACKAGING_USAGE_CONTRACT.md
 docs/LOCAL_ALPHA_README.md
 docs/LOCAL_ALPHA_COMMANDS.md

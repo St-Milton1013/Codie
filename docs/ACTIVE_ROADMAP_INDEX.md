@@ -28,22 +28,24 @@ Phase 29E Recommendation Output CLI Wrapper: externally accepted
 Phase 29F CLI / Report Integration Checkpoint: externally accepted
 Phase 30A Local Alpha Release Checklist: externally accepted
 Phase 30B Local Alpha Packaging / Usage Documentation: externally accepted
-Current action: prepare Phase 30C Local Alpha release candidate checkpoint
-Phase 30C status: next allowed phase
+Phase 30C Local Alpha Release Candidate Checkpoint: internally complete
+Current action: send Phase 30C outside validation packet
+Phase 30D status: blocked until Phase 30C outside validation is accepted
 ```
 
 ## Next Allowed Phase
 
 ```text
-Phase 30C - Local Alpha release candidate checkpoint
+Phase 30D - Local Alpha tag / release notes / handoff finalization after Phase 30C outside validation
 ```
 
-Phase 30C may start contract-first.
+Do not start Phase 30D until Phase 30C outside validation returns PASS or PASS WITH REVIEW NOTES.
 
 ## Release-Critical Path
 
 ```text
-1. Phase 30C Local Alpha release candidate checkpoint
+1. Phase 30C outside validation
+2. Phase 30D Local Alpha tag / release notes / handoff finalization
 ```
 
 ## Post-Alpha / Later Roadmap
@@ -99,11 +101,14 @@ SIM-R must not be implemented until the active validation chain completes and a 
 Simulator output remains evidence only and must never generate recommendations.
 ```
 
-## Phase 30C Preparation Packet
+## Phase 30C Outside Validation Packet
 
-Read these files before drafting the Phase 30C checkpoint:
+Send these files for the current gate:
 
 ```text
+docs/PHASE30C_LOCAL_ALPHA_RELEASE_CANDIDATE_CHECKPOINT_CONTRACT.md
+docs/CHECKPOINT_PHASE30C_LOCAL_ALPHA_RELEASE_CANDIDATE_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE30C_LOCAL_ALPHA_RELEASE_CANDIDATE_PROMPT.md
 docs/PHASE30B_LOCAL_ALPHA_PACKAGING_USAGE_CONTRACT.md
 docs/LOCAL_ALPHA_README.md
 docs/LOCAL_ALPHA_COMMANDS.md

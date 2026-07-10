@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: Phase 30C - Local Alpha release candidate checkpoint
+Recommended next task: review Phase 30C - Local Alpha release candidate checkpoint; after acceptance proceed to Phase 30D - Local Alpha tag / release notes / handoff finalization
 
 ## Active Indexes
 

@@ -66,10 +66,10 @@ Expected: no errors.
 ## 6. Release Gate Scan
 
 ```powershell
-rg -n "Phase 30B: next allowed|Phase 30B.*PASS|Phase 30B.*INTERNAL PASS|Current Phase 30B" docs\ACTIVE_ROADMAP_INDEX.md docs\VALIDATION_STATUS_INDEX.md docs\CODEX_CONTINUITY_HANDOFF.md
+rg -n "Phase 30B.*INTERNAL PASS|blocked until Phase 30B|send Phase 30B outside validation|Current Phase 30B Outside Validation" docs\ACTIVE_ROADMAP_INDEX.md docs\VALIDATION_STATUS_INDEX.md docs\NEXT_PHASE_CONTRACT.md docs\CODEX_CONTINUITY_HANDOFF.md
 ```
 
-Expected: no matches until Phase 30B outside validation is accepted.
+Expected: no matches after Phase 30B outside validation is accepted.
 
 ## 7. Production Touch Check For Phase 30B
 
@@ -78,4 +78,3 @@ git diff --name-only -- codie tests scripts ui .github requirements.txt requirem
 ```
 
 Expected: no matches for Phase 30B documentation-only work.
-

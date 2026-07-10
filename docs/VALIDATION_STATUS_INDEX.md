@@ -26,7 +26,8 @@ Phase 29E Recommendation Output CLI Wrapper: PASS WITH REVIEW NOTES
 Phase 29F CLI / Report Integration Checkpoint: PASS
 Phase 30A Local Alpha Release Checklist: PASS
 Phase 30B Local Alpha Packaging / Usage Documentation: PASS
-Phase 30C: next allowed phase
+Phase 30C Local Alpha Release Candidate Checkpoint: INTERNAL PASS
+Phase 30D: blocked until Phase 30C outside validation is accepted
 ```
 
 ## Accepted Phase Summary
@@ -76,40 +77,45 @@ Phase 29E Recommendation Output CLI Wrapper: PASS WITH REVIEW NOTES
 Phase 29F CLI / Report Integration Checkpoint: PASS
 Phase 30A Local Alpha Release Checklist: PASS
 Phase 30B Local Alpha Packaging / Usage Documentation: PASS
+Phase 30C Local Alpha Release Candidate Checkpoint: INTERNAL PASS
 ```
 
 ## Latest Local Validation
 
 ```text
-Phase 30B Local Alpha Packaging / Usage Documentation:
+Phase 30C Local Alpha Release Candidate Checkpoint:
 python scripts/check_schema.py
 Schema bootstrap check passed.
 
 Full suite:
 python -m unittest discover -s tests
-Ran 797 tests in 4.819s
+Ran 797 tests in 3.670s
 OK (skipped=1)
 
 Static check:
 git diff --check
 passed
 
-Outside validation:
-Phase 30B returned PASS
-
 Production touch check:
 no codie/tests/scripts/ui/schema/dependency/CI changes
+
+Environment note:
+requirements.txt was installed into the bundled Python runtime before rerunning
+the full suite because qrcode and bs4 were missing from that runtime.
 ```
 
 ## Current Blocker
 
 ```text
-Phase 30C - Local Alpha release candidate checkpoint is the next allowed phase.
+Phase 30D - Local Alpha tag / release notes / handoff finalization is blocked until Phase 30C outside validation is accepted.
 ```
 
-## Current Phase 30C Preparation Packet
+## Current Phase 30C Outside Validation Packet
 
 ```text
+docs/PHASE30C_LOCAL_ALPHA_RELEASE_CANDIDATE_CHECKPOINT_CONTRACT.md
+docs/CHECKPOINT_PHASE30C_LOCAL_ALPHA_RELEASE_CANDIDATE_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE30C_LOCAL_ALPHA_RELEASE_CANDIDATE_PROMPT.md
 docs/PHASE30B_LOCAL_ALPHA_PACKAGING_USAGE_CONTRACT.md
 docs/LOCAL_ALPHA_README.md
 docs/LOCAL_ALPHA_COMMANDS.md
