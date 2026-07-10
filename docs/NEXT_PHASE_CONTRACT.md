@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: review Phase 29F - CLI / Report integration checkpoint; after acceptance proceed to Phase 30A - Local Alpha release checklist
+Recommended next task: Phase 30A - Local Alpha release checklist
 
 ## Active Indexes
 

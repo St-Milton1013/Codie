@@ -23,8 +23,8 @@ Phase 29B Report Document Implementation: INTERNAL PASS
 Phase 29C CLI / Safe File Writer Integration Contract: COMPLETE
 Phase 29D Safe Recommendation Report File Writer: INTERNAL PASS
 Phase 29E Recommendation Output CLI Wrapper: PASS WITH REVIEW NOTES
-Phase 29F CLI / Report Integration Checkpoint: INTERNAL PASS
-Phase 30A: blocked until Phase 29F outside validation is accepted
+Phase 29F CLI / Report Integration Checkpoint: PASS
+Phase 30A: next allowed phase
 ```
 
 ## Accepted Phase Summary
@@ -71,7 +71,7 @@ Phase 29B Report Document Implementation: INTERNAL PASS
 Phase 29C CLI / Safe File Writer Integration Contract: COMPLETE; REQUIRED FIXES APPLIED
 Phase 29D Safe Recommendation Report File Writer: INTERNAL PASS
 Phase 29E Recommendation Output CLI Wrapper: PASS WITH REVIEW NOTES
-Phase 29F CLI / Report Integration Checkpoint: INTERNAL PASS
+Phase 29F CLI / Report Integration Checkpoint: PASS
 ```
 
 ## Latest Local Validation
@@ -92,7 +92,7 @@ OK
 
 Full suite:
 python -m unittest discover -s tests
-Ran 797 tests in 3.372s
+Ran 797 tests in 3.428s
 OK (skipped=1)
 
 Static check:
@@ -103,13 +103,14 @@ passed
 ## Current Blocker
 
 ```text
-Phase 30A - Local Alpha release checklist is blocked until Phase 29F outside validation is accepted.
+Phase 30A - Local Alpha release checklist is the next allowed phase.
 ```
 
-## Current Phase 29F Review Packet
+## Current Phase 30A Preparation Packet
 
 ```text
 docs/CHECKPOINT_PHASE29F_CLI_REPORT_INTEGRATION_REPORT.md
+docs/PRE_PHASE30_AUDIT_REPORT.md
 docs/OUTSIDE_VALIDATION_PHASE29F_CLI_REPORT_INTEGRATION_PROMPT.md
 docs/PHASE29E_RECOMMENDATION_OUTPUT_CLI_IMPLEMENTATION_REPORT.md
 docs/CHECKPOINT_PHASE29E_RECOMMENDATION_OUTPUT_CLI_REPORT.md
