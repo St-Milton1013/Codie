@@ -30,24 +30,25 @@ Phase 30A Local Alpha Release Checklist: externally accepted
 Phase 30B Local Alpha Packaging / Usage Documentation: externally accepted
 Phase 30C Local Alpha Release Candidate Checkpoint: externally accepted
 Phase 30D Local Alpha Tag / Release Notes / Handoff Finalization: externally accepted
-Phase 31A SIM-R Architecture Contract: internally complete
-Current action: send Phase 31A outside validation packet
+Phase 31A SIM-R Architecture Contract: externally accepted
+Phase 31B SIM-R Current Simulator Freeze: internally complete
+Current action: send Phase 31B outside validation packet
 Local alpha tag status: created locally; remote tag push not verified in this environment
 ```
 
 ## Next Allowed Phase
 
 ```text
-Phase 31A outside validation
+Phase 31B outside validation
 ```
 
-Do not begin Phase 31B until Phase 31A outside validation returns PASS or PASS WITH REVIEW NOTES.
+Do not begin Phase 31C until Phase 31B outside validation returns PASS or PASS WITH REVIEW NOTES.
 
 ## Release-Critical Path
 
 ```text
-1. Phase 31A outside validation
-2. Phase 31B SIM-R current simulator freeze / validation packet
+1. Phase 31B outside validation
+2. Phase 31C SIM-R state model contract
 ```
 
 ## Post-Alpha / Later Roadmap
@@ -104,18 +105,21 @@ SIM-R must not be implemented until the active validation chain completes and a 
 Simulator output remains evidence only and must never generate recommendations.
 ```
 
-## Phase 31A Outside Validation Packet
+## Phase 31B Outside Validation Packet
 
 Send these files for the current gate:
 
 ```text
+docs/PHASE31B_SIM_R_CURRENT_SIMULATOR_FREEZE_CONTRACT.md
+docs/CHECKPOINT_PHASE31B_SIM_R_CURRENT_SIMULATOR_FREEZE_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE31B_SIM_R_CURRENT_SIMULATOR_FREEZE_PROMPT.md
 docs/PHASE31A_SIM_R_ARCHITECTURE_CONTRACT.md
 docs/CHECKPOINT_PHASE31A_SIM_R_ARCHITECTURE_CONTRACT_REPORT.md
-docs/OUTSIDE_VALIDATION_PHASE31A_SIM_R_ARCHITECTURE_PROMPT.md
 docs/ROADMAP_PATCH_SIMULATOR_REVISION_SIM_R.md
 docs/PHASE13_SIMULATOR_CONTRACT_REFRESH.md
 docs/CHECKPOINT_PHASE13_SIMULATOR_TRACK_REPORT.md
 docs/CHECKPOINT_PHASE14_SIMULATION_REVIEW_EXPORT_REPORT.md
+docs/USER_GUIDE_SIMULATION_REVIEW_EXPORTS.md
 docs/ACTIVE_ROADMAP_INDEX.md
 docs/VALIDATION_STATUS_INDEX.md
 docs/NEXT_PHASE_CONTRACT.md
