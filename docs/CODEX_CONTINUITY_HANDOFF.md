@@ -1417,6 +1417,15 @@ Phase 30A is internally complete. It is a local alpha readiness checklist only
 and adds no production code, schema, providers, UI, LLM calls, SIM-R behavior,
 or recommendation generation.
 
+While Phase 30A is awaiting outside validation, draft-only Phase 30B planning
+docs were prepared. They do not authorize Phase 30B implementation:
+
+```text
+docs/PHASE30A_OUTSIDE_VALIDATION_PACKET_MESSAGE.md
+docs/PHASE30B_LOCAL_ALPHA_PACKAGING_PLANNING_DRAFT.md
+docs/LOCAL_ALPHA_USAGE_DOCUMENTATION_OUTLINE_DRAFT.md
+```
+
 Current Phase 30A outside validation packet:
 
 ```text

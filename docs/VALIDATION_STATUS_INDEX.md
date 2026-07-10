@@ -127,3 +127,13 @@ docs/VALIDATION_STATUS_INDEX.md
 docs/NEXT_PHASE_CONTRACT.md
 docs/CODEX_CONTINUITY_HANDOFF.md
 ```
+
+## Draft-Only Waiting Room Docs
+
+```text
+docs/PHASE30A_OUTSIDE_VALIDATION_PACKET_MESSAGE.md
+docs/PHASE30B_LOCAL_ALPHA_PACKAGING_PLANNING_DRAFT.md
+docs/LOCAL_ALPHA_USAGE_DOCUMENTATION_OUTLINE_DRAFT.md
+```
+
+These do not authorize Phase 30B before Phase 30A outside validation is accepted.
