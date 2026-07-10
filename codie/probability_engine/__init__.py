@@ -147,6 +147,21 @@ from .review_export_writer import (
     SimulationReviewExportWriteResult,
     write_simulation_review_export_bundle,
 )
+from .sim_r_state import (
+    SIM_R_STATE_VERSION,
+    MANA_POOL_KEYS,
+    SimulationCardInstance,
+    SimulationCommanderState,
+    SimulationManaPool,
+    SimulationState,
+    SimulationStateBuildError,
+    SimulationTargetProgress,
+    SimulationUnsupportedBehavior,
+    SimulationZone,
+    build_simulation_state,
+    simulation_state_to_dict,
+    validate_simulation_state,
+)
 
 __all__ = [
     "MANA_COLOR_KEYS",
@@ -269,4 +284,17 @@ __all__ = [
     "simulation_review_summary_to_json_payload",
     "simulation_review_summary_to_markdown",
     "write_simulation_review_export_bundle",
+    "SIM_R_STATE_VERSION",
+    "MANA_POOL_KEYS",
+    "SimulationCardInstance",
+    "SimulationCommanderState",
+    "SimulationManaPool",
+    "SimulationState",
+    "SimulationStateBuildError",
+    "SimulationTargetProgress",
+    "SimulationUnsupportedBehavior",
+    "SimulationZone",
+    "build_simulation_state",
+    "simulation_state_to_dict",
+    "validate_simulation_state",
 ]

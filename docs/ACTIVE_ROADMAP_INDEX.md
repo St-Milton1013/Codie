@@ -33,24 +33,25 @@ Phase 30D Local Alpha Tag / Release Notes / Handoff Finalization: externally acc
 Phase 31A SIM-R Architecture Contract: externally accepted
 Phase 31B SIM-R Current Simulator Freeze: externally accepted
 Phase 31C SIM-R State Model Contract: externally accepted
-Phase 31D SIM-R State Model Implementation Contract: internally complete
-Current action: send Phase 31D outside validation packet
+Phase 31D SIM-R State Model Implementation Contract: externally accepted
+Phase 31E SIM-R State Model Implementation: internally complete
+Current action: send Phase 31E outside validation packet
 Local alpha tag status: created locally; remote tag push not verified in this environment
 ```
 
 ## Next Allowed Phase
 
 ```text
-Phase 31D outside validation
+Phase 31E outside validation
 ```
 
-Do not begin Phase 31E until Phase 31D outside validation returns PASS or PASS WITH REVIEW NOTES.
+Do not begin Phase 31F until Phase 31E outside validation returns PASS or PASS WITH REVIEW NOTES.
 
 ## Release-Critical Path
 
 ```text
-1. Phase 31D outside validation
-2. Phase 31E SIM-R state model implementation
+1. Phase 31E outside validation
+2. Phase 31F SIM-R resource ledger contract
 ```
 
 ## Post-Alpha / Later Roadmap
@@ -107,20 +108,19 @@ SIM-R must not be implemented until the active validation chain completes and a 
 Simulator output remains evidence only and must never generate recommendations.
 ```
 
-## Phase 31D Outside Validation Packet
+## Phase 31E Outside Validation Packet
 
 Send these files for the current gate:
 
 ```text
+docs/PHASE31E_SIM_R_STATE_MODEL_IMPLEMENTATION_REPORT.md
+docs/CHECKPOINT_PHASE31E_SIM_R_STATE_MODEL_IMPLEMENTATION_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE31E_SIM_R_STATE_MODEL_IMPLEMENTATION_PROMPT.md
 docs/PHASE31D_SIM_R_STATE_MODEL_IMPLEMENTATION_CONTRACT.md
-docs/CHECKPOINT_PHASE31D_SIM_R_STATE_MODEL_IMPLEMENTATION_CONTRACT_REPORT.md
-docs/OUTSIDE_VALIDATION_PHASE31D_SIM_R_STATE_MODEL_IMPLEMENTATION_CONTRACT_PROMPT.md
 docs/PHASE31C_SIM_R_STATE_MODEL_CONTRACT.md
-docs/CHECKPOINT_PHASE31C_SIM_R_STATE_MODEL_CONTRACT_REPORT.md
-docs/PHASE31B_SIM_R_CURRENT_SIMULATOR_FREEZE_CONTRACT.md
-docs/CHECKPOINT_PHASE31B_SIM_R_CURRENT_SIMULATOR_FREEZE_REPORT.md
-docs/PHASE31A_SIM_R_ARCHITECTURE_CONTRACT.md
-docs/ROADMAP_PATCH_SIMULATOR_REVISION_SIM_R.md
+codie/probability_engine/sim_r_state.py
+codie/probability_engine/__init__.py
+tests/test_probability_engine_sim_r_state.py
 docs/ACTIVE_ROADMAP_INDEX.md
 docs/VALIDATION_STATUS_INDEX.md
 docs/NEXT_PHASE_CONTRACT.md
