@@ -205,7 +205,8 @@ Phase 31A SIM-R Architecture Contract: PASS WITH REVIEW NOTES
 Phase 31B SIM-R Current Simulator Freeze: PASS
 Phase 31C SIM-R State Model Contract: PASS WITH REVIEW NOTES
 Phase 31D SIM-R State Model Implementation Contract: PASS WITH REVIEW NOTES
-Phase 31E SIM-R State Model Implementation: INTERNAL PASS
+Phase 31E SIM-R State Model Implementation: PASS WITH REVIEW NOTES
+Phase 31F SIM-R Resource Ledger Contract: INTERNAL PASS
 ```
 
 ## Recent Commits
@@ -1475,19 +1476,30 @@ state value objects in codie/probability_engine/sim_r_state.py and focused
 tests in tests/test_probability_engine_sim_r_state.py. It adds no simulator
 actions, search, behavior modules, hashing, resource ledger execution, trace
 v2 execution, schema, repositories, Forge integration, LLM behavior generation,
-recommendation output, UI, or live network calls. Phase 31F is blocked until
-Phase 31E outside validation returns PASS or PASS WITH REVIEW NOTES.
+recommendation output, UI, or live network calls. Phase 31E outside validation
+returned PASS WITH REVIEW NOTES.
 
-Current Phase 31E outside validation packet:
+Phase 31F is internally complete. It is the SIM-R resource ledger contract
+only. It defines future ledger entry fields, resource types, cost/payment
+relationships, double-spend prevention, state relationship requirements,
+restricted mana handling, unsupported resource behavior handling, serialization
+requirements, and evidence-only boundaries. It adds no production simulator
+code, resource ledger implementation, state transition behavior, schema,
+repositories, dependencies, UI, live network behavior, or recommendation output.
+Phase 31G is blocked until Phase 31F outside validation returns PASS or PASS
+WITH REVIEW NOTES.
+
+Current Phase 31F outside validation packet:
 
 ```text
+docs/PHASE31F_SIM_R_RESOURCE_LEDGER_CONTRACT.md
+docs/CHECKPOINT_PHASE31F_SIM_R_RESOURCE_LEDGER_CONTRACT_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE31F_SIM_R_RESOURCE_LEDGER_PROMPT.md
 docs/PHASE31E_SIM_R_STATE_MODEL_IMPLEMENTATION_REPORT.md
 docs/CHECKPOINT_PHASE31E_SIM_R_STATE_MODEL_IMPLEMENTATION_REPORT.md
-docs/OUTSIDE_VALIDATION_PHASE31E_SIM_R_STATE_MODEL_IMPLEMENTATION_PROMPT.md
 docs/PHASE31D_SIM_R_STATE_MODEL_IMPLEMENTATION_CONTRACT.md
 docs/PHASE31C_SIM_R_STATE_MODEL_CONTRACT.md
 codie/probability_engine/sim_r_state.py
-codie/probability_engine/__init__.py
 tests/test_probability_engine_sim_r_state.py
 docs/ACTIVE_ROADMAP_INDEX.md
 docs/VALIDATION_STATUS_INDEX.md

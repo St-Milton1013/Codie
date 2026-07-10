@@ -34,24 +34,25 @@ Phase 31A SIM-R Architecture Contract: externally accepted
 Phase 31B SIM-R Current Simulator Freeze: externally accepted
 Phase 31C SIM-R State Model Contract: externally accepted
 Phase 31D SIM-R State Model Implementation Contract: externally accepted
-Phase 31E SIM-R State Model Implementation: internally complete
-Current action: send Phase 31E outside validation packet
+Phase 31E SIM-R State Model Implementation: externally accepted
+Phase 31F SIM-R Resource Ledger Contract: internally complete
+Current action: send Phase 31F outside validation packet
 Local alpha tag status: created locally; remote tag push not verified in this environment
 ```
 
 ## Next Allowed Phase
 
 ```text
-Phase 31E outside validation
+Phase 31F outside validation
 ```
 
-Do not begin Phase 31F until Phase 31E outside validation returns PASS or PASS WITH REVIEW NOTES.
+Do not begin Phase 31G until Phase 31F outside validation returns PASS or PASS WITH REVIEW NOTES.
 
 ## Release-Critical Path
 
 ```text
-1. Phase 31E outside validation
-2. Phase 31F SIM-R resource ledger contract
+1. Phase 31F outside validation
+2. Phase 31G SIM-R resource ledger implementation contract
 ```
 
 ## Post-Alpha / Later Roadmap
@@ -108,18 +109,19 @@ SIM-R must not be implemented until the active validation chain completes and a 
 Simulator output remains evidence only and must never generate recommendations.
 ```
 
-## Phase 31E Outside Validation Packet
+## Phase 31F Outside Validation Packet
 
 Send these files for the current gate:
 
 ```text
+docs/PHASE31F_SIM_R_RESOURCE_LEDGER_CONTRACT.md
+docs/CHECKPOINT_PHASE31F_SIM_R_RESOURCE_LEDGER_CONTRACT_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE31F_SIM_R_RESOURCE_LEDGER_PROMPT.md
 docs/PHASE31E_SIM_R_STATE_MODEL_IMPLEMENTATION_REPORT.md
 docs/CHECKPOINT_PHASE31E_SIM_R_STATE_MODEL_IMPLEMENTATION_REPORT.md
-docs/OUTSIDE_VALIDATION_PHASE31E_SIM_R_STATE_MODEL_IMPLEMENTATION_PROMPT.md
 docs/PHASE31D_SIM_R_STATE_MODEL_IMPLEMENTATION_CONTRACT.md
 docs/PHASE31C_SIM_R_STATE_MODEL_CONTRACT.md
 codie/probability_engine/sim_r_state.py
-codie/probability_engine/__init__.py
 tests/test_probability_engine_sim_r_state.py
 docs/ACTIVE_ROADMAP_INDEX.md
 docs/VALIDATION_STATUS_INDEX.md
