@@ -24,7 +24,8 @@ Phase 29C CLI / Safe File Writer Integration Contract: COMPLETE
 Phase 29D Safe Recommendation Report File Writer: INTERNAL PASS
 Phase 29E Recommendation Output CLI Wrapper: PASS WITH REVIEW NOTES
 Phase 29F CLI / Report Integration Checkpoint: PASS
-Phase 30A: next allowed phase
+Phase 30A Local Alpha Release Checklist: INTERNAL PASS
+Phase 30B: blocked until Phase 30A outside validation is accepted
 ```
 
 ## Accepted Phase Summary
@@ -72,43 +73,42 @@ Phase 29C CLI / Safe File Writer Integration Contract: COMPLETE; REQUIRED FIXES 
 Phase 29D Safe Recommendation Report File Writer: INTERNAL PASS
 Phase 29E Recommendation Output CLI Wrapper: PASS WITH REVIEW NOTES
 Phase 29F CLI / Report Integration Checkpoint: PASS
+Phase 30A Local Alpha Release Checklist: INTERNAL PASS
 ```
 
 ## Latest Local Validation
 
 ```text
-Focused Phase 29F CLI / Report Integration:
-python -m unittest tests.test_recommendation_output_reporting -v
-Ran 9 tests in 0.005s
-OK
-
-python -m unittest tests.test_recommendation_output_writers -v
-Ran 10 tests in 0.058s
-OK
-
-python -m unittest tests.test_cli_recommendation_output -v
-Ran 6 tests in 0.032s
-OK
+Phase 30A Local Alpha Release Checklist:
+python scripts/check_schema.py
+Schema bootstrap check passed.
 
 Full suite:
 python -m unittest discover -s tests
-Ran 797 tests in 3.428s
+Ran 797 tests in 3.377s
 OK (skipped=1)
 
 Static check:
 git diff --check
 passed
+
+Status drift scans:
+no stale Phase 29F / Phase 30A gate matches
+no patch backlog item still claims Phase 30A
 ```
 
 ## Current Blocker
 
 ```text
-Phase 30A - Local Alpha release checklist is the next allowed phase.
+Phase 30B - Local Alpha packaging / usage documentation is blocked until Phase 30A outside validation is accepted.
 ```
 
-## Current Phase 30A Preparation Packet
+## Current Phase 30A Outside Validation Packet
 
 ```text
+docs/PHASE30A_LOCAL_ALPHA_RELEASE_CHECKLIST_CONTRACT.md
+docs/CHECKPOINT_PHASE30A_LOCAL_ALPHA_RELEASE_CHECKLIST_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE30A_LOCAL_ALPHA_RELEASE_CHECKLIST_PROMPT.md
 docs/CHECKPOINT_PHASE29F_CLI_REPORT_INTEGRATION_REPORT.md
 docs/PRE_PHASE30_AUDIT_REPORT.md
 docs/OUTSIDE_VALIDATION_PHASE29F_CLI_REPORT_INTEGRATION_PROMPT.md

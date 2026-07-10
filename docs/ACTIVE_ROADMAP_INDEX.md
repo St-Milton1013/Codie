@@ -26,22 +26,24 @@ Phase 29C CLI / Safe File Writer Integration Contract: complete
 Phase 29D Safe Recommendation Report File Writer: internally complete
 Phase 29E Recommendation Output CLI Wrapper: externally accepted
 Phase 29F CLI / Report Integration Checkpoint: externally accepted
-Current action: prepare Phase 30A Local Alpha release checklist
-Phase 30A status: next allowed phase
+Phase 30A Local Alpha Release Checklist: internally complete
+Current action: send Phase 30A outside validation packet
+Phase 30B status: blocked until Phase 30A outside validation is accepted
 ```
 
 ## Next Allowed Phase
 
 ```text
-Phase 30A - Local Alpha release checklist
+Phase 30B - Local Alpha packaging / usage documentation after Phase 30A outside validation
 ```
 
-Phase 30A may start contract-first.
+Do not start Phase 30B until Phase 30A outside validation returns PASS or PASS WITH REVIEW NOTES.
 
 ## Release-Critical Path
 
 ```text
-1. Phase 30A Local Alpha release checklist
+1. Phase 30A outside validation
+2. Phase 30B Local Alpha packaging / usage documentation
 ```
 
 ## Post-Alpha / Later Roadmap
@@ -97,11 +99,14 @@ SIM-R must not be implemented until the active validation chain completes and a 
 Simulator output remains evidence only and must never generate recommendations.
 ```
 
-## Phase 30A Preparation Packet
+## Phase 30A Outside Validation Packet
 
-Read these files before drafting the Phase 30A checklist:
+Send these files for the current gate:
 
 ```text
+docs/PHASE30A_LOCAL_ALPHA_RELEASE_CHECKLIST_CONTRACT.md
+docs/CHECKPOINT_PHASE30A_LOCAL_ALPHA_RELEASE_CHECKLIST_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE30A_LOCAL_ALPHA_RELEASE_CHECKLIST_PROMPT.md
 docs/CHECKPOINT_PHASE29F_CLI_REPORT_INTEGRATION_REPORT.md
 docs/PRE_PHASE30_AUDIT_REPORT.md
 docs/OUTSIDE_VALIDATION_PHASE29F_CLI_REPORT_INTEGRATION_PROMPT.md

@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: Phase 30A - Local Alpha release checklist
+Recommended next task: review Phase 30A - Local Alpha release checklist; after acceptance proceed to Phase 30B - Local Alpha packaging / usage documentation
 
 ## Active Indexes
 

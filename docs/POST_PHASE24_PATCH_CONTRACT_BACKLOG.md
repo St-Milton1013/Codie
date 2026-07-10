@@ -342,7 +342,7 @@ no unresolved name silently accepted
 Recommended phase:
 
 ```text
-Phase 30A
+Post-alpha TBD
 ```
 
 Purpose:

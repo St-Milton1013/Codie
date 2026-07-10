@@ -32,9 +32,15 @@ Latest pushed commit before Phase 24 outside validation acceptance: 432e958 Add 
 Latest full-suite result:
 
 ```text
-Ran 797 tests in 3.428s
+Ran 797 tests in 3.377s
 
 OK (skipped=1)
+```
+
+Latest schema bootstrap result:
+
+```text
+Schema bootstrap check passed.
 ```
 
 Latest focused Phase 29F result:
@@ -191,6 +197,7 @@ Phase 29C CLI / Safe File Writer Integration Contract: PASS
 Phase 29D Safe Recommendation Report File Writer: PASS
 Phase 29E Recommendation Output CLI Wrapper: PASS WITH REVIEW NOTES
 Phase 29F CLI / Report Integration Checkpoint: PASS
+Phase 30A Local Alpha Release Checklist: INTERNAL PASS
 ```
 
 ## Recent Commits
@@ -1406,9 +1413,16 @@ validates the Phase 29B report serializers, Phase 29D safe writer, and Phase
 29E CLI wrapper as one local output chain. It adds no runtime behavior.
 Phase 29F outside validation returned PASS.
 
-Current Phase 30A preparation packet:
+Phase 30A is internally complete. It is a local alpha readiness checklist only
+and adds no production code, schema, providers, UI, LLM calls, SIM-R behavior,
+or recommendation generation.
+
+Current Phase 30A outside validation packet:
 
 ```text
+docs/PHASE30A_LOCAL_ALPHA_RELEASE_CHECKLIST_CONTRACT.md
+docs/CHECKPOINT_PHASE30A_LOCAL_ALPHA_RELEASE_CHECKLIST_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE30A_LOCAL_ALPHA_RELEASE_CHECKLIST_PROMPT.md
 docs/CHECKPOINT_PHASE29F_CLI_REPORT_INTEGRATION_REPORT.md
 docs/PRE_PHASE30_AUDIT_REPORT.md
 docs/OUTSIDE_VALIDATION_PHASE29F_CLI_REPORT_INTEGRATION_PROMPT.md
@@ -1452,7 +1466,8 @@ Phase 13 simulator contracts or a new UI/API contract is explicitly selected.
 - Zip export is implemented as local-only deterministic packaging.
 - Phase 12 local/mobile report sharing documentation is complete.
 - No local UI API exists yet.
-- No simulator implementation exists yet.
+- No SIM-R full rules simulator revision exists yet; the Phase 13 simulator
+  track remains the current accepted simulator baseline.
 - Simulator contract refresh and pure core models are complete.
 - Probability engine currently has core dataclasses, card definition manager,
   deck/target parsing, seeded shuffle/opening hands, mulligan policy, and target
@@ -1538,7 +1553,7 @@ Phase 13 simulator contracts or a new UI/API contract is explicitly selected.
 - Phase 23 outside validation is accepted.
 - Phase 24A Chat/Intelligence Local API Contract is complete.
 - Phase 24 Chat/Intelligence Local API is accepted.
-- Phase 25 Evidence Fusion is ready for outside validation.
+- Phase 25 Evidence Fusion outside validation is accepted.
 - cEDHData public asset metadata and local reference hashes are recorded in docs/CEDHDATA_SIMULATOR_REFERENCE_CAPTURE_MANIFEST.md.
 - Simulator Revision (SIM-R) is architecture-approved but implementation-deferred in docs/ROADMAP_PATCH_SIMULATOR_REVISION_SIM_R.md.
 - Do not modify existing simulator implementation for SIM-R until the active validation chain completes, current simulator contracts are frozen, and a dedicated SIM-R contract plus outside validation is accepted.
