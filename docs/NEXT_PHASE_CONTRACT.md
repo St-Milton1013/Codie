@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: send Phase 31F SIM-R Resource Ledger Contract outside validation packet; do not begin Phase 31G until accepted
+Recommended next task: send Phase 31G SIM-R Resource Ledger Implementation Contract outside validation packet; do not begin Phase 31H until accepted
 
 ## Active Indexes
 

@@ -33,7 +33,8 @@ Phase 31B SIM-R Current Simulator Freeze: PASS
 Phase 31C SIM-R State Model Contract: PASS WITH REVIEW NOTES
 Phase 31D SIM-R State Model Implementation Contract: PASS WITH REVIEW NOTES
 Phase 31E SIM-R State Model Implementation: PASS WITH REVIEW NOTES
-Phase 31F SIM-R Resource Ledger Contract: INTERNAL PASS
+Phase 31F SIM-R Resource Ledger Contract: PASS WITH REVIEW NOTES
+Phase 31G SIM-R Resource Ledger Implementation Contract: INTERNAL PASS
 Local alpha tag: created locally; remote tag push not verified in this environment
 ```
 
@@ -91,18 +92,19 @@ Phase 31B SIM-R Current Simulator Freeze: PASS
 Phase 31C SIM-R State Model Contract: PASS WITH REVIEW NOTES
 Phase 31D SIM-R State Model Implementation Contract: PASS WITH REVIEW NOTES
 Phase 31E SIM-R State Model Implementation: PASS WITH REVIEW NOTES
-Phase 31F SIM-R Resource Ledger Contract: INTERNAL PASS
+Phase 31F SIM-R Resource Ledger Contract: PASS WITH REVIEW NOTES
+Phase 31G SIM-R Resource Ledger Implementation Contract: INTERNAL PASS
 ```
 
 ## Latest Local Validation
 
 ```text
-Phase 31F SIM-R Resource Ledger Contract:
+Phase 31G SIM-R Resource Ledger Implementation Contract:
 python scripts/check_schema.py
 Schema bootstrap check passed.
 
 python -m unittest discover -s tests
-Ran 808 tests in 5.462s
+Ran 808 tests in 3.697s
 OK (skipped=1)
 
 git diff --check
@@ -117,17 +119,17 @@ production Forge / LLM SDK import scan: no matches
 ## Current Blocker
 
 ```text
-Phase 31G is blocked until Phase 31F outside validation returns PASS or PASS WITH REVIEW NOTES.
+Phase 31H is blocked until Phase 31G outside validation returns PASS or PASS WITH REVIEW NOTES.
 ```
 
-## Current Phase 31F Outside Validation Packet
+## Current Phase 31G Outside Validation Packet
 
 ```text
+docs/PHASE31G_SIM_R_RESOURCE_LEDGER_IMPLEMENTATION_CONTRACT.md
+docs/CHECKPOINT_PHASE31G_SIM_R_RESOURCE_LEDGER_IMPLEMENTATION_CONTRACT_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE31G_SIM_R_RESOURCE_LEDGER_IMPLEMENTATION_CONTRACT_PROMPT.md
 docs/PHASE31F_SIM_R_RESOURCE_LEDGER_CONTRACT.md
-docs/CHECKPOINT_PHASE31F_SIM_R_RESOURCE_LEDGER_CONTRACT_REPORT.md
-docs/OUTSIDE_VALIDATION_PHASE31F_SIM_R_RESOURCE_LEDGER_PROMPT.md
 docs/PHASE31E_SIM_R_STATE_MODEL_IMPLEMENTATION_REPORT.md
-docs/CHECKPOINT_PHASE31E_SIM_R_STATE_MODEL_IMPLEMENTATION_REPORT.md
 docs/PHASE31D_SIM_R_STATE_MODEL_IMPLEMENTATION_CONTRACT.md
 docs/PHASE31C_SIM_R_STATE_MODEL_CONTRACT.md
 codie/probability_engine/sim_r_state.py
