@@ -75,12 +75,12 @@ Phase 29D Safe Recommendation Report File Writer: INTERNAL PASS
 ```text
 Focused Phase 29D Recommendation Output Writers:
 python -m unittest tests.test_recommendation_output_writers -v
-Ran 9 tests in 0.041s
+Ran 10 tests in 0.049s
 OK
 
 Full suite:
 python -m unittest discover -s tests
-Ran 790 tests in 5.173s
+Ran 791 tests in 3.398s
 OK (skipped=1)
 
 Static check:
@@ -98,6 +98,8 @@ Phase 29E - CLI wrapper is blocked until Phase 29D outside validation is accepte
 
 ```text
 docs/PHASE29D_CLI_SAFE_FILE_WRITER_IMPLEMENTATION_REPORT.md
+docs/CHECKPOINT_PHASE29D_SAFE_FILE_WRITER_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE29D_SAFE_FILE_WRITER_PROMPT.md
 docs/PHASE29C_CLI_SAFE_FILE_WRITER_CONTRACT.md
 codie/recommendation_output/writers.py
 codie/recommendation_output/reporting.py

@@ -36,7 +36,8 @@ writes JSON report files
 writes Markdown report files
 writes both formats by default
 writes UTF-8 text with LF newlines
-creates output_root when missing
+rejects missing output_root by default
+creates output_root when missing only when RecommendationReportWriteOptions.create_output_root is true
 rejects output_root when it points to an existing file
 enforces output-root containment
 rejects unsafe path traversal
@@ -80,6 +81,7 @@ test_writer_requires_recommendation_output_bundle_json_input
 test_writer_writes_json_markdown_and_manifest_last
 test_writer_can_write_single_formats
 test_output_root_containment_and_file_root_are_enforced
+test_missing_output_root_requires_explicit_create_option
 test_path_traversal_and_extension_override_are_rejected
 test_basename_cannot_collide_with_manifest
 test_overwrite_is_explicit_and_repeated_export_is_deterministic
@@ -91,7 +93,7 @@ test_module_has_no_forbidden_imports_raw_sql_provider_reads_or_cli_scope
 
 ```text
 python -m unittest tests.test_recommendation_output_writers -v
-Ran 9 tests in 0.041s
+Ran 10 tests in 0.049s
 OK
 ```
 
@@ -99,7 +101,7 @@ OK
 
 ```text
 python -m unittest discover -s tests
-Ran 790 tests in 3.440s
+Ran 791 tests in 3.398s
 OK (skipped=1)
 
 git diff --check
@@ -129,7 +131,17 @@ Confirm:
 writer accepts already-built bundle packets only
 writer validates before rendering
 JSON and Markdown files preserve evidence visibility fields
+JSON and Markdown preserve confidence
+JSON and Markdown preserve expected impact
+JSON and Markdown preserve source agreement
+JSON and Markdown preserve caveats
+JSON and Markdown preserve contradictions
+JSON and Markdown preserve speculation level
+JSON and Markdown preserve weight / analysis profile refs
+JSON and Markdown preserve decision IDs
+JSON and Markdown preserve UnifiedEvidenceObject IDs
 output_root containment is enforced
+missing output_root is rejected unless create_output_root is true
 path traversal is rejected
 explicit basename path separators are rejected
 explicit basename extension override is rejected

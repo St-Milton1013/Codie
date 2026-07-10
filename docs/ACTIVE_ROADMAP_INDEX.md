@@ -104,6 +104,8 @@ Review these files for the current gate:
 
 ```text
 docs/PHASE29D_CLI_SAFE_FILE_WRITER_IMPLEMENTATION_REPORT.md
+docs/CHECKPOINT_PHASE29D_SAFE_FILE_WRITER_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE29D_SAFE_FILE_WRITER_PROMPT.md
 docs/PHASE29C_CLI_SAFE_FILE_WRITER_CONTRACT.md
 codie/recommendation_output/writers.py
 codie/recommendation_output/reporting.py

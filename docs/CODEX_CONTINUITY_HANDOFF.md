@@ -32,7 +32,7 @@ Latest pushed commit before Phase 24 outside validation acceptance: 432e958 Add 
 Latest full-suite result:
 
 ```text
-Ran 790 tests in 5.173s
+Ran 791 tests in 3.398s
 
 OK (skipped=1)
 ```
@@ -40,7 +40,7 @@ OK (skipped=1)
 Latest focused Phase 29D result:
 
 ```text
-Ran 9 tests in 0.041s
+Ran 10 tests in 0.049s
 
 OK
 ```
@@ -1390,6 +1390,8 @@ Current Phase 29D review packet:
 
 ```text
 docs/PHASE29D_CLI_SAFE_FILE_WRITER_IMPLEMENTATION_REPORT.md
+docs/CHECKPOINT_PHASE29D_SAFE_FILE_WRITER_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE29D_SAFE_FILE_WRITER_PROMPT.md
 docs/PHASE29C_CLI_SAFE_FILE_WRITER_CONTRACT.md
 codie/recommendation_output/writers.py
 codie/recommendation_output/reporting.py

@@ -55,12 +55,12 @@ class RecommendationOutputWritersTest(unittest.TestCase):
             json_result = write_recommendation_report_files(
                 bundle,
                 root / "json",
-                options=RecommendationReportWriteOptions(output_format="json"),
+                options=RecommendationReportWriteOptions(output_format="json", create_output_root=True),
             )
             markdown_result = write_recommendation_report_files(
                 bundle,
                 root / "markdown",
-                options=RecommendationReportWriteOptions(output_format="markdown"),
+                options=RecommendationReportWriteOptions(output_format="markdown", create_output_root=True),
             )
 
             self.assertEqual([file["content_type"] for file in json_result.files], ["application/json", "application/json"])
@@ -77,6 +77,24 @@ class RecommendationOutputWritersTest(unittest.TestCase):
 
             with self.assertRaises(RecommendationReportWriteError):
                 write_recommendation_report_files(bundle, occupied)
+
+    def test_missing_output_root_requires_explicit_create_option(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            missing = root / "missing"
+            bundle = recommendation_output_bundle_to_dict(report_bundle())
+
+            with self.assertRaises(RecommendationReportWriteError):
+                write_recommendation_report_files(bundle, missing)
+
+            result = write_recommendation_report_files(
+                bundle,
+                missing,
+                options=RecommendationReportWriteOptions(create_output_root=True),
+            )
+
+            self.assertTrue(missing.is_dir())
+            self.assertEqual(result.root, str(missing.resolve()))
 
     def test_path_traversal_and_extension_override_are_rejected(self) -> None:
         with self.assertRaises(RecommendationReportWriteError):

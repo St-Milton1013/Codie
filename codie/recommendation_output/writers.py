@@ -31,6 +31,7 @@ class RecommendationReportWriteOptions:
     output_format: str = "both"
     basename: str | None = None
     overwrite: bool = False
+    create_output_root: bool = False
     include_provenance_section: bool = True
     writer_version: str = WRITER_VERSION
 
@@ -38,6 +39,8 @@ class RecommendationReportWriteOptions:
         object.__setattr__(self, "output_format", _normalize_format(self.output_format))
         if not isinstance(self.overwrite, bool):
             raise RecommendationReportWriteError("overwrite must be a bool")
+        if not isinstance(self.create_output_root, bool):
+            raise RecommendationReportWriteError("create_output_root must be a bool")
         if not isinstance(self.include_provenance_section, bool):
             raise RecommendationReportWriteError("include_provenance_section must be a bool")
         _require_text(self.writer_version, "writer_version")
@@ -85,7 +88,7 @@ def write_recommendation_report_files(
     """Write an already-built recommendation output bundle under output_root."""
 
     resolved_options = options or RecommendationReportWriteOptions()
-    root = _resolve_output_root(output_root)
+    root = _resolve_output_root(output_root, create=resolved_options.create_output_root)
     bundle_payload = _bundle_payload(bundle)
     resolved_report_id = _require_text(report_id or f"report:{bundle_payload['bundle_id']}", "report_id")
     resolved_generated_at = _require_text(generated_at or bundle_payload["generated_at"], "generated_at")
@@ -212,13 +215,16 @@ def _bundle_payload(bundle: RecommendationOutputBundle | dict[str, Any]) -> dict
     return bundle
 
 
-def _resolve_output_root(output_root: str | Path) -> Path:
+def _resolve_output_root(output_root: str | Path, *, create: bool) -> Path:
     if str(output_root).strip() == "":
         raise RecommendationReportWriteError("output_root is required")
     root = Path(output_root).expanduser().resolve()
     if root.exists() and not root.is_dir():
         raise RecommendationReportWriteError("output_root must be a directory")
-    root.mkdir(parents=True, exist_ok=True)
+    if not root.exists():
+        if not create:
+            raise RecommendationReportWriteError("output_root does not exist; pass create_output_root=True to create it")
+        root.mkdir(parents=True, exist_ok=True)
     return root
 
 
