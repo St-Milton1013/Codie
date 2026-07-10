@@ -26,8 +26,9 @@ Phase 29E Recommendation Output CLI Wrapper: PASS WITH REVIEW NOTES
 Phase 29F CLI / Report Integration Checkpoint: PASS
 Phase 30A Local Alpha Release Checklist: PASS
 Phase 30B Local Alpha Packaging / Usage Documentation: PASS
-Phase 30C Local Alpha Release Candidate Checkpoint: INTERNAL PASS
-Phase 30D: blocked until Phase 30C outside validation is accepted
+Phase 30C Local Alpha Release Candidate Checkpoint: PASS
+Phase 30D Local Alpha Tag / Release Notes / Handoff Finalization: INTERNAL PASS
+Local alpha tag: blocked until Phase 30D outside validation is accepted
 ```
 
 ## Accepted Phase Summary
@@ -77,19 +78,20 @@ Phase 29E Recommendation Output CLI Wrapper: PASS WITH REVIEW NOTES
 Phase 29F CLI / Report Integration Checkpoint: PASS
 Phase 30A Local Alpha Release Checklist: PASS
 Phase 30B Local Alpha Packaging / Usage Documentation: PASS
-Phase 30C Local Alpha Release Candidate Checkpoint: INTERNAL PASS
+Phase 30C Local Alpha Release Candidate Checkpoint: PASS
+Phase 30D Local Alpha Tag / Release Notes / Handoff Finalization: INTERNAL PASS
 ```
 
 ## Latest Local Validation
 
 ```text
-Phase 30C Local Alpha Release Candidate Checkpoint:
+Phase 30D Local Alpha Tag / Release Notes / Handoff Finalization:
 python scripts/check_schema.py
 Schema bootstrap check passed.
 
 Full suite:
 python -m unittest discover -s tests
-Ran 797 tests in 3.670s
+Ran 797 tests in 4.304s
 OK (skipped=1)
 
 Static check:
@@ -99,20 +101,25 @@ passed
 Production touch check:
 no codie/tests/scripts/ui/schema/dependency/CI changes
 
-Environment note:
-requirements.txt was installed into the bundled Python runtime before rerunning
-the full suite because qrcode and bs4 were missing from that runtime.
+Tag absence check:
+local-alpha-0.1.0 does not exist yet
 ```
 
 ## Current Blocker
 
 ```text
-Phase 30D - Local Alpha tag / release notes / handoff finalization is blocked until Phase 30C outside validation is accepted.
+Local alpha tag creation is blocked until Phase 30D outside validation is accepted.
 ```
 
-## Current Phase 30C Outside Validation Packet
+## Current Phase 30D Outside Validation Packet
 
 ```text
+docs/PHASE30D_LOCAL_ALPHA_TAG_RELEASE_HANDOFF_CONTRACT.md
+docs/LOCAL_ALPHA_RELEASE_NOTES.md
+docs/LOCAL_ALPHA_TAG_PLAN.md
+docs/LOCAL_ALPHA_FINAL_HANDOFF.md
+docs/CHECKPOINT_PHASE30D_LOCAL_ALPHA_TAG_RELEASE_HANDOFF_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE30D_LOCAL_ALPHA_TAG_RELEASE_HANDOFF_PROMPT.md
 docs/PHASE30C_LOCAL_ALPHA_RELEASE_CANDIDATE_CHECKPOINT_CONTRACT.md
 docs/CHECKPOINT_PHASE30C_LOCAL_ALPHA_RELEASE_CANDIDATE_REPORT.md
 docs/OUTSIDE_VALIDATION_PHASE30C_LOCAL_ALPHA_RELEASE_CANDIDATE_PROMPT.md
