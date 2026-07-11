@@ -1538,6 +1538,8 @@ docs/PHASE31F_SIM_R_RESOURCE_LEDGER_CONTRACT.md
 docs/PHASE31E_SIM_R_STATE_MODEL_IMPLEMENTATION_REPORT.md
 docs/PHASE31D_SIM_R_STATE_MODEL_IMPLEMENTATION_CONTRACT.md
 docs/PHASE31C_SIM_R_STATE_MODEL_CONTRACT.md
+codie/probability_engine/sim_r_transition.py
+tests/test_probability_engine_sim_r_transition.py
 codie/probability_engine/sim_r_ledger.py
 codie/probability_engine/__init__.py
 tests/test_probability_engine_sim_r_ledger.py
