@@ -34,6 +34,26 @@ powershell -ExecutionPolicy Bypass -File scripts\dev.ps1 precommit
 
 Direct `.\scripts\dev.ps1` execution may be blocked by Windows execution policy. Use the `-ExecutionPolicy Bypass -File` form above.
 
+## GitHub Actions Validation
+
+The repository CI workflow lives at:
+
+```text
+.github/workflows/tests.yml
+```
+
+It mirrors the release validation gate:
+
+```text
+git diff --check
+python scripts/check_schema.py
+python -m unittest discover -s tests -v
+```
+
+The workflow is intentionally narrow. It does not run live provider calls, mutate
+databases, generate recommendations, run SIM-R runtime behavior, or perform
+networked validation beyond dependency installation.
+
 ## Dev Dependencies
 
 Runtime dependencies remain in `requirements.txt`.

@@ -126,6 +126,26 @@ schema/repository/dependency diff scan: no matches
 production Forge / LLM SDK import scan: no matches
 ```
 
+## CI Review Note Status
+
+```text
+GitHub Actions workflow exists: .github/workflows/tests.yml
+Workflow release gate:
+git diff --check
+python scripts/check_schema.py
+python -m unittest discover -s tests -v
+
+Scope:
+CI is validation-only.
+CI does not run live provider calls, recommendation generation, SIM-R runtime
+behavior, LLM calls, UI work, or database mutation beyond test-controlled
+schema bootstrap behavior.
+
+Remaining note:
+Outside validators should still confirm GitHub Actions is enabled on the remote
+repository and that the latest pushed commit has a completed workflow run.
+```
+
 ## Previous Local Validation
 
 ```text

@@ -1549,6 +1549,27 @@ docs/NEXT_PHASE_CONTRACT.md
 docs/CODEX_CONTINUITY_HANDOFF.md
 ```
 
+## CI Review Note Follow-Up
+
+The recurring outside-review note about CI-backed proof has been narrowed. The
+repository contains `.github/workflows/tests.yml`, and the workflow mirrors the
+release validation gate:
+
+```text
+git diff --check
+python scripts/check_schema.py
+python -m unittest discover -s tests -v
+```
+
+This is an operational hardening change only. It does not advance Phase 31L,
+does not begin Phase 31M, and does not add production code, schema,
+repositories, provider behavior, recommendation generation, SIM-R runtime
+behavior, LLM calls, or UI work.
+
+Outside validators should still confirm that GitHub Actions is enabled on the
+remote repository and that the latest pushed commit receives a completed
+workflow run.
+
 ```text
 docs/PHASE30D_LOCAL_ALPHA_TAG_RELEASE_HANDOFF_CONTRACT.md
 docs/LOCAL_ALPHA_RELEASE_NOTES.md
