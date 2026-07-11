@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: send Phase 31R SIM-R Foundation Checkpoint / Freeze outside validation packet; do not begin post-31 deferred implementation backlog until accepted
+Recommended next task: send Phase 32A Scryfall Bulk Data Foundation Contract outside validation packet; do not begin Phase 32B until accepted
 
 ## Active Indexes
 

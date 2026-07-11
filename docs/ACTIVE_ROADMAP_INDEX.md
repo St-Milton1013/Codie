@@ -47,25 +47,27 @@ Phase 31N SIM-R Behavior Module Implementation: externally accepted
 Phase 31O SIM-R Behavior Transition Wiring Contract: externally accepted
 Phase 31P SIM-R Behavior Transition Wiring Implementation Contract: externally accepted
 Phase 31Q SIM-R Behavior Transition Wiring Implementation: externally accepted
-Phase 31R SIM-R Foundation Checkpoint / Freeze: internally complete
+Phase 31R SIM-R Foundation Checkpoint / Freeze: externally accepted
 Post-Phase 31 Deferred Implementation Priority Plan: logged
-Current action: send Phase 31R outside validation packet
+Phase 32A Scryfall Bulk Data Foundation Contract: internally complete
+Current action: send Phase 32A outside validation packet
 Local alpha tag status: created locally; remote tag push not verified in this environment
 ```
 
 ## Next Allowed Phase
 
 ```text
-Phase 31R outside validation
+Phase 32A outside validation
 ```
 
-Do not begin deferred implementation backlog work until Phase 31R outside validation returns PASS or PASS WITH REVIEW NOTES.
+Do not begin Phase 32B until Phase 32A outside validation returns PASS or PASS WITH REVIEW NOTES.
 
 ## Release-Critical Path
 
 ```text
-1. Phase 31R outside validation
-2. Post-Phase 31 deferred implementation priority plan
+1. Phase 32A outside validation
+2. Phase 32B Scryfall bulk data foundation implementation contract
+3. Phase 32C Scryfall bulk data foundation implementation
 ```
 
 ## Post-Alpha / Later Roadmap
@@ -237,9 +239,9 @@ docs/NEXT_PHASE_CONTRACT.md
 docs/CODEX_CONTINUITY_HANDOFF.md
 ```
 
-## Phase 31R Outside Validation Packet
+## Accepted Phase 31R Outside Validation Packet
 
-Send these files for the current gate:
+Phase 31R was accepted with review notes using this packet:
 
 ```text
 docs/PHASE31R_SIM_R_FOUNDATION_CHECKPOINT_CONTRACT.md
@@ -266,4 +268,21 @@ docs/VALIDATION_STATUS_INDEX.md
 docs/NEXT_PHASE_CONTRACT.md
 docs/CODEX_CONTINUITY_HANDOFF.md
 docs/POST_PHASE31_DEFERRED_IMPLEMENTATION_PRIORITY_PLAN.md
+```
+
+## Phase 32A Outside Validation Packet
+
+Send these files for the current gate:
+
+```text
+docs/PHASE32A_SCRYFALL_BULK_DATA_FOUNDATION_CONTRACT.md
+docs/CHECKPOINT_PHASE32A_SCRYFALL_BULK_DATA_FOUNDATION_CONTRACT_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE32A_SCRYFALL_BULK_DATA_FOUNDATION_CONTRACT_PROMPT.md
+docs/POST_PHASE31_DEFERRED_IMPLEMENTATION_PRIORITY_PLAN.md
+docs/PHASE2_SCRYFALL_TRUTH_CONTRACT.md
+docs/ROADMAP_PATCH_CODIE_MASTER_ARCHITECTURE.md
+docs/ACTIVE_ROADMAP_INDEX.md
+docs/VALIDATION_STATUS_INDEX.md
+docs/NEXT_PHASE_CONTRACT.md
+docs/CODEX_CONTINUITY_HANDOFF.md
 ```

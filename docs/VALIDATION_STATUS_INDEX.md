@@ -45,8 +45,9 @@ Phase 31N SIM-R Behavior Module Implementation: PASS WITH REVIEW NOTES
 Phase 31O SIM-R Behavior Transition Wiring Contract: PASS WITH REVIEW NOTES
 Phase 31P SIM-R Behavior Transition Wiring Implementation Contract: PASS WITH REVIEW NOTES
 Phase 31Q SIM-R Behavior Transition Wiring Implementation: PASS WITH REVIEW NOTES
-Phase 31R SIM-R Foundation Checkpoint / Freeze: INTERNAL PASS
+Phase 31R SIM-R Foundation Checkpoint / Freeze: PASS WITH REVIEW NOTES
 Post-Phase 31 Deferred Implementation Priority Plan: LOGGED
+Phase 32A Scryfall Bulk Data Foundation Contract: INTERNAL PASS
 Local alpha tag: created locally; remote tag push not verified in this environment
 ```
 
@@ -116,17 +117,14 @@ Phase 31N SIM-R Behavior Module Implementation: PASS WITH REVIEW NOTES
 Phase 31O SIM-R Behavior Transition Wiring Contract: PASS WITH REVIEW NOTES
 Phase 31P SIM-R Behavior Transition Wiring Implementation Contract: PASS WITH REVIEW NOTES
 Phase 31Q SIM-R Behavior Transition Wiring Implementation: PASS WITH REVIEW NOTES
-Phase 31R SIM-R Foundation Checkpoint / Freeze: INTERNAL PASS
+Phase 31R SIM-R Foundation Checkpoint / Freeze: PASS WITH REVIEW NOTES
+Phase 32A Scryfall Bulk Data Foundation Contract: INTERNAL PASS
 ```
 
 ## Latest Local Validation
 
 ```text
-Phase 31R SIM-R Foundation Checkpoint / Freeze:
-python -m unittest tests.test_probability_engine_sim_r_state tests.test_probability_engine_sim_r_ledger tests.test_probability_engine_sim_r_transition tests.test_probability_engine_sim_r_behavior tests.test_probability_engine_sim_r_wiring -v
-Ran 67 tests
-OK
-
+Phase 32A Scryfall Bulk Data Foundation Contract:
 python scripts/check_schema.py
 Schema bootstrap check passed.
 
@@ -138,11 +136,9 @@ git diff --check
 passed
 
 Static scans:
-production/test runtime diff scan: no matches
-schema/repository/dependency diff scan: no matches
-production Forge / LLM SDK import scan: no matches
-SIM-R foundation forbidden import scan: no matches
-stale Phase 31Q gate scan: no matches
+production/test/schema/repository/dependency drift scan: no matches
+forbidden string scan: matches only explicit forbidden/boundary lists
+stale Phase 31R gate scan: no matches
 ```
 
 ## CI Review Note Status
@@ -168,6 +164,28 @@ repository and that the latest pushed commit has a completed workflow run.
 ## Previous Local Validation
 
 ```text
+Phase 31R SIM-R Foundation Checkpoint / Freeze:
+python -m unittest tests.test_probability_engine_sim_r_state tests.test_probability_engine_sim_r_ledger tests.test_probability_engine_sim_r_transition tests.test_probability_engine_sim_r_behavior tests.test_probability_engine_sim_r_wiring -v
+Ran 67 tests
+OK
+
+python scripts/check_schema.py
+Schema bootstrap check passed.
+
+python -m unittest discover -s tests
+Ran 864 tests
+OK (skipped=1)
+
+git diff --check
+passed
+
+Static scans:
+production/test runtime diff scan: no matches
+schema/repository/dependency diff scan: no matches
+production Forge / LLM SDK import scan: no matches
+SIM-R foundation forbidden import scan: no matches
+stale Phase 31Q gate scan: no matches
+
 Phase 31K SIM-R State Transition Implementation:
 python -m unittest tests.test_probability_engine_sim_r_transition -v
 Ran 13 tests
@@ -262,36 +280,22 @@ production Forge / LLM SDK import scan: no matches
 ## Current Blocker
 
 ```text
-Post-31 deferred implementation backlog work is blocked until Phase 31R outside validation returns PASS or PASS WITH REVIEW NOTES.
+Phase 32B is blocked until Phase 32A outside validation returns PASS or PASS WITH REVIEW NOTES.
 ```
 
-## Current Phase 31R Outside Validation Packet
+## Current Phase 32A Outside Validation Packet
 
 ```text
-docs/PHASE31R_SIM_R_FOUNDATION_CHECKPOINT_CONTRACT.md
-docs/CHECKPOINT_PHASE31R_SIM_R_FOUNDATION_CHECKPOINT_REPORT.md
-docs/OUTSIDE_VALIDATION_PHASE31R_SIM_R_FOUNDATION_CHECKPOINT_PROMPT.md
-docs/PHASE31Q_SIM_R_BEHAVIOR_TRANSITION_WIRING_IMPLEMENTATION_REPORT.md
-docs/CHECKPOINT_PHASE31Q_SIM_R_BEHAVIOR_TRANSITION_WIRING_IMPLEMENTATION_REPORT.md
-docs/OUTSIDE_VALIDATION_PHASE31Q_SIM_R_BEHAVIOR_TRANSITION_WIRING_IMPLEMENTATION_PROMPT.md
-docs/PHASE31P_SIM_R_BEHAVIOR_TRANSITION_WIRING_IMPLEMENTATION_CONTRACT.md
-docs/PHASE31O_SIM_R_BEHAVIOR_TRANSITION_WIRING_CONTRACT.md
-codie/probability_engine/sim_r_state.py
-codie/probability_engine/sim_r_ledger.py
-codie/probability_engine/sim_r_transition.py
-codie/probability_engine/sim_r_behavior.py
-codie/probability_engine/sim_r_wiring.py
-codie/probability_engine/__init__.py
-tests/test_probability_engine_sim_r_state.py
-tests/test_probability_engine_sim_r_ledger.py
-tests/test_probability_engine_sim_r_transition.py
-tests/test_probability_engine_sim_r_behavior.py
-tests/test_probability_engine_sim_r_wiring.py
+docs/PHASE32A_SCRYFALL_BULK_DATA_FOUNDATION_CONTRACT.md
+docs/CHECKPOINT_PHASE32A_SCRYFALL_BULK_DATA_FOUNDATION_CONTRACT_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE32A_SCRYFALL_BULK_DATA_FOUNDATION_CONTRACT_PROMPT.md
+docs/POST_PHASE31_DEFERRED_IMPLEMENTATION_PRIORITY_PLAN.md
+docs/PHASE2_SCRYFALL_TRUTH_CONTRACT.md
+docs/ROADMAP_PATCH_CODIE_MASTER_ARCHITECTURE.md
 docs/ACTIVE_ROADMAP_INDEX.md
 docs/VALIDATION_STATUS_INDEX.md
 docs/NEXT_PHASE_CONTRACT.md
 docs/CODEX_CONTINUITY_HANDOFF.md
-docs/POST_PHASE31_DEFERRED_IMPLEMENTATION_PRIORITY_PLAN.md
 ```
 
 ## Accepted Phase 31O Outside Validation Packet
