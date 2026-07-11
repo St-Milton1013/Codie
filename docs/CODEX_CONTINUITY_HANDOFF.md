@@ -1510,6 +1510,16 @@ Phase 31M outside validation returned PASS WITH REVIEW NOTES.
 
 Phase 31N outside validation returned PASS WITH REVIEW NOTES.
 
+The Codie Master Architecture roadmap patch is logged in
+`docs/ROADMAP_PATCH_CODIE_MASTER_ARCHITECTURE.md`. It is architecture approved
+and implementation deferred. It consolidates SIM-R, Forge validation,
+Scryfall bulk data, migration monitoring, Tagger functional ontology,
+Commander Spellbook interpretation, Cockatrice interoperability, primer
+ingestion, plugin architecture, immutable snapshots, confidence, coverage,
+explainability, smart enrichment, conversation summaries, and testing strategy.
+It does not require immediate backtracking and does not authorize implementation
+without a future contract.
+
 Phase 31O is internally complete. It is a contract-only packet for future
 SIM-R behavior-to-transition wiring. It defines how already-built state,
 action, behavior proposal, and ledger-reference packets may later be linked

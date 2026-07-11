@@ -76,6 +76,7 @@ Advanced UI dashboard
 Mobile-friendly local report delivery
 Optional Discord / LocalSend / QR delivery integrations
 Simulator Revision (SIM-R)
+Codie Master Architecture patch
 ```
 
 These items remain roadmap-only until a future contract explicitly authorizes implementation.
@@ -90,6 +91,9 @@ LocalSend
 Moxfield parser references
 MTGJSON references
 Forge references for SIM-R validation only
+Cockatrice interoperability references
+Scryfall bulk data and migration monitoring references
+Scryfall Tagger functional ontology references
 ```
 
 Reference repositories are not production dependencies unless a future contract explicitly approves that dependency.
