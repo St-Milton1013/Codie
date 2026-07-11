@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: send Phase 31M SIM-R Behavior Module Implementation Contract outside validation packet; do not begin Phase 31N until accepted
+Recommended next task: send Phase 31N SIM-R Behavior Module Implementation outside validation packet; do not begin Phase 31O until accepted
 
 ## Active Indexes
 

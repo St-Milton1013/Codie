@@ -1506,20 +1506,24 @@ Phase 31K outside validation returned PASS WITH REVIEW NOTES.
 
 Phase 31L outside validation returned PASS WITH REVIEW NOTES.
 
-Phase 31M is internally complete. It is an implementation-contract-only packet
-for future SIM-R behavior module data models and validators. It authorizes a
-later packet to add only `codie/probability_engine/sim_r_behavior.py`,
-`tests/test_probability_engine_sim_r_behavior.py`, and optional
-`codie/probability_engine/__init__.py` exports. It adds no behavior module
-implementation, card behavior execution, action execution, state mutation,
-resource ledger mutation, search, hashing, trace v2 runtime, schema,
-repositories, dependencies, UI, live network behavior, LLM behavior generation,
-or recommendation output. Phase 31N is blocked until Phase 31M outside
-validation returns PASS or PASS WITH REVIEW NOTES.
+Phase 31M outside validation returned PASS WITH REVIEW NOTES.
 
-Current Phase 31M outside validation packet:
+Phase 31N is internally complete. It implements pure in-memory SIM-R behavior
+module value objects and validators: behavior profiles, behavior requirements,
+behavior proposals, and unsupported behavior notes. It exports the new behavior
+symbols from `codie/probability_engine/__init__.py` and adds focused tests. It
+adds no card behavior execution, action execution, state mutation, resource
+ledger mutation, transition result creation, search, hashing, trace v2 runtime,
+schema, repositories, dependencies, UI, live network behavior, LLM behavior
+generation, or recommendation output. Phase 31O is blocked until Phase 31N
+outside validation returns PASS or PASS WITH REVIEW NOTES.
+
+Current Phase 31N outside validation packet:
 
 ```text
+docs/PHASE31N_SIM_R_BEHAVIOR_MODULE_IMPLEMENTATION_REPORT.md
+docs/CHECKPOINT_PHASE31N_SIM_R_BEHAVIOR_MODULE_IMPLEMENTATION_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE31N_SIM_R_BEHAVIOR_MODULE_IMPLEMENTATION_PROMPT.md
 docs/PHASE31M_SIM_R_BEHAVIOR_MODULE_IMPLEMENTATION_CONTRACT.md
 docs/CHECKPOINT_PHASE31M_SIM_R_BEHAVIOR_MODULE_IMPLEMENTATION_CONTRACT_REPORT.md
 docs/OUTSIDE_VALIDATION_PHASE31M_SIM_R_BEHAVIOR_MODULE_IMPLEMENTATION_CONTRACT_PROMPT.md
@@ -1543,6 +1547,8 @@ docs/PHASE31F_SIM_R_RESOURCE_LEDGER_CONTRACT.md
 docs/PHASE31E_SIM_R_STATE_MODEL_IMPLEMENTATION_REPORT.md
 docs/PHASE31D_SIM_R_STATE_MODEL_IMPLEMENTATION_CONTRACT.md
 docs/PHASE31C_SIM_R_STATE_MODEL_CONTRACT.md
+codie/probability_engine/sim_r_behavior.py
+tests/test_probability_engine_sim_r_behavior.py
 codie/probability_engine/sim_r_transition.py
 tests/test_probability_engine_sim_r_transition.py
 codie/probability_engine/sim_r_ledger.py

@@ -40,7 +40,8 @@ Phase 31I SIM-R State Transition Contract: PASS WITH REVIEW NOTES
 Phase 31J SIM-R State Transition Implementation Contract: PASS WITH REVIEW NOTES
 Phase 31K SIM-R State Transition Implementation: PASS WITH REVIEW NOTES
 Phase 31L SIM-R Behavior Module Contract: PASS WITH REVIEW NOTES
-Phase 31M SIM-R Behavior Module Implementation Contract: INTERNAL PASS
+Phase 31M SIM-R Behavior Module Implementation Contract: PASS WITH REVIEW NOTES
+Phase 31N SIM-R Behavior Module Implementation: INTERNAL PASS
 Local alpha tag: created locally; remote tag push not verified in this environment
 ```
 
@@ -105,18 +106,23 @@ Phase 31I SIM-R State Transition Contract: PASS WITH REVIEW NOTES
 Phase 31J SIM-R State Transition Implementation Contract: PASS WITH REVIEW NOTES
 Phase 31K SIM-R State Transition Implementation: PASS WITH REVIEW NOTES
 Phase 31L SIM-R Behavior Module Contract: PASS WITH REVIEW NOTES
-Phase 31M SIM-R Behavior Module Implementation Contract: INTERNAL PASS
+Phase 31M SIM-R Behavior Module Implementation Contract: PASS WITH REVIEW NOTES
+Phase 31N SIM-R Behavior Module Implementation: INTERNAL PASS
 ```
 
 ## Latest Local Validation
 
 ```text
-Phase 31M SIM-R Behavior Module Implementation Contract:
+Phase 31N SIM-R Behavior Module Implementation:
+python -m unittest tests.test_probability_engine_sim_r_behavior -v
+Ran 15 tests
+OK
+
 python scripts/check_schema.py
 Schema bootstrap check passed.
 
 python -m unittest discover -s tests
-Ran 833 tests
+Ran 848 tests
 OK (skipped=1)
 
 git diff --check
@@ -245,12 +251,15 @@ production Forge / LLM SDK import scan: no matches
 ## Current Blocker
 
 ```text
-Phase 31N is blocked until Phase 31M outside validation returns PASS or PASS WITH REVIEW NOTES.
+Phase 31O is blocked until Phase 31N outside validation returns PASS or PASS WITH REVIEW NOTES.
 ```
 
-## Current Phase 31M Outside Validation Packet
+## Current Phase 31N Outside Validation Packet
 
 ```text
+docs/PHASE31N_SIM_R_BEHAVIOR_MODULE_IMPLEMENTATION_REPORT.md
+docs/CHECKPOINT_PHASE31N_SIM_R_BEHAVIOR_MODULE_IMPLEMENTATION_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE31N_SIM_R_BEHAVIOR_MODULE_IMPLEMENTATION_PROMPT.md
 docs/PHASE31M_SIM_R_BEHAVIOR_MODULE_IMPLEMENTATION_CONTRACT.md
 docs/CHECKPOINT_PHASE31M_SIM_R_BEHAVIOR_MODULE_IMPLEMENTATION_CONTRACT_REPORT.md
 docs/OUTSIDE_VALIDATION_PHASE31M_SIM_R_BEHAVIOR_MODULE_IMPLEMENTATION_CONTRACT_PROMPT.md
@@ -274,6 +283,8 @@ docs/PHASE31F_SIM_R_RESOURCE_LEDGER_CONTRACT.md
 docs/PHASE31E_SIM_R_STATE_MODEL_IMPLEMENTATION_REPORT.md
 docs/PHASE31D_SIM_R_STATE_MODEL_IMPLEMENTATION_CONTRACT.md
 docs/PHASE31C_SIM_R_STATE_MODEL_CONTRACT.md
+codie/probability_engine/sim_r_behavior.py
+tests/test_probability_engine_sim_r_behavior.py
 codie/probability_engine/sim_r_transition.py
 tests/test_probability_engine_sim_r_transition.py
 codie/probability_engine/sim_r_ledger.py

@@ -42,24 +42,25 @@ Phase 31I SIM-R State Transition Contract: externally accepted
 Phase 31J SIM-R State Transition Implementation Contract: externally accepted
 Phase 31K SIM-R State Transition Implementation: externally accepted
 Phase 31L SIM-R Behavior Module Contract: externally accepted
-Phase 31M SIM-R Behavior Module Implementation Contract: internally complete
-Current action: send Phase 31M outside validation packet
+Phase 31M SIM-R Behavior Module Implementation Contract: externally accepted
+Phase 31N SIM-R Behavior Module Implementation: internally complete
+Current action: send Phase 31N outside validation packet
 Local alpha tag status: created locally; remote tag push not verified in this environment
 ```
 
 ## Next Allowed Phase
 
 ```text
-Phase 31M outside validation
+Phase 31N outside validation
 ```
 
-Do not begin Phase 31N until Phase 31M outside validation returns PASS or PASS WITH REVIEW NOTES.
+Do not begin Phase 31O until Phase 31N outside validation returns PASS or PASS WITH REVIEW NOTES.
 
 ## Release-Critical Path
 
 ```text
-1. Phase 31M outside validation
-2. Phase 31N SIM-R behavior module implementation
+1. Phase 31N outside validation
+2. Phase 31O next SIM-R contract
 ```
 
 ## Post-Alpha / Later Roadmap
@@ -116,11 +117,14 @@ SIM-R must not be implemented until the active validation chain completes and a 
 Simulator output remains evidence only and must never generate recommendations.
 ```
 
-## Phase 31M Outside Validation Packet
+## Phase 31N Outside Validation Packet
 
 Send these files for the current gate:
 
 ```text
+docs/PHASE31N_SIM_R_BEHAVIOR_MODULE_IMPLEMENTATION_REPORT.md
+docs/CHECKPOINT_PHASE31N_SIM_R_BEHAVIOR_MODULE_IMPLEMENTATION_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE31N_SIM_R_BEHAVIOR_MODULE_IMPLEMENTATION_PROMPT.md
 docs/PHASE31M_SIM_R_BEHAVIOR_MODULE_IMPLEMENTATION_CONTRACT.md
 docs/CHECKPOINT_PHASE31M_SIM_R_BEHAVIOR_MODULE_IMPLEMENTATION_CONTRACT_REPORT.md
 docs/OUTSIDE_VALIDATION_PHASE31M_SIM_R_BEHAVIOR_MODULE_IMPLEMENTATION_CONTRACT_PROMPT.md
@@ -144,6 +148,8 @@ docs/PHASE31F_SIM_R_RESOURCE_LEDGER_CONTRACT.md
 docs/PHASE31E_SIM_R_STATE_MODEL_IMPLEMENTATION_REPORT.md
 docs/PHASE31D_SIM_R_STATE_MODEL_IMPLEMENTATION_CONTRACT.md
 docs/PHASE31C_SIM_R_STATE_MODEL_CONTRACT.md
+codie/probability_engine/sim_r_behavior.py
+tests/test_probability_engine_sim_r_behavior.py
 codie/probability_engine/sim_r_transition.py
 tests/test_probability_engine_sim_r_transition.py
 codie/probability_engine/sim_r_ledger.py

@@ -185,6 +185,22 @@ from .sim_r_transition import (
     transition_result_to_dict,
     validate_transition_result,
 )
+from .sim_r_behavior import (
+    SIM_R_BEHAVIOR_VERSION,
+    SUPPORTED_BEHAVIOR_CATEGORIES,
+    UNSUPPORTED_BEHAVIOR_CATEGORY,
+    SimulationBehaviorBuildError,
+    SimulationBehaviorProfile,
+    SimulationBehaviorProposal,
+    SimulationBehaviorRequirement,
+    SimulationUnsupportedBehaviorNote,
+    behavior_profile_to_dict,
+    behavior_proposal_to_dict,
+    build_behavior_profile,
+    build_behavior_proposal,
+    validate_behavior_profile,
+    validate_behavior_proposal,
+)
 
 __all__ = [
     "MANA_COLOR_KEYS",
@@ -339,4 +355,18 @@ __all__ = [
     "build_transition_result",
     "transition_result_to_dict",
     "validate_transition_result",
+    "SIM_R_BEHAVIOR_VERSION",
+    "SUPPORTED_BEHAVIOR_CATEGORIES",
+    "UNSUPPORTED_BEHAVIOR_CATEGORY",
+    "SimulationBehaviorBuildError",
+    "SimulationBehaviorProfile",
+    "SimulationBehaviorProposal",
+    "SimulationBehaviorRequirement",
+    "SimulationUnsupportedBehaviorNote",
+    "behavior_profile_to_dict",
+    "behavior_proposal_to_dict",
+    "build_behavior_profile",
+    "build_behavior_proposal",
+    "validate_behavior_profile",
+    "validate_behavior_proposal",
 ]
