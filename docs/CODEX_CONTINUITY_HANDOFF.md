@@ -1504,20 +1504,25 @@ Phase 31J outside validation returned PASS WITH REVIEW NOTES.
 
 Phase 31K outside validation returned PASS WITH REVIEW NOTES.
 
-Phase 31L is internally complete. It is a contract-only packet for future SIM-R
-behavior modules. It defines behavior module principles, future behavior model
-files, future public interfaces, required future behavior rules, initial
-behavior categories as data labels only, required tests, dependency boundaries,
-Forge/LLM boundaries, compatibility boundaries, evidence-only boundaries, and
-the Phase 31M gate. It adds no behavior module implementation, card behavior
-execution, action execution, state mutation, search, hashing, trace v2 runtime,
-schema, repositories, dependencies, UI, live network behavior, or recommendation
-output. Phase 31M is blocked until Phase 31L outside validation returns PASS or
-PASS WITH REVIEW NOTES.
+Phase 31L outside validation returned PASS WITH REVIEW NOTES.
 
-Current Phase 31L outside validation packet:
+Phase 31M is internally complete. It is an implementation-contract-only packet
+for future SIM-R behavior module data models and validators. It authorizes a
+later packet to add only `codie/probability_engine/sim_r_behavior.py`,
+`tests/test_probability_engine_sim_r_behavior.py`, and optional
+`codie/probability_engine/__init__.py` exports. It adds no behavior module
+implementation, card behavior execution, action execution, state mutation,
+resource ledger mutation, search, hashing, trace v2 runtime, schema,
+repositories, dependencies, UI, live network behavior, LLM behavior generation,
+or recommendation output. Phase 31N is blocked until Phase 31M outside
+validation returns PASS or PASS WITH REVIEW NOTES.
+
+Current Phase 31M outside validation packet:
 
 ```text
+docs/PHASE31M_SIM_R_BEHAVIOR_MODULE_IMPLEMENTATION_CONTRACT.md
+docs/CHECKPOINT_PHASE31M_SIM_R_BEHAVIOR_MODULE_IMPLEMENTATION_CONTRACT_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE31M_SIM_R_BEHAVIOR_MODULE_IMPLEMENTATION_CONTRACT_PROMPT.md
 docs/PHASE31L_SIM_R_BEHAVIOR_MODULE_CONTRACT.md
 docs/CHECKPOINT_PHASE31L_SIM_R_BEHAVIOR_MODULE_CONTRACT_REPORT.md
 docs/OUTSIDE_VALIDATION_PHASE31L_SIM_R_BEHAVIOR_MODULE_CONTRACT_PROMPT.md
@@ -1563,10 +1568,10 @@ python scripts/check_schema.py
 python -m unittest discover -s tests -v
 ```
 
-This is an operational hardening change only. It does not advance Phase 31L,
-does not begin Phase 31M, and does not add production code, schema,
-repositories, provider behavior, recommendation generation, SIM-R runtime
-behavior, LLM calls, or UI work.
+This was an operational hardening change only. It did not advance Phase 31L by
+itself and did not add production code, schema, repositories, provider
+behavior, recommendation generation, SIM-R runtime behavior, LLM calls, or UI
+work.
 
 Outside validators should still confirm that GitHub Actions is enabled on the
 remote repository and that the latest pushed commit receives a completed
