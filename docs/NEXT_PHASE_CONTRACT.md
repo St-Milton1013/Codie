@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: send Phase 31O SIM-R Behavior Transition Wiring Contract outside validation packet; do not begin Phase 31P until accepted
+Recommended next task: finish Phase 31 cleanly, then use docs/POST_PHASE31_DEFERRED_IMPLEMENTATION_PRIORITY_PLAN.md to prioritize deferred implementations contract-first
 
 ## Active Indexes
 

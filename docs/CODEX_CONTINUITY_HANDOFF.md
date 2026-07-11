@@ -1510,6 +1510,17 @@ Phase 31M outside validation returned PASS WITH REVIEW NOTES.
 
 Phase 31N outside validation returned PASS WITH REVIEW NOTES.
 
+Phase 31O outside validation returned PASS WITH REVIEW NOTES.
+
+After Phase 31 closes, prioritize deferred implementations using
+`docs/POST_PHASE31_DEFERRED_IMPLEMENTATION_PRIORITY_PLAN.md`. The plan records
+the preferred post-31 order: close the remaining SIM-R foundation chain first,
+then move through Scryfall bulk data, migration monitoring, Tagger functional
+ontology, Commander Spellbook interpretation, immutable deck snapshots,
+frequency pools / Tag Graph Lab, Cockatrice interoperability, plugin
+architecture, smart enrichment, and conversation summaries. This plan is
+planning-only and does not authorize implementation without future contracts.
+
 The Codie Master Architecture roadmap patch is logged in
 `docs/ROADMAP_PATCH_CODIE_MASTER_ARCHITECTURE.md`. It is architecture approved
 and implementation deferred. It consolidates SIM-R, Forge validation,
@@ -1520,15 +1531,14 @@ explainability, smart enrichment, conversation summaries, and testing strategy.
 It does not require immediate backtracking and does not authorize implementation
 without a future contract.
 
-Phase 31O is internally complete. It is a contract-only packet for future
+Phase 31O is accepted. It is a contract-only packet for future
 SIM-R behavior-to-transition wiring. It defines how already-built state,
 action, behavior proposal, and ledger-reference packets may later be linked
 without executing behavior, mutating state, creating ledgers, building
 transitions, searching, adding schema, calling providers, invoking LLMs, adding
-UI, or generating recommendations. Phase 31P is blocked until Phase 31O outside
-validation returns PASS or PASS WITH REVIEW NOTES.
+UI, or generating recommendations. Phase 31P may begin contract-first.
 
-Current Phase 31O outside validation packet:
+Accepted Phase 31O outside validation packet:
 
 ```text
 docs/PHASE31O_SIM_R_BEHAVIOR_TRANSITION_WIRING_CONTRACT.md

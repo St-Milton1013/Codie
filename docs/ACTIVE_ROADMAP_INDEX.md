@@ -44,24 +44,27 @@ Phase 31K SIM-R State Transition Implementation: externally accepted
 Phase 31L SIM-R Behavior Module Contract: externally accepted
 Phase 31M SIM-R Behavior Module Implementation Contract: externally accepted
 Phase 31N SIM-R Behavior Module Implementation: externally accepted
-Phase 31O SIM-R Behavior Transition Wiring Contract: internally complete
-Current action: send Phase 31O outside validation packet
+Phase 31O SIM-R Behavior Transition Wiring Contract: externally accepted
+Post-Phase 31 Deferred Implementation Priority Plan: logged
+Current action: finish Phase 31 cleanly, then prioritize deferred implementations from docs/POST_PHASE31_DEFERRED_IMPLEMENTATION_PRIORITY_PLAN.md
 Local alpha tag status: created locally; remote tag push not verified in this environment
 ```
 
 ## Next Allowed Phase
 
 ```text
-Phase 31O outside validation
+Phase 31P SIM-R behavior transition wiring implementation contract
 ```
 
-Do not begin Phase 31P until Phase 31O outside validation returns PASS or PASS WITH REVIEW NOTES.
+Do not begin deferred implementation backlog work until Phase 31 closes with an accepted checkpoint.
 
 ## Release-Critical Path
 
 ```text
-1. Phase 31O outside validation
-2. Phase 31P SIM-R behavior transition wiring implementation contract
+1. Phase 31P SIM-R behavior transition wiring implementation contract
+2. Phase 31Q SIM-R behavior transition wiring implementation
+3. Phase 31R SIM-R foundation checkpoint / freeze
+4. Post-Phase 31 deferred implementation priority plan
 ```
 
 ## Post-Alpha / Later Roadmap
@@ -77,6 +80,7 @@ Mobile-friendly local report delivery
 Optional Discord / LocalSend / QR delivery integrations
 Simulator Revision (SIM-R)
 Codie Master Architecture patch
+Post-Phase 31 Deferred Implementation Priority Plan
 ```
 
 These items remain roadmap-only until a future contract explicitly authorizes implementation.
@@ -122,9 +126,9 @@ SIM-R must not be implemented until the active validation chain completes and a 
 Simulator output remains evidence only and must never generate recommendations.
 ```
 
-## Phase 31O Outside Validation Packet
+## Accepted Phase 31O Outside Validation Packet
 
-Send these files for the current gate:
+Phase 31O was accepted with review notes using this packet:
 
 ```text
 docs/PHASE31O_SIM_R_BEHAVIOR_TRANSITION_WIRING_CONTRACT.md

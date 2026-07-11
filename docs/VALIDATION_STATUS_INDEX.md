@@ -42,7 +42,8 @@ Phase 31K SIM-R State Transition Implementation: PASS WITH REVIEW NOTES
 Phase 31L SIM-R Behavior Module Contract: PASS WITH REVIEW NOTES
 Phase 31M SIM-R Behavior Module Implementation Contract: PASS WITH REVIEW NOTES
 Phase 31N SIM-R Behavior Module Implementation: PASS WITH REVIEW NOTES
-Phase 31O SIM-R Behavior Transition Wiring Contract: INTERNAL PASS
+Phase 31O SIM-R Behavior Transition Wiring Contract: PASS WITH REVIEW NOTES
+Post-Phase 31 Deferred Implementation Priority Plan: LOGGED
 Local alpha tag: created locally; remote tag push not verified in this environment
 ```
 
@@ -109,13 +110,13 @@ Phase 31K SIM-R State Transition Implementation: PASS WITH REVIEW NOTES
 Phase 31L SIM-R Behavior Module Contract: PASS WITH REVIEW NOTES
 Phase 31M SIM-R Behavior Module Implementation Contract: PASS WITH REVIEW NOTES
 Phase 31N SIM-R Behavior Module Implementation: PASS WITH REVIEW NOTES
-Phase 31O SIM-R Behavior Transition Wiring Contract: INTERNAL PASS
+Phase 31O SIM-R Behavior Transition Wiring Contract: PASS WITH REVIEW NOTES
 ```
 
 ## Latest Local Validation
 
 ```text
-Phase 31O SIM-R Behavior Transition Wiring Contract:
+Post-Phase 31 Deferred Implementation Priority Plan:
 python scripts/check_schema.py
 Schema bootstrap check passed.
 
@@ -249,10 +250,10 @@ production Forge / LLM SDK import scan: no matches
 ## Current Blocker
 
 ```text
-Phase 31P is blocked until Phase 31O outside validation returns PASS or PASS WITH REVIEW NOTES.
+Post-31 deferred implementation backlog work is blocked until Phase 31 closes with an accepted checkpoint.
 ```
 
-## Current Phase 31O Outside Validation Packet
+## Accepted Phase 31O Outside Validation Packet
 
 ```text
 docs/PHASE31O_SIM_R_BEHAVIOR_TRANSITION_WIRING_CONTRACT.md
