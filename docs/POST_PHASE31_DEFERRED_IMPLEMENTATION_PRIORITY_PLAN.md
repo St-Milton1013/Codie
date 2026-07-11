@@ -16,13 +16,13 @@ Every item below remains contract-first.
 ## Current Rule
 
 ```text
-Finish the active Phase 31 validation chain first.
-Then prioritize deferred implementations from this plan.
+Phase 31 foundation checkpoint is accepted.
+Prioritize deferred implementations from this plan.
 ```
 
-Phase 31 work remains governed by the active SIM-R contracts and validation
-gates. Post-31 work must not begin until the Phase 31 closing checkpoint is
-accepted.
+Phase 31 work remains frozen by the accepted SIM-R foundation checkpoint.
+Post-31 implementation must proceed contract-first in the order below unless a
+future accepted governance checkpoint explicitly changes that order.
 
 ## Priority Framework
 
@@ -45,10 +45,10 @@ strategic output.
 Goal:
 
 ```text
-finish the SIM-R foundation chain without runtime sprawl
+complete
 ```
 
-Likely remaining Phase 31 packets:
+Completed Phase 31 packets:
 
 ```text
 Phase 31P - SIM-R behavior transition wiring implementation contract
@@ -64,6 +64,12 @@ no old simulator replacement
 no Monte Carlo integration
 no recommendation output
 no DB persistence unless separately contracted
+```
+
+Status:
+
+```text
+accepted
 ```
 
 ## Priority 1 - Scryfall Bulk Data Foundation

@@ -1590,6 +1590,15 @@ providers, dependency changes, lookup replacement, Tagger import, migration
 monitoring, UI, LLM calls, analytics, or recommendations. Phase 32B is blocked
 until Phase 32A outside validation returns PASS or PASS WITH REVIEW NOTES.
 
+The post-31 patch-note plan has been cemented in
+`docs/POST_PHASE31_PATCH_PLAN_CEMENTING_AUDIT.md`. That audit confirms no
+backtracking is required before Phase 32 implementation and locks the deferred
+priority order: Scryfall bulk, Scryfall migration monitoring, Scryfall Tagger
+ontology, Spellbook interpreter expansion, immutable deck snapshots, frequency
+pools / Tag Graph Lab, Cockatrice interoperability, plugin architecture, smart
+enrichment, and conversation summaries. It is governance-only and does not
+authorize implementation beyond accepted phase contracts.
+
 Current Phase 32A outside validation packet:
 
 ```text

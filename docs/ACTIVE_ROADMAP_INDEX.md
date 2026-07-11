@@ -50,6 +50,7 @@ Phase 31Q SIM-R Behavior Transition Wiring Implementation: externally accepted
 Phase 31R SIM-R Foundation Checkpoint / Freeze: externally accepted
 Post-Phase 31 Deferred Implementation Priority Plan: logged
 Phase 32A Scryfall Bulk Data Foundation Contract: internally complete
+Post-Phase 31 Patch Plan Cementing Audit: complete
 Current action: send Phase 32A outside validation packet
 Local alpha tag status: created locally; remote tag push not verified in this environment
 ```
@@ -68,6 +69,13 @@ Do not begin Phase 32B until Phase 32A outside validation returns PASS or PASS W
 1. Phase 32A outside validation
 2. Phase 32B Scryfall bulk data foundation implementation contract
 3. Phase 32C Scryfall bulk data foundation implementation
+```
+
+The post-31 patch priority order is cemented in:
+
+```text
+docs/POST_PHASE31_DEFERRED_IMPLEMENTATION_PRIORITY_PLAN.md
+docs/POST_PHASE31_PATCH_PLAN_CEMENTING_AUDIT.md
 ```
 
 ## Post-Alpha / Later Roadmap
