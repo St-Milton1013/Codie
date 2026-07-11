@@ -211,7 +211,8 @@ Phase 31G SIM-R Resource Ledger Implementation Contract: PASS WITH REVIEW NOTES
 Phase 31H SIM-R Resource Ledger Implementation: PASS WITH REVIEW NOTES
 Phase 31I SIM-R State Transition Contract: PASS WITH REVIEW NOTES
 Phase 31J SIM-R State Transition Implementation Contract: PASS WITH REVIEW NOTES
-Phase 31K SIM-R State Transition Implementation: INTERNAL PASS
+Phase 31K SIM-R State Transition Implementation: PASS WITH REVIEW NOTES
+Phase 31L SIM-R Behavior Module Contract: INTERNAL PASS
 ```
 
 ## Recent Commits
@@ -1501,19 +1502,25 @@ Phase 31I outside validation returned PASS WITH REVIEW NOTES.
 
 Phase 31J outside validation returned PASS WITH REVIEW NOTES.
 
-Phase 31K is internally complete. It is the isolated SIM-R state transition
-model implementation. It adds pure immutable transition result packets,
-deterministic serialization, validation for explicit no_op transitions, resource
-ledger references, trace event references, unsupported behavior visibility,
-failed reason visibility, negative turn/priority rejection, and package exports.
-It adds no state mutation logic, action execution, behavior modules, search,
-hashing, trace v2 runtime, schema, repositories, dependencies, UI, live network
-behavior, or recommendation output. Phase 31L is blocked until Phase 31K outside
-validation returns PASS or PASS WITH REVIEW NOTES.
+Phase 31K outside validation returned PASS WITH REVIEW NOTES.
 
-Current Phase 31K outside validation packet:
+Phase 31L is internally complete. It is a contract-only packet for future SIM-R
+behavior modules. It defines behavior module principles, future behavior model
+files, future public interfaces, required future behavior rules, initial
+behavior categories as data labels only, required tests, dependency boundaries,
+Forge/LLM boundaries, compatibility boundaries, evidence-only boundaries, and
+the Phase 31M gate. It adds no behavior module implementation, card behavior
+execution, action execution, state mutation, search, hashing, trace v2 runtime,
+schema, repositories, dependencies, UI, live network behavior, or recommendation
+output. Phase 31M is blocked until Phase 31L outside validation returns PASS or
+PASS WITH REVIEW NOTES.
+
+Current Phase 31L outside validation packet:
 
 ```text
+docs/PHASE31L_SIM_R_BEHAVIOR_MODULE_CONTRACT.md
+docs/CHECKPOINT_PHASE31L_SIM_R_BEHAVIOR_MODULE_CONTRACT_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE31L_SIM_R_BEHAVIOR_MODULE_CONTRACT_PROMPT.md
 docs/PHASE31K_SIM_R_STATE_TRANSITION_IMPLEMENTATION_REPORT.md
 docs/CHECKPOINT_PHASE31K_SIM_R_STATE_TRANSITION_IMPLEMENTATION_REPORT.md
 docs/OUTSIDE_VALIDATION_PHASE31K_SIM_R_STATE_TRANSITION_IMPLEMENTATION_PROMPT.md

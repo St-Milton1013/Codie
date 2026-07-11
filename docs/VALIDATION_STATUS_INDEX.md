@@ -38,7 +38,8 @@ Phase 31G SIM-R Resource Ledger Implementation Contract: PASS WITH REVIEW NOTES
 Phase 31H SIM-R Resource Ledger Implementation: PASS WITH REVIEW NOTES
 Phase 31I SIM-R State Transition Contract: PASS WITH REVIEW NOTES
 Phase 31J SIM-R State Transition Implementation Contract: PASS WITH REVIEW NOTES
-Phase 31K SIM-R State Transition Implementation: INTERNAL PASS
+Phase 31K SIM-R State Transition Implementation: PASS WITH REVIEW NOTES
+Phase 31L SIM-R Behavior Module Contract: INTERNAL PASS
 Local alpha tag: created locally; remote tag push not verified in this environment
 ```
 
@@ -101,10 +102,31 @@ Phase 31G SIM-R Resource Ledger Implementation Contract: PASS WITH REVIEW NOTES
 Phase 31H SIM-R Resource Ledger Implementation: PASS WITH REVIEW NOTES
 Phase 31I SIM-R State Transition Contract: PASS WITH REVIEW NOTES
 Phase 31J SIM-R State Transition Implementation Contract: PASS WITH REVIEW NOTES
-Phase 31K SIM-R State Transition Implementation: INTERNAL PASS
+Phase 31K SIM-R State Transition Implementation: PASS WITH REVIEW NOTES
+Phase 31L SIM-R Behavior Module Contract: INTERNAL PASS
 ```
 
 ## Latest Local Validation
+
+```text
+Phase 31L SIM-R Behavior Module Contract:
+python scripts/check_schema.py
+Schema bootstrap check passed.
+
+python -m unittest discover -s tests
+Ran 833 tests in 3.984s
+OK (skipped=1)
+
+git diff --check
+passed
+
+Static scans:
+production simulator/test diff scan: no matches
+schema/repository/dependency diff scan: no matches
+production Forge / LLM SDK import scan: no matches
+```
+
+## Previous Local Validation
 
 ```text
 Phase 31K SIM-R State Transition Implementation:
@@ -127,11 +149,7 @@ schema/repository/dependency diff scan: no matches
 forbidden import scan: no matches
 production Forge / LLM SDK import scan: no matches
 recommendation-language scan: no matches
-```
 
-## Previous Local Validation
-
-```text
 Phase 31J SIM-R State Transition Implementation Contract:
 python scripts/check_schema.py
 Schema bootstrap check passed.
@@ -205,12 +223,15 @@ production Forge / LLM SDK import scan: no matches
 ## Current Blocker
 
 ```text
-Phase 31L is blocked until Phase 31K outside validation returns PASS or PASS WITH REVIEW NOTES.
+Phase 31M is blocked until Phase 31L outside validation returns PASS or PASS WITH REVIEW NOTES.
 ```
 
-## Current Phase 31K Outside Validation Packet
+## Current Phase 31L Outside Validation Packet
 
 ```text
+docs/PHASE31L_SIM_R_BEHAVIOR_MODULE_CONTRACT.md
+docs/CHECKPOINT_PHASE31L_SIM_R_BEHAVIOR_MODULE_CONTRACT_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE31L_SIM_R_BEHAVIOR_MODULE_CONTRACT_PROMPT.md
 docs/PHASE31K_SIM_R_STATE_TRANSITION_IMPLEMENTATION_REPORT.md
 docs/CHECKPOINT_PHASE31K_SIM_R_STATE_TRANSITION_IMPLEMENTATION_REPORT.md
 docs/OUTSIDE_VALIDATION_PHASE31K_SIM_R_STATE_TRANSITION_IMPLEMENTATION_PROMPT.md
