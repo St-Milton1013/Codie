@@ -41,7 +41,8 @@ Phase 31J SIM-R State Transition Implementation Contract: PASS WITH REVIEW NOTES
 Phase 31K SIM-R State Transition Implementation: PASS WITH REVIEW NOTES
 Phase 31L SIM-R Behavior Module Contract: PASS WITH REVIEW NOTES
 Phase 31M SIM-R Behavior Module Implementation Contract: PASS WITH REVIEW NOTES
-Phase 31N SIM-R Behavior Module Implementation: INTERNAL PASS
+Phase 31N SIM-R Behavior Module Implementation: PASS WITH REVIEW NOTES
+Phase 31O SIM-R Behavior Transition Wiring Contract: INTERNAL PASS
 Local alpha tag: created locally; remote tag push not verified in this environment
 ```
 
@@ -107,17 +108,14 @@ Phase 31J SIM-R State Transition Implementation Contract: PASS WITH REVIEW NOTES
 Phase 31K SIM-R State Transition Implementation: PASS WITH REVIEW NOTES
 Phase 31L SIM-R Behavior Module Contract: PASS WITH REVIEW NOTES
 Phase 31M SIM-R Behavior Module Implementation Contract: PASS WITH REVIEW NOTES
-Phase 31N SIM-R Behavior Module Implementation: INTERNAL PASS
+Phase 31N SIM-R Behavior Module Implementation: PASS WITH REVIEW NOTES
+Phase 31O SIM-R Behavior Transition Wiring Contract: INTERNAL PASS
 ```
 
 ## Latest Local Validation
 
 ```text
-Phase 31N SIM-R Behavior Module Implementation:
-python -m unittest tests.test_probability_engine_sim_r_behavior -v
-Ran 15 tests
-OK
-
+Phase 31O SIM-R Behavior Transition Wiring Contract:
 python scripts/check_schema.py
 Schema bootstrap check passed.
 
@@ -251,12 +249,15 @@ production Forge / LLM SDK import scan: no matches
 ## Current Blocker
 
 ```text
-Phase 31O is blocked until Phase 31N outside validation returns PASS or PASS WITH REVIEW NOTES.
+Phase 31P is blocked until Phase 31O outside validation returns PASS or PASS WITH REVIEW NOTES.
 ```
 
-## Current Phase 31N Outside Validation Packet
+## Current Phase 31O Outside Validation Packet
 
 ```text
+docs/PHASE31O_SIM_R_BEHAVIOR_TRANSITION_WIRING_CONTRACT.md
+docs/CHECKPOINT_PHASE31O_SIM_R_BEHAVIOR_TRANSITION_WIRING_CONTRACT_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE31O_SIM_R_BEHAVIOR_TRANSITION_WIRING_CONTRACT_PROMPT.md
 docs/PHASE31N_SIM_R_BEHAVIOR_MODULE_IMPLEMENTATION_REPORT.md
 docs/CHECKPOINT_PHASE31N_SIM_R_BEHAVIOR_MODULE_IMPLEMENTATION_REPORT.md
 docs/OUTSIDE_VALIDATION_PHASE31N_SIM_R_BEHAVIOR_MODULE_IMPLEMENTATION_PROMPT.md

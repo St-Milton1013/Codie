@@ -1508,19 +1508,22 @@ Phase 31L outside validation returned PASS WITH REVIEW NOTES.
 
 Phase 31M outside validation returned PASS WITH REVIEW NOTES.
 
-Phase 31N is internally complete. It implements pure in-memory SIM-R behavior
-module value objects and validators: behavior profiles, behavior requirements,
-behavior proposals, and unsupported behavior notes. It exports the new behavior
-symbols from `codie/probability_engine/__init__.py` and adds focused tests. It
-adds no card behavior execution, action execution, state mutation, resource
-ledger mutation, transition result creation, search, hashing, trace v2 runtime,
-schema, repositories, dependencies, UI, live network behavior, LLM behavior
-generation, or recommendation output. Phase 31O is blocked until Phase 31N
-outside validation returns PASS or PASS WITH REVIEW NOTES.
+Phase 31N outside validation returned PASS WITH REVIEW NOTES.
 
-Current Phase 31N outside validation packet:
+Phase 31O is internally complete. It is a contract-only packet for future
+SIM-R behavior-to-transition wiring. It defines how already-built state,
+action, behavior proposal, and ledger-reference packets may later be linked
+without executing behavior, mutating state, creating ledgers, building
+transitions, searching, adding schema, calling providers, invoking LLMs, adding
+UI, or generating recommendations. Phase 31P is blocked until Phase 31O outside
+validation returns PASS or PASS WITH REVIEW NOTES.
+
+Current Phase 31O outside validation packet:
 
 ```text
+docs/PHASE31O_SIM_R_BEHAVIOR_TRANSITION_WIRING_CONTRACT.md
+docs/CHECKPOINT_PHASE31O_SIM_R_BEHAVIOR_TRANSITION_WIRING_CONTRACT_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE31O_SIM_R_BEHAVIOR_TRANSITION_WIRING_CONTRACT_PROMPT.md
 docs/PHASE31N_SIM_R_BEHAVIOR_MODULE_IMPLEMENTATION_REPORT.md
 docs/CHECKPOINT_PHASE31N_SIM_R_BEHAVIOR_MODULE_IMPLEMENTATION_REPORT.md
 docs/OUTSIDE_VALIDATION_PHASE31N_SIM_R_BEHAVIOR_MODULE_IMPLEMENTATION_PROMPT.md
