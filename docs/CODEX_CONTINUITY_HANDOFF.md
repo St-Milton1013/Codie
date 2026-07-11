@@ -1538,6 +1538,42 @@ without executing behavior, mutating state, creating ledgers, building
 transitions, searching, adding schema, calling providers, invoking LLMs, adding
 UI, or generating recommendations. Phase 31P may begin contract-first.
 
+Phase 31P is internally complete. It is an implementation-contract-only packet
+for future SIM-R behavior-to-transition wiring value objects and validators.
+It authorizes a later packet to add only
+`codie/probability_engine/sim_r_wiring.py`,
+`tests/test_probability_engine_sim_r_wiring.py`, and optional
+`codie/probability_engine/__init__.py` exports. It adds no wiring
+implementation, behavior proposal application, transition result creation, card
+behavior execution, action execution, state mutation, ledger creation, search,
+hashing, trace v2 runtime, schema, repositories, dependencies, provider access,
+LLM calls, UI, or recommendation output. Phase 31Q is blocked until Phase 31P
+outside validation returns PASS or PASS WITH REVIEW NOTES.
+
+Current Phase 31P outside validation packet:
+
+```text
+docs/PHASE31P_SIM_R_BEHAVIOR_TRANSITION_WIRING_IMPLEMENTATION_CONTRACT.md
+docs/CHECKPOINT_PHASE31P_SIM_R_BEHAVIOR_TRANSITION_WIRING_IMPLEMENTATION_CONTRACT_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE31P_SIM_R_BEHAVIOR_TRANSITION_WIRING_IMPLEMENTATION_CONTRACT_PROMPT.md
+docs/PHASE31O_SIM_R_BEHAVIOR_TRANSITION_WIRING_CONTRACT.md
+docs/CHECKPOINT_PHASE31O_SIM_R_BEHAVIOR_TRANSITION_WIRING_CONTRACT_REPORT.md
+docs/PHASE31N_SIM_R_BEHAVIOR_MODULE_IMPLEMENTATION_REPORT.md
+docs/PHASE31M_SIM_R_BEHAVIOR_MODULE_IMPLEMENTATION_CONTRACT.md
+codie/probability_engine/sim_r_behavior.py
+codie/probability_engine/sim_r_transition.py
+codie/probability_engine/sim_r_state.py
+codie/probability_engine/sim_r_ledger.py
+tests/test_probability_engine_sim_r_behavior.py
+tests/test_probability_engine_sim_r_transition.py
+tests/test_probability_engine_sim_r_state.py
+tests/test_probability_engine_sim_r_ledger.py
+docs/ACTIVE_ROADMAP_INDEX.md
+docs/VALIDATION_STATUS_INDEX.md
+docs/NEXT_PHASE_CONTRACT.md
+docs/CODEX_CONTINUITY_HANDOFF.md
+```
+
 Accepted Phase 31O outside validation packet:
 
 ```text

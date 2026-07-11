@@ -43,6 +43,7 @@ Phase 31L SIM-R Behavior Module Contract: PASS WITH REVIEW NOTES
 Phase 31M SIM-R Behavior Module Implementation Contract: PASS WITH REVIEW NOTES
 Phase 31N SIM-R Behavior Module Implementation: PASS WITH REVIEW NOTES
 Phase 31O SIM-R Behavior Transition Wiring Contract: PASS WITH REVIEW NOTES
+Phase 31P SIM-R Behavior Transition Wiring Implementation Contract: INTERNAL PASS
 Post-Phase 31 Deferred Implementation Priority Plan: LOGGED
 Local alpha tag: created locally; remote tag push not verified in this environment
 ```
@@ -111,12 +112,13 @@ Phase 31L SIM-R Behavior Module Contract: PASS WITH REVIEW NOTES
 Phase 31M SIM-R Behavior Module Implementation Contract: PASS WITH REVIEW NOTES
 Phase 31N SIM-R Behavior Module Implementation: PASS WITH REVIEW NOTES
 Phase 31O SIM-R Behavior Transition Wiring Contract: PASS WITH REVIEW NOTES
+Phase 31P SIM-R Behavior Transition Wiring Implementation Contract: INTERNAL PASS
 ```
 
 ## Latest Local Validation
 
 ```text
-Post-Phase 31 Deferred Implementation Priority Plan:
+Phase 31P SIM-R Behavior Transition Wiring Implementation Contract:
 python scripts/check_schema.py
 Schema bootstrap check passed.
 
@@ -250,7 +252,32 @@ production Forge / LLM SDK import scan: no matches
 ## Current Blocker
 
 ```text
+Phase 31Q is blocked until Phase 31P outside validation returns PASS or PASS WITH REVIEW NOTES.
 Post-31 deferred implementation backlog work is blocked until Phase 31 closes with an accepted checkpoint.
+```
+
+## Current Phase 31P Outside Validation Packet
+
+```text
+docs/PHASE31P_SIM_R_BEHAVIOR_TRANSITION_WIRING_IMPLEMENTATION_CONTRACT.md
+docs/CHECKPOINT_PHASE31P_SIM_R_BEHAVIOR_TRANSITION_WIRING_IMPLEMENTATION_CONTRACT_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE31P_SIM_R_BEHAVIOR_TRANSITION_WIRING_IMPLEMENTATION_CONTRACT_PROMPT.md
+docs/PHASE31O_SIM_R_BEHAVIOR_TRANSITION_WIRING_CONTRACT.md
+docs/CHECKPOINT_PHASE31O_SIM_R_BEHAVIOR_TRANSITION_WIRING_CONTRACT_REPORT.md
+docs/PHASE31N_SIM_R_BEHAVIOR_MODULE_IMPLEMENTATION_REPORT.md
+docs/PHASE31M_SIM_R_BEHAVIOR_MODULE_IMPLEMENTATION_CONTRACT.md
+codie/probability_engine/sim_r_behavior.py
+codie/probability_engine/sim_r_transition.py
+codie/probability_engine/sim_r_state.py
+codie/probability_engine/sim_r_ledger.py
+tests/test_probability_engine_sim_r_behavior.py
+tests/test_probability_engine_sim_r_transition.py
+tests/test_probability_engine_sim_r_state.py
+tests/test_probability_engine_sim_r_ledger.py
+docs/ACTIVE_ROADMAP_INDEX.md
+docs/VALIDATION_STATUS_INDEX.md
+docs/NEXT_PHASE_CONTRACT.md
+docs/CODEX_CONTINUITY_HANDOFF.md
 ```
 
 ## Accepted Phase 31O Outside Validation Packet
