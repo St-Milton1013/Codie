@@ -207,7 +207,8 @@ Phase 31C SIM-R State Model Contract: PASS WITH REVIEW NOTES
 Phase 31D SIM-R State Model Implementation Contract: PASS WITH REVIEW NOTES
 Phase 31E SIM-R State Model Implementation: PASS WITH REVIEW NOTES
 Phase 31F SIM-R Resource Ledger Contract: PASS WITH REVIEW NOTES
-Phase 31G SIM-R Resource Ledger Implementation Contract: INTERNAL PASS
+Phase 31G SIM-R Resource Ledger Implementation Contract: PASS WITH REVIEW NOTES
+Phase 31H SIM-R Resource Ledger Implementation: INTERNAL PASS
 ```
 
 ## Recent Commits
@@ -1489,24 +1490,32 @@ code, resource ledger implementation, state transition behavior, schema,
 repositories, dependencies, UI, live network behavior, or recommendation output.
 Phase 31F outside validation returned PASS WITH REVIEW NOTES.
 
-Phase 31G is internally complete. It is an implementation contract only for
-the future SIM-R resource ledger. It defines allowed future files, public
-ledger interfaces, immutable ledger rules, required tests, dependency
-boundaries, and compatibility limits. It adds no production simulator code,
-resource ledger classes, state transitions, schema, repositories, dependencies,
-UI, live network behavior, or recommendation output. Phase 31H is blocked until
-Phase 31G outside validation returns PASS or PASS WITH REVIEW NOTES.
+Phase 31G outside validation returned PASS WITH REVIEW NOTES.
 
-Current Phase 31G outside validation packet:
+Phase 31H is internally complete. It is the isolated SIM-R resource ledger
+implementation. It adds pure immutable ledger models, deterministic
+serialization, validation for duplicate ledger entries, duplicate payment keys,
+double-spent resources, negative resource quantities, restricted mana metadata,
+failed payment visibility, unsupported payment visibility, and state/action/cost
+references. It adds no state transitions, actions, behavior modules, search,
+hashing, trace v2, schema, repositories, dependencies, UI, live network behavior,
+or recommendation output. Phase 31I is blocked until Phase 31H outside
+validation returns PASS or PASS WITH REVIEW NOTES.
+
+Current Phase 31H outside validation packet:
 
 ```text
+docs/PHASE31H_SIM_R_RESOURCE_LEDGER_IMPLEMENTATION_REPORT.md
+docs/CHECKPOINT_PHASE31H_SIM_R_RESOURCE_LEDGER_IMPLEMENTATION_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE31H_SIM_R_RESOURCE_LEDGER_IMPLEMENTATION_PROMPT.md
 docs/PHASE31G_SIM_R_RESOURCE_LEDGER_IMPLEMENTATION_CONTRACT.md
-docs/CHECKPOINT_PHASE31G_SIM_R_RESOURCE_LEDGER_IMPLEMENTATION_CONTRACT_REPORT.md
-docs/OUTSIDE_VALIDATION_PHASE31G_SIM_R_RESOURCE_LEDGER_IMPLEMENTATION_CONTRACT_PROMPT.md
 docs/PHASE31F_SIM_R_RESOURCE_LEDGER_CONTRACT.md
 docs/PHASE31E_SIM_R_STATE_MODEL_IMPLEMENTATION_REPORT.md
 docs/PHASE31D_SIM_R_STATE_MODEL_IMPLEMENTATION_CONTRACT.md
 docs/PHASE31C_SIM_R_STATE_MODEL_CONTRACT.md
+codie/probability_engine/sim_r_ledger.py
+codie/probability_engine/__init__.py
+tests/test_probability_engine_sim_r_ledger.py
 codie/probability_engine/sim_r_state.py
 tests/test_probability_engine_sim_r_state.py
 docs/ACTIVE_ROADMAP_INDEX.md
