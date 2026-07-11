@@ -39,24 +39,25 @@ Phase 31F SIM-R Resource Ledger Contract: externally accepted
 Phase 31G SIM-R Resource Ledger Implementation Contract: externally accepted
 Phase 31H SIM-R Resource Ledger Implementation: externally accepted
 Phase 31I SIM-R State Transition Contract: externally accepted
-Phase 31J SIM-R State Transition Implementation Contract: internally complete
-Current action: send Phase 31J outside validation packet
+Phase 31J SIM-R State Transition Implementation Contract: externally accepted
+Phase 31K SIM-R State Transition Implementation: internally complete
+Current action: send Phase 31K outside validation packet
 Local alpha tag status: created locally; remote tag push not verified in this environment
 ```
 
 ## Next Allowed Phase
 
 ```text
-Phase 31J outside validation
+Phase 31K outside validation
 ```
 
-Do not begin Phase 31K until Phase 31J outside validation returns PASS or PASS WITH REVIEW NOTES.
+Do not begin Phase 31L until Phase 31K outside validation returns PASS or PASS WITH REVIEW NOTES.
 
 ## Release-Critical Path
 
 ```text
-1. Phase 31J outside validation
-2. Phase 31K SIM-R state transition implementation
+1. Phase 31K outside validation
+2. Phase 31L SIM-R next implementation contract
 ```
 
 ## Post-Alpha / Later Roadmap
@@ -113,11 +114,14 @@ SIM-R must not be implemented until the active validation chain completes and a 
 Simulator output remains evidence only and must never generate recommendations.
 ```
 
-## Phase 31J Outside Validation Packet
+## Phase 31K Outside Validation Packet
 
 Send these files for the current gate:
 
 ```text
+docs/PHASE31K_SIM_R_STATE_TRANSITION_IMPLEMENTATION_REPORT.md
+docs/CHECKPOINT_PHASE31K_SIM_R_STATE_TRANSITION_IMPLEMENTATION_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE31K_SIM_R_STATE_TRANSITION_IMPLEMENTATION_PROMPT.md
 docs/PHASE31J_SIM_R_STATE_TRANSITION_IMPLEMENTATION_CONTRACT.md
 docs/CHECKPOINT_PHASE31J_SIM_R_STATE_TRANSITION_IMPLEMENTATION_CONTRACT_REPORT.md
 docs/OUTSIDE_VALIDATION_PHASE31J_SIM_R_STATE_TRANSITION_IMPLEMENTATION_CONTRACT_PROMPT.md

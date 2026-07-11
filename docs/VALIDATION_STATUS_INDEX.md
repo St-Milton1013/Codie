@@ -37,7 +37,8 @@ Phase 31F SIM-R Resource Ledger Contract: PASS WITH REVIEW NOTES
 Phase 31G SIM-R Resource Ledger Implementation Contract: PASS WITH REVIEW NOTES
 Phase 31H SIM-R Resource Ledger Implementation: PASS WITH REVIEW NOTES
 Phase 31I SIM-R State Transition Contract: PASS WITH REVIEW NOTES
-Phase 31J SIM-R State Transition Implementation Contract: INTERNAL PASS
+Phase 31J SIM-R State Transition Implementation Contract: PASS WITH REVIEW NOTES
+Phase 31K SIM-R State Transition Implementation: INTERNAL PASS
 Local alpha tag: created locally; remote tag push not verified in this environment
 ```
 
@@ -99,10 +100,36 @@ Phase 31F SIM-R Resource Ledger Contract: PASS WITH REVIEW NOTES
 Phase 31G SIM-R Resource Ledger Implementation Contract: PASS WITH REVIEW NOTES
 Phase 31H SIM-R Resource Ledger Implementation: PASS WITH REVIEW NOTES
 Phase 31I SIM-R State Transition Contract: PASS WITH REVIEW NOTES
-Phase 31J SIM-R State Transition Implementation Contract: INTERNAL PASS
+Phase 31J SIM-R State Transition Implementation Contract: PASS WITH REVIEW NOTES
+Phase 31K SIM-R State Transition Implementation: INTERNAL PASS
 ```
 
 ## Latest Local Validation
+
+```text
+Phase 31K SIM-R State Transition Implementation:
+python -m unittest tests.test_probability_engine_sim_r_transition -v
+Ran 13 tests
+OK
+
+python scripts/check_schema.py
+Schema bootstrap check passed.
+
+python -m unittest discover -s tests
+Ran 833 tests in 3.966s
+OK (skipped=1)
+
+git diff --check
+passed
+
+Static scans:
+schema/repository/dependency diff scan: no matches
+forbidden import scan: no matches
+production Forge / LLM SDK import scan: no matches
+recommendation-language scan: no matches
+```
+
+## Previous Local Validation
 
 ```text
 Phase 31J SIM-R State Transition Implementation Contract:
@@ -120,11 +147,7 @@ Static scans:
 production simulator/test diff scan: no matches
 schema/repository/dependency diff scan: no matches
 production Forge / LLM SDK import scan: no matches
-```
 
-## Previous Local Validation
-
-```text
 Phase 31I SIM-R State Transition Contract:
 python scripts/check_schema.py
 Schema bootstrap check passed.
@@ -182,12 +205,15 @@ production Forge / LLM SDK import scan: no matches
 ## Current Blocker
 
 ```text
-Phase 31K is blocked until Phase 31J outside validation returns PASS or PASS WITH REVIEW NOTES.
+Phase 31L is blocked until Phase 31K outside validation returns PASS or PASS WITH REVIEW NOTES.
 ```
 
-## Current Phase 31J Outside Validation Packet
+## Current Phase 31K Outside Validation Packet
 
 ```text
+docs/PHASE31K_SIM_R_STATE_TRANSITION_IMPLEMENTATION_REPORT.md
+docs/CHECKPOINT_PHASE31K_SIM_R_STATE_TRANSITION_IMPLEMENTATION_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE31K_SIM_R_STATE_TRANSITION_IMPLEMENTATION_PROMPT.md
 docs/PHASE31J_SIM_R_STATE_TRANSITION_IMPLEMENTATION_CONTRACT.md
 docs/CHECKPOINT_PHASE31J_SIM_R_STATE_TRANSITION_IMPLEMENTATION_CONTRACT_REPORT.md
 docs/OUTSIDE_VALIDATION_PHASE31J_SIM_R_STATE_TRANSITION_IMPLEMENTATION_CONTRACT_PROMPT.md
