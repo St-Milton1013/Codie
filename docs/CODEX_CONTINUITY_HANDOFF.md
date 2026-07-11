@@ -209,7 +209,8 @@ Phase 31E SIM-R State Model Implementation: PASS WITH REVIEW NOTES
 Phase 31F SIM-R Resource Ledger Contract: PASS WITH REVIEW NOTES
 Phase 31G SIM-R Resource Ledger Implementation Contract: PASS WITH REVIEW NOTES
 Phase 31H SIM-R Resource Ledger Implementation: PASS WITH REVIEW NOTES
-Phase 31I SIM-R State Transition Contract: INTERNAL PASS
+Phase 31I SIM-R State Transition Contract: PASS WITH REVIEW NOTES
+Phase 31J SIM-R State Transition Implementation Contract: INTERNAL PASS
 ```
 
 ## Recent Commits
@@ -1495,19 +1496,24 @@ Phase 31G outside validation returned PASS WITH REVIEW NOTES.
 
 Phase 31H outside validation returned PASS WITH REVIEW NOTES.
 
-Phase 31I is internally complete. It is a contract-only packet for future SIM-R
-state transitions. It defines the transition principle, future transition model
-files, future public interface, required future transition rules, required
-future tests, dependency boundaries, compatibility boundaries, evidence-only
-boundaries, and the Phase 31J gate. It adds no transition implementation,
-actions, behavior modules, search, hashing, trace v2, schema, repositories,
-dependencies, UI, live network behavior, or recommendation output. Phase 31J is
-blocked until Phase 31I outside validation returns PASS or PASS WITH REVIEW
-NOTES.
+Phase 31I outside validation returned PASS WITH REVIEW NOTES.
 
-Current Phase 31I outside validation packet:
+Phase 31J is internally complete. It is an implementation-contract-only packet
+for future SIM-R state transition value objects and validators. It defines
+allowed future files, public transition interfaces, immutable transition model
+rules, required tests, dependency boundaries, compatibility boundaries,
+evidence-only boundaries, and the Phase 31K gate. It adds no transition
+implementation, actions, behavior modules, search, hashing, trace v2, schema,
+repositories, dependencies, UI, live network behavior, or recommendation output.
+Phase 31K is blocked until Phase 31J outside validation returns PASS or PASS
+WITH REVIEW NOTES.
+
+Current Phase 31J outside validation packet:
 
 ```text
+docs/PHASE31J_SIM_R_STATE_TRANSITION_IMPLEMENTATION_CONTRACT.md
+docs/CHECKPOINT_PHASE31J_SIM_R_STATE_TRANSITION_IMPLEMENTATION_CONTRACT_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE31J_SIM_R_STATE_TRANSITION_IMPLEMENTATION_CONTRACT_PROMPT.md
 docs/PHASE31I_SIM_R_STATE_TRANSITION_CONTRACT.md
 docs/CHECKPOINT_PHASE31I_SIM_R_STATE_TRANSITION_CONTRACT_REPORT.md
 docs/OUTSIDE_VALIDATION_PHASE31I_SIM_R_STATE_TRANSITION_CONTRACT_PROMPT.md

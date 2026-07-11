@@ -36,7 +36,8 @@ Phase 31E SIM-R State Model Implementation: PASS WITH REVIEW NOTES
 Phase 31F SIM-R Resource Ledger Contract: PASS WITH REVIEW NOTES
 Phase 31G SIM-R Resource Ledger Implementation Contract: PASS WITH REVIEW NOTES
 Phase 31H SIM-R Resource Ledger Implementation: PASS WITH REVIEW NOTES
-Phase 31I SIM-R State Transition Contract: INTERNAL PASS
+Phase 31I SIM-R State Transition Contract: PASS WITH REVIEW NOTES
+Phase 31J SIM-R State Transition Implementation Contract: INTERNAL PASS
 Local alpha tag: created locally; remote tag push not verified in this environment
 ```
 
@@ -97,10 +98,31 @@ Phase 31E SIM-R State Model Implementation: PASS WITH REVIEW NOTES
 Phase 31F SIM-R Resource Ledger Contract: PASS WITH REVIEW NOTES
 Phase 31G SIM-R Resource Ledger Implementation Contract: PASS WITH REVIEW NOTES
 Phase 31H SIM-R Resource Ledger Implementation: PASS WITH REVIEW NOTES
-Phase 31I SIM-R State Transition Contract: INTERNAL PASS
+Phase 31I SIM-R State Transition Contract: PASS WITH REVIEW NOTES
+Phase 31J SIM-R State Transition Implementation Contract: INTERNAL PASS
 ```
 
 ## Latest Local Validation
+
+```text
+Phase 31J SIM-R State Transition Implementation Contract:
+python scripts/check_schema.py
+Schema bootstrap check passed.
+
+python -m unittest discover -s tests
+Ran 820 tests in 3.947s
+OK (skipped=1)
+
+git diff --check
+passed
+
+Static scans:
+production simulator/test diff scan: no matches
+schema/repository/dependency diff scan: no matches
+production Forge / LLM SDK import scan: no matches
+```
+
+## Previous Local Validation
 
 ```text
 Phase 31I SIM-R State Transition Contract:
@@ -118,11 +140,7 @@ Static scans:
 production simulator/test diff scan: no matches
 schema/repository/dependency diff scan: no matches
 production Forge / LLM SDK import scan: no matches
-```
 
-## Previous Local Validation
-
-```text
 Phase 31H SIM-R Resource Ledger Implementation:
 python -m unittest tests.test_probability_engine_sim_r_ledger -v
 Ran 12 tests
@@ -164,12 +182,15 @@ production Forge / LLM SDK import scan: no matches
 ## Current Blocker
 
 ```text
-Phase 31J is blocked until Phase 31I outside validation returns PASS or PASS WITH REVIEW NOTES.
+Phase 31K is blocked until Phase 31J outside validation returns PASS or PASS WITH REVIEW NOTES.
 ```
 
-## Current Phase 31I Outside Validation Packet
+## Current Phase 31J Outside Validation Packet
 
 ```text
+docs/PHASE31J_SIM_R_STATE_TRANSITION_IMPLEMENTATION_CONTRACT.md
+docs/CHECKPOINT_PHASE31J_SIM_R_STATE_TRANSITION_IMPLEMENTATION_CONTRACT_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE31J_SIM_R_STATE_TRANSITION_IMPLEMENTATION_CONTRACT_PROMPT.md
 docs/PHASE31I_SIM_R_STATE_TRANSITION_CONTRACT.md
 docs/CHECKPOINT_PHASE31I_SIM_R_STATE_TRANSITION_CONTRACT_REPORT.md
 docs/OUTSIDE_VALIDATION_PHASE31I_SIM_R_STATE_TRANSITION_CONTRACT_PROMPT.md

@@ -38,24 +38,25 @@ Phase 31E SIM-R State Model Implementation: externally accepted
 Phase 31F SIM-R Resource Ledger Contract: externally accepted
 Phase 31G SIM-R Resource Ledger Implementation Contract: externally accepted
 Phase 31H SIM-R Resource Ledger Implementation: externally accepted
-Phase 31I SIM-R State Transition Contract: internally complete
-Current action: send Phase 31I outside validation packet
+Phase 31I SIM-R State Transition Contract: externally accepted
+Phase 31J SIM-R State Transition Implementation Contract: internally complete
+Current action: send Phase 31J outside validation packet
 Local alpha tag status: created locally; remote tag push not verified in this environment
 ```
 
 ## Next Allowed Phase
 
 ```text
-Phase 31I outside validation
+Phase 31J outside validation
 ```
 
-Do not begin Phase 31J until Phase 31I outside validation returns PASS or PASS WITH REVIEW NOTES.
+Do not begin Phase 31K until Phase 31J outside validation returns PASS or PASS WITH REVIEW NOTES.
 
 ## Release-Critical Path
 
 ```text
-1. Phase 31I outside validation
-2. Phase 31J SIM-R state transition implementation contract
+1. Phase 31J outside validation
+2. Phase 31K SIM-R state transition implementation
 ```
 
 ## Post-Alpha / Later Roadmap
@@ -112,11 +113,14 @@ SIM-R must not be implemented until the active validation chain completes and a 
 Simulator output remains evidence only and must never generate recommendations.
 ```
 
-## Phase 31I Outside Validation Packet
+## Phase 31J Outside Validation Packet
 
 Send these files for the current gate:
 
 ```text
+docs/PHASE31J_SIM_R_STATE_TRANSITION_IMPLEMENTATION_CONTRACT.md
+docs/CHECKPOINT_PHASE31J_SIM_R_STATE_TRANSITION_IMPLEMENTATION_CONTRACT_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE31J_SIM_R_STATE_TRANSITION_IMPLEMENTATION_CONTRACT_PROMPT.md
 docs/PHASE31I_SIM_R_STATE_TRANSITION_CONTRACT.md
 docs/CHECKPOINT_PHASE31I_SIM_R_STATE_TRANSITION_CONTRACT_REPORT.md
 docs/OUTSIDE_VALIDATION_PHASE31I_SIM_R_STATE_TRANSITION_CONTRACT_PROMPT.md
