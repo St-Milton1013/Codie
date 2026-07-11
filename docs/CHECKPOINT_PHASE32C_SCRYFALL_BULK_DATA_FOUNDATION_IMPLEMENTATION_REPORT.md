@@ -5,11 +5,12 @@ Status: internal checkpoint
 ## Verdict
 
 ```text
-Phase 32C Scryfall Bulk Data Foundation Implementation: INTERNAL PASS
+Phase 32C Scryfall Bulk Data Foundation Implementation: PASS WITH REVIEW NOTES
+Phase 32C review-note correction: APPLIED
 ```
 
-This is an internal checkpoint, not external proof. Phase 33A remains blocked
-until Phase 32C outside validation returns PASS or PASS WITH REVIEW NOTES.
+Phase 32C outside validation returned PASS WITH REVIEW NOTES. The follow-up
+review-note correction was applied before Phase 33A.
 
 ## Scope Verified
 
@@ -66,6 +67,9 @@ card_faces are preserved when available
 produced_mana is preserved when available
 raw card payloads are preserved in immutable form
 hash/count validation mismatches remain visible
+fixture metadata bulk_type is used when caller does not override it
+explicit bulk_type still overrides fixture metadata
+manifest dictionary round-trip reconstructs file_refs and compares full serialized equality
 ```
 
 ## Boundaries Verified
@@ -94,7 +98,7 @@ Focused tests:
 
 ```text
 python -m unittest tests.test_scryfall_bulk_snapshots -v
-Ran 10 tests
+Ran 11 tests
 OK
 ```
 
@@ -105,7 +109,7 @@ python scripts/check_schema.py
 Schema bootstrap check passed.
 
 python -m unittest discover -s tests
-Ran 874 tests in 6.074s
+Ran 875 tests in 4.052s
 OK (skipped=1)
 
 git diff --check
@@ -157,8 +161,8 @@ docs/CODEX_CONTINUITY_HANDOFF.md
 ## Next Gate
 
 ```text
-Phase 33A Scryfall Migration Monitoring Contract: BLOCKED
+Phase 33A Scryfall Migration Monitoring Contract: READY
 ```
 
-Phase 33A may begin contract-first only after Phase 32C outside validation
-returns PASS or PASS WITH REVIEW NOTES.
+Phase 33A may begin contract-first. Do not implement migration monitoring until
+a future accepted implementation contract authorizes it.

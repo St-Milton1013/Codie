@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: send Phase 32C Scryfall Bulk Data Foundation Implementation outside validation packet; do not begin Phase 33A until accepted
+Recommended next task: begin Phase 33A Scryfall Migration Monitoring Contract; do not implement migration monitoring until a future accepted implementation contract authorizes it
 
 ## Active Indexes
 

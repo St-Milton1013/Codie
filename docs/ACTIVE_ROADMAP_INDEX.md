@@ -52,24 +52,25 @@ Post-Phase 31 Deferred Implementation Priority Plan: logged
 Phase 32A Scryfall Bulk Data Foundation Contract: externally accepted
 Post-Phase 31 Patch Plan Cementing Audit: complete
 Phase 32B Scryfall Bulk Data Foundation Implementation Contract: externally accepted
-Phase 32C Scryfall Bulk Data Foundation Implementation: internally complete
-Current action: send Phase 32C outside validation packet
+Phase 32C Scryfall Bulk Data Foundation Implementation: externally accepted
+Phase 32C review-note correction: applied
+Current action: begin Phase 33A Scryfall Migration Monitoring Contract
 Local alpha tag status: created locally; remote tag push not verified in this environment
 ```
 
 ## Next Allowed Phase
 
 ```text
-Phase 32C outside validation
+Phase 33A Scryfall Migration Monitoring Contract
 ```
 
-Do not begin Phase 33A until Phase 32C outside validation returns PASS or PASS WITH REVIEW NOTES.
+Phase 33A may begin contract-first. Do not implement migration monitoring until a future accepted implementation contract authorizes it.
 
 ## Release-Critical Path
 
 ```text
-1. Phase 32C outside validation
-2. Phase 33A Scryfall migration monitoring contract
+1. Phase 33A Scryfall migration monitoring contract
+2. Phase 33B Scryfall migration monitoring implementation contract
 ```
 
 The post-31 patch priority order is cemented in:
@@ -317,9 +318,9 @@ docs/NEXT_PHASE_CONTRACT.md
 docs/CODEX_CONTINUITY_HANDOFF.md
 ```
 
-## Phase 32C Outside Validation Packet
+## Accepted Phase 32C Outside Validation Packet
 
-Send these files for the current gate:
+Phase 32C was accepted with review notes using this packet:
 
 ```text
 docs/PHASE32C_SCRYFALL_BULK_DATA_FOUNDATION_IMPLEMENTATION_REPORT.md
@@ -343,4 +344,14 @@ docs/ACTIVE_ROADMAP_INDEX.md
 docs/VALIDATION_STATUS_INDEX.md
 docs/NEXT_PHASE_CONTRACT.md
 docs/CODEX_CONTINUITY_HANDOFF.md
+```
+
+## Phase 32C Review-Note Correction
+
+Applied before Phase 33A:
+
+```text
+fixture metadata bulk_type is used when caller does not override it
+explicit bulk_type still overrides fixture metadata
+manifest dictionary round-trip test reconstructs file_refs and compares full serialized equality
 ```

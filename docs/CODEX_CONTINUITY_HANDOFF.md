@@ -1603,7 +1603,7 @@ validation returns PASS or PASS WITH REVIEW NOTES.
 
 Phase 32B outside validation returned PASS WITH REVIEW NOTES.
 
-Phase 32C is internally complete. It implements local, fixture-first Scryfall
+Phase 32C is externally accepted with review notes. It implements local, fixture-first Scryfall
 bulk snapshot manifest models, local fixture loading, deterministic
 serialization, stable content hashing, card-count validation, and validation
 reports in `codie/cards/scryfall_bulk_snapshots.py`, with focused tests in
@@ -1611,8 +1611,13 @@ reports in `codie/cards/scryfall_bulk_snapshots.py`, with focused tests in
 `tests/fixtures/scryfall/`. It does not implement live Scryfall downloads,
 schema, repositories, provider rewrites, lookup replacement, migration
 monitoring, Tagger import, UI, LLM calls, analytics, or recommendations.
-Phase 33A is blocked until Phase 32C outside validation returns PASS or PASS
-WITH REVIEW NOTES.
+Phase 32C review-note corrections were applied before Phase 33A: fixture
+metadata `bulk_type` is used unless the caller explicitly overrides it, and the
+manifest round-trip test now reconstructs `file_refs` and compares the complete
+serialized manifest.
+
+Phase 33A may begin contract-first. Do not implement migration monitoring until
+a future accepted implementation contract authorizes it.
 
 The post-31 patch-note plan has been cemented in
 `docs/POST_PHASE31_PATCH_PLAN_CEMENTING_AUDIT.md`. That audit confirms no
@@ -1623,7 +1628,7 @@ pools / Tag Graph Lab, Cockatrice interoperability, plugin architecture, smart
 enrichment, and conversation summaries. It is governance-only and does not
 authorize implementation beyond accepted phase contracts.
 
-Current Phase 32C outside validation packet:
+Accepted Phase 32C outside validation packet:
 
 ```text
 docs/PHASE32C_SCRYFALL_BULK_DATA_FOUNDATION_IMPLEMENTATION_REPORT.md

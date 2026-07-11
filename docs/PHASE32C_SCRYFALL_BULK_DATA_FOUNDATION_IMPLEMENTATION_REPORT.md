@@ -142,8 +142,17 @@ Focused tests:
 
 ```text
 python -m unittest tests.test_scryfall_bulk_snapshots -v
-Ran 10 tests
+Ran 11 tests
 OK
+```
+
+Phase 32C outside validation returned PASS WITH REVIEW NOTES. The follow-up
+review-note correction was applied before Phase 33A:
+
+```text
+fixture metadata bulk_type is used when caller does not override it
+explicit bulk_type still overrides fixture metadata
+manifest dictionary round-trip reconstructs file_refs and compares full serialized equality
 ```
 
 Full validation is recorded in:

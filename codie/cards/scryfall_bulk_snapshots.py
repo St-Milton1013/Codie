@@ -181,7 +181,7 @@ def load_scryfall_bulk_snapshot_fixture(
     fixture_path: str | Path,
     *,
     snapshot_id: str | None = None,
-    bulk_type: str = "default_cards",
+    bulk_type: str | None = None,
     source_uri: str | None = None,
     generated_at: str | None = None,
     imported_at: str | None = None,

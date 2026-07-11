@@ -71,9 +71,19 @@ class ScryfallBulkSnapshotsTest(unittest.TestCase):
             imported_at=decoded["imported_at"],
             content_hash=decoded["content_hash"],
             card_count=decoded["card_count"],
+            schema_version=decoded["schema_version"],
+            file_refs=tuple(
+                ScryfallBulkFileRef(
+                    filename=file_ref["filename"],
+                    content_hash=file_ref["content_hash"],
+                    card_count=file_ref["card_count"],
+                    source_uri=file_ref["source_uri"],
+                )
+                for file_ref in decoded["file_refs"]
+            ),
             raw_metadata=decoded["raw_metadata"],
         )
-        self.assertEqual(scryfall_bulk_snapshot_manifest_to_dict(rebuilt)["content_hash"], first["content_hash"])
+        self.assertEqual(scryfall_bulk_snapshot_manifest_to_dict(rebuilt), first)
         self.assertEqual(first["raw_metadata"], {"a": ["kept"], "z": {"a": 1, "b": 2}})
 
     def test_manifest_value_object_is_frozen_and_builder_does_not_mutate_metadata(self) -> None:
@@ -145,6 +155,7 @@ class ScryfallBulkSnapshotsTest(unittest.TestCase):
             path.write_text(
                 json.dumps(
                     {
+                        "bulk_type": "oracle_cards",
                         "source_uri": "fixture://local",
                         "cards": [
                             {
@@ -156,11 +167,33 @@ class ScryfallBulkSnapshotsTest(unittest.TestCase):
                 ),
                 encoding="utf-8",
             )
-            report = load_scryfall_bulk_snapshot_fixture(path, bulk_type="oracle_cards")
+            report = load_scryfall_bulk_snapshot_fixture(path)
 
         self.assertTrue(report.is_valid)
         self.assertEqual(report.manifest.bulk_type, "oracle_cards")
         self.assertEqual(report.manifest.raw_metadata["source_uri"], "fixture://local")
+
+    def test_explicit_bulk_type_overrides_fixture_metadata(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            path = Path(temp_dir) / "snapshot.json"
+            path.write_text(
+                json.dumps(
+                    {
+                        "bulk_type": "oracle_cards",
+                        "cards": [
+                            {
+                                "scryfall_id": "00000000-0000-0000-0000-000000000001",
+                                "name": "Local Card",
+                            }
+                        ],
+                    }
+                ),
+                encoding="utf-8",
+            )
+            report = load_scryfall_bulk_snapshot_fixture(path, bulk_type="default_cards")
+
+        self.assertTrue(report.is_valid)
+        self.assertEqual(report.manifest.bulk_type, "default_cards")
 
     def test_hash_and_card_count_validation_mismatches_are_visible(self) -> None:
         manifest = build_scryfall_bulk_snapshot_manifest(

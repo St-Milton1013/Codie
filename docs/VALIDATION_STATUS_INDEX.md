@@ -50,7 +50,8 @@ Post-Phase 31 Deferred Implementation Priority Plan: LOGGED
 Phase 32A Scryfall Bulk Data Foundation Contract: PASS WITH REVIEW NOTES
 Post-Phase 31 Patch Plan Cementing Audit: COMPLETE
 Phase 32B Scryfall Bulk Data Foundation Implementation Contract: PASS WITH REVIEW NOTES
-Phase 32C Scryfall Bulk Data Foundation Implementation: INTERNAL PASS
+Phase 32C Scryfall Bulk Data Foundation Implementation: PASS WITH REVIEW NOTES
+Phase 32C review-note correction: APPLIED
 Local alpha tag: created locally; remote tag push not verified in this environment
 ```
 
@@ -123,22 +124,23 @@ Phase 31Q SIM-R Behavior Transition Wiring Implementation: PASS WITH REVIEW NOTE
 Phase 31R SIM-R Foundation Checkpoint / Freeze: PASS WITH REVIEW NOTES
 Phase 32A Scryfall Bulk Data Foundation Contract: PASS WITH REVIEW NOTES
 Phase 32B Scryfall Bulk Data Foundation Implementation Contract: PASS WITH REVIEW NOTES
-Phase 32C Scryfall Bulk Data Foundation Implementation: INTERNAL PASS
+Phase 32C Scryfall Bulk Data Foundation Implementation: PASS WITH REVIEW NOTES
+Phase 32C review-note correction: APPLIED
 ```
 
 ## Latest Local Validation
 
 ```text
-Phase 32C Scryfall Bulk Data Foundation Implementation:
+Phase 32C Scryfall Bulk Data Foundation Implementation with review-note correction:
 python -m unittest tests.test_scryfall_bulk_snapshots -v
-Ran 10 tests
+Ran 11 tests
 OK
 
 python scripts/check_schema.py
 Schema bootstrap check passed.
 
 python -m unittest discover -s tests
-Ran 874 tests in 6.074s
+Ran 875 tests in 4.052s
 OK (skipped=1)
 
 git diff --check
@@ -289,10 +291,10 @@ production Forge / LLM SDK import scan: no matches
 ## Current Blocker
 
 ```text
-Phase 33A is blocked until Phase 32C outside validation returns PASS or PASS WITH REVIEW NOTES.
+Phase 33A may begin contract-first.
 ```
 
-## Current Phase 32C Outside Validation Packet
+## Accepted Phase 32C Outside Validation Packet
 
 ```text
 docs/PHASE32C_SCRYFALL_BULK_DATA_FOUNDATION_IMPLEMENTATION_REPORT.md
