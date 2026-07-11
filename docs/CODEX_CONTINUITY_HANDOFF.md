@@ -208,7 +208,8 @@ Phase 31D SIM-R State Model Implementation Contract: PASS WITH REVIEW NOTES
 Phase 31E SIM-R State Model Implementation: PASS WITH REVIEW NOTES
 Phase 31F SIM-R Resource Ledger Contract: PASS WITH REVIEW NOTES
 Phase 31G SIM-R Resource Ledger Implementation Contract: PASS WITH REVIEW NOTES
-Phase 31H SIM-R Resource Ledger Implementation: INTERNAL PASS
+Phase 31H SIM-R Resource Ledger Implementation: PASS WITH REVIEW NOTES
+Phase 31I SIM-R State Transition Contract: INTERNAL PASS
 ```
 
 ## Recent Commits
@@ -1492,19 +1493,24 @@ Phase 31F outside validation returned PASS WITH REVIEW NOTES.
 
 Phase 31G outside validation returned PASS WITH REVIEW NOTES.
 
-Phase 31H is internally complete. It is the isolated SIM-R resource ledger
-implementation. It adds pure immutable ledger models, deterministic
-serialization, validation for duplicate ledger entries, duplicate payment keys,
-double-spent resources, negative resource quantities, restricted mana metadata,
-failed payment visibility, unsupported payment visibility, and state/action/cost
-references. It adds no state transitions, actions, behavior modules, search,
-hashing, trace v2, schema, repositories, dependencies, UI, live network behavior,
-or recommendation output. Phase 31I is blocked until Phase 31H outside
-validation returns PASS or PASS WITH REVIEW NOTES.
+Phase 31H outside validation returned PASS WITH REVIEW NOTES.
 
-Current Phase 31H outside validation packet:
+Phase 31I is internally complete. It is a contract-only packet for future SIM-R
+state transitions. It defines the transition principle, future transition model
+files, future public interface, required future transition rules, required
+future tests, dependency boundaries, compatibility boundaries, evidence-only
+boundaries, and the Phase 31J gate. It adds no transition implementation,
+actions, behavior modules, search, hashing, trace v2, schema, repositories,
+dependencies, UI, live network behavior, or recommendation output. Phase 31J is
+blocked until Phase 31I outside validation returns PASS or PASS WITH REVIEW
+NOTES.
+
+Current Phase 31I outside validation packet:
 
 ```text
+docs/PHASE31I_SIM_R_STATE_TRANSITION_CONTRACT.md
+docs/CHECKPOINT_PHASE31I_SIM_R_STATE_TRANSITION_CONTRACT_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE31I_SIM_R_STATE_TRANSITION_CONTRACT_PROMPT.md
 docs/PHASE31H_SIM_R_RESOURCE_LEDGER_IMPLEMENTATION_REPORT.md
 docs/CHECKPOINT_PHASE31H_SIM_R_RESOURCE_LEDGER_IMPLEMENTATION_REPORT.md
 docs/OUTSIDE_VALIDATION_PHASE31H_SIM_R_RESOURCE_LEDGER_IMPLEMENTATION_PROMPT.md
