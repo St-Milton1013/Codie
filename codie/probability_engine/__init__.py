@@ -201,6 +201,20 @@ from .sim_r_behavior import (
     validate_behavior_profile,
     validate_behavior_proposal,
 )
+from .sim_r_wiring import (
+    COMPATIBLE,
+    INCOMPATIBLE,
+    SIM_R_WIRING_VERSION,
+    SimulationBehaviorTransitionLink,
+    SimulationBehaviorWiringResult,
+    SimulationWiringBuildError,
+    behavior_transition_link_to_dict,
+    behavior_wiring_result_to_dict,
+    build_behavior_transition_link,
+    build_behavior_wiring_result,
+    validate_behavior_transition_link,
+    validate_behavior_wiring_result,
+)
 
 __all__ = [
     "MANA_COLOR_KEYS",
@@ -369,4 +383,16 @@ __all__ = [
     "build_behavior_proposal",
     "validate_behavior_profile",
     "validate_behavior_proposal",
+    "COMPATIBLE",
+    "INCOMPATIBLE",
+    "SIM_R_WIRING_VERSION",
+    "SimulationBehaviorTransitionLink",
+    "SimulationBehaviorWiringResult",
+    "SimulationWiringBuildError",
+    "behavior_transition_link_to_dict",
+    "behavior_wiring_result_to_dict",
+    "build_behavior_transition_link",
+    "build_behavior_wiring_result",
+    "validate_behavior_transition_link",
+    "validate_behavior_wiring_result",
 ]

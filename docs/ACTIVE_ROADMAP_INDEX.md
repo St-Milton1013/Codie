@@ -45,28 +45,28 @@ Phase 31L SIM-R Behavior Module Contract: externally accepted
 Phase 31M SIM-R Behavior Module Implementation Contract: externally accepted
 Phase 31N SIM-R Behavior Module Implementation: externally accepted
 Phase 31O SIM-R Behavior Transition Wiring Contract: externally accepted
-Phase 31P SIM-R Behavior Transition Wiring Implementation Contract: internally complete
+Phase 31P SIM-R Behavior Transition Wiring Implementation Contract: externally accepted
+Phase 31Q SIM-R Behavior Transition Wiring Implementation: internally complete
 Post-Phase 31 Deferred Implementation Priority Plan: logged
-Current action: send Phase 31P outside validation packet
+Current action: send Phase 31Q outside validation packet
 Local alpha tag status: created locally; remote tag push not verified in this environment
 ```
 
 ## Next Allowed Phase
 
 ```text
-Phase 31P outside validation
+Phase 31Q outside validation
 ```
 
-Do not begin Phase 31Q until Phase 31P outside validation returns PASS or PASS WITH REVIEW NOTES.
+Do not begin Phase 31R until Phase 31Q outside validation returns PASS or PASS WITH REVIEW NOTES.
 Do not begin deferred implementation backlog work until Phase 31 closes with an accepted checkpoint.
 
 ## Release-Critical Path
 
 ```text
-1. Phase 31P outside validation
-2. Phase 31Q SIM-R behavior transition wiring implementation
-3. Phase 31R SIM-R foundation checkpoint / freeze
-4. Post-Phase 31 deferred implementation priority plan
+1. Phase 31Q outside validation
+2. Phase 31R SIM-R foundation checkpoint / freeze
+3. Post-Phase 31 deferred implementation priority plan
 ```
 
 ## Post-Alpha / Later Roadmap
@@ -183,9 +183,9 @@ docs/LOCAL_ALPHA_USAGE_DOCUMENTATION_OUTLINE_DRAFT.md
 docs/POST_PHASE24_PATCH_CONTRACT_BACKLOG.md
 ```
 
-## Phase 31P Outside Validation Packet
+## Accepted Phase 31P Outside Validation Packet
 
-Send these files for the current gate:
+Phase 31P was accepted with review notes using this packet:
 
 ```text
 docs/PHASE31P_SIM_R_BEHAVIOR_TRANSITION_WIRING_IMPLEMENTATION_CONTRACT.md
@@ -199,6 +199,35 @@ codie/probability_engine/sim_r_behavior.py
 codie/probability_engine/sim_r_transition.py
 codie/probability_engine/sim_r_state.py
 codie/probability_engine/sim_r_ledger.py
+tests/test_probability_engine_sim_r_behavior.py
+tests/test_probability_engine_sim_r_transition.py
+tests/test_probability_engine_sim_r_state.py
+tests/test_probability_engine_sim_r_ledger.py
+docs/ACTIVE_ROADMAP_INDEX.md
+docs/VALIDATION_STATUS_INDEX.md
+docs/NEXT_PHASE_CONTRACT.md
+docs/CODEX_CONTINUITY_HANDOFF.md
+```
+
+## Phase 31Q Outside Validation Packet
+
+Send these files for the current gate:
+
+```text
+docs/PHASE31Q_SIM_R_BEHAVIOR_TRANSITION_WIRING_IMPLEMENTATION_REPORT.md
+docs/CHECKPOINT_PHASE31Q_SIM_R_BEHAVIOR_TRANSITION_WIRING_IMPLEMENTATION_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE31Q_SIM_R_BEHAVIOR_TRANSITION_WIRING_IMPLEMENTATION_PROMPT.md
+docs/PHASE31P_SIM_R_BEHAVIOR_TRANSITION_WIRING_IMPLEMENTATION_CONTRACT.md
+docs/CHECKPOINT_PHASE31P_SIM_R_BEHAVIOR_TRANSITION_WIRING_IMPLEMENTATION_CONTRACT_REPORT.md
+docs/PHASE31O_SIM_R_BEHAVIOR_TRANSITION_WIRING_CONTRACT.md
+docs/CHECKPOINT_PHASE31O_SIM_R_BEHAVIOR_TRANSITION_WIRING_CONTRACT_REPORT.md
+codie/probability_engine/sim_r_wiring.py
+codie/probability_engine/sim_r_behavior.py
+codie/probability_engine/sim_r_transition.py
+codie/probability_engine/sim_r_state.py
+codie/probability_engine/sim_r_ledger.py
+codie/probability_engine/__init__.py
+tests/test_probability_engine_sim_r_wiring.py
 tests/test_probability_engine_sim_r_behavior.py
 tests/test_probability_engine_sim_r_transition.py
 tests/test_probability_engine_sim_r_state.py

@@ -1538,7 +1538,9 @@ without executing behavior, mutating state, creating ledgers, building
 transitions, searching, adding schema, calling providers, invoking LLMs, adding
 UI, or generating recommendations. Phase 31P may begin contract-first.
 
-Phase 31P is internally complete. It is an implementation-contract-only packet
+Phase 31P outside validation returned PASS WITH REVIEW NOTES.
+
+Phase 31P is accepted. It is an implementation-contract-only packet
 for future SIM-R behavior-to-transition wiring value objects and validators.
 It authorizes a later packet to add only
 `codie/probability_engine/sim_r_wiring.py`,
@@ -1547,23 +1549,36 @@ It authorizes a later packet to add only
 implementation, behavior proposal application, transition result creation, card
 behavior execution, action execution, state mutation, ledger creation, search,
 hashing, trace v2 runtime, schema, repositories, dependencies, provider access,
-LLM calls, UI, or recommendation output. Phase 31Q is blocked until Phase 31P
-outside validation returns PASS or PASS WITH REVIEW NOTES.
+LLM calls, UI, or recommendation output.
 
-Current Phase 31P outside validation packet:
+Phase 31Q is internally complete. It implements the isolated pure in-memory
+SIM-R behavior transition wiring model layer in
+`codie/probability_engine/sim_r_wiring.py`, adds focused coverage in
+`tests/test_probability_engine_sim_r_wiring.py`, and exports the model symbols
+from `codie/probability_engine/__init__.py`. It adds no behavior proposal
+execution, state mutation, resource ledger creation, transition result
+creation, action execution, search, state hashing, trace v2 runtime, schema,
+repositories, dependencies, provider access, LLM calls, UI, or recommendation
+output. Phase 31R is blocked until Phase 31Q outside validation returns PASS or
+PASS WITH REVIEW NOTES.
+
+Current Phase 31Q outside validation packet:
 
 ```text
+docs/PHASE31Q_SIM_R_BEHAVIOR_TRANSITION_WIRING_IMPLEMENTATION_REPORT.md
+docs/CHECKPOINT_PHASE31Q_SIM_R_BEHAVIOR_TRANSITION_WIRING_IMPLEMENTATION_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE31Q_SIM_R_BEHAVIOR_TRANSITION_WIRING_IMPLEMENTATION_PROMPT.md
 docs/PHASE31P_SIM_R_BEHAVIOR_TRANSITION_WIRING_IMPLEMENTATION_CONTRACT.md
 docs/CHECKPOINT_PHASE31P_SIM_R_BEHAVIOR_TRANSITION_WIRING_IMPLEMENTATION_CONTRACT_REPORT.md
-docs/OUTSIDE_VALIDATION_PHASE31P_SIM_R_BEHAVIOR_TRANSITION_WIRING_IMPLEMENTATION_CONTRACT_PROMPT.md
 docs/PHASE31O_SIM_R_BEHAVIOR_TRANSITION_WIRING_CONTRACT.md
 docs/CHECKPOINT_PHASE31O_SIM_R_BEHAVIOR_TRANSITION_WIRING_CONTRACT_REPORT.md
-docs/PHASE31N_SIM_R_BEHAVIOR_MODULE_IMPLEMENTATION_REPORT.md
-docs/PHASE31M_SIM_R_BEHAVIOR_MODULE_IMPLEMENTATION_CONTRACT.md
+codie/probability_engine/sim_r_wiring.py
 codie/probability_engine/sim_r_behavior.py
 codie/probability_engine/sim_r_transition.py
 codie/probability_engine/sim_r_state.py
 codie/probability_engine/sim_r_ledger.py
+codie/probability_engine/__init__.py
+tests/test_probability_engine_sim_r_wiring.py
 tests/test_probability_engine_sim_r_behavior.py
 tests/test_probability_engine_sim_r_transition.py
 tests/test_probability_engine_sim_r_state.py
