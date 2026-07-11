@@ -44,7 +44,8 @@ Phase 31M SIM-R Behavior Module Implementation Contract: PASS WITH REVIEW NOTES
 Phase 31N SIM-R Behavior Module Implementation: PASS WITH REVIEW NOTES
 Phase 31O SIM-R Behavior Transition Wiring Contract: PASS WITH REVIEW NOTES
 Phase 31P SIM-R Behavior Transition Wiring Implementation Contract: PASS WITH REVIEW NOTES
-Phase 31Q SIM-R Behavior Transition Wiring Implementation: INTERNAL PASS
+Phase 31Q SIM-R Behavior Transition Wiring Implementation: PASS WITH REVIEW NOTES
+Phase 31R SIM-R Foundation Checkpoint / Freeze: INTERNAL PASS
 Post-Phase 31 Deferred Implementation Priority Plan: LOGGED
 Local alpha tag: created locally; remote tag push not verified in this environment
 ```
@@ -114,15 +115,16 @@ Phase 31M SIM-R Behavior Module Implementation Contract: PASS WITH REVIEW NOTES
 Phase 31N SIM-R Behavior Module Implementation: PASS WITH REVIEW NOTES
 Phase 31O SIM-R Behavior Transition Wiring Contract: PASS WITH REVIEW NOTES
 Phase 31P SIM-R Behavior Transition Wiring Implementation Contract: PASS WITH REVIEW NOTES
-Phase 31Q SIM-R Behavior Transition Wiring Implementation: INTERNAL PASS
+Phase 31Q SIM-R Behavior Transition Wiring Implementation: PASS WITH REVIEW NOTES
+Phase 31R SIM-R Foundation Checkpoint / Freeze: INTERNAL PASS
 ```
 
 ## Latest Local Validation
 
 ```text
-Phase 31Q SIM-R Behavior Transition Wiring Implementation:
-python -m unittest tests.test_probability_engine_sim_r_wiring -v
-Ran 16 tests
+Phase 31R SIM-R Foundation Checkpoint / Freeze:
+python -m unittest tests.test_probability_engine_sim_r_state tests.test_probability_engine_sim_r_ledger tests.test_probability_engine_sim_r_transition tests.test_probability_engine_sim_r_behavior tests.test_probability_engine_sim_r_wiring -v
+Ran 67 tests
 OK
 
 python scripts/check_schema.py
@@ -136,10 +138,11 @@ git diff --check
 passed
 
 Static scans:
-forbidden import scan: no matches
-runtime helper scan: no matches
-production Forge / LLM SDK import scan: no matches
+production/test runtime diff scan: no matches
 schema/repository/dependency diff scan: no matches
+production Forge / LLM SDK import scan: no matches
+SIM-R foundation forbidden import scan: no matches
+stale Phase 31Q gate scan: no matches
 ```
 
 ## CI Review Note Status
@@ -259,35 +262,36 @@ production Forge / LLM SDK import scan: no matches
 ## Current Blocker
 
 ```text
-Phase 31R is blocked until Phase 31Q outside validation returns PASS or PASS WITH REVIEW NOTES.
-Post-31 deferred implementation backlog work is blocked until Phase 31 closes with an accepted checkpoint.
+Post-31 deferred implementation backlog work is blocked until Phase 31R outside validation returns PASS or PASS WITH REVIEW NOTES.
 ```
 
-## Current Phase 31Q Outside Validation Packet
+## Current Phase 31R Outside Validation Packet
 
 ```text
+docs/PHASE31R_SIM_R_FOUNDATION_CHECKPOINT_CONTRACT.md
+docs/CHECKPOINT_PHASE31R_SIM_R_FOUNDATION_CHECKPOINT_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE31R_SIM_R_FOUNDATION_CHECKPOINT_PROMPT.md
 docs/PHASE31Q_SIM_R_BEHAVIOR_TRANSITION_WIRING_IMPLEMENTATION_REPORT.md
 docs/CHECKPOINT_PHASE31Q_SIM_R_BEHAVIOR_TRANSITION_WIRING_IMPLEMENTATION_REPORT.md
 docs/OUTSIDE_VALIDATION_PHASE31Q_SIM_R_BEHAVIOR_TRANSITION_WIRING_IMPLEMENTATION_PROMPT.md
 docs/PHASE31P_SIM_R_BEHAVIOR_TRANSITION_WIRING_IMPLEMENTATION_CONTRACT.md
-docs/CHECKPOINT_PHASE31P_SIM_R_BEHAVIOR_TRANSITION_WIRING_IMPLEMENTATION_CONTRACT_REPORT.md
 docs/PHASE31O_SIM_R_BEHAVIOR_TRANSITION_WIRING_CONTRACT.md
-docs/CHECKPOINT_PHASE31O_SIM_R_BEHAVIOR_TRANSITION_WIRING_CONTRACT_REPORT.md
-codie/probability_engine/sim_r_wiring.py
-codie/probability_engine/sim_r_behavior.py
-codie/probability_engine/sim_r_transition.py
 codie/probability_engine/sim_r_state.py
 codie/probability_engine/sim_r_ledger.py
+codie/probability_engine/sim_r_transition.py
+codie/probability_engine/sim_r_behavior.py
+codie/probability_engine/sim_r_wiring.py
 codie/probability_engine/__init__.py
-tests/test_probability_engine_sim_r_wiring.py
-tests/test_probability_engine_sim_r_behavior.py
-tests/test_probability_engine_sim_r_transition.py
 tests/test_probability_engine_sim_r_state.py
 tests/test_probability_engine_sim_r_ledger.py
+tests/test_probability_engine_sim_r_transition.py
+tests/test_probability_engine_sim_r_behavior.py
+tests/test_probability_engine_sim_r_wiring.py
 docs/ACTIVE_ROADMAP_INDEX.md
 docs/VALIDATION_STATUS_INDEX.md
 docs/NEXT_PHASE_CONTRACT.md
 docs/CODEX_CONTINUITY_HANDOFF.md
+docs/POST_PHASE31_DEFERRED_IMPLEMENTATION_PRIORITY_PLAN.md
 ```
 
 ## Accepted Phase 31O Outside Validation Packet
