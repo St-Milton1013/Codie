@@ -1,0 +1,37 @@
+{
+  "bulk_type": "default_cards",
+  "generated_at": "2026-06-21T00:00:00+00:00",
+  "source_uri": "fixture://scryfall/default_cards_snapshot.json",
+  "cards": [
+    {
+      "id": "00000000-0000-0000-0000-000000000001",
+      "oracle_id": "11111111-1111-1111-1111-111111111111",
+      "name": "Tymna the Weaver",
+      "released_at": "2016-11-11",
+      "legalities": {
+        "commander": "legal"
+      }
+    },
+    {
+      "id": "00000000-0000-0000-0000-000000000003",
+      "oracle_id": "33333333-3333-3333-3333-333333333333",
+      "name": "Bala Ged Recovery // Bala Ged Sanctuary",
+      "released_at": "2020-09-25",
+      "card_faces": [
+        {
+          "name": "Bala Ged Recovery"
+        },
+        {
+          "name": "Bala Ged Sanctuary"
+        }
+      ],
+      "produced_mana": [
+        "G"
+      ]
+    },
+    {
+      "id": "00000000-0000-0000-0000-000000000099",
+      "name": "Minimal Fixture Card"
+    }
+  ]
+}

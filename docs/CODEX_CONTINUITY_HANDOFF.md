@@ -1601,6 +1601,19 @@ lookup replacement, migration monitoring, Tagger import, UI, LLM calls,
 analytics, or recommendations. Phase 32C is blocked until Phase 32B outside
 validation returns PASS or PASS WITH REVIEW NOTES.
 
+Phase 32B outside validation returned PASS WITH REVIEW NOTES.
+
+Phase 32C is internally complete. It implements local, fixture-first Scryfall
+bulk snapshot manifest models, local fixture loading, deterministic
+serialization, stable content hashing, card-count validation, and validation
+reports in `codie/cards/scryfall_bulk_snapshots.py`, with focused tests in
+`tests/test_scryfall_bulk_snapshots.py` and fixtures under
+`tests/fixtures/scryfall/`. It does not implement live Scryfall downloads,
+schema, repositories, provider rewrites, lookup replacement, migration
+monitoring, Tagger import, UI, LLM calls, analytics, or recommendations.
+Phase 33A is blocked until Phase 32C outside validation returns PASS or PASS
+WITH REVIEW NOTES.
+
 The post-31 patch-note plan has been cemented in
 `docs/POST_PHASE31_PATCH_PLAN_CEMENTING_AUDIT.md`. That audit confirms no
 backtracking is required before Phase 32 implementation and locks the deferred
@@ -1610,9 +1623,12 @@ pools / Tag Graph Lab, Cockatrice interoperability, plugin architecture, smart
 enrichment, and conversation summaries. It is governance-only and does not
 authorize implementation beyond accepted phase contracts.
 
-Current Phase 32B outside validation packet:
+Current Phase 32C outside validation packet:
 
 ```text
+docs/PHASE32C_SCRYFALL_BULK_DATA_FOUNDATION_IMPLEMENTATION_REPORT.md
+docs/CHECKPOINT_PHASE32C_SCRYFALL_BULK_DATA_FOUNDATION_IMPLEMENTATION_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE32C_SCRYFALL_BULK_DATA_FOUNDATION_IMPLEMENTATION_PROMPT.md
 docs/PHASE32B_SCRYFALL_BULK_DATA_FOUNDATION_IMPLEMENTATION_CONTRACT.md
 docs/CHECKPOINT_PHASE32B_SCRYFALL_BULK_DATA_FOUNDATION_IMPLEMENTATION_CONTRACT_REPORT.md
 docs/OUTSIDE_VALIDATION_PHASE32B_SCRYFALL_BULK_DATA_FOUNDATION_IMPLEMENTATION_CONTRACT_PROMPT.md
@@ -1622,7 +1638,12 @@ docs/OUTSIDE_VALIDATION_PHASE32A_SCRYFALL_BULK_DATA_FOUNDATION_CONTRACT_PROMPT.m
 docs/POST_PHASE31_DEFERRED_IMPLEMENTATION_PRIORITY_PLAN.md
 docs/POST_PHASE31_PATCH_PLAN_CEMENTING_AUDIT.md
 docs/PHASE2_SCRYFALL_TRUTH_CONTRACT.md
-docs/ROADMAP_PATCH_CODIE_MASTER_ARCHITECTURE.md
+codie/cards/scryfall_bulk_snapshots.py
+codie/cards/__init__.py
+tests/test_scryfall_bulk_snapshots.py
+tests/fixtures/scryfall/bulk_manifest.json
+tests/fixtures/scryfall/default_cards_snapshot.json
+tests/fixtures/scryfall/malformed_bulk_snapshot.json
 docs/ACTIVE_ROADMAP_INDEX.md
 docs/VALIDATION_STATUS_INDEX.md
 docs/NEXT_PHASE_CONTRACT.md

@@ -51,24 +51,25 @@ Phase 31R SIM-R Foundation Checkpoint / Freeze: externally accepted
 Post-Phase 31 Deferred Implementation Priority Plan: logged
 Phase 32A Scryfall Bulk Data Foundation Contract: externally accepted
 Post-Phase 31 Patch Plan Cementing Audit: complete
-Phase 32B Scryfall Bulk Data Foundation Implementation Contract: internally complete
-Current action: send Phase 32B outside validation packet
+Phase 32B Scryfall Bulk Data Foundation Implementation Contract: externally accepted
+Phase 32C Scryfall Bulk Data Foundation Implementation: internally complete
+Current action: send Phase 32C outside validation packet
 Local alpha tag status: created locally; remote tag push not verified in this environment
 ```
 
 ## Next Allowed Phase
 
 ```text
-Phase 32B outside validation
+Phase 32C outside validation
 ```
 
-Do not begin Phase 32C until Phase 32B outside validation returns PASS or PASS WITH REVIEW NOTES.
+Do not begin Phase 33A until Phase 32C outside validation returns PASS or PASS WITH REVIEW NOTES.
 
 ## Release-Critical Path
 
 ```text
-1. Phase 32B outside validation
-2. Phase 32C Scryfall bulk data foundation implementation
+1. Phase 32C outside validation
+2. Phase 33A Scryfall migration monitoring contract
 ```
 
 The post-31 patch priority order is cemented in:
@@ -295,9 +296,9 @@ docs/NEXT_PHASE_CONTRACT.md
 docs/CODEX_CONTINUITY_HANDOFF.md
 ```
 
-## Phase 32B Outside Validation Packet
+## Accepted Phase 32B Outside Validation Packet
 
-Send these files for the current gate:
+Phase 32B was accepted with review notes using this packet:
 
 ```text
 docs/PHASE32B_SCRYFALL_BULK_DATA_FOUNDATION_IMPLEMENTATION_CONTRACT.md
@@ -310,6 +311,34 @@ docs/POST_PHASE31_DEFERRED_IMPLEMENTATION_PRIORITY_PLAN.md
 docs/POST_PHASE31_PATCH_PLAN_CEMENTING_AUDIT.md
 docs/PHASE2_SCRYFALL_TRUTH_CONTRACT.md
 docs/ROADMAP_PATCH_CODIE_MASTER_ARCHITECTURE.md
+docs/ACTIVE_ROADMAP_INDEX.md
+docs/VALIDATION_STATUS_INDEX.md
+docs/NEXT_PHASE_CONTRACT.md
+docs/CODEX_CONTINUITY_HANDOFF.md
+```
+
+## Phase 32C Outside Validation Packet
+
+Send these files for the current gate:
+
+```text
+docs/PHASE32C_SCRYFALL_BULK_DATA_FOUNDATION_IMPLEMENTATION_REPORT.md
+docs/CHECKPOINT_PHASE32C_SCRYFALL_BULK_DATA_FOUNDATION_IMPLEMENTATION_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE32C_SCRYFALL_BULK_DATA_FOUNDATION_IMPLEMENTATION_PROMPT.md
+docs/PHASE32B_SCRYFALL_BULK_DATA_FOUNDATION_IMPLEMENTATION_CONTRACT.md
+docs/CHECKPOINT_PHASE32B_SCRYFALL_BULK_DATA_FOUNDATION_IMPLEMENTATION_CONTRACT_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE32B_SCRYFALL_BULK_DATA_FOUNDATION_IMPLEMENTATION_CONTRACT_PROMPT.md
+docs/PHASE32A_SCRYFALL_BULK_DATA_FOUNDATION_CONTRACT.md
+docs/CHECKPOINT_PHASE32A_SCRYFALL_BULK_DATA_FOUNDATION_CONTRACT_REPORT.md
+docs/POST_PHASE31_DEFERRED_IMPLEMENTATION_PRIORITY_PLAN.md
+docs/POST_PHASE31_PATCH_PLAN_CEMENTING_AUDIT.md
+docs/PHASE2_SCRYFALL_TRUTH_CONTRACT.md
+codie/cards/scryfall_bulk_snapshots.py
+codie/cards/__init__.py
+tests/test_scryfall_bulk_snapshots.py
+tests/fixtures/scryfall/bulk_manifest.json
+tests/fixtures/scryfall/default_cards_snapshot.json
+tests/fixtures/scryfall/malformed_bulk_snapshot.json
 docs/ACTIVE_ROADMAP_INDEX.md
 docs/VALIDATION_STATUS_INDEX.md
 docs/NEXT_PHASE_CONTRACT.md

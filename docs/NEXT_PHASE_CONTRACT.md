@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: send Phase 32B Scryfall Bulk Data Foundation Implementation Contract outside validation packet; do not begin Phase 32C until accepted
+Recommended next task: send Phase 32C Scryfall Bulk Data Foundation Implementation outside validation packet; do not begin Phase 33A until accepted
 
 ## Active Indexes
 
