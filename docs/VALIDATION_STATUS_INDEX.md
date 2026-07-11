@@ -47,8 +47,9 @@ Phase 31P SIM-R Behavior Transition Wiring Implementation Contract: PASS WITH RE
 Phase 31Q SIM-R Behavior Transition Wiring Implementation: PASS WITH REVIEW NOTES
 Phase 31R SIM-R Foundation Checkpoint / Freeze: PASS WITH REVIEW NOTES
 Post-Phase 31 Deferred Implementation Priority Plan: LOGGED
-Phase 32A Scryfall Bulk Data Foundation Contract: INTERNAL PASS
+Phase 32A Scryfall Bulk Data Foundation Contract: PASS WITH REVIEW NOTES
 Post-Phase 31 Patch Plan Cementing Audit: COMPLETE
+Phase 32B Scryfall Bulk Data Foundation Implementation Contract: INTERNAL PASS
 Local alpha tag: created locally; remote tag push not verified in this environment
 ```
 
@@ -119,13 +120,14 @@ Phase 31O SIM-R Behavior Transition Wiring Contract: PASS WITH REVIEW NOTES
 Phase 31P SIM-R Behavior Transition Wiring Implementation Contract: PASS WITH REVIEW NOTES
 Phase 31Q SIM-R Behavior Transition Wiring Implementation: PASS WITH REVIEW NOTES
 Phase 31R SIM-R Foundation Checkpoint / Freeze: PASS WITH REVIEW NOTES
-Phase 32A Scryfall Bulk Data Foundation Contract: INTERNAL PASS
+Phase 32A Scryfall Bulk Data Foundation Contract: PASS WITH REVIEW NOTES
+Phase 32B Scryfall Bulk Data Foundation Implementation Contract: INTERNAL PASS
 ```
 
 ## Latest Local Validation
 
 ```text
-Phase 32A Scryfall Bulk Data Foundation Contract:
+Phase 32B Scryfall Bulk Data Foundation Implementation Contract:
 python scripts/check_schema.py
 Schema bootstrap check passed.
 
@@ -137,9 +139,9 @@ git diff --check
 passed
 
 Static scans:
-production/test/schema/repository/dependency drift scan: no matches
+production/test/fixture/schema/repository/dependency drift scan: no matches
 forbidden string scan: matches only explicit forbidden/boundary lists
-stale Phase 31R gate scan: no matches
+stale Phase 32A gate scan: no matches
 ```
 
 ## CI Review Note Status
@@ -281,16 +283,20 @@ production Forge / LLM SDK import scan: no matches
 ## Current Blocker
 
 ```text
-Phase 32B is blocked until Phase 32A outside validation returns PASS or PASS WITH REVIEW NOTES.
+Phase 32C is blocked until Phase 32B outside validation returns PASS or PASS WITH REVIEW NOTES.
 ```
 
-## Current Phase 32A Outside Validation Packet
+## Current Phase 32B Outside Validation Packet
 
 ```text
+docs/PHASE32B_SCRYFALL_BULK_DATA_FOUNDATION_IMPLEMENTATION_CONTRACT.md
+docs/CHECKPOINT_PHASE32B_SCRYFALL_BULK_DATA_FOUNDATION_IMPLEMENTATION_CONTRACT_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE32B_SCRYFALL_BULK_DATA_FOUNDATION_IMPLEMENTATION_CONTRACT_PROMPT.md
 docs/PHASE32A_SCRYFALL_BULK_DATA_FOUNDATION_CONTRACT.md
 docs/CHECKPOINT_PHASE32A_SCRYFALL_BULK_DATA_FOUNDATION_CONTRACT_REPORT.md
 docs/OUTSIDE_VALIDATION_PHASE32A_SCRYFALL_BULK_DATA_FOUNDATION_CONTRACT_PROMPT.md
 docs/POST_PHASE31_DEFERRED_IMPLEMENTATION_PRIORITY_PLAN.md
+docs/POST_PHASE31_PATCH_PLAN_CEMENTING_AUDIT.md
 docs/PHASE2_SCRYFALL_TRUTH_CONTRACT.md
 docs/ROADMAP_PATCH_CODIE_MASTER_ARCHITECTURE.md
 docs/ACTIVE_ROADMAP_INDEX.md

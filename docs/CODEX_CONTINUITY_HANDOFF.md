@@ -1580,15 +1580,26 @@ It adds no production simulator runtime behavior, schema, repositories,
 dependencies, providers, UI, LLM calls, Forge integration, live network calls,
 or recommendations.
 
-Phase 32A is internally complete. It is a contract-only packet for the
+Phase 32A outside validation returned PASS WITH REVIEW NOTES.
+
+Phase 32A is accepted. It is a contract-only packet for the
 Scryfall Bulk Data Foundation, the first priority from the post-Phase 31
 deferred implementation plan. It defines future local-first bulk snapshot
 discovery, manifests, raw payload preservation, identity normalization inputs,
 offline cache inputs, and migration-compatibility inputs. It does not implement
 bulk download, live Scryfall calls, file writing, schema, repositories,
 providers, dependency changes, lookup replacement, Tagger import, migration
-monitoring, UI, LLM calls, analytics, or recommendations. Phase 32B is blocked
-until Phase 32A outside validation returns PASS or PASS WITH REVIEW NOTES.
+monitoring, UI, LLM calls, analytics, or recommendations.
+
+Phase 32B is internally complete. It is an implementation-contract-only packet
+for the future Scryfall bulk data foundation implementation. It authorizes a
+later packet to add only local, fixture-first snapshot manifest models/tests and
+fixtures under `codie/cards/`, `tests/`, and `tests/fixtures/scryfall/`, with
+optional export-only updates to `codie/cards/__init__.py`. It does not implement
+bulk snapshots, live Scryfall calls, schema, repositories, provider rewrites,
+lookup replacement, migration monitoring, Tagger import, UI, LLM calls,
+analytics, or recommendations. Phase 32C is blocked until Phase 32B outside
+validation returns PASS or PASS WITH REVIEW NOTES.
 
 The post-31 patch-note plan has been cemented in
 `docs/POST_PHASE31_PATCH_PLAN_CEMENTING_AUDIT.md`. That audit confirms no
@@ -1599,13 +1610,17 @@ pools / Tag Graph Lab, Cockatrice interoperability, plugin architecture, smart
 enrichment, and conversation summaries. It is governance-only and does not
 authorize implementation beyond accepted phase contracts.
 
-Current Phase 32A outside validation packet:
+Current Phase 32B outside validation packet:
 
 ```text
+docs/PHASE32B_SCRYFALL_BULK_DATA_FOUNDATION_IMPLEMENTATION_CONTRACT.md
+docs/CHECKPOINT_PHASE32B_SCRYFALL_BULK_DATA_FOUNDATION_IMPLEMENTATION_CONTRACT_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE32B_SCRYFALL_BULK_DATA_FOUNDATION_IMPLEMENTATION_CONTRACT_PROMPT.md
 docs/PHASE32A_SCRYFALL_BULK_DATA_FOUNDATION_CONTRACT.md
 docs/CHECKPOINT_PHASE32A_SCRYFALL_BULK_DATA_FOUNDATION_CONTRACT_REPORT.md
 docs/OUTSIDE_VALIDATION_PHASE32A_SCRYFALL_BULK_DATA_FOUNDATION_CONTRACT_PROMPT.md
 docs/POST_PHASE31_DEFERRED_IMPLEMENTATION_PRIORITY_PLAN.md
+docs/POST_PHASE31_PATCH_PLAN_CEMENTING_AUDIT.md
 docs/PHASE2_SCRYFALL_TRUTH_CONTRACT.md
 docs/ROADMAP_PATCH_CODIE_MASTER_ARCHITECTURE.md
 docs/ACTIVE_ROADMAP_INDEX.md

@@ -49,26 +49,26 @@ Phase 31P SIM-R Behavior Transition Wiring Implementation Contract: externally a
 Phase 31Q SIM-R Behavior Transition Wiring Implementation: externally accepted
 Phase 31R SIM-R Foundation Checkpoint / Freeze: externally accepted
 Post-Phase 31 Deferred Implementation Priority Plan: logged
-Phase 32A Scryfall Bulk Data Foundation Contract: internally complete
+Phase 32A Scryfall Bulk Data Foundation Contract: externally accepted
 Post-Phase 31 Patch Plan Cementing Audit: complete
-Current action: send Phase 32A outside validation packet
+Phase 32B Scryfall Bulk Data Foundation Implementation Contract: internally complete
+Current action: send Phase 32B outside validation packet
 Local alpha tag status: created locally; remote tag push not verified in this environment
 ```
 
 ## Next Allowed Phase
 
 ```text
-Phase 32A outside validation
+Phase 32B outside validation
 ```
 
-Do not begin Phase 32B until Phase 32A outside validation returns PASS or PASS WITH REVIEW NOTES.
+Do not begin Phase 32C until Phase 32B outside validation returns PASS or PASS WITH REVIEW NOTES.
 
 ## Release-Critical Path
 
 ```text
-1. Phase 32A outside validation
-2. Phase 32B Scryfall bulk data foundation implementation contract
-3. Phase 32C Scryfall bulk data foundation implementation
+1. Phase 32B outside validation
+2. Phase 32C Scryfall bulk data foundation implementation
 ```
 
 The post-31 patch priority order is cemented in:
@@ -278,15 +278,36 @@ docs/CODEX_CONTINUITY_HANDOFF.md
 docs/POST_PHASE31_DEFERRED_IMPLEMENTATION_PRIORITY_PLAN.md
 ```
 
-## Phase 32A Outside Validation Packet
+## Accepted Phase 32A Outside Validation Packet
 
-Send these files for the current gate:
+Phase 32A was accepted with review notes using this packet:
 
 ```text
 docs/PHASE32A_SCRYFALL_BULK_DATA_FOUNDATION_CONTRACT.md
 docs/CHECKPOINT_PHASE32A_SCRYFALL_BULK_DATA_FOUNDATION_CONTRACT_REPORT.md
 docs/OUTSIDE_VALIDATION_PHASE32A_SCRYFALL_BULK_DATA_FOUNDATION_CONTRACT_PROMPT.md
 docs/POST_PHASE31_DEFERRED_IMPLEMENTATION_PRIORITY_PLAN.md
+docs/PHASE2_SCRYFALL_TRUTH_CONTRACT.md
+docs/ROADMAP_PATCH_CODIE_MASTER_ARCHITECTURE.md
+docs/ACTIVE_ROADMAP_INDEX.md
+docs/VALIDATION_STATUS_INDEX.md
+docs/NEXT_PHASE_CONTRACT.md
+docs/CODEX_CONTINUITY_HANDOFF.md
+```
+
+## Phase 32B Outside Validation Packet
+
+Send these files for the current gate:
+
+```text
+docs/PHASE32B_SCRYFALL_BULK_DATA_FOUNDATION_IMPLEMENTATION_CONTRACT.md
+docs/CHECKPOINT_PHASE32B_SCRYFALL_BULK_DATA_FOUNDATION_IMPLEMENTATION_CONTRACT_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE32B_SCRYFALL_BULK_DATA_FOUNDATION_IMPLEMENTATION_CONTRACT_PROMPT.md
+docs/PHASE32A_SCRYFALL_BULK_DATA_FOUNDATION_CONTRACT.md
+docs/CHECKPOINT_PHASE32A_SCRYFALL_BULK_DATA_FOUNDATION_CONTRACT_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE32A_SCRYFALL_BULK_DATA_FOUNDATION_CONTRACT_PROMPT.md
+docs/POST_PHASE31_DEFERRED_IMPLEMENTATION_PRIORITY_PLAN.md
+docs/POST_PHASE31_PATCH_PLAN_CEMENTING_AUDIT.md
 docs/PHASE2_SCRYFALL_TRUTH_CONTRACT.md
 docs/ROADMAP_PATCH_CODIE_MASTER_ARCHITECTURE.md
 docs/ACTIVE_ROADMAP_INDEX.md
