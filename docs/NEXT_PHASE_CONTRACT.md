@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: send Phase 33C Scryfall Migration Monitoring Implementation outside validation packet; do not begin Phase 34A until accepted
+Recommended next task: send Phase 34A Scryfall Tagger Functional Ontology Contract outside validation packet; do not begin Phase 34B until accepted
 
 ## Active Indexes
 

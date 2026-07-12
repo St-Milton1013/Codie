@@ -54,7 +54,8 @@ Phase 32C Scryfall Bulk Data Foundation Implementation: PASS WITH REVIEW NOTES
 Phase 32C review-note correction: APPLIED
 Phase 33A Scryfall Migration Monitoring Contract: PASS WITH REVIEW NOTES
 Phase 33B Scryfall Migration Monitoring Implementation Contract: PASS WITH REVIEW NOTES
-Phase 33C Scryfall Migration Monitoring Implementation: INTERNAL PASS
+Phase 33C Scryfall Migration Monitoring Implementation: PASS WITH REVIEW NOTES
+Phase 34A Scryfall Tagger Functional Ontology Contract: INTERNAL PASS
 Local alpha tag: created locally; remote tag push not verified in this environment
 ```
 
@@ -131,17 +132,14 @@ Phase 32C Scryfall Bulk Data Foundation Implementation: PASS WITH REVIEW NOTES
 Phase 32C review-note correction: APPLIED
 Phase 33A Scryfall Migration Monitoring Contract: PASS WITH REVIEW NOTES
 Phase 33B Scryfall Migration Monitoring Implementation Contract: PASS WITH REVIEW NOTES
-Phase 33C Scryfall Migration Monitoring Implementation: INTERNAL PASS
+Phase 33C Scryfall Migration Monitoring Implementation: PASS WITH REVIEW NOTES
+Phase 34A Scryfall Tagger Functional Ontology Contract: INTERNAL PASS
 ```
 
 ## Latest Local Validation
 
 ```text
-Phase 33C Scryfall Migration Monitoring Implementation:
-python -m unittest tests.test_scryfall_migration_monitoring -v
-Ran 16 tests
-OK
-
+Phase 34A Scryfall Tagger Functional Ontology Contract:
 python scripts/check_schema.py
 Schema bootstrap check passed.
 
@@ -153,10 +151,9 @@ git diff --check
 passed
 
 Static scans:
-schema/repository/dependency drift scan: no matches
-forbidden import/dependency scan: no production matches
-provider/live-network/file-writing scan: no production matches
-recommendation-language scan: matches only explicit boundary statements in documentation
+production/test/schema/repository/dependency drift scan: no matches
+forbidden implementation/dependency scan: matches only contract narrative and explicit forbidden-scope lists
+recommendation-language scan: matches only explicit contract boundary statements
 ```
 
 ## CI Review Note Status
@@ -298,30 +295,23 @@ production Forge / LLM SDK import scan: no matches
 ## Current Blocker
 
 ```text
-Phase 34A is blocked until Phase 33C outside validation returns PASS or PASS WITH REVIEW NOTES.
+Phase 34B is blocked until Phase 34A outside validation returns PASS or PASS WITH REVIEW NOTES.
 ```
 
-## Current Phase 33C Outside Validation Packet
+## Current Phase 34A Outside Validation Packet
 
 ```text
+docs/PHASE34A_SCRYFALL_TAGGER_FUNCTIONAL_ONTOLOGY_CONTRACT.md
+docs/CHECKPOINT_PHASE34A_SCRYFALL_TAGGER_FUNCTIONAL_ONTOLOGY_CONTRACT_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE34A_SCRYFALL_TAGGER_FUNCTIONAL_ONTOLOGY_CONTRACT_PROMPT.md
 docs/PHASE33C_SCRYFALL_MIGRATION_MONITORING_IMPLEMENTATION_REPORT.md
 docs/CHECKPOINT_PHASE33C_SCRYFALL_MIGRATION_MONITORING_IMPLEMENTATION_REPORT.md
 docs/OUTSIDE_VALIDATION_PHASE33C_SCRYFALL_MIGRATION_MONITORING_IMPLEMENTATION_PROMPT.md
-docs/PHASE33B_SCRYFALL_MIGRATION_MONITORING_IMPLEMENTATION_CONTRACT.md
-docs/CHECKPOINT_PHASE33B_SCRYFALL_MIGRATION_MONITORING_IMPLEMENTATION_CONTRACT_REPORT.md
-docs/PHASE33A_SCRYFALL_MIGRATION_MONITORING_CONTRACT.md
-docs/CHECKPOINT_PHASE33A_SCRYFALL_MIGRATION_MONITORING_CONTRACT_REPORT.md
-docs/PHASE32C_SCRYFALL_BULK_DATA_FOUNDATION_IMPLEMENTATION_REPORT.md
+docs/POST_PHASE31_DEFERRED_IMPLEMENTATION_PRIORITY_PLAN.md
+docs/ROADMAP_PATCH_TAG_GRAPH_LAB.md
+docs/CODIE_V1_CONSTITUTION.md
 codie/cards/scryfall_migration_monitoring.py
-codie/cards/scryfall_bulk_snapshots.py
-codie/cards/__init__.py
 tests/test_scryfall_migration_monitoring.py
-tests/test_scryfall_bulk_snapshots.py
-tests/fixtures/scryfall/migration_previous_snapshot.json
-tests/fixtures/scryfall/migration_next_snapshot.json
-tests/fixtures/scryfall/migration_unknown_fields_snapshot.json
-tests/fixtures/scryfall/migration_unknown_enums_snapshot.json
-tests/fixtures/scryfall/migration_breaking_snapshot.json
 docs/ACTIVE_ROADMAP_INDEX.md
 docs/VALIDATION_STATUS_INDEX.md
 docs/NEXT_PHASE_CONTRACT.md
