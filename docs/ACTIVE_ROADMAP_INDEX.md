@@ -57,24 +57,25 @@ Phase 32C review-note correction: applied
 Phase 33A Scryfall Migration Monitoring Contract: externally accepted
 Phase 33B Scryfall Migration Monitoring Implementation Contract: externally accepted
 Phase 33C Scryfall Migration Monitoring Implementation: externally accepted
-Phase 34A Scryfall Tagger Functional Ontology Contract: internally complete
-Current action: send Phase 34A outside validation packet
+Phase 34A Scryfall Tagger Functional Ontology Contract: externally accepted
+Phase 34B Scryfall Tagger Ontology Implementation Contract: internally complete
+Current action: send Phase 34B outside validation packet
 Local alpha tag status: created locally; remote tag push not verified in this environment
 ```
 
 ## Next Allowed Phase
 
 ```text
-Phase 34A outside validation
+Phase 34B outside validation
 ```
 
-Do not begin Phase 34B until Phase 34A outside validation returns PASS or PASS WITH REVIEW NOTES.
+Do not begin Phase 34C until Phase 34B outside validation returns PASS or PASS WITH REVIEW NOTES.
 
 ## Release-Critical Path
 
 ```text
-1. Phase 34A outside validation
-2. Phase 34B Scryfall Tagger Functional Ontology Implementation Contract
+1. Phase 34B outside validation
+2. Phase 34C Scryfall Tagger Ontology Implementation
 ```
 
 The post-31 patch priority order is cemented in:
@@ -439,9 +440,9 @@ affected-consumer/manual-review field names differ from one earlier prompt's
 exact wording, but no required fix was requested
 ```
 
-## Phase 34A Outside Validation Packet
+## Accepted Phase 34A Outside Validation Packet
 
-Send these files for the current gate:
+Phase 34A was accepted with review notes using this packet:
 
 ```text
 docs/PHASE34A_SCRYFALL_TAGGER_FUNCTIONAL_ONTOLOGY_CONTRACT.md
@@ -450,6 +451,36 @@ docs/OUTSIDE_VALIDATION_PHASE34A_SCRYFALL_TAGGER_FUNCTIONAL_ONTOLOGY_CONTRACT_PR
 docs/PHASE33C_SCRYFALL_MIGRATION_MONITORING_IMPLEMENTATION_REPORT.md
 docs/CHECKPOINT_PHASE33C_SCRYFALL_MIGRATION_MONITORING_IMPLEMENTATION_REPORT.md
 docs/OUTSIDE_VALIDATION_PHASE33C_SCRYFALL_MIGRATION_MONITORING_IMPLEMENTATION_PROMPT.md
+docs/POST_PHASE31_DEFERRED_IMPLEMENTATION_PRIORITY_PLAN.md
+docs/ROADMAP_PATCH_TAG_GRAPH_LAB.md
+docs/CODIE_V1_CONSTITUTION.md
+codie/cards/scryfall_migration_monitoring.py
+tests/test_scryfall_migration_monitoring.py
+docs/ACTIVE_ROADMAP_INDEX.md
+docs/VALIDATION_STATUS_INDEX.md
+docs/NEXT_PHASE_CONTRACT.md
+docs/CODEX_CONTINUITY_HANDOFF.md
+```
+
+Review note:
+
+```text
+Phase 34B should explicitly decide whether to include alias/deprecation/conflict/replacement-chain ontology handling
+```
+
+## Phase 34B Outside Validation Packet
+
+Send these files for the current gate:
+
+```text
+docs/PHASE34B_SCRYFALL_TAGGER_ONTOLOGY_IMPLEMENTATION_CONTRACT.md
+docs/CHECKPOINT_PHASE34B_SCRYFALL_TAGGER_ONTOLOGY_IMPLEMENTATION_CONTRACT_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE34B_SCRYFALL_TAGGER_ONTOLOGY_IMPLEMENTATION_CONTRACT_PROMPT.md
+docs/PHASE34A_SCRYFALL_TAGGER_FUNCTIONAL_ONTOLOGY_CONTRACT.md
+docs/CHECKPOINT_PHASE34A_SCRYFALL_TAGGER_FUNCTIONAL_ONTOLOGY_CONTRACT_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE34A_SCRYFALL_TAGGER_FUNCTIONAL_ONTOLOGY_CONTRACT_PROMPT.md
+docs/PHASE33C_SCRYFALL_MIGRATION_MONITORING_IMPLEMENTATION_REPORT.md
+docs/CHECKPOINT_PHASE33C_SCRYFALL_MIGRATION_MONITORING_IMPLEMENTATION_REPORT.md
 docs/POST_PHASE31_DEFERRED_IMPLEMENTATION_PRIORITY_PLAN.md
 docs/ROADMAP_PATCH_TAG_GRAPH_LAB.md
 docs/CODIE_V1_CONSTITUTION.md

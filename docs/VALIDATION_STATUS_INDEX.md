@@ -55,7 +55,8 @@ Phase 32C review-note correction: APPLIED
 Phase 33A Scryfall Migration Monitoring Contract: PASS WITH REVIEW NOTES
 Phase 33B Scryfall Migration Monitoring Implementation Contract: PASS WITH REVIEW NOTES
 Phase 33C Scryfall Migration Monitoring Implementation: PASS WITH REVIEW NOTES
-Phase 34A Scryfall Tagger Functional Ontology Contract: INTERNAL PASS
+Phase 34A Scryfall Tagger Functional Ontology Contract: PASS WITH REVIEW NOTES
+Phase 34B Scryfall Tagger Ontology Implementation Contract: INTERNAL PASS
 Local alpha tag: created locally; remote tag push not verified in this environment
 ```
 
@@ -133,13 +134,14 @@ Phase 32C review-note correction: APPLIED
 Phase 33A Scryfall Migration Monitoring Contract: PASS WITH REVIEW NOTES
 Phase 33B Scryfall Migration Monitoring Implementation Contract: PASS WITH REVIEW NOTES
 Phase 33C Scryfall Migration Monitoring Implementation: PASS WITH REVIEW NOTES
-Phase 34A Scryfall Tagger Functional Ontology Contract: INTERNAL PASS
+Phase 34A Scryfall Tagger Functional Ontology Contract: PASS WITH REVIEW NOTES
+Phase 34B Scryfall Tagger Ontology Implementation Contract: INTERNAL PASS
 ```
 
 ## Latest Local Validation
 
 ```text
-Phase 34A Scryfall Tagger Functional Ontology Contract:
+Phase 34B Scryfall Tagger Ontology Implementation Contract:
 python scripts/check_schema.py
 Schema bootstrap check passed.
 
@@ -295,12 +297,15 @@ production Forge / LLM SDK import scan: no matches
 ## Current Blocker
 
 ```text
-Phase 34B is blocked until Phase 34A outside validation returns PASS or PASS WITH REVIEW NOTES.
+Phase 34C is blocked until Phase 34B outside validation returns PASS or PASS WITH REVIEW NOTES.
 ```
 
-## Current Phase 34A Outside Validation Packet
+## Current Phase 34B Outside Validation Packet
 
 ```text
+docs/PHASE34B_SCRYFALL_TAGGER_ONTOLOGY_IMPLEMENTATION_CONTRACT.md
+docs/CHECKPOINT_PHASE34B_SCRYFALL_TAGGER_ONTOLOGY_IMPLEMENTATION_CONTRACT_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE34B_SCRYFALL_TAGGER_ONTOLOGY_IMPLEMENTATION_CONTRACT_PROMPT.md
 docs/PHASE34A_SCRYFALL_TAGGER_FUNCTIONAL_ONTOLOGY_CONTRACT.md
 docs/CHECKPOINT_PHASE34A_SCRYFALL_TAGGER_FUNCTIONAL_ONTOLOGY_CONTRACT_REPORT.md
 docs/OUTSIDE_VALIDATION_PHASE34A_SCRYFALL_TAGGER_FUNCTIONAL_ONTOLOGY_CONTRACT_PROMPT.md
