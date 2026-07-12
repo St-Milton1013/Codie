@@ -52,7 +52,8 @@ Post-Phase 31 Patch Plan Cementing Audit: COMPLETE
 Phase 32B Scryfall Bulk Data Foundation Implementation Contract: PASS WITH REVIEW NOTES
 Phase 32C Scryfall Bulk Data Foundation Implementation: PASS WITH REVIEW NOTES
 Phase 32C review-note correction: APPLIED
-Phase 33A Scryfall Migration Monitoring Contract: INTERNAL PASS
+Phase 33A Scryfall Migration Monitoring Contract: PASS WITH REVIEW NOTES
+Phase 33B Scryfall Migration Monitoring Implementation Contract: INTERNAL PASS
 Local alpha tag: created locally; remote tag push not verified in this environment
 ```
 
@@ -127,18 +128,19 @@ Phase 32A Scryfall Bulk Data Foundation Contract: PASS WITH REVIEW NOTES
 Phase 32B Scryfall Bulk Data Foundation Implementation Contract: PASS WITH REVIEW NOTES
 Phase 32C Scryfall Bulk Data Foundation Implementation: PASS WITH REVIEW NOTES
 Phase 32C review-note correction: APPLIED
-Phase 33A Scryfall Migration Monitoring Contract: INTERNAL PASS
+Phase 33A Scryfall Migration Monitoring Contract: PASS WITH REVIEW NOTES
+Phase 33B Scryfall Migration Monitoring Implementation Contract: INTERNAL PASS
 ```
 
 ## Latest Local Validation
 
 ```text
-Phase 33A Scryfall Migration Monitoring Contract:
+Phase 33B Scryfall Migration Monitoring Implementation Contract:
 python scripts/check_schema.py
 Schema bootstrap check passed.
 
 python -m unittest discover -s tests
-Ran 875 tests in 4.173s
+Ran 875 tests in 3.963s
 OK (skipped=1)
 
 git diff --check
@@ -289,22 +291,19 @@ production Forge / LLM SDK import scan: no matches
 ## Current Blocker
 
 ```text
-Phase 33B is blocked until Phase 33A outside validation returns PASS or PASS WITH REVIEW NOTES.
+Phase 33C is blocked until Phase 33B outside validation returns PASS or PASS WITH REVIEW NOTES.
 ```
 
-## Current Phase 33A Outside Validation Packet
+## Current Phase 33B Outside Validation Packet
 
 ```text
+docs/PHASE33B_SCRYFALL_MIGRATION_MONITORING_IMPLEMENTATION_CONTRACT.md
+docs/CHECKPOINT_PHASE33B_SCRYFALL_MIGRATION_MONITORING_IMPLEMENTATION_CONTRACT_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE33B_SCRYFALL_MIGRATION_MONITORING_IMPLEMENTATION_CONTRACT_PROMPT.md
 docs/PHASE33A_SCRYFALL_MIGRATION_MONITORING_CONTRACT.md
 docs/CHECKPOINT_PHASE33A_SCRYFALL_MIGRATION_MONITORING_CONTRACT_REPORT.md
-docs/OUTSIDE_VALIDATION_PHASE33A_SCRYFALL_MIGRATION_MONITORING_CONTRACT_PROMPT.md
 docs/PHASE32C_SCRYFALL_BULK_DATA_FOUNDATION_IMPLEMENTATION_REPORT.md
 docs/CHECKPOINT_PHASE32C_SCRYFALL_BULK_DATA_FOUNDATION_IMPLEMENTATION_REPORT.md
-docs/PHASE32B_SCRYFALL_BULK_DATA_FOUNDATION_IMPLEMENTATION_CONTRACT.md
-docs/PHASE32A_SCRYFALL_BULK_DATA_FOUNDATION_CONTRACT.md
-docs/POST_PHASE31_DEFERRED_IMPLEMENTATION_PRIORITY_PLAN.md
-docs/POST_PHASE31_PATCH_PLAN_CEMENTING_AUDIT.md
-docs/PHASE2_SCRYFALL_TRUTH_CONTRACT.md
 codie/cards/scryfall_bulk_snapshots.py
 tests/test_scryfall_bulk_snapshots.py
 docs/ACTIVE_ROADMAP_INDEX.md

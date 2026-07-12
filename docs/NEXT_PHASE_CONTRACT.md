@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: send Phase 33A Scryfall Migration Monitoring Contract outside validation packet; do not begin Phase 33B until accepted
+Recommended next task: send Phase 33B Scryfall Migration Monitoring Implementation Contract outside validation packet; do not begin Phase 33C until accepted
 
 ## Active Indexes
 

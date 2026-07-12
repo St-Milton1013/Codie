@@ -54,24 +54,25 @@ Post-Phase 31 Patch Plan Cementing Audit: complete
 Phase 32B Scryfall Bulk Data Foundation Implementation Contract: externally accepted
 Phase 32C Scryfall Bulk Data Foundation Implementation: externally accepted
 Phase 32C review-note correction: applied
-Phase 33A Scryfall Migration Monitoring Contract: internally complete
-Current action: send Phase 33A outside validation packet
+Phase 33A Scryfall Migration Monitoring Contract: externally accepted
+Phase 33B Scryfall Migration Monitoring Implementation Contract: internally complete
+Current action: send Phase 33B outside validation packet
 Local alpha tag status: created locally; remote tag push not verified in this environment
 ```
 
 ## Next Allowed Phase
 
 ```text
-Phase 33A outside validation
+Phase 33B outside validation
 ```
 
-Do not begin Phase 33B until Phase 33A outside validation returns PASS or PASS WITH REVIEW NOTES.
+Do not begin Phase 33C until Phase 33B outside validation returns PASS or PASS WITH REVIEW NOTES.
 
 ## Release-Critical Path
 
 ```text
-1. Phase 33A outside validation
-2. Phase 33B Scryfall migration monitoring implementation contract
+1. Phase 33B outside validation
+2. Phase 33C Scryfall migration monitoring implementation
 ```
 
 The post-31 patch priority order is cemented in:
@@ -357,9 +358,9 @@ explicit bulk_type still overrides fixture metadata
 manifest dictionary round-trip test reconstructs file_refs and compares full serialized equality
 ```
 
-## Phase 33A Outside Validation Packet
+## Accepted Phase 33A Outside Validation Packet
 
-Send these files for the current gate:
+Phase 33A was accepted with review notes using this packet:
 
 ```text
 docs/PHASE33A_SCRYFALL_MIGRATION_MONITORING_CONTRACT.md
@@ -372,6 +373,26 @@ docs/PHASE32A_SCRYFALL_BULK_DATA_FOUNDATION_CONTRACT.md
 docs/POST_PHASE31_DEFERRED_IMPLEMENTATION_PRIORITY_PLAN.md
 docs/POST_PHASE31_PATCH_PLAN_CEMENTING_AUDIT.md
 docs/PHASE2_SCRYFALL_TRUTH_CONTRACT.md
+codie/cards/scryfall_bulk_snapshots.py
+tests/test_scryfall_bulk_snapshots.py
+docs/ACTIVE_ROADMAP_INDEX.md
+docs/VALIDATION_STATUS_INDEX.md
+docs/NEXT_PHASE_CONTRACT.md
+docs/CODEX_CONTINUITY_HANDOFF.md
+```
+
+## Phase 33B Outside Validation Packet
+
+Send these files for the current gate:
+
+```text
+docs/PHASE33B_SCRYFALL_MIGRATION_MONITORING_IMPLEMENTATION_CONTRACT.md
+docs/CHECKPOINT_PHASE33B_SCRYFALL_MIGRATION_MONITORING_IMPLEMENTATION_CONTRACT_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE33B_SCRYFALL_MIGRATION_MONITORING_IMPLEMENTATION_CONTRACT_PROMPT.md
+docs/PHASE33A_SCRYFALL_MIGRATION_MONITORING_CONTRACT.md
+docs/CHECKPOINT_PHASE33A_SCRYFALL_MIGRATION_MONITORING_CONTRACT_REPORT.md
+docs/PHASE32C_SCRYFALL_BULK_DATA_FOUNDATION_IMPLEMENTATION_REPORT.md
+docs/CHECKPOINT_PHASE32C_SCRYFALL_BULK_DATA_FOUNDATION_IMPLEMENTATION_REPORT.md
 codie/cards/scryfall_bulk_snapshots.py
 tests/test_scryfall_bulk_snapshots.py
 docs/ACTIVE_ROADMAP_INDEX.md
