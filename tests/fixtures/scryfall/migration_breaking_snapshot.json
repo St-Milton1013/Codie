@@ -1,0 +1,35 @@
+{
+  "bulk_type": "default_cards",
+  "generated_at": "2026-07-04T00:00:00+00:00",
+  "source_uri": "fixture://scryfall/migration_breaking_snapshot.json",
+  "cards": [
+    {
+      "id": "sf-dup",
+      "oracle_id": "oracle-dup-a",
+      "name": "Duplicate A"
+    },
+    {
+      "id": "sf-dup",
+      "oracle_id": "oracle-dup-b",
+      "name": "Duplicate B"
+    },
+    {
+      "oracle_id": "oracle-missing-id",
+      "name": "Missing ID"
+    },
+    {
+      "id": "sf-missing-name",
+      "oracle_id": "oracle-missing-name"
+    },
+    {
+      "id": "sf-split-a",
+      "oracle_id": "oracle-split",
+      "name": "Split Identity A"
+    },
+    {
+      "id": "sf-split-b",
+      "oracle_id": "oracle-split",
+      "name": "Split Identity B"
+    }
+  ]
+}

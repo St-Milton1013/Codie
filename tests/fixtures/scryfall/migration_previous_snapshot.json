@@ -1,0 +1,71 @@
+{
+  "bulk_type": "default_cards",
+  "generated_at": "2026-06-01T00:00:00+00:00",
+  "source_uri": "fixture://scryfall/migration_previous_snapshot.json",
+  "cards": [
+    {
+      "id": "sf-001",
+      "oracle_id": "oracle-remora",
+      "name": "Mystic Remora",
+      "released_at": "1995-06-03",
+      "legalities": {
+        "commander": "legal"
+      },
+      "layout": "normal",
+      "type_line": "Enchantment",
+      "mana_cost": "{U}",
+      "color_identity": ["U"],
+      "rarity": "uncommon",
+      "border_color": "black",
+      "games": ["paper"]
+    },
+    {
+      "id": "sf-002",
+      "oracle_id": "oracle-renamed",
+      "name": "Old Test Name",
+      "released_at": "2020-01-01",
+      "legalities": {
+        "commander": "legal"
+      },
+      "layout": "normal",
+      "type_line": "Creature",
+      "mana_cost": "{1}{U}",
+      "color_identity": ["U"],
+      "rarity": "rare",
+      "border_color": "black",
+      "games": ["paper"]
+    },
+    {
+      "id": "sf-003",
+      "oracle_id": "oracle-replaced",
+      "name": "Replacement Test Card",
+      "released_at": "2020-01-01",
+      "legalities": {
+        "commander": "legal"
+      },
+      "layout": "normal",
+      "type_line": "Artifact",
+      "mana_cost": "{2}",
+      "color_identity": [],
+      "rarity": "rare",
+      "border_color": "black",
+      "games": ["paper"]
+    },
+    {
+      "id": "sf-004",
+      "oracle_id": "oracle-old",
+      "name": "Oracle Drift Card",
+      "released_at": "2020-01-01",
+      "legalities": {
+        "commander": "legal"
+      },
+      "layout": "normal",
+      "type_line": "Instant",
+      "mana_cost": "{B}",
+      "color_identity": ["B"],
+      "rarity": "common",
+      "border_color": "black",
+      "games": ["paper"]
+    }
+  ]
+}

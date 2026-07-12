@@ -1628,7 +1628,7 @@ Tagger import, UI, LLM calls, analytics, or recommendations.
 
 Phase 33A outside validation returned PASS WITH REVIEW NOTES.
 
-Phase 33B is internally complete. It is an implementation-contract-only packet
+Phase 33B is externally accepted with review notes. It is an implementation-contract-only packet
 for future Scryfall migration monitoring. It authorizes a later packet to add
 only local, fixture-first migration report models/tests and fixtures under
 `codie/cards/`, `tests/`, and `tests/fixtures/scryfall/`, with optional
@@ -1636,8 +1636,18 @@ export-only updates to `codie/cards/__init__.py`. It does not implement
 migration monitoring, snapshot diffs, schema, repositories, providers, live
 Scryfall calls, file writing, snapshot activation, snapshot rollback, lookup
 replacement, Tagger import, UI, LLM calls, analytics, or recommendations.
-Phase 33C is blocked until Phase 33B outside validation returns PASS or PASS
-WITH REVIEW NOTES.
+
+Phase 33C is internally complete. It implements local, fixture-first Scryfall
+migration monitoring report models, snapshot-to-snapshot comparison helpers,
+deterministic serialization, activation-blocking metadata, affected-consumer
+reporting, and manual-review item output in
+`codie/cards/scryfall_migration_monitoring.py`, with focused tests in
+`tests/test_scryfall_migration_monitoring.py` and synthetic fixtures under
+`tests/fixtures/scryfall/`. It does not implement schema, repositories,
+providers, live Scryfall calls, file writing, snapshot activation, snapshot
+rollback, lookup replacement, Tagger import, UI, LLM calls, analytics mutation,
+simulator behavior changes, or recommendations. Phase 34A is blocked until
+Phase 33C outside validation returns PASS or PASS WITH REVIEW NOTES.
 
 The post-31 patch-note plan has been cemented in
 `docs/POST_PHASE31_PATCH_PLAN_CEMENTING_AUDIT.md`. That audit confirms no
@@ -1696,7 +1706,7 @@ docs/NEXT_PHASE_CONTRACT.md
 docs/CODEX_CONTINUITY_HANDOFF.md
 ```
 
-Current Phase 33B outside validation packet:
+Accepted Phase 33B outside validation packet:
 
 ```text
 docs/PHASE33B_SCRYFALL_MIGRATION_MONITORING_IMPLEMENTATION_CONTRACT.md
@@ -1755,6 +1765,33 @@ codie/probability_engine/__init__.py
 tests/test_probability_engine_sim_r_ledger.py
 codie/probability_engine/sim_r_state.py
 tests/test_probability_engine_sim_r_state.py
+docs/ACTIVE_ROADMAP_INDEX.md
+docs/VALIDATION_STATUS_INDEX.md
+docs/NEXT_PHASE_CONTRACT.md
+docs/CODEX_CONTINUITY_HANDOFF.md
+```
+
+Current Phase 33C outside validation packet:
+
+```text
+docs/PHASE33C_SCRYFALL_MIGRATION_MONITORING_IMPLEMENTATION_REPORT.md
+docs/CHECKPOINT_PHASE33C_SCRYFALL_MIGRATION_MONITORING_IMPLEMENTATION_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE33C_SCRYFALL_MIGRATION_MONITORING_IMPLEMENTATION_PROMPT.md
+docs/PHASE33B_SCRYFALL_MIGRATION_MONITORING_IMPLEMENTATION_CONTRACT.md
+docs/CHECKPOINT_PHASE33B_SCRYFALL_MIGRATION_MONITORING_IMPLEMENTATION_CONTRACT_REPORT.md
+docs/PHASE33A_SCRYFALL_MIGRATION_MONITORING_CONTRACT.md
+docs/CHECKPOINT_PHASE33A_SCRYFALL_MIGRATION_MONITORING_CONTRACT_REPORT.md
+docs/PHASE32C_SCRYFALL_BULK_DATA_FOUNDATION_IMPLEMENTATION_REPORT.md
+codie/cards/scryfall_migration_monitoring.py
+codie/cards/scryfall_bulk_snapshots.py
+codie/cards/__init__.py
+tests/test_scryfall_migration_monitoring.py
+tests/test_scryfall_bulk_snapshots.py
+tests/fixtures/scryfall/migration_previous_snapshot.json
+tests/fixtures/scryfall/migration_next_snapshot.json
+tests/fixtures/scryfall/migration_unknown_fields_snapshot.json
+tests/fixtures/scryfall/migration_unknown_enums_snapshot.json
+tests/fixtures/scryfall/migration_breaking_snapshot.json
 docs/ACTIVE_ROADMAP_INDEX.md
 docs/VALIDATION_STATUS_INDEX.md
 docs/NEXT_PHASE_CONTRACT.md

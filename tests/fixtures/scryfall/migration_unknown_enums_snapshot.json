@@ -1,0 +1,23 @@
+{
+  "bulk_type": "default_cards",
+  "generated_at": "2026-07-03T00:00:00+00:00",
+  "source_uri": "fixture://scryfall/migration_unknown_enums_snapshot.json",
+  "cards": [
+    {
+      "id": "sf-001",
+      "oracle_id": "oracle-remora",
+      "name": "Mystic Remora",
+      "released_at": "1995-06-03",
+      "legalities": {
+        "commander": "temporarily_legal"
+      },
+      "layout": "future_layout",
+      "type_line": "Enchantment",
+      "mana_cost": "{U}",
+      "color_identity": ["U"],
+      "rarity": "experimental",
+      "border_color": "black",
+      "games": ["paper"]
+    }
+  ]
+}
