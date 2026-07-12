@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: send Phase 34C Scryfall Tagger Ontology Implementation outside validation packet; do not begin Phase 35A until accepted
+Recommended next task: send Phase 35A Commander Spellbook Interpreter Expansion Contract outside validation packet; do not begin Phase 35B until accepted
 
 ## Active Indexes
 

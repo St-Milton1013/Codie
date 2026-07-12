@@ -1677,7 +1677,7 @@ Tagger calls, Tagger scraping, schema, repositories, providers, file writing,
 card lookup replacement, analytics, frequency pools, chart export, UI, LLM
 calls, or recommendations.
 
-Phase 34C is internally complete. It implements the local, fixture-first
+Phase 34C is externally accepted with review notes. It implements the local, fixture-first
 Scryfall Tagger ontology model layer in
 `codie/cards/scryfall_tagger_ontology.py`, with focused tests in
 `tests/test_scryfall_tagger_ontology.py` and synthetic fixtures under
@@ -1688,8 +1688,30 @@ deprecated-tag records, replacement chains, conflict reporting, coverage
 reporting, deterministic serialization, and validation. It does not implement
 live Tagger calls, Tagger scraping, schema, repositories, providers, file
 writing, card lookup replacement, analytics, frequency pools, chart export, UI,
-LLM calls, or recommendations. Phase 35A is blocked until Phase 34C outside
-validation returns PASS or PASS WITH REVIEW NOTES.
+LLM calls, or recommendations.
+
+Phase 34C review notes:
+
+```text
+No public fixture loader was added because the accepted Phase 34B interface did
+not require one.
+
+Phase 34C did not import accepted Phase 32/33 model layers because it did not
+need them.
+
+GitHub CI was not available for the Phase 34C validation result.
+```
+
+Phase 35A is internally complete. It is a contract-only packet for future
+Commander Spellbook interpreter expansion. It defines future interpretation of
+combo prerequisites, outputs, restrictions, variant grouping, target
+compatibility, infinite draw handling, infinite mana handling, compatible sink
+inputs, unsupported interpretation reporting, deterministic serialization, and
+manual-review item output. It does not implement interpreter code, schema,
+repositories, providers, live Spellbook calls, Spellbook scraping, file writing,
+analytics, simulator execution, UI, LLM calls, or recommendations. Phase 35B is
+blocked until Phase 35A outside validation returns PASS or PASS WITH REVIEW
+NOTES.
 
 The post-31 patch-note plan has been cemented in
 `docs/POST_PHASE31_PATCH_PLAN_CEMENTING_AUDIT.md`. That audit confirms no
@@ -1882,7 +1904,7 @@ docs/NEXT_PHASE_CONTRACT.md
 docs/CODEX_CONTINUITY_HANDOFF.md
 ```
 
-Current Phase 34C outside validation packet:
+Accepted Phase 34C outside validation packet:
 
 ```text
 docs/PHASE34C_SCRYFALL_TAGGER_ONTOLOGY_IMPLEMENTATION_REPORT.md
@@ -1902,6 +1924,28 @@ tests/fixtures/scryfall_tagger/tagger_artwork_tags.json
 tests/fixtures/scryfall_tagger/tagger_unknown_namespace.json
 tests/fixtures/scryfall_tagger/tagger_duplicate_tags.json
 tests/fixtures/scryfall_tagger/tagger_aliases_deprecated_conflicts.json
+docs/ACTIVE_ROADMAP_INDEX.md
+docs/VALIDATION_STATUS_INDEX.md
+docs/NEXT_PHASE_CONTRACT.md
+docs/CODEX_CONTINUITY_HANDOFF.md
+```
+
+Current Phase 35A outside validation packet:
+
+```text
+docs/PHASE35A_COMMANDER_SPELLBOOK_INTERPRETER_EXPANSION_CONTRACT.md
+docs/CHECKPOINT_PHASE35A_COMMANDER_SPELLBOOK_INTERPRETER_EXPANSION_CONTRACT_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE35A_COMMANDER_SPELLBOOK_INTERPRETER_EXPANSION_CONTRACT_PROMPT.md
+docs/PHASE34C_SCRYFALL_TAGGER_ONTOLOGY_IMPLEMENTATION_REPORT.md
+docs/CHECKPOINT_PHASE34C_SCRYFALL_TAGGER_ONTOLOGY_IMPLEMENTATION_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE34C_SCRYFALL_TAGGER_ONTOLOGY_IMPLEMENTATION_PROMPT.md
+docs/PHASE7A_SPELLBOOK_COMBO_EVIDENCE_CONTRACT.md
+docs/POST_PHASE31_DEFERRED_IMPLEMENTATION_PRIORITY_PLAN.md
+docs/CODIE_V1_CONSTITUTION.md
+codie/providers/spellbook/parser.py
+codie/combos/sync.py
+tests/test_provider_spellbook.py
+tests/test_combo_sync.py
 docs/ACTIVE_ROADMAP_INDEX.md
 docs/VALIDATION_STATUS_INDEX.md
 docs/NEXT_PHASE_CONTRACT.md
