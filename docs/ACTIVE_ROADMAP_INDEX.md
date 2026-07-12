@@ -54,22 +54,23 @@ Post-Phase 31 Patch Plan Cementing Audit: complete
 Phase 32B Scryfall Bulk Data Foundation Implementation Contract: externally accepted
 Phase 32C Scryfall Bulk Data Foundation Implementation: externally accepted
 Phase 32C review-note correction: applied
-Current action: begin Phase 33A Scryfall Migration Monitoring Contract
+Phase 33A Scryfall Migration Monitoring Contract: internally complete
+Current action: send Phase 33A outside validation packet
 Local alpha tag status: created locally; remote tag push not verified in this environment
 ```
 
 ## Next Allowed Phase
 
 ```text
-Phase 33A Scryfall Migration Monitoring Contract
+Phase 33A outside validation
 ```
 
-Phase 33A may begin contract-first. Do not implement migration monitoring until a future accepted implementation contract authorizes it.
+Do not begin Phase 33B until Phase 33A outside validation returns PASS or PASS WITH REVIEW NOTES.
 
 ## Release-Critical Path
 
 ```text
-1. Phase 33A Scryfall migration monitoring contract
+1. Phase 33A outside validation
 2. Phase 33B Scryfall migration monitoring implementation contract
 ```
 
@@ -354,4 +355,27 @@ Applied before Phase 33A:
 fixture metadata bulk_type is used when caller does not override it
 explicit bulk_type still overrides fixture metadata
 manifest dictionary round-trip test reconstructs file_refs and compares full serialized equality
+```
+
+## Phase 33A Outside Validation Packet
+
+Send these files for the current gate:
+
+```text
+docs/PHASE33A_SCRYFALL_MIGRATION_MONITORING_CONTRACT.md
+docs/CHECKPOINT_PHASE33A_SCRYFALL_MIGRATION_MONITORING_CONTRACT_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE33A_SCRYFALL_MIGRATION_MONITORING_CONTRACT_PROMPT.md
+docs/PHASE32C_SCRYFALL_BULK_DATA_FOUNDATION_IMPLEMENTATION_REPORT.md
+docs/CHECKPOINT_PHASE32C_SCRYFALL_BULK_DATA_FOUNDATION_IMPLEMENTATION_REPORT.md
+docs/PHASE32B_SCRYFALL_BULK_DATA_FOUNDATION_IMPLEMENTATION_CONTRACT.md
+docs/PHASE32A_SCRYFALL_BULK_DATA_FOUNDATION_CONTRACT.md
+docs/POST_PHASE31_DEFERRED_IMPLEMENTATION_PRIORITY_PLAN.md
+docs/POST_PHASE31_PATCH_PLAN_CEMENTING_AUDIT.md
+docs/PHASE2_SCRYFALL_TRUTH_CONTRACT.md
+codie/cards/scryfall_bulk_snapshots.py
+tests/test_scryfall_bulk_snapshots.py
+docs/ACTIVE_ROADMAP_INDEX.md
+docs/VALIDATION_STATUS_INDEX.md
+docs/NEXT_PHASE_CONTRACT.md
+docs/CODEX_CONTINUITY_HANDOFF.md
 ```

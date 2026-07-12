@@ -163,7 +163,7 @@ docs/CHECKPOINT_PHASE32C_SCRYFALL_BULK_DATA_FOUNDATION_IMPLEMENTATION_REPORT.md
 
 ## Next Gate
 
-Send Phase 32C to outside validation.
+Phase 33A may begin contract-first.
 
-Do not begin Phase 33A or Scryfall migration monitoring until Phase 32C outside
-validation returns PASS or PASS WITH REVIEW NOTES.
+Do not implement Scryfall migration monitoring until a future accepted
+implementation contract authorizes it.

@@ -1616,8 +1616,17 @@ metadata `bulk_type` is used unless the caller explicitly overrides it, and the
 manifest round-trip test now reconstructs `file_refs` and compares the complete
 serialized manifest.
 
-Phase 33A may begin contract-first. Do not implement migration monitoring until
-a future accepted implementation contract authorizes it.
+Phase 33A is internally complete. It is a contract-only packet for future
+Scryfall migration monitoring. It defines required vs optional Scryfall fields,
+unknown-field handling, unknown enum handling, schema-breaking conditions,
+migration report fields, snapshot activation blocking rules, affected consumer
+reporting, manual review queue inputs, fixture requirements, and
+validation/rollback behavior. It does not implement migration monitoring,
+snapshot diffs, schema, repositories, provider changes, live Scryfall calls,
+file writing, snapshot activation, snapshot rollback, lookup replacement,
+Tagger import, UI, LLM calls, analytics, or recommendations. Phase 33B is
+blocked until Phase 33A outside validation returns PASS or PASS WITH REVIEW
+NOTES.
 
 The post-31 patch-note plan has been cemented in
 `docs/POST_PHASE31_PATCH_PLAN_CEMENTING_AUDIT.md`. That audit confirms no
@@ -1649,6 +1658,27 @@ tests/test_scryfall_bulk_snapshots.py
 tests/fixtures/scryfall/bulk_manifest.json
 tests/fixtures/scryfall/default_cards_snapshot.json
 tests/fixtures/scryfall/malformed_bulk_snapshot.json
+docs/ACTIVE_ROADMAP_INDEX.md
+docs/VALIDATION_STATUS_INDEX.md
+docs/NEXT_PHASE_CONTRACT.md
+docs/CODEX_CONTINUITY_HANDOFF.md
+```
+
+Current Phase 33A outside validation packet:
+
+```text
+docs/PHASE33A_SCRYFALL_MIGRATION_MONITORING_CONTRACT.md
+docs/CHECKPOINT_PHASE33A_SCRYFALL_MIGRATION_MONITORING_CONTRACT_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE33A_SCRYFALL_MIGRATION_MONITORING_CONTRACT_PROMPT.md
+docs/PHASE32C_SCRYFALL_BULK_DATA_FOUNDATION_IMPLEMENTATION_REPORT.md
+docs/CHECKPOINT_PHASE32C_SCRYFALL_BULK_DATA_FOUNDATION_IMPLEMENTATION_REPORT.md
+docs/PHASE32B_SCRYFALL_BULK_DATA_FOUNDATION_IMPLEMENTATION_CONTRACT.md
+docs/PHASE32A_SCRYFALL_BULK_DATA_FOUNDATION_CONTRACT.md
+docs/POST_PHASE31_DEFERRED_IMPLEMENTATION_PRIORITY_PLAN.md
+docs/POST_PHASE31_PATCH_PLAN_CEMENTING_AUDIT.md
+docs/PHASE2_SCRYFALL_TRUTH_CONTRACT.md
+codie/cards/scryfall_bulk_snapshots.py
+tests/test_scryfall_bulk_snapshots.py
 docs/ACTIVE_ROADMAP_INDEX.md
 docs/VALIDATION_STATUS_INDEX.md
 docs/NEXT_PHASE_CONTRACT.md

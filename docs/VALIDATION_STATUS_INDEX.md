@@ -52,6 +52,7 @@ Post-Phase 31 Patch Plan Cementing Audit: COMPLETE
 Phase 32B Scryfall Bulk Data Foundation Implementation Contract: PASS WITH REVIEW NOTES
 Phase 32C Scryfall Bulk Data Foundation Implementation: PASS WITH REVIEW NOTES
 Phase 32C review-note correction: APPLIED
+Phase 33A Scryfall Migration Monitoring Contract: INTERNAL PASS
 Local alpha tag: created locally; remote tag push not verified in this environment
 ```
 
@@ -126,30 +127,27 @@ Phase 32A Scryfall Bulk Data Foundation Contract: PASS WITH REVIEW NOTES
 Phase 32B Scryfall Bulk Data Foundation Implementation Contract: PASS WITH REVIEW NOTES
 Phase 32C Scryfall Bulk Data Foundation Implementation: PASS WITH REVIEW NOTES
 Phase 32C review-note correction: APPLIED
+Phase 33A Scryfall Migration Monitoring Contract: INTERNAL PASS
 ```
 
 ## Latest Local Validation
 
 ```text
-Phase 32C Scryfall Bulk Data Foundation Implementation with review-note correction:
-python -m unittest tests.test_scryfall_bulk_snapshots -v
-Ran 11 tests
-OK
-
+Phase 33A Scryfall Migration Monitoring Contract:
 python scripts/check_schema.py
 Schema bootstrap check passed.
 
 python -m unittest discover -s tests
-Ran 875 tests in 4.052s
+Ran 875 tests in 4.173s
 OK (skipped=1)
 
 git diff --check
 passed
 
 Static scans:
-schema/repository/dependency drift scan: no matches
-forbidden import scan: matches only the explicit rejection list in tests/test_scryfall_bulk_snapshots.py
-boundary/recommendation-language scan: matches only explicit boundary statements in Phase 32C implementation report
+production/test/schema/repository/dependency drift scan: no matches
+forbidden import/dependency scan: matches only contract narrative and explicit forbidden-scope lists
+forbidden implementation/recommendation-language scan: matches only explicit contract boundary statements
 ```
 
 ## CI Review Note Status
@@ -291,30 +289,24 @@ production Forge / LLM SDK import scan: no matches
 ## Current Blocker
 
 ```text
-Phase 33A may begin contract-first.
+Phase 33B is blocked until Phase 33A outside validation returns PASS or PASS WITH REVIEW NOTES.
 ```
 
-## Accepted Phase 32C Outside Validation Packet
+## Current Phase 33A Outside Validation Packet
 
 ```text
+docs/PHASE33A_SCRYFALL_MIGRATION_MONITORING_CONTRACT.md
+docs/CHECKPOINT_PHASE33A_SCRYFALL_MIGRATION_MONITORING_CONTRACT_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE33A_SCRYFALL_MIGRATION_MONITORING_CONTRACT_PROMPT.md
 docs/PHASE32C_SCRYFALL_BULK_DATA_FOUNDATION_IMPLEMENTATION_REPORT.md
 docs/CHECKPOINT_PHASE32C_SCRYFALL_BULK_DATA_FOUNDATION_IMPLEMENTATION_REPORT.md
-docs/OUTSIDE_VALIDATION_PHASE32C_SCRYFALL_BULK_DATA_FOUNDATION_IMPLEMENTATION_PROMPT.md
 docs/PHASE32B_SCRYFALL_BULK_DATA_FOUNDATION_IMPLEMENTATION_CONTRACT.md
-docs/CHECKPOINT_PHASE32B_SCRYFALL_BULK_DATA_FOUNDATION_IMPLEMENTATION_CONTRACT_REPORT.md
-docs/OUTSIDE_VALIDATION_PHASE32B_SCRYFALL_BULK_DATA_FOUNDATION_IMPLEMENTATION_CONTRACT_PROMPT.md
 docs/PHASE32A_SCRYFALL_BULK_DATA_FOUNDATION_CONTRACT.md
-docs/CHECKPOINT_PHASE32A_SCRYFALL_BULK_DATA_FOUNDATION_CONTRACT_REPORT.md
-docs/OUTSIDE_VALIDATION_PHASE32A_SCRYFALL_BULK_DATA_FOUNDATION_CONTRACT_PROMPT.md
 docs/POST_PHASE31_DEFERRED_IMPLEMENTATION_PRIORITY_PLAN.md
 docs/POST_PHASE31_PATCH_PLAN_CEMENTING_AUDIT.md
 docs/PHASE2_SCRYFALL_TRUTH_CONTRACT.md
 codie/cards/scryfall_bulk_snapshots.py
-codie/cards/__init__.py
 tests/test_scryfall_bulk_snapshots.py
-tests/fixtures/scryfall/bulk_manifest.json
-tests/fixtures/scryfall/default_cards_snapshot.json
-tests/fixtures/scryfall/malformed_bulk_snapshot.json
 docs/ACTIVE_ROADMAP_INDEX.md
 docs/VALIDATION_STATUS_INDEX.md
 docs/NEXT_PHASE_CONTRACT.md
