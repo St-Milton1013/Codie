@@ -32,7 +32,7 @@ Latest pushed commit before Phase 24 outside validation acceptance: 432e958 Add 
 Latest full-suite result:
 
 ```text
-Ran 797 tests in 4.304s
+Ran 906 tests in 4.560s
 
 OK (skipped=1)
 ```
@@ -43,13 +43,10 @@ Latest schema bootstrap result:
 Schema bootstrap check passed.
 ```
 
-Latest focused Phase 29F result:
+Latest focused Phase 34C result:
 
 ```text
-Reporting: Ran 9 tests in 0.005s
-Writer: Ran 10 tests in 0.058s
-CLI: Ran 6 tests in 0.032s
-
+Ran 15 tests in 0.004s
 OK
 ```
 
@@ -64,11 +61,10 @@ passed.
 Latest relevant boundary scans:
 
 ```text
-rg -n "codie\.db|codie\.providers|codie\.analytics|codie\.recommendations|codie\.ingestion|codie\.cards|codie\.probability_engine|codie\.canonical|requests|httpx|sqlite3|openai|anthropic|flask|fastapi|uvicorn|starlette" codie\intelligence\local_api.py tests\test_intelligence_local_api.py
-rg -n "SELECT |INSERT |UPDATE |DELETE |execute\(|executescript\(" codie\intelligence\local_api.py tests\test_intelligence_local_api.py
-rg -n "open\(|write_text\(|write_bytes\(|Path\(|mkdir\(|touch\(|unlink\(" codie\intelligence\local_api.py
-rg -n "source_events|source_decks|source_deck_cards|provider_objects" codie\intelligence\local_api.py tests\test_intelligence_local_api.py
-rg -n "should play|should be played|should be cut|must include|correct card|breaks the format|secretly optimal|cut this|strict upgrade|auto-include|recommended cut|recommended include" codie\intelligence\local_api.py tests\test_intelligence_local_api.py docs\PHASE24B_CHAT_INTELLIGENCE_LOCAL_API_IMPLEMENTATION_REPORT.md
+git diff --name-only -- codie\db\schema codie\db\repositories docs\SCHEMA_SPEC.md requirements.txt requirements-dev.txt pyproject.toml
+rg -n "requests|httpx|sqlite3|codie\.db|repositories|providers|openai|anthropic|google\.generativeai|langchain" codie\cards\scryfall_tagger_ontology.py tests\test_scryfall_tagger_ontology.py
+rg -n "open\(|write_text\(|write_bytes\(|mkdir\(|touch\(|unlink\(" codie\cards\scryfall_tagger_ontology.py
+rg -n "live Scryfall Tagger|Tagger scraping|card lookup replacement|recommendation generation|should play|must include|strict upgrade|auto-include|recommended cut|recommended include" codie\cards\scryfall_tagger_ontology.py tests\test_scryfall_tagger_ontology.py
 ```
 
 returned:
@@ -1670,17 +1666,30 @@ Phase 34A review note:
 Phase 34B should explicitly decide whether to include alias/deprecation/conflict/replacement-chain ontology handling.
 ```
 
-Phase 34B is internally complete. It is an implementation-contract-only packet
-for future Scryfall Tagger ontology. It explicitly includes alias,
-deprecated-tag, conflict, and replacement-chain handling in the future
-implementation scope. It authorizes a later implementation packet to add only
-local, fixture-first ontology model code, tests, and fixtures, with optional
-export-only updates to `codie/cards/__init__.py`. It does not implement
-Scryfall Tagger ontology, live Tagger calls, Tagger scraping, schema,
-repositories, providers, file writing, card lookup replacement, analytics,
-frequency pools, chart export, UI, LLM calls, or recommendations. Phase 34C is
-blocked until Phase 34B outside validation returns PASS or PASS WITH REVIEW
-NOTES.
+Phase 34B is externally accepted with review notes. It is an
+implementation-contract-only packet for future Scryfall Tagger ontology. It
+explicitly includes alias, deprecated-tag, conflict, and replacement-chain
+handling in the future implementation scope. It authorizes a later
+implementation packet to add only local, fixture-first ontology model code,
+tests, and fixtures, with optional export-only updates to
+`codie/cards/__init__.py`. It does not implement Scryfall Tagger ontology, live
+Tagger calls, Tagger scraping, schema, repositories, providers, file writing,
+card lookup replacement, analytics, frequency pools, chart export, UI, LLM
+calls, or recommendations.
+
+Phase 34C is internally complete. It implements the local, fixture-first
+Scryfall Tagger ontology model layer in
+`codie/cards/scryfall_tagger_ontology.py`, with focused tests in
+`tests/test_scryfall_tagger_ontology.py` and synthetic fixtures under
+`tests/fixtures/scryfall_tagger/`. It supports functional namespace filtering,
+artwork/aesthetic namespace exclusion, oracle_id and optional scryfall_id
+provenance, source refs, confidence, manual corrections, aliases,
+deprecated-tag records, replacement chains, conflict reporting, coverage
+reporting, deterministic serialization, and validation. It does not implement
+live Tagger calls, Tagger scraping, schema, repositories, providers, file
+writing, card lookup replacement, analytics, frequency pools, chart export, UI,
+LLM calls, or recommendations. Phase 35A is blocked until Phase 34C outside
+validation returns PASS or PASS WITH REVIEW NOTES.
 
 The post-31 patch-note plan has been cemented in
 `docs/POST_PHASE31_PATCH_PLAN_CEMENTING_AUDIT.md`. That audit confirms no
@@ -1851,7 +1860,7 @@ docs/NEXT_PHASE_CONTRACT.md
 docs/CODEX_CONTINUITY_HANDOFF.md
 ```
 
-Current Phase 34B outside validation packet:
+Accepted Phase 34B outside validation packet:
 
 ```text
 docs/PHASE34B_SCRYFALL_TAGGER_ONTOLOGY_IMPLEMENTATION_CONTRACT.md
@@ -1867,6 +1876,32 @@ docs/ROADMAP_PATCH_TAG_GRAPH_LAB.md
 docs/CODIE_V1_CONSTITUTION.md
 codie/cards/scryfall_migration_monitoring.py
 tests/test_scryfall_migration_monitoring.py
+docs/ACTIVE_ROADMAP_INDEX.md
+docs/VALIDATION_STATUS_INDEX.md
+docs/NEXT_PHASE_CONTRACT.md
+docs/CODEX_CONTINUITY_HANDOFF.md
+```
+
+Current Phase 34C outside validation packet:
+
+```text
+docs/PHASE34C_SCRYFALL_TAGGER_ONTOLOGY_IMPLEMENTATION_REPORT.md
+docs/CHECKPOINT_PHASE34C_SCRYFALL_TAGGER_ONTOLOGY_IMPLEMENTATION_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE34C_SCRYFALL_TAGGER_ONTOLOGY_IMPLEMENTATION_PROMPT.md
+docs/PHASE34B_SCRYFALL_TAGGER_ONTOLOGY_IMPLEMENTATION_CONTRACT.md
+docs/CHECKPOINT_PHASE34B_SCRYFALL_TAGGER_ONTOLOGY_IMPLEMENTATION_CONTRACT_REPORT.md
+docs/PHASE34A_SCRYFALL_TAGGER_FUNCTIONAL_ONTOLOGY_CONTRACT.md
+docs/CHECKPOINT_PHASE34A_SCRYFALL_TAGGER_FUNCTIONAL_ONTOLOGY_CONTRACT_REPORT.md
+docs/ROADMAP_PATCH_TAG_GRAPH_LAB.md
+docs/CODIE_V1_CONSTITUTION.md
+codie/cards/scryfall_tagger_ontology.py
+codie/cards/__init__.py
+tests/test_scryfall_tagger_ontology.py
+tests/fixtures/scryfall_tagger/tagger_functional_tags.json
+tests/fixtures/scryfall_tagger/tagger_artwork_tags.json
+tests/fixtures/scryfall_tagger/tagger_unknown_namespace.json
+tests/fixtures/scryfall_tagger/tagger_duplicate_tags.json
+tests/fixtures/scryfall_tagger/tagger_aliases_deprecated_conflicts.json
 docs/ACTIVE_ROADMAP_INDEX.md
 docs/VALIDATION_STATUS_INDEX.md
 docs/NEXT_PHASE_CONTRACT.md

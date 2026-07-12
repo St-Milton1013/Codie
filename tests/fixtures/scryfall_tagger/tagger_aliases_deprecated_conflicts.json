@@ -1,0 +1,79 @@
+{
+  "ontology_id": "fixture-tagger-alias-conflict",
+  "source_snapshot_id": "tagger-fixture-2026-07-11",
+  "source_uri": "fixture://scryfall_tagger/tagger_aliases_deprecated_conflicts.json",
+  "tags": [
+    {
+      "oracle_id": "oracle-vault",
+      "scryfall_id": "sf-002",
+      "tag": "Fast Mana",
+      "tag_namespace": "mana_role",
+      "source": "scryfall_tagger",
+      "confidence": 1.0,
+      "raw_source_ref": "conflict-row-1"
+    },
+    {
+      "oracle_id": "oracle-vault",
+      "scryfall_id": "sf-002",
+      "tag": "Fast Mana",
+      "tag_namespace": "resource",
+      "source": "curated_functional_registry",
+      "confidence": 0.8,
+      "raw_source_ref": "conflict-row-2"
+    }
+  ],
+  "aliases": [
+    {
+      "alias_tag": "card draw",
+      "canonical_tag": "draw engine",
+      "tag_namespace": "card_advantage",
+      "source": "curated_functional_registry",
+      "reason": "legacy synonym"
+    }
+  ],
+  "deprecated_tags": [
+    {
+      "deprecated_tag": "mana rock",
+      "replacement_tag": "fast mana",
+      "tag_namespace": "mana_role",
+      "source": "curated_functional_registry",
+      "reason": "more precise cEDH vocabulary"
+    },
+    {
+      "deprecated_tag": "old loop a",
+      "replacement_tag": "old loop b",
+      "tag_namespace": "combo_role",
+      "source": "curated_functional_registry",
+      "reason": "cycle test"
+    },
+    {
+      "deprecated_tag": "old loop b",
+      "replacement_tag": "old loop a",
+      "tag_namespace": "combo_role",
+      "source": "curated_functional_registry",
+      "reason": "cycle test"
+    }
+  ],
+  "corrections": [
+    {
+      "correction_type": "add",
+      "tag": "Fast Mana",
+      "tag_namespace": "mana_role",
+      "correction_source": "user_correction",
+      "correction_reason": "local review",
+      "created_at": "2026-07-11T00:00:00+00:00",
+      "review_status": "reviewed",
+      "oracle_id": "oracle-vault"
+    },
+    {
+      "correction_type": "remove",
+      "tag": "Fast Mana",
+      "tag_namespace": "mana_role",
+      "correction_source": "user_correction",
+      "correction_reason": "conflict test",
+      "created_at": "2026-07-11T00:01:00+00:00",
+      "review_status": "reviewed",
+      "oracle_id": "oracle-vault"
+    }
+  ]
+}

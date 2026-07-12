@@ -58,24 +58,25 @@ Phase 33A Scryfall Migration Monitoring Contract: externally accepted
 Phase 33B Scryfall Migration Monitoring Implementation Contract: externally accepted
 Phase 33C Scryfall Migration Monitoring Implementation: externally accepted
 Phase 34A Scryfall Tagger Functional Ontology Contract: externally accepted
-Phase 34B Scryfall Tagger Ontology Implementation Contract: internally complete
-Current action: send Phase 34B outside validation packet
+Phase 34B Scryfall Tagger Ontology Implementation Contract: externally accepted
+Phase 34C Scryfall Tagger Ontology Implementation: internally complete
+Current action: send Phase 34C outside validation packet
 Local alpha tag status: created locally; remote tag push not verified in this environment
 ```
 
 ## Next Allowed Phase
 
 ```text
-Phase 34B outside validation
+Phase 34C outside validation
 ```
 
-Do not begin Phase 34C until Phase 34B outside validation returns PASS or PASS WITH REVIEW NOTES.
+Do not begin Phase 35A until Phase 34C outside validation returns PASS or PASS WITH REVIEW NOTES.
 
 ## Release-Critical Path
 
 ```text
-1. Phase 34B outside validation
-2. Phase 34C Scryfall Tagger Ontology Implementation
+1. Phase 34C outside validation
+2. Phase 35A Commander Spellbook Interpreter Expansion Contract
 ```
 
 The post-31 patch priority order is cemented in:
@@ -468,9 +469,9 @@ Review note:
 Phase 34B should explicitly decide whether to include alias/deprecation/conflict/replacement-chain ontology handling
 ```
 
-## Phase 34B Outside Validation Packet
+## Accepted Phase 34B Outside Validation Packet
 
-Send these files for the current gate:
+Phase 34B was accepted with review notes using this packet:
 
 ```text
 docs/PHASE34B_SCRYFALL_TAGGER_ONTOLOGY_IMPLEMENTATION_CONTRACT.md
@@ -486,6 +487,34 @@ docs/ROADMAP_PATCH_TAG_GRAPH_LAB.md
 docs/CODIE_V1_CONSTITUTION.md
 codie/cards/scryfall_migration_monitoring.py
 tests/test_scryfall_migration_monitoring.py
+docs/ACTIVE_ROADMAP_INDEX.md
+docs/VALIDATION_STATUS_INDEX.md
+docs/NEXT_PHASE_CONTRACT.md
+docs/CODEX_CONTINUITY_HANDOFF.md
+```
+
+## Phase 34C Outside Validation Packet
+
+Send these files for the current gate:
+
+```text
+docs/PHASE34C_SCRYFALL_TAGGER_ONTOLOGY_IMPLEMENTATION_REPORT.md
+docs/CHECKPOINT_PHASE34C_SCRYFALL_TAGGER_ONTOLOGY_IMPLEMENTATION_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE34C_SCRYFALL_TAGGER_ONTOLOGY_IMPLEMENTATION_PROMPT.md
+docs/PHASE34B_SCRYFALL_TAGGER_ONTOLOGY_IMPLEMENTATION_CONTRACT.md
+docs/CHECKPOINT_PHASE34B_SCRYFALL_TAGGER_ONTOLOGY_IMPLEMENTATION_CONTRACT_REPORT.md
+docs/PHASE34A_SCRYFALL_TAGGER_FUNCTIONAL_ONTOLOGY_CONTRACT.md
+docs/CHECKPOINT_PHASE34A_SCRYFALL_TAGGER_FUNCTIONAL_ONTOLOGY_CONTRACT_REPORT.md
+docs/ROADMAP_PATCH_TAG_GRAPH_LAB.md
+docs/CODIE_V1_CONSTITUTION.md
+codie/cards/scryfall_tagger_ontology.py
+codie/cards/__init__.py
+tests/test_scryfall_tagger_ontology.py
+tests/fixtures/scryfall_tagger/tagger_functional_tags.json
+tests/fixtures/scryfall_tagger/tagger_artwork_tags.json
+tests/fixtures/scryfall_tagger/tagger_unknown_namespace.json
+tests/fixtures/scryfall_tagger/tagger_duplicate_tags.json
+tests/fixtures/scryfall_tagger/tagger_aliases_deprecated_conflicts.json
 docs/ACTIVE_ROADMAP_INDEX.md
 docs/VALIDATION_STATUS_INDEX.md
 docs/NEXT_PHASE_CONTRACT.md

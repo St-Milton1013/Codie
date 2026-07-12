@@ -56,7 +56,8 @@ Phase 33A Scryfall Migration Monitoring Contract: PASS WITH REVIEW NOTES
 Phase 33B Scryfall Migration Monitoring Implementation Contract: PASS WITH REVIEW NOTES
 Phase 33C Scryfall Migration Monitoring Implementation: PASS WITH REVIEW NOTES
 Phase 34A Scryfall Tagger Functional Ontology Contract: PASS WITH REVIEW NOTES
-Phase 34B Scryfall Tagger Ontology Implementation Contract: INTERNAL PASS
+Phase 34B Scryfall Tagger Ontology Implementation Contract: PASS WITH REVIEW NOTES
+Phase 34C Scryfall Tagger Ontology Implementation: INTERNAL PASS
 Local alpha tag: created locally; remote tag push not verified in this environment
 ```
 
@@ -135,27 +136,33 @@ Phase 33A Scryfall Migration Monitoring Contract: PASS WITH REVIEW NOTES
 Phase 33B Scryfall Migration Monitoring Implementation Contract: PASS WITH REVIEW NOTES
 Phase 33C Scryfall Migration Monitoring Implementation: PASS WITH REVIEW NOTES
 Phase 34A Scryfall Tagger Functional Ontology Contract: PASS WITH REVIEW NOTES
-Phase 34B Scryfall Tagger Ontology Implementation Contract: INTERNAL PASS
+Phase 34B Scryfall Tagger Ontology Implementation Contract: PASS WITH REVIEW NOTES
+Phase 34C Scryfall Tagger Ontology Implementation: INTERNAL PASS
 ```
 
 ## Latest Local Validation
 
 ```text
-Phase 34B Scryfall Tagger Ontology Implementation Contract:
+Phase 34C Scryfall Tagger Ontology Implementation:
+python -m unittest tests.test_scryfall_tagger_ontology -v
+Ran 15 tests
+OK
+
 python scripts/check_schema.py
 Schema bootstrap check passed.
 
 python -m unittest discover -s tests
-Ran 891 tests
+Ran 906 tests
 OK (skipped=1)
 
 git diff --check
 passed
 
 Static scans:
-production/test/schema/repository/dependency drift scan: no matches
-forbidden implementation/dependency scan: matches only contract narrative and explicit forbidden-scope lists
-recommendation-language scan: matches only explicit contract boundary statements
+schema/repository/dependency drift scan: no matches
+forbidden import/dependency scan: no production matches
+provider/live-network/file-writing scan: no production matches
+recommendation-language scan: no production matches
 ```
 
 ## CI Review Note Status
@@ -297,26 +304,29 @@ production Forge / LLM SDK import scan: no matches
 ## Current Blocker
 
 ```text
-Phase 34C is blocked until Phase 34B outside validation returns PASS or PASS WITH REVIEW NOTES.
+Phase 35A is blocked until Phase 34C outside validation returns PASS or PASS WITH REVIEW NOTES.
 ```
 
-## Current Phase 34B Outside Validation Packet
+## Current Phase 34C Outside Validation Packet
 
 ```text
+docs/PHASE34C_SCRYFALL_TAGGER_ONTOLOGY_IMPLEMENTATION_REPORT.md
+docs/CHECKPOINT_PHASE34C_SCRYFALL_TAGGER_ONTOLOGY_IMPLEMENTATION_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE34C_SCRYFALL_TAGGER_ONTOLOGY_IMPLEMENTATION_PROMPT.md
 docs/PHASE34B_SCRYFALL_TAGGER_ONTOLOGY_IMPLEMENTATION_CONTRACT.md
 docs/CHECKPOINT_PHASE34B_SCRYFALL_TAGGER_ONTOLOGY_IMPLEMENTATION_CONTRACT_REPORT.md
-docs/OUTSIDE_VALIDATION_PHASE34B_SCRYFALL_TAGGER_ONTOLOGY_IMPLEMENTATION_CONTRACT_PROMPT.md
 docs/PHASE34A_SCRYFALL_TAGGER_FUNCTIONAL_ONTOLOGY_CONTRACT.md
 docs/CHECKPOINT_PHASE34A_SCRYFALL_TAGGER_FUNCTIONAL_ONTOLOGY_CONTRACT_REPORT.md
-docs/OUTSIDE_VALIDATION_PHASE34A_SCRYFALL_TAGGER_FUNCTIONAL_ONTOLOGY_CONTRACT_PROMPT.md
-docs/PHASE33C_SCRYFALL_MIGRATION_MONITORING_IMPLEMENTATION_REPORT.md
-docs/CHECKPOINT_PHASE33C_SCRYFALL_MIGRATION_MONITORING_IMPLEMENTATION_REPORT.md
-docs/OUTSIDE_VALIDATION_PHASE33C_SCRYFALL_MIGRATION_MONITORING_IMPLEMENTATION_PROMPT.md
-docs/POST_PHASE31_DEFERRED_IMPLEMENTATION_PRIORITY_PLAN.md
 docs/ROADMAP_PATCH_TAG_GRAPH_LAB.md
 docs/CODIE_V1_CONSTITUTION.md
-codie/cards/scryfall_migration_monitoring.py
-tests/test_scryfall_migration_monitoring.py
+codie/cards/scryfall_tagger_ontology.py
+codie/cards/__init__.py
+tests/test_scryfall_tagger_ontology.py
+tests/fixtures/scryfall_tagger/tagger_functional_tags.json
+tests/fixtures/scryfall_tagger/tagger_artwork_tags.json
+tests/fixtures/scryfall_tagger/tagger_unknown_namespace.json
+tests/fixtures/scryfall_tagger/tagger_duplicate_tags.json
+tests/fixtures/scryfall_tagger/tagger_aliases_deprecated_conflicts.json
 docs/ACTIVE_ROADMAP_INDEX.md
 docs/VALIDATION_STATUS_INDEX.md
 docs/NEXT_PHASE_CONTRACT.md

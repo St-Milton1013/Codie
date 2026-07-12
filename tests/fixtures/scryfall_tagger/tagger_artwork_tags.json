@@ -1,0 +1,25 @@
+{
+  "ontology_id": "fixture-tagger-artwork",
+  "source_snapshot_id": "tagger-fixture-2026-07-11",
+  "source_uri": "fixture://scryfall_tagger/tagger_artwork_tags.json",
+  "tags": [
+    {
+      "oracle_id": "oracle-remora",
+      "scryfall_id": "sf-001",
+      "tag": "Fish",
+      "tag_namespace": "artwork_subject",
+      "source": "scryfall_tagger",
+      "confidence": 1.0,
+      "raw_source_ref": "art-row-1"
+    },
+    {
+      "oracle_id": "oracle-remora",
+      "scryfall_id": "sf-001",
+      "tag": "Draw Engine",
+      "tag_namespace": "card_advantage",
+      "source": "scryfall_tagger",
+      "confidence": 0.95,
+      "raw_source_ref": "functional-row-1"
+    }
+  ]
+}

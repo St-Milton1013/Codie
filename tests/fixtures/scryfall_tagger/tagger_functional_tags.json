@@ -1,0 +1,38 @@
+{
+  "ontology_id": "fixture-tagger-functional",
+  "source_snapshot_id": "tagger-fixture-2026-07-11",
+  "source_uri": "fixture://scryfall_tagger/tagger_functional_tags.json",
+  "generated_at": "2026-07-11T00:00:00+00:00",
+  "tags": [
+    {
+      "oracle_id": "oracle-remora",
+      "scryfall_id": "sf-001",
+      "tag": "Draw Engine",
+      "tag_namespace": "card_advantage",
+      "source": "scryfall_tagger",
+      "confidence": 0.95,
+      "source_url": "fixture://tagger/cards/sf-001",
+      "raw_source_ref": "tagger-row-1"
+    },
+    {
+      "oracle_id": "oracle-vault",
+      "scryfall_id": "sf-002",
+      "tag": "Fast Mana",
+      "tag_namespace": "mana_role",
+      "source": "scryfall_tagger",
+      "confidence": 1.0,
+      "source_url": "fixture://tagger/cards/sf-002",
+      "raw_source_ref": "tagger-row-2"
+    },
+    {
+      "oracle_id": "oracle-force",
+      "scryfall_id": "sf-003",
+      "tag": "Interaction",
+      "tag_namespace": "interaction",
+      "source": "scryfall_tagger",
+      "confidence": 0.9,
+      "source_url": "fixture://tagger/cards/sf-003",
+      "raw_source_ref": "tagger-row-3"
+    }
+  ]
+}

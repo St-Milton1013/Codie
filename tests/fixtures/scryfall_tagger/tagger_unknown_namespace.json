@@ -1,0 +1,16 @@
+{
+  "ontology_id": "fixture-tagger-unknown",
+  "source_snapshot_id": "tagger-fixture-2026-07-11",
+  "source_uri": "fixture://scryfall_tagger/tagger_unknown_namespace.json",
+  "tags": [
+    {
+      "oracle_id": "oracle-remora",
+      "scryfall_id": "sf-001",
+      "tag": "Temporal Weirdness",
+      "tag_namespace": "future_namespace",
+      "source": "scryfall_tagger",
+      "confidence": 0.5,
+      "raw_source_ref": "unknown-row-1"
+    }
+  ]
+}
