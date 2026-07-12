@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: send Phase 35A Commander Spellbook Interpreter Expansion Contract outside validation packet; do not begin Phase 35B until accepted
+Recommended next task: send Phase 35B Commander Spellbook Interpreter Implementation Contract outside validation packet; do not begin Phase 35C until accepted
 
 ## Active Indexes
 

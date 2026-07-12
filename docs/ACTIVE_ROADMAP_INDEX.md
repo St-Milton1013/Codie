@@ -60,24 +60,25 @@ Phase 33C Scryfall Migration Monitoring Implementation: externally accepted
 Phase 34A Scryfall Tagger Functional Ontology Contract: externally accepted
 Phase 34B Scryfall Tagger Ontology Implementation Contract: externally accepted
 Phase 34C Scryfall Tagger Ontology Implementation: externally accepted
-Phase 35A Commander Spellbook Interpreter Expansion Contract: internally complete
-Current action: send Phase 35A outside validation packet
+Phase 35A Commander Spellbook Interpreter Expansion Contract: externally accepted
+Phase 35B Commander Spellbook Interpreter Implementation Contract: internally complete
+Current action: send Phase 35B outside validation packet
 Local alpha tag status: created locally; remote tag push not verified in this environment
 ```
 
 ## Next Allowed Phase
 
 ```text
-Phase 35A outside validation
+Phase 35B outside validation
 ```
 
-Do not begin Phase 35B until Phase 35A outside validation returns PASS or PASS WITH REVIEW NOTES.
+Do not begin Phase 35C until Phase 35B outside validation returns PASS or PASS WITH REVIEW NOTES.
 
 ## Release-Critical Path
 
 ```text
-1. Phase 35A outside validation
-2. Phase 35B Commander Spellbook Interpreter Expansion Implementation Contract
+1. Phase 35B outside validation
+2. Phase 35C Commander Spellbook Interpreter Implementation
 ```
 
 The post-31 patch priority order is cemented in:
@@ -522,9 +523,9 @@ docs/NEXT_PHASE_CONTRACT.md
 docs/CODEX_CONTINUITY_HANDOFF.md
 ```
 
-## Current Phase 35A Outside Validation Packet
+## Accepted Phase 35A Outside Validation Packet
 
-Send these files for the current gate:
+Phase 35A was accepted with review notes using this packet:
 
 ```text
 docs/PHASE35A_COMMANDER_SPELLBOOK_INTERPRETER_EXPANSION_CONTRACT.md
@@ -533,6 +534,30 @@ docs/OUTSIDE_VALIDATION_PHASE35A_COMMANDER_SPELLBOOK_INTERPRETER_EXPANSION_CONTR
 docs/PHASE34C_SCRYFALL_TAGGER_ONTOLOGY_IMPLEMENTATION_REPORT.md
 docs/CHECKPOINT_PHASE34C_SCRYFALL_TAGGER_ONTOLOGY_IMPLEMENTATION_REPORT.md
 docs/OUTSIDE_VALIDATION_PHASE34C_SCRYFALL_TAGGER_ONTOLOGY_IMPLEMENTATION_PROMPT.md
+docs/PHASE7A_SPELLBOOK_COMBO_EVIDENCE_CONTRACT.md
+docs/POST_PHASE31_DEFERRED_IMPLEMENTATION_PRIORITY_PLAN.md
+docs/CODIE_V1_CONSTITUTION.md
+codie/providers/spellbook/parser.py
+codie/combos/sync.py
+tests/test_provider_spellbook.py
+tests/test_combo_sync.py
+docs/ACTIVE_ROADMAP_INDEX.md
+docs/VALIDATION_STATUS_INDEX.md
+docs/NEXT_PHASE_CONTRACT.md
+docs/CODEX_CONTINUITY_HANDOFF.md
+```
+
+## Current Phase 35B Outside Validation Packet
+
+Send these files for the current gate:
+
+```text
+docs/PHASE35B_COMMANDER_SPELLBOOK_INTERPRETER_IMPLEMENTATION_CONTRACT.md
+docs/CHECKPOINT_PHASE35B_COMMANDER_SPELLBOOK_INTERPRETER_IMPLEMENTATION_CONTRACT_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE35B_COMMANDER_SPELLBOOK_INTERPRETER_IMPLEMENTATION_CONTRACT_PROMPT.md
+docs/PHASE35A_COMMANDER_SPELLBOOK_INTERPRETER_EXPANSION_CONTRACT.md
+docs/CHECKPOINT_PHASE35A_COMMANDER_SPELLBOOK_INTERPRETER_EXPANSION_CONTRACT_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE35A_COMMANDER_SPELLBOOK_INTERPRETER_EXPANSION_CONTRACT_PROMPT.md
 docs/PHASE7A_SPELLBOOK_COMBO_EVIDENCE_CONTRACT.md
 docs/POST_PHASE31_DEFERRED_IMPLEMENTATION_PRIORITY_PLAN.md
 docs/CODIE_V1_CONSTITUTION.md
