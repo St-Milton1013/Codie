@@ -1,42 +1,82 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://codie.local/schemas/codie_validator_report_v1.schema.json",
-  "title": "Codie Validator Report v1",
-  "type": "object",
-  "required": [
-    "schema_version",
-    "phase_id",
-    "phase_part",
-    "gate_scope",
-    "repository",
-    "branch",
-    "target_sha",
-    "validator",
-    "result",
-    "findings",
-    "errors"
-  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
   "additionalProperties": false,
   "properties": {
-    "schema_version": { "const": "codie.validator.report.v1" },
-    "phase_id": { "type": "string", "minLength": 1 },
-    "phase_part": { "type": "string", "minLength": 1 },
-    "gate_scope": { "enum": ["INTERMEDIATE_PACKET", "FINAL_PHASE"] },
-    "repository": { "const": "St-Milton1013/Codie" },
-    "branch": { "type": "string", "minLength": 1 },
-    "target_sha": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
-    "validator": { "enum": ["deterministic", "architecture", "adversarial"] },
-    "result": { "enum": ["CLEAN_PASS", "FAIL", "ERROR"] },
-    "model": { "type": ["string", "null"] },
-    "generated_at": { "type": "string" },
+    "branch": {
+      "minLength": 1,
+      "type": "string"
+    },
     "commands": {
-      "type": "array",
-      "items": { "type": "string" }
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "completed_at": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "constitution_path": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "constitution_version": {
+      "const": "codie.constitution.v1"
+    },
+    "errors": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
     },
     "findings": {
-      "type": "array",
       "items": {
-        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "affected_files": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "finding": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "finding_id": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "governing_rule": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "repair_performed": {
+            "type": "string"
+          },
+          "required_correction": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "resolution_status": {
+            "enum": [
+              "DEFERRED",
+              "OPEN",
+              "RESOLVED"
+            ]
+          },
+          "severity": {
+            "enum": [
+              "BLOCKER",
+              "CRITICAL",
+              "HIGH",
+              "MEDIUM",
+              "LOW",
+              "INFORMATIONAL"
+            ]
+          }
+        },
         "required": [
           "finding_id",
           "severity",
@@ -46,29 +86,123 @@
           "required_correction",
           "resolution_status"
         ],
-        "additionalProperties": false,
-        "properties": {
-          "finding_id": { "type": "string", "minLength": 1 },
-          "severity": {
-            "enum": ["BLOCKER", "CRITICAL", "HIGH", "MEDIUM", "LOW", "INFORMATIONAL"]
-          },
-          "finding": { "type": "string", "minLength": 1 },
-          "affected_files": {
-            "type": "array",
-            "items": { "type": "string" }
-          },
-          "governing_rule": { "type": "string", "minLength": 1 },
-          "required_correction": { "type": "string", "minLength": 1 },
-          "repair_performed": { "type": "string" },
-          "resolution_status": {
-            "enum": ["OPEN", "RESOLVED", "DEFERRED"]
-          }
-        }
-      }
+        "type": "object"
+      },
+      "type": "array"
     },
-    "errors": {
-      "type": "array",
-      "items": { "type": "string" }
+    "gate_scope": {
+      "enum": [
+        "FINAL_PHASE",
+        "INTERMEDIATE_PACKET"
+      ]
+    },
+    "generated_at": {
+      "type": "string"
+    },
+    "model": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "phase_id": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "phase_part": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "pull_request_number": {
+      "minimum": 1,
+      "type": "integer"
+    },
+    "repository": {
+      "const": "St-Milton1013/Codie"
+    },
+    "result": {
+      "enum": [
+        "CLEAN_PASS",
+        "ERROR",
+        "FAIL"
+      ]
+    },
+    "schema_version": {
+      "const": "codie.validator.report.v1"
+    },
+    "severity_totals": {
+      "additionalProperties": false,
+      "properties": {
+        "BLOCKER": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "CRITICAL": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "HIGH": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "INFORMATIONAL": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "LOW": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "MEDIUM": {
+          "minimum": 0,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "BLOCKER",
+        "CRITICAL",
+        "HIGH",
+        "MEDIUM",
+        "LOW",
+        "INFORMATIONAL"
+      ],
+      "type": "object"
+    },
+    "started_at": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "target_sha": {
+      "pattern": "^[0-9a-f]{40}$",
+      "type": "string"
+    },
+    "validator": {
+      "enum": [
+        "deterministic",
+        "architecture",
+        "adversarial"
+      ]
     }
-  }
+  },
+  "required": [
+    "schema_version",
+    "phase_id",
+    "phase_part",
+    "gate_scope",
+    "repository",
+    "branch",
+    "target_sha",
+    "pull_request_number",
+    "validator",
+    "result",
+    "constitution_path",
+    "constitution_version",
+    "started_at",
+    "completed_at",
+    "severity_totals",
+    "findings",
+    "errors"
+  ],
+  "title": "Codie Validator Report v1",
+  "type": "object"
 }

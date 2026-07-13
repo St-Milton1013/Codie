@@ -59,4 +59,15 @@ Repair or recreate C:\Users\Main\.venvs\codie-py312 before running the GitHub wo
 gh auth status reports an invalid token and must be reauthenticated before push or PR creation through gh.
 ```
 
-Final Result: implementation complete locally pending full validation, push, and draft PR creation.
+Final Result: not complete.
+
+Completion requires all of the following:
+
+```text
+C:\Users\Main\.venvs\codie-py312\Scripts\python.exe runs the required checks
+live Ollama architecture validator smoke test succeeds
+live Ollama adversarial validator smoke test succeeds
+manual self-hosted workflow_dispatch succeeds against the PR head SHA
+generated artifacts contain deterministic, architecture, and adversarial reports
+the repair loop is exercised in a controlled test
+```

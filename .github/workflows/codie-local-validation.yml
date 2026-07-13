@@ -19,8 +19,17 @@ on:
           - INTERMEDIATE_PACKET
           - FINAL_PHASE
       pull_request_number:
-        description: Optional pull request number
+        description: Pull request number
+        required: true
+        type: string
+      pr_branch:
+        description: Pull request head branch
+        required: true
+        type: string
+      base_branch:
+        description: Pull request base branch
         required: false
+        default: main
         type: string
       target_sha:
         description: Optional exact target SHA
@@ -28,7 +37,7 @@ on:
         type: string
 
 permissions:
-  contents: read
+  contents: write
   actions: read
 
 jobs:
@@ -71,17 +80,16 @@ jobs:
         shell: pwsh
         run: |
           $args = @(
-            "scripts/codie_validation_gate.py",
+            "scripts/codie_repair_controller.py",
             "--phase-id", "${{ inputs.phase_id }}",
             "--phase-part", "${{ inputs.phase_part }}",
             "--gate-scope", "${{ inputs.gate_scope }}",
+            "--pull-request-number", "${{ inputs.pull_request_number }}",
+            "--pr-branch", "${{ inputs.pr_branch }}",
+            "--base-branch", "${{ inputs.base_branch }}",
             "--target-sha", "${{ steps.target.outputs.sha }}",
-            "--output-dir", "validation_artifacts",
             "--python-executable", "$env:CODIE_PYTHON"
           )
-          if (-not [string]::IsNullOrWhiteSpace("${{ inputs.pull_request_number }}")) {
-            $args += @("--pull-request-number", "${{ inputs.pull_request_number }}")
-          }
           & "$env:CODIE_PYTHON" @args
 
       - name: Write job summary

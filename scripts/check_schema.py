@@ -4,10 +4,12 @@ from __future__ import annotations
 
 import sqlite3
 import sys
+import json
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 SCHEMA_DIR = REPO_ROOT / "codie" / "db" / "schema"
+VALIDATOR_SCHEMA_PATH = REPO_ROOT / "schemas" / "codie_validator_report_v1.schema.json"
 EXPECTED_SCHEMA_ORDER = (
     "core.sql",
     "source.sql",
@@ -25,6 +27,7 @@ def main() -> int:
     sys.path.insert(0, str(REPO_ROOT))
 
     from codie.db.bootstrap import SCHEMA_ORDER, bootstrap  # noqa: PLC0415
+    from codie.validation.local_gate import report_json_schema  # noqa: PLC0415
 
     schema_files = tuple(sorted(path.name for path in SCHEMA_DIR.glob("*.sql")))
     ordered_files = tuple(SCHEMA_ORDER)
@@ -51,6 +54,13 @@ def main() -> int:
         connection.execute("PRAGMA foreign_key_check")
     finally:
         connection.close()
+
+    checked_in_schema = json.loads(VALIDATOR_SCHEMA_PATH.read_text(encoding="utf-8"))
+    runtime_schema = report_json_schema()
+    if checked_in_schema != runtime_schema:
+        print("Validator report JSON Schema drift detected.")
+        print("Regenerate schemas/codie_validator_report_v1.schema.json from codie.validation.local_gate.report_json_schema().")
+        return 1
 
     print("Schema bootstrap check passed.")
     return 0
