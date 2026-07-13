@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://codie.local/schemas/codie_validator_report_v1.schema.json",
+  "title": "Codie Validator Report v1",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "phase_id",
+    "phase_part",
+    "gate_scope",
+    "repository",
+    "branch",
+    "target_sha",
+    "validator",
+    "result",
+    "findings",
+    "errors"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": { "const": "codie.validator.report.v1" },
+    "phase_id": { "type": "string", "minLength": 1 },
+    "phase_part": { "type": "string", "minLength": 1 },
+    "gate_scope": { "enum": ["INTERMEDIATE_PACKET", "FINAL_PHASE"] },
+    "repository": { "const": "St-Milton1013/Codie" },
+    "branch": { "type": "string", "minLength": 1 },
+    "target_sha": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+    "validator": { "enum": ["deterministic", "architecture", "adversarial"] },
+    "result": { "enum": ["CLEAN_PASS", "FAIL", "ERROR"] },
+    "model": { "type": ["string", "null"] },
+    "generated_at": { "type": "string" },
+    "commands": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "finding_id",
+          "severity",
+          "finding",
+          "affected_files",
+          "governing_rule",
+          "required_correction",
+          "resolution_status"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "finding_id": { "type": "string", "minLength": 1 },
+          "severity": {
+            "enum": ["BLOCKER", "CRITICAL", "HIGH", "MEDIUM", "LOW", "INFORMATIONAL"]
+          },
+          "finding": { "type": "string", "minLength": 1 },
+          "affected_files": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "governing_rule": { "type": "string", "minLength": 1 },
+          "required_correction": { "type": "string", "minLength": 1 },
+          "repair_performed": { "type": "string" },
+          "resolution_status": {
+            "enum": ["OPEN", "RESOLVED", "DEFERRED"]
+          }
+        }
+      }
+    },
+    "errors": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  }
+}

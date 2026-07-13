@@ -1,0 +1,101 @@
+name: Codie Local Validation Gate
+
+on:
+  workflow_dispatch:
+    inputs:
+      phase_id:
+        description: Phase id to validate
+        required: true
+        type: string
+      phase_part:
+        description: Phase part to validate
+        required: true
+        type: string
+      gate_scope:
+        description: Validation gate scope
+        required: true
+        type: choice
+        options:
+          - INTERMEDIATE_PACKET
+          - FINAL_PHASE
+      pull_request_number:
+        description: Optional pull request number
+        required: false
+        type: string
+      target_sha:
+        description: Optional exact target SHA
+        required: false
+        type: string
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  codie-validation-gate:
+    name: Codie Validation Gate
+    runs-on:
+      - self-hosted
+      - Windows
+      - X64
+      - codie-local
+    if: ${{ github.event_name == 'workflow_dispatch' && github.event.repository.full_name == 'St-Milton1013/Codie' }}
+    env:
+      CODIE_PYTHON: C:\Users\Main\.venvs\codie-py312\Scripts\python.exe
+      OPENAI_API_KEY: ""
+    steps:
+      - name: Check out exact target
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.target_sha || github.sha }}
+          persist-credentials: false
+
+      - name: Reject fork context
+        shell: pwsh
+        run: |
+          if ("${{ github.event.repository.full_name }}" -ne "St-Milton1013/Codie") {
+            throw "Refusing to run local validation outside St-Milton1013/Codie."
+          }
+
+      - name: Resolve target SHA
+        id: target
+        shell: pwsh
+        run: |
+          $target = "${{ inputs.target_sha }}"
+          if ([string]::IsNullOrWhiteSpace($target)) {
+            $target = git rev-parse HEAD
+          }
+          "sha=$target" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
+
+      - name: Run local validation gate
+        shell: pwsh
+        run: |
+          $args = @(
+            "scripts/codie_validation_gate.py",
+            "--phase-id", "${{ inputs.phase_id }}",
+            "--phase-part", "${{ inputs.phase_part }}",
+            "--gate-scope", "${{ inputs.gate_scope }}",
+            "--target-sha", "${{ steps.target.outputs.sha }}",
+            "--output-dir", "validation_artifacts",
+            "--python-executable", "$env:CODIE_PYTHON"
+          )
+          if (-not [string]::IsNullOrWhiteSpace("${{ inputs.pull_request_number }}")) {
+            $args += @("--pull-request-number", "${{ inputs.pull_request_number }}")
+          }
+          & "$env:CODIE_PYTHON" @args
+
+      - name: Write job summary
+        if: always()
+        shell: pwsh
+        run: |
+          if (Test-Path validation_artifacts/codie-validation-summary.md) {
+            Get-Content validation_artifacts/codie-validation-summary.md | Out-File -FilePath $env:GITHUB_STEP_SUMMARY -Append
+          }
+
+      - name: Upload validation artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: codie-local-validation-${{ steps.target.outputs.sha }}
+          path: validation_artifacts/
+          if-no-files-found: error
