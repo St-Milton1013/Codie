@@ -2011,6 +2011,75 @@ Outside validators should still confirm that GitHub Actions is enabled on the
 remote repository and that the latest pushed commit receives a completed
 workflow run.
 
+## Codie Local Validation Automation Bootstrap
+
+Branch:
+
+```text
+codex/operational-local-validation-bootstrap
+```
+
+Phase status:
+
+```text
+Phase 35A remains the active outside validation target.
+Phase 35B implementation is not advanced by this automation bootstrap.
+```
+
+Files created:
+
+```text
+.github/workflows/codie-local-validation.yml
+codie/validation/local_gate.py
+codie/validation/repair_controller.py
+docs/CODIE_LOCAL_VALIDATION_AUTOMATION_CONTRACT.md
+docs/WINDOWS_LOCAL_VALIDATION_SETUP.md
+docs/MANUAL_WORKFLOW_DISPATCH_GUIDE.md
+docs/VALIDATOR_REPORT_FORMAT_GUIDE.md
+docs/REPAIR_LOOP_BEHAVIOR_GUIDE.md
+docs/CODIE_LOCAL_VALIDATION_BOOTSTRAP_COMPLETION_REPORT.md
+schemas/codie_validator_report_v1.schema.json
+scripts/codie_validation_gate.py
+scripts/codie_repair_controller.py
+tests/test_validation_local_gate.py
+tests/test_validation_repair_controller.py
+```
+
+Public functions/classes added:
+
+```text
+ValidationGateOptions
+ValidationFinding
+ValidatorReport
+AggregatedValidationResult
+run_validation_gate
+aggregate_validator_reports
+validate_report_payload
+render_markdown_summary
+RepairControllerOptions
+RepairExecutionResult
+ValidationCycleResult
+RepairControllerResult
+run_repair_controller
+unauthorized_repair_paths
+```
+
+Schema impact:
+
+```text
+No product schema impact. A validator-report JSON Schema was added under schemas/.
+```
+
+Do not do next:
+
+```text
+do not modify docs/CODIE_V1_CONSTITUTION.md
+do not implement Phase 35B
+do not weaken validator rules
+do not use OPENAI_API_KEY or paid APIs
+do not merge the pull request
+```
+
 ```text
 docs/PHASE30D_LOCAL_ALPHA_TAG_RELEASE_HANDOFF_CONTRACT.md
 docs/LOCAL_ALPHA_RELEASE_NOTES.md
