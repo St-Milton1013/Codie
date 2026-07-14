@@ -32,7 +32,7 @@ Latest pushed commit before Phase 24 outside validation acceptance: 432e958 Add 
 Latest full-suite result:
 
 ```text
-Ran 906 tests in 4.560s
+Ran 916 tests
 
 OK (skipped=1)
 ```
@@ -1750,14 +1750,29 @@ component-role ambiguity.
 GitHub CI was not available for the Phase 35C validation result.
 ```
 
-Phase 36A is internally complete. It is a contract-only packet for future
+Phase 36A is externally accepted with review notes. It is a contract-only packet for future
 immutable deck snapshot expansion. It defines future snapshot IDs, deck hash,
 commander signature, source/user deck refs, analysis refs, card entries,
 privacy/redaction policy, replay metadata, source provenance, deterministic
 serialization, and dictionary round-trip. It does not implement snapshot code,
 schema, repositories, providers, file writing, CLI, UI, analytics, simulator
-execution, LLM calls, or recommendations. Phase 36B is blocked until Phase 36A
-outside validation returns PASS or PASS WITH REVIEW NOTES.
+execution, LLM calls, or recommendations. Phase 36A outside validation review
+notes require Phase 36B / 36C to make redaction behavior concrete: redacted
+snapshots by default, an explicit full-card-list option, visible privacy caveats
+for full-card-list snapshots, and hard rejection of raw imported text and
+private notes by default. GitHub CI was not available for the Phase 36A
+validation result.
+
+Phase 36B is internally complete. It is an implementation-contract-only packet
+for immutable deck snapshots. It authorizes no implementation in Phase 36B and
+limits future Phase 36C work to isolated snapshot value models, deterministic
+serialization, fixture-first tests, explicit redaction options, visible privacy
+caveats, private metadata rejection, and export-only `codie.user_decks`
+surface updates. It does not implement snapshot code, tests or fixtures for
+implementation, schema, repositories, providers, SQLite reads/writes, file
+writing, CLI, UI, analytics, simulator execution, LLM calls, frequency pools, or
+recommendations. Phase 36C is blocked until Phase 36B outside validation returns
+PASS or PASS WITH REVIEW NOTES.
 
 The post-31 patch-note plan has been cemented in
 `docs/POST_PHASE31_PATCH_PLAN_CEMENTING_AUDIT.md`. That audit confirms no
@@ -2049,7 +2064,7 @@ docs/NEXT_PHASE_CONTRACT.md
 docs/CODEX_CONTINUITY_HANDOFF.md
 ```
 
-Current Phase 36A outside validation packet:
+Accepted Phase 36A outside validation packet:
 
 ```text
 docs/PHASE36A_IMMUTABLE_DECK_SNAPSHOT_EXPANSION_CONTRACT.md
@@ -2063,6 +2078,32 @@ docs/CODIE_V1_CONSTITUTION.md
 codie/user_decks/importer.py
 codie/user_decks/deck_memory.py
 codie/user_decks/analysis_input.py
+codie/db/schema/user.sql
+codie/db/repositories/user.py
+tests/test_user_deck_import.py
+tests/test_user_deck_memory.py
+tests/test_user_deck_analysis_input.py
+docs/ACTIVE_ROADMAP_INDEX.md
+docs/VALIDATION_STATUS_INDEX.md
+docs/NEXT_PHASE_CONTRACT.md
+docs/CODEX_CONTINUITY_HANDOFF.md
+```
+
+Current Phase 36B outside validation packet:
+
+```text
+docs/PHASE36B_IMMUTABLE_DECK_SNAPSHOT_IMPLEMENTATION_CONTRACT.md
+docs/CHECKPOINT_PHASE36B_IMMUTABLE_DECK_SNAPSHOT_IMPLEMENTATION_CONTRACT_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE36B_IMMUTABLE_DECK_SNAPSHOT_IMPLEMENTATION_CONTRACT_PROMPT.md
+docs/PHASE36A_IMMUTABLE_DECK_SNAPSHOT_EXPANSION_CONTRACT.md
+docs/CHECKPOINT_PHASE36A_IMMUTABLE_DECK_SNAPSHOT_EXPANSION_CONTRACT_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE36A_IMMUTABLE_DECK_SNAPSHOT_EXPANSION_CONTRACT_PROMPT.md
+docs/POST_PHASE31_DEFERRED_IMPLEMENTATION_PRIORITY_PLAN.md
+docs/CODIE_V1_CONSTITUTION.md
+codie/user_decks/importer.py
+codie/user_decks/deck_memory.py
+codie/user_decks/analysis_input.py
+codie/user_decks/__init__.py
 codie/db/schema/user.sql
 codie/db/repositories/user.py
 tests/test_user_deck_import.py

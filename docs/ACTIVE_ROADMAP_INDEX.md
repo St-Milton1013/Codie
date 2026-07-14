@@ -63,24 +63,25 @@ Phase 34C Scryfall Tagger Ontology Implementation: externally accepted
 Phase 35A Commander Spellbook Interpreter Expansion Contract: externally accepted
 Phase 35B Commander Spellbook Interpreter Implementation Contract: externally accepted
 Phase 35C Commander Spellbook Interpreter Implementation: externally accepted
-Phase 36A Immutable Deck Snapshot Expansion Contract: internally complete
-Current action: send Phase 36A outside validation packet
+Phase 36A Immutable Deck Snapshot Expansion Contract: externally accepted
+Phase 36B Immutable Deck Snapshot Implementation Contract: internally complete
+Current action: send Phase 36B outside validation packet
 Local alpha tag status: created locally; remote tag push not verified in this environment
 ```
 
 ## Next Allowed Phase
 
 ```text
-Phase 36A outside validation
+Phase 36B outside validation
 ```
 
-Do not begin Phase 36B until Phase 36A outside validation returns PASS or PASS WITH REVIEW NOTES.
+Do not begin Phase 36C until Phase 36B outside validation returns PASS or PASS WITH REVIEW NOTES.
 
 ## Release-Critical Path
 
 ```text
-1. Phase 36A outside validation
-2. Phase 36B Immutable Deck Snapshot Implementation Contract
+1. Phase 36B outside validation
+2. Phase 36C Immutable Deck Snapshot Implementation
 ```
 
 The post-31 patch priority order is cemented in:
@@ -604,9 +605,9 @@ docs/NEXT_PHASE_CONTRACT.md
 docs/CODEX_CONTINUITY_HANDOFF.md
 ```
 
-## Current Phase 36A Outside Validation Packet
+## Accepted Phase 36A Outside Validation Packet
 
-Send these files for the current gate:
+Phase 36A was accepted with review notes using this packet:
 
 ```text
 docs/PHASE36A_IMMUTABLE_DECK_SNAPSHOT_EXPANSION_CONTRACT.md
@@ -620,6 +621,46 @@ docs/CODIE_V1_CONSTITUTION.md
 codie/user_decks/importer.py
 codie/user_decks/deck_memory.py
 codie/user_decks/analysis_input.py
+codie/db/schema/user.sql
+codie/db/repositories/user.py
+tests/test_user_deck_import.py
+tests/test_user_deck_memory.py
+tests/test_user_deck_analysis_input.py
+docs/ACTIVE_ROADMAP_INDEX.md
+docs/VALIDATION_STATUS_INDEX.md
+docs/NEXT_PHASE_CONTRACT.md
+docs/CODEX_CONTINUITY_HANDOFF.md
+```
+
+Phase 36A outside validation review notes to carry forward:
+
+```text
+Phase 36B / 36C must make redaction behavior concrete:
+- default redacted snapshot packet
+- explicit full-card-list option
+- visible privacy caveat on full-card-list snapshots
+- hard rejection of raw imported text and private notes by default
+
+GitHub CI was not available for the Phase 36A validation result.
+```
+
+## Current Phase 36B Outside Validation Packet
+
+Send these files for the current gate:
+
+```text
+docs/PHASE36B_IMMUTABLE_DECK_SNAPSHOT_IMPLEMENTATION_CONTRACT.md
+docs/CHECKPOINT_PHASE36B_IMMUTABLE_DECK_SNAPSHOT_IMPLEMENTATION_CONTRACT_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE36B_IMMUTABLE_DECK_SNAPSHOT_IMPLEMENTATION_CONTRACT_PROMPT.md
+docs/PHASE36A_IMMUTABLE_DECK_SNAPSHOT_EXPANSION_CONTRACT.md
+docs/CHECKPOINT_PHASE36A_IMMUTABLE_DECK_SNAPSHOT_EXPANSION_CONTRACT_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE36A_IMMUTABLE_DECK_SNAPSHOT_EXPANSION_CONTRACT_PROMPT.md
+docs/POST_PHASE31_DEFERRED_IMPLEMENTATION_PRIORITY_PLAN.md
+docs/CODIE_V1_CONSTITUTION.md
+codie/user_decks/importer.py
+codie/user_decks/deck_memory.py
+codie/user_decks/analysis_input.py
+codie/user_decks/__init__.py
 codie/db/schema/user.sql
 codie/db/repositories/user.py
 tests/test_user_deck_import.py

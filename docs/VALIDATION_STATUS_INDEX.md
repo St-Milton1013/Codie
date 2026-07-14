@@ -61,7 +61,8 @@ Phase 34C Scryfall Tagger Ontology Implementation: PASS WITH REVIEW NOTES
 Phase 35A Commander Spellbook Interpreter Expansion Contract: PASS WITH REVIEW NOTES
 Phase 35B Commander Spellbook Interpreter Implementation Contract: PASS WITH REVIEW NOTES
 Phase 35C Commander Spellbook Interpreter Implementation: PASS WITH REVIEW NOTES
-Phase 36A Immutable Deck Snapshot Expansion Contract: INTERNAL PASS
+Phase 36A Immutable Deck Snapshot Expansion Contract: PASS WITH REVIEW NOTES
+Phase 36B Immutable Deck Snapshot Implementation Contract: INTERNAL PASS
 Local alpha tag: created locally; remote tag push not verified in this environment
 ```
 
@@ -145,7 +146,8 @@ Phase 34C Scryfall Tagger Ontology Implementation: PASS WITH REVIEW NOTES
 Phase 35A Commander Spellbook Interpreter Expansion Contract: PASS WITH REVIEW NOTES
 Phase 35B Commander Spellbook Interpreter Implementation Contract: PASS WITH REVIEW NOTES
 Phase 35C Commander Spellbook Interpreter Implementation: PASS WITH REVIEW NOTES
-Phase 36A Immutable Deck Snapshot Expansion Contract: INTERNAL PASS
+Phase 36A Immutable Deck Snapshot Expansion Contract: PASS WITH REVIEW NOTES
+Phase 36B Immutable Deck Snapshot Implementation Contract: INTERNAL PASS
 ```
 
 ## Latest Local Validation
@@ -225,6 +227,22 @@ forbidden import/dependency scan: no production matches; test matches only asser
 recommendation-language scan: production matches only blocked phrase constants and boundary comments; test matches only rejection coverage
 
 Phase 36A Immutable Deck Snapshot Expansion Contract:
+python scripts/check_schema.py
+Schema bootstrap check passed.
+
+python -m unittest discover -s tests
+Ran 916 tests
+OK (skipped=1)
+
+git diff --check
+passed
+
+Static scans:
+production/test/schema/repository/dependency drift scan: no matches
+forbidden implementation/dependency scan: matches only contract narrative and explicit forbidden-scope lists
+recommendation-language scan: matches only explicit contract boundary statements
+
+Phase 36B Immutable Deck Snapshot Implementation Contract:
 python scripts/check_schema.py
 Schema bootstrap check passed.
 
@@ -380,23 +398,24 @@ production Forge / LLM SDK import scan: no matches
 ## Current Blocker
 
 ```text
-Phase 36B is blocked until Phase 36A outside validation returns PASS or PASS WITH REVIEW NOTES.
+Phase 36C is blocked until Phase 36B outside validation returns PASS or PASS WITH REVIEW NOTES.
 ```
 
-## Current Phase 36A Outside Validation Packet
+## Current Phase 36B Outside Validation Packet
 
 ```text
+docs/PHASE36B_IMMUTABLE_DECK_SNAPSHOT_IMPLEMENTATION_CONTRACT.md
+docs/CHECKPOINT_PHASE36B_IMMUTABLE_DECK_SNAPSHOT_IMPLEMENTATION_CONTRACT_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE36B_IMMUTABLE_DECK_SNAPSHOT_IMPLEMENTATION_CONTRACT_PROMPT.md
 docs/PHASE36A_IMMUTABLE_DECK_SNAPSHOT_EXPANSION_CONTRACT.md
 docs/CHECKPOINT_PHASE36A_IMMUTABLE_DECK_SNAPSHOT_EXPANSION_CONTRACT_REPORT.md
 docs/OUTSIDE_VALIDATION_PHASE36A_IMMUTABLE_DECK_SNAPSHOT_EXPANSION_CONTRACT_PROMPT.md
-docs/PHASE35C_COMMANDER_SPELLBOOK_INTERPRETER_IMPLEMENTATION_REPORT.md
-docs/CHECKPOINT_PHASE35C_COMMANDER_SPELLBOOK_INTERPRETER_IMPLEMENTATION_REPORT.md
-docs/OUTSIDE_VALIDATION_PHASE35C_COMMANDER_SPELLBOOK_INTERPRETER_IMPLEMENTATION_PROMPT.md
 docs/POST_PHASE31_DEFERRED_IMPLEMENTATION_PRIORITY_PLAN.md
 docs/CODIE_V1_CONSTITUTION.md
 codie/user_decks/importer.py
 codie/user_decks/deck_memory.py
 codie/user_decks/analysis_input.py
+codie/user_decks/__init__.py
 codie/db/schema/user.sql
 codie/db/repositories/user.py
 tests/test_user_deck_import.py
