@@ -402,8 +402,37 @@ docs/NEXT_PHASE_CONTRACT.md
 docs/CODEX_CONTINUITY_HANDOFF.md
 ```
 
+## Contract Completeness Checklist
+
+This implementation contract defines:
+
+```text
+explicit Phase 37B validation tuple
+explicit next-phase validation tuple
+accepted Phase 37A dependency evidence
+authorized future implementation files
+future public interface
+future packet responsibilities
+allowed pool types
+identity and provenance rules
+metric serialization rules
+tag row rules
+coverage and caveat rules
+privacy boundary
+evidence boundary enforcement
+fixture inventory
+fixture coverage requirements
+required tests
+dependency and input allowances
+deferred later work
+outside validation packet
+```
+
+The listed items are the complete Phase 37B contract surface for the Frequency
+Pools / Tag Graph Lab implementation-contract packet.
+
 ## Completion Rule
 
-Phase 37B publishes the validation tuple for the next roadmap packet. The
-current PR contains only the implementation-contract packet and matching
-governance records.
+Phase 37B publishes the validation tuple for the next roadmap packet. Acceptance
+of this contract packet authorizes the roadmap to proceed to the next declared
+packet under its own validation gate.
