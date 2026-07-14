@@ -217,6 +217,19 @@ PASS / PASS WITH REVIEW NOTES unblock Phase 37C contract-first work
 PASS WITH REQUIRED FIXES / FAIL keep Phase 37C blocked
 ```
 
+Deferred implementation remains outside this checkpoint:
+
+```text
+no production Frequency Pool implementation
+no Tag Graph metric packet models
+no repository-backed Frequency Pool builders
+no exports
+no UI
+no implementation tests or fixtures
+```
+
+Validators should not require those deferred items as Phase 37B corrections.
+
 ## Next Gate
 
 ```text

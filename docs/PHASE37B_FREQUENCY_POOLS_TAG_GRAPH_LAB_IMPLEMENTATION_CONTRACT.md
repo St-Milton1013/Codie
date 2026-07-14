@@ -395,7 +395,9 @@ dependencies.
 
 ## Complete Deferred Later Work
 
-Separate future contracts are still required for:
+The following work is excluded from Phase 37B and excluded from the immediate
+Phase 37C model/validator packet unless a later accepted contract explicitly
+authorizes it:
 
 ```text
 Tag Graph metric packet models
@@ -407,6 +409,11 @@ repository-backed Frequency Pool builders
 Moxfield Frequency Pool Builder
 recommendation integration
 ```
+
+Validators must not require any deferred item above as a correction for Phase
+37B. Requiring production implementation, Tag Graph metric packet models,
+repository-backed builders, exports, UI, or recommendation integration would
+contradict this implementation-contract packet.
 
 ## Phase 37B Outside Validation Packet
 
@@ -479,6 +486,21 @@ FAIL
 Only PASS or PASS WITH REVIEW NOTES may unblock Phase 37C contract-first work.
 PASS WITH REQUIRED FIXES or FAIL must leave Phase 37C blocked and identify
 required corrections against this Phase 37B packet.
+
+## Final Governance Summary
+
+Phase 37B is complete when this implementation-contract packet, checkpoint,
+outside-validation prompt, and governance records are internally consistent and
+accepted by validation. The phase intentionally contains no production
+Frequency Pool implementation, no Tag Graph implementation, no repository
+builders, no tests or fixtures for implementation code, and no changes outside
+the listed governance documents.
+
+The next allowed work after Phase 37B acceptance is Phase 37C contract-first
+work for local in-memory Frequency Pool packet models and validators only.
+Phase 37C must not include deferred Tag Graph metrics, repository-backed
+builders, exports, UI, provider/database access, recommendation integration, or
+other deferred work unless a later accepted contract changes the scope.
 
 ## Contract Completeness Checklist
 

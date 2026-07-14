@@ -153,6 +153,11 @@ the PASS WITH REQUIRED FIXES / FAIL blocked condition
 Reject if the packet does not state what validators must confirm, what remains
 out of scope, or which outcomes block Phase 37C.
 
+Do not reject Phase 37B for lacking production implementation, Tag Graph metric
+packet models, repository-backed Frequency Pool builders, exports, UI, tests,
+or fixtures. Those items are deferred unless a later accepted contract
+explicitly authorizes them.
+
 ## Confirm Frequency Pool Boundaries
 
 Confirm future Frequency Pool packet models must:
@@ -237,4 +242,12 @@ PASS
 PASS WITH REVIEW NOTES
 PASS WITH REQUIRED FIXES
 FAIL
+```
+
+Final validation note:
+
+```text
+Phase 37B is an implementation-contract packet.
+PASS or PASS WITH REVIEW NOTES accepts the contract packet.
+It does not mean production Frequency Pool or Tag Graph code exists.
 ```
