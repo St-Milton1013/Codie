@@ -130,7 +130,7 @@ evidence boundary enforcement
 fixture inventory
 fixture coverage requirements
 required tests
-dependency and input allowances
+future package dependencies and input limits
 deferred later work
 outside validation packet
 ```

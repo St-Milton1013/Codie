@@ -40,7 +40,7 @@ It does not implement Frequency Pool code, Tag Graph code, schema,
 repositories, providers, live network behavior, file writing, CLI, UI,
 simulator execution, analytics recalculation, LLM calls, or recommendations.
 
-## Accepted Dependency
+## Accepted Phase 37A Dependency Evidence
 
 ```text
 Phase 37A Frequency Pools / Tag Graph Lab Contract: PASS WITH REVIEW NOTES

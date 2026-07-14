@@ -32,7 +32,7 @@ the matching governance records. The packet defines the later model/validator
 surface without adding `codie/`, `tests/`, fixture, schema, provider, UI,
 workflow, validator, or constitution changes.
 
-## Accepted Dependency
+## Accepted Phase 37A Dependency Evidence
 
 Phase 37A outside validation returned PASS WITH REVIEW NOTES.
 
@@ -95,7 +95,7 @@ The packet does not build Frequency Pool data, calculate metrics, read sources,
 write files, or prepare Tag Graph visualizations. It only constrains what a
 future accepted implementation packet may add.
 
-## Complete Authorized Future Implementation Files
+## Authorized Future Implementation Files
 
 After this contract is accepted, the next packet may define local, in-memory
 Frequency Pool packet models and validators.
@@ -366,7 +366,7 @@ recommendation-language scan has no production matches
 file-writing scan has no production matches
 ```
 
-## Future Dependency Rules
+## Future Package Dependencies And Input Limits
 
 Allowed implementation package dependencies:
 
@@ -458,7 +458,7 @@ evidence boundary enforcement
 fixture inventory
 fixture coverage requirements
 required tests
-dependency and input allowances
+future package dependencies and input limits
 deferred later work
 outside validation packet
 ```
