@@ -1,4 +1,4 @@
-from __future__ import annotations
+﻿from __future__ import annotations
 
 import json
 import os
@@ -105,7 +105,7 @@ class RepairControllerTest(unittest.TestCase):
         result = run_repair_controller(
             options(),
             validation_runner=lambda sha, _cycle: validations[sha],
-            repair_runner=lambda _attempt, _sha, _cycle: RepairExecutionResult(
+            repair_runner=lambda _attempt, _sha, _cycle, _allowed_paths: RepairExecutionResult(
                 "COMMITTED",
                 commit_sha=SHA2,
                 changed_files=("codie/cards/example.py",),
@@ -126,7 +126,7 @@ class RepairControllerTest(unittest.TestCase):
         result = run_repair_controller(
             options(),
             validation_runner=lambda sha, _cycle: validations[sha],
-            repair_runner=lambda _attempt, _sha, _cycle: RepairExecutionResult(
+            repair_runner=lambda _attempt, _sha, _cycle, _allowed_paths: RepairExecutionResult(
                 "COMMITTED",
                 commit_sha=commits.pop(0),
                 changed_files=("tests/test_example.py",),
@@ -147,7 +147,7 @@ class RepairControllerTest(unittest.TestCase):
         result = run_repair_controller(
             options(),
             validation_runner=lambda sha, _cycle: validations[sha],
-            repair_runner=lambda _attempt, _sha, _cycle: RepairExecutionResult(
+            repair_runner=lambda _attempt, _sha, _cycle, _allowed_paths: RepairExecutionResult(
                 "COMMITTED",
                 commit_sha=commits.pop(0),
                 changed_files=("codie/cards/example.py",),
@@ -165,7 +165,7 @@ class RepairControllerTest(unittest.TestCase):
                 SHA1,
                 summary=cycle_summary(),
             ),
-            repair_runner=lambda _attempt, _sha, _cycle: RepairExecutionResult(
+            repair_runner=lambda _attempt, _sha, _cycle, _allowed_paths: RepairExecutionResult(
                 "COMMITTED",
                 commit_sha=SHA2,
                 changed_files=("codie/cards/example.py",),
@@ -184,7 +184,7 @@ class RepairControllerTest(unittest.TestCase):
                 sha,
                 summary=cycle_summary(),
             ),
-            repair_runner=lambda _attempt, _sha, _cycle: RepairExecutionResult(
+            repair_runner=lambda _attempt, _sha, _cycle, _allowed_paths: RepairExecutionResult(
                 "COMMITTED",
                 commit_sha=SHA2,
                 changed_files=("codie/cards/example.py",),
@@ -198,7 +198,7 @@ class RepairControllerTest(unittest.TestCase):
         result = run_repair_controller(
             options(),
             validation_runner=lambda sha, _cycle: ValidationCycleResult("REPAIR_REQUIRED", sha, summary=cycle_summary()),
-            repair_runner=lambda _attempt, _sha, _cycle: RepairExecutionResult("USAGE_LIMIT", message="usage limit"),
+            repair_runner=lambda _attempt, _sha, _cycle, _allowed_paths: RepairExecutionResult("USAGE_LIMIT", message="usage limit"),
         )
 
         self.assertEqual(result.final_result, "CODEX_USAGE_LIMIT")
@@ -218,7 +218,7 @@ class RepairControllerTest(unittest.TestCase):
                 result = run_repair_controller(
                     options(),
                     validation_runner=lambda sha, _cycle, status=ineligible: ValidationCycleResult(status, sha),
-                    repair_runner=lambda _attempt, _sha, _cycle: (_ for _ in ()).throw(AssertionError("repair ran")),
+                    repair_runner=lambda _attempt, _sha, _cycle, _allowed_paths: (_ for _ in ()).throw(AssertionError("repair ran")),
                 )
 
                 self.assertEqual(result.final_result, ineligible)
@@ -226,6 +226,7 @@ class RepairControllerTest(unittest.TestCase):
 
     def test_repair_runner_receives_latest_validation_cycle(self) -> None:
         seen_cycles: list[str] = []
+        seen_allowed_paths: list[frozenset[str]] = []
 
         result = run_repair_controller(
             options(),
@@ -234,7 +235,8 @@ class RepairControllerTest(unittest.TestCase):
                 sha,
                 summary=cycle_summary(),
             ),
-            repair_runner=lambda _attempt, _sha, cycle: seen_cycles.append(cycle.summary)
+            repair_runner=lambda _attempt, _sha, cycle, _allowed_paths: seen_cycles.append(cycle.summary)
+            or seen_allowed_paths.append(_allowed_paths)
             or RepairExecutionResult(
                 "COMMITTED",
                 commit_sha=SHA2,
@@ -245,12 +247,13 @@ class RepairControllerTest(unittest.TestCase):
         self.assertEqual(result.final_result, "CLEAN_PASS")
         self.assertEqual(len(seen_cycles), 1)
         self.assertIn("Open validation finding", seen_cycles[0])
+        self.assertEqual(seen_allowed_paths, [frozenset({"codie/cards/example.py", "tests/test_example.py"})])
 
     def test_unauthorized_file_changes(self) -> None:
         result = run_repair_controller(
             options(),
             validation_runner=lambda sha, _cycle: ValidationCycleResult("REPAIR_REQUIRED", sha, summary=cycle_summary()),
-            repair_runner=lambda _attempt, _sha, _cycle: RepairExecutionResult(
+            repair_runner=lambda _attempt, _sha, _cycle, _allowed_paths: RepairExecutionResult(
                 "COMMITTED",
                 commit_sha=SHA2,
                 changed_files=("docs/CODIE_V1_CONSTITUTION.md",),
@@ -263,6 +266,11 @@ class RepairControllerTest(unittest.TestCase):
         offenders = unauthorized_repair_paths(("docs/CODIE_V1_CONSTITUTION.md",))
 
         self.assertEqual(offenders, ("docs/CODIE_V1_CONSTITUTION.md",))
+
+    def test_active_scope_file_is_protected(self) -> None:
+        offenders = unauthorized_repair_paths(("docs/CODIE_ACTIVE_VALIDATION_SCOPE.json",))
+
+        self.assertEqual(offenders, ("docs/CODIE_ACTIVE_VALIDATION_SCOPE.json",))
 
     def test_validator_infrastructure_modification_rejected(self) -> None:
         result = self._repair_with_changed_file(".github/workflows/codie-local-validation.yml")
@@ -307,7 +315,7 @@ class RepairControllerTest(unittest.TestCase):
                 sha,
                 summary=cycle_summary(affected_files=[]),
             ),
-            repair_runner=lambda _attempt, _sha, _cycle: (_ for _ in ()).throw(AssertionError("repair ran")),
+            repair_runner=lambda _attempt, _sha, _cycle, _allowed_paths: (_ for _ in ()).throw(AssertionError("repair ran")),
         )
 
         self.assertEqual(result.final_result, "HUMAN_REVIEW_REQUIRED")
@@ -461,6 +469,7 @@ class RepairControllerTest(unittest.TestCase):
                 Path(tmp),
                 BRANCH,
                 "repair",
+                allowed_paths=frozenset({"codie/new_file.py"}),
                 codex_path=Path("C:/Codex/codex.exe"),
                 command_runner=runner,
             )
@@ -468,6 +477,59 @@ class RepairControllerTest(unittest.TestCase):
         self.assertEqual(result.status, "COMMITTED")
         self.assertIn(("git", "push", "origin", f"HEAD:{BRANCH}"), calls)
         self.assertIn("codie/new_file.py", result.changed_files)
+
+    def test_unrelated_file_rejected_before_commit_or_push(self) -> None:
+        calls: list[tuple[str, ...]] = []
+
+        def runner(command: tuple[str, ...], _root: Path):
+            calls.append(command)
+            if command[:3] == ("git", "ls-files", "--others"):
+                return completed(stdout="codie/unrelated.py\n")
+            return completed()
+
+        with tempfile.TemporaryDirectory() as tmp:
+            result = codex_exec_repair_attempt(
+                1,
+                SHA1,
+                Path(tmp),
+                BRANCH,
+                "repair",
+                allowed_paths=frozenset({"codie/cards/example.py"}),
+                codex_path=Path("C:/Codex/codex.exe"),
+                command_runner=runner,
+            )
+
+        self.assertEqual(result.status, "FAILED")
+        self.assertEqual(result.changed_files, ("codie/unrelated.py",))
+        self.assertFalse(any(command[:2] == ("git", "add") for command in calls))
+        self.assertFalse(any(command[:2] == ("git", "commit") for command in calls))
+        self.assertFalse(any(command[:2] == ("git", "push") for command in calls))
+
+    def test_unrelated_file_rejected_before_branch_mutation(self) -> None:
+        calls: list[tuple[str, ...]] = []
+
+        def runner(command: tuple[str, ...], _root: Path):
+            calls.append(command)
+            if command[:2] == ("git", "diff"):
+                return completed(stdout="codie/unrelated.py\n")
+            return completed()
+
+        with tempfile.TemporaryDirectory() as tmp:
+            result = codex_exec_repair_attempt(
+                1,
+                SHA1,
+                Path(tmp),
+                BRANCH,
+                "repair",
+                allowed_paths=frozenset({"codie/cards/example.py"}),
+                codex_path=Path("C:/Codex/codex.exe"),
+                command_runner=runner,
+            )
+
+        self.assertEqual(result.status, "FAILED")
+        self.assertEqual(result.changed_files, ("codie/unrelated.py",))
+        self.assertFalse(any(command[:2] == ("git", "commit") for command in calls))
+        self.assertFalse(any(command[:2] == ("git", "push") for command in calls))
 
     def test_worktree_command_failure(self) -> None:
         def runner(command: tuple[str, ...], _root: Path):
@@ -618,7 +680,7 @@ class RepairControllerTest(unittest.TestCase):
             result = run_repair_controller(
                 options(output_dir=output_dir),
                 validation_runner=lambda sha, _cycle: validations[sha],
-                repair_runner=lambda _attempt, _sha, _cycle: RepairExecutionResult(
+                repair_runner=lambda _attempt, _sha, _cycle, _allowed_paths: RepairExecutionResult(
                     "COMMITTED",
                     commit_sha=commits.pop(0),
                     changed_files=("tests/test_example.py",),
@@ -645,7 +707,7 @@ class RepairControllerTest(unittest.TestCase):
                 run_repair_controller(
                     options(),
                     validation_runner=lambda sha, _cycle: ValidationCycleResult("REPAIR_REQUIRED", sha, summary=cycle_summary()),
-                    repair_runner=lambda _attempt, _sha, _cycle: RepairExecutionResult("FAILED"),
+                    repair_runner=lambda _attempt, _sha, _cycle, _allowed_paths: RepairExecutionResult("FAILED"),
                 )
         finally:
             if original is None:
@@ -657,7 +719,7 @@ class RepairControllerTest(unittest.TestCase):
         return run_repair_controller(
             options(),
             validation_runner=lambda sha, _cycle: ValidationCycleResult("REPAIR_REQUIRED" if sha == SHA1 else "CLEAN_PASS", sha, summary=cycle_summary()),
-            repair_runner=lambda _attempt, _sha, _cycle: RepairExecutionResult(
+            repair_runner=lambda _attempt, _sha, _cycle, _allowed_paths: RepairExecutionResult(
                 "COMMITTED",
                 commit_sha=SHA2,
                 changed_files=(changed_file,),

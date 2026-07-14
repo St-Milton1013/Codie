@@ -11,6 +11,7 @@ from unittest import mock
 from codie.validation.local_gate import (
     ACTIVE_VALIDATION_SCOPE_SCHEMA_VERSION,
     ACTIVE_VALIDATION_SCOPE_PATH,
+    ActiveValidationScope,
     CONSTITUTION_VERSION,
     CURRENT_EXPECTED_PHASE_ID,
     REPOSITORY,
@@ -21,6 +22,7 @@ from codie.validation.local_gate import (
     ValidationGateOptions,
     ValidatorReport,
     aggregate_validator_reports,
+    authoritative_active_validation_scope,
     model_response_json_schema,
     parse_model_validator_json,
     parse_validator_json,
@@ -30,6 +32,7 @@ from codie.validation.local_gate import (
     _run_ollama,
     _portable_python_executable,
     run_ollama_validator,
+    run_validation_gate,
     validate_report_payload,
     validator_report_from_model_response,
     validator_report_to_dict,
@@ -285,6 +288,91 @@ class ValidationLocalGateTest(unittest.TestCase):
             with self.assertRaises(ValidationGateError):
                 resolve_active_validation_scope(root)
 
+    def test_pr_head_scope_change_cannot_weaken_validation(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            write_scope(root, phase_id="Phase35B", gate_scope="INTERMEDIATE_PACKET")
+            base_text = json.dumps(
+                {
+                    "schema_version": ACTIVE_VALIDATION_SCOPE_SCHEMA_VERSION,
+                    "phase_id": "Phase35B",
+                    "phase_part": "outside-validation",
+                    "gate_scope": "FINAL_PHASE",
+                },
+                sort_keys=True,
+            )
+            with mock.patch("codie.validation.local_gate._git_show_text", return_value=base_text):
+                scope, conflict = authoritative_active_validation_scope(root, "main")
+
+            self.assertEqual(scope.gate_scope, "FINAL_PHASE")
+            self.assertIn("modified active validation scope", conflict)
+
+    def test_base_branch_scope_is_authoritative(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            base_text = json.dumps(
+                {
+                    "schema_version": ACTIVE_VALIDATION_SCOPE_SCHEMA_VERSION,
+                    "phase_id": "Phase35B",
+                    "phase_part": "outside-validation",
+                    "gate_scope": "INTERMEDIATE_PACKET",
+                },
+                sort_keys=True,
+            ) + "\n"
+            (root / ACTIVE_VALIDATION_SCOPE_PATH).parent.mkdir(parents=True, exist_ok=True)
+            (root / ACTIVE_VALIDATION_SCOPE_PATH).write_text(base_text, encoding="utf-8")
+            with mock.patch("codie.validation.local_gate._git_show_text", return_value=base_text):
+                scope, conflict = authoritative_active_validation_scope(root, "main")
+
+            self.assertEqual(scope.phase_id, "Phase35B")
+            self.assertEqual(scope.gate_scope, "INTERMEDIATE_PACKET")
+            self.assertEqual(conflict, "")
+
+    def test_wrong_phase_part_rejected_against_authoritative_scope(self) -> None:
+        result = self._run_security_only_gate(
+            active_scope=ActiveValidationScope("Phase35B", "outside-validation", "INTERMEDIATE_PACKET"),
+            options=ValidationGateOptions(
+                phase_id="Phase35B",
+                phase_part="wrong-part",
+                gate_scope="INTERMEDIATE_PACKET",
+                target_sha=SHA,
+                pull_request_number=PR_NUMBER,
+                branch=BRANCH,
+            ),
+        )
+
+        self.assertEqual(result.result, "CONSTITUTION_CONFLICT")
+
+    def test_wrong_gate_scope_rejected_against_authoritative_scope(self) -> None:
+        result = self._run_security_only_gate(
+            active_scope=ActiveValidationScope("Phase35B", "outside-validation", "FINAL_PHASE"),
+            options=ValidationGateOptions(
+                phase_id="Phase35B",
+                phase_part="outside-validation",
+                gate_scope="INTERMEDIATE_PACKET",
+                target_sha=SHA,
+                pull_request_number=PR_NUMBER,
+                branch=BRANCH,
+            ),
+        )
+
+        self.assertEqual(result.result, "CONSTITUTION_CONFLICT")
+
+    def test_manual_weaker_gate_rejected(self) -> None:
+        result = self._run_security_only_gate(
+            active_scope=ActiveValidationScope("Phase35B", "outside-validation", "FINAL_PHASE"),
+            options=ValidationGateOptions(
+                phase_id="Phase35B",
+                phase_part="outside-validation",
+                gate_scope="INTERMEDIATE_PACKET",
+                target_sha=SHA,
+                pull_request_number=PR_NUMBER,
+                branch=BRANCH,
+            ),
+        )
+
+        self.assertEqual(result.result, "CONSTITUTION_CONFLICT")
+
     def test_malformed_json_fails(self) -> None:
         with self.assertRaises(ValidationGateError):
             parse_validator_json("{not-json")
@@ -320,9 +408,53 @@ class ValidationLocalGateTest(unittest.TestCase):
 
         self.assertEqual(result.result, "CLEAN_PASS")
 
+    def test_intermediate_medium_only_fail_report_does_not_block(self) -> None:
+        result = aggregate_validator_reports(
+            (
+                report(validator="deterministic", result="FAIL", findings=(finding(finding_id="finding:medium", severity="MEDIUM"),)),
+                report(validator="architecture", model="qwen2.5-coder:7b"),
+                report(validator="adversarial", model="llama3.1:latest"),
+            ),
+            SHA,
+        )
+
+        self.assertEqual(result.result, "CLEAN_PASS")
+
+    def test_intermediate_low_only_fail_report_does_not_block(self) -> None:
+        result = aggregate_validator_reports(
+            (
+                report(validator="deterministic", result="FAIL", findings=(finding(finding_id="finding:low", severity="LOW"),)),
+                report(validator="architecture", model="qwen2.5-coder:7b"),
+                report(validator="adversarial", model="llama3.1:latest"),
+            ),
+            SHA,
+        )
+
+        self.assertEqual(result.result, "CLEAN_PASS")
+
+    def test_intermediate_high_finding_blocks(self) -> None:
+        result = aggregate_validator_reports(
+            (
+                report(validator="deterministic", result="FAIL", findings=(finding(finding_id="finding:high", severity="HIGH"),)),
+                report(validator="architecture", model="qwen2.5-coder:7b"),
+                report(validator="adversarial", model="llama3.1:latest"),
+            ),
+            SHA,
+        )
+
+        self.assertEqual(result.result, "REPAIR_REQUIRED")
+
     def test_final_clean_pass_policy_rejects_medium_and_low(self) -> None:
         result = aggregate_validator_reports(
             three_reports(gate_scope="FINAL_PHASE", result="CLEAN_PASS", findings=(finding(severity="MEDIUM"),)),
+            SHA,
+        )
+
+        self.assertEqual(result.result, "REPAIR_REQUIRED")
+
+    def test_final_phase_any_open_finding_blocks(self) -> None:
+        result = aggregate_validator_reports(
+            three_reports(gate_scope="FINAL_PHASE", result="CLEAN_PASS", findings=(finding(severity="INFORMATIONAL"),)),
             SHA,
         )
 
@@ -516,6 +648,13 @@ class ValidationLocalGateTest(unittest.TestCase):
 
     def test_linux_python312_regression_uses_current_interpreter_when_windows_venv_missing(self) -> None:
         self.assertEqual(_portable_python_executable("Z:/definitely/missing/python.exe"), sys.executable)
+
+    def _run_security_only_gate(self, *, active_scope: ActiveValidationScope, options: ValidationGateOptions):
+        with mock.patch("codie.validation.local_gate.authoritative_active_validation_scope", return_value=(active_scope, "")), mock.patch(
+            "codie.validation.local_gate._git_output",
+            return_value=SHA,
+        ):
+            return run_validation_gate(options, root=Path.cwd())
 
 
 if __name__ == "__main__":

@@ -31,6 +31,7 @@ PROTECTED_REPAIR_PATHS = frozenset(
         "tests/test_validation_local_gate.py",
         "tests/test_validation_repair_controller.py",
         "docs/CODIE_LOCAL_VALIDATION_AUTOMATION_CONTRACT.md",
+        "docs/CODIE_ACTIVE_VALIDATION_SCOPE.json",
         "docs/CODIE_V1_CONSTITUTION.md",
     }
 )
@@ -148,7 +149,7 @@ class RepairControllerResult:
 
 
 ValidationRunner = Callable[[str, int], ValidationCycleResult]
-RepairRunner = Callable[[int, str, ValidationCycleResult], RepairExecutionResult]
+RepairRunner = Callable[[int, str, ValidationCycleResult, frozenset[str]], RepairExecutionResult]
 CommandRunner = Callable[[tuple[str, ...], Path], subprocess.CompletedProcess[str]]
 
 
@@ -192,7 +193,7 @@ def run_repair_controller(
                 current_sha,
                 str(exc),
             )
-        repair = repair_runner(attempts_used + 1, current_sha, latest_cycle)
+        repair = repair_runner(attempts_used + 1, current_sha, latest_cycle, allowed_paths)
         repairs.append(repair)
         if repair.status == "USAGE_LIMIT":
             return _finish(
@@ -266,7 +267,7 @@ def run_real_repair_controller(
             command_runner=runner,
         )
 
-    def repair(attempt: int, sha: str, cycle: ValidationCycleResult) -> RepairExecutionResult:
+    def repair(attempt: int, sha: str, cycle: ValidationCycleResult, allowed_paths: frozenset[str]) -> RepairExecutionResult:
         prompt = _repair_prompt(options, attempt, sha, cycle)
         return codex_exec_repair_attempt(
             attempt,
@@ -274,6 +275,7 @@ def run_real_repair_controller(
             root,
             options.pr_branch,
             prompt,
+            allowed_paths=allowed_paths,
             codex_path=codex_path,
             command_runner=runner,
         )
@@ -389,6 +391,7 @@ def codex_exec_repair_attempt(
     root: Path,
     pr_branch: str,
     prompt: str,
+    allowed_paths: frozenset[str] | None = None,
     codex_path: Path | None = None,
     command_runner: CommandRunner | None = None,
 ) -> RepairExecutionResult:
@@ -406,7 +409,7 @@ def codex_exec_repair_attempt(
                 return RepairExecutionResult(status="USAGE_LIMIT", message=combined.strip())
             return RepairExecutionResult(status="FAILED", message=combined.strip())
         changed_files = _changed_files(runner, worktree_dir)
-        unauthorized = unauthorized_repair_paths(changed_files)
+        unauthorized = unauthorized_repair_paths(changed_files, allowed_paths=allowed_paths)
         if unauthorized:
             return RepairExecutionResult(status="FAILED", changed_files=unauthorized, message="unauthorized file changes")
         if not changed_files:

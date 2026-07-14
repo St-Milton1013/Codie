@@ -24,6 +24,8 @@ REPOSITORY = "St-Milton1013/Codie"
 CURRENT_EXPECTED_PHASE_ID = "Phase35A"
 ACTIVE_VALIDATION_SCOPE_SCHEMA_VERSION = "codie.active_validation_scope.v1"
 ACTIVE_VALIDATION_SCOPE_PATH = "docs/CODIE_ACTIVE_VALIDATION_SCOPE.json"
+ACTIVE_VALIDATION_SCOPE_BOOTSTRAP_BASE_SHA = "b14614aa499a3254892949f6f36d96e126c7c7c3"
+ACTIVE_VALIDATION_SCOPE_BOOTSTRAP = ("Phase35B", "outside-validation", "INTERMEDIATE_PACKET")
 ALLOWED_GATE_SCOPES = frozenset({"INTERMEDIATE_PACKET", "FINAL_PHASE"})
 VALIDATORS = ("deterministic", "architecture", "adversarial")
 VALIDATOR_SET = frozenset(VALIDATORS)
@@ -42,7 +44,7 @@ AGGREGATOR_RESULTS = frozenset(
 )
 SEVERITIES = ("BLOCKER", "CRITICAL", "HIGH", "MEDIUM", "LOW", "INFORMATIONAL")
 BLOCKING_INTERMEDIATE = frozenset({"BLOCKER", "CRITICAL", "HIGH"})
-BLOCKING_FINAL = frozenset({"BLOCKER", "CRITICAL", "HIGH", "MEDIUM", "LOW"})
+BLOCKING_FINAL = frozenset(SEVERITIES)
 REPORT_STATUSES = frozenset({"CLEAN_PASS", "FAIL", "ERROR"})
 FINDING_STATUSES = frozenset({"OPEN", "RESOLVED", "DEFERRED"})
 MODEL_BY_VALIDATOR = {
@@ -255,7 +257,8 @@ def run_validation_gate(
 ) -> AggregatedValidationResult:
     resolved_root = root or Path.cwd()
     branch = options.branch or _git_output(("git", "branch", "--show-current"), resolved_root)
-    active_phase = expected_phase_for_run(options.phase_id, resolved_root)
+    active_scope, scope_conflict = authoritative_active_validation_scope(resolved_root, options.base_branch)
+    active_phase = active_scope.phase_id
     resolved_options = ValidationGateOptions(
         phase_id=options.phase_id,
         phase_part=options.phase_part,
@@ -268,7 +271,7 @@ def run_validation_gate(
         output_dir=options.output_dir,
         python_executable=options.python_executable,
     )
-    security_report = _security_preflight(resolved_options, resolved_root, active_phase)
+    security_report = _security_preflight(resolved_options, resolved_root, active_scope, scope_conflict)
     if security_report is not None:
         aggregate = aggregate_validator_reports((security_report,), resolved_options.target_sha, active_phase=active_phase)
         write_validation_outputs(aggregate, resolved_options.output_dir)
@@ -403,6 +406,8 @@ def aggregate_validator_reports(
     severity_totals = SeverityTotals.from_findings(findings)
     if contradictions:
         result = "HUMAN_REVIEW_REQUIRED"
+    elif any(finding.governing_rule == "CONSTITUTION_CONFLICT" for finding in findings):
+        result = "CONSTITUTION_CONFLICT"
     elif missing or duplicates or unexpected:
         result = "VALIDATOR_ERROR"
     elif any("stale SHA" in error for error in errors):
@@ -415,10 +420,10 @@ def aggregate_validator_reports(
         result = "COST_POLICY_VIOLATION"
     elif any(report.result == "ERROR" for report in reports):
         result = "VALIDATOR_ERROR"
-    elif blocking or any(report.result == "FAIL" for report in reports):
+    elif gate_scope == "FINAL_PHASE" and (blocking or any(report.result != "CLEAN_PASS" for report in reports)):
         result = "REPAIR_REQUIRED"
-    elif gate_scope == "FINAL_PHASE" and any(report.result != "CLEAN_PASS" for report in reports):
-        result = "HUMAN_REVIEW_REQUIRED"
+    elif gate_scope != "FINAL_PHASE" and blocking:
+        result = "REPAIR_REQUIRED"
     else:
         result = "CLEAN_PASS"
     return AggregatedValidationResult(
@@ -816,11 +821,29 @@ def resolve_active_validation_scope(root: Path) -> ActiveValidationScope:
     declaration_path = root / ACTIVE_VALIDATION_SCOPE_PATH
     if not declaration_path.is_file():
         raise ValidationGateError(f"missing active validation scope declaration: {ACTIVE_VALIDATION_SCOPE_PATH}")
+    return active_validation_scope_from_text(declaration_path.read_text(encoding="utf-8"))
+
+
+def authoritative_active_validation_scope(root: Path, base_branch: str) -> tuple[ActiveValidationScope, str]:
+    base_ref = f"origin/{_require_text(base_branch, 'base_branch')}"
+    base_text = _git_show_text(root, base_ref, ACTIVE_VALIDATION_SCOPE_PATH)
+    head_text = _read_optional_file(root / ACTIVE_VALIDATION_SCOPE_PATH)
+    if base_text is None:
+        head_scope = resolve_active_validation_scope(root)
+        if _is_allowed_active_scope_bootstrap(root, base_ref, head_scope):
+            return head_scope, ""
+        return head_scope, f"missing authoritative base scope declaration: {base_ref}:{ACTIVE_VALIDATION_SCOPE_PATH}"
+    base_scope = active_validation_scope_from_text(base_text)
+    if head_text is None:
+        return base_scope, f"PR head removed active validation scope declaration: {ACTIVE_VALIDATION_SCOPE_PATH}"
+    if head_text != base_text:
+        return base_scope, f"PR head modified active validation scope declaration: {ACTIVE_VALIDATION_SCOPE_PATH}"
+    return base_scope, ""
+
+
+def active_validation_scope_from_text(text: str) -> ActiveValidationScope:
     try:
-        payload = json.loads(
-            declaration_path.read_text(encoding="utf-8"),
-            object_pairs_hook=_reject_duplicate_json_keys,
-        )
+        payload = json.loads(text, object_pairs_hook=_reject_duplicate_json_keys)
     except json.JSONDecodeError as exc:
         raise ValidationGateError(f"malformed active validation scope declaration: {exc}") from exc
     if not isinstance(payload, dict):
@@ -844,10 +867,21 @@ def expected_phase_for_run(requested_phase_id: str, root: Path) -> str:
     return resolve_active_phase(root)
 
 
-def _security_preflight(options: ValidationGateOptions, root: Path, active_phase: str) -> ValidatorReport | None:
+def _security_preflight(
+    options: ValidationGateOptions,
+    root: Path,
+    active_scope: ActiveValidationScope,
+    scope_conflict: str = "",
+) -> ValidatorReport | None:
     findings: list[ValidationFinding] = []
-    if options.phase_id != active_phase:
-        findings.append(_security_finding("phase", f"Wrong active phase: expected {active_phase}.", "CONSTITUTION_CONFLICT"))
+    if scope_conflict:
+        findings.append(_security_finding("active-scope-source", scope_conflict, "CONSTITUTION_CONFLICT"))
+    if options.phase_id != active_scope.phase_id:
+        findings.append(_security_finding("phase", f"Wrong active phase: expected {active_scope.phase_id}.", "CONSTITUTION_CONFLICT"))
+    if options.phase_part != active_scope.phase_part:
+        findings.append(_security_finding("phase-part", f"Wrong phase part: expected {active_scope.phase_part}.", "CONSTITUTION_CONFLICT"))
+    if options.gate_scope != active_scope.gate_scope:
+        findings.append(_security_finding("gate-scope", f"Wrong gate scope: expected {active_scope.gate_scope}.", "CONSTITUTION_CONFLICT"))
     current_sha = _git_output(("git", "rev-parse", "HEAD"), root)
     if current_sha != options.target_sha:
         findings.append(
@@ -1302,6 +1336,38 @@ def _git_output(command: tuple[str, ...], root: Path) -> str:
     return completed.stdout.strip()
 
 
+def _git_show_text(root: Path, ref: str, relative_path: str) -> str | None:
+    completed = subprocess.run(
+        ("git", "show", f"{ref}:{relative_path}"),
+        cwd=root,
+        text=True,
+        capture_output=True,
+        check=False,
+    )
+    if completed.returncode != 0:
+        return None
+    return completed.stdout
+
+
+def _read_optional_file(path: Path) -> str | None:
+    if not path.is_file():
+        return None
+    return path.read_text(encoding="utf-8")
+
+
+def _is_allowed_active_scope_bootstrap(root: Path, base_ref: str, head_scope: ActiveValidationScope) -> bool:
+    if (head_scope.phase_id, head_scope.phase_part, head_scope.gate_scope) != ACTIVE_VALIDATION_SCOPE_BOOTSTRAP:
+        return False
+    merge_base = subprocess.run(
+        ("git", "merge-base", base_ref, "HEAD"),
+        cwd=root,
+        text=True,
+        capture_output=True,
+        check=False,
+    )
+    return merge_base.returncode == 0 and merge_base.stdout.strip() == ACTIVE_VALIDATION_SCOPE_BOOTSTRAP_BASE_SHA
+
+
 def build_arg_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="Run the Codie local validation gate.")
     parser.add_argument("--print-active-scope", action="store_true")
@@ -1320,7 +1386,9 @@ def build_arg_parser() -> argparse.ArgumentParser:
 def main(argv: list[str] | None = None) -> int:
     args = build_arg_parser().parse_args(argv)
     if args.print_active_scope:
-        scope = resolve_active_validation_scope(Path.cwd())
+        scope, conflict = authoritative_active_validation_scope(Path.cwd(), args.base_branch)
+        if conflict:
+            raise ValidationGateError(conflict)
         print(f"phase_id={scope.phase_id}")
         print(f"phase_part={scope.phase_part}")
         print(f"gate_scope={scope.gate_scope}")
