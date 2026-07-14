@@ -400,33 +400,74 @@ def codex_exec_repair_attempt(
     codex = codex_path or discover_codex_executable()
     worktree_dir = root / ".repair-worktrees" / f"attempt-{attempt_number}"
     repair_branch = f"codex-repair-{attempt_number}-{current_sha[:12]}"
+    result: RepairExecutionResult | None = None
+    cleanup_errors: tuple[str, ...] = ()
     try:
         _checked(runner, ("git", "worktree", "add", "-b", repair_branch, str(worktree_dir), current_sha), root, "create repair worktree")
         completed = runner((str(codex), "exec", "--full-auto", prompt), worktree_dir)
         if completed.returncode != 0:
             combined = f"{completed.stdout}\n{completed.stderr}".lower()
             if "usage limit" in combined or "rate limit" in combined:
-                return RepairExecutionResult(status="USAGE_LIMIT", message=combined.strip())
-            return RepairExecutionResult(status="FAILED", message=combined.strip())
+                result = RepairExecutionResult(status="USAGE_LIMIT", message=combined.strip())
+            else:
+                result = RepairExecutionResult(status="FAILED", message=combined.strip())
+            return result
         changed_files = _changed_files(runner, worktree_dir)
         unauthorized = unauthorized_repair_paths(changed_files, allowed_paths=allowed_paths)
         if unauthorized:
-            return RepairExecutionResult(status="FAILED", changed_files=unauthorized, message="unauthorized file changes")
+            result = RepairExecutionResult(status="FAILED", changed_files=unauthorized, message="unauthorized file changes")
+            return result
         if not changed_files:
-            return RepairExecutionResult(status="FAILED", message="codex produced no changes")
+            result = RepairExecutionResult(status="FAILED", message="codex produced no changes")
+            return result
         _checked(runner, ("git", "add", "--", *changed_files), worktree_dir, "stage repair changes")
         _checked(runner, ("git", "commit", "-m", f"Apply validation repair attempt {attempt_number}"), worktree_dir, "commit repair")
         commit_sha = _checked(runner, ("git", "rev-parse", "HEAD"), worktree_dir, "read repair SHA").stdout.strip()
         if commit_sha == current_sha:
-            return RepairExecutionResult(status="FAILED", changed_files=changed_files, message="repair did not advance SHA")
+            result = RepairExecutionResult(status="FAILED", changed_files=changed_files, message="repair did not advance SHA")
+            return result
         _checked(runner, ("git", "push", "origin", f"HEAD:{pr_branch}"), worktree_dir, "push repair commit")
         remote_sha = _checked(runner, ("git", "ls-remote", "origin", f"refs/heads/{pr_branch}"), worktree_dir, "verify remote PR head").stdout.split()[0]
         if remote_sha != commit_sha:
-            return RepairExecutionResult(status="FAILED", changed_files=changed_files, message="remote PR head SHA mismatch after push")
-        return RepairExecutionResult(status="COMMITTED", commit_sha=commit_sha, changed_files=changed_files)
+            result = RepairExecutionResult(status="FAILED", changed_files=changed_files, message="remote PR head SHA mismatch after push")
+            return result
+        result = RepairExecutionResult(status="COMMITTED", commit_sha=commit_sha, changed_files=changed_files)
+        return result
     finally:
-        runner(("git", "worktree", "remove", "--force", str(worktree_dir)), root)
-        runner(("git", "worktree", "prune"), root)
+        cleanup_errors = _cleanup_repair_resources(runner, root, worktree_dir, repair_branch)
+        if cleanup_errors and result is not None:
+            object.__setattr__(result, "message", _append_cleanup_errors(result.message, cleanup_errors))
+
+
+def _cleanup_repair_resources(runner: CommandRunner, root: Path, worktree_dir: Path, repair_branch: str) -> tuple[str, ...]:
+    errors: list[str] = []
+    cleanup_steps = (
+        (("git", "worktree", "remove", "--force", str(worktree_dir)), "remove repair worktree", False),
+        (("git", "worktree", "prune"), "prune repair worktrees", False),
+        (("git", "branch", "-D", repair_branch), "delete temporary repair branch", True),
+    )
+    for command, label, tolerate_missing in cleanup_steps:
+        completed = runner(command, root)
+        if completed.returncode == 0:
+            continue
+        combined = f"{completed.stdout}\n{completed.stderr}".strip()
+        if tolerate_missing and _branch_missing_message(combined):
+            continue
+        errors.append(f"{label} failed: {combined or completed.returncode}")
+    return tuple(errors)
+
+
+def _branch_missing_message(message: str) -> bool:
+    lowered = message.lower()
+    return any(fragment in lowered for fragment in ("not found", "not a valid branch name", "branch name required"))
+
+
+def _append_cleanup_errors(message: str, cleanup_errors: tuple[str, ...]) -> str:
+    prefix = message.strip()
+    suffix = "cleanup failures: " + "; ".join(cleanup_errors)
+    if not prefix:
+        return suffix
+    return f"{prefix}; {suffix}"
 
 
 def run_validation_cycle_in_worktree(

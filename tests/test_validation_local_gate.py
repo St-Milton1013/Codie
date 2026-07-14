@@ -36,6 +36,7 @@ from codie.validation.local_gate import (
     validate_report_payload,
     validator_report_from_model_response,
     validator_report_to_dict,
+    _content_scan_text,
 )
 
 
@@ -223,6 +224,88 @@ class ValidationLocalGateTest(unittest.TestCase):
         )
 
         self.assertEqual(result.result, "STALE_RESULTS")
+
+    def test_preflight_stale_sha_not_overwritten_by_missing_validators(self) -> None:
+        result = aggregate_validator_reports(
+            (
+                report(
+                    validator="deterministic",
+                    result="FAIL",
+                    findings=(
+                        finding(
+                            finding_id="security:stale-sha",
+                            severity="BLOCKER",
+                            governing_rule="Exact SHA validation",
+                            required_correction="Dispatch validation for the current pull request head SHA.",
+                        ),
+                    ),
+                ),
+            ),
+            SHA,
+        )
+
+        self.assertEqual(result.result, "STALE_RESULTS")
+        self.assertIn("missing validators: adversarial, architecture", result.errors)
+
+    def test_preflight_cost_policy_not_overwritten_by_missing_validators(self) -> None:
+        result = aggregate_validator_reports(
+            (
+                report(
+                    validator="deterministic",
+                    result="FAIL",
+                    findings=(
+                        finding(
+                            finding_id="cost-policy:environment",
+                            severity="BLOCKER",
+                            governing_rule="Zero Cost Requirement",
+                            required_correction="Remove paid/cloud API usage and rerun validation.",
+                        ),
+                    ),
+                ),
+            ),
+            SHA,
+        )
+
+        self.assertEqual(result.result, "COST_POLICY_VIOLATION")
+        self.assertIn("missing validators: adversarial, architecture", result.errors)
+
+    def test_preflight_constitution_conflict_not_overwritten_by_missing_validators(self) -> None:
+        result = aggregate_validator_reports(
+            (
+                report(
+                    validator="deterministic",
+                    result="FAIL",
+                    findings=(
+                        finding(
+                            finding_id="security:phase",
+                            severity="BLOCKER",
+                            governing_rule="CONSTITUTION_CONFLICT",
+                            required_correction="Use the authoritative repository validation scope.",
+                        ),
+                    ),
+                ),
+            ),
+            SHA,
+        )
+
+        self.assertEqual(result.result, "CONSTITUTION_CONFLICT")
+        self.assertIn("missing validators: adversarial, architecture", result.errors)
+
+    def test_validator_rule_text_is_excluded_from_static_content_scan(self) -> None:
+        text = '\n'.join(
+            (
+                '    "recommended include",',
+                '    finding="Placeholder or TODO language is present in changed PR content.",',
+                '    finding="Real TODO remains in production logic.",',
+            )
+        )
+
+        scan_text = _content_scan_text("codie/validation/local_gate.py", text)
+
+        self.assertNotIn("recommended include", scan_text)
+        self.assertNotIn("Placeholder or TODO language", scan_text)
+        self.assertIn("Real TODO remains", scan_text)
+        self.assertNotIn("recommended include", _content_scan_text("tests/test_validation_local_gate.py", text))
 
     def test_phase35b_can_become_active_without_source_change(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

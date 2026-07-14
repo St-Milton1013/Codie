@@ -80,6 +80,21 @@ HISTORICAL_SCAN_EXCLUSIONS = (
     "tests/fixtures/",
     "ui/package-lock.json",
 )
+VALIDATOR_SELF_REFERENCE_SCAN_EXCLUSIONS = (
+    "todo|placeholder",
+    "Placeholder or TODO language",
+    "placeholder language",
+    "static:placeholder",
+    "Potential strategy-inference language",
+    "static:strategy-language",
+    '"should play"',
+    '"must include"',
+    '"correct card"',
+    '"strict upgrade"',
+    '"auto-include"',
+    '"recommended cut"',
+    '"recommended include"',
+)
 CONTEXT_FILES = (
     "docs/CODIE_V1_CONSTITUTION.md",
     ACTIVE_VALIDATION_SCOPE_PATH,
@@ -406,18 +421,18 @@ def aggregate_validator_reports(
     severity_totals = SeverityTotals.from_findings(findings)
     if contradictions:
         result = "HUMAN_REVIEW_REQUIRED"
-    elif any(finding.governing_rule == "CONSTITUTION_CONFLICT" for finding in findings):
+    elif any("stale SHA" in error for error in errors) or any(_is_stale_sha_finding(finding) for finding in findings):
+        result = "STALE_RESULTS"
+    elif any(_is_cost_finding(finding) for finding in findings):
+        result = "COST_POLICY_VIOLATION"
+    elif any(_is_constitution_conflict_finding(finding) for finding in findings):
         result = "CONSTITUTION_CONFLICT"
     elif missing or duplicates or unexpected:
         result = "VALIDATOR_ERROR"
-    elif any("stale SHA" in error for error in errors):
-        result = "STALE_RESULTS"
     elif any("wrong active phase" in error for error in errors):
         result = "CONSTITUTION_CONFLICT"
     elif any(label in error for error in errors for label in ("wrong branch", "wrong phase part", "wrong gate scope", "wrong pull request")):
         result = "VALIDATOR_ERROR"
-    elif any(_is_cost_finding(finding) for finding in findings):
-        result = "COST_POLICY_VIOLATION"
     elif any(report.result == "ERROR" for report in reports):
         result = "VALIDATOR_ERROR"
     elif gate_scope == "FINAL_PHASE" and (blocking or any(report.result != "CLEAN_PASS" for report in reports)):
@@ -920,7 +935,8 @@ def _static_findings(options: ValidationGateOptions, root: Path) -> tuple[Valida
         if not path.is_file() or path.suffix.lower() not in {".py", ".md", ".txt", ".toml", ".yml", ".yaml"}:
             continue
         text = path.read_text(encoding="utf-8", errors="ignore")
-        lowered = text.lower()
+        scan_text = _content_scan_text(relative, text)
+        lowered = scan_text.lower()
         if path.name in {"requirements.txt", "requirements-dev.txt", "pyproject.toml"}:
             for dependency in FORBIDDEN_DEPENDENCIES:
                 if _dependency_declared(lowered, dependency):
@@ -961,6 +977,16 @@ def _changed_files_for_scan(options: ValidationGateOptions, root: Path) -> tuple
         _normalize_path(line)
         for line in diff.stdout.splitlines()
         if line.strip() and not _normalize_path(line).startswith(".git/")
+    )
+
+
+def _content_scan_text(relative: str, text: str) -> str:
+    if relative not in {"codie/validation/local_gate.py", "tests/test_validation_local_gate.py"}:
+        return text
+    return "\n".join(
+        line
+        for line in text.splitlines()
+        if not any(fragment in line for fragment in VALIDATOR_SELF_REFERENCE_SCAN_EXCLUSIONS)
     )
 
 
@@ -1280,6 +1306,14 @@ def _architecture_import_finding(relative: str, module: str) -> ValidationFindin
 
 def _is_cost_finding(finding: ValidationFinding) -> bool:
     return finding.governing_rule == "Zero Cost Requirement" or finding.finding_id.startswith("cost-policy:")
+
+
+def _is_stale_sha_finding(finding: ValidationFinding) -> bool:
+    return finding.finding_id == "security:stale-sha" or finding.governing_rule == "Exact SHA validation"
+
+
+def _is_constitution_conflict_finding(finding: ValidationFinding) -> bool:
+    return finding.governing_rule == "CONSTITUTION_CONFLICT" or finding.finding_id.startswith("security:phase")
 
 
 def _run_command(command: tuple[str, ...], root: Path) -> subprocess.CompletedProcess[str]:

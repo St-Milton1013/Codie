@@ -574,6 +574,132 @@ class RepairControllerTest(unittest.TestCase):
         self.assertEqual(result.status, "FAILED")
         self.assertTrue(any(command[:3] == ("git", "worktree", "remove") for command in calls))
         self.assertTrue(any(command[:3] == ("git", "worktree", "prune") for command in calls))
+        self.assertTrue(any(command[:3] == ("git", "branch", "-D") for command in calls))
+
+    def test_successful_repair_branch_cleanup(self) -> None:
+        calls: list[tuple[str, ...]] = []
+
+        def runner(command: tuple[str, ...], _root: Path):
+            calls.append(command)
+            if command[:2] == ("git", "diff"):
+                return completed(stdout="codie/new_file.py\n")
+            if command[:3] == ("git", "ls-files", "--others"):
+                return completed()
+            if command[:2] == ("git", "rev-parse"):
+                return completed(stdout=f"{SHA2}\n")
+            if command[:2] == ("git", "ls-remote"):
+                return completed(stdout=f"{SHA2}\trefs/heads/{BRANCH}\n")
+            return completed()
+
+        with tempfile.TemporaryDirectory() as tmp:
+            result = codex_exec_repair_attempt(
+                1,
+                SHA1,
+                Path(tmp),
+                BRANCH,
+                "repair",
+                allowed_paths=frozenset({"codie/new_file.py"}),
+                codex_path=Path("C:/Codex/codex.exe"),
+                command_runner=runner,
+            )
+
+        self.assertEqual(result.status, "COMMITTED")
+        self.assertIn(("git", "branch", "-D", f"codex-repair-1-{SHA1[:12]}"), calls)
+
+    def test_usage_limit_repair_branch_cleanup(self) -> None:
+        calls: list[tuple[str, ...]] = []
+
+        def runner(command: tuple[str, ...], _root: Path):
+            calls.append(command)
+            if "codex.exe" in command[0]:
+                return completed(returncode=1, stderr="usage limit reached")
+            return completed()
+
+        with tempfile.TemporaryDirectory() as tmp:
+            result = codex_exec_repair_attempt(
+                1,
+                SHA1,
+                Path(tmp),
+                BRANCH,
+                "repair",
+                codex_path=Path("C:/Codex/codex.exe"),
+                command_runner=runner,
+            )
+
+        self.assertEqual(result.status, "USAGE_LIMIT")
+        self.assertIn(("git", "branch", "-D", f"codex-repair-1-{SHA1[:12]}"), calls)
+
+    def test_failed_repair_branch_cleanup_is_recorded(self) -> None:
+        def runner(command: tuple[str, ...], _root: Path):
+            if "codex.exe" in command[0]:
+                return completed(returncode=1, stderr="failed")
+            if command[:3] == ("git", "branch", "-D"):
+                return completed(returncode=1, stderr="cannot delete branch")
+            return completed()
+
+        with tempfile.TemporaryDirectory() as tmp:
+            result = codex_exec_repair_attempt(
+                1,
+                SHA1,
+                Path(tmp),
+                BRANCH,
+                "repair",
+                codex_path=Path("C:/Codex/codex.exe"),
+                command_runner=runner,
+            )
+
+        self.assertEqual(result.status, "FAILED")
+        self.assertIn("cleanup failures", result.message)
+        self.assertIn("delete temporary repair branch failed", result.message)
+
+    def test_same_sha_retry_after_repair_branch_cleanup(self) -> None:
+        active_branches: set[str] = set()
+
+        def runner(command: tuple[str, ...], _root: Path):
+            if command[:4] == ("git", "worktree", "add", "-b"):
+                branch = command[4]
+                if branch in active_branches:
+                    return completed(returncode=1, stderr="branch already exists")
+                active_branches.add(branch)
+                return completed()
+            if command[:2] == ("git", "diff"):
+                return completed(stdout="codie/new_file.py\n")
+            if command[:3] == ("git", "ls-files", "--others"):
+                return completed()
+            if command[:2] == ("git", "rev-parse"):
+                return completed(stdout=f"{SHA2}\n")
+            if command[:2] == ("git", "ls-remote"):
+                return completed(stdout=f"{SHA2}\trefs/heads/{BRANCH}\n")
+            if command[:3] == ("git", "branch", "-D"):
+                active_branches.discard(command[3])
+                return completed()
+            return completed()
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            first = codex_exec_repair_attempt(
+                1,
+                SHA1,
+                root,
+                BRANCH,
+                "repair",
+                allowed_paths=frozenset({"codie/new_file.py"}),
+                codex_path=Path("C:/Codex/codex.exe"),
+                command_runner=runner,
+            )
+            second = codex_exec_repair_attempt(
+                1,
+                SHA1,
+                root,
+                BRANCH,
+                "repair",
+                allowed_paths=frozenset({"codie/new_file.py"}),
+                codex_path=Path("C:/Codex/codex.exe"),
+                command_runner=runner,
+            )
+
+        self.assertEqual(first.status, "COMMITTED")
+        self.assertEqual(second.status, "COMMITTED")
 
     def test_validation_worktree_uses_exact_sha_and_cleans_up(self) -> None:
         calls: list[tuple[str, ...]] = []
@@ -658,6 +784,19 @@ class RepairControllerTest(unittest.TestCase):
         workflow = Path(".github/workflows/codie-local-validation.yml").read_text(encoding="utf-8")
 
         self.assertIn("github.event.pull_request.head.repo.full_name == github.event.repository.full_name", workflow)
+
+    def test_self_hosted_workflow_fetches_and_verifies_trusted_base_refs(self) -> None:
+        workflow = Path(".github/workflows/codie-local-validation.yml").read_text(encoding="utf-8")
+        pr_section = workflow.split("manual-validation:")[0]
+        manual_validation_section = workflow.split("manual-validation:")[1].split("manual-repair:")[0]
+        manual_repair_section = workflow.split("manual-repair:")[1]
+
+        for section in (pr_section, manual_validation_section, manual_repair_section):
+            self.assertIn("fetch-depth: 0", section)
+            self.assertIn("git fetch --no-tags origin", section)
+            self.assertIn("refs/remotes/origin/$base", section)
+            self.assertIn("git rev-parse --verify", section)
+            self.assertIn("trusted base ref", section)
 
     def test_pull_request_workflow_resolves_phase_without_phase35a_hardcoding(self) -> None:
         workflow = Path(".github/workflows/codie-local-validation.yml").read_text(encoding="utf-8")
