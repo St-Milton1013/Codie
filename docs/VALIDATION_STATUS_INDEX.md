@@ -65,7 +65,7 @@ Phase 36A Immutable Deck Snapshot Expansion Contract: PASS WITH REVIEW NOTES
 Phase 36B Immutable Deck Snapshot Implementation Contract: PASS WITH REVIEW NOTES
 Phase 36C Immutable Deck Snapshot Implementation: PASS WITH REVIEW NOTES
 Phase 37A Frequency Pools / Tag Graph Lab Contract: PASS WITH REVIEW NOTES
-Phase 37B Frequency Pools / Tag Graph Lab Implementation Contract: INTERNAL PASS
+Phase 37B Frequency Pools / Tag Graph Lab Implementation Contract: CONTRACT PACKET IN PR
 Local alpha tag: created locally; remote tag push not verified in this environment
 ```
 
@@ -441,15 +441,15 @@ observations and require no corrective action.
 ## Current Phase 37B Gate
 
 ```text
-Phase 37B Frequency Pools / Tag Graph Lab Implementation Contract: INTERNAL PASS
+Phase 37B Frequency Pools / Tag Graph Lab Implementation Contract: CONTRACT PACKET IN PR
 Phase 37B outside validation: current required gate
 Phase 37B outside validation result: NOT YET COMPLETED
 Phase 37B external acceptance status: NOT ACCEPTED
 ```
 
-Phase 37B is internally complete as an implementation-contract-only packet. Do
+Phase 37B has a draft implementation-contract packet under PR validation. Do
 not implement Phase 37C production code until Phase 37B outside validation
-returns PASS or PASS WITH REVIEW NOTES.
+returns PASS or PASS WITH REVIEW NOTES after the PR is merged.
 
 Phase 37B validation tuple:
 
