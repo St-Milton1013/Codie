@@ -62,7 +62,8 @@ Phase 35A Commander Spellbook Interpreter Expansion Contract: PASS WITH REVIEW N
 Phase 35B Commander Spellbook Interpreter Implementation Contract: PASS WITH REVIEW NOTES
 Phase 35C Commander Spellbook Interpreter Implementation: PASS WITH REVIEW NOTES
 Phase 36A Immutable Deck Snapshot Expansion Contract: PASS WITH REVIEW NOTES
-Phase 36B Immutable Deck Snapshot Implementation Contract: INTERNAL PASS
+Phase 36B Immutable Deck Snapshot Implementation Contract: PASS WITH REVIEW NOTES
+Phase 36C Immutable Deck Snapshot Implementation: INTERNAL PASS
 Local alpha tag: created locally; remote tag push not verified in this environment
 ```
 
@@ -147,7 +148,8 @@ Phase 35A Commander Spellbook Interpreter Expansion Contract: PASS WITH REVIEW N
 Phase 35B Commander Spellbook Interpreter Implementation Contract: PASS WITH REVIEW NOTES
 Phase 35C Commander Spellbook Interpreter Implementation: PASS WITH REVIEW NOTES
 Phase 36A Immutable Deck Snapshot Expansion Contract: PASS WITH REVIEW NOTES
-Phase 36B Immutable Deck Snapshot Implementation Contract: INTERNAL PASS
+Phase 36B Immutable Deck Snapshot Implementation Contract: PASS WITH REVIEW NOTES
+Phase 36C Immutable Deck Snapshot Implementation: INTERNAL PASS
 ```
 
 ## Latest Local Validation
@@ -398,26 +400,30 @@ production Forge / LLM SDK import scan: no matches
 ## Current Blocker
 
 ```text
-Phase 36C is blocked until Phase 36B outside validation returns PASS or PASS WITH REVIEW NOTES.
+Later work is blocked until Phase 36C outside validation returns PASS or PASS WITH REVIEW NOTES.
 ```
 
-## Current Phase 36B Outside Validation Packet
+## Current Phase 36C Outside Validation Packet
 
 ```text
+docs/PHASE36C_IMMUTABLE_DECK_SNAPSHOT_IMPLEMENTATION_REPORT.md
+docs/CHECKPOINT_PHASE36C_IMMUTABLE_DECK_SNAPSHOT_IMPLEMENTATION_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE36C_IMMUTABLE_DECK_SNAPSHOT_IMPLEMENTATION_PROMPT.md
 docs/PHASE36B_IMMUTABLE_DECK_SNAPSHOT_IMPLEMENTATION_CONTRACT.md
 docs/CHECKPOINT_PHASE36B_IMMUTABLE_DECK_SNAPSHOT_IMPLEMENTATION_CONTRACT_REPORT.md
 docs/OUTSIDE_VALIDATION_PHASE36B_IMMUTABLE_DECK_SNAPSHOT_IMPLEMENTATION_CONTRACT_PROMPT.md
 docs/PHASE36A_IMMUTABLE_DECK_SNAPSHOT_EXPANSION_CONTRACT.md
 docs/CHECKPOINT_PHASE36A_IMMUTABLE_DECK_SNAPSHOT_EXPANSION_CONTRACT_REPORT.md
-docs/OUTSIDE_VALIDATION_PHASE36A_IMMUTABLE_DECK_SNAPSHOT_EXPANSION_CONTRACT_PROMPT.md
-docs/POST_PHASE31_DEFERRED_IMPLEMENTATION_PRIORITY_PLAN.md
 docs/CODIE_V1_CONSTITUTION.md
+codie/user_decks/immutable_snapshots.py
 codie/user_decks/importer.py
 codie/user_decks/deck_memory.py
 codie/user_decks/analysis_input.py
 codie/user_decks/__init__.py
-codie/db/schema/user.sql
-codie/db/repositories/user.py
+tests/test_user_deck_immutable_snapshots.py
+tests/fixtures/user_deck_snapshots/user_deck_snapshot_full.json
+tests/fixtures/user_deck_snapshots/user_deck_snapshot_redacted.json
+tests/fixtures/user_deck_snapshots/user_deck_snapshot_invalid.json
 tests/test_user_deck_import.py
 tests/test_user_deck_memory.py
 tests/test_user_deck_analysis_input.py

@@ -1,0 +1,50 @@
+{
+  "cards": [
+    {
+      "name": "Command Tower",
+      "oracle_id": "11111111-1111-1111-1111-111111111111",
+      "quantity": 1,
+      "scryfall_id": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+      "source_order": 0,
+      "zone": "main"
+    },
+    {
+      "name": "Thassa's Oracle",
+      "oracle_id": "22222222-2222-2222-2222-222222222222",
+      "quantity": 1,
+      "scryfall_id": "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+      "source_order": 1,
+      "zone": "main"
+    }
+  ],
+  "commander_names": [
+    "Tymna the Weaver",
+    "Kraum, Ludevic's Opus"
+  ],
+  "commander_signature": "tymna-kraum",
+  "created_at": "2026-07-14T00:00:00+00:00",
+  "deck_hash": "deckhash-full-001",
+  "manual_review_items": [],
+  "metadata": {
+    "fixture": true
+  },
+  "partner_names": [
+    "Kraum, Ludevic's Opus"
+  ],
+  "privacy_metadata": {
+    "privacy_mode": "full_card_list"
+  },
+  "privacy_policy": {
+    "privacy_caveats": [
+      "full card list included only by explicit snapshot option"
+    ],
+    "redaction_policy": "full_card_list"
+  },
+  "replay_metadata": null,
+  "snapshot_id": "snapshot-full-001",
+  "snapshot_scope": "user_deck",
+  "snapshot_version": "immutable-deck-snapshot-v1",
+  "source_refs": [],
+  "user_deck_ref": "user-deck-001",
+  "validation_warnings": []
+}

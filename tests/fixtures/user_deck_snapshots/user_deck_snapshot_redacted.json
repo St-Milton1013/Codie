@@ -1,0 +1,83 @@
+{
+  "analysis_profile_refs": [
+    "analysis-profile-competitive-default@1"
+  ],
+  "analysis_refs": [
+    {
+      "analysis_id": "analysis-001",
+      "analysis_profile_id": "analysis-profile-competitive-default",
+      "analysis_profile_version": "1",
+      "analysis_type": "comparison",
+      "metadata": {
+        "scope": "local-user"
+      }
+    }
+  ],
+  "commander_names": [
+    "Tymna the Weaver",
+    "Kraum, Ludevic's Opus"
+  ],
+  "commander_signature": "tymna-kraum",
+  "created_at": "2026-07-14T00:00:00+00:00",
+  "deck_hash": "deckhash-redacted-001",
+  "manual_review_items": [
+    {
+      "item_id": "review-001",
+      "message": "local snapshot caveat acknowledged"
+    }
+  ],
+  "metadata": {
+    "fixture": true
+  },
+  "partner_names": [
+    "Kraum, Ludevic's Opus"
+  ],
+  "privacy_metadata": {
+    "privacy_mode": "redacted"
+  },
+  "privacy_policy": {
+    "privacy_caveats": [
+      "card entries omitted by default for user privacy"
+    ],
+    "redaction_policy": "redacted"
+  },
+  "replay_metadata": {
+    "analysis_profile_id": "analysis-profile-competitive-default",
+    "analysis_profile_version": "1",
+    "decision_version": "decision-v1",
+    "evidence_version": "evidence-v1",
+    "generated_by_phase": "Phase 36C",
+    "metadata": {
+      "replay_scope": "local"
+    },
+    "source_snapshot_ids": [
+      "source-snapshot-001"
+    ],
+    "weight_profile_id": "competitive-default",
+    "weight_profile_version": "1"
+  },
+  "snapshot_id": "snapshot-redacted-001",
+  "snapshot_scope": "user_deck",
+  "snapshot_version": "immutable-deck-snapshot-v1",
+  "source_refs": [
+    {
+      "metadata": {
+        "source_layer": "user-local"
+      },
+      "source_id": "user-deck-001",
+      "source_type": "user_deck",
+      "source_url": null
+    }
+  ],
+  "user_deck_ref": "user-deck-001",
+  "validation_warnings": [
+    {
+      "message": "user deck snapshots are local replay packets",
+      "metadata": {
+        "evidence_scope": "not_tournament_evidence"
+      },
+      "severity": "informational",
+      "warning_id": "user-local-only"
+    }
+  ]
+}

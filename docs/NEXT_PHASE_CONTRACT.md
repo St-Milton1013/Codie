@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: send Phase 36B Immutable Deck Snapshot Implementation Contract outside validation packet; do not begin Phase 36C until accepted
+Recommended next task: send Phase 36C Immutable Deck Snapshot Implementation outside validation packet; do not begin any later phase until accepted
 
 ## Active Indexes
 

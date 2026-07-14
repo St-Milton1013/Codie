@@ -64,24 +64,25 @@ Phase 35A Commander Spellbook Interpreter Expansion Contract: externally accepte
 Phase 35B Commander Spellbook Interpreter Implementation Contract: externally accepted
 Phase 35C Commander Spellbook Interpreter Implementation: externally accepted
 Phase 36A Immutable Deck Snapshot Expansion Contract: externally accepted
-Phase 36B Immutable Deck Snapshot Implementation Contract: internally complete
-Current action: send Phase 36B outside validation packet
+Phase 36B Immutable Deck Snapshot Implementation Contract: externally accepted
+Phase 36C Immutable Deck Snapshot Implementation: internally complete
+Current action: send Phase 36C outside validation packet
 Local alpha tag status: created locally; remote tag push not verified in this environment
 ```
 
 ## Next Allowed Phase
 
 ```text
-Phase 36B outside validation
+Phase 36C outside validation
 ```
 
-Do not begin Phase 36C until Phase 36B outside validation returns PASS or PASS WITH REVIEW NOTES.
+Do not begin any later phase until Phase 36C outside validation returns PASS or PASS WITH REVIEW NOTES.
 
 ## Release-Critical Path
 
 ```text
-1. Phase 36B outside validation
-2. Phase 36C Immutable Deck Snapshot Implementation
+1. Phase 36C outside validation
+2. Next contract-first deferred implementation packet after Phase 36C acceptance
 ```
 
 The post-31 patch priority order is cemented in:
