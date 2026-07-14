@@ -1180,25 +1180,48 @@ def _phase_ledger_findings(root: Path) -> tuple[ValidationFinding, ...]:
                 required_correction="Restore the required ledger file before phase-ledger validation.",
             )
         )
-    phase_tokens: dict[str, set[str]] = {}
+    try:
+        active_scope = resolve_active_validation_scope(root)
+        active_phase_pattern = _phase_id_reference_pattern(active_scope.phase_id)
+    except ValidationGateError as exc:
+        findings.append(
+            ValidationFinding(
+                finding_id="phase-ledger:active-scope-invalid",
+                severity="BLOCKER",
+                finding=f"Active validation scope declaration is missing or invalid: {exc}",
+                affected_files=(ACTIVE_VALIDATION_SCOPE_PATH,),
+                governing_rule="Phase Ledger Consistency",
+                required_correction="Restore a valid active validation scope declaration before phase-ledger validation.",
+            )
+        )
+        return tuple(findings)
+
+    missing_active_phase: list[str] = []
     for relative in PHASE_LEDGER_FILES:
         path = root / relative
         if path.is_file():
-            tokens = set(re.findall(r"Phase\s*\d+[A-Z]?", path.read_text(encoding="utf-8", errors="ignore")))
-            if tokens:
-                phase_tokens[relative] = tokens
-    if len({tuple(sorted(tokens)) for tokens in phase_tokens.values()}) > 1:
+            text = path.read_text(encoding="utf-8", errors="ignore")
+            if not active_phase_pattern.search(text):
+                missing_active_phase.append(relative)
+    if missing_active_phase:
         findings.append(
             ValidationFinding(
-                finding_id="phase-ledger:phase-token-mismatch",
+                finding_id="phase-ledger:active-phase-missing",
                 severity="HIGH",
-                finding="Phase ledger files reference inconsistent phase identifiers.",
-                affected_files=tuple(sorted(phase_tokens)),
+                finding="Phase ledger files do not all reference the active validation phase.",
+                affected_files=tuple(sorted(missing_active_phase)),
                 governing_rule="Phase Ledger Consistency",
-                required_correction="Align active roadmap, validation status, next contract, and continuity handoff phase references.",
+                required_correction=f"Reference {active_scope.phase_id} in each required phase ledger file.",
             )
         )
     return tuple(findings)
+
+
+def _phase_id_reference_pattern(phase_id: str) -> re.Pattern[str]:
+    match = re.fullmatch(r"Phase\s*(\d+[A-Z]?)", phase_id)
+    if not match:
+        raise ValidationGateError(f"invalid active validation phase_id: {phase_id}")
+    return re.compile(rf"\bPhase\s*{re.escape(match.group(1))}\b")
 
 
 def _validator_prompt(validator: str, options: ValidationGateOptions, root: Path) -> str:

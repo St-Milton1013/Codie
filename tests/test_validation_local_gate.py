@@ -38,6 +38,7 @@ from codie.validation.local_gate import (
     validator_report_to_dict,
     _changed_files_for_scan,
     _content_scan_text,
+    _phase_ledger_findings,
 )
 
 
@@ -388,6 +389,63 @@ class ValidationLocalGateTest(unittest.TestCase):
             self.assertEqual(scope.phase_id, "Phase35B")
             self.assertEqual(scope.phase_part, "outside-validation")
             self.assertEqual(scope.gate_scope, "INTERMEDIATE_PACKET")
+
+    def test_phase_ledger_allows_distinct_historical_token_sets(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            write_scope(root, phase_id="Phase37A", gate_scope="INTERMEDIATE_PACKET")
+            (root / "docs" / "ACTIVE_ROADMAP_INDEX.md").write_text(
+                "Phase 31R accepted. Current action: Phase 37A outside validation.\n",
+                encoding="utf-8",
+            )
+            (root / "docs" / "VALIDATION_STATUS_INDEX.md").write_text(
+                "Phase 0 through Phase 36C accepted. Phase37A internal pass.\n",
+                encoding="utf-8",
+            )
+            (root / "docs" / "NEXT_PHASE_CONTRACT.md").write_text(
+                "Historical note: Phase 22C. Current gate: Phase 37A.\n",
+                encoding="utf-8",
+            )
+            (root / "docs" / "CODEX_CONTINUITY_HANDOFF.md").write_text(
+                "Long-form continuity mentions Phase 12C, Phase 13Z, and Phase 37A.\n",
+                encoding="utf-8",
+            )
+
+            findings = _phase_ledger_findings(root)
+
+            self.assertEqual(findings, ())
+
+    def test_phase_ledger_rejects_missing_active_phase_reference(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            write_scope(root, phase_id="Phase37A", gate_scope="INTERMEDIATE_PACKET")
+            for relative in (
+                "docs/ACTIVE_ROADMAP_INDEX.md",
+                "docs/VALIDATION_STATUS_INDEX.md",
+                "docs/CODEX_CONTINUITY_HANDOFF.md",
+            ):
+                path = root / relative
+                path.write_text("Current gate: Phase 37A.\n", encoding="utf-8")
+            (root / "docs" / "NEXT_PHASE_CONTRACT.md").write_text(
+                "Historical note only: Phase 22C.\n",
+                encoding="utf-8",
+            )
+
+            findings = _phase_ledger_findings(root)
+
+            self.assertEqual(len(findings), 1)
+            self.assertEqual(findings[0].finding_id, "phase-ledger:active-phase-missing")
+            self.assertEqual(findings[0].affected_files, ("docs/NEXT_PHASE_CONTRACT.md",))
+
+    def test_phase_ledger_invalid_active_phase_id_fails_closed(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            write_scope(root, phase_id="not-a-phase", gate_scope="INTERMEDIATE_PACKET")
+
+            findings = _phase_ledger_findings(root)
+
+            self.assertEqual(len(findings), 5)
+            self.assertTrue(any(finding.finding_id == "phase-ledger:active-scope-invalid" for finding in findings))
 
     def test_missing_active_scope_declaration_fails_closed(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
