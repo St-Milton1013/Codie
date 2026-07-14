@@ -9,6 +9,8 @@ from pathlib import Path
 from unittest import mock
 
 from codie.validation.local_gate import (
+    ACTIVE_VALIDATION_SCOPE_SCHEMA_VERSION,
+    ACTIVE_VALIDATION_SCOPE_PATH,
     CONSTITUTION_VERSION,
     CURRENT_EXPECTED_PHASE_ID,
     REPOSITORY,
@@ -37,6 +39,24 @@ from codie.validation.local_gate import (
 SHA = "a" * 40
 BRANCH = "codex/operational-local-validation-bootstrap"
 PR_NUMBER = 1
+
+
+def write_scope(root: Path, *, phase_id: str = "Phase35B", phase_part: str = "outside-validation", gate_scope: str = "INTERMEDIATE_PACKET") -> None:
+    path = root / ACTIVE_VALIDATION_SCOPE_PATH
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(
+        json.dumps(
+            {
+                "schema_version": ACTIVE_VALIDATION_SCOPE_SCHEMA_VERSION,
+                "phase_id": phase_id,
+                "phase_part": phase_part,
+                "gate_scope": gate_scope,
+            },
+            sort_keys=True,
+        )
+        + "\n",
+        encoding="utf-8",
+    )
 
 
 def finding(**overrides) -> ValidationFinding:
@@ -204,26 +224,14 @@ class ValidationLocalGateTest(unittest.TestCase):
     def test_phase35b_can_become_active_without_source_change(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
-            (root / "docs").mkdir()
-            (root / "docs" / "ACTIVE_ROADMAP_INDEX.md").write_text(
-                "## Current Phase 35B Outside Validation Packet\n",
-                encoding="utf-8",
-            )
+            write_scope(root, phase_id="Phase35B")
 
             self.assertEqual(resolve_active_phase(root), "Phase35B")
 
     def test_active_scope_resolves_phase_part_and_gate_scope(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
-            (root / "docs").mkdir()
-            (root / "docs" / "ACTIVE_ROADMAP_INDEX.md").write_text(
-                "Current action: send Phase 35B outside validation packet\n",
-                encoding="utf-8",
-            )
-            (root / "docs" / "NEXT_PHASE_CONTRACT.md").write_text(
-                "Recommended next task: send Phase 35B outside validation packet\n",
-                encoding="utf-8",
-            )
+            write_scope(root, phase_id="Phase35B", gate_scope="INTERMEDIATE_PACKET")
 
             scope = resolve_active_validation_scope(root)
 
@@ -231,12 +239,13 @@ class ValidationLocalGateTest(unittest.TestCase):
             self.assertEqual(scope.phase_part, "outside-validation")
             self.assertEqual(scope.gate_scope, "INTERMEDIATE_PACKET")
 
-    def test_active_scope_resolves_final_phase_gate(self) -> None:
+    def test_historical_final_phase_prose_cannot_alter_active_gate(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             (root / "docs").mkdir()
+            write_scope(root, phase_id="Phase35B", gate_scope="INTERMEDIATE_PACKET")
             (root / "docs" / "ACTIVE_ROADMAP_INDEX.md").write_text(
-                "Current action: send Phase 35Z outside validation packet\n",
+                "Current action: send Phase 35Z final phase outside validation packet\n",
                 encoding="utf-8",
             )
             (root / "docs" / "NEXT_PHASE_CONTRACT.md").write_text(
@@ -246,9 +255,35 @@ class ValidationLocalGateTest(unittest.TestCase):
 
             scope = resolve_active_validation_scope(root)
 
-            self.assertEqual(scope.phase_id, "Phase35Z")
+            self.assertEqual(scope.phase_id, "Phase35B")
             self.assertEqual(scope.phase_part, "outside-validation")
-            self.assertEqual(scope.gate_scope, "FINAL_PHASE")
+            self.assertEqual(scope.gate_scope, "INTERMEDIATE_PACKET")
+
+    def test_missing_active_scope_declaration_fails_closed(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            with self.assertRaises(ValidationGateError):
+                resolve_active_validation_scope(Path(tmp))
+
+    def test_duplicate_active_scope_declaration_fails_closed(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            path = root / ACTIVE_VALIDATION_SCOPE_PATH
+            path.parent.mkdir(parents=True)
+            path.write_text(
+                '{"schema_version":"codie.active_validation_scope.v1","phase_id":"Phase35B","phase_id":"Phase35C","phase_part":"outside-validation","gate_scope":"INTERMEDIATE_PACKET"}',
+                encoding="utf-8",
+            )
+
+            with self.assertRaises(ValidationGateError):
+                resolve_active_validation_scope(root)
+
+    def test_invalid_active_scope_declaration_fails_closed(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            write_scope(root, gate_scope="BAD_SCOPE")
+
+            with self.assertRaises(ValidationGateError):
+                resolve_active_validation_scope(root)
 
     def test_malformed_json_fails(self) -> None:
         with self.assertRaises(ValidationGateError):

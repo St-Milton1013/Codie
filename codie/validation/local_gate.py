@@ -22,6 +22,8 @@ SCHEMA_VERSION = "codie.validator.report.v1"
 CONSTITUTION_VERSION = "codie.constitution.v1"
 REPOSITORY = "St-Milton1013/Codie"
 CURRENT_EXPECTED_PHASE_ID = "Phase35A"
+ACTIVE_VALIDATION_SCOPE_SCHEMA_VERSION = "codie.active_validation_scope.v1"
+ACTIVE_VALIDATION_SCOPE_PATH = "docs/CODIE_ACTIVE_VALIDATION_SCOPE.json"
 ALLOWED_GATE_SCOPES = frozenset({"INTERMEDIATE_PACKET", "FINAL_PHASE"})
 VALIDATORS = ("deterministic", "architecture", "adversarial")
 VALIDATOR_SET = frozenset(VALIDATORS)
@@ -78,6 +80,7 @@ HISTORICAL_SCAN_EXCLUSIONS = (
 )
 CONTEXT_FILES = (
     "docs/CODIE_V1_CONSTITUTION.md",
+    ACTIVE_VALIDATION_SCOPE_PATH,
     "docs/ACTIVE_ROADMAP_INDEX.md",
     "docs/VALIDATION_STATUS_INDEX.md",
     "docs/NEXT_PHASE_CONTRACT.md",
@@ -806,37 +809,38 @@ def write_validation_outputs(result: AggregatedValidationResult, output_dir: Pat
 
 
 def resolve_active_phase(root: Path) -> str:
-    index = root / "docs" / "ACTIVE_ROADMAP_INDEX.md"
-    text = index.read_text(encoding="utf-8")
-    patterns = (
-        r"Current Phase\s+(Phase\d+[A-Z]?)",
-        r"Current action:\s+send\s+(Phase\s+\d+[A-Z]?)",
-        r"## Current\s+(Phase\s+\d+[A-Z]?)",
-    )
-    for pattern in patterns:
-        match = re.search(pattern, text, re.IGNORECASE)
-        if match:
-            return match.group(1).replace(" ", "")
-    raise ValidationGateError("unable to resolve active phase from docs/ACTIVE_ROADMAP_INDEX.md")
+    return resolve_active_validation_scope(root).phase_id
 
 
 def resolve_active_validation_scope(root: Path) -> ActiveValidationScope:
-    phase_id = resolve_active_phase(root)
-    index = root / "docs" / "ACTIVE_ROADMAP_INDEX.md"
-    next_contract = root / "docs" / "NEXT_PHASE_CONTRACT.md"
-    text = "\n".join(
-        path.read_text(encoding="utf-8", errors="ignore")
-        for path in (index, next_contract)
-        if path.is_file()
-    )
-    phase_part = "outside-validation" if re.search(r"\boutside validation\b", text, re.IGNORECASE) else "validation"
-    gate_scope = "FINAL_PHASE" if re.search(r"\bfinal phase\b", text, re.IGNORECASE) else "INTERMEDIATE_PACKET"
+    declaration_path = root / ACTIVE_VALIDATION_SCOPE_PATH
+    if not declaration_path.is_file():
+        raise ValidationGateError(f"missing active validation scope declaration: {ACTIVE_VALIDATION_SCOPE_PATH}")
+    try:
+        payload = json.loads(
+            declaration_path.read_text(encoding="utf-8"),
+            object_pairs_hook=_reject_duplicate_json_keys,
+        )
+    except json.JSONDecodeError as exc:
+        raise ValidationGateError(f"malformed active validation scope declaration: {exc}") from exc
+    if not isinstance(payload, dict):
+        raise ValidationGateError("active validation scope declaration must be an object")
+    required = {"schema_version", "phase_id", "phase_part", "gate_scope"}
+    missing = sorted(required.difference(payload))
+    extra = sorted(set(payload).difference(required))
+    if missing:
+        raise ValidationGateError(f"active validation scope missing fields: {', '.join(missing)}")
+    if extra:
+        raise ValidationGateError(f"active validation scope contains unsupported fields: {', '.join(extra)}")
+    if payload["schema_version"] != ACTIVE_VALIDATION_SCOPE_SCHEMA_VERSION:
+        raise ValidationGateError("active validation scope schema_version mismatch")
+    phase_id = _require_phase_id(str(payload["phase_id"]))
+    phase_part = _require_text(str(payload["phase_part"]), "phase_part")
+    gate_scope = _require_allowed(str(payload["gate_scope"]), ALLOWED_GATE_SCOPES, "gate_scope")
     return ActiveValidationScope(phase_id=phase_id, phase_part=phase_part, gate_scope=gate_scope)
 
 
 def expected_phase_for_run(requested_phase_id: str, root: Path) -> str:
-    if requested_phase_id == CURRENT_EXPECTED_PHASE_ID:
-        return CURRENT_EXPECTED_PHASE_ID
     return resolve_active_phase(root)
 
 
@@ -1426,6 +1430,17 @@ def _normalize_path(path: str) -> str:
     return path.replace("\\", "/").strip().lstrip("./")
 
 
+def _reject_duplicate_json_keys(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
+    seen: set[str] = set()
+    output: dict[str, Any] = {}
+    for key, value in pairs:
+        if key in seen:
+            raise ValidationGateError(f"duplicate JSON key: {key}")
+        seen.add(key)
+        output[key] = value
+    return output
+
+
 def _require_text(value: str, field_name: str) -> str:
     if not isinstance(value, str) or not value.strip():
         raise ValidationGateError(f"{field_name} is required")
@@ -1443,6 +1458,13 @@ def _require_sha(value: str) -> str:
     text = _require_text(value, "target_sha")
     if not re.fullmatch(r"[0-9a-f]{40}", text):
         raise ValidationGateError("target_sha must be a 40-character lowercase Git SHA")
+    return text
+
+
+def _require_phase_id(value: str) -> str:
+    text = _require_text(value, "phase_id")
+    if not re.fullmatch(r"Phase\d+[A-Z]?", text):
+        raise ValidationGateError("phase_id must use PhaseNNX format")
     return text
 
 
