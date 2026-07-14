@@ -153,7 +153,6 @@ Phase 36A Immutable Deck Snapshot Expansion Contract: PASS WITH REVIEW NOTES
 Phase 36B Immutable Deck Snapshot Implementation Contract: PASS WITH REVIEW NOTES
 Phase 36C Immutable Deck Snapshot Implementation: PASS WITH REVIEW NOTES
 Phase 37A Frequency Pools / Tag Graph Lab Contract: PASS WITH REVIEW NOTES
-Phase 37B Frequency Pools / Tag Graph Lab Implementation Contract: INTERNAL PASS
 ```
 
 ## Latest Local Validation
@@ -444,6 +443,8 @@ observations and require no corrective action.
 ```text
 Phase 37B Frequency Pools / Tag Graph Lab Implementation Contract: INTERNAL PASS
 Phase 37B outside validation: current required gate
+Phase 37B outside validation result: NOT YET COMPLETED
+Phase 37B external acceptance status: NOT ACCEPTED
 ```
 
 Phase 37B is internally complete as an implementation-contract-only packet. Do
@@ -463,7 +464,7 @@ next_gate_scope: INTERMEDIATE_PACKET
 
 The active validation scope file was not modified by the Phase 37B PR. The
 Phase 37B tuple is declared in the contract packet; active-scope advancement
-remains governed by the accepted validation workflow.
+remains governed by the validation workflow after outside validation completes.
 
 ## Accepted Phase 36C Outside Validation Packet
 
