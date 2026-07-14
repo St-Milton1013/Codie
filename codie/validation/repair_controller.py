@@ -4,11 +4,10 @@ from __future__ import annotations
 
 import json
 import os
-import shutil
 import subprocess
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Callable
+from typing import Any, Callable
 
 from codie.validation.local_gate import (
     AGGREGATOR_RESULTS,
@@ -100,6 +99,8 @@ class RepairControllerOptions:
     base_branch: str = "main"
     max_attempts: int = MAX_REPAIR_ATTEMPTS
     python_executable: str = r"C:\Users\Main\.venvs\codie-py312\Scripts\python.exe"
+    output_dir: Path | None = None
+    expected_validation_result: str = "REPAIR_REQUIRED"
 
     def __post_init__(self) -> None:
         if not self.pr_branch or self.pr_branch in {"main", "master"}:
@@ -110,6 +111,12 @@ class RepairControllerOptions:
             raise ValidationGateError("repair controller maximum attempts is fixed at two")
         if self.repository != REPOSITORY:
             raise ValidationGateError("repository mismatch")
+        if self.expected_validation_result not in AGGREGATOR_RESULTS:
+            raise ValidationGateError(f"unsupported expected validation result: {self.expected_validation_result}")
+        if self.expected_validation_result != "REPAIR_REQUIRED":
+            raise ValidationGateError("manual repair is eligible only for REPAIR_REQUIRED validation results")
+        if self.output_dir is not None:
+            object.__setattr__(self, "output_dir", Path(self.output_dir))
 
 
 @dataclass(frozen=True)
@@ -123,7 +130,7 @@ class RepairControllerResult:
 
 
 ValidationRunner = Callable[[str, int], ValidationCycleResult]
-RepairRunner = Callable[[int, str], RepairExecutionResult]
+RepairRunner = Callable[[int, str, ValidationCycleResult], RepairExecutionResult]
 CommandRunner = Callable[[tuple[str, ...], Path], subprocess.CompletedProcess[str]]
 
 
@@ -139,15 +146,27 @@ def run_repair_controller(
     initial = validation_runner(current_sha, 1)
     cycles.append(initial)
     if initial.target_sha != current_sha:
-        return _finish("STALE_RESULTS", 0, cycles, repairs, current_sha, "initial report was stale")
+        return _finish(options, "STALE_RESULTS", 0, cycles, repairs, current_sha, "initial report was stale")
     if initial.result == "CLEAN_PASS":
-        return _finish("CLEAN_PASS", 0, cycles, repairs, current_sha, "initial validation passed")
+        return _finish(options, "CLEAN_PASS", 0, cycles, repairs, current_sha, "initial validation passed")
+    if initial.result != "REPAIR_REQUIRED":
+        return _finish(
+            options,
+            initial.result,
+            0,
+            cycles,
+            repairs,
+            current_sha,
+            f"initial validation result is not repair eligible: {initial.result}",
+        )
     attempts_used = 0
+    latest_cycle = initial
     while attempts_used < options.max_attempts:
-        repair = repair_runner(attempts_used + 1, current_sha)
+        repair = repair_runner(attempts_used + 1, current_sha, latest_cycle)
         repairs.append(repair)
         if repair.status == "USAGE_LIMIT":
             return _finish(
+                options,
                 "CODEX_USAGE_LIMIT",
                 attempts_used,
                 cycles,
@@ -156,10 +175,11 @@ def run_repair_controller(
                 "codex usage limit interrupted repair without consuming an attempt",
             )
         if repair.status != "COMMITTED":
-            return _finish("HUMAN_REVIEW_REQUIRED", attempts_used, cycles, repairs, current_sha, repair.message)
+            return _finish(options, "HUMAN_REVIEW_REQUIRED", attempts_used, cycles, repairs, current_sha, repair.message)
         unauthorized = unauthorized_repair_paths(repair.changed_files)
         if unauthorized:
             return _finish(
+                options,
                 "HUMAN_REVIEW_REQUIRED",
                 attempts_used,
                 cycles,
@@ -172,10 +192,22 @@ def run_repair_controller(
         cycle = validation_runner(current_sha, attempts_used + 1)
         cycles.append(cycle)
         if cycle.target_sha != current_sha:
-            return _finish("STALE_RESULTS", attempts_used, cycles, repairs, current_sha, "repair report was stale")
+            return _finish(options, "STALE_RESULTS", attempts_used, cycles, repairs, current_sha, "repair report was stale")
         if cycle.result == "CLEAN_PASS":
-            return _finish("CLEAN_PASS", attempts_used, cycles, repairs, current_sha, "repair validation passed")
+            return _finish(options, "CLEAN_PASS", attempts_used, cycles, repairs, current_sha, "repair validation passed")
+        if cycle.result != "REPAIR_REQUIRED":
+            return _finish(
+                options,
+                cycle.result,
+                attempts_used,
+                cycles,
+                repairs,
+                current_sha,
+                f"post-repair validation result is not repair eligible: {cycle.result}",
+            )
+        latest_cycle = cycle
     return _finish(
+        options,
         "HUMAN_REVIEW_REQUIRED",
         attempts_used,
         cycles,
@@ -204,8 +236,8 @@ def run_real_repair_controller(
             command_runner=runner,
         )
 
-    def repair(attempt: int, sha: str) -> RepairExecutionResult:
-        prompt = _repair_prompt(options, attempt, sha)
+    def repair(attempt: int, sha: str, cycle: ValidationCycleResult) -> RepairExecutionResult:
+        prompt = _repair_prompt(options, attempt, sha, cycle)
         return codex_exec_repair_attempt(
             attempt,
             sha,
@@ -338,6 +370,7 @@ def run_validation_cycle_in_worktree(
             repository=options.repository,
             branch=options.pr_branch,
             base_branch=base_branch,
+            output_dir=(root / (options.output_dir or Path("validation_artifacts")) / "cycles" / f"cycle-{validation_cycle}"),
             python_executable=options.python_executable,
         )
         aggregate = run_validation_gate(gate_options, root=worktree_dir)
@@ -386,15 +419,81 @@ def _checked(runner: CommandRunner, command: tuple[str, ...], root: Path, action
     return completed
 
 
-def _repair_prompt(options: RepairControllerOptions, attempt: int, sha: str) -> str:
+def _repair_prompt(options: RepairControllerOptions, attempt: int, sha: str, cycle: ValidationCycleResult) -> str:
+    repair_packet = build_repair_packet(options, attempt, sha, cycle)
     return (
-        f"Repair Codie PR #{options.pull_request_number} attempt {attempt} at SHA {sha}. "
-        "Make the smallest code/test changes needed for the local validation gate. "
-        "Do not modify docs/CODIE_V1_CONSTITUTION.md, do not merge, and do not implement Phase 35B."
+        "TRUSTED REPAIR INSTRUCTIONS:\n"
+        f"Repair Codie PR #{options.pull_request_number} attempt {attempt} at SHA {sha}.\n"
+        "Use only the bounded repair packet below to decide what to repair.\n"
+        "Do not include resolved findings in the repair scope.\n"
+        "Do not modify trusted metadata, workflow policy, docs/CODIE_V1_CONSTITUTION.md, or unrelated files.\n"
+        "Do not merge, do not create another PR, and do not implement Phase 35B.\n"
+        "Make the smallest code/test changes needed for the unresolved findings.\n"
+        "\nBOUNDED REPAIR PACKET:\n"
+        f"{json.dumps(repair_packet, indent=2, sort_keys=True)}\n"
     )
 
 
+def build_repair_packet(
+    options: RepairControllerOptions,
+    attempt: int,
+    sha: str,
+    cycle: ValidationCycleResult,
+) -> dict[str, Any]:
+    summary = _parse_cycle_summary(cycle)
+    unresolved: list[dict[str, Any]] = []
+    for report in summary.get("reports", ()):
+        if not isinstance(report, dict):
+            continue
+        validator_source = str(report.get("validator", "unknown"))
+        for finding in report.get("findings", ()):
+            if not isinstance(finding, dict) or finding.get("resolution_status") != "OPEN":
+                continue
+            unresolved.append(
+                {
+                    "finding_id": _bounded_text(str(finding.get("finding_id", "")), limit=300),
+                    "severity": _bounded_text(str(finding.get("severity", "")), limit=40),
+                    "finding": _bounded_text(str(finding.get("finding", "")), limit=2_000),
+                    "affected_files": [
+                        _bounded_text(_normalize_path(str(path)), limit=240)
+                        for path in finding.get("affected_files", ())
+                        if str(path).strip()
+                    ][:20],
+                    "governing_rule": _bounded_text(str(finding.get("governing_rule", "")), limit=500),
+                    "required_correction": _bounded_text(str(finding.get("required_correction", "")), limit=1_000),
+                    "validator_source": validator_source,
+                }
+            )
+    return {
+        "trusted_metadata": {
+            "repair_attempt": attempt,
+            "validation_cycle": int(summary.get("validation_cycle") or 0),
+            "current_sha": sha,
+            "target_sha": cycle.target_sha,
+            "aggregate_result": cycle.result,
+            "phase_id": options.phase_id,
+            "phase_part": options.phase_part,
+            "gate_scope": options.gate_scope,
+            "pull_request_number": options.pull_request_number,
+        },
+        "unresolved_findings": unresolved[:30],
+    }
+
+
+def _parse_cycle_summary(cycle: ValidationCycleResult) -> dict[str, Any]:
+    if not cycle.summary:
+        return {"final_result": cycle.result, "target_sha": cycle.target_sha, "reports": []}
+    try:
+        payload = json.loads(cycle.summary)
+    except json.JSONDecodeError:
+        return {"final_result": cycle.result, "target_sha": cycle.target_sha, "reports": []}
+    if not isinstance(payload, dict):
+        return {"final_result": cycle.result, "target_sha": cycle.target_sha, "reports": []}
+    return payload
+
+
 def _finish(
+    options: RepairControllerOptions,
     result: str,
     attempts_used: int,
     cycles: list[ValidationCycleResult],
@@ -402,7 +501,7 @@ def _finish(
     current_sha: str,
     message: str,
 ) -> RepairControllerResult:
-    return RepairControllerResult(
+    controller_result = RepairControllerResult(
         final_result=result,
         attempts_used=attempts_used,
         validation_cycles=tuple(cycles),
@@ -410,6 +509,85 @@ def _finish(
         current_sha=current_sha,
         message=message,
     )
+    if options.output_dir is not None:
+        write_repair_outputs(controller_result, options.output_dir)
+    return controller_result
+
+
+def write_repair_outputs(result: RepairControllerResult, output_dir: Path) -> None:
+    output_dir.mkdir(parents=True, exist_ok=True)
+    (output_dir / "repair-controller-result.json").write_text(
+        json.dumps(repair_controller_result_to_dict(result), indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
+    (output_dir / "repair-summary.md").write_text(render_repair_summary(result), encoding="utf-8")
+    cycles_dir = output_dir / "cycles"
+    cycles_dir.mkdir(exist_ok=True)
+    for index, cycle in enumerate(result.validation_cycles, start=1):
+        cycle_dir = cycles_dir / f"cycle-{index}"
+        cycle_dir.mkdir(exist_ok=True)
+        (cycle_dir / "cycle-result.json").write_text(
+            json.dumps(validation_cycle_result_to_dict(cycle), indent=2, sort_keys=True) + "\n",
+            encoding="utf-8",
+        )
+    repairs_dir = output_dir / "repairs"
+    repairs_dir.mkdir(exist_ok=True)
+    for index, repair in enumerate(result.repair_results, start=1):
+        (repairs_dir / f"attempt-{index}.json").write_text(
+            json.dumps(repair_execution_result_to_dict(repair), indent=2, sort_keys=True) + "\n",
+            encoding="utf-8",
+        )
+
+
+def repair_controller_result_to_dict(result: RepairControllerResult) -> dict[str, Any]:
+    return {
+        "final_result": result.final_result,
+        "attempts_used": result.attempts_used,
+        "current_sha": result.current_sha,
+        "message": result.message,
+        "validation_cycles": [validation_cycle_result_to_dict(cycle) for cycle in result.validation_cycles],
+        "repair_results": [repair_execution_result_to_dict(repair) for repair in result.repair_results],
+    }
+
+
+def validation_cycle_result_to_dict(cycle: ValidationCycleResult) -> dict[str, Any]:
+    return {
+        "result": cycle.result,
+        "target_sha": cycle.target_sha,
+        "summary": _parse_cycle_summary(cycle),
+    }
+
+
+def repair_execution_result_to_dict(repair: RepairExecutionResult) -> dict[str, Any]:
+    return {
+        "status": repair.status,
+        "commit_sha": repair.commit_sha,
+        "changed_files": list(repair.changed_files),
+        "message": repair.message,
+    }
+
+
+def render_repair_summary(result: RepairControllerResult) -> str:
+    lines = [
+        "# Codie Repair Controller Summary",
+        "",
+        f"- final result: {result.final_result}",
+        f"- attempts used: {result.attempts_used}",
+        f"- current SHA: {result.current_sha}",
+        f"- message: {result.message or 'none'}",
+        "",
+        "## Validation Cycles",
+    ]
+    for index, cycle in enumerate(result.validation_cycles, start=1):
+        lines.append(f"- cycle {index}: {cycle.result} at {cycle.target_sha}")
+    lines.extend(["", "## Repair Attempts"])
+    if result.repair_results:
+        for index, repair in enumerate(result.repair_results, start=1):
+            files = ", ".join(repair.changed_files) or "none"
+            lines.append(f"- attempt {index}: {repair.status}; commit={repair.commit_sha or 'none'}; files={files}")
+    else:
+        lines.append("- none")
+    return "\n".join(lines) + "\n"
 
 
 def _reject_api_key_fallback() -> None:
@@ -420,6 +598,12 @@ def _reject_api_key_fallback() -> None:
 
 def _normalize_path(path: str) -> str:
     return path.replace("\\", "/").strip().lstrip("./")
+
+
+def _bounded_text(text: str, limit: int = 24_000) -> str:
+    if len(text) <= limit:
+        return text
+    return text[:limit] + "\n[truncated]\n"
 
 
 def _run_command(command: tuple[str, ...], root: Path) -> subprocess.CompletedProcess[str]:

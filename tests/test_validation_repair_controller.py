@@ -16,12 +16,14 @@ from codie.validation.repair_controller import (
     RepairControllerResult,
     RepairExecutionResult,
     ValidationCycleResult,
+    build_repair_packet,
     codex_exec_repair_attempt,
     discover_codex_executable,
     run_validation_cycle_in_worktree,
     run_repair_controller,
     unauthorized_repair_paths,
     verify_pull_request,
+    _repair_prompt,
 )
 
 
@@ -48,6 +50,41 @@ def completed(stdout: str = "", stderr: str = "", returncode: int = 0) -> subpro
     return subprocess.CompletedProcess(("fake",), returncode, stdout, stderr)
 
 
+def cycle_summary(*, result: str = "REPAIR_REQUIRED", resolved: bool = False) -> str:
+    return json.dumps(
+        {
+            "validation_cycle": 1,
+            "final_result": result,
+            "reports": [
+                {
+                    "validator": "deterministic",
+                    "findings": [
+                        {
+                            "finding_id": "open:1",
+                            "severity": "HIGH",
+                            "finding": "Open validation finding.",
+                            "affected_files": ["codie/validation/local_gate.py"],
+                            "governing_rule": "Implementation Quality Gate",
+                            "required_correction": "Correct the open issue.",
+                            "resolution_status": "OPEN",
+                        },
+                        {
+                            "finding_id": "resolved:1",
+                            "severity": "HIGH",
+                            "finding": "Resolved validation finding.",
+                            "affected_files": ["codie/resolved.py"],
+                            "governing_rule": "Implementation Quality Gate",
+                            "required_correction": "Already fixed.",
+                            "resolution_status": "RESOLVED" if resolved else "DEFERRED",
+                        },
+                    ],
+                }
+            ],
+        },
+        sort_keys=True,
+    )
+
+
 class RepairControllerTest(unittest.TestCase):
     def test_successful_first_repair(self) -> None:
         validations = {
@@ -58,7 +95,7 @@ class RepairControllerTest(unittest.TestCase):
         result = run_repair_controller(
             options(),
             validation_runner=lambda sha, _cycle: validations[sha],
-            repair_runner=lambda _attempt, _sha: RepairExecutionResult(
+            repair_runner=lambda _attempt, _sha, _cycle: RepairExecutionResult(
                 "COMMITTED",
                 commit_sha=SHA2,
                 changed_files=("codie/cards/example.py",),
@@ -79,7 +116,7 @@ class RepairControllerTest(unittest.TestCase):
         result = run_repair_controller(
             options(),
             validation_runner=lambda sha, _cycle: validations[sha],
-            repair_runner=lambda _attempt, _sha: RepairExecutionResult(
+            repair_runner=lambda _attempt, _sha, _cycle: RepairExecutionResult(
                 "COMMITTED",
                 commit_sha=commits.pop(0),
                 changed_files=("tests/test_example.py",),
@@ -100,7 +137,7 @@ class RepairControllerTest(unittest.TestCase):
         result = run_repair_controller(
             options(),
             validation_runner=lambda sha, _cycle: validations[sha],
-            repair_runner=lambda _attempt, _sha: RepairExecutionResult(
+            repair_runner=lambda _attempt, _sha, _cycle: RepairExecutionResult(
                 "COMMITTED",
                 commit_sha=commits.pop(0),
                 changed_files=("codie/cards/example.py",),
@@ -117,7 +154,7 @@ class RepairControllerTest(unittest.TestCase):
                 "REPAIR_REQUIRED" if cycle == 1 else "CLEAN_PASS",
                 SHA1,
             ),
-            repair_runner=lambda _attempt, _sha: RepairExecutionResult(
+            repair_runner=lambda _attempt, _sha, _cycle: RepairExecutionResult(
                 "COMMITTED",
                 commit_sha=SHA2,
                 changed_files=("codie/cards/example.py",),
@@ -135,7 +172,7 @@ class RepairControllerTest(unittest.TestCase):
                 "REPAIR_REQUIRED" if sha == SHA1 else "CLEAN_PASS",
                 sha,
             ),
-            repair_runner=lambda _attempt, _sha: RepairExecutionResult(
+            repair_runner=lambda _attempt, _sha, _cycle: RepairExecutionResult(
                 "COMMITTED",
                 commit_sha=SHA2,
                 changed_files=("codie/cards/example.py",),
@@ -149,17 +186,59 @@ class RepairControllerTest(unittest.TestCase):
         result = run_repair_controller(
             options(),
             validation_runner=lambda sha, _cycle: ValidationCycleResult("REPAIR_REQUIRED", sha),
-            repair_runner=lambda _attempt, _sha: RepairExecutionResult("USAGE_LIMIT", message="usage limit"),
+            repair_runner=lambda _attempt, _sha, _cycle: RepairExecutionResult("USAGE_LIMIT", message="usage limit"),
         )
 
         self.assertEqual(result.final_result, "CODEX_USAGE_LIMIT")
         self.assertEqual(result.attempts_used, 0)
 
+    def test_ineligible_results_prevent_repair(self) -> None:
+        for ineligible in (
+            "CLEAN_PASS",
+            "VALIDATOR_ERROR",
+            "STALE_RESULTS",
+            "CONSTITUTION_CONFLICT",
+            "HUMAN_REVIEW_REQUIRED",
+            "COST_POLICY_VIOLATION",
+            "CODEX_USAGE_LIMIT",
+        ):
+            with self.subTest(ineligible=ineligible):
+                result = run_repair_controller(
+                    options(),
+                    validation_runner=lambda sha, _cycle, status=ineligible: ValidationCycleResult(status, sha),
+                    repair_runner=lambda _attempt, _sha, _cycle: (_ for _ in ()).throw(AssertionError("repair ran")),
+                )
+
+                self.assertEqual(result.final_result, ineligible)
+                self.assertEqual(result.repair_results, ())
+
+    def test_repair_runner_receives_latest_validation_cycle(self) -> None:
+        seen_cycles: list[str] = []
+
+        result = run_repair_controller(
+            options(),
+            validation_runner=lambda sha, _cycle: ValidationCycleResult(
+                "REPAIR_REQUIRED" if sha == SHA1 else "CLEAN_PASS",
+                sha,
+                summary=cycle_summary(),
+            ),
+            repair_runner=lambda _attempt, _sha, cycle: seen_cycles.append(cycle.summary)
+            or RepairExecutionResult(
+                "COMMITTED",
+                commit_sha=SHA2,
+                changed_files=("codie/cards/example.py",),
+            ),
+        )
+
+        self.assertEqual(result.final_result, "CLEAN_PASS")
+        self.assertEqual(len(seen_cycles), 1)
+        self.assertIn("Open validation finding", seen_cycles[0])
+
     def test_unauthorized_file_changes(self) -> None:
         result = run_repair_controller(
             options(),
             validation_runner=lambda sha, _cycle: ValidationCycleResult("REPAIR_REQUIRED", sha),
-            repair_runner=lambda _attempt, _sha: RepairExecutionResult(
+            repair_runner=lambda _attempt, _sha, _cycle: RepairExecutionResult(
                 "COMMITTED",
                 commit_sha=SHA2,
                 changed_files=("docs/CODIE_V1_CONSTITUTION.md",),
@@ -173,9 +252,38 @@ class RepairControllerTest(unittest.TestCase):
 
         self.assertEqual(offenders, ("docs/CODIE_V1_CONSTITUTION.md",))
 
+    def test_repair_prompt_contains_unresolved_findings_only(self) -> None:
+        packet = build_repair_packet(
+            options(),
+            1,
+            SHA1,
+            ValidationCycleResult("REPAIR_REQUIRED", SHA1, summary=cycle_summary(resolved=True)),
+        )
+
+        self.assertEqual(packet["trusted_metadata"]["aggregate_result"], "REPAIR_REQUIRED")
+        self.assertEqual(packet["unresolved_findings"][0]["validator_source"], "deterministic")
+        self.assertIn("Open validation finding", json.dumps(packet))
+        self.assertNotIn("Resolved validation finding", json.dumps(packet))
+
+    def test_repair_prompt_declares_trusted_metadata_immutable(self) -> None:
+        prompt = _repair_prompt(
+            options(),
+            1,
+            SHA1,
+            ValidationCycleResult("REPAIR_REQUIRED", SHA1, summary=cycle_summary(resolved=True)),
+        )
+
+        self.assertIn("Do not modify trusted metadata", prompt)
+        self.assertIn('"trusted_metadata"', prompt)
+        self.assertIn('"current_sha": "1111111111111111111111111111111111111111"', prompt)
+
     def test_invalid_pr_number(self) -> None:
         with self.assertRaises(ValidationGateError):
             options(pull_request_number=0)
+
+    def test_non_repair_required_expected_result_is_rejected(self) -> None:
+        with self.assertRaises(ValidationGateError):
+            options(expected_validation_result="CLEAN_PASS")
 
     def test_pr_head_sha_mismatch(self) -> None:
         payload = self._pr_payload(headRefOid=SHA2)
@@ -318,6 +426,10 @@ class RepairControllerTest(unittest.TestCase):
                     BRANCH,
                     "--target-sha",
                     SHA1,
+                    "--output-dir",
+                    "validation_artifacts",
+                    "--expected-validation-result",
+                    "REPAIR_REQUIRED",
                 ],
             ):
                 exit_code = repair_cli.main()
@@ -338,14 +450,57 @@ class RepairControllerTest(unittest.TestCase):
         workflow = Path(".github/workflows/codie-local-validation.yml").read_text(encoding="utf-8")
         repair_section = workflow.split("manual-repair:")[1]
 
+        self.assertIn("always()", repair_section)
+        self.assertIn("needs.manual-validation.outputs.aggregate_result == 'REPAIR_REQUIRED'", repair_section)
         self.assertIn("contents: write", repair_section)
         self.assertIn("scripts/codie_repair_controller.py", repair_section)
         self.assertIn("persist-credentials: true", repair_section)
+        self.assertIn("--expected-validation-result", repair_section)
 
     def test_workflow_requires_same_repository_pr(self) -> None:
         workflow = Path(".github/workflows/codie-local-validation.yml").read_text(encoding="utf-8")
 
         self.assertIn("github.event.pull_request.head.repo.full_name == github.event.repository.full_name", workflow)
+
+    def test_pull_request_workflow_resolves_phase_without_phase35a_hardcoding(self) -> None:
+        workflow = Path(".github/workflows/codie-local-validation.yml").read_text(encoding="utf-8")
+        pr_section = workflow.split("manual-validation:")[0]
+
+        self.assertIn("--print-active-scope", pr_section)
+        self.assertIn("steps.scope.outputs.phase_id", pr_section)
+        self.assertNotIn("--phase-id Phase35A", pr_section)
+
+    def test_repair_outputs_persist_complete_history(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            output_dir = Path(tmp) / "validation_artifacts"
+            validations = {
+                SHA1: ValidationCycleResult("REPAIR_REQUIRED", SHA1, summary=cycle_summary()),
+                SHA2: ValidationCycleResult("REPAIR_REQUIRED", SHA2, summary=cycle_summary()),
+                SHA3: ValidationCycleResult("CLEAN_PASS", SHA3, summary=cycle_summary(result="CLEAN_PASS")),
+            }
+            commits = [SHA2, SHA3]
+
+            result = run_repair_controller(
+                options(output_dir=output_dir),
+                validation_runner=lambda sha, _cycle: validations[sha],
+                repair_runner=lambda _attempt, _sha, _cycle: RepairExecutionResult(
+                    "COMMITTED",
+                    commit_sha=commits.pop(0),
+                    changed_files=("tests/test_example.py",),
+                ),
+            )
+
+            self.assertEqual(result.final_result, "CLEAN_PASS")
+            self.assertTrue((output_dir / "repair-controller-result.json").is_file())
+            self.assertTrue((output_dir / "repair-summary.md").is_file())
+            self.assertTrue((output_dir / "cycles" / "cycle-1" / "cycle-result.json").is_file())
+            self.assertTrue((output_dir / "cycles" / "cycle-2" / "cycle-result.json").is_file())
+            self.assertTrue((output_dir / "cycles" / "cycle-3" / "cycle-result.json").is_file())
+            self.assertTrue((output_dir / "repairs" / "attempt-1.json").is_file())
+            self.assertTrue((output_dir / "repairs" / "attempt-2.json").is_file())
+            payload = json.loads((output_dir / "repair-controller-result.json").read_text(encoding="utf-8"))
+            self.assertEqual(len(payload["validation_cycles"]), 3)
+            self.assertEqual(len(payload["repair_results"]), 2)
 
     def test_no_api_key_fallback(self) -> None:
         original = os.environ.get("OPENAI_API_KEY")
@@ -355,7 +510,7 @@ class RepairControllerTest(unittest.TestCase):
                 run_repair_controller(
                     options(),
                     validation_runner=lambda sha, _cycle: ValidationCycleResult("REPAIR_REQUIRED", sha),
-                    repair_runner=lambda _attempt, _sha: RepairExecutionResult("FAILED"),
+                    repair_runner=lambda _attempt, _sha, _cycle: RepairExecutionResult("FAILED"),
                 )
         finally:
             if original is None:

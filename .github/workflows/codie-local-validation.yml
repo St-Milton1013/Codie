@@ -72,13 +72,22 @@ jobs:
           ref: ${{ github.event.pull_request.head.sha }}
           persist-credentials: false
 
+      - name: Resolve active validation scope
+        id: scope
+        shell: pwsh
+        run: |
+          $scopeLines = & "$env:CODIE_PYTHON" scripts/codie_validation_gate.py --print-active-scope
+          foreach ($line in $scopeLines) {
+            Add-Content -Path $env:GITHUB_OUTPUT -Value $line
+          }
+
       - name: Run validation only
         shell: pwsh
         run: |
           & "$env:CODIE_PYTHON" scripts/codie_validation_gate.py `
-            --phase-id Phase35A `
-            --phase-part outside-validation `
-            --gate-scope INTERMEDIATE_PACKET `
+            --phase-id "${{ steps.scope.outputs.phase_id }}" `
+            --phase-part "${{ steps.scope.outputs.phase_part }}" `
+            --gate-scope "${{ steps.scope.outputs.gate_scope }}" `
             --pull-request-number "${{ github.event.pull_request.number }}" `
             --branch "${{ github.event.pull_request.head.ref }}" `
             --base-branch "${{ github.event.pull_request.base.ref }}" `
@@ -105,6 +114,8 @@ jobs:
   manual-validation:
     name: Manual Validation
     if: ${{ github.event_name == 'workflow_dispatch' && github.event.repository.full_name == 'St-Milton1013/Codie' }}
+    outputs:
+      aggregate_result: ${{ steps.validation.outputs.aggregate_result }}
     runs-on:
       - self-hosted
       - Windows
@@ -121,8 +132,10 @@ jobs:
           persist-credentials: false
 
       - name: Run validation only
+        id: validation
         shell: pwsh
         run: |
+          $exitCode = 0
           & "$env:CODIE_PYTHON" scripts/codie_validation_gate.py `
             --phase-id "${{ inputs.phase_id }}" `
             --phase-part "${{ inputs.phase_part }}" `
@@ -133,6 +146,14 @@ jobs:
             --target-sha "${{ inputs.target_sha }}" `
             --output-dir validation_artifacts `
             --python-executable "$env:CODIE_PYTHON"
+          $exitCode = $LASTEXITCODE
+          $aggregateResult = "VALIDATOR_ERROR"
+          if (Test-Path validation_artifacts/codie-validation-result.json) {
+            $payload = Get-Content validation_artifacts/codie-validation-result.json -Raw | ConvertFrom-Json
+            $aggregateResult = $payload.final_result
+          }
+          Add-Content -Path $env:GITHUB_OUTPUT -Value "aggregate_result=$aggregateResult"
+          exit $exitCode
 
       - name: Upload validation artifact
         if: always()
@@ -144,7 +165,7 @@ jobs:
 
   manual-repair:
     name: Manual Repair
-    if: ${{ github.event_name == 'workflow_dispatch' && inputs.run_repair == true && github.event.repository.full_name == 'St-Milton1013/Codie' }}
+    if: ${{ always() && github.event_name == 'workflow_dispatch' && inputs.run_repair == true && github.event.repository.full_name == 'St-Milton1013/Codie' && needs.manual-validation.outputs.aggregate_result == 'REPAIR_REQUIRED' }}
     needs: manual-validation
     permissions:
       contents: write
@@ -176,4 +197,22 @@ jobs:
             --pr-branch "${{ inputs.pr_branch }}" `
             --base-branch "${{ inputs.base_branch }}" `
             --target-sha "${{ inputs.target_sha }}" `
+            --output-dir validation_artifacts `
+            --expected-validation-result "${{ needs.manual-validation.outputs.aggregate_result }}" `
             --python-executable "$env:CODIE_PYTHON"
+
+      - name: Write repair job summary
+        if: always()
+        shell: pwsh
+        run: |
+          if (Test-Path validation_artifacts/repair-summary.md) {
+            Get-Content validation_artifacts/repair-summary.md | Out-File -FilePath $env:GITHUB_STEP_SUMMARY -Append
+          }
+
+      - name: Upload repair artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: codie-manual-repair-${{ inputs.target_sha }}
+          path: validation_artifacts/
+          if-no-files-found: error

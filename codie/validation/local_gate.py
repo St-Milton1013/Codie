@@ -84,6 +84,13 @@ CONTEXT_FILES = (
 )
 
 
+@dataclass(frozen=True)
+class ActiveValidationScope:
+    phase_id: str
+    phase_part: str
+    gate_scope: str
+
+
 class ValidationGateError(ValueError):
     """Raised when local validation inputs or reports are invalid."""
 
@@ -813,6 +820,20 @@ def resolve_active_phase(root: Path) -> str:
     raise ValidationGateError("unable to resolve active phase from docs/ACTIVE_ROADMAP_INDEX.md")
 
 
+def resolve_active_validation_scope(root: Path) -> ActiveValidationScope:
+    phase_id = resolve_active_phase(root)
+    index = root / "docs" / "ACTIVE_ROADMAP_INDEX.md"
+    next_contract = root / "docs" / "NEXT_PHASE_CONTRACT.md"
+    text = "\n".join(
+        path.read_text(encoding="utf-8", errors="ignore")
+        for path in (index, next_contract)
+        if path.is_file()
+    )
+    phase_part = "outside-validation" if re.search(r"\boutside validation\b", text, re.IGNORECASE) else "validation"
+    gate_scope = "FINAL_PHASE" if re.search(r"\bfinal phase\b", text, re.IGNORECASE) else "INTERMEDIATE_PACKET"
+    return ActiveValidationScope(phase_id=phase_id, phase_part=phase_part, gate_scope=gate_scope)
+
+
 def expected_phase_for_run(requested_phase_id: str, root: Path) -> str:
     if requested_phase_id == CURRENT_EXPECTED_PHASE_ID:
         return CURRENT_EXPECTED_PHASE_ID
@@ -1279,11 +1300,12 @@ def _git_output(command: tuple[str, ...], root: Path) -> str:
 
 def build_arg_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="Run the Codie local validation gate.")
-    parser.add_argument("--phase-id", required=True)
-    parser.add_argument("--phase-part", required=True)
-    parser.add_argument("--gate-scope", choices=sorted(ALLOWED_GATE_SCOPES), required=True)
-    parser.add_argument("--pull-request-number", type=int, required=True)
-    parser.add_argument("--target-sha", required=True)
+    parser.add_argument("--print-active-scope", action="store_true")
+    parser.add_argument("--phase-id")
+    parser.add_argument("--phase-part")
+    parser.add_argument("--gate-scope", choices=sorted(ALLOWED_GATE_SCOPES))
+    parser.add_argument("--pull-request-number", type=int)
+    parser.add_argument("--target-sha")
     parser.add_argument("--branch", default="")
     parser.add_argument("--base-branch", default="main")
     parser.add_argument("--output-dir", default="validation_artifacts")
@@ -1293,6 +1315,19 @@ def build_arg_parser() -> argparse.ArgumentParser:
 
 def main(argv: list[str] | None = None) -> int:
     args = build_arg_parser().parse_args(argv)
+    if args.print_active_scope:
+        scope = resolve_active_validation_scope(Path.cwd())
+        print(f"phase_id={scope.phase_id}")
+        print(f"phase_part={scope.phase_part}")
+        print(f"gate_scope={scope.gate_scope}")
+        return 0
+    missing = [
+        name
+        for name in ("phase_id", "phase_part", "gate_scope", "pull_request_number", "target_sha")
+        if getattr(args, name) in (None, "")
+    ]
+    if missing:
+        raise ValidationGateError(f"missing required arguments: {', '.join(missing)}")
     options = ValidationGateOptions(
         phase_id=args.phase_id,
         phase_part=args.phase_part,

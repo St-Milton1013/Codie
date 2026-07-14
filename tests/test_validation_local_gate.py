@@ -24,6 +24,7 @@ from codie.validation.local_gate import (
     parse_validator_json,
     report_json_schema,
     resolve_active_phase,
+    resolve_active_validation_scope,
     _run_ollama,
     _portable_python_executable,
     run_ollama_validator,
@@ -210,6 +211,44 @@ class ValidationLocalGateTest(unittest.TestCase):
             )
 
             self.assertEqual(resolve_active_phase(root), "Phase35B")
+
+    def test_active_scope_resolves_phase_part_and_gate_scope(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "docs").mkdir()
+            (root / "docs" / "ACTIVE_ROADMAP_INDEX.md").write_text(
+                "Current action: send Phase 35B outside validation packet\n",
+                encoding="utf-8",
+            )
+            (root / "docs" / "NEXT_PHASE_CONTRACT.md").write_text(
+                "Recommended next task: send Phase 35B outside validation packet\n",
+                encoding="utf-8",
+            )
+
+            scope = resolve_active_validation_scope(root)
+
+            self.assertEqual(scope.phase_id, "Phase35B")
+            self.assertEqual(scope.phase_part, "outside-validation")
+            self.assertEqual(scope.gate_scope, "INTERMEDIATE_PACKET")
+
+    def test_active_scope_resolves_final_phase_gate(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "docs").mkdir()
+            (root / "docs" / "ACTIVE_ROADMAP_INDEX.md").write_text(
+                "Current action: send Phase 35Z outside validation packet\n",
+                encoding="utf-8",
+            )
+            (root / "docs" / "NEXT_PHASE_CONTRACT.md").write_text(
+                "Phase 35Z is the final phase outside validation gate.\n",
+                encoding="utf-8",
+            )
+
+            scope = resolve_active_validation_scope(root)
+
+            self.assertEqual(scope.phase_id, "Phase35Z")
+            self.assertEqual(scope.phase_part, "outside-validation")
+            self.assertEqual(scope.gate_scope, "FINAL_PHASE")
 
     def test_malformed_json_fails(self) -> None:
         with self.assertRaises(ValidationGateError):
