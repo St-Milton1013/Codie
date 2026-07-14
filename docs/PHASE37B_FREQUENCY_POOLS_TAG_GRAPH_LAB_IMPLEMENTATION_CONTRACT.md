@@ -261,52 +261,102 @@ Frequency Pool packets are evidence/reporting inputs only. They are not
 recommendation outputs and do not express play, cut, include, optimality, or
 pilot-intent claims.
 
+Boundary enforcement for the later model packet:
+
+```text
+packet builders accept already-supplied sanitized values only
+packet builders reject recommendation-language fields
+packet builders reject ranking/scoring/include/cut metadata
+packet builders preserve source_ref_ids and caveat_ids visibly
+packet builders label user-local pool types visibly
+packet validators reject private/raw metadata recursively
+packet serializers expose metrics as evidence values only
+dependency scans reject provider, database, analytics, recommendation, LLM, UI, and file-writing imports
+```
+
 If later Decision Intelligence consumes Frequency Pool packets, that connection
-requires a separate accepted contract.
+requires a separate accepted contract. That contract must treat the packets as
+supporting evidence inputs, cite their packet IDs and source refs, preserve
+their caveats, and keep recommendation reasoning inside Decision Intelligence.
 
 ## Future Fixture Requirements
 
 Future tests must use local fixtures only:
 
 ```text
-frequency_pool_commander.json
-frequency_pool_partner_pair.json
-frequency_pool_user_local.json
-frequency_pool_invalid.json
+tests/fixtures/frequency_pools/frequency_pool_commander.json
+tests/fixtures/frequency_pools/frequency_pool_partner_pair.json
+tests/fixtures/frequency_pools/frequency_pool_user_local.json
+tests/fixtures/frequency_pools/frequency_pool_invalid.json
 ```
 
-Fixtures should cover commander pools, partner-pair pools, user-local labeling,
-card identity rows, tag rows, source refs, coverage reports, caveats, blocked
-private/raw keys, and malformed packet shapes.
+Required fixture coverage:
+
+```text
+commander pool subject
+partner-pair pool subject
+user-local pool labeling
+card identity rows
+functional tag rows
+source refs
+coverage report values
+low-sample caveat
+low-coverage caveat
+blocked private/raw keys
+malformed packet shape
+```
 
 ## Future Required Tests
 
 The later model packet should test:
 
 ```text
-commander pool packet builds
-partner-pair pool packet builds
-user-local pool packet isolation
-card identity preservation
-tag provenance preservation
-coverage visibility
-low-sample caveat visibility
-low-coverage caveat visibility
+valid commander frequency pool packet builds
+valid partner-pair frequency pool packet builds
+valid user-local pool packet remains labeled user-local
+user-local pool does not enter commander-average fields
+card identities preserve scryfall_id and oracle_id when supplied
+tag rows preserve source provenance
+coverage ratio remains visible
+matching deck count remains visible
+available deck count remains visible
+low sample creates visible caveat
+low coverage creates visible caveat
+unknown coverage remains visible
 deterministic serialization
 dictionary-compatible round-trip
-input payload immutability
-recursive private/raw metadata rejection
-clean malformed fixture failures
-dependency boundary scans
-recommendation-language rejection
+input payloads are not mutated
+raw imported deck text is rejected recursively
+private notes are rejected recursively
+raw provider payloads are rejected recursively
+primer body text is rejected recursively
+malformed fixture failures are clean
+provider import scan has no production matches
+SQLite import scan has no production matches
+analytics recalculation scan has no production matches
+recommendation-language scan has no production matches
+file-writing scan has no production matches
 ```
 
 ## Future Dependency Rules
 
-The later implementation may use only Python standard-library facilities and
-already accepted local packet/reference values. It must remain independent from
-database, provider, ingestion, analytics, recommendation, Decision Intelligence,
-Evidence Fusion, HTTP, LLM, server, UI, and file-writing dependencies.
+Allowed implementation dependencies and inputs:
+
+```text
+Python standard library
+local dataclasses or equivalent immutable value helpers
+typing helpers
+already accepted Scryfall identity values as input values
+already accepted Scryfall Tagger ontology values as input values
+already accepted immutable deck snapshot refs as input refs
+already accepted measured evidence refs as input refs
+already accepted caveat refs as input refs
+already accepted source refs as input refs
+```
+
+The later implementation must remain independent from database, provider,
+ingestion, analytics, recommendation, Decision Intelligence, Evidence Fusion,
+HTTP, LLM, server, UI, and file-writing dependencies.
 
 ## Deferred Later Work
 
@@ -354,5 +404,6 @@ docs/CODEX_CONTINUITY_HANDOFF.md
 
 ## Completion Rule
 
-The next implementation packet may begin only after Phase 37B outside validation
-returns PASS or PASS WITH REVIEW NOTES.
+Phase 37B publishes the validation tuple for the next roadmap packet. The
+current PR contains only the implementation-contract packet and matching
+governance records.
