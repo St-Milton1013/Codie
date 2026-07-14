@@ -11,12 +11,17 @@ Phase 37B Frequency Pools / Tag Graph Lab Implementation Contract: INTERNAL PASS
 This is an internal checkpoint, not external proof. Phase 37C remains blocked
 until Phase 37B outside validation returns PASS or PASS WITH REVIEW NOTES.
 
-## Validation Tuple
+## Explicit Phase 37B Validation Tuple
 
 ```text
 phase_id: Phase37B
 phase_part: outside-validation
 gate_scope: INTERMEDIATE_PACKET
+```
+
+## Explicit Next-Phase Validation Tuple
+
+```text
 next_phase_id: Phase37C
 next_phase_part: outside-validation
 next_gate_scope: INTERMEDIATE_PACKET
@@ -138,7 +143,7 @@ label user-local pools
 keep user-local pools out of commander averages
 reject raw imported deck text recursively
 reject private notes recursively
-reject raw provider payloads recursively
+reject provider payload metadata recursively
 reject primer body text recursively
 avoid provider imports
 avoid SQLite imports

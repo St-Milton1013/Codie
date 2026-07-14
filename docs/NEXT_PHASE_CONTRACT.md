@@ -21,12 +21,17 @@ Phase 37A outside validation returned PASS WITH REVIEW NOTES.
 
 Phase 37B Frequency Pools / Tag Graph Lab Implementation Contract is internally complete.
 
-Phase 37B validation tuple:
+Explicit Phase 37B validation tuple:
 
 ```text
 phase_id: Phase37B
 phase_part: outside-validation
 gate_scope: INTERMEDIATE_PACKET
+```
+
+Explicit next-phase validation tuple:
+
+```text
 next_phase_id: Phase37C
 next_phase_part: outside-validation
 next_gate_scope: INTERMEDIATE_PACKET

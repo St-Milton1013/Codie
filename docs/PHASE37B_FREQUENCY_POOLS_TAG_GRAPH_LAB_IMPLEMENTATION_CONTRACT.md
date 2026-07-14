@@ -2,12 +2,17 @@
 
 Status: implementation contract only
 
-## Validation Tuple
+## Explicit Phase 37B Validation Tuple
 
 ```text
 phase_id: Phase37B
 phase_part: outside-validation
 gate_scope: INTERMEDIATE_PACKET
+```
+
+## Explicit Next-Phase Validation Tuple
+
+```text
 next_phase_id: Phase37C
 next_phase_part: outside-validation
 next_gate_scope: INTERMEDIATE_PACKET
@@ -65,7 +70,7 @@ Any runtime, schema, provider, validator, workflow, dependency, UI, export,
 simulation, analytics, recommendation, or constitution change is outside this
 PR.
 
-## Next Implementation Packet Shape
+## Complete Authorized Future Implementation Files
 
 After this contract is accepted, the next packet may define local, in-memory
 Frequency Pool packet models and validators.
@@ -304,7 +309,7 @@ blocked private/raw keys
 malformed packet shape
 ```
 
-## Future Required Tests
+## Complete Future Required Tests
 
 The later model packet should test:
 
@@ -356,7 +361,7 @@ The later implementation must remain independent from database, provider,
 ingestion, analytics, recommendation, Decision Intelligence, Evidence Fusion,
 HTTP, LLM, server, UI, and file-writing dependencies.
 
-## Deferred Later Work
+## Complete Deferred Later Work
 
 Separate future contracts are still required for:
 
