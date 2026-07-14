@@ -1815,8 +1815,9 @@ required corrections: none
 ```
 
 The adversarial informational findings are nonblocking historical observations
-and require no corrective action. Phase 37B is now internally complete as an
-implementation-contract-only packet.
+and require no corrective action. Phase 37B's authorized deliverable is the
+Frequency Pools / Tag Graph Lab implementation-contract packet and matching
+governance records.
 
 Next allowed work:
 
@@ -1825,8 +1826,8 @@ Phase 37B - Frequency Pools / Tag Graph Lab Implementation Contract: internal pa
 Phase 37B outside validation: current required gate
 ```
 
-Do not implement Phase 37C production code until Phase 37B outside validation
-returns PASS or PASS WITH REVIEW NOTES.
+The next-phase tuple is declared for governance continuity; no next-phase
+runtime files are part of the Phase 37B PR.
 
 Phase 37B validation tuple:
 
@@ -2371,18 +2372,17 @@ Phase 13 simulator contracts or a new UI/API contract is explicitly selected.
 
 ## Known Caveats
 
-- Phase 37B Frequency Pools / Tag Graph Lab Implementation Contract is
-  internally complete and awaiting outside validation.
+- Phase 37B Frequency Pools / Tag Graph Lab Implementation Contract is the
+  current PR validation packet.
 - Phase 37B declares:
   `phase_id: Phase37B`, `phase_part: outside-validation`,
   `gate_scope: INTERMEDIATE_PACKET`, `next_phase_id: Phase37C`,
   `next_phase_part: outside-validation`, and
   `next_gate_scope: INTERMEDIATE_PACKET`.
-- Phase 37C Frequency Pool Packet Models and Validators remains blocked until
-  Phase 37B outside validation returns PASS or PASS WITH REVIEW NOTES.
-- Phase 37B is contract-only and does not implement Frequency Pool code, Tag
-  Graph code, schema, repositories, providers, UI, exports, LLM calls,
-  simulator execution, analytics calculation, or recommendations.
+- The next-phase tuple is declared for governance continuity.
+- The Phase 37B PR changes governance documents only; no `codie/`, `tests/`,
+  fixture, schema, provider, UI, workflow, validator, or constitution files are
+  part of this packet.
 
 - Hareruya live access can hit AWS WAF; treat Hareruya as regional enrichment, not critical path.
 - CLI requires a local Codie SQLite database with card rows before user deck import can resolve cards.

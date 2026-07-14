@@ -69,8 +69,10 @@ Phase 37B Frequency Pools / Tag Graph Lab Implementation Contract: CURRENT PR VA
 Local alpha tag: created locally; remote tag push not verified in this environment
 ```
 
-Phase 37B is a contract-only pull request. It does not implement production
-Frequency Pool or Tag Graph Lab code. It does not include Phase 37C work.
+Phase 37B's authorized deliverable is the Frequency Pools / Tag Graph Lab
+implementation-contract packet and matching governance records. The current PR
+contains no `codie/`, `tests/`, fixture, schema, provider, UI, workflow,
+validator, or constitution changes.
 
 Phase 37B validation tuple:
 

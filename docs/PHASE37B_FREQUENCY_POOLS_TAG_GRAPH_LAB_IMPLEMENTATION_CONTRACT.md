@@ -22,8 +22,10 @@ advancement remains governed by accepted validation results.
 Phase 37B converts the accepted Phase 37A Frequency Pools / Tag Graph Lab
 boundary into a narrower implementation contract for the next packet.
 
-This PR is documentation-only. It adds no runtime behavior and no implementation
-tests or fixtures.
+The authorized Phase 37B deliverable is this implementation-contract packet and
+the matching governance records. The packet defines the later model/validator
+surface without adding `codie/`, `tests/`, fixture, schema, provider, UI,
+workflow, validator, or constitution changes.
 
 ## Accepted Dependency
 

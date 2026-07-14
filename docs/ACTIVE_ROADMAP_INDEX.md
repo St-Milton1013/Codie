@@ -78,10 +78,9 @@ Local alpha tag status: created locally; remote tag push not verified in this en
 Phase 37B outside validation
 ```
 
-Phase 37A outside validation returned PASS WITH REVIEW NOTES. Phase 37B is
-internally complete as an implementation-contract-only packet. Phase 37C remains
-blocked until Phase 37B outside validation returns PASS or PASS WITH REVIEW
-NOTES.
+Phase 37A outside validation returned PASS WITH REVIEW NOTES. Phase 37B's
+authorized deliverable is the Frequency Pools / Tag Graph Lab
+implementation-contract packet and matching governance records.
 
 Phase 37B validation tuple:
 
@@ -117,8 +116,8 @@ and require no corrective action.
 
 ```text
 1. Phase 37A Frequency Pools / Tag Graph Lab Contract: accepted with review notes
-2. Phase 37B Frequency Pools / Tag Graph Lab Implementation Contract: internal pass
-3. Phase 37B outside validation: next
+2. Phase 37B Frequency Pools / Tag Graph Lab Implementation Contract: current PR validation packet
+3. Phase 37B outside validation: current gate
 ```
 
 The post-31 patch priority order is cemented in:
