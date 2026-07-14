@@ -1,0 +1,31 @@
+{
+  "provider_combo_id": "spellbook-restriction-1",
+  "combo_url": "https://commanderspellbook.com/combo/spellbook-restriction-1/",
+  "combo_name": "Kiki-Jiki, Mirror Breaker + Zealous Conscripts",
+  "variant_ids": ["kiki-line"],
+  "raw_payload_hash": "sha256:restriction-fixture",
+  "cards": [
+    {
+      "name": "Kiki-Jiki, Mirror Breaker",
+      "role": "copy_engine",
+      "required": true
+    },
+    {
+      "name": "Zealous Conscripts",
+      "role": "untap_engine",
+      "required": true
+    }
+  ],
+  "outputs": [
+    "Create infinite tokens with haste for combat."
+  ],
+  "prerequisites": [
+    "Requires commander.",
+    "Requires creature on the battlefield.",
+    "Requires tap ability available."
+  ],
+  "restrictions": [
+    "Summoning sickness sensitive.",
+    "Once per turn limit may apply to replacement pieces."
+  ]
+}

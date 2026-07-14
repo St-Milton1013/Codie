@@ -59,7 +59,8 @@ Phase 34A Scryfall Tagger Functional Ontology Contract: PASS WITH REVIEW NOTES
 Phase 34B Scryfall Tagger Ontology Implementation Contract: PASS WITH REVIEW NOTES
 Phase 34C Scryfall Tagger Ontology Implementation: PASS WITH REVIEW NOTES
 Phase 35A Commander Spellbook Interpreter Expansion Contract: PASS WITH REVIEW NOTES
-Phase 35B Commander Spellbook Interpreter Implementation Contract: INTERNAL PASS
+Phase 35B Commander Spellbook Interpreter Implementation Contract: PASS WITH REVIEW NOTES
+Phase 35C Commander Spellbook Interpreter Implementation: INTERNAL PASS
 Local alpha tag: created locally; remote tag push not verified in this environment
 ```
 
@@ -141,7 +142,8 @@ Phase 34A Scryfall Tagger Functional Ontology Contract: PASS WITH REVIEW NOTES
 Phase 34B Scryfall Tagger Ontology Implementation Contract: PASS WITH REVIEW NOTES
 Phase 34C Scryfall Tagger Ontology Implementation: PASS WITH REVIEW NOTES
 Phase 35A Commander Spellbook Interpreter Expansion Contract: PASS WITH REVIEW NOTES
-Phase 35B Commander Spellbook Interpreter Implementation Contract: INTERNAL PASS
+Phase 35B Commander Spellbook Interpreter Implementation Contract: PASS WITH REVIEW NOTES
+Phase 35C Commander Spellbook Interpreter Implementation: INTERNAL PASS
 ```
 
 ## Latest Local Validation
@@ -199,6 +201,26 @@ Static scans:
 production/test/schema/repository/dependency drift scan: no matches
 forbidden implementation/dependency scan: matches only contract narrative and explicit forbidden-scope lists
 recommendation-language scan: matches only explicit contract boundary statements
+
+Phase 35C Commander Spellbook Interpreter Implementation:
+python -m unittest tests.test_spellbook_interpreter -v
+Ran 10 tests
+OK
+
+python scripts/check_schema.py
+Schema bootstrap check passed.
+
+python -m unittest discover -s tests
+Ran 916 tests
+OK (skipped=1)
+
+git diff --check
+passed
+
+Static scans:
+schema/repository/provider/analytics/recommendation/simulator/dependency drift scan: no matches
+forbidden import/dependency scan: no production matches; test matches only assertion strings
+recommendation-language scan: production matches only blocked phrase constants and boundary comments; test matches only rejection coverage
 ```
 
 ## CI Review Note Status
@@ -340,21 +362,28 @@ production Forge / LLM SDK import scan: no matches
 ## Current Blocker
 
 ```text
-Phase 35C is blocked until Phase 35B outside validation returns PASS or PASS WITH REVIEW NOTES.
+Later phases are blocked until Phase 35C outside validation returns PASS or PASS WITH REVIEW NOTES.
 ```
 
-## Current Phase 35B Outside Validation Packet
+## Current Phase 35C Outside Validation Packet
 
 ```text
+docs/PHASE35C_COMMANDER_SPELLBOOK_INTERPRETER_IMPLEMENTATION_REPORT.md
+docs/CHECKPOINT_PHASE35C_COMMANDER_SPELLBOOK_INTERPRETER_IMPLEMENTATION_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE35C_COMMANDER_SPELLBOOK_INTERPRETER_IMPLEMENTATION_PROMPT.md
 docs/PHASE35B_COMMANDER_SPELLBOOK_INTERPRETER_IMPLEMENTATION_CONTRACT.md
 docs/CHECKPOINT_PHASE35B_COMMANDER_SPELLBOOK_INTERPRETER_IMPLEMENTATION_CONTRACT_REPORT.md
 docs/OUTSIDE_VALIDATION_PHASE35B_COMMANDER_SPELLBOOK_INTERPRETER_IMPLEMENTATION_CONTRACT_PROMPT.md
 docs/PHASE35A_COMMANDER_SPELLBOOK_INTERPRETER_EXPANSION_CONTRACT.md
 docs/CHECKPOINT_PHASE35A_COMMANDER_SPELLBOOK_INTERPRETER_EXPANSION_CONTRACT_REPORT.md
-docs/OUTSIDE_VALIDATION_PHASE35A_COMMANDER_SPELLBOOK_INTERPRETER_EXPANSION_CONTRACT_PROMPT.md
 docs/PHASE7A_SPELLBOOK_COMBO_EVIDENCE_CONTRACT.md
-docs/POST_PHASE31_DEFERRED_IMPLEMENTATION_PRIORITY_PLAN.md
 docs/CODIE_V1_CONSTITUTION.md
+codie/combos/spellbook_interpreter.py
+codie/combos/__init__.py
+tests/test_spellbook_interpreter.py
+tests/fixtures/spellbook_interpreter/spellbook_combo_outputs.json
+tests/fixtures/spellbook_interpreter/spellbook_combo_restrictions.json
+tests/fixtures/spellbook_interpreter/spellbook_combo_unknowns.json
 codie/providers/spellbook/parser.py
 codie/combos/sync.py
 tests/test_provider_spellbook.py

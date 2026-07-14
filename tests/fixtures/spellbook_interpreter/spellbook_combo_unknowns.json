@@ -1,0 +1,29 @@
+{
+  "provider_combo_id": "spellbook-unknown-1",
+  "combo_url": "https://commanderspellbook.com/combo/spellbook-unknown-1/",
+  "combo_name": "Ambiguous Engine",
+  "variant_ids": ["unknown-line"],
+  "raw_payload_hash": "sha256:unknown-fixture",
+  "cards": [
+    {
+      "name": "Mystery Card",
+      "required": true
+    }
+  ],
+  "outputs": [
+    "Produces a table-dependent advantage loop."
+  ],
+  "prerequisites": [
+    "Requires a previously established condition."
+  ],
+  "restrictions": [
+    "Only works in a special case."
+  ],
+  "unsupported_items": [
+    {
+      "item_type": "unsupported_source_shape",
+      "source_text": "special case",
+      "reason": "fixture represents an unsupported source shape"
+    }
+  ]
+}

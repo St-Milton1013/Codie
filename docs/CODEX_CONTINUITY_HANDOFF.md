@@ -1717,7 +1717,7 @@ Phase 35A review note:
 GitHub CI was not available for the Phase 35A validation result.
 ```
 
-Phase 35B is internally complete. It is an implementation-contract-only packet
+Phase 35B is externally accepted with review notes. It is an implementation-contract-only packet
 for future Commander Spellbook interpreter models and validators. It narrows
 the future implementation to `codie/combos/spellbook_interpreter.py`, focused
 tests, local fixtures, and optional export-only updates to `codie/combos/__init__.py`.
@@ -1726,8 +1726,18 @@ target-compatibility metadata, unsupported/manual-review output, fixture
 requirements, dependency limits, and implementation guardrails. It does not
 implement interpreter code, schema, repositories, providers, live Spellbook
 calls, Spellbook scraping, file writing, analytics, simulator execution, UI,
-LLM calls, combo ranking, or recommendations. Phase 35C is blocked until Phase
-35B outside validation returns PASS or PASS WITH REVIEW NOTES.
+LLM calls, combo ranking, or recommendations.
+
+Phase 35C is internally complete. It implements the local Commander Spellbook
+interpreter models and validators authorized by Phase 35B. It adds
+`codie/combos/spellbook_interpreter.py`, focused local fixtures, focused tests,
+and export-only updates to `codie/combos/__init__.py`. It classifies Spellbook
+combo outputs, prerequisites, restrictions, target-compatibility metadata, and
+unsupported/manual-review records. It remains local-only, fixture-first,
+provider-free, schema-free, repository-free, simulator-execution-free,
+analytics-free, frequency-pool-free, UI-free, LLM-free, and recommendation-free.
+No later phase should begin until Phase 35C outside validation returns PASS or
+PASS WITH REVIEW NOTES.
 
 The post-31 patch-note plan has been cemented in
 `docs/POST_PHASE31_PATCH_PLAN_CEMENTING_AUDIT.md`. That audit confirms no
@@ -1968,7 +1978,7 @@ docs/NEXT_PHASE_CONTRACT.md
 docs/CODEX_CONTINUITY_HANDOFF.md
 ```
 
-Current Phase 35B outside validation packet:
+Accepted Phase 35B outside validation packet:
 
 ```text
 docs/PHASE35B_COMMANDER_SPELLBOOK_INTERPRETER_IMPLEMENTATION_CONTRACT.md
@@ -1980,6 +1990,35 @@ docs/OUTSIDE_VALIDATION_PHASE35A_COMMANDER_SPELLBOOK_INTERPRETER_EXPANSION_CONTR
 docs/PHASE7A_SPELLBOOK_COMBO_EVIDENCE_CONTRACT.md
 docs/POST_PHASE31_DEFERRED_IMPLEMENTATION_PRIORITY_PLAN.md
 docs/CODIE_V1_CONSTITUTION.md
+codie/providers/spellbook/parser.py
+codie/combos/sync.py
+tests/test_provider_spellbook.py
+tests/test_combo_sync.py
+docs/ACTIVE_ROADMAP_INDEX.md
+docs/VALIDATION_STATUS_INDEX.md
+docs/NEXT_PHASE_CONTRACT.md
+docs/CODEX_CONTINUITY_HANDOFF.md
+```
+
+Current Phase 35C outside validation packet:
+
+```text
+docs/PHASE35C_COMMANDER_SPELLBOOK_INTERPRETER_IMPLEMENTATION_REPORT.md
+docs/CHECKPOINT_PHASE35C_COMMANDER_SPELLBOOK_INTERPRETER_IMPLEMENTATION_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE35C_COMMANDER_SPELLBOOK_INTERPRETER_IMPLEMENTATION_PROMPT.md
+docs/PHASE35B_COMMANDER_SPELLBOOK_INTERPRETER_IMPLEMENTATION_CONTRACT.md
+docs/CHECKPOINT_PHASE35B_COMMANDER_SPELLBOOK_INTERPRETER_IMPLEMENTATION_CONTRACT_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE35B_COMMANDER_SPELLBOOK_INTERPRETER_IMPLEMENTATION_CONTRACT_PROMPT.md
+docs/PHASE35A_COMMANDER_SPELLBOOK_INTERPRETER_EXPANSION_CONTRACT.md
+docs/CHECKPOINT_PHASE35A_COMMANDER_SPELLBOOK_INTERPRETER_EXPANSION_CONTRACT_REPORT.md
+docs/PHASE7A_SPELLBOOK_COMBO_EVIDENCE_CONTRACT.md
+docs/CODIE_V1_CONSTITUTION.md
+codie/combos/spellbook_interpreter.py
+codie/combos/__init__.py
+tests/test_spellbook_interpreter.py
+tests/fixtures/spellbook_interpreter/spellbook_combo_outputs.json
+tests/fixtures/spellbook_interpreter/spellbook_combo_restrictions.json
+tests/fixtures/spellbook_interpreter/spellbook_combo_unknowns.json
 codie/providers/spellbook/parser.py
 codie/combos/sync.py
 tests/test_provider_spellbook.py

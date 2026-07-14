@@ -1,0 +1,34 @@
+{
+  "provider_combo_id": "spellbook-output-1",
+  "combo_url": "https://commanderspellbook.com/combo/spellbook-output-1/",
+  "combo_name": "Basalt Monolith + Rings of Brighthearth",
+  "variant_ids": ["variant-b", "variant-a"],
+  "raw_payload_hash": "sha256:output-fixture",
+  "cards": [
+    {
+      "name": "Basalt Monolith",
+      "role": "mana_engine",
+      "required": true,
+      "scryfall_id": "scryfall-basalt",
+      "oracle_id": "oracle-basalt"
+    },
+    {
+      "name": "Rings of Brighthearth",
+      "role": "copy_engine",
+      "required": true,
+      "scryfall_id": "scryfall-rings",
+      "oracle_id": "oracle-rings"
+    }
+  ],
+  "outputs": [
+    "Infinite mana.",
+    "Draw your deck with a compatible draw outlet."
+  ],
+  "prerequisites": [
+    "Basalt Monolith on the battlefield.",
+    "Requires three mana to start."
+  ],
+  "restrictions": [
+    "Timing requirement: activate only when priority is available."
+  ]
+}
