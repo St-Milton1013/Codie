@@ -65,13 +65,12 @@ Phase 36A Immutable Deck Snapshot Expansion Contract: PASS WITH REVIEW NOTES
 Phase 36B Immutable Deck Snapshot Implementation Contract: PASS WITH REVIEW NOTES
 Phase 36C Immutable Deck Snapshot Implementation: PASS WITH REVIEW NOTES
 Phase 37A Frequency Pools / Tag Graph Lab Contract: PASS WITH REVIEW NOTES
-Phase 37B Frequency Pools / Tag Graph Lab Implementation Contract: INTERNAL PASS; outside validation pending
+Phase 37B Frequency Pools / Tag Graph Lab Implementation Contract: CURRENT PR VALIDATION PACKET
 Local alpha tag: created locally; remote tag push not verified in this environment
 ```
 
 Phase 37B is a contract-only pull request. It does not implement production
-Frequency Pool or Tag Graph Lab code. Phase 37C remains blocked until Phase 37B
-outside validation returns PASS or PASS WITH REVIEW NOTES.
+Frequency Pool or Tag Graph Lab code. It does not include Phase 37C work.
 
 Phase 37B validation tuple:
 
@@ -168,7 +167,7 @@ Phase 36A Immutable Deck Snapshot Expansion Contract: PASS WITH REVIEW NOTES
 Phase 36B Immutable Deck Snapshot Implementation Contract: PASS WITH REVIEW NOTES
 Phase 36C Immutable Deck Snapshot Implementation: PASS WITH REVIEW NOTES
 Phase 37A Frequency Pools / Tag Graph Lab Contract: PASS WITH REVIEW NOTES
-Phase 37B Frequency Pools / Tag Graph Lab Implementation Contract: INTERNAL PASS; outside validation pending
+Phase 37B Frequency Pools / Tag Graph Lab Implementation Contract: CURRENT PR VALIDATION PACKET
 ```
 
 ## Latest Local Validation
