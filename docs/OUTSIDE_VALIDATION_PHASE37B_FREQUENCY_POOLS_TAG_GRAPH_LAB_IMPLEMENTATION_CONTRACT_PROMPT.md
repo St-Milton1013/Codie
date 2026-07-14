@@ -151,6 +151,9 @@ preserve source refs by ID only
 keep matching_deck_count visible
 keep available_deck_count visible
 keep coverage_ratio visible
+keep low_sample_threshold visible or explicitly unknown
+keep low_coverage_threshold visible or explicitly unknown
+keep caveats visible or explicitly unknown
 label low sample caveats
 label low coverage caveats
 label user-local pool scopes
@@ -160,22 +163,10 @@ keep user-local pools out of tournament evidence
 
 ## Confirm Privacy Requirements
 
-Confirm the future implementation must reject these keys recursively:
-
-```text
-raw_input
-original_import_text
-private_deck_text
-private_notes
-private_user_notes
-full_primer_body
-primer_body
-raw_provider_payload
-provider_payload
-```
-
-Confirm future packets must not accept raw imported deck text, private notes,
-primer body text, or raw provider payloads.
+Confirm the future implementation must preserve the accepted Phase 36C
+blocked-key policy and reject private import text, private notes, primer body
+text, and raw provider payload metadata recursively. This prompt intentionally
+does not redefine the private/raw key vocabulary.
 
 ## Confirm Evidence And Recommendation Boundaries
 

@@ -74,6 +74,21 @@ implementation-contract packet and matching governance records. The current PR
 contains no `codie/`, `tests/`, fixture, schema, provider, UI, workflow,
 validator, or constitution changes.
 
+Phase 37B coverage visibility requirement:
+
+```text
+matching_deck_count: visible when supplied; explicit unknown marker when unavailable
+available_deck_count: visible when supplied; explicit unknown marker when unavailable
+coverage_ratio: visible when supplied; explicit unknown marker when unavailable
+low_sample_threshold: visible when supplied; explicit unknown marker when unavailable
+low_coverage_threshold: visible when supplied; explicit unknown marker when unavailable
+caveats: visible when supplied; explicit unknown marker when unavailable
+```
+
+The Phase 37B contract preserves the accepted Phase 36C privacy boundary by
+referencing the existing blocked-key policy instead of redefining private/raw
+metadata terms in this status index.
+
 Phase 37B validation tuple:
 
 ```text

@@ -231,29 +231,27 @@ low_coverage_threshold
 caveats
 ```
 
-Low sample and low coverage states must create visible caveats. Missing coverage
-data remains visible as unknown coverage.
+Low sample and low coverage states must create visible caveats. When coverage
+values are not available, the packet must still serialize explicit unknown
+coverage markers for each unavailable value instead of omitting the coverage
+field. The unknown marker applies independently to:
+
+```text
+matching_deck_count
+available_deck_count
+coverage_ratio
+low_sample_threshold
+low_coverage_threshold
+caveats
+```
 
 ## Privacy Boundary
 
-Future packets must preserve the Phase 36C privacy boundary.
-
-Blocked private/raw keys:
-
-```text
-raw_input
-original_import_text
-private_deck_text
-private_notes
-private_user_notes
-full_primer_body
-primer_body
-raw_provider_payload
-provider_payload
-```
-
-These strings may appear only as blocked-key constants, validation errors,
-tests, and documentation.
+Future packets must preserve the Phase 36C privacy boundary and must reject
+private import text, private user notes, full primer bodies, and raw provider
+payload metadata recursively. The later implementation should reuse the
+accepted Phase 36C blocked-key policy rather than redefining or expanding the
+private/raw metadata vocabulary in this packet.
 
 ## Evidence Boundary
 
@@ -326,11 +324,11 @@ unknown coverage remains visible
 deterministic serialization
 dictionary-compatible round-trip
 input payloads are not mutated
-raw imported deck text is rejected recursively
+private imported deck text is rejected recursively
 private notes are rejected recursively
-raw provider payloads are rejected recursively
+provider payload metadata is rejected recursively
 primer body text is rejected recursively
-malformed fixture failures are clean
+malformed packet fixtures produce clean validation errors
 provider import scan has no production matches
 SQLite import scan has no production matches
 analytics recalculation scan has no production matches
