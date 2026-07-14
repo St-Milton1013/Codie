@@ -70,6 +70,31 @@ Any runtime, schema, provider, validator, workflow, dependency, UI, export,
 simulation, analytics, recommendation, or constitution change is outside this
 PR.
 
+## Implementation-Contract Packet Responsibilities
+
+The Phase 37B implementation-contract packet is a governance packet, not a
+runtime packet. Its responsibilities are:
+
+```text
+record Phase 37A acceptance evidence
+declare the Phase 37B validation tuple
+declare the next-phase validation tuple
+define the exact future Frequency Pool model files
+define the exact future Frequency Pool public interface
+define future packet fields and allowed pool types
+define identity, provenance, coverage, privacy, and evidence boundaries
+define local fixture inventory and fixture coverage
+define required tests for the later model packet
+define dependency and input limits for the later model packet
+define deferred work that remains outside the later model packet
+define the outside-validation packet for Phase 37B
+update roadmap, status, next-phase, and handoff governance records
+```
+
+The packet does not build Frequency Pool data, calculate metrics, read sources,
+write files, or prepare Tag Graph visualizations. It only constrains what a
+future accepted implementation packet may add.
+
 ## Complete Authorized Future Implementation Files
 
 After this contract is accepted, the next packet may define local, in-memory
@@ -343,12 +368,17 @@ file-writing scan has no production matches
 
 ## Future Dependency Rules
 
-Allowed implementation dependencies and inputs:
+Allowed implementation package dependencies:
 
 ```text
 Python standard library
 local dataclasses or equivalent immutable value helpers
 typing helpers
+```
+
+Allowed input value categories:
+
+```text
 already accepted Scryfall identity values as input values
 already accepted Scryfall Tagger ontology values as input values
 already accepted immutable deck snapshot refs as input refs
@@ -357,9 +387,11 @@ already accepted caveat refs as input refs
 already accepted source refs as input refs
 ```
 
-The later implementation must remain independent from database, provider,
-ingestion, analytics, recommendation, Decision Intelligence, Evidence Fusion,
-HTTP, LLM, server, UI, and file-writing dependencies.
+Input value categories are not package dependencies and do not authorize imports
+from their producing subsystems. The later implementation must remain
+independent from database, provider, ingestion, analytics, recommendation,
+Decision Intelligence, Evidence Fusion, HTTP, LLM, server, UI, and file-writing
+dependencies.
 
 ## Complete Deferred Later Work
 
@@ -376,7 +408,7 @@ Moxfield Frequency Pool Builder
 recommendation integration
 ```
 
-## Outside Validation Packet
+## Phase 37B Outside Validation Packet
 
 Phase 37B outside validation should review:
 
