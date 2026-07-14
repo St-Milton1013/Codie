@@ -65,6 +65,7 @@ Phase 36A Immutable Deck Snapshot Expansion Contract: PASS WITH REVIEW NOTES
 Phase 36B Immutable Deck Snapshot Implementation Contract: PASS WITH REVIEW NOTES
 Phase 36C Immutable Deck Snapshot Implementation: PASS WITH REVIEW NOTES
 Phase 37A Frequency Pools / Tag Graph Lab Contract: PASS WITH REVIEW NOTES
+Phase 37B Frequency Pools / Tag Graph Lab Implementation Contract: INTERNAL PASS
 Local alpha tag: created locally; remote tag push not verified in this environment
 ```
 
@@ -152,11 +153,31 @@ Phase 36A Immutable Deck Snapshot Expansion Contract: PASS WITH REVIEW NOTES
 Phase 36B Immutable Deck Snapshot Implementation Contract: PASS WITH REVIEW NOTES
 Phase 36C Immutable Deck Snapshot Implementation: PASS WITH REVIEW NOTES
 Phase 37A Frequency Pools / Tag Graph Lab Contract: PASS WITH REVIEW NOTES
+Phase 37B Frequency Pools / Tag Graph Lab Implementation Contract: INTERNAL PASS
 ```
 
 ## Latest Local Validation
 
 ```text
+Phase 37B Frequency Pools / Tag Graph Lab Implementation Contract:
+git diff --check
+passed
+
+C:\Users\Main\.venvs\codie-py312\Scripts\python.exe scripts/check_schema.py
+failed: configured venv points at missing Python312 executable
+
+C:\Users\Main\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe scripts/check_schema.py
+Schema bootstrap check passed.
+
+C:\Users\Main\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe -m unittest discover -s tests -v
+Ran 1033 tests
+OK (skipped=1)
+
+Static scans:
+production/test/schema/repository/dependency drift scan: no matches
+forbidden implementation/dependency scan: matches only contract narrative and explicit forbidden-scope lists
+recommendation-language scan: matches only explicit contract boundary statements
+
 Phase 34C Scryfall Tagger Ontology Implementation:
 python -m unittest tests.test_scryfall_tagger_ontology -v
 Ran 15 tests
@@ -421,15 +442,28 @@ observations and require no corrective action.
 ## Current Phase 37B Gate
 
 ```text
-Phase 37B Frequency Pools / Tag Graph Lab Implementation Contract: next allowed work
+Phase 37B Frequency Pools / Tag Graph Lab Implementation Contract: INTERNAL PASS
+Phase 37B outside validation: current required gate
 ```
 
-Phase 37B is unblocked for contract-first work only. Do not implement Phase 37B
-production code until a Phase 37B implementation contract is accepted.
+Phase 37B is internally complete as an implementation-contract-only packet. Do
+not implement Phase 37C production code until Phase 37B outside validation
+returns PASS or PASS WITH REVIEW NOTES.
 
-The active validation scope file was not advanced in this governance update
-because the accepted Phase 37A documents name the Phase 37B task but do not
-declare an exact Phase 37B `phase_part` and `gate_scope` tuple.
+Phase 37B validation tuple:
+
+```text
+phase_id: Phase37B
+phase_part: outside-validation
+gate_scope: INTERMEDIATE_PACKET
+next_phase_id: Phase37C
+next_phase_part: outside-validation
+next_gate_scope: INTERMEDIATE_PACKET
+```
+
+The active validation scope file was not modified by the Phase 37B PR. The
+Phase 37B tuple is declared in the contract packet; active-scope advancement
+remains governed by the accepted validation workflow.
 
 ## Accepted Phase 36C Outside Validation Packet
 

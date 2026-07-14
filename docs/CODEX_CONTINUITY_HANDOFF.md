@@ -1815,19 +1815,33 @@ required corrections: none
 ```
 
 The adversarial informational findings are nonblocking historical observations
-and require no corrective action. Phase 37B is unblocked for contract-first work
-only.
+and require no corrective action. Phase 37B is now internally complete as an
+implementation-contract-only packet.
 
 Next allowed work:
 
 ```text
-Phase 37B - Frequency Pools / Tag Graph Lab Implementation Contract
+Phase 37B - Frequency Pools / Tag Graph Lab Implementation Contract: internal pass
+Phase 37B outside validation: current required gate
 ```
 
-Do not implement Phase 37B production code until the Phase 37B implementation
-contract is accepted. The active validation scope file was not advanced in this
-governance update because the accepted Phase 37A documents name the Phase 37B
-task but do not declare an exact Phase 37B `phase_part` and `gate_scope` tuple.
+Do not implement Phase 37C production code until Phase 37B outside validation
+returns PASS or PASS WITH REVIEW NOTES.
+
+Phase 37B validation tuple:
+
+```text
+phase_id: Phase37B
+phase_part: outside-validation
+gate_scope: INTERMEDIATE_PACKET
+next_phase_id: Phase37C
+next_phase_part: outside-validation
+next_gate_scope: INTERMEDIATE_PACKET
+```
+
+The active validation scope file was not modified by the Phase 37B PR. The
+Phase 37B tuple is declared in the contract packet; active-scope advancement
+remains governed by the accepted validation workflow.
 
 Accepted Phase 37A outside validation packet:
 
@@ -2356,6 +2370,19 @@ Phase 13 simulator contracts or a new UI/API contract is explicitly selected.
 ```
 
 ## Known Caveats
+
+- Phase 37B Frequency Pools / Tag Graph Lab Implementation Contract is
+  internally complete and awaiting outside validation.
+- Phase 37B declares:
+  `phase_id: Phase37B`, `phase_part: outside-validation`,
+  `gate_scope: INTERMEDIATE_PACKET`, `next_phase_id: Phase37C`,
+  `next_phase_part: outside-validation`, and
+  `next_gate_scope: INTERMEDIATE_PACKET`.
+- Phase 37C Frequency Pool Packet Models and Validators remains blocked until
+  Phase 37B outside validation returns PASS or PASS WITH REVIEW NOTES.
+- Phase 37B is contract-only and does not implement Frequency Pool code, Tag
+  Graph code, schema, repositories, providers, UI, exports, LLM calls,
+  simulator execution, analytics calculation, or recommendations.
 
 - Hareruya live access can hit AWS WAF; treat Hareruya as regional enrichment, not critical path.
 - CLI requires a local Codie SQLite database with card rows before user deck import can resolve cards.
