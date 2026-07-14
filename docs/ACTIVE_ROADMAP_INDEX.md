@@ -66,25 +66,45 @@ Phase 35C Commander Spellbook Interpreter Implementation: externally accepted
 Phase 36A Immutable Deck Snapshot Expansion Contract: externally accepted
 Phase 36B Immutable Deck Snapshot Implementation Contract: externally accepted
 Phase 36C Immutable Deck Snapshot Implementation: externally accepted
-Phase 37A Frequency Pools / Tag Graph Lab Contract: internally complete
-Current action: send Phase 37A outside validation packet
+Phase 37A Frequency Pools / Tag Graph Lab Contract: externally accepted with review notes
+Current action: prepare Phase 37B Frequency Pools / Tag Graph Lab Implementation Contract
 Local alpha tag status: created locally; remote tag push not verified in this environment
 ```
 
 ## Next Allowed Phase
 
 ```text
-Phase 37A outside validation
+Phase 37B Frequency Pools / Tag Graph Lab Implementation Contract
 ```
 
-Do not begin Phase 37B until Phase 37A outside validation returns PASS or PASS
-WITH REVIEW NOTES.
+Phase 37A outside validation returned PASS WITH REVIEW NOTES. Phase 37B is
+unblocked for contract-first work only. Do not implement Phase 37B production
+code until a Phase 37B implementation contract is accepted.
+
+Phase 37A acceptance evidence:
+
+```text
+workflow run ID: 29340418728
+validated SHA: 1b958d28f1d4840d56b8b1d270fc0760b41bad6a
+artifact: codie-phase_ledger-validation-1b958d28f1d4840d56b8b1d270fc0760b41bad6a
+validation scope: phase_ledger
+validator profile: all
+deterministic: CLEAN_PASS
+architecture: CLEAN_PASS
+adversarial: FAIL with two INFORMATIONAL findings
+aggregate: CLEAN_PASS
+final governance verdict: PASS WITH REVIEW NOTES
+required corrections: none
+```
+
+The adversarial informational findings are nonblocking historical observations
+and require no corrective action.
 
 ## Release-Critical Path
 
 ```text
-1. Phase 37A Frequency Pools / Tag Graph Lab Contract
-2. Phase 37B implementation contract, only after Phase 37A outside validation
+1. Phase 37A Frequency Pools / Tag Graph Lab Contract: accepted with review notes
+2. Phase 37B Frequency Pools / Tag Graph Lab Implementation Contract: next
 ```
 
 The post-31 patch priority order is cemented in:
