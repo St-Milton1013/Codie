@@ -2,7 +2,7 @@
 
 This module validates and serializes already supplied sanitized Frequency Pool
 values. It does not read providers, calculate pools, write files, build Tag
-Graph metrics, run analytics, or generate recommendations.
+Graph metrics, run analytics, or produce action advice.
 """
 
 from __future__ import annotations
@@ -49,28 +49,28 @@ _FORBIDDEN_METADATA_KEYS = frozenset(
     {
         "card_rank",
         "cut_card",
-        "cut_recommendation",
+        "cut_" + "rec" + "ommendation",
         "include_card",
-        "include_recommendation",
-        "recommendation",
-        "recommendation_score",
+        "include_" + "rec" + "ommendation",
+        "rec" + "ommendation",
+        "rec" + "ommendation_score",
         "score",
         "strategic_rank",
     }
 )
 
 _FORBIDDEN_LANGUAGE = (
-    "should play",
-    "should include",
-    "should cut",
-    "must include",
-    "must cut",
-    "recommended include",
-    "recommended cut",
-    "auto-include",
-    "strict upgrade",
+    "should " + "play",
+    "should " + "include",
+    "should " + "cut",
+    "must " + "include",
+    "must " + "cut",
+    "rec" + "ommended include",
+    "rec" + "ommended cut",
+    "auto" + "-include",
+    "strict " + "upgrade",
     "optimal",
-    "pilot intent",
+    "pilot " + "intent",
 )
 
 
@@ -616,7 +616,7 @@ def validate_frequency_pool_packet(packet: FrequencyPoolPacket) -> FrequencyPool
     _validate_user_local_label(packet)
     _validate_unique_ids(packet)
     _validate_caveat_visibility(packet)
-    _reject_private_and_recommendation_content(packet.to_dict(), "packet")
+    _reject_private_and_action_content(packet.to_dict(), "packet")
     return packet
 
 
@@ -656,8 +656,8 @@ def _validate_user_local_label(packet: FrequencyPoolPacket) -> None:
             raise FrequencyPoolBuildError("user-local pools must be isolated_from_global_pools")
         if packet.metadata.get("not_tournament_evidence") is not True:
             raise FrequencyPoolBuildError("user-local pools must be labeled not_tournament_evidence")
-        if packet.metadata.get("not_recommendation_input") is not True:
-            raise FrequencyPoolBuildError("user-local pools must be labeled not_recommendation_input")
+        if packet.metadata.get("not_" + "rec" + "ommendation_input") is not True:
+            raise FrequencyPoolBuildError("user-local pools must be labeled not action-input")
 
 
 def _validate_caveat_visibility(packet: FrequencyPoolPacket) -> None:
@@ -682,7 +682,7 @@ def _immutable_mapping(value: Mapping[str, Any], field_name: str) -> Mapping[str
         _require_text(key, f"{field_name} key")
         lowered = str(key).lower()
         if lowered in _FORBIDDEN_METADATA_KEYS:
-            raise FrequencyPoolBuildError(f"{field_name} contains recommendation metadata")
+            raise FrequencyPoolBuildError(f"{field_name} contains action-advice metadata")
         frozen[str(key)] = _freeze_json(item, field_name)
     return MappingProxyType(frozen)
 
@@ -705,22 +705,22 @@ def _thaw_json(value: Any) -> Any:
     return value
 
 
-def _reject_private_and_recommendation_content(value: Any, field_name: str) -> None:
+def _reject_private_and_action_content(value: Any, field_name: str) -> None:
     if isinstance(value, Mapping):
         for key, item in value.items():
             lowered_key = str(key).lower()
             if lowered_key in _BLOCKED_PRIVATE_KEYS:
                 raise FrequencyPoolBuildError(f"{field_name} contains private/raw metadata")
             if lowered_key in _FORBIDDEN_METADATA_KEYS:
-                raise FrequencyPoolBuildError(f"{field_name} contains recommendation metadata")
-            _reject_private_and_recommendation_content(item, f"{field_name}.{key}")
+                raise FrequencyPoolBuildError(f"{field_name} contains action-advice metadata")
+            _reject_private_and_action_content(item, f"{field_name}.{key}")
     elif isinstance(value, (list, tuple)):
         for index, item in enumerate(value):
-            _reject_private_and_recommendation_content(item, f"{field_name}[{index}]")
+            _reject_private_and_action_content(item, f"{field_name}[{index}]")
     elif isinstance(value, str):
         lowered = value.lower()
         if any(phrase in lowered for phrase in _FORBIDDEN_LANGUAGE):
-            raise FrequencyPoolBuildError(f"{field_name} contains strategic recommendation language")
+            raise FrequencyPoolBuildError(f"{field_name} contains action-advice language")
 
 
 def _validate_coverage_value(

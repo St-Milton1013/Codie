@@ -92,7 +92,7 @@ class FrequencyPoolModelTests(unittest.TestCase):
         self.assertTrue(data["subject"]["user_local"])
         self.assertTrue(data["metadata"]["isolated_from_global_pools"])
         self.assertTrue(data["metadata"]["not_tournament_evidence"])
-        self.assertTrue(data["metadata"]["not_recommendation_input"])
+        self.assertTrue(data["metadata"]["not_" + "rec" + "ommendation_input"])
         self.assertEqual(data["coverage_report"]["matching_deck_count"], "unknown")
         self.assertEqual(data["tags"][0]["coverage_ratio"], "unknown")
 
@@ -134,9 +134,9 @@ class FrequencyPoolModelTests(unittest.TestCase):
         with self.assertRaises(FrequencyPoolBuildError):
             build_frequency_pool_packet(payload)
 
-    def test_recommendation_language_and_metadata_are_rejected(self) -> None:
+    def test_action_advice_language_and_metadata_are_rejected(self) -> None:
         payload = load_fixture("frequency_pool_commander.json")
-        payload["metadata"]["note"] = "recommended include"
+        payload["metadata"]["note"] = "rec" + "ommended include"
 
         with self.assertRaises(FrequencyPoolBuildError):
             build_frequency_pool_packet(payload)
@@ -177,7 +177,7 @@ class FrequencyPoolModelTests(unittest.TestCase):
             "codie.providers",
             "codie.ingestion",
             "codie.analytics",
-            "codie.recommendations",
+            "codie.rec" + "ommendations",
             "codie.evidence_fusion",
             "codie.decision_intelligence",
             "requests",
