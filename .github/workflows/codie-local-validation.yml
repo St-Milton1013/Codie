@@ -1,6 +1,14 @@
 name: Codie Local Validation Gate
 
 on:
+  pull_request:
+    branches:
+      - main
+    types:
+      - opened
+      - synchronize
+      - reopened
+      - ready_for_review
   workflow_dispatch:
     inputs:
       phase_id:
@@ -32,65 +40,51 @@ on:
         default: main
         type: string
       target_sha:
-        description: Optional exact target SHA
-        required: false
+        description: Exact target SHA
+        required: true
         type: string
+      run_repair:
+        description: Allow repair controller after validation
+        required: false
+        default: false
+        type: boolean
 
 permissions:
-  contents: write
+  contents: read
   actions: read
 
 jobs:
-  codie-validation-gate:
-    name: Codie Validation Gate
+  pull-request-validation:
+    name: Pull Request Validation
+    if: ${{ github.event_name == 'pull_request' && github.event.repository.full_name == 'St-Milton1013/Codie' && github.event.pull_request.head.repo.full_name == github.event.repository.full_name }}
     runs-on:
       - self-hosted
       - Windows
       - X64
       - codie-local
-    if: ${{ github.event_name == 'workflow_dispatch' && github.event.repository.full_name == 'St-Milton1013/Codie' }}
     env:
       CODIE_PYTHON: C:\Users\Main\.venvs\codie-py312\Scripts\python.exe
       OPENAI_API_KEY: ""
     steps:
-      - name: Check out exact target
+      - name: Check out pull request head
         uses: actions/checkout@v4
         with:
-          ref: ${{ inputs.target_sha || github.sha }}
+          ref: ${{ github.event.pull_request.head.sha }}
           persist-credentials: false
 
-      - name: Reject fork context
+      - name: Run validation only
         shell: pwsh
         run: |
-          if ("${{ github.event.repository.full_name }}" -ne "St-Milton1013/Codie") {
-            throw "Refusing to run local validation outside St-Milton1013/Codie."
-          }
-
-      - name: Resolve target SHA
-        id: target
-        shell: pwsh
-        run: |
-          $target = "${{ inputs.target_sha }}"
-          if ([string]::IsNullOrWhiteSpace($target)) {
-            $target = git rev-parse HEAD
-          }
-          "sha=$target" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
-
-      - name: Run local validation gate
-        shell: pwsh
-        run: |
-          $args = @(
-            "scripts/codie_repair_controller.py",
-            "--phase-id", "${{ inputs.phase_id }}",
-            "--phase-part", "${{ inputs.phase_part }}",
-            "--gate-scope", "${{ inputs.gate_scope }}",
-            "--pull-request-number", "${{ inputs.pull_request_number }}",
-            "--pr-branch", "${{ inputs.pr_branch }}",
-            "--base-branch", "${{ inputs.base_branch }}",
-            "--target-sha", "${{ steps.target.outputs.sha }}",
-            "--python-executable", "$env:CODIE_PYTHON"
-          )
-          & "$env:CODIE_PYTHON" @args
+          & "$env:CODIE_PYTHON" scripts/codie_validation_gate.py `
+            --phase-id Phase35A `
+            --phase-part outside-validation `
+            --gate-scope INTERMEDIATE_PACKET `
+            --pull-request-number "${{ github.event.pull_request.number }}" `
+            --branch "${{ github.event.pull_request.head.ref }}" `
+            --base-branch "${{ github.event.pull_request.base.ref }}" `
+            --target-sha "${{ github.event.pull_request.head.sha }}" `
+            --output-dir validation_artifacts `
+            --python-executable "$env:CODIE_PYTHON"
 
       - name: Write job summary
         if: always()
@@ -104,6 +98,82 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: codie-local-validation-${{ steps.target.outputs.sha }}
+          name: codie-pr-validation-${{ github.event.pull_request.head.sha }}
           path: validation_artifacts/
           if-no-files-found: error
+
+  manual-validation:
+    name: Manual Validation
+    if: ${{ github.event_name == 'workflow_dispatch' && github.event.repository.full_name == 'St-Milton1013/Codie' }}
+    runs-on:
+      - self-hosted
+      - Windows
+      - X64
+      - codie-local
+    env:
+      CODIE_PYTHON: C:\Users\Main\.venvs\codie-py312\Scripts\python.exe
+      OPENAI_API_KEY: ""
+    steps:
+      - name: Check out exact target
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.target_sha }}
+          persist-credentials: false
+
+      - name: Run validation only
+        shell: pwsh
+        run: |
+          & "$env:CODIE_PYTHON" scripts/codie_validation_gate.py `
+            --phase-id "${{ inputs.phase_id }}" `
+            --phase-part "${{ inputs.phase_part }}" `
+            --gate-scope "${{ inputs.gate_scope }}" `
+            --pull-request-number "${{ inputs.pull_request_number }}" `
+            --branch "${{ inputs.pr_branch }}" `
+            --base-branch "${{ inputs.base_branch }}" `
+            --target-sha "${{ inputs.target_sha }}" `
+            --output-dir validation_artifacts `
+            --python-executable "$env:CODIE_PYTHON"
+
+      - name: Upload validation artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: codie-manual-validation-${{ inputs.target_sha }}
+          path: validation_artifacts/
+          if-no-files-found: error
+
+  manual-repair:
+    name: Manual Repair
+    if: ${{ github.event_name == 'workflow_dispatch' && inputs.run_repair == true && github.event.repository.full_name == 'St-Milton1013/Codie' }}
+    needs: manual-validation
+    permissions:
+      contents: write
+      actions: read
+    runs-on:
+      - self-hosted
+      - Windows
+      - X64
+      - codie-local
+    env:
+      CODIE_PYTHON: C:\Users\Main\.venvs\codie-py312\Scripts\python.exe
+      GH_TOKEN: ${{ github.token }}
+      OPENAI_API_KEY: ""
+    steps:
+      - name: Check out exact target with write credentials
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.target_sha }}
+          persist-credentials: true
+
+      - name: Run repair controller
+        shell: pwsh
+        run: |
+          & "$env:CODIE_PYTHON" scripts/codie_repair_controller.py `
+            --phase-id "${{ inputs.phase_id }}" `
+            --phase-part "${{ inputs.phase_part }}" `
+            --gate-scope "${{ inputs.gate_scope }}" `
+            --pull-request-number "${{ inputs.pull_request_number }}" `
+            --pr-branch "${{ inputs.pr_branch }}" `
+            --base-branch "${{ inputs.base_branch }}" `
+            --target-sha "${{ inputs.target_sha }}" `
+            --python-executable "$env:CODIE_PYTHON"

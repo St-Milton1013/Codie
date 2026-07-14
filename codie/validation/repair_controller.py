@@ -195,22 +195,13 @@ def run_real_repair_controller(
     codex_path = discover_codex_executable()
 
     def validate(sha: str, cycle: int) -> ValidationCycleResult:
-        gate_options = ValidationGateOptions(
-            phase_id=options.phase_id,
-            phase_part=options.phase_part,
-            gate_scope=options.gate_scope,
-            target_sha=sha,
-            pull_request_number=options.pull_request_number,
-            repository=options.repository,
-            branch=options.pr_branch,
+        return run_validation_cycle_in_worktree(
+            options=options,
             base_branch=pr.base_branch,
-            python_executable=options.python_executable,
-        )
-        aggregate = run_validation_gate(gate_options, root=root)
-        return ValidationCycleResult(
-            aggregate.result,
-            aggregate.target_sha,
-            json.dumps(aggregated_result_to_dict(aggregate), sort_keys=True),
+            sha=sha,
+            validation_cycle=cycle,
+            root=root,
+            command_runner=runner,
         )
 
     def repair(attempt: int, sha: str) -> RepairExecutionResult:
@@ -320,6 +311,41 @@ def codex_exec_repair_attempt(
         if remote_sha != commit_sha:
             return RepairExecutionResult(status="FAILED", changed_files=changed_files, message="remote PR head SHA mismatch after push")
         return RepairExecutionResult(status="COMMITTED", commit_sha=commit_sha, changed_files=changed_files)
+    finally:
+        runner(("git", "worktree", "remove", "--force", str(worktree_dir)), root)
+        runner(("git", "worktree", "prune"), root)
+
+
+def run_validation_cycle_in_worktree(
+    *,
+    options: RepairControllerOptions,
+    base_branch: str,
+    sha: str,
+    validation_cycle: int,
+    root: Path,
+    command_runner: CommandRunner | None = None,
+) -> ValidationCycleResult:
+    runner = command_runner or _run_command
+    worktree_dir = root / ".validation-worktrees" / f"cycle-{validation_cycle}-{sha[:12]}"
+    try:
+        _checked(runner, ("git", "worktree", "add", "--detach", str(worktree_dir), sha), root, "create validation worktree")
+        gate_options = ValidationGateOptions(
+            phase_id=options.phase_id,
+            phase_part=options.phase_part,
+            gate_scope=options.gate_scope,
+            target_sha=sha,
+            pull_request_number=options.pull_request_number,
+            repository=options.repository,
+            branch=options.pr_branch,
+            base_branch=base_branch,
+            python_executable=options.python_executable,
+        )
+        aggregate = run_validation_gate(gate_options, root=worktree_dir)
+        return ValidationCycleResult(
+            aggregate.result,
+            aggregate.target_sha,
+            json.dumps(aggregated_result_to_dict(aggregate), sort_keys=True),
+        )
     finally:
         runner(("git", "worktree", "remove", "--force", str(worktree_dir)), root)
         runner(("git", "worktree", "prune"), root)

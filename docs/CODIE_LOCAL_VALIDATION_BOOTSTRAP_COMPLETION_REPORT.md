@@ -49,14 +49,15 @@ Schema Impact: no product schema impact.
 Errors Encountered During This Phase:
 
 ```text
-C:\Users\Main\.venvs\codie-py312\Scripts\python.exe currently points to a missing base Python and could not run tests in this environment.
+The bootstrap remains under active correction after outside validation found
+GitHub Actions and live Ollama validator failures.
 ```
 
 Remaining Open Errors:
 
 ```text
-Repair or recreate C:\Users\Main\.venvs\codie-py312 before running the GitHub workflow.
-gh auth status reports an invalid token and must be reauthenticated before push or PR creation through gh.
+Completion is not yet claimed until the current corrective PR passes standard
+GitHub tests and self-hosted PR-triggered validation.
 ```
 
 Final Result: not complete.
@@ -64,10 +65,10 @@ Final Result: not complete.
 Completion requires all of the following:
 
 ```text
-C:\Users\Main\.venvs\codie-py312\Scripts\python.exe runs the required checks
-live Ollama architecture validator smoke test succeeds
-live Ollama adversarial validator smoke test succeeds
-manual self-hosted workflow_dispatch succeeds against the PR head SHA
-generated artifacts contain deterministic, architecture, and adversarial reports
-the repair loop is exercised in a controlled test
+standard GitHub tests pass
+live Ollama architecture validator produces valid findings-only output
+live Ollama adversarial validator produces valid findings-only output
+PR-triggered self-hosted validation runs successfully
+generated artifacts contain deterministic, architecture, and adversarial wrapped reports
+aggregate result is generated for the exact PR head SHA
 ```

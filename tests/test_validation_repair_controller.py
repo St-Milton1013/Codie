@@ -18,6 +18,7 @@ from codie.validation.repair_controller import (
     ValidationCycleResult,
     codex_exec_repair_attempt,
     discover_codex_executable,
+    run_validation_cycle_in_worktree,
     run_repair_controller,
     unauthorized_repair_paths,
     verify_pull_request,
@@ -124,6 +125,25 @@ class RepairControllerTest(unittest.TestCase):
         )
 
         self.assertEqual(result.final_result, "STALE_RESULTS")
+
+    def test_post_repair_validation_uses_new_sha(self) -> None:
+        seen: list[str] = []
+
+        result = run_repair_controller(
+            options(),
+            validation_runner=lambda sha, _cycle: seen.append(sha) or ValidationCycleResult(
+                "REPAIR_REQUIRED" if sha == SHA1 else "CLEAN_PASS",
+                sha,
+            ),
+            repair_runner=lambda _attempt, _sha: RepairExecutionResult(
+                "COMMITTED",
+                commit_sha=SHA2,
+                changed_files=("codie/cards/example.py",),
+            ),
+        )
+
+        self.assertEqual(result.final_result, "CLEAN_PASS")
+        self.assertEqual(seen, [SHA1, SHA2])
 
     def test_usage_limit_pause_does_not_consume_attempt(self) -> None:
         result = run_repair_controller(
@@ -250,6 +270,35 @@ class RepairControllerTest(unittest.TestCase):
         self.assertTrue(any(command[:3] == ("git", "worktree", "remove") for command in calls))
         self.assertTrue(any(command[:3] == ("git", "worktree", "prune") for command in calls))
 
+    def test_validation_worktree_uses_exact_sha_and_cleans_up(self) -> None:
+        calls: list[tuple[str, ...]] = []
+
+        def runner(command: tuple[str, ...], _root: Path):
+            calls.append(command)
+            return completed()
+
+        fake_aggregate = mock.Mock(result="CLEAN_PASS", target_sha=SHA1)
+        with mock.patch("codie.validation.repair_controller.run_validation_gate", return_value=fake_aggregate), mock.patch(
+            "codie.validation.repair_controller.aggregated_result_to_dict",
+            return_value={"final_result": "CLEAN_PASS"},
+        ):
+            result = run_validation_cycle_in_worktree(
+                options=options(),
+                base_branch="main",
+                sha=SHA1,
+                validation_cycle=1,
+                root=Path("C:/repo"),
+                command_runner=runner,
+            )
+
+        self.assertEqual(result.result, "CLEAN_PASS")
+        add_commands = [command for command in calls if command[:4] == ("git", "worktree", "add", "--detach")]
+        self.assertEqual(len(add_commands), 1)
+        self.assertIn("cycle-1-111111111111", add_commands[0][4])
+        self.assertEqual(add_commands[0][-1], SHA1)
+        self.assertTrue(any(command[:3] == ("git", "worktree", "remove") for command in calls))
+        self.assertTrue(any(command[:3] == ("git", "worktree", "prune") for command in calls))
+
     def test_real_repair_cli_execution(self) -> None:
         with mock.patch.object(repair_cli, "run_real_repair_controller") as mocked:
             mocked.return_value = RepairControllerResult("CLEAN_PASS", 0, (), (), SHA1, "")
@@ -275,6 +324,28 @@ class RepairControllerTest(unittest.TestCase):
 
         self.assertEqual(exit_code, 0)
         mocked.assert_called_once()
+
+    def test_pull_request_workflow_mode_never_invokes_repair(self) -> None:
+        workflow = Path(".github/workflows/codie-local-validation.yml").read_text(encoding="utf-8")
+        pr_section = workflow.split("manual-validation:")[0]
+
+        self.assertIn("pull_request:", workflow)
+        self.assertIn("scripts/codie_validation_gate.py", pr_section)
+        self.assertNotIn("scripts/codie_repair_controller.py", pr_section)
+        self.assertIn("persist-credentials: false", pr_section)
+
+    def test_workflow_dispatch_repair_mode_can_invoke_repair(self) -> None:
+        workflow = Path(".github/workflows/codie-local-validation.yml").read_text(encoding="utf-8")
+        repair_section = workflow.split("manual-repair:")[1]
+
+        self.assertIn("contents: write", repair_section)
+        self.assertIn("scripts/codie_repair_controller.py", repair_section)
+        self.assertIn("persist-credentials: true", repair_section)
+
+    def test_workflow_requires_same_repository_pr(self) -> None:
+        workflow = Path(".github/workflows/codie-local-validation.yml").read_text(encoding="utf-8")
+
+        self.assertIn("github.event.pull_request.head.repo.full_name == github.event.repository.full_name", workflow)
 
     def test_no_api_key_fallback(self) -> None:
         original = os.environ.get("OPENAI_API_KEY")

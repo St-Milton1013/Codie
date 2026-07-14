@@ -4,7 +4,9 @@ import json
 import subprocess
 import tempfile
 import unittest
+import sys
 from pathlib import Path
+from unittest import mock
 
 from codie.validation.local_gate import (
     CONSTITUTION_VERSION,
@@ -17,12 +19,16 @@ from codie.validation.local_gate import (
     ValidationGateOptions,
     ValidatorReport,
     aggregate_validator_reports,
+    model_response_json_schema,
+    parse_model_validator_json,
     parse_validator_json,
     report_json_schema,
     resolve_active_phase,
     _run_ollama,
+    _portable_python_executable,
     run_ollama_validator,
     validate_report_payload,
+    validator_report_from_model_response,
     validator_report_to_dict,
 )
 
@@ -80,6 +86,24 @@ def three_reports(**overrides):
 
 def report_payload(**overrides):
     payload = validator_report_to_dict(report(validator="architecture", model="qwen2.5-coder:7b"))
+    payload.update(overrides)
+    return payload
+
+
+def model_payload(**overrides):
+    payload = {
+        "result": "FAIL",
+        "findings": [
+            {
+                "severity": "HIGH",
+                "title": "Architecture boundary leak",
+                "description": "The changed file imports a forbidden module.",
+                "affected_files": ["codie/validation/local_gate.py"],
+                "governing_rule": "Architecture Boundary",
+                "required_correction": "Remove the forbidden import.",
+            }
+        ],
+    }
     payload.update(overrides)
     return payload
 
@@ -285,7 +309,7 @@ class ValidationLocalGateTest(unittest.TestCase):
 
         self.assertEqual(result.result, "COST_POLICY_VIOLATION")
 
-    def test_ollama_json_report_is_validated(self) -> None:
+    def test_model_findings_only_response_is_wrapped_as_trusted_report(self) -> None:
         options = ValidationGateOptions(
             phase_id=CURRENT_EXPECTED_PHASE_ID,
             phase_part="outside-validation",
@@ -294,13 +318,45 @@ class ValidationLocalGateTest(unittest.TestCase):
             pull_request_number=PR_NUMBER,
             branch=BRANCH,
         )
-        payload = report_payload()
+
+        output = validator_report_from_model_response(
+            validator="architecture",
+            model="qwen2.5-coder:7b",
+            options=options,
+            payload=model_payload(),
+            started_at="2026-07-13T00:00:00+00:00",
+            completed_at="2026-07-13T00:01:00+00:00",
+        )
+
+        self.assertEqual(output.validator, "architecture")
+        self.assertEqual(output.branch, BRANCH)
+        self.assertEqual(output.target_sha, SHA)
+        self.assertEqual(output.pull_request_number, PR_NUMBER)
+        self.assertEqual(output.result, "FAIL")
+        self.assertEqual(output.severity_totals.HIGH, 1)
+        self.assertTrue(output.findings[0].finding_id.startswith("architecture:"))
+
+    def test_model_cannot_override_trusted_report_fields(self) -> None:
+        payload = model_payload(branch="wrong", target_sha="b" * 40, severity_totals={"HIGH": 99})
+
+        with self.assertRaises(ValidationGateError):
+            parse_model_validator_json(json.dumps(payload))
+
+    def test_ollama_findings_only_json_is_validated(self) -> None:
+        options = ValidationGateOptions(
+            phase_id=CURRENT_EXPECTED_PHASE_ID,
+            phase_part="outside-validation",
+            gate_scope="INTERMEDIATE_PACKET",
+            target_sha=SHA,
+            pull_request_number=PR_NUMBER,
+            branch=BRANCH,
+        )
 
         output = run_ollama_validator(
             "architecture",
             options,
             Path.cwd(),
-            ollama_runner=lambda _model, _prompt: json.dumps(payload),
+            ollama_runner=lambda _model, _prompt: json.dumps({"result": "CLEAN_PASS", "findings": []}),
         )
 
         self.assertEqual(output.result, "CLEAN_PASS")
@@ -341,28 +397,51 @@ class ValidationLocalGateTest(unittest.TestCase):
         )
 
         self.assertEqual(output.result, "ERROR")
-        self.assertIn("malformed validator JSON", output.errors[0])
+        self.assertIn("expected exactly one JSON object", output.errors[0])
+
+    def test_malformed_json_recovery_from_wrapped_prose(self) -> None:
+        payload = parse_model_validator_json(f"Here is the result:\n{json.dumps(model_payload())}\nDone.")
+
+        self.assertEqual(payload["result"], "FAIL")
+
+    def test_multiple_json_objects_are_rejected(self) -> None:
+        text = f"{json.dumps({'result': 'CLEAN_PASS', 'findings': []})}\n{json.dumps({'result': 'CLEAN_PASS', 'findings': []})}"
+
+        with self.assertRaises(ValidationGateError):
+            parse_model_validator_json(text)
 
     def test_run_ollama_requests_json_format_and_sends_prompt_on_stdin(self) -> None:
         calls = []
 
-        def fake_run(command, **kwargs):
-            calls.append((command, kwargs))
-            return subprocess.CompletedProcess(command, 0, stdout='{"ok": true}', stderr="")
+        class FakeResponse:
+            def __enter__(self):
+                return self
 
-        original_run = subprocess.run
-        try:
-            subprocess.run = fake_run
+            def __exit__(self, *_args):
+                return False
+
+            def read(self):
+                return b'{"response": "{\\"result\\": \\"CLEAN_PASS\\", \\"findings\\": []}"}'
+
+        def fake_urlopen(request, timeout):
+            calls.append((request, timeout))
+            return FakeResponse()
+
+        with mock.patch("urllib.request.urlopen", fake_urlopen):
             output = _run_ollama("llama3.1:latest", "validator prompt")
-        finally:
-            subprocess.run = original_run
 
-        self.assertEqual(output, '{"ok": true}')
-        command, kwargs = calls[0]
-        self.assertEqual(command, ("ollama", "run", "llama3.1:latest", "--format", "json"))
-        self.assertEqual(kwargs["input"], "validator prompt")
-        self.assertTrue(kwargs["capture_output"])
-        self.assertTrue(kwargs["check"])
+        self.assertEqual(output, '{"result": "CLEAN_PASS", "findings": []}')
+        request, timeout = calls[0]
+        body = json.loads(request.data.decode("utf-8"))
+        self.assertEqual(timeout, 300)
+        self.assertEqual(body["model"], "llama3.1:latest")
+        self.assertEqual(body["prompt"], "validator prompt")
+        self.assertFalse(body["stream"])
+        self.assertEqual(body["options"]["temperature"], 0)
+        self.assertEqual(body["format"], model_response_json_schema())
+
+    def test_linux_python312_regression_uses_current_interpreter_when_windows_venv_missing(self) -> None:
+        self.assertEqual(_portable_python_executable("Z:/definitely/missing/python.exe"), sys.executable)
 
 
 if __name__ == "__main__":
