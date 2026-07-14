@@ -66,13 +66,15 @@ Phase 36B Immutable Deck Snapshot Implementation Contract: PASS WITH REVIEW NOTE
 Phase 36C Immutable Deck Snapshot Implementation: PASS WITH REVIEW NOTES
 Phase 37A Frequency Pools / Tag Graph Lab Contract: PASS WITH REVIEW NOTES
 Phase 37B Frequency Pools / Tag Graph Lab Implementation Contract: PASS WITH REVIEW NOTES
-Phase 37C Frequency Pool Packet Models and Validators: TO BE VALIDATED
+Phase 37C Frequency Pool Packet Models and Validators: PR VALIDATED; PHASE-LEDGER VALIDATION PENDING
+Phase 37D Tag Graph Metric Packet Models and Validators: TO BE VALIDATED
 Local alpha tag: created locally; remote tag push not verified in this environment
 ```
 
-Phase 37C's authorized deliverable is the local, in-memory Frequency Pool
-packet model and validator implementation. Phase 37C is not accepted yet and
-must complete validation before Phase 37D starts.
+Phase 37C received clean PR validation and is being used as the basis for
+continued Phase 37 work. Phase 37D's authorized deliverable is the local,
+in-memory Tag Graph metric packet model and validator implementation. Phase
+37D is not accepted yet and must complete validation before Phase 37E starts.
 
 Phase 37B coverage visibility requirement:
 
@@ -89,13 +91,13 @@ The Phase 37B contract preserves the accepted Phase 36C privacy boundary by
 referencing the existing blocked-key policy instead of redefining private/raw
 metadata terms in this status index.
 
-Phase 37C validation tuple:
+Phase 37D validation tuple:
 
 ```text
-phase_id: Phase37C
+phase_id: Phase37D
 phase_part: outside-validation
 gate_scope: INTERMEDIATE_PACKET
-next_phase_id: Phase37D
+next_phase_id: Phase37E
 next_phase_part: outside-validation
 next_gate_scope: INTERMEDIATE_PACKET
 ```
@@ -185,7 +187,8 @@ Phase 36B Immutable Deck Snapshot Implementation Contract: PASS WITH REVIEW NOTE
 Phase 36C Immutable Deck Snapshot Implementation: PASS WITH REVIEW NOTES
 Phase 37A Frequency Pools / Tag Graph Lab Contract: PASS WITH REVIEW NOTES
 Phase 37B Frequency Pools / Tag Graph Lab Implementation Contract: PASS WITH REVIEW NOTES
-Phase 37C Frequency Pool Packet Models and Validators: TO BE VALIDATED
+Phase 37C Frequency Pool Packet Models and Validators: PR VALIDATED; PHASE-LEDGER VALIDATION PENDING
+Phase 37D Tag Graph Metric Packet Models and Validators: TO BE VALIDATED
 ```
 
 ## Latest Local Validation

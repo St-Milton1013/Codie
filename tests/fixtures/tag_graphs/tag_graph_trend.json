@@ -1,0 +1,58 @@
+{
+  "graph_id": "graph-kinnan-trend",
+  "graph_version": "tag-graph-packet-v1",
+  "graph_type": "tag_trend_line",
+  "subject": {
+    "subject_type": "commander",
+    "subject_key": "kinnan",
+    "commander": "Kinnan, Bonder Prodigy",
+    "partner": null,
+    "user_local": false,
+    "metadata": {}
+  },
+  "selected_tags": [
+    {
+      "tag": "ramp",
+      "tag_namespace": "scryfall_tagger",
+      "tag_source": "scryfall_tagger",
+      "tag_confidence": 0.98,
+      "metadata": {}
+    }
+  ],
+  "generated_at": "2026-07-14T00:00:00Z",
+  "comparison_refs": [],
+  "source_packet_ids": [
+    "pool-kinnan-2026-h1"
+  ],
+  "metric_rows": [],
+  "contributor_rows": [],
+  "overlap_rows": [],
+  "correlation_rows": [],
+  "trend_rows": [
+    {
+      "row_id": "trend-ramp-h1",
+      "tag": "ramp",
+      "window_start": "2026-01-01",
+      "window_end": "2026-06-30",
+      "value": 0.81,
+      "delta": 0.06,
+      "source_packet_ids": [
+        "pool-kinnan-2026-h1"
+      ],
+      "caveat_ids": [],
+      "metadata": {}
+    }
+  ],
+  "numeric_tables": [],
+  "card_lists": [],
+  "caveats": [],
+  "filters": {
+    "date_range": "2026-H1"
+  },
+  "frequency_pool_packet_version": "frequency-pool-packet-v1",
+  "tag_ontology_version": "scryfall-tagger-ontology-v1",
+  "evidence_version": "measured-evidence-v1",
+  "metadata": {
+    "evidence_only": true
+  }
+}

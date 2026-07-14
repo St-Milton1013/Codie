@@ -32,7 +32,7 @@ Latest pushed commit before Phase 24 outside validation acceptance: 432e958 Add 
 Latest full-suite result:
 
 ```text
-Ran 1047 tests
+Ran 1060 tests
 
 OK (skipped=1)
 ```
@@ -43,10 +43,10 @@ Latest schema bootstrap result:
 Schema bootstrap check passed.
 ```
 
-Latest focused Phase 37C result:
+Latest focused Phase 37D result:
 
 ```text
-Ran 14 tests in 0.005s
+Ran 13 tests
 OK
 ```
 
@@ -1816,34 +1816,36 @@ required corrections: none
 
 The adversarial informational findings are nonblocking historical observations
 and require no corrective action. Phase 37B has been accepted with review
-notes. Phase 37C's authorized deliverable is the local, in-memory Frequency
-Pool packet model and validator implementation.
+notes. Phase 37C received clean PR validation and is being used as the basis
+for continued Phase 37 work. Phase 37D's authorized deliverable is the local,
+in-memory Tag Graph metric packet model and validator implementation.
 
 Next allowed work:
 
 ```text
-Phase 37C - Frequency Pool Packet Models and Validators: implementation prepared
-Phase 37C outside validation: required
-Phase 37D - Tag Graph Metric Packet Models and Validators: blocked
+Phase 37C - Frequency Pool Packet Models and Validators: PR validated; phase-ledger validation pending
+Phase 37D - Tag Graph Metric Packet Models and Validators: implementation prepared
+Phase 37D outside validation: required
+Phase 37E - Tag Graph Export / Report Contract: blocked
 ```
 
-Phase 37C is not externally accepted yet. The next-phase tuple is declared for
-governance continuity; Phase 37D must not begin until Phase 37C validation
+Phase 37D is not externally accepted yet. The next-phase tuple is declared for
+governance continuity; Phase 37E must not begin until Phase 37D validation
 returns PASS or PASS WITH REVIEW NOTES.
 
-Phase 37C validation tuple:
+Phase 37D validation tuple:
 
 ```text
-phase_id: Phase37C
+phase_id: Phase37D
 phase_part: outside-validation
 gate_scope: INTERMEDIATE_PACKET
-next_phase_id: Phase37D
+next_phase_id: Phase37E
 next_phase_part: outside-validation
 next_gate_scope: INTERMEDIATE_PACKET
 ```
 
-The active validation scope file was not modified by the Phase 37C branch.
-The Phase 37C tuple is declared in the implementation packet; active-scope
+The active validation scope file was not modified by the Phase 37D branch.
+The Phase 37D tuple is declared in the implementation packet; active-scope
 advancement remains governed by the accepted validation workflow.
 
 Accepted Phase 37A outside validation packet:
@@ -2374,19 +2376,20 @@ Phase 13 simulator contracts or a new UI/API contract is explicitly selected.
 
 ## Known Caveats
 
-- Phase 37C Frequency Pool Packet Models and Validators are prepared and must
-  be validated before Phase 37D starts.
-- Phase 37C declares:
-  `phase_id: Phase37C`, `phase_part: outside-validation`,
-  `gate_scope: INTERMEDIATE_PACKET`, `next_phase_id: Phase37D`,
+- Phase 37D Tag Graph Metric Packet Models and Validators are prepared and
+  must be validated before Phase 37E starts.
+- Phase 37D declares:
+  `phase_id: Phase37D`, `phase_part: outside-validation`,
+  `gate_scope: INTERMEDIATE_PACKET`, `next_phase_id: Phase37E`,
   `next_phase_part: outside-validation`, and
   `next_gate_scope: INTERMEDIATE_PACKET`.
 - The next-phase tuple is declared for governance continuity.
-- Phase 37C is not externally accepted yet and must not be marked complete
+- Phase 37D is not externally accepted yet and must not be marked complete
   until validation returns PASS or PASS WITH REVIEW NOTES.
-- The Phase 37C branch changes only authorized frequency-pool model files,
-  fixtures, tests, and governance/validation packet docs; no schema, provider,
-  UI, workflow, validator, or constitution files are part of this packet.
+- The active Phase 37 branch changes only authorized frequency-pool and tag
+  graph model files, fixtures, tests, and governance/validation packet docs; no
+  schema, provider, UI, workflow, validator, or constitution files are part of
+  this packet.
 
 - Hareruya live access can hit AWS WAF; treat Hareruya as regional enrichment, not critical path.
 - CLI requires a local Codie SQLite database with card rows before user deck import can resolve cards.

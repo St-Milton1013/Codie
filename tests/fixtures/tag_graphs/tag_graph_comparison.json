@@ -1,0 +1,215 @@
+{
+  "graph_id": "graph-tymna-kraum-comparison",
+  "graph_version": "tag-graph-packet-v1",
+  "graph_type": "deck_vs_commander_average",
+  "subject": {
+    "subject_type": "analyzed_deck",
+    "subject_key": "deck-bluefarm-local",
+    "commander": "Tymna the Weaver",
+    "partner": "Kraum, Ludevic's Opus",
+    "user_local": true,
+    "metadata": {
+      "sanitized": true
+    }
+  },
+  "selected_tags": [
+    {
+      "tag": "draw engine",
+      "tag_namespace": "scryfall_tagger",
+      "tag_source": "scryfall_tagger",
+      "tag_confidence": 0.97,
+      "metadata": {}
+    },
+    {
+      "tag": "interaction",
+      "tag_namespace": "scryfall_tagger",
+      "tag_source": "scryfall_tagger",
+      "tag_confidence": 0.96,
+      "metadata": {}
+    }
+  ],
+  "generated_at": "2026-07-14T00:00:00Z",
+  "comparison_refs": [
+    {
+      "comparison_id": "cmp-1",
+      "comparison_type": "commander_top_cut_average",
+      "label": "Commander top-cut average",
+      "frequency_pool_ids": [
+        "pool-tymna-kraum-top16"
+      ],
+      "metadata": {}
+    }
+  ],
+  "source_packet_ids": [
+    "pool-user-local-bluefarm",
+    "pool-tymna-kraum-top16"
+  ],
+  "metric_rows": [
+    {
+      "row_id": "metric-draw-local",
+      "tag": "draw engine",
+      "scope_label": "Analyzed deck",
+      "raw_tag_count": 8,
+      "tag_density": 0.08,
+      "tag_inclusion_rate": 1.0,
+      "average_cards_per_deck_with_tag": 8.0,
+      "placement_weighted_tag_usage": "unknown",
+      "top_cut_tag_frequency": "unknown",
+      "winner_tag_frequency": "unknown",
+      "tag_trend_delta": "unknown",
+      "tag_confidence": 0.97,
+      "matching_deck_count": 1,
+      "available_deck_count": 1,
+      "coverage_ratio": 1.0,
+      "source_packet_ids": [
+        "pool-user-local-bluefarm"
+      ],
+      "caveat_ids": [
+        "cav-user-local"
+      ],
+      "metadata": {
+        "metric_source": "supplied packet value"
+      }
+    },
+    {
+      "row_id": "metric-draw-average",
+      "tag": "draw engine",
+      "scope_label": "Commander average",
+      "raw_tag_count": 64,
+      "tag_density": 0.064,
+      "tag_inclusion_rate": 0.79,
+      "average_cards_per_deck_with_tag": 5.8,
+      "placement_weighted_tag_usage": 0.82,
+      "top_cut_tag_frequency": 0.79,
+      "winner_tag_frequency": 0.71,
+      "tag_trend_delta": 0.03,
+      "tag_confidence": 0.97,
+      "matching_deck_count": 11,
+      "available_deck_count": 14,
+      "coverage_ratio": 0.79,
+      "source_packet_ids": [
+        "pool-tymna-kraum-top16"
+      ],
+      "caveat_ids": [],
+      "metadata": {}
+    }
+  ],
+  "contributor_rows": [
+    {
+      "row_id": "contrib-rhystic",
+      "tag": "draw engine",
+      "oracle_id": "oracle-rhystic-study",
+      "card_name": "Rhystic Study",
+      "contribution_count": 11,
+      "contribution_density": 0.11,
+      "source_packet_ids": [
+        "pool-tymna-kraum-top16"
+      ],
+      "caveat_ids": [],
+      "metadata": {}
+    }
+  ],
+  "overlap_rows": [
+    {
+      "row_id": "overlap-draw-interaction",
+      "tag_a": "draw engine",
+      "tag_b": "interaction",
+      "overlap_count": 4,
+      "overlap_ratio": 0.29,
+      "source_packet_ids": [
+        "pool-tymna-kraum-top16"
+      ],
+      "caveat_ids": [],
+      "metadata": {}
+    }
+  ],
+  "correlation_rows": [
+    {
+      "row_id": "corr-draw-interaction",
+      "tag_x": "draw engine",
+      "tag_y": "interaction",
+      "correlation_value": 0.24,
+      "sample_size": 14,
+      "source_packet_ids": [
+        "pool-tymna-kraum-top16"
+      ],
+      "caveat_ids": [],
+      "metadata": {}
+    }
+  ],
+  "trend_rows": [
+    {
+      "row_id": "trend-draw",
+      "tag": "draw engine",
+      "window_start": "2026-01-01",
+      "window_end": "2026-06-30",
+      "value": 0.79,
+      "delta": 0.03,
+      "source_packet_ids": [
+        "pool-tymna-kraum-top16"
+      ],
+      "caveat_ids": [],
+      "metadata": {}
+    }
+  ],
+  "numeric_tables": [
+    {
+      "table_id": "table-comparison",
+      "label": "Deck vs commander average",
+      "columns": [
+        "tag",
+        "scope_label",
+        "raw_tag_count",
+        "tag_density"
+      ],
+      "rows": [
+        {
+          "tag": "draw engine",
+          "scope_label": "Analyzed deck",
+          "raw_tag_count": 8,
+          "tag_density": 0.08
+        }
+      ],
+      "metadata": {}
+    }
+  ],
+  "card_lists": [
+    {
+      "list_id": "cards-draw",
+      "tag": "draw engine",
+      "oracle_ids": [
+        "oracle-rhystic-study",
+        "oracle-mystic-remora"
+      ],
+      "source_packet_ids": [
+        "pool-tymna-kraum-top16"
+      ],
+      "metadata": {}
+    }
+  ],
+  "caveats": [
+    {
+      "caveat_id": "cav-user-local",
+      "caveat_type": "user_local_context",
+      "message": "User-local rows are not commander average rows.",
+      "severity": "info",
+      "source_packet_ids": [
+        "pool-user-local-bluefarm"
+      ],
+      "metadata": {}
+    }
+  ],
+  "filters": {
+    "selected_tags": [
+      "draw engine",
+      "interaction"
+    ],
+    "baseline": "commander_top_cut_average"
+  },
+  "frequency_pool_packet_version": "frequency-pool-packet-v1",
+  "tag_ontology_version": "scryfall-tagger-ontology-v1",
+  "evidence_version": "measured-evidence-v1",
+  "metadata": {
+    "evidence_only": true
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "graph_id": "graph-invalid",
+  "graph_version": "tag-graph-packet-v1",
+  "graph_type": "tag_count_bar",
+  "subject": {
+    "subject_type": "commander",
+    "subject_key": "bad",
+    "metadata": {}
+  },
+  "selected_tags": [],
+  "generated_at": "2026-07-14T00:00:00Z",
+  "comparison_refs": [],
+  "source_packet_ids": [],
+  "metric_rows": [],
+  "contributor_rows": [],
+  "overlap_rows": [],
+  "correlation_rows": [],
+  "trend_rows": [],
+  "numeric_tables": [],
+  "card_lists": [],
+  "caveats": [],
+  "filters": {},
+  "frequency_pool_packet_version": "frequency-pool-packet-v1",
+  "tag_ontology_version": "scryfall-tagger-ontology-v1",
+  "evidence_version": "measured-evidence-v1",
+  "metadata": {}
+}
