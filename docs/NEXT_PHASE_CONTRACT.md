@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: send Phase 37A Frequency Pools / Tag Graph Lab Contract outside validation packet; do not begin Phase 37B until accepted
+Recommended next task: prepare Phase 37B Frequency Pools / Tag Graph Lab Implementation Contract; do not implement Phase 37B production code until the implementation contract is accepted
 
 ## Active Indexes
 

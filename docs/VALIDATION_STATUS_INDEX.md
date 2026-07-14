@@ -64,7 +64,7 @@ Phase 35C Commander Spellbook Interpreter Implementation: PASS WITH REVIEW NOTES
 Phase 36A Immutable Deck Snapshot Expansion Contract: PASS WITH REVIEW NOTES
 Phase 36B Immutable Deck Snapshot Implementation Contract: PASS WITH REVIEW NOTES
 Phase 36C Immutable Deck Snapshot Implementation: PASS WITH REVIEW NOTES
-Phase 37A Frequency Pools / Tag Graph Lab Contract: INTERNAL PASS
+Phase 37A Frequency Pools / Tag Graph Lab Contract: PASS WITH REVIEW NOTES
 Local alpha tag: created locally; remote tag push not verified in this environment
 ```
 
@@ -151,7 +151,7 @@ Phase 35C Commander Spellbook Interpreter Implementation: PASS WITH REVIEW NOTES
 Phase 36A Immutable Deck Snapshot Expansion Contract: PASS WITH REVIEW NOTES
 Phase 36B Immutable Deck Snapshot Implementation Contract: PASS WITH REVIEW NOTES
 Phase 36C Immutable Deck Snapshot Implementation: PASS WITH REVIEW NOTES
-Phase 37A Frequency Pools / Tag Graph Lab Contract: INTERNAL PASS
+Phase 37A Frequency Pools / Tag Graph Lab Contract: PASS WITH REVIEW NOTES
 ```
 
 ## Latest Local Validation
@@ -399,35 +399,37 @@ schema/repository/dependency diff scan: no matches
 production Forge / LLM SDK import scan: no matches
 ```
 
-## Current Blocker
+## Phase 37A Outside Validation Result
 
 ```text
-Phase 37B remains blocked until Phase 37A outside validation returns PASS or PASS WITH REVIEW NOTES.
+workflow run ID: 29340418728
+validated SHA: 1b958d28f1d4840d56b8b1d270fc0760b41bad6a
+artifact: codie-phase_ledger-validation-1b958d28f1d4840d56b8b1d270fc0760b41bad6a
+validation scope: phase_ledger
+validator profile: all
+deterministic: CLEAN_PASS
+architecture: CLEAN_PASS
+adversarial: FAIL with two INFORMATIONAL findings
+aggregate: CLEAN_PASS
+final governance verdict: PASS WITH REVIEW NOTES
+required corrections: none
 ```
 
-## Current Phase 37A Outside Validation Packet
+The two adversarial informational findings are nonblocking historical
+observations and require no corrective action.
+
+## Current Phase 37B Gate
 
 ```text
-docs/PHASE37A_FREQUENCY_POOLS_TAG_GRAPH_LAB_CONTRACT.md
-docs/CHECKPOINT_PHASE37A_FREQUENCY_POOLS_TAG_GRAPH_LAB_CONTRACT_REPORT.md
-docs/OUTSIDE_VALIDATION_PHASE37A_FREQUENCY_POOLS_TAG_GRAPH_LAB_CONTRACT_PROMPT.md
-docs/POST_PHASE31_DEFERRED_IMPLEMENTATION_PRIORITY_PLAN.md
-docs/POST_PHASE31_PATCH_PLAN_CEMENTING_AUDIT.md
-docs/ROADMAP_PATCH_TAG_GRAPH_LAB.md
-docs/ROADMAP_PATCH_MOXFIELD_FREQUENCY_POOL_BUILDER.md
-docs/PATCH_EVIDENCE_INTELLIGENCE_AND_LOCAL_REPORTS.md
-docs/PHASE34C_SCRYFALL_TAGGER_ONTOLOGY_IMPLEMENTATION_REPORT.md
-docs/CHECKPOINT_PHASE34C_SCRYFALL_TAGGER_ONTOLOGY_IMPLEMENTATION_REPORT.md
-docs/PHASE35C_COMMANDER_SPELLBOOK_INTERPRETER_IMPLEMENTATION_REPORT.md
-docs/CHECKPOINT_PHASE35C_COMMANDER_SPELLBOOK_INTERPRETER_IMPLEMENTATION_REPORT.md
-docs/PHASE36C_IMMUTABLE_DECK_SNAPSHOT_IMPLEMENTATION_REPORT.md
-docs/CHECKPOINT_PHASE36C_IMMUTABLE_DECK_SNAPSHOT_IMPLEMENTATION_REPORT.md
-docs/CODIE_V1_CONSTITUTION.md
-docs/ACTIVE_ROADMAP_INDEX.md
-docs/VALIDATION_STATUS_INDEX.md
-docs/NEXT_PHASE_CONTRACT.md
-docs/CODEX_CONTINUITY_HANDOFF.md
+Phase 37B Frequency Pools / Tag Graph Lab Implementation Contract: next allowed work
 ```
+
+Phase 37B is unblocked for contract-first work only. Do not implement Phase 37B
+production code until a Phase 37B implementation contract is accepted.
+
+The active validation scope file was not advanced in this governance update
+because the accepted Phase 37A documents name the Phase 37B task but do not
+declare an exact Phase 37B `phase_part` and `gate_scope` tuple.
 
 ## Accepted Phase 36C Outside Validation Packet
 

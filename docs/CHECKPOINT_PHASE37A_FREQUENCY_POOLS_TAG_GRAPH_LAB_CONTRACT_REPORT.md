@@ -1,8 +1,28 @@
 # Checkpoint - Phase 37A Frequency Pools / Tag Graph Lab Contract
 
-Status: INTERNAL PASS
+Status: PASS WITH REVIEW NOTES
 
-This checkpoint is internal evidence only. It is not outside validation.
+This checkpoint was originally internal evidence. Phase 37A outside validation
+has since returned PASS WITH REVIEW NOTES.
+
+## Outside Validation Result
+
+```text
+workflow run ID: 29340418728
+validated SHA: 1b958d28f1d4840d56b8b1d270fc0760b41bad6a
+artifact: codie-phase_ledger-validation-1b958d28f1d4840d56b8b1d270fc0760b41bad6a
+validation scope: phase_ledger
+validator profile: all
+deterministic: CLEAN_PASS
+architecture: CLEAN_PASS
+adversarial: FAIL with two INFORMATIONAL findings
+aggregate: CLEAN_PASS
+final governance verdict: PASS WITH REVIEW NOTES
+required corrections: none
+```
+
+The adversarial informational findings are nonblocking historical observations
+and require no corrective action.
 
 ## Scope
 
@@ -60,7 +80,7 @@ tag provenance must remain visible
 future metric outputs must expose underlying numeric tables and card lists
 future outputs must not generate strategic claims
 future outputs must not generate recommendations
-Phase 37B remains blocked until Phase 37A outside validation passes
+Phase 37B is unblocked for contract-first work only
 ```
 
 ## Validation
@@ -118,8 +138,8 @@ docs/CODEX_CONTINUITY_HANDOFF.md
 ## Next Gate
 
 ```text
-Phase 37A outside validation: REQUIRED
+Phase 37B Frequency Pools / Tag Graph Lab Implementation Contract
 ```
 
-Do not begin Phase 37B until Phase 37A outside validation returns PASS or PASS
-WITH REVIEW NOTES.
+Do not implement Phase 37B production code until the Phase 37B implementation
+contract is accepted.

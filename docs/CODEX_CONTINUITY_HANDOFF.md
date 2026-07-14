@@ -1783,14 +1783,12 @@ privacy metadata, and arbitrary nested metadata. Phase 36C does not add
 persistence, schema, repositories, providers, file writing, CLI, UI, analytics,
 simulator execution, LLM calls, frequency pools, or recommendations.
 
-Phase 37A may begin contract-first. It should define the Frequency Pools / Tag
-Graph Lab boundary from the cemented post-31 priority plan. Phase 37A must not
-implement frequency pools, Tag Graph Lab metrics, schema, repositories, provider
-calls, file writing, UI, LLM calls, simulator execution, or recommendations.
-Phase 37B remains blocked until Phase 37A outside validation returns PASS or
-PASS WITH REVIEW NOTES.
+Phase 37A began contract-first to define the Frequency Pools / Tag Graph Lab
+boundary from the cemented post-31 priority plan. Phase 37A did not implement
+frequency pools, Tag Graph Lab metrics, schema, repositories, provider calls,
+file writing, UI, LLM calls, simulator execution, or recommendations.
 
-Phase 37A is internally complete. It is a contract-only packet for future
+Phase 37A is externally accepted with review notes. It is a contract-only packet for future
 Frequency Pools and Tag Graph Lab work. It defines allowed future sanitized
 inputs, forbidden raw/private/provider inputs, future metric boundaries,
 coverage and provenance requirements, user-local snapshot privacy rules, and a
@@ -1798,10 +1796,40 @@ recommended future split across Phase 37B/37C/37D/37E. It does not add
 production code, tests, fixtures, schema, repositories, provider calls, file
 writing, CLI, UI, analytics calculation, frequency pool calculation, Tag Graph
 Lab metrics, simulator execution, LLM calls, dependency changes, or
-recommendations. Phase 37B is blocked until Phase 37A outside validation
-returns PASS or PASS WITH REVIEW NOTES.
+recommendations.
 
-Current Phase 37A outside validation packet:
+Phase 37A outside validation returned PASS WITH REVIEW NOTES.
+
+```text
+workflow run ID: 29340418728
+validated SHA: 1b958d28f1d4840d56b8b1d270fc0760b41bad6a
+artifact: codie-phase_ledger-validation-1b958d28f1d4840d56b8b1d270fc0760b41bad6a
+validation scope: phase_ledger
+validator profile: all
+deterministic: CLEAN_PASS
+architecture: CLEAN_PASS
+adversarial: FAIL with two INFORMATIONAL findings
+aggregate: CLEAN_PASS
+final governance verdict: PASS WITH REVIEW NOTES
+required corrections: none
+```
+
+The adversarial informational findings are nonblocking historical observations
+and require no corrective action. Phase 37B is unblocked for contract-first work
+only.
+
+Next allowed work:
+
+```text
+Phase 37B - Frequency Pools / Tag Graph Lab Implementation Contract
+```
+
+Do not implement Phase 37B production code until the Phase 37B implementation
+contract is accepted. The active validation scope file was not advanced in this
+governance update because the accepted Phase 37A documents name the Phase 37B
+task but do not declare an exact Phase 37B `phase_part` and `gate_scope` tuple.
+
+Accepted Phase 37A outside validation packet:
 
 ```text
 docs/PHASE37A_FREQUENCY_POOLS_TAG_GRAPH_LAB_CONTRACT.md
