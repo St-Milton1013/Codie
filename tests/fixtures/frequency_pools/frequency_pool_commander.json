@@ -1,0 +1,113 @@
+{
+  "pool_id": "pool-rogsi-top16",
+  "pool_version": "frequency-pool-packet-v1",
+  "pool_type": "commander",
+  "subject": {
+    "subject_type": "commander",
+    "commander": "Rograkh, Son of Rohgahh",
+    "partner": "Silas Renn, Seeker Adept",
+    "subject_key": "rograkh-silas",
+    "user_local": false,
+    "metadata": {
+      "commander_key": "rograkh",
+      "partner_key": "silas"
+    }
+  },
+  "source_window": {
+    "date_start": "2026-01-01",
+    "date_end": "2026-06-30",
+    "placement_scope": "top_16",
+    "provider": "topdeck",
+    "region": "global",
+    "filters": {
+      "include_generic_staples": true,
+      "include_lands": false
+    }
+  },
+  "source_refs": [
+    {
+      "source_ref_id": "src-1",
+      "source_type": "deck",
+      "source_key": "deck-ref-1",
+      "provider": "topdeck",
+      "event_ref_id": "event-ref-1",
+      "deck_ref_id": "deck-ref-1",
+      "metadata": {
+        "sanitized": true
+      }
+    }
+  ],
+  "generated_at": "2026-07-14T00:00:00Z",
+  "cards": [
+    {
+      "identity": {
+        "oracle_id": "oracle-dark-ritual",
+        "scryfall_id": "scryfall-dark-ritual",
+        "card_name": "Dark Ritual"
+      },
+      "card_count": 14,
+      "deck_count": 12,
+      "inclusion_rate": 0.86,
+      "average_copies": 1.0,
+      "placement_weighted_usage": 0.91,
+      "trend_delta": 0.03,
+      "confidence": 0.94,
+      "source_ref_ids": [
+        "src-1"
+      ],
+      "caveat_ids": [],
+      "metadata": {
+        "evidence_only": true
+      }
+    }
+  ],
+  "tags": [
+    {
+      "tag": "ramp",
+      "tag_namespace": "scryfall_tagger",
+      "tag_source": "scryfall_tagger",
+      "tag_confidence": 0.98,
+      "oracle_ids": [
+        "oracle-dark-ritual"
+      ],
+      "raw_tag_count": 14,
+      "tag_density": 0.14,
+      "tag_inclusion_rate": 0.86,
+      "average_cards_per_deck_with_tag": 7.1,
+      "matching_deck_count": 12,
+      "available_deck_count": 14,
+      "coverage_ratio": 0.86,
+      "caveat_ids": [],
+      "source_ref_ids": [
+        "src-1"
+      ],
+      "metadata": {
+        "provenance": "accepted-tagger-ontology"
+      }
+    }
+  ],
+  "coverage_report": {
+    "matching_deck_count": 12,
+    "available_deck_count": 14,
+    "coverage_ratio": 0.86,
+    "low_sample_threshold": 5,
+    "low_coverage_threshold": 0.6,
+    "caveat_ids": [],
+    "metadata": {
+      "coverage_basis": "sanitized refs"
+    }
+  },
+  "caveats": [],
+  "filters": {
+    "selected_tags": [
+      "ramp"
+    ],
+    "minimum_deck_count": 5
+  },
+  "identity_version": "canonical-card-identity-v1",
+  "tag_ontology_version": "scryfall-tagger-ontology-v1",
+  "evidence_version": "measured-evidence-v1",
+  "metadata": {
+    "evidence_only": true
+  }
+}

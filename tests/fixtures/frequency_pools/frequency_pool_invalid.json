@@ -1,0 +1,32 @@
+{
+  "pool_id": "pool-invalid",
+  "pool_version": "frequency-pool-packet-v1",
+  "pool_type": "commander",
+  "subject": {
+    "subject_type": "commander",
+    "commander": "Bad Fixture",
+    "user_local": false,
+    "metadata": {}
+  },
+  "source_window": {},
+  "source_refs": [],
+  "generated_at": "2026-07-14T00:00:00Z",
+  "cards": [],
+  "tags": [],
+  "coverage_report": {
+    "matching_deck_count": 0,
+    "available_deck_count": 0,
+    "coverage_ratio": 0.0,
+    "low_sample_threshold": 5,
+    "low_coverage_threshold": 0.6,
+    "caveat_ids": []
+  },
+  "caveats": [],
+  "filters": {
+    "recommendation_score": 99
+  },
+  "identity_version": "canonical-card-identity-v1",
+  "tag_ontology_version": "scryfall-tagger-ontology-v1",
+  "evidence_version": "measured-evidence-v1",
+  "metadata": {}
+}

@@ -1,0 +1,128 @@
+{
+  "pool_id": "pool-user-local-1",
+  "pool_version": "frequency-pool-packet-v1",
+  "pool_type": "user_local_snapshot",
+  "subject": {
+    "subject_type": "user_local_snapshot",
+    "commander": "Kinnan, Bonder Prodigy",
+    "partner": null,
+    "subject_key": "user-local-kinnan-2026-07",
+    "user_local": true,
+    "metadata": {
+      "local_only": true
+    }
+  },
+  "source_window": {
+    "date_start": null,
+    "date_end": null,
+    "placement_scope": "personal_history",
+    "provider": "local_snapshot",
+    "region": null,
+    "filters": {
+      "source": "personal_deck_history"
+    }
+  },
+  "source_refs": [
+    {
+      "source_ref_id": "user-src-1",
+      "source_type": "user_deck_snapshot",
+      "source_key": "snapshot-1",
+      "provider": "local_snapshot",
+      "event_ref_id": null,
+      "deck_ref_id": "snapshot-1",
+      "metadata": {
+        "sanitized": true
+      }
+    }
+  ],
+  "generated_at": "2026-07-14T00:00:00Z",
+  "cards": [
+    {
+      "identity": {
+        "oracle_id": "oracle-basalt-monolith",
+        "scryfall_id": "scryfall-basalt-monolith",
+        "card_name": "Basalt Monolith"
+      },
+      "card_count": 1,
+      "deck_count": 1,
+      "inclusion_rate": 1.0,
+      "average_copies": 1.0,
+      "placement_weighted_usage": null,
+      "trend_delta": null,
+      "confidence": 1.0,
+      "source_ref_ids": [
+        "user-src-1"
+      ],
+      "caveat_ids": [
+        "cav-user-local"
+      ],
+      "metadata": {}
+    }
+  ],
+  "tags": [
+    {
+      "tag": "combo piece",
+      "tag_namespace": "curated_functional_registry",
+      "tag_source": "curated_functional_registry",
+      "tag_confidence": 0.9,
+      "oracle_ids": [
+        "oracle-basalt-monolith"
+      ],
+      "raw_tag_count": 1,
+      "tag_density": 0.01,
+      "tag_inclusion_rate": 1.0,
+      "average_cards_per_deck_with_tag": 1.0,
+      "matching_deck_count": "unknown",
+      "available_deck_count": "unknown",
+      "coverage_ratio": "unknown",
+      "caveat_ids": [
+        "cav-user-local"
+      ],
+      "source_ref_ids": [
+        "user-src-1"
+      ],
+      "metadata": {
+        "provenance": "local curated label"
+      }
+    }
+  ],
+  "coverage_report": {
+    "matching_deck_count": "unknown",
+    "available_deck_count": "unknown",
+    "coverage_ratio": "unknown",
+    "low_sample_threshold": "unknown",
+    "low_coverage_threshold": "unknown",
+    "caveat_ids": [
+      "cav-user-local"
+    ],
+    "metadata": {
+      "unknown_values_are_explicit": true
+    }
+  },
+  "caveats": [
+    {
+      "caveat_id": "cav-user-local",
+      "caveat_type": "user_local_isolation",
+      "message": "User-local pools are isolated from commander averages and tournament evidence.",
+      "severity": "info",
+      "source_ref_ids": [
+        "user-src-1"
+      ],
+      "metadata": {}
+    }
+  ],
+  "filters": {
+    "selected_tags": [
+      "combo piece"
+    ]
+  },
+  "identity_version": "canonical-card-identity-v1",
+  "tag_ontology_version": "curated-functional-registry-v1",
+  "evidence_version": "user-local-evidence-v1",
+  "metadata": {
+    "evidence_only": true,
+    "isolated_from_global_pools": true,
+    "not_tournament_evidence": true,
+    "not_recommendation_input": true
+  }
+}

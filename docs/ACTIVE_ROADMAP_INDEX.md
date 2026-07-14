@@ -67,28 +67,29 @@ Phase 36A Immutable Deck Snapshot Expansion Contract: externally accepted
 Phase 36B Immutable Deck Snapshot Implementation Contract: externally accepted
 Phase 36C Immutable Deck Snapshot Implementation: externally accepted
 Phase 37A Frequency Pools / Tag Graph Lab Contract: externally accepted with review notes
-Phase 37B Frequency Pools / Tag Graph Lab Implementation Contract: internally complete
-Current action: send Phase 37B outside validation packet
+Phase 37B Frequency Pools / Tag Graph Lab Implementation Contract: accepted with review notes
+Phase 37C Frequency Pool Packet Models and Validators: implementation prepared; validation required
+Current action: validate Phase 37C Frequency Pool Packet Models and Validators
 Local alpha tag status: created locally; remote tag push not verified in this environment
 ```
 
 ## Next Allowed Phase
 
 ```text
-Phase 37B outside validation
+Phase 37C outside validation
 ```
 
-Phase 37A outside validation returned PASS WITH REVIEW NOTES. Phase 37B's
-authorized deliverable is the Frequency Pools / Tag Graph Lab
-implementation-contract packet and matching governance records.
+Phase 37B has been merged and accepted with review notes. Phase 37C's
+authorized deliverable is the local, in-memory Frequency Pool packet model and
+validator implementation. Phase 37C is not externally accepted yet.
 
-Phase 37B validation tuple:
+Phase 37C validation tuple:
 
 ```text
-phase_id: Phase37B
+phase_id: Phase37C
 phase_part: outside-validation
 gate_scope: INTERMEDIATE_PACKET
-next_phase_id: Phase37C
+next_phase_id: Phase37D
 next_phase_part: outside-validation
 next_gate_scope: INTERMEDIATE_PACKET
 ```
@@ -116,8 +117,9 @@ and require no corrective action.
 
 ```text
 1. Phase 37A Frequency Pools / Tag Graph Lab Contract: accepted with review notes
-2. Phase 37B Frequency Pools / Tag Graph Lab Implementation Contract: current PR validation packet
-3. Phase 37B outside validation: current gate
+2. Phase 37B Frequency Pools / Tag Graph Lab Implementation Contract: accepted with review notes
+3. Phase 37C Frequency Pool Packet Models and Validators: implementation prepared; validation required
+4. Phase 37D Tag Graph Metric Packet Models and Validators: blocked
 ```
 
 The post-31 patch priority order is cemented in:

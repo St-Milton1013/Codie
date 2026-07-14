@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: send Phase 37B Frequency Pools / Tag Graph Lab Implementation Contract to outside validation
+Recommended next task: validate Phase 37C Frequency Pool Packet Models and Validators
 
 ## Active Indexes
 
@@ -19,12 +19,17 @@ log.
 
 Phase 37A outside validation returned PASS WITH REVIEW NOTES.
 
-Phase 37B Frequency Pools / Tag Graph Lab Implementation Contract is internally complete.
+Phase 37B Frequency Pools / Tag Graph Lab Implementation Contract has been
+accepted with review notes.
 
-Explicit Phase 37B validation tuple:
+Phase 37C Frequency Pool Packet Models and Validators are prepared on the
+active feature branch and must be validated before Phase 37D starts. Phase 37C
+is not externally accepted yet.
+
+Explicit Phase 37C validation tuple:
 
 ```text
-phase_id: Phase37B
+phase_id: Phase37C
 phase_part: outside-validation
 gate_scope: INTERMEDIATE_PACKET
 ```
@@ -32,13 +37,14 @@ gate_scope: INTERMEDIATE_PACKET
 Explicit next-phase validation tuple:
 
 ```text
-next_phase_id: Phase37C
+next_phase_id: Phase37D
 next_phase_part: outside-validation
 next_gate_scope: INTERMEDIATE_PACKET
 ```
 
-The next-phase tuple is declared for governance continuity. Phase 37B contains
-only the implementation-contract packet and matching governance records.
+The next-phase tuple is declared for governance continuity. Phase 37C contains
+only local Frequency Pool packet models, validators, local fixtures, tests, and
+matching validation packet records.
 
 Phase 14 has passed outside validation.
 
