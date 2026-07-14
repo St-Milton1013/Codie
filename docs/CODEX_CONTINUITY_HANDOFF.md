@@ -1728,7 +1728,7 @@ implement interpreter code, schema, repositories, providers, live Spellbook
 calls, Spellbook scraping, file writing, analytics, simulator execution, UI,
 LLM calls, combo ranking, or recommendations.
 
-Phase 35C is internally complete. It implements the local Commander Spellbook
+Phase 35C is externally accepted with review notes. It implements the local Commander Spellbook
 interpreter models and validators authorized by Phase 35B. It adds
 `codie/combos/spellbook_interpreter.py`, focused local fixtures, focused tests,
 and export-only updates to `codie/combos/__init__.py`. It classifies Spellbook
@@ -1736,8 +1736,28 @@ combo outputs, prerequisites, restrictions, target-compatibility metadata, and
 unsupported/manual-review records. It remains local-only, fixture-first,
 provider-free, schema-free, repository-free, simulator-execution-free,
 analytics-free, frequency-pool-free, UI-free, LLM-free, and recommendation-free.
-No later phase should begin until Phase 35C outside validation returns PASS or
-PASS WITH REVIEW NOTES.
+
+Phase 35C review notes:
+
+```text
+win_enabling=True for infinite_mana/infinite_draw/win_condition must remain
+documented as win-enabling metadata, not a claim that those outputs always win.
+
+Future Spellbook interpreter expansion should add edge fixtures for mixed
+outputs, multiple unknown requirements, optional target compatibility, and
+component-role ambiguity.
+
+GitHub CI was not available for the Phase 35C validation result.
+```
+
+Phase 36A is internally complete. It is a contract-only packet for future
+immutable deck snapshot expansion. It defines future snapshot IDs, deck hash,
+commander signature, source/user deck refs, analysis refs, card entries,
+privacy/redaction policy, replay metadata, source provenance, deterministic
+serialization, and dictionary round-trip. It does not implement snapshot code,
+schema, repositories, providers, file writing, CLI, UI, analytics, simulator
+execution, LLM calls, or recommendations. Phase 36B is blocked until Phase 36A
+outside validation returns PASS or PASS WITH REVIEW NOTES.
 
 The post-31 patch-note plan has been cemented in
 `docs/POST_PHASE31_PATCH_PLAN_CEMENTING_AUDIT.md`. That audit confirms no
@@ -2000,7 +2020,7 @@ docs/NEXT_PHASE_CONTRACT.md
 docs/CODEX_CONTINUITY_HANDOFF.md
 ```
 
-Current Phase 35C outside validation packet:
+Accepted Phase 35C outside validation packet:
 
 ```text
 docs/PHASE35C_COMMANDER_SPELLBOOK_INTERPRETER_IMPLEMENTATION_REPORT.md
@@ -2023,6 +2043,31 @@ codie/providers/spellbook/parser.py
 codie/combos/sync.py
 tests/test_provider_spellbook.py
 tests/test_combo_sync.py
+docs/ACTIVE_ROADMAP_INDEX.md
+docs/VALIDATION_STATUS_INDEX.md
+docs/NEXT_PHASE_CONTRACT.md
+docs/CODEX_CONTINUITY_HANDOFF.md
+```
+
+Current Phase 36A outside validation packet:
+
+```text
+docs/PHASE36A_IMMUTABLE_DECK_SNAPSHOT_EXPANSION_CONTRACT.md
+docs/CHECKPOINT_PHASE36A_IMMUTABLE_DECK_SNAPSHOT_EXPANSION_CONTRACT_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE36A_IMMUTABLE_DECK_SNAPSHOT_EXPANSION_CONTRACT_PROMPT.md
+docs/PHASE35C_COMMANDER_SPELLBOOK_INTERPRETER_IMPLEMENTATION_REPORT.md
+docs/CHECKPOINT_PHASE35C_COMMANDER_SPELLBOOK_INTERPRETER_IMPLEMENTATION_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE35C_COMMANDER_SPELLBOOK_INTERPRETER_IMPLEMENTATION_PROMPT.md
+docs/POST_PHASE31_DEFERRED_IMPLEMENTATION_PRIORITY_PLAN.md
+docs/CODIE_V1_CONSTITUTION.md
+codie/user_decks/importer.py
+codie/user_decks/deck_memory.py
+codie/user_decks/analysis_input.py
+codie/db/schema/user.sql
+codie/db/repositories/user.py
+tests/test_user_deck_import.py
+tests/test_user_deck_memory.py
+tests/test_user_deck_analysis_input.py
 docs/ACTIVE_ROADMAP_INDEX.md
 docs/VALIDATION_STATUS_INDEX.md
 docs/NEXT_PHASE_CONTRACT.md

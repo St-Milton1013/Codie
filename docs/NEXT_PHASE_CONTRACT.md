@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: send Phase 35C Commander Spellbook Interpreter Implementation outside validation packet; do not begin later phases until accepted
+Recommended next task: send Phase 36A Immutable Deck Snapshot Expansion Contract outside validation packet; do not begin Phase 36B until accepted
 
 ## Active Indexes
 

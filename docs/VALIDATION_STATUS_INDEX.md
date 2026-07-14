@@ -60,7 +60,8 @@ Phase 34B Scryfall Tagger Ontology Implementation Contract: PASS WITH REVIEW NOT
 Phase 34C Scryfall Tagger Ontology Implementation: PASS WITH REVIEW NOTES
 Phase 35A Commander Spellbook Interpreter Expansion Contract: PASS WITH REVIEW NOTES
 Phase 35B Commander Spellbook Interpreter Implementation Contract: PASS WITH REVIEW NOTES
-Phase 35C Commander Spellbook Interpreter Implementation: INTERNAL PASS
+Phase 35C Commander Spellbook Interpreter Implementation: PASS WITH REVIEW NOTES
+Phase 36A Immutable Deck Snapshot Expansion Contract: INTERNAL PASS
 Local alpha tag: created locally; remote tag push not verified in this environment
 ```
 
@@ -143,7 +144,8 @@ Phase 34B Scryfall Tagger Ontology Implementation Contract: PASS WITH REVIEW NOT
 Phase 34C Scryfall Tagger Ontology Implementation: PASS WITH REVIEW NOTES
 Phase 35A Commander Spellbook Interpreter Expansion Contract: PASS WITH REVIEW NOTES
 Phase 35B Commander Spellbook Interpreter Implementation Contract: PASS WITH REVIEW NOTES
-Phase 35C Commander Spellbook Interpreter Implementation: INTERNAL PASS
+Phase 35C Commander Spellbook Interpreter Implementation: PASS WITH REVIEW NOTES
+Phase 36A Immutable Deck Snapshot Expansion Contract: INTERNAL PASS
 ```
 
 ## Latest Local Validation
@@ -221,6 +223,22 @@ Static scans:
 schema/repository/provider/analytics/recommendation/simulator/dependency drift scan: no matches
 forbidden import/dependency scan: no production matches; test matches only assertion strings
 recommendation-language scan: production matches only blocked phrase constants and boundary comments; test matches only rejection coverage
+
+Phase 36A Immutable Deck Snapshot Expansion Contract:
+python scripts/check_schema.py
+Schema bootstrap check passed.
+
+python -m unittest discover -s tests
+Ran 916 tests
+OK (skipped=1)
+
+git diff --check
+passed
+
+Static scans:
+production/test/schema/repository/dependency drift scan: no matches
+forbidden implementation/dependency scan: matches only contract narrative and explicit forbidden-scope lists
+recommendation-language scan: matches only explicit contract boundary statements
 ```
 
 ## CI Review Note Status
@@ -362,32 +380,28 @@ production Forge / LLM SDK import scan: no matches
 ## Current Blocker
 
 ```text
-Later phases are blocked until Phase 35C outside validation returns PASS or PASS WITH REVIEW NOTES.
+Phase 36B is blocked until Phase 36A outside validation returns PASS or PASS WITH REVIEW NOTES.
 ```
 
-## Current Phase 35C Outside Validation Packet
+## Current Phase 36A Outside Validation Packet
 
 ```text
+docs/PHASE36A_IMMUTABLE_DECK_SNAPSHOT_EXPANSION_CONTRACT.md
+docs/CHECKPOINT_PHASE36A_IMMUTABLE_DECK_SNAPSHOT_EXPANSION_CONTRACT_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE36A_IMMUTABLE_DECK_SNAPSHOT_EXPANSION_CONTRACT_PROMPT.md
 docs/PHASE35C_COMMANDER_SPELLBOOK_INTERPRETER_IMPLEMENTATION_REPORT.md
 docs/CHECKPOINT_PHASE35C_COMMANDER_SPELLBOOK_INTERPRETER_IMPLEMENTATION_REPORT.md
 docs/OUTSIDE_VALIDATION_PHASE35C_COMMANDER_SPELLBOOK_INTERPRETER_IMPLEMENTATION_PROMPT.md
-docs/PHASE35B_COMMANDER_SPELLBOOK_INTERPRETER_IMPLEMENTATION_CONTRACT.md
-docs/CHECKPOINT_PHASE35B_COMMANDER_SPELLBOOK_INTERPRETER_IMPLEMENTATION_CONTRACT_REPORT.md
-docs/OUTSIDE_VALIDATION_PHASE35B_COMMANDER_SPELLBOOK_INTERPRETER_IMPLEMENTATION_CONTRACT_PROMPT.md
-docs/PHASE35A_COMMANDER_SPELLBOOK_INTERPRETER_EXPANSION_CONTRACT.md
-docs/CHECKPOINT_PHASE35A_COMMANDER_SPELLBOOK_INTERPRETER_EXPANSION_CONTRACT_REPORT.md
-docs/PHASE7A_SPELLBOOK_COMBO_EVIDENCE_CONTRACT.md
+docs/POST_PHASE31_DEFERRED_IMPLEMENTATION_PRIORITY_PLAN.md
 docs/CODIE_V1_CONSTITUTION.md
-codie/combos/spellbook_interpreter.py
-codie/combos/__init__.py
-tests/test_spellbook_interpreter.py
-tests/fixtures/spellbook_interpreter/spellbook_combo_outputs.json
-tests/fixtures/spellbook_interpreter/spellbook_combo_restrictions.json
-tests/fixtures/spellbook_interpreter/spellbook_combo_unknowns.json
-codie/providers/spellbook/parser.py
-codie/combos/sync.py
-tests/test_provider_spellbook.py
-tests/test_combo_sync.py
+codie/user_decks/importer.py
+codie/user_decks/deck_memory.py
+codie/user_decks/analysis_input.py
+codie/db/schema/user.sql
+codie/db/repositories/user.py
+tests/test_user_deck_import.py
+tests/test_user_deck_memory.py
+tests/test_user_deck_analysis_input.py
 docs/ACTIVE_ROADMAP_INDEX.md
 docs/VALIDATION_STATUS_INDEX.md
 docs/NEXT_PHASE_CONTRACT.md
