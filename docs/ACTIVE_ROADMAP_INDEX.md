@@ -67,19 +67,31 @@ Phase 36A Immutable Deck Snapshot Expansion Contract: externally accepted
 Phase 36B Immutable Deck Snapshot Implementation Contract: externally accepted
 Phase 36C Immutable Deck Snapshot Implementation: externally accepted
 Phase 37A Frequency Pools / Tag Graph Lab Contract: externally accepted with review notes
-Current action: prepare Phase 37B Frequency Pools / Tag Graph Lab Implementation Contract
+Phase 37B Frequency Pools / Tag Graph Lab Implementation Contract: internally complete
+Current action: send Phase 37B outside validation packet
 Local alpha tag status: created locally; remote tag push not verified in this environment
 ```
 
 ## Next Allowed Phase
 
 ```text
-Phase 37B Frequency Pools / Tag Graph Lab Implementation Contract
+Phase 37B outside validation
 ```
 
-Phase 37A outside validation returned PASS WITH REVIEW NOTES. Phase 37B is
-unblocked for contract-first work only. Do not implement Phase 37B production
-code until a Phase 37B implementation contract is accepted.
+Phase 37A outside validation returned PASS WITH REVIEW NOTES. Phase 37B's
+authorized deliverable is the Frequency Pools / Tag Graph Lab
+implementation-contract packet and matching governance records.
+
+Phase 37B validation tuple:
+
+```text
+phase_id: Phase37B
+phase_part: outside-validation
+gate_scope: INTERMEDIATE_PACKET
+next_phase_id: Phase37C
+next_phase_part: outside-validation
+next_gate_scope: INTERMEDIATE_PACKET
+```
 
 Phase 37A acceptance evidence:
 
@@ -104,7 +116,8 @@ and require no corrective action.
 
 ```text
 1. Phase 37A Frequency Pools / Tag Graph Lab Contract: accepted with review notes
-2. Phase 37B Frequency Pools / Tag Graph Lab Implementation Contract: next
+2. Phase 37B Frequency Pools / Tag Graph Lab Implementation Contract: current PR validation packet
+3. Phase 37B outside validation: current gate
 ```
 
 The post-31 patch priority order is cemented in:

@@ -65,7 +65,39 @@ Phase 36A Immutable Deck Snapshot Expansion Contract: PASS WITH REVIEW NOTES
 Phase 36B Immutable Deck Snapshot Implementation Contract: PASS WITH REVIEW NOTES
 Phase 36C Immutable Deck Snapshot Implementation: PASS WITH REVIEW NOTES
 Phase 37A Frequency Pools / Tag Graph Lab Contract: PASS WITH REVIEW NOTES
+Phase 37B Frequency Pools / Tag Graph Lab Implementation Contract: CURRENT PR VALIDATION PACKET
 Local alpha tag: created locally; remote tag push not verified in this environment
+```
+
+Phase 37B's authorized deliverable is the Frequency Pools / Tag Graph Lab
+implementation-contract packet and matching governance records. The current PR
+contains no `codie/`, `tests/`, fixture, schema, provider, UI, workflow,
+validator, or constitution changes.
+
+Phase 37B coverage visibility requirement:
+
+```text
+matching_deck_count: visible when supplied; explicit unknown marker when unavailable
+available_deck_count: visible when supplied; explicit unknown marker when unavailable
+coverage_ratio: visible when supplied; explicit unknown marker when unavailable
+low_sample_threshold: visible when supplied; explicit unknown marker when unavailable
+low_coverage_threshold: visible when supplied; explicit unknown marker when unavailable
+caveats: visible when supplied; explicit unknown marker when unavailable
+```
+
+The Phase 37B contract preserves the accepted Phase 36C privacy boundary by
+referencing the existing blocked-key policy instead of redefining private/raw
+metadata terms in this status index.
+
+Phase 37B validation tuple:
+
+```text
+phase_id: Phase37B
+phase_part: outside-validation
+gate_scope: INTERMEDIATE_PACKET
+next_phase_id: Phase37C
+next_phase_part: outside-validation
+next_gate_scope: INTERMEDIATE_PACKET
 ```
 
 ## Accepted Phase Summary
@@ -152,6 +184,7 @@ Phase 36A Immutable Deck Snapshot Expansion Contract: PASS WITH REVIEW NOTES
 Phase 36B Immutable Deck Snapshot Implementation Contract: PASS WITH REVIEW NOTES
 Phase 36C Immutable Deck Snapshot Implementation: PASS WITH REVIEW NOTES
 Phase 37A Frequency Pools / Tag Graph Lab Contract: PASS WITH REVIEW NOTES
+Phase 37B Frequency Pools / Tag Graph Lab Implementation Contract: CURRENT PR VALIDATION PACKET
 ```
 
 ## Latest Local Validation
@@ -417,19 +450,6 @@ required corrections: none
 
 The two adversarial informational findings are nonblocking historical
 observations and require no corrective action.
-
-## Current Phase 37B Gate
-
-```text
-Phase 37B Frequency Pools / Tag Graph Lab Implementation Contract: next allowed work
-```
-
-Phase 37B is unblocked for contract-first work only. Do not implement Phase 37B
-production code until a Phase 37B implementation contract is accepted.
-
-The active validation scope file was not advanced in this governance update
-because the accepted Phase 37A documents name the Phase 37B task but do not
-declare an exact Phase 37B `phase_part` and `gate_scope` tuple.
 
 ## Accepted Phase 36C Outside Validation Packet
 
