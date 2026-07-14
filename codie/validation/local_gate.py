@@ -30,6 +30,8 @@ ALLOWED_GATE_SCOPES = frozenset({"INTERMEDIATE_PACKET", "FINAL_PHASE"})
 VALIDATORS = ("deterministic", "architecture", "adversarial")
 VALIDATOR_SET = frozenset(VALIDATORS)
 VALIDATOR_RESULTS = frozenset({"CLEAN_PASS", "FAIL", "ERROR"})
+VALIDATION_SCOPES = frozenset({"pr", "full_project", "phase_ledger"})
+VALIDATOR_PROFILES = frozenset({"deterministic", "architecture", "adversarial", "all"})
 AGGREGATOR_RESULTS = frozenset(
     {
         "CLEAN_PASS",
@@ -102,6 +104,12 @@ CONTEXT_FILES = (
     "docs/VALIDATION_STATUS_INDEX.md",
     "docs/NEXT_PHASE_CONTRACT.md",
 )
+PHASE_LEDGER_FILES = (
+    "docs/ACTIVE_ROADMAP_INDEX.md",
+    "docs/VALIDATION_STATUS_INDEX.md",
+    "docs/NEXT_PHASE_CONTRACT.md",
+    "docs/CODEX_CONTINUITY_HANDOFF.md",
+)
 MODEL_RESERVED_FINDING_RULES = frozenset(
     {
         "CONSTITUTION_CONFLICT",
@@ -137,12 +145,17 @@ class ValidationGateOptions:
     base_branch: str = "main"
     output_dir: Path = Path("validation_artifacts")
     python_executable: str = r"C:\Users\Main\.venvs\codie-py312\Scripts\python.exe"
+    target_ref: str = ""
+    validation_scope: str = "pr"
+    validator_profile: str = "all"
 
     def __post_init__(self) -> None:
         _require_text(self.phase_id, "phase_id")
         _require_text(self.phase_part, "phase_part")
         _require_allowed(self.gate_scope, ALLOWED_GATE_SCOPES, "gate_scope")
         _require_sha(self.target_sha)
+        _require_allowed(self.validation_scope, VALIDATION_SCOPES, "validation_scope")
+        _require_allowed(self.validator_profile, VALIDATOR_PROFILES, "validator_profile")
         if self.repository != REPOSITORY:
             raise ValidationGateError("repository mismatch")
         if self.pull_request_number is not None and self.pull_request_number < 1:
@@ -265,9 +278,16 @@ class AggregatedValidationResult:
     severity_totals: SeverityTotals
     repair_attempt: int = 0
     validation_cycle: int = 1
+    target_ref: str = ""
+    validation_scope: str = "pr"
+    validator_profile: str = "all"
+    skipped_validators: tuple[str, ...] = ()
 
     def __post_init__(self) -> None:
         _require_allowed(self.result, AGGREGATOR_RESULTS, "aggregator_result")
+        _require_allowed(self.validation_scope, VALIDATION_SCOPES, "validation_scope")
+        _require_allowed(self.validator_profile, VALIDATOR_PROFILES, "validator_profile")
+        object.__setattr__(self, "skipped_validators", tuple(sorted(self.skipped_validators)))
 
 
 CommandRunner = Callable[[tuple[str, ...], Path], subprocess.CompletedProcess[str]]
@@ -295,18 +315,43 @@ def run_validation_gate(
         base_branch=options.base_branch,
         output_dir=options.output_dir,
         python_executable=options.python_executable,
+        target_ref=options.target_ref,
+        validation_scope=options.validation_scope,
+        validator_profile=options.validator_profile,
     )
     security_report = _security_preflight(resolved_options, resolved_root, active_scope, scope_conflict)
     if security_report is not None:
-        aggregate = aggregate_validator_reports((security_report,), resolved_options.target_sha, active_phase=active_phase)
+        aggregate = aggregate_validator_reports(
+            (security_report,),
+            resolved_options.target_sha,
+            active_phase=active_phase,
+            target_ref=resolved_options.target_ref,
+            validation_scope=resolved_options.validation_scope,
+            validator_profile=resolved_options.validator_profile,
+            skipped_validators=tuple(sorted(VALIDATOR_SET - {"deterministic"})),
+        )
         write_validation_outputs(aggregate, resolved_options.output_dir)
         return aggregate
-    reports = [
-        run_deterministic_validator(resolved_options, resolved_root, command_runner),
-        run_ollama_validator("architecture", resolved_options, resolved_root, ollama_runner),
-        run_ollama_validator("adversarial", resolved_options, resolved_root, ollama_runner),
-    ]
-    aggregate = aggregate_validator_reports(tuple(reports), resolved_options.target_sha, active_phase=active_phase)
+    reports: list[ValidatorReport] = []
+    skipped: list[str] = []
+    for validator in VALIDATORS:
+        if _validator_is_enabled(validator, resolved_options.validator_profile):
+            if validator == "deterministic":
+                reports.append(run_deterministic_validator(resolved_options, resolved_root, command_runner))
+            else:
+                reports.append(run_ollama_validator(validator, resolved_options, resolved_root, ollama_runner))
+        else:
+            skipped.append(validator)
+            reports.append(_skipped_validator_report(validator, resolved_options))
+    aggregate = aggregate_validator_reports(
+        tuple(reports),
+        resolved_options.target_sha,
+        active_phase=active_phase,
+        target_ref=resolved_options.target_ref,
+        validation_scope=resolved_options.validation_scope,
+        validator_profile=resolved_options.validator_profile,
+        skipped_validators=tuple(skipped),
+    )
     write_validation_outputs(aggregate, resolved_options.output_dir)
     return aggregate
 
@@ -395,6 +440,10 @@ def aggregate_validator_reports(
     validation_cycle: int = 1,
     repair_attempt: int = 0,
     active_phase: str = CURRENT_EXPECTED_PHASE_ID,
+    target_ref: str = "",
+    validation_scope: str = "pr",
+    validator_profile: str = "all",
+    skipped_validators: tuple[str, ...] = (),
 ) -> AggregatedValidationResult:
     _require_sha(target_sha)
     errors: list[str] = []
@@ -465,6 +514,10 @@ def aggregate_validator_reports(
         severity_totals=severity_totals,
         repair_attempt=repair_attempt,
         validation_cycle=validation_cycle,
+        target_ref=target_ref,
+        validation_scope=validation_scope,
+        validator_profile=validator_profile,
+        skipped_validators=skipped_validators,
     )
 
 
@@ -749,6 +802,10 @@ def aggregated_result_to_dict(result: AggregatedValidationResult) -> dict[str, A
         "phase": result.phase_id,
         "phase_part": result.phase_part,
         "target_sha": result.target_sha,
+        "target_ref": result.target_ref,
+        "validation_scope": result.validation_scope,
+        "validator_profile": result.validator_profile,
+        "skipped_validators": list(result.skipped_validators),
         "pull_request_number": result.pull_request_number,
         "gate_scope": result.gate_scope,
         "validation_cycle": result.validation_cycle,
@@ -777,6 +834,10 @@ def render_markdown_summary(result: AggregatedValidationResult) -> str:
         f"- phase: {result.phase_id}",
         f"- phase part: {result.phase_part}",
         f"- commit SHA: {result.target_sha}",
+        f"- target ref: {result.target_ref or result.target_sha}",
+        f"- validation scope: {result.validation_scope}",
+        f"- validator profile: {result.validator_profile}",
+        f"- skipped validators: {', '.join(result.skipped_validators) or 'none'}",
         f"- gate scope: {result.gate_scope}",
         f"- validation cycle: {result.validation_cycle}",
         f"- repair attempt: {result.repair_attempt}",
@@ -979,10 +1040,21 @@ def _static_findings(options: ValidationGateOptions, root: Path) -> tuple[Valida
         if path.suffix == ".py":
             findings.extend(_architecture_findings_for_python(relative, text))
     findings.extend(_packet_completeness_findings(root))
+    if options.validation_scope == "phase_ledger":
+        findings.extend(_phase_ledger_findings(root))
     return tuple(findings)
 
 
 def _changed_files_for_scan(options: ValidationGateOptions, root: Path) -> tuple[str, ...]:
+    if options.validation_scope == "full_project":
+        return tuple(
+            path
+            for path in _tracked_files(root)
+            if path.startswith(("codie/", "scripts/", ".github/workflows/"))
+            or path in {"pyproject.toml", "requirements.txt", "requirements-dev.txt"}
+        )
+    if options.validation_scope == "phase_ledger":
+        return _phase_ledger_scan_files(root)
     diff = _run_command(("git", "diff", "--name-only", f"origin/{options.base_branch}...{options.target_sha}"), root)
     if diff.returncode != 0:
         diff = _run_command(("git", "diff", "--name-only", options.target_sha), root)
@@ -993,7 +1065,32 @@ def _changed_files_for_scan(options: ValidationGateOptions, root: Path) -> tuple
     )
 
 
+def _tracked_files(root: Path) -> tuple[str, ...]:
+    completed = _run_command(("git", "ls-files"), root)
+    if completed.returncode != 0:
+        return ()
+    return tuple(_normalize_path(line) for line in completed.stdout.splitlines() if line.strip())
+
+
+def _phase_ledger_scan_files(root: Path) -> tuple[str, ...]:
+    patterns = (
+        "phase",
+        "checkpoint",
+        "outside-validation",
+        "outside_validation",
+        "validation-prompt",
+        "validation_prompt",
+    )
+    files = set(PHASE_LEDGER_FILES)
+    for relative in _tracked_files(root):
+        lowered = relative.lower()
+        if relative.startswith("docs/") and any(pattern in lowered for pattern in patterns):
+            files.add(relative)
+    return tuple(sorted(files))
+
+
 def _content_scan_text(relative: str, text: str) -> str:
+    text = _strip_guardrail_literal_blocks(text)
     if relative not in {"codie/validation/local_gate.py", "tests/test_validation_local_gate.py"}:
         return text
     return "\n".join(
@@ -1001,6 +1098,22 @@ def _content_scan_text(relative: str, text: str) -> str:
         for line in text.splitlines()
         if not any(fragment in line for fragment in VALIDATOR_SELF_REFERENCE_SCAN_EXCLUSIONS)
     )
+
+
+def _strip_guardrail_literal_blocks(text: str) -> str:
+    kept: list[str] = []
+    in_guardrail_block = False
+    for line in text.splitlines():
+        stripped = line.strip()
+        if re.match(r"(FORBIDDEN|UNSUPPORTED)_[A-Z0-9_]*\s*=", stripped):
+            in_guardrail_block = True
+            continue
+        if in_guardrail_block:
+            if stripped == ")" or stripped.endswith(")"):
+                in_guardrail_block = False
+            continue
+        kept.append(line)
+    return "\n".join(kept)
 
 
 def _architecture_findings_for_python(relative: str, text: str) -> tuple[ValidationFinding, ...]:
@@ -1050,6 +1163,41 @@ def _packet_completeness_findings(root: Path) -> tuple[ValidationFinding, ...]:
                     required_correction="Restore the required governance packet file before validation.",
                 )
             )
+    return tuple(findings)
+
+
+def _phase_ledger_findings(root: Path) -> tuple[ValidationFinding, ...]:
+    findings: list[ValidationFinding] = []
+    missing = [relative for relative in PHASE_LEDGER_FILES if not (root / relative).is_file()]
+    for relative in missing:
+        findings.append(
+            ValidationFinding(
+                finding_id=f"phase-ledger:missing:{_finding_hash(relative)}",
+                severity="BLOCKER",
+                finding=f"Required phase ledger file is missing: {relative}",
+                affected_files=(relative,),
+                governing_rule="Phase Ledger Consistency",
+                required_correction="Restore the required ledger file before phase-ledger validation.",
+            )
+        )
+    phase_tokens: dict[str, set[str]] = {}
+    for relative in PHASE_LEDGER_FILES:
+        path = root / relative
+        if path.is_file():
+            tokens = set(re.findall(r"Phase\s*\d+[A-Z]?", path.read_text(encoding="utf-8", errors="ignore")))
+            if tokens:
+                phase_tokens[relative] = tokens
+    if len({tuple(sorted(tokens)) for tokens in phase_tokens.values()}) > 1:
+        findings.append(
+            ValidationFinding(
+                finding_id="phase-ledger:phase-token-mismatch",
+                severity="HIGH",
+                finding="Phase ledger files reference inconsistent phase identifiers.",
+                affected_files=tuple(sorted(phase_tokens)),
+                governing_rule="Phase Ledger Consistency",
+                required_correction="Align active roadmap, validation status, next contract, and continuity handoff phase references.",
+            )
+        )
     return tuple(findings)
 
 
@@ -1134,6 +1282,24 @@ def _build_report(
         errors=errors,
         model=model,
         commands=commands,
+    )
+
+
+def _validator_is_enabled(validator: str, validator_profile: str) -> bool:
+    return validator_profile == "all" or validator_profile == validator
+
+
+def _skipped_validator_report(validator: str, options: ValidationGateOptions) -> ValidatorReport:
+    now = _now()
+    return _build_report(
+        options=options,
+        validator=validator,
+        result="CLEAN_PASS",
+        findings=(),
+        errors=(),
+        started_at=now,
+        completed_at=now,
+        model="skipped-by-profile" if validator != "deterministic" else None,
     )
 
 
@@ -1435,6 +1601,9 @@ def build_arg_parser() -> argparse.ArgumentParser:
     parser.add_argument("--gate-scope", choices=sorted(ALLOWED_GATE_SCOPES))
     parser.add_argument("--pull-request-number", type=int)
     parser.add_argument("--target-sha")
+    parser.add_argument("--target-ref", default="")
+    parser.add_argument("--validation-scope", choices=sorted(VALIDATION_SCOPES), default="pr")
+    parser.add_argument("--validator-profile", choices=sorted(VALIDATOR_PROFILES), default="all")
     parser.add_argument("--branch", default="")
     parser.add_argument("--base-branch", default="main")
     parser.add_argument("--output-dir", default="validation_artifacts")
@@ -1469,6 +1638,9 @@ def main(argv: list[str] | None = None) -> int:
         base_branch=args.base_branch,
         output_dir=Path(args.output_dir),
         python_executable=args.python_executable,
+        target_ref=args.target_ref,
+        validation_scope=args.validation_scope,
+        validator_profile=args.validator_profile,
     )
     result = run_validation_gate(options)
     print(json.dumps(aggregated_result_to_dict(result), indent=2, sort_keys=True))
@@ -1554,7 +1726,10 @@ def _finding_hash(text: str) -> str:
 
 
 def _normalize_path(path: str) -> str:
-    return path.replace("\\", "/").strip().lstrip("./")
+    normalized = path.replace("\\", "/").strip()
+    while normalized.startswith("./"):
+        normalized = normalized[2:]
+    return normalized
 
 
 def _reject_duplicate_json_keys(pairs: list[tuple[str, Any]]) -> dict[str, Any]:

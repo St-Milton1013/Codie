@@ -11,28 +11,54 @@ on:
       - ready_for_review
   workflow_dispatch:
     inputs:
+      target_ref:
+        description: Ref or SHA to validate for manual snapshot validation
+        required: true
+        type: string
+      validation_scope:
+        description: Manual validation scope
+        required: false
+        default: pr
+        type: choice
+        options:
+          - pr
+          - full_project
+          - phase_ledger
+      validator_profile:
+        description: Validators to run
+        required: false
+        default: all
+        type: choice
+        options:
+          - deterministic
+          - architecture
+          - adversarial
+          - all
       phase_id:
         description: Phase id to validate
-        required: true
+        required: false
         type: string
       phase_part:
         description: Phase part to validate
-        required: true
+        required: false
         type: string
       gate_scope:
         description: Validation gate scope
-        required: true
+        required: false
+        default: INTERMEDIATE_PACKET
         type: choice
         options:
           - INTERMEDIATE_PACKET
           - FINAL_PHASE
       pull_request_number:
         description: Pull request number
-        required: true
+        required: false
+        default: "1"
         type: string
       pr_branch:
         description: Pull request head branch
-        required: true
+        required: false
+        default: codex/operational-local-validation-bootstrap
         type: string
       base_branch:
         description: Pull request base branch
@@ -41,7 +67,8 @@ on:
         type: string
       target_sha:
         description: Exact target SHA
-        required: true
+        required: false
+        default: ""
         type: string
       run_repair:
         description: Allow repair controller after validation
@@ -161,7 +188,7 @@ jobs:
 
   manual-validation:
     name: Manual Validation
-    if: ${{ github.event_name == 'workflow_dispatch' && github.event.repository.full_name == 'St-Milton1013/Codie' }}
+    if: ${{ github.event_name == 'workflow_dispatch' && inputs.validation_scope == 'pr' && github.event.repository.full_name == 'St-Milton1013/Codie' }}
     outputs:
       aggregate_result: ${{ steps.validation.outputs.aggregate_result }}
     runs-on:
@@ -202,6 +229,9 @@ jobs:
             --branch "${{ inputs.pr_branch }}" `
             --base-branch "${{ inputs.base_branch }}" `
             --target-sha "${{ inputs.target_sha }}" `
+            --target-ref "${{ inputs.target_ref }}" `
+            --validation-scope "pr" `
+            --validator-profile "all" `
             --output-dir validation_artifacts `
             --python-executable "$env:CODIE_PYTHON"
           $exitCode = $LASTEXITCODE
@@ -259,9 +289,139 @@ jobs:
           path: validation_artifacts/
           if-no-files-found: warn
 
+  manual-snapshot-validation:
+    name: Manual Snapshot Validation
+    if: ${{ github.event_name == 'workflow_dispatch' && inputs.validation_scope != 'pr' && github.event.repository.full_name == 'St-Milton1013/Codie' }}
+    runs-on:
+      - self-hosted
+      - Windows
+      - X64
+      - codie-local
+    env:
+      CODIE_PYTHON: C:\Users\Main\.venvs\codie-py312\Scripts\python.exe
+      OPENAI_API_KEY: ""
+    steps:
+      - name: Check out selected target
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.target_ref }}
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Resolve selected target SHA
+        id: target
+        shell: powershell
+        run: |
+          $targetSha = git rev-parse HEAD
+          if ($LASTEXITCODE -ne 0) {
+            throw "failed to resolve selected target ref ${{ inputs.target_ref }}"
+          }
+          Add-Content -Path $env:GITHUB_OUTPUT -Value "target_sha=$targetSha"
+
+      - name: Verify trusted manual base
+        shell: powershell
+        run: |
+          $base = "${{ inputs.base_branch }}"
+          git rev-parse --verify "refs/remotes/origin/$base"
+          if ($LASTEXITCODE -ne 0) {
+            throw "trusted base ref refs/remotes/origin/$base does not resolve"
+          }
+
+      - name: Resolve active validation scope
+        id: scope
+        shell: powershell
+        run: |
+          $scopeLines = & "$env:CODIE_PYTHON" scripts/codie_validation_gate.py --print-active-scope
+          foreach ($line in $scopeLines) {
+            Add-Content -Path $env:GITHUB_OUTPUT -Value $line
+          }
+
+      - name: Run manual snapshot validation
+        shell: powershell
+        run: |
+          & "$env:CODIE_PYTHON" scripts/codie_validation_gate.py `
+            --phase-id "${{ steps.scope.outputs.phase_id }}" `
+            --phase-part "${{ steps.scope.outputs.phase_part }}" `
+            --gate-scope "${{ steps.scope.outputs.gate_scope }}" `
+            --pull-request-number "${{ inputs.pull_request_number }}" `
+            --branch "manual/${{ inputs.target_ref }}" `
+            --base-branch "${{ inputs.base_branch }}" `
+            --target-sha "${{ steps.target.outputs.target_sha }}" `
+            --target-ref "${{ inputs.target_ref }}" `
+            --validation-scope "${{ inputs.validation_scope }}" `
+            --validator-profile "${{ inputs.validator_profile }}" `
+            --output-dir validation_artifacts `
+            --python-executable "$env:CODIE_PYTHON"
+
+      - name: Ensure validation artifact after infrastructure failure
+        if: always()
+        shell: powershell
+        run: |
+          New-Item -ItemType Directory -Force -Path validation_artifacts | Out-Null
+          if (-not (Test-Path validation_artifacts/codie-validation-result.json)) {
+            $message = "workflow infrastructure failed before validators ran; inspect preceding step logs for the original failure"
+            $targetSha = "${{ steps.target.outputs.target_sha }}"
+            if (-not $targetSha) {
+              $targetSha = "${{ inputs.target_ref }}"
+            }
+            $result = [ordered]@{
+              final_result = "VALIDATOR_ERROR"
+              target_sha = $targetSha
+              target_ref = "${{ inputs.target_ref }}"
+              validation_scope = "${{ inputs.validation_scope }}"
+              validator_profile = "${{ inputs.validator_profile }}"
+              skipped_validators = @()
+              pull_request_number = [int]"${{ inputs.pull_request_number }}"
+              errors_encountered_during_this_phase = @($message)
+              finding_history = @()
+              remaining_open_errors = @()
+              reports = @()
+              severity_totals = [ordered]@{
+                BLOCKER = 0
+                CRITICAL = 0
+                HIGH = 0
+                MEDIUM = 0
+                LOW = 0
+                INFORMATIONAL = 0
+              }
+            }
+            $result | ConvertTo-Json -Depth 8 | Out-File -FilePath validation_artifacts/codie-validation-result.json -Encoding utf8
+            @(
+              "# Codie Validation Gate",
+              "",
+              "Result: VALIDATOR_ERROR",
+              "",
+              "Target ref: ${{ inputs.target_ref }}",
+              "",
+              "Target SHA: $targetSha",
+              "",
+              "Validation scope: ${{ inputs.validation_scope }}",
+              "",
+              "Validator profile: ${{ inputs.validator_profile }}",
+              "",
+              "The workflow infrastructure failed before validators ran. Inspect the preceding step logs for the original failure."
+            ) | Out-File -FilePath validation_artifacts/codie-validation-summary.md -Encoding utf8
+          }
+
+      - name: Write snapshot job summary
+        if: always()
+        shell: powershell
+        run: |
+          if (Test-Path validation_artifacts/codie-validation-summary.md) {
+            Get-Content validation_artifacts/codie-validation-summary.md | Out-File -FilePath $env:GITHUB_STEP_SUMMARY -Append
+          }
+
+      - name: Upload snapshot validation artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: codie-${{ inputs.validation_scope }}-validation-${{ steps.target.outputs.target_sha }}
+          path: validation_artifacts/
+          if-no-files-found: warn
+
   manual-repair:
     name: Manual Repair
-    if: ${{ always() && github.event_name == 'workflow_dispatch' && inputs.run_repair == true && github.event.repository.full_name == 'St-Milton1013/Codie' && needs.manual-validation.outputs.aggregate_result == 'REPAIR_REQUIRED' }}
+    if: ${{ always() && github.event_name == 'workflow_dispatch' && inputs.validation_scope == 'pr' && inputs.run_repair == true && github.event.repository.full_name == 'St-Milton1013/Codie' && needs.manual-validation.outputs.aggregate_result == 'REPAIR_REQUIRED' }}
     needs: manual-validation
     permissions:
       contents: write

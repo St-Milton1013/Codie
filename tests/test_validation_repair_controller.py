@@ -774,6 +774,7 @@ class RepairControllerTest(unittest.TestCase):
         repair_section = workflow.split("manual-repair:")[1]
 
         self.assertIn("always()", repair_section)
+        self.assertIn("inputs.validation_scope == 'pr'", repair_section)
         self.assertIn("needs.manual-validation.outputs.aggregate_result == 'REPAIR_REQUIRED'", repair_section)
         self.assertIn("contents: write", repair_section)
         self.assertIn("scripts/codie_repair_controller.py", repair_section)
@@ -831,6 +832,28 @@ class RepairControllerTest(unittest.TestCase):
         self.assertIn("--print-active-scope", pr_section)
         self.assertIn("steps.scope.outputs.phase_id", pr_section)
         self.assertNotIn("--phase-id Phase35A", pr_section)
+
+    def test_workflow_dispatch_exposes_manual_snapshot_validation_inputs(self) -> None:
+        workflow = Path(".github/workflows/codie-local-validation.yml").read_text(encoding="utf-8")
+
+        self.assertIn("target_ref:", workflow)
+        self.assertIn("validation_scope:", workflow)
+        self.assertIn("validator_profile:", workflow)
+        for value in ("pr", "full_project", "phase_ledger", "deterministic", "architecture", "adversarial", "all"):
+            self.assertIn(f"- {value}", workflow)
+
+    def test_manual_snapshot_validation_does_not_invoke_repair_or_use_write_credentials(self) -> None:
+        workflow = Path(".github/workflows/codie-local-validation.yml").read_text(encoding="utf-8")
+        snapshot_section = workflow.split("manual-snapshot-validation:")[1].split("manual-repair:")[0]
+
+        self.assertIn("inputs.validation_scope != 'pr'", snapshot_section)
+        self.assertIn("persist-credentials: false", snapshot_section)
+        self.assertIn("--validation-scope", snapshot_section)
+        self.assertIn("--validator-profile", snapshot_section)
+        self.assertIn("--target-ref", snapshot_section)
+        self.assertIn("codie-${{ inputs.validation_scope }}-validation-${{ steps.target.outputs.target_sha }}", snapshot_section)
+        self.assertNotIn("scripts/codie_repair_controller.py", snapshot_section)
+        self.assertNotIn("contents: write", snapshot_section)
 
     def test_repair_outputs_persist_complete_history(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

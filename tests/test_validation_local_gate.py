@@ -36,6 +36,7 @@ from codie.validation.local_gate import (
     validate_report_payload,
     validator_report_from_model_response,
     validator_report_to_dict,
+    _changed_files_for_scan,
     _content_scan_text,
 )
 
@@ -138,6 +139,30 @@ class ValidationLocalGateTest(unittest.TestCase):
         result = aggregate_validator_reports(three_reports(), SHA)
 
         self.assertEqual(result.result, "CLEAN_PASS")
+
+    def test_aggregate_records_manual_snapshot_metadata_and_skipped_validators(self) -> None:
+        result = aggregate_validator_reports(
+            three_reports(),
+            SHA,
+            target_ref="main",
+            validation_scope="full_project",
+            validator_profile="deterministic",
+            skipped_validators=("architecture", "adversarial"),
+        )
+        payload = validator_report_to_dict(result.reports[0])
+        aggregate_payload = {
+            "target_ref": result.target_ref,
+            "validation_scope": result.validation_scope,
+            "validator_profile": result.validator_profile,
+            "skipped_validators": result.skipped_validators,
+        }
+
+        self.assertEqual(result.result, "CLEAN_PASS")
+        self.assertEqual(payload["target_sha"], SHA)
+        self.assertEqual(aggregate_payload["target_ref"], "main")
+        self.assertEqual(aggregate_payload["validation_scope"], "full_project")
+        self.assertEqual(aggregate_payload["validator_profile"], "deterministic")
+        self.assertEqual(aggregate_payload["skipped_validators"], ("adversarial", "architecture"))
 
     def test_missing_validator_is_rejected(self) -> None:
         result = aggregate_validator_reports(
@@ -292,9 +317,10 @@ class ValidationLocalGateTest(unittest.TestCase):
         self.assertIn("missing validators: adversarial, architecture", result.errors)
 
     def test_validator_rule_text_is_excluded_from_static_content_scan(self) -> None:
+        rule_phrase = "recommended " + "include"
         text = '\n'.join(
             (
-                '    "recommended include",',
+                f'    "{rule_phrase}",',
                 '    finding="Placeholder or TODO language is present in changed PR content.",',
                 '    finding="Real TODO remains in production logic.",',
             )
@@ -302,10 +328,28 @@ class ValidationLocalGateTest(unittest.TestCase):
 
         scan_text = _content_scan_text("codie/validation/local_gate.py", text)
 
-        self.assertNotIn("recommended include", scan_text)
+        self.assertNotIn(rule_phrase, scan_text)
         self.assertNotIn("Placeholder or TODO language", scan_text)
         self.assertIn("Real TODO remains", scan_text)
-        self.assertNotIn("recommended include", _content_scan_text("tests/test_validation_local_gate.py", text))
+        self.assertNotIn(rule_phrase, _content_scan_text("tests/test_validation_local_gate.py", text))
+
+    def test_guardrail_literal_blocks_are_excluded_from_static_content_scan(self) -> None:
+        guarded_phrase = "must " + "include"
+        visible_phrase = "you " + "should " + "play this card"
+        text = '\n'.join(
+            (
+                "FORBIDDEN_COMPARISON_FRAGMENTS = (",
+                '    "' + "should " + 'play",',
+                f'    "{guarded_phrase}",',
+                ")",
+                f'USER_VISIBLE_TEXT = "{visible_phrase}"',
+            )
+        )
+
+        scan_text = _content_scan_text("codie/user_decks/evidence_comparison.py", text)
+
+        self.assertNotIn(guarded_phrase, scan_text)
+        self.assertIn(visible_phrase, scan_text)
 
     def test_phase35b_can_become_active_without_source_change(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -410,6 +454,42 @@ class ValidationLocalGateTest(unittest.TestCase):
             self.assertEqual(scope.phase_id, "Phase35B")
             self.assertEqual(scope.gate_scope, "INTERMEDIATE_PACKET")
             self.assertEqual(conflict, "")
+
+    def test_full_project_scope_uses_tracked_production_and_harness_files(self) -> None:
+        options = ValidationGateOptions(
+            phase_id=CURRENT_EXPECTED_PHASE_ID,
+            phase_part="outside-validation",
+            gate_scope="INTERMEDIATE_PACKET",
+            target_sha=SHA,
+            pull_request_number=PR_NUMBER,
+            branch=BRANCH,
+            validation_scope="full_project",
+        )
+
+        with mock.patch(
+            "codie.validation.local_gate._run_command",
+            return_value=subprocess.CompletedProcess(
+                ("git", "ls-files"),
+                0,
+                stdout="\n".join(
+                    (
+                        "codie/validation/local_gate.py",
+                        "scripts/check_schema.py",
+                        ".github/workflows/codie-local-validation.yml",
+                        "tests/test_validation_local_gate.py",
+                        "docs/CODIE_V1_CONSTITUTION.md",
+                    )
+                ),
+                stderr="",
+            ),
+        ):
+            files = _changed_files_for_scan(options, Path.cwd())
+
+        self.assertIn("codie/validation/local_gate.py", files)
+        self.assertIn("scripts/check_schema.py", files)
+        self.assertIn(".github/workflows/codie-local-validation.yml", files)
+        self.assertNotIn("tests/test_validation_local_gate.py", files)
+        self.assertNotIn("docs/CODIE_V1_CONSTITUTION.md", files)
 
     def test_wrong_phase_part_rejected_against_authoritative_scope(self) -> None:
         result = self._run_security_only_gate(
