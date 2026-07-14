@@ -785,18 +785,44 @@ class RepairControllerTest(unittest.TestCase):
 
         self.assertIn("github.event.pull_request.head.repo.full_name == github.event.repository.full_name", workflow)
 
-    def test_self_hosted_workflow_fetches_and_verifies_trusted_base_refs(self) -> None:
+    def test_self_hosted_workflow_verifies_trusted_base_refs_without_read_only_fetch(self) -> None:
         workflow = Path(".github/workflows/codie-local-validation.yml").read_text(encoding="utf-8")
         pr_section = workflow.split("manual-validation:")[0]
         manual_validation_section = workflow.split("manual-validation:")[1].split("manual-repair:")[0]
         manual_repair_section = workflow.split("manual-repair:")[1]
 
-        for section in (pr_section, manual_validation_section, manual_repair_section):
+        for section in (pr_section, manual_validation_section):
             self.assertIn("fetch-depth: 0", section)
-            self.assertIn("git fetch --no-tags origin", section)
             self.assertIn("refs/remotes/origin/$base", section)
             self.assertIn("git rev-parse --verify", section)
             self.assertIn("trusted base ref", section)
+            self.assertNotIn("git fetch --no-tags origin", section)
+
+        self.assertIn("fetch-depth: 0", manual_repair_section)
+        self.assertIn("$baseRefExists = $LASTEXITCODE -eq 0", manual_repair_section)
+        self.assertIn("if (-not $baseRefExists)", manual_repair_section)
+        self.assertIn("git fetch --no-tags origin", manual_repair_section)
+        self.assertIn("git rev-parse --verify", manual_repair_section)
+
+    def test_self_hosted_workflow_uses_windows_powershell_shell(self) -> None:
+        workflow = Path(".github/workflows/codie-local-validation.yml").read_text(encoding="utf-8")
+
+        self.assertIn("shell: powershell", workflow)
+        self.assertNotIn("shell: pwsh", workflow)
+
+    def test_infrastructure_failure_artifacts_are_written_and_uploaded_without_masking_failure(self) -> None:
+        workflow = Path(".github/workflows/codie-local-validation.yml").read_text(encoding="utf-8")
+        pr_section = workflow.split("manual-validation:")[0]
+        manual_validation_section = workflow.split("manual-validation:")[1].split("manual-repair:")[0]
+
+        for section in (pr_section, manual_validation_section):
+            self.assertIn("Ensure validation artifact after infrastructure failure", section)
+            self.assertIn("codie-validation-result.json", section)
+            self.assertIn("codie-validation-summary.md", section)
+            self.assertIn('final_result = "VALIDATOR_ERROR"', section)
+            self.assertIn("workflow infrastructure failed before validators ran", section)
+            self.assertIn("inspect preceding step logs for the original failure", section)
+            self.assertIn("if-no-files-found: warn", section)
 
     def test_pull_request_workflow_resolves_phase_without_phase35a_hardcoding(self) -> None:
         workflow = Path(".github/workflows/codie-local-validation.yml").read_text(encoding="utf-8")

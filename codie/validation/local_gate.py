@@ -102,6 +102,16 @@ CONTEXT_FILES = (
     "docs/VALIDATION_STATUS_INDEX.md",
     "docs/NEXT_PHASE_CONTRACT.md",
 )
+MODEL_RESERVED_FINDING_RULES = frozenset(
+    {
+        "CONSTITUTION_CONFLICT",
+        "Exact SHA validation",
+        "Scope Validation",
+        "Packet Completeness",
+        "No Partial Implementations",
+        "Evidence First Rule",
+    }
+)
 
 
 @dataclass(frozen=True)
@@ -373,6 +383,7 @@ def run_ollama_validator(
             payload=parsed,
             started_at=started_at,
             completed_at=_now(),
+            allowed_affected_files=frozenset(_changed_files_for_scan(options, root)),
         )
     except ValidationGateError as exc:
         return _ollama_error_report(validator, model, options, started_at, str(exc))
@@ -532,13 +543,15 @@ def validator_report_from_model_response(
     payload: dict[str, Any],
     started_at: str,
     completed_at: str,
+    allowed_affected_files: frozenset[str] | None = None,
 ) -> ValidatorReport:
     validate_model_payload(payload)
     findings = tuple(
         _model_finding_to_validation_finding(validator, item)
         for item in payload["findings"]
+        if _model_finding_is_in_scope(item, allowed_affected_files)
     )
-    result = "FAIL" if payload["result"] == "FAIL" or findings else "CLEAN_PASS"
+    result = "FAIL" if findings else "CLEAN_PASS"
     return _build_report(
         options=options,
         validator=validator,
@@ -1210,8 +1223,20 @@ def _validate_model_finding_payload(finding: Any) -> None:
         _require_text(str(path), "affected_file")
 
 
+def _model_finding_is_in_scope(finding: dict[str, Any], allowed_affected_files: frozenset[str] | None) -> bool:
+    governing_rule = str(finding["governing_rule"]).strip()
+    if governing_rule in MODEL_RESERVED_FINDING_RULES:
+        return False
+    affected_files = frozenset(_normalize_path(str(path)) for path in finding["affected_files"])
+    if not affected_files:
+        return False
+    if allowed_affected_files is not None and not affected_files.issubset(allowed_affected_files):
+        return False
+    return True
+
+
 def _model_finding_to_validation_finding(validator: str, finding: dict[str, Any]) -> ValidationFinding:
-    affected_files = tuple(str(path) for path in finding["affected_files"])
+    affected_files = tuple(_normalize_path(str(path)) for path in finding["affected_files"])
     title = str(finding["title"]).strip()
     description = str(finding["description"]).strip()
     governing_rule = str(finding["governing_rule"]).strip()

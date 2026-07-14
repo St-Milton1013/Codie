@@ -73,14 +73,10 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
 
-      - name: Fetch trusted pull request base
-        shell: pwsh
+      - name: Verify trusted pull request base
+        shell: powershell
         run: |
           $base = "${{ github.event.pull_request.base.ref }}"
-          git fetch --no-tags origin "+refs/heads/$base`:refs/remotes/origin/$base"
-          if ($LASTEXITCODE -ne 0) {
-            throw "failed to fetch trusted base branch $base"
-          }
           git rev-parse --verify "refs/remotes/origin/$base"
           if ($LASTEXITCODE -ne 0) {
             throw "trusted base ref refs/remotes/origin/$base does not resolve"
@@ -88,7 +84,7 @@ jobs:
 
       - name: Resolve active validation scope
         id: scope
-        shell: pwsh
+        shell: powershell
         run: |
           $scopeLines = & "$env:CODIE_PYTHON" scripts/codie_validation_gate.py --print-active-scope
           foreach ($line in $scopeLines) {
@@ -96,7 +92,7 @@ jobs:
           }
 
       - name: Run validation only
-        shell: pwsh
+        shell: powershell
         run: |
           & "$env:CODIE_PYTHON" scripts/codie_validation_gate.py `
             --phase-id "${{ steps.scope.outputs.phase_id }}" `
@@ -109,9 +105,47 @@ jobs:
             --output-dir validation_artifacts `
             --python-executable "$env:CODIE_PYTHON"
 
+      - name: Ensure validation artifact after infrastructure failure
+        if: always()
+        shell: powershell
+        run: |
+          New-Item -ItemType Directory -Force -Path validation_artifacts | Out-Null
+          if (-not (Test-Path validation_artifacts/codie-validation-result.json)) {
+            $message = "workflow infrastructure failed before validators ran; inspect preceding step logs for the original failure"
+            $result = [ordered]@{
+              final_result = "VALIDATOR_ERROR"
+              target_sha = "${{ github.event.pull_request.head.sha }}"
+              pull_request_number = [int]"${{ github.event.pull_request.number }}"
+              errors_encountered_during_this_phase = @($message)
+              finding_history = @()
+              remaining_open_errors = @()
+              reports = @()
+              severity_totals = [ordered]@{
+                BLOCKER = 0
+                CRITICAL = 0
+                HIGH = 0
+                MEDIUM = 0
+                LOW = 0
+                INFORMATIONAL = 0
+              }
+            }
+            $result | ConvertTo-Json -Depth 8 | Out-File -FilePath validation_artifacts/codie-validation-result.json -Encoding utf8
+            @(
+              "# Codie Validation Gate",
+              "",
+              "Result: VALIDATOR_ERROR",
+              "",
+              "Target SHA: ${{ github.event.pull_request.head.sha }}",
+              "",
+              "Pull request: ${{ github.event.pull_request.number }}",
+              "",
+              "The workflow infrastructure failed before validators ran. Inspect the preceding step logs for the original failure."
+            ) | Out-File -FilePath validation_artifacts/codie-validation-summary.md -Encoding utf8
+          }
+
       - name: Write job summary
         if: always()
-        shell: pwsh
+        shell: powershell
         run: |
           if (Test-Path validation_artifacts/codie-validation-summary.md) {
             Get-Content validation_artifacts/codie-validation-summary.md | Out-File -FilePath $env:GITHUB_STEP_SUMMARY -Append
@@ -123,7 +157,7 @@ jobs:
         with:
           name: codie-pr-validation-${{ github.event.pull_request.head.sha }}
           path: validation_artifacts/
-          if-no-files-found: error
+          if-no-files-found: warn
 
   manual-validation:
     name: Manual Validation
@@ -146,14 +180,10 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
 
-      - name: Fetch trusted manual base
-        shell: pwsh
+      - name: Verify trusted manual base
+        shell: powershell
         run: |
           $base = "${{ inputs.base_branch }}"
-          git fetch --no-tags origin "+refs/heads/$base`:refs/remotes/origin/$base"
-          if ($LASTEXITCODE -ne 0) {
-            throw "failed to fetch trusted base branch $base"
-          }
           git rev-parse --verify "refs/remotes/origin/$base"
           if ($LASTEXITCODE -ne 0) {
             throw "trusted base ref refs/remotes/origin/$base does not resolve"
@@ -161,7 +191,7 @@ jobs:
 
       - name: Run validation only
         id: validation
-        shell: pwsh
+        shell: powershell
         run: |
           $exitCode = 0
           & "$env:CODIE_PYTHON" scripts/codie_validation_gate.py `
@@ -183,13 +213,51 @@ jobs:
           Add-Content -Path $env:GITHUB_OUTPUT -Value "aggregate_result=$aggregateResult"
           exit $exitCode
 
+      - name: Ensure validation artifact after infrastructure failure
+        if: always()
+        shell: powershell
+        run: |
+          New-Item -ItemType Directory -Force -Path validation_artifacts | Out-Null
+          if (-not (Test-Path validation_artifacts/codie-validation-result.json)) {
+            $message = "workflow infrastructure failed before validators ran; inspect preceding step logs for the original failure"
+            $result = [ordered]@{
+              final_result = "VALIDATOR_ERROR"
+              target_sha = "${{ inputs.target_sha }}"
+              pull_request_number = [int]"${{ inputs.pull_request_number }}"
+              errors_encountered_during_this_phase = @($message)
+              finding_history = @()
+              remaining_open_errors = @()
+              reports = @()
+              severity_totals = [ordered]@{
+                BLOCKER = 0
+                CRITICAL = 0
+                HIGH = 0
+                MEDIUM = 0
+                LOW = 0
+                INFORMATIONAL = 0
+              }
+            }
+            $result | ConvertTo-Json -Depth 8 | Out-File -FilePath validation_artifacts/codie-validation-result.json -Encoding utf8
+            @(
+              "# Codie Validation Gate",
+              "",
+              "Result: VALIDATOR_ERROR",
+              "",
+              "Target SHA: ${{ inputs.target_sha }}",
+              "",
+              "Pull request: ${{ inputs.pull_request_number }}",
+              "",
+              "The workflow infrastructure failed before validators ran. Inspect the preceding step logs for the original failure."
+            ) | Out-File -FilePath validation_artifacts/codie-validation-summary.md -Encoding utf8
+          }
+
       - name: Upload validation artifact
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: codie-manual-validation-${{ inputs.target_sha }}
           path: validation_artifacts/
-          if-no-files-found: error
+          if-no-files-found: warn
 
   manual-repair:
     name: Manual Repair
@@ -216,12 +284,16 @@ jobs:
           persist-credentials: true
 
       - name: Fetch trusted manual repair base
-        shell: pwsh
+        shell: powershell
         run: |
           $base = "${{ inputs.base_branch }}"
-          git fetch --no-tags origin "+refs/heads/$base`:refs/remotes/origin/$base"
-          if ($LASTEXITCODE -ne 0) {
-            throw "failed to fetch trusted base branch $base"
+          git rev-parse --verify "refs/remotes/origin/$base"
+          $baseRefExists = $LASTEXITCODE -eq 0
+          if (-not $baseRefExists) {
+            git fetch --no-tags origin "+refs/heads/$base`:refs/remotes/origin/$base"
+            if ($LASTEXITCODE -ne 0) {
+              throw "failed to fetch trusted base branch $base"
+            }
           }
           git rev-parse --verify "refs/remotes/origin/$base"
           if ($LASTEXITCODE -ne 0) {
@@ -229,7 +301,7 @@ jobs:
           }
 
       - name: Run repair controller
-        shell: pwsh
+        shell: powershell
         run: |
           & "$env:CODIE_PYTHON" scripts/codie_repair_controller.py `
             --phase-id "${{ inputs.phase_id }}" `
@@ -245,7 +317,7 @@ jobs:
 
       - name: Write repair job summary
         if: always()
-        shell: pwsh
+        shell: powershell
         run: |
           if (Test-Path validation_artifacts/repair-summary.md) {
             Get-Content validation_artifacts/repair-summary.md | Out-File -FilePath $env:GITHUB_STEP_SUMMARY -Append

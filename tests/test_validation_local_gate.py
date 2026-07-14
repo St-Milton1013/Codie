@@ -625,6 +625,81 @@ class ValidationLocalGateTest(unittest.TestCase):
         self.assertEqual(output.severity_totals.HIGH, 1)
         self.assertTrue(output.findings[0].finding_id.startswith("architecture:"))
 
+    def test_model_findings_are_limited_to_changed_pr_files(self) -> None:
+        options = ValidationGateOptions(
+            phase_id=CURRENT_EXPECTED_PHASE_ID,
+            phase_part="outside-validation",
+            gate_scope="INTERMEDIATE_PACKET",
+            target_sha=SHA,
+            pull_request_number=PR_NUMBER,
+            branch=BRANCH,
+        )
+
+        output = validator_report_from_model_response(
+            validator="architecture",
+            model="qwen2.5-coder:7b",
+            options=options,
+            payload=model_payload(),
+            started_at="2026-07-13T00:00:00+00:00",
+            completed_at="2026-07-13T00:01:00+00:00",
+            allowed_affected_files=frozenset({"codie/validation/repair_controller.py"}),
+        )
+
+        self.assertEqual(output.result, "CLEAN_PASS")
+        self.assertEqual(output.findings, ())
+
+    def test_model_cannot_contribute_reserved_preflight_or_deterministic_findings(self) -> None:
+        options = ValidationGateOptions(
+            phase_id=CURRENT_EXPECTED_PHASE_ID,
+            phase_part="outside-validation",
+            gate_scope="INTERMEDIATE_PACKET",
+            target_sha=SHA,
+            pull_request_number=PR_NUMBER,
+            branch=BRANCH,
+        )
+        payload = model_payload(
+            findings=[
+                {
+                    "severity": "BLOCKER",
+                    "title": "Stale SHA",
+                    "description": "Target SHA does not match the checked-out HEAD.",
+                    "affected_files": [],
+                    "governing_rule": "Exact SHA validation",
+                    "required_correction": "Check out the requested commit and rerun validation.",
+                },
+                {
+                    "severity": "HIGH",
+                    "title": "Potential Strategy-Inference Language Present",
+                    "description": "Potential strategy-inference language is present in changed PR content.",
+                    "affected_files": ["path/to/file.py"],
+                    "governing_rule": "Evidence First Rule",
+                    "required_correction": "Use evidence-only phrasing.",
+                },
+                {
+                    "severity": "HIGH",
+                    "title": "Valid architecture issue",
+                    "description": "Changed code imports through the wrong boundary.",
+                    "affected_files": ["codie/validation/local_gate.py"],
+                    "governing_rule": "Architecture Boundary",
+                    "required_correction": "Use the approved local boundary.",
+                },
+            ],
+        )
+
+        output = validator_report_from_model_response(
+            validator="architecture",
+            model="qwen2.5-coder:7b",
+            options=options,
+            payload=payload,
+            started_at="2026-07-13T00:00:00+00:00",
+            completed_at="2026-07-13T00:01:00+00:00",
+            allowed_affected_files=frozenset({"codie/validation/local_gate.py"}),
+        )
+
+        self.assertEqual(output.result, "FAIL")
+        self.assertEqual(len(output.findings), 1)
+        self.assertEqual(output.findings[0].governing_rule, "Architecture Boundary")
+
     def test_model_cannot_override_trusted_report_fields(self) -> None:
         payload = model_payload(branch="wrong", target_sha="b" * 40, severity_totals={"HIGH": 99})
 
