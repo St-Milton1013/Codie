@@ -430,9 +430,3 @@ outside validation packet
 
 The listed items are the complete Phase 37B contract surface for the Frequency
 Pools / Tag Graph Lab implementation-contract packet.
-
-## Completion Rule
-
-Phase 37B publishes the validation tuple for the next roadmap packet. Acceptance
-of this contract packet authorizes the roadmap to proceed to the next declared
-packet under its own validation gate.

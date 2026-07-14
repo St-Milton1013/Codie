@@ -109,6 +109,35 @@ Reject if the contract authorizes schema changes, repository reads/writes,
 provider reads, live network calls, analytics recalculation, recommendation
 output, simulator execution, UI, LLM calls, CLI behavior, or file writing.
 
+## Confirm Contract Completeness
+
+Confirm the Phase 37B contract includes all of these review points:
+
+```text
+explicit Phase 37B validation tuple
+explicit next-phase validation tuple
+accepted Phase 37A dependency evidence
+authorized future implementation files
+future public interface
+future packet responsibilities
+allowed pool types
+identity and provenance rules
+metric serialization rules
+tag row rules
+coverage and caveat rules
+privacy boundary
+evidence boundary enforcement
+fixture inventory
+fixture coverage requirements
+required tests
+dependency and input allowances
+deferred later work
+outside validation packet
+```
+
+Reject only if a required review point is missing or contradicts
+`CODIE_V1_CONSTITUTION.md`.
+
 ## Confirm Frequency Pool Boundaries
 
 Confirm future Frequency Pool packet models must:
