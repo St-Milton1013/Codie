@@ -207,6 +207,16 @@ docs/NEXT_PHASE_CONTRACT.md
 docs/CODEX_CONTINUITY_HANDOFF.md
 ```
 
+The outside-validation packet defines:
+
+```text
+specific validation requirements
+specific validation constraints
+expected outcomes
+PASS / PASS WITH REVIEW NOTES unblock Phase 37C contract-first work
+PASS WITH REQUIRED FIXES / FAIL keep Phase 37C blocked
+```
+
 ## Next Gate
 
 ```text

@@ -437,6 +437,49 @@ docs/NEXT_PHASE_CONTRACT.md
 docs/CODEX_CONTINUITY_HANDOFF.md
 ```
 
+Outside validation requirements:
+
+```text
+confirm Phase 37B is implementation-contract-only
+confirm Phase 37A acceptance evidence is recorded
+confirm the Phase 37B validation tuple is explicit
+confirm the next-phase validation tuple is explicit
+confirm authorized future implementation files are complete
+confirm future public interface is complete
+confirm future packet responsibilities are complete
+confirm future package dependencies and input limits are explicit
+confirm coverage values and unknown coverage markers remain visible
+confirm privacy, evidence, and recommendation boundaries remain intact
+confirm fixture inventory and required tests are complete
+confirm deferred later work remains deferred
+confirm roadmap/status/handoff docs agree on the current gate
+```
+
+Outside validation constraints:
+
+```text
+do not treat Phase 37B as production implementation
+do not require codie/ implementation files in this PR
+do not require tests or fixtures in this PR
+do not require active validation scope advancement in this PR
+do not treat user-local pools as commander averages or tournament evidence
+do not allow provider, database, analytics, recommendation, UI, LLM, or file-writing scope
+do not allow Phase 37C implementation before Phase 37B acceptance
+```
+
+Expected outside validation outcomes:
+
+```text
+PASS
+PASS WITH REVIEW NOTES
+PASS WITH REQUIRED FIXES
+FAIL
+```
+
+Only PASS or PASS WITH REVIEW NOTES may unblock Phase 37C contract-first work.
+PASS WITH REQUIRED FIXES or FAIL must leave Phase 37C blocked and identify
+required corrections against this Phase 37B packet.
+
 ## Contract Completeness Checklist
 
 This implementation contract defines:

@@ -138,6 +138,21 @@ outside validation packet
 Reject only if a required review point is missing or contradicts
 `CODIE_V1_CONSTITUTION.md`.
 
+## Confirm Outside Validation Requirements
+
+Confirm the Phase 37B outside-validation packet defines:
+
+```text
+specific validation requirements
+specific validation constraints
+expected outcomes
+the PASS / PASS WITH REVIEW NOTES unblock condition
+the PASS WITH REQUIRED FIXES / FAIL blocked condition
+```
+
+Reject if the packet does not state what validators must confirm, what remains
+out of scope, or which outcomes block Phase 37C.
+
 ## Confirm Frequency Pool Boundaries
 
 Confirm future Frequency Pool packet models must:
