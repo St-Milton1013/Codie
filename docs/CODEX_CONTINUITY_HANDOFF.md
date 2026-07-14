@@ -1773,7 +1773,7 @@ implementation, schema, repositories, providers, SQLite reads/writes, file
 writing, CLI, UI, analytics, simulator execution, LLM calls, frequency pools, or
 recommendations.
 
-Phase 36C is internally complete. It implements the authorized immutable deck
+Phase 36C is externally accepted with review notes. It implements the authorized immutable deck
 snapshot value models and validators in `codie/user_decks/immutable_snapshots.py`
 with fixture-first tests. Snapshots are redacted by default, card entries are
 omitted unless explicitly requested, full-card-list snapshots carry a visible
@@ -1781,9 +1781,49 @@ privacy caveat, and blocked private/raw keys are rejected recursively across
 source refs, analysis refs, replay metadata, warnings, manual-review items,
 privacy metadata, and arbitrary nested metadata. Phase 36C does not add
 persistence, schema, repositories, providers, file writing, CLI, UI, analytics,
-simulator execution, LLM calls, frequency pools, or recommendations. Later work
-is blocked until Phase 36C outside validation returns PASS or PASS WITH REVIEW
-NOTES.
+simulator execution, LLM calls, frequency pools, or recommendations.
+
+Phase 37A may begin contract-first. It should define the Frequency Pools / Tag
+Graph Lab boundary from the cemented post-31 priority plan. Phase 37A must not
+implement frequency pools, Tag Graph Lab metrics, schema, repositories, provider
+calls, file writing, UI, LLM calls, simulator execution, or recommendations.
+Phase 37B remains blocked until Phase 37A outside validation returns PASS or
+PASS WITH REVIEW NOTES.
+
+Phase 37A is internally complete. It is a contract-only packet for future
+Frequency Pools and Tag Graph Lab work. It defines allowed future sanitized
+inputs, forbidden raw/private/provider inputs, future metric boundaries,
+coverage and provenance requirements, user-local snapshot privacy rules, and a
+recommended future split across Phase 37B/37C/37D/37E. It does not add
+production code, tests, fixtures, schema, repositories, provider calls, file
+writing, CLI, UI, analytics calculation, frequency pool calculation, Tag Graph
+Lab metrics, simulator execution, LLM calls, dependency changes, or
+recommendations. Phase 37B is blocked until Phase 37A outside validation
+returns PASS or PASS WITH REVIEW NOTES.
+
+Current Phase 37A outside validation packet:
+
+```text
+docs/PHASE37A_FREQUENCY_POOLS_TAG_GRAPH_LAB_CONTRACT.md
+docs/CHECKPOINT_PHASE37A_FREQUENCY_POOLS_TAG_GRAPH_LAB_CONTRACT_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE37A_FREQUENCY_POOLS_TAG_GRAPH_LAB_CONTRACT_PROMPT.md
+docs/POST_PHASE31_DEFERRED_IMPLEMENTATION_PRIORITY_PLAN.md
+docs/POST_PHASE31_PATCH_PLAN_CEMENTING_AUDIT.md
+docs/ROADMAP_PATCH_TAG_GRAPH_LAB.md
+docs/ROADMAP_PATCH_MOXFIELD_FREQUENCY_POOL_BUILDER.md
+docs/PATCH_EVIDENCE_INTELLIGENCE_AND_LOCAL_REPORTS.md
+docs/PHASE34C_SCRYFALL_TAGGER_ONTOLOGY_IMPLEMENTATION_REPORT.md
+docs/CHECKPOINT_PHASE34C_SCRYFALL_TAGGER_ONTOLOGY_IMPLEMENTATION_REPORT.md
+docs/PHASE35C_COMMANDER_SPELLBOOK_INTERPRETER_IMPLEMENTATION_REPORT.md
+docs/CHECKPOINT_PHASE35C_COMMANDER_SPELLBOOK_INTERPRETER_IMPLEMENTATION_REPORT.md
+docs/PHASE36C_IMMUTABLE_DECK_SNAPSHOT_IMPLEMENTATION_REPORT.md
+docs/CHECKPOINT_PHASE36C_IMMUTABLE_DECK_SNAPSHOT_IMPLEMENTATION_REPORT.md
+docs/CODIE_V1_CONSTITUTION.md
+docs/ACTIVE_ROADMAP_INDEX.md
+docs/VALIDATION_STATUS_INDEX.md
+docs/NEXT_PHASE_CONTRACT.md
+docs/CODEX_CONTINUITY_HANDOFF.md
+```
 
 The post-31 patch-note plan has been cemented in
 `docs/POST_PHASE31_PATCH_PLAN_CEMENTING_AUDIT.md`. That audit confirms no
@@ -2100,7 +2140,7 @@ docs/NEXT_PHASE_CONTRACT.md
 docs/CODEX_CONTINUITY_HANDOFF.md
 ```
 
-Current Phase 36C outside validation packet:
+Accepted Phase 36C outside validation packet:
 
 ```text
 docs/PHASE36C_IMMUTABLE_DECK_SNAPSHOT_IMPLEMENTATION_REPORT.md

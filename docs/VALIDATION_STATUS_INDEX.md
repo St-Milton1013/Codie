@@ -63,7 +63,8 @@ Phase 35B Commander Spellbook Interpreter Implementation Contract: PASS WITH REV
 Phase 35C Commander Spellbook Interpreter Implementation: PASS WITH REVIEW NOTES
 Phase 36A Immutable Deck Snapshot Expansion Contract: PASS WITH REVIEW NOTES
 Phase 36B Immutable Deck Snapshot Implementation Contract: PASS WITH REVIEW NOTES
-Phase 36C Immutable Deck Snapshot Implementation: INTERNAL PASS
+Phase 36C Immutable Deck Snapshot Implementation: PASS WITH REVIEW NOTES
+Phase 37A Frequency Pools / Tag Graph Lab Contract: INTERNAL PASS
 Local alpha tag: created locally; remote tag push not verified in this environment
 ```
 
@@ -149,7 +150,8 @@ Phase 35B Commander Spellbook Interpreter Implementation Contract: PASS WITH REV
 Phase 35C Commander Spellbook Interpreter Implementation: PASS WITH REVIEW NOTES
 Phase 36A Immutable Deck Snapshot Expansion Contract: PASS WITH REVIEW NOTES
 Phase 36B Immutable Deck Snapshot Implementation Contract: PASS WITH REVIEW NOTES
-Phase 36C Immutable Deck Snapshot Implementation: INTERNAL PASS
+Phase 36C Immutable Deck Snapshot Implementation: PASS WITH REVIEW NOTES
+Phase 37A Frequency Pools / Tag Graph Lab Contract: INTERNAL PASS
 ```
 
 ## Latest Local Validation
@@ -400,10 +402,34 @@ production Forge / LLM SDK import scan: no matches
 ## Current Blocker
 
 ```text
-Later work is blocked until Phase 36C outside validation returns PASS or PASS WITH REVIEW NOTES.
+Phase 37B remains blocked until Phase 37A outside validation returns PASS or PASS WITH REVIEW NOTES.
 ```
 
-## Current Phase 36C Outside Validation Packet
+## Current Phase 37A Outside Validation Packet
+
+```text
+docs/PHASE37A_FREQUENCY_POOLS_TAG_GRAPH_LAB_CONTRACT.md
+docs/CHECKPOINT_PHASE37A_FREQUENCY_POOLS_TAG_GRAPH_LAB_CONTRACT_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE37A_FREQUENCY_POOLS_TAG_GRAPH_LAB_CONTRACT_PROMPT.md
+docs/POST_PHASE31_DEFERRED_IMPLEMENTATION_PRIORITY_PLAN.md
+docs/POST_PHASE31_PATCH_PLAN_CEMENTING_AUDIT.md
+docs/ROADMAP_PATCH_TAG_GRAPH_LAB.md
+docs/ROADMAP_PATCH_MOXFIELD_FREQUENCY_POOL_BUILDER.md
+docs/PATCH_EVIDENCE_INTELLIGENCE_AND_LOCAL_REPORTS.md
+docs/PHASE34C_SCRYFALL_TAGGER_ONTOLOGY_IMPLEMENTATION_REPORT.md
+docs/CHECKPOINT_PHASE34C_SCRYFALL_TAGGER_ONTOLOGY_IMPLEMENTATION_REPORT.md
+docs/PHASE35C_COMMANDER_SPELLBOOK_INTERPRETER_IMPLEMENTATION_REPORT.md
+docs/CHECKPOINT_PHASE35C_COMMANDER_SPELLBOOK_INTERPRETER_IMPLEMENTATION_REPORT.md
+docs/PHASE36C_IMMUTABLE_DECK_SNAPSHOT_IMPLEMENTATION_REPORT.md
+docs/CHECKPOINT_PHASE36C_IMMUTABLE_DECK_SNAPSHOT_IMPLEMENTATION_REPORT.md
+docs/CODIE_V1_CONSTITUTION.md
+docs/ACTIVE_ROADMAP_INDEX.md
+docs/VALIDATION_STATUS_INDEX.md
+docs/NEXT_PHASE_CONTRACT.md
+docs/CODEX_CONTINUITY_HANDOFF.md
+```
+
+## Accepted Phase 36C Outside Validation Packet
 
 ```text
 docs/PHASE36C_IMMUTABLE_DECK_SNAPSHOT_IMPLEMENTATION_REPORT.md

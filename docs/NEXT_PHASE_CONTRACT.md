@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: send Phase 36C Immutable Deck Snapshot Implementation outside validation packet; do not begin any later phase until accepted
+Recommended next task: send Phase 37A Frequency Pools / Tag Graph Lab Contract outside validation packet; do not begin Phase 37B until accepted
 
 ## Active Indexes
 
