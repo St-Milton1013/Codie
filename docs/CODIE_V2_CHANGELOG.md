@@ -2,6 +2,7 @@
 
 **Status:** Ratification record
 **Date:** 2026-07-20
+**Last amended:** 2026-07-21
 **V1 reference:** `docs/CODIE_V1_CONSTITUTION.md`
 **V2 authority:** `docs/CODIE_V2_CONSTITUTION.md`
 
@@ -40,6 +41,8 @@ This document records the approved differences between V1 and V2. It is a govern
 - cEDH.jp is audit-gated and becomes analytics-eligible only after acquisition, provenance, and deduplication validation.
 - Lotus Refinery remains a research candidate until admitted through source review.
 - Older theory sources remain eligible with date, format, and transferability caveats.
+- Reddit RSS/Atom becomes an approved post-checkpoint Community Context discovery candidate for Jin, Theory Corpus candidates, research, rules review, tool evaluation, and experiments.
+- Reddit RSS remains low-confidence by default and is prohibited from tournament injection, measured analytics, recommendation generation, canonical evidence writes, model training, bulk harvesting, or unattributed full-content storage.
 
 ## Simulation and rules changes
 

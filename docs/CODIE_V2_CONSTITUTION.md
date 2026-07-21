@@ -3,6 +3,7 @@
 
 **Version:** 2.0 Ratified
 **Date:** 2026-07-20
+**Last ratification amendment:** 2026-07-21
 **Status:** RATIFIED — effective when the V2 adoption change is merged
 **Authority:** Primary Codie constitution
 **Supersedes prior documents:** Yes, for current constitutional governance
@@ -626,11 +627,95 @@ They may be used by Jin for:
 
 Community retrieval has no fixed recency window. It must select material by relevance and temporal context, preserve publication dates, and label whether the material is current discussion or historical context.
 
-## 7.7 Research attribution
+## 7.7 Reddit RSS Community Signal Monitor
+
+Reddit RSS or Atom retrieval is an approved post-checkpoint discovery capability, subject to a separate implementation contract.
+
+Its constitutional classification is:
+
+```text
+Source role: Community Context / Discovery
+Tournament injection: prohibited
+Measured analytics: prohibited
+Jin retrieval: permitted
+Theory Corpus discovery: permitted
+Default confidence: low
+Permanent evidence: prohibited without separate validation and source promotion
+```
+
+The monitor may discover:
+
+- newly discussed cards, commanders, decks, and community terminology;
+- primers, articles, tools, websites, and repositories;
+- tournament reports and local-metagame anecdotes that require independent verification;
+- unusual interactions and frequently raised rules questions;
+- potential Theory Corpus authors and works;
+- contradiction, research, rules-review, tool-evaluation, and experiment candidates.
+
+Feed acquisition should use a small governed registry and narrowly scoped temporary searches rather than indiscriminate subreddit harvesting. Illustrative patterns include:
+
+```text
+r/CompetitiveEDH/new.rss
+r/CompetitiveEDH/top.rss?t=week
+r/CompetitiveEDH/search.rss?q=primer&restrict_sr=1&sort=new
+r/CompetitiveEDH/search.rss?q=tournament+report&restrict_sr=1&sort=new
+r/CompetitiveEDH/search.rss?q=metagame&restrict_sr=1&sort=new
+r/mtgrules/search.rss?q=commander&restrict_sr=1&sort=new
+```
+
+Eligible feed types may include chronological subreddit, time-bounded top, search, combined-community, attributed-user, and comment streams. User- or comment-specific monitoring requires an explicit research purpose and the same relevance and storage gates as post retrieval.
+
+Temporary search feeds may be created for a commander, newly spoiled card, disputed combo, tournament, deck, archetype, or research term such as `primer`, `tournament report`, `deck tech`, or `GitHub`.
+
+The intake path is:
+
+```text
+RSS or Atom item
+  -> metadata intake
+  -> Reddit post-ID deduplication
+  -> card, commander, deck, tool, and topic detection
+  -> transparent relevance tagging or scoring
+  -> Community Signal Queue
+  -> human or Jin review
+  -> research, theory-candidate, rules-review, tool-evaluation, or experiment queue
+```
+
+Initial storage is limited to:
+
+- Reddit post ID;
+- subreddit;
+- title;
+- attributed author;
+- publication time;
+- canonical URL;
+- discovering feed or search;
+- a short compliant excerpt or generated summary;
+- detected cards, commanders, and entities;
+- relevance tags and score inputs;
+- review status.
+
+Full post or comment retrieval may occur only after a relevance gate and must remain purpose-limited. Codie must not build a permanent Reddit mirror or copy full posts and comment trees by default.
+
+The monitor must:
+
+- poll conservatively, normally every 30–60 minutes or on command;
+- use conditional requests, caching, exponential backoff, and visible source-health state;
+- pass current access-policy, terms, reuse, and acquisition review before implementation and whenever those conditions materially change;
+- identify itself honestly where the transport permits;
+- preserve attribution and links;
+- honor deleted or removed content in stored discovery records;
+- avoid bulk historical harvesting;
+- keep community material separate from measured evidence;
+- never use Reddit content to train Jin or another model;
+- treat access changes, throttling, and source unavailability as expected provider states.
+
+RSS discovery may not directly create tournament observations, measured analytics, recommendations, canonical evidence, or permanent Theory Corpus authority. Promotion requires separate review against the destination's governing source and evidence rules.
+
+## 7.8 Research attribution
 
 Research output must identify which source supports each material claim. Aggregated summaries must still preserve source-level provenance.
 
-## 7.8 Reference implementation policy
+## 7.9 Reference implementation policy
 
 Reference implementations may inform architecture or testing without becoming dependencies.
 
@@ -1867,6 +1952,8 @@ Each source should preserve:
 - direct source citations;
 - user notes.
 
+A Reddit RSS item enters only a Theory Corpus candidate queue. The linked work, author, attribution, relevance, storage rights, and transferability must be reviewed separately before promotion. A Reddit post remains community context unless it independently qualifies under the Theory Corpus source policy.
+
 ## 25.4 Transferability
 
 Vintage, Legacy, constructed, and casual Commander theory may be included when transferable concepts are separated from format-specific claims.
@@ -2099,6 +2186,7 @@ V2 recognizes the following recent candidates:
 - Delvefall: semantic-search reference;
 - Penpot: UI prototyping candidate;
 - Pake: packaging or acquisition research candidate, not approved by default.
+- Reddit RSS Community Signal Monitor: approved post-checkpoint discovery candidate for Jin and governed research queues, never a tournament injection source.
 
 ## 28.5 Source health and freshness
 
@@ -2478,6 +2566,7 @@ The following may remain deferred until separately contracted:
 - a full multiplayer Magic rules engine and broad arbitrary-card behavior coverage;
 - optional MCP and external-plugin integrations;
 - reference implementation adapters.
+- Reddit RSS Community Signal Monitor implementation and any notification delivery attached to it.
 
 The standalone Stream Deck Game Tracker remains outside Codie. Voice input and output remain removed from active scope.
 

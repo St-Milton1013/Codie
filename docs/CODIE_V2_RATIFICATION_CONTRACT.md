@@ -48,7 +48,7 @@ runtime Jin, theory, exposure, relationship, or correction implementation
 
 ## Acceptance criteria
 
-- V2 contains every explicit decision recorded through 2026-07-20.
+- V2 contains every explicit decision recorded through 2026-07-21, including the bounded Reddit RSS Community Signal Monitor proposal.
 - V1 remains byte-for-byte unchanged from `origin/main`.
 - The change log and compatibility statement agree with V2.
 - Active roadmap documents state that ratification does not advance Phase 37.

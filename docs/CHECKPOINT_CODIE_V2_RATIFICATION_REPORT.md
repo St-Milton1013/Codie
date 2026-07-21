@@ -10,6 +10,7 @@
 - Added the formal V1/V2 change log.
 - Added compatibility and ratification contracts.
 - Reconciled the constitution with explicit user decisions and the Codie/Jin handoff.
+- Added the Reddit RSS Community Signal Monitor as a post-checkpoint, low-confidence discovery candidate with strict evidence, storage, policy, and training prohibitions.
 - Kept Phase 37 and runtime implementation outside the packet.
 
 ## Design decisions
@@ -18,6 +19,7 @@
 - Relationship Intelligence is a typed, metric-only evidence subsystem.
 - All V1 capabilities carry forward except the folded standalone query helper and deferred mobile report delivery.
 - Core capabilities and implementation sequence remain separate: constitutional inclusion does not bypass contracts.
+- Reddit RSS may populate governed discovery queues but cannot inject tournament evidence, measured analytics, recommendations, canonical truth, or model training data.
 
 ## Files intentionally unchanged
 
@@ -36,6 +38,7 @@ docs/CODIE_ACTIVE_VALIDATION_SCOPE.json
 git diff --check: PASS
 V1 content comparison against origin/main: PASS (unchanged)
 Markdown heading, stale-draft-language, and encoding scans: PASS
+Reddit RSS discovery/evidence/prohibition boundary scan: PASS
 schema bootstrap check: PASS
 full unit-test suite: PASS — 1,033 tests, 1 expected skip
 ```

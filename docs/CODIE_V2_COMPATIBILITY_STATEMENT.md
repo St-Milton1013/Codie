@@ -45,3 +45,5 @@ When V1 and V2 conflict after adoption, V2 governs. When V2 is silent, retained 
 ## No runtime impact in the ratification change
 
 The adoption packet introduces no production code, schema, repository, provider, database, UI, workflow, validator, simulator, model, or dependency changes.
+
+The Reddit RSS Community Signal Monitor is a post-checkpoint, separately contracted discovery candidate. Its constitutional inclusion does not authorize polling, storage, notification delivery, or provider implementation in this packet.

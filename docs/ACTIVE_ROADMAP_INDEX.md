@@ -148,6 +148,7 @@ Obsidian / Knowledge Vault
 Advanced UI dashboard
 Mobile-friendly local report delivery
 Optional Discord / LocalSend / QR delivery integrations
+Reddit RSS Community Signal Monitor
 Simulator Revision (SIM-R)
 Codie Master Architecture patch
 Post-Phase 31 Deferred Implementation Priority Plan
@@ -156,6 +157,8 @@ Post-Phase 31 Deferred Implementation Priority Plan
 These items remain roadmap-only until a future contract explicitly authorizes implementation.
 
 Mobile report delivery is explicitly deferred by V2. All other V1 capabilities retain their V1 purpose, boundaries, and roadmap status unless V2 directly changes them. The standalone Natural Language Query Helper capability is folded into Jin query planning and Scryfall/Tagger translation.
+
+The Reddit RSS Community Signal Monitor is a post-checkpoint, separately contracted discovery item. It may feed low-confidence community candidates to Jin, Theory Corpus review, research, rules, tool-evaluation, and experiment queues, but never tournament injection, measured analytics, recommendations, canonical evidence, or model training.
 
 ## Research / Reference-Only Items
 

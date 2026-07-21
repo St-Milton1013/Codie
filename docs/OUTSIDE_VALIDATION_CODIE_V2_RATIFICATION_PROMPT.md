@@ -30,7 +30,8 @@ Confirm that:
 7. Local model execution remains viable and cloud data egress is profile- and data-class-controlled.
 8. Unknown and abstention states cannot silently collapse into zero or false.
 9. All V1 capabilities carry forward except the two explicit carry-forward exceptions.
-10. The packet does not advance Phase 37 or authorize runtime work.
+10. Reddit RSS is bounded to low-confidence Community Context discovery and cannot directly create tournament evidence, analytics, recommendations, canonical writes, Theory Corpus authority, or model-training data.
+11. The packet does not advance Phase 37 or authorize runtime work.
 
 ## Reject for
 
