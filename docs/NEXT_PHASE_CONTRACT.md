@@ -2,6 +2,17 @@
 
 Recommended next task: send Phase 37B Frequency Pools / Tag Graph Lab Implementation Contract to outside validation
 
+## Constitutional Governance Overlay
+
+The Codie V2 Constitution ratification packet is a parallel governance-only change. On accepted validation and merge:
+
+```text
+docs/CODIE_V2_CONSTITUTION.md becomes primary constitutional authority
+docs/CODIE_V1_CONSTITUTION.md remains unchanged as historical reference
+```
+
+Ratification does not alter the Phase 37B validation tuple or authorize Phase 37C/runtime work on this branch.
+
 ## Active Indexes
 
 Use these compact index files first when resuming work:
