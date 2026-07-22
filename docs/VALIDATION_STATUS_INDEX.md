@@ -7,13 +7,14 @@ This file is the compact validation snapshot for Codie. Detailed evidence, comma
 ## Constitution Ratification Track
 
 ```text
-Codie V2 Constitution Ratification: INTERNAL PASS
-Outside/PR validation: REQUIRED
+Codie V2 Constitution Ratification: ADOPTED ON MAIN
+Outside/PR validation: merged governance adoption
 Runtime or phase advancement: NONE
 V1 preservation: REQUIRED
 ```
 
-The ratification track is governance-only and does not replace the active Phase 37 validation tuple. V2 becomes authoritative only after PASS or PASS WITH REVIEW NOTES and merge.
+The ratification track was governance-only. V2 is now the primary constitution.
+V1 remains unchanged as historical reference.
 
 ## Current Validation Gate
 
@@ -77,16 +78,17 @@ Phase 36B Immutable Deck Snapshot Implementation Contract: PASS WITH REVIEW NOTE
 Phase 36C Immutable Deck Snapshot Implementation: PASS WITH REVIEW NOTES
 Phase 37A Frequency Pools / Tag Graph Lab Contract: PASS WITH REVIEW NOTES
 Phase 37B Frequency Pools / Tag Graph Lab Implementation Contract: PASS WITH REVIEW NOTES
-Phase 37C Frequency Pool Packet Models and Validators: PR VALIDATED; PHASE-LEDGER VALIDATION PENDING
-Phase 37D Tag Graph Metric Packet Models and Validators: PR VALIDATED; PHASE-LEDGER VALIDATION PENDING
-Phase 37E Tag Graph Export / Report Contract: TO BE VALIDATED
+Phase 37C Frequency Pool Packet Models and Validators: PASS
+Phase 37D Tag Graph Metric Packet Models and Validators: PASS
+Phase 37E Tag Graph Export / Report Contract: PASS
+Phase 37 Frequency Pools / Tag Graph Lab split: PASS
+Phase 38A Moxfield Frequency Pool Builder Contract: NEXT
 Local alpha tag: created locally; remote tag push not verified in this environment
 ```
 
-Phase 37C received clean PR validation and is being used as the basis for
-continued Phase 37 work. Phase 37D received clean PR validation and is being
-used as the basis for the Phase 37E contract-only packet. Phase 37E's
-authorized deliverable is the Tag Graph Export / Report Contract only.
+Phase 37 received artifact-backed phase-ledger validation on merged `main`.
+The next allowed work is Phase 38A contract-first. Phase 38A must follow V2
+Moxfield, evidence, unknown-state, privacy, and recommendation-boundary rules.
 
 Phase 37B coverage visibility requirement:
 
@@ -118,13 +120,29 @@ aggregate: CLEAN_PASS
 unresolved findings: none
 ```
 
-Phase 37E validation tuple:
+Phase 37 final acceptance evidence:
 
 ```text
-phase_id: Phase37E
+workflow run ID: 29881579352
+validated SHA: 5901dc51d8bc823ce85e29894768573d0555b91a
+artifact: codie-phase_ledger-validation-5901dc51d8bc823ce85e29894768573d0555b91a
+validation scope: phase_ledger
+validator profile: all
+deterministic: CLEAN_PASS
+architecture: CLEAN_PASS
+adversarial: CLEAN_PASS
+aggregate: CLEAN_PASS
+final governance verdict: PASS
+unresolved findings: none
+```
+
+Phase 38A validation tuple:
+
+```text
+phase_id: Phase38A
 phase_part: outside-validation
 gate_scope: INTERMEDIATE_PACKET
-next_phase_id: Phase38A
+next_phase_id: Phase38B
 next_phase_part: outside-validation
 next_gate_scope: INTERMEDIATE_PACKET
 ```
@@ -214,8 +232,9 @@ Phase 36B Immutable Deck Snapshot Implementation Contract: PASS WITH REVIEW NOTE
 Phase 36C Immutable Deck Snapshot Implementation: PASS WITH REVIEW NOTES
 Phase 37A Frequency Pools / Tag Graph Lab Contract: PASS WITH REVIEW NOTES
 Phase 37B Frequency Pools / Tag Graph Lab Implementation Contract: PASS WITH REVIEW NOTES
-Phase 37C Frequency Pool Packet Models and Validators: PR VALIDATED; PHASE-LEDGER VALIDATION PENDING
-Phase 37D Tag Graph Metric Packet Models and Validators: TO BE VALIDATED
+Phase 37C Frequency Pool Packet Models and Validators: PASS
+Phase 37D Tag Graph Metric Packet Models and Validators: PASS
+Phase 37E Tag Graph Export / Report Contract: PASS
 ```
 
 ## Latest Local Validation
