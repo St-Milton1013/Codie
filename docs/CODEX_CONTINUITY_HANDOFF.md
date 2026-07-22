@@ -2582,21 +2582,23 @@ adversarial: CLEAN_PASS
 aggregate: CLEAN_PASS
 ```
 
-## Current Phase 38B Handoff
+## Current Phase 38D Handoff
 
 ```text
 Phase 38A Moxfield Frequency Pool Builder Contract: PASS
 Phase 38B Moxfield Frequency Pool Builder Implementation Contract: PASS
-Phase 38C Moxfield Frequency Pool Builder Implementation: INTERNAL PASS
-Current action: send Phase 38C implementation packet to PR validation
-Phase 38D: BLOCKED until Phase 38C returns PASS or PASS WITH REVIEW NOTES
+Phase 38C Moxfield Frequency Pool Builder Implementation: PASS WITH REVIEW NOTES
+Phase 38D Moxfield Frequency Pool Builder Checkpoint: INTERNAL PASS
+Current action: send Phase 38D checkpoint packet to PR validation
+Phase 39A: BLOCKED until Phase 38D returns PASS or PASS WITH REVIEW NOTES
 ```
 
 Phase 38C implements a local, fixture-first Moxfield Frequency Pool Builder. It
 parses already supplied text exports and local fixture payloads. It does not
 fetch Moxfield URLs, call provider APIs, call Scryfall, change schema or
 repositories, write files, add CLI or UI behavior, call LLMs, run simulator
-logic, recalculate analytics, or generate recommendations.
+logic, recalculate analytics, or generate recommendations. Phase 38D is a
+checkpoint-only packet for closing the current Moxfield builder track.
 
 Phase 38C validation tuple:
 
@@ -2605,6 +2607,35 @@ phase_id: Phase38C
 phase_part: outside-validation
 gate_scope: INTERMEDIATE_PACKET
 next_phase_id: Phase38D
+next_phase_part: outside-validation
+next_gate_scope: INTERMEDIATE_PACKET
+```
+
+Phase 38C acceptance evidence:
+
+```text
+workflow run ID: 29962601660
+validated SHA: bbacc28e00a0cc617f5443d834c47aba05835147
+artifact: codie-phase_ledger-validation-bbacc28e00a0cc617f5443d834c47aba05835147
+validation scope: phase_ledger
+validator profile: all
+deterministic: CLEAN_PASS
+architecture: CLEAN_PASS
+adversarial: FAIL with one INFORMATIONAL finding
+aggregate: CLEAN_PASS
+required corrections: none
+```
+
+The Phase 38C informational finding is a nonblocking historical observation
+from Phase 37A and requires no corrective action.
+
+Phase 38D validation tuple:
+
+```text
+phase_id: Phase38D
+phase_part: outside-validation
+gate_scope: INTERMEDIATE_PACKET
+next_phase_id: Phase39A
 next_phase_part: outside-validation
 next_gate_scope: INTERMEDIATE_PACKET
 ```

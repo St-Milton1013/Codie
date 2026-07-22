@@ -84,15 +84,17 @@ Phase 37E Tag Graph Export / Report Contract: PASS
 Phase 37 Frequency Pools / Tag Graph Lab split: PASS
 Phase 38A Moxfield Frequency Pool Builder Contract: PASS
 Phase 38B Moxfield Frequency Pool Builder Implementation Contract: PASS
-Phase 38C Moxfield Frequency Pool Builder Implementation: INTERNAL PASS
-Phase 38D: BLOCKED
+Phase 38C Moxfield Frequency Pool Builder Implementation: PASS WITH REVIEW NOTES
+Phase 38D Moxfield Frequency Pool Builder Checkpoint: INTERNAL PASS
+Phase 39A: BLOCKED
 Local alpha tag: created locally; remote tag push not verified in this environment
 ```
 
 Phase 37 received artifact-backed phase-ledger validation on merged `main`.
-Phase 38A and Phase 38B passed artifact-backed phase-ledger validation. Phase
-38C is prepared as a bounded implementation packet. Phase 38D remains blocked
-until Phase 38C outside validation returns PASS or PASS WITH REVIEW NOTES.
+Phase 38A, Phase 38B, and Phase 38C passed artifact-backed phase-ledger
+validation. Phase 38D is prepared as a checkpoint-only packet. Phase 39A
+remains blocked until Phase 38D outside validation returns PASS or PASS WITH
+REVIEW NOTES.
 
 Phase 37B coverage visibility requirement:
 
@@ -228,6 +230,35 @@ phase_id: Phase38C
 phase_part: outside-validation
 gate_scope: INTERMEDIATE_PACKET
 next_phase_id: Phase38D
+next_phase_part: outside-validation
+next_gate_scope: INTERMEDIATE_PACKET
+```
+
+Phase 38C acceptance evidence:
+
+```text
+workflow run ID: 29962601660
+validated SHA: bbacc28e00a0cc617f5443d834c47aba05835147
+artifact: codie-phase_ledger-validation-bbacc28e00a0cc617f5443d834c47aba05835147
+validation scope: phase_ledger
+validator profile: all
+deterministic: CLEAN_PASS
+architecture: CLEAN_PASS
+adversarial: FAIL with one INFORMATIONAL finding
+aggregate: CLEAN_PASS
+required corrections: none
+```
+
+The Phase 38C informational finding is a nonblocking historical observation
+from Phase 37A and requires no corrective action.
+
+Phase 38D validation tuple:
+
+```text
+phase_id: Phase38D
+phase_part: outside-validation
+gate_scope: INTERMEDIATE_PACKET
+next_phase_id: Phase39A
 next_phase_part: outside-validation
 next_gate_scope: INTERMEDIATE_PACKET
 ```
