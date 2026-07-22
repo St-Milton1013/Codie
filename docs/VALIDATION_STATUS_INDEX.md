@@ -85,16 +85,17 @@ Phase 37 Frequency Pools / Tag Graph Lab split: PASS
 Phase 38A Moxfield Frequency Pool Builder Contract: PASS
 Phase 38B Moxfield Frequency Pool Builder Implementation Contract: PASS
 Phase 38C Moxfield Frequency Pool Builder Implementation: PASS WITH REVIEW NOTES
-Phase 38D Moxfield Frequency Pool Builder Checkpoint: INTERNAL PASS
-Phase 39A: BLOCKED
+Phase 38D Moxfield Frequency Pool Builder Checkpoint: PASS
+Phase 39A Cockatrice Interoperability Contract: INTERNAL PASS
+Phase 39B: BLOCKED
 Local alpha tag: created locally; remote tag push not verified in this environment
 ```
 
 Phase 37 received artifact-backed phase-ledger validation on merged `main`.
-Phase 38A, Phase 38B, and Phase 38C passed artifact-backed phase-ledger
-validation. Phase 38D is prepared as a checkpoint-only packet. Phase 39A
-remains blocked until Phase 38D outside validation returns PASS or PASS WITH
-REVIEW NOTES.
+Phase 38A, Phase 38B, Phase 38C, and Phase 38D passed artifact-backed
+phase-ledger validation. Phase 39A is prepared as a contract-only packet.
+Phase 39B remains blocked until Phase 39A outside validation returns PASS or
+PASS WITH REVIEW NOTES.
 
 Phase 37B coverage visibility requirement:
 
@@ -259,6 +260,32 @@ phase_id: Phase38D
 phase_part: outside-validation
 gate_scope: INTERMEDIATE_PACKET
 next_phase_id: Phase39A
+next_phase_part: outside-validation
+next_gate_scope: INTERMEDIATE_PACKET
+```
+
+Phase 38D acceptance evidence:
+
+```text
+workflow run ID: 29964132762
+validated SHA: 38b3fc9d7cc812062674ae0615d7d5733c4b5401
+artifact: codie-phase_ledger-validation-38b3fc9d7cc812062674ae0615d7d5733c4b5401
+validation scope: phase_ledger
+validator profile: all
+deterministic: CLEAN_PASS
+architecture: CLEAN_PASS
+adversarial: CLEAN_PASS
+aggregate: CLEAN_PASS
+unresolved findings: none
+```
+
+Phase 39A validation tuple:
+
+```text
+phase_id: Phase39A
+phase_part: outside-validation
+gate_scope: INTERMEDIATE_PACKET
+next_phase_id: Phase39B
 next_phase_part: outside-validation
 next_gate_scope: INTERMEDIATE_PACKET
 ```

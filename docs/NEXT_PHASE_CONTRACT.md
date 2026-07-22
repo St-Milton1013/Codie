@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: send Phase 38D Moxfield Frequency Pool Builder Checkpoint to PR validation
+Recommended next task: send Phase 39A Cockatrice Interoperability Contract to PR validation
 
 ## Constitutional Governance Overlay
 
@@ -74,13 +74,14 @@ unresolved findings: none
 
 Phase 38A and Phase 38B returned artifact-backed PASS. Phase 38C returned
 artifact-backed PASS WITH REVIEW NOTES with no required corrections. Phase
-38D is prepared as a checkpoint-only packet. Phase 39A remains blocked until
-Phase 38D outside validation returns PASS or PASS WITH REVIEW NOTES.
+38D returned artifact-backed PASS. Phase 39A is prepared as a contract-only
+packet. Phase 39B remains blocked until Phase 39A outside validation returns
+PASS or PASS WITH REVIEW NOTES.
 
-Explicit Phase 38D validation tuple:
+Explicit Phase 39A validation tuple:
 
 ```text
-phase_id: Phase38D
+phase_id: Phase39A
 phase_part: outside-validation
 gate_scope: INTERMEDIATE_PACKET
 ```
@@ -88,13 +89,13 @@ gate_scope: INTERMEDIATE_PACKET
 Explicit next-phase validation tuple:
 
 ```text
-next_phase_id: Phase39A
+next_phase_id: Phase39B
 next_phase_part: outside-validation
 next_gate_scope: INTERMEDIATE_PACKET
 ```
 
-The next-phase tuple is declared for governance continuity. Phase 39A remains
-blocked until Phase 38D returns PASS or PASS WITH REVIEW NOTES.
+The next-phase tuple is declared for governance continuity. Phase 39B remains
+blocked until Phase 39A returns PASS or PASS WITH REVIEW NOTES.
 
 Phase 38A must comply with V2 rules for Moxfield observations, user-local deck
 privacy, unknown/unavailable/unsupported state preservation, evidence
@@ -177,6 +178,21 @@ required corrections: none
 
 The Phase 38C informational finding is a nonblocking historical observation
 from Phase 37A and requires no corrective action.
+
+Phase 38D acceptance evidence:
+
+```text
+workflow run ID: 29964132762
+validated SHA: 38b3fc9d7cc812062674ae0615d7d5733c4b5401
+artifact: codie-phase_ledger-validation-38b3fc9d7cc812062674ae0615d7d5733c4b5401
+validation scope: phase_ledger
+validator profile: all
+deterministic: CLEAN_PASS
+architecture: CLEAN_PASS
+adversarial: CLEAN_PASS
+aggregate: CLEAN_PASS
+unresolved findings: none
+```
 
 Phase 14 has passed outside validation.
 
