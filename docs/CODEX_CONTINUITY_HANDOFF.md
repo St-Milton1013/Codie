@@ -8,7 +8,7 @@ Use the repository and this handoff as the source of truth. Do not rely on prior
 
 ## Constitutional Authority Transition
 
-The user ratified Codie V2 on 2026-07-20. The adoption packet adds:
+The user ratified Codie V2 on 2026-07-20. The adoption packet added:
 
 ```text
 docs/CODIE_V2_CONSTITUTION.md
@@ -19,9 +19,12 @@ docs/CHECKPOINT_CODIE_V2_RATIFICATION_REPORT.md
 docs/OUTSIDE_VALIDATION_CODIE_V2_RATIFICATION_PROMPT.md
 ```
 
-V2 becomes primary authority only when its adoption pull request passes validation and is merged. `docs/CODIE_V1_CONSTITUTION.md` must remain unchanged as historical reference.
+V2 is now primary authority. `docs/CODIE_V1_CONSTITUTION.md` must remain
+unchanged as historical reference.
 
-The ratification packet is governance-only. It does not advance Phase 37, authorize runtime implementation, or alter accepted phase evidence.
+The ratification packet is governance-only. It does not retroactively authorize
+runtime, schema, provider, UI, LLM, simulator, recommendation, or export
+implementation without accepted contracts.
 
 ## Active Restart Indexes
 
@@ -1833,24 +1836,21 @@ required corrections: none
 
 The adversarial informational findings are nonblocking historical observations
 and require no corrective action. Phase 37B has been accepted with review
-notes. Phase 37C received clean PR validation and is being used as the basis
-for continued Phase 37 work. Phase 37D received clean PR validation and is
-being used as the basis for the Phase 37E contract-only packet.
+notes. Phase 37C, Phase 37D, and Phase 37E are accepted as part of the
+artifact-backed Phase 37 phase-ledger validation.
 
 Next allowed work:
 
 ```text
-Phase 37C - Frequency Pool Packet Models and Validators: PR validated; phase-ledger validation pending
-Phase 37D - Tag Graph Metric Packet Models and Validators: PR validated; phase-ledger validation pending
-Phase 37E - Tag Graph Export / Report Contract: contract prepared
-Phase 37E outside validation: required
-Phase 38A - Moxfield Frequency Pool Builder Contract: blocked
+Phase 37C - Frequency Pool Packet Models and Validators: accepted
+Phase 37D - Tag Graph Metric Packet Models and Validators: accepted
+Phase 37E - Tag Graph Export / Report Contract: accepted
+Phase 38A - Moxfield Frequency Pool Builder Contract: next
 ```
 
-Phase 37D is not externally accepted yet. Phase 37E is contract-only and does
-not implement Tag Graph export/report code. The next-phase tuple is declared
-for governance continuity; Phase 38A must not begin until Phase 37E validation
-returns PASS or PASS WITH REVIEW NOTES.
+Phase 37 is externally accepted. Phase 38A may begin contract-first and must
+follow V2 Moxfield, evidence, unknown-state, privacy, and recommendation
+boundary rules.
 
 Phase 37D PR validation evidence:
 
@@ -1867,20 +1867,35 @@ aggregate: CLEAN_PASS
 unresolved findings: none
 ```
 
-Phase 37E validation tuple:
+Phase 37 final acceptance evidence:
 
 ```text
-phase_id: Phase37E
+workflow run ID: 29881579352
+validated SHA: 5901dc51d8bc823ce85e29894768573d0555b91a
+artifact: codie-phase_ledger-validation-5901dc51d8bc823ce85e29894768573d0555b91a
+validation scope: phase_ledger
+validator profile: all
+deterministic: CLEAN_PASS
+architecture: CLEAN_PASS
+adversarial: CLEAN_PASS
+aggregate: CLEAN_PASS
+final governance verdict: PASS
+unresolved findings: none
+```
+
+Phase 38A validation tuple:
+
+```text
+phase_id: Phase38A
 phase_part: outside-validation
 gate_scope: INTERMEDIATE_PACKET
-next_phase_id: Phase38A
+next_phase_id: Phase38B
 next_phase_part: outside-validation
 next_gate_scope: INTERMEDIATE_PACKET
 ```
 
-The active validation scope file was not modified by the Phase 37D branch.
-The Phase 37E tuple is declared in the contract packet; active-scope
-advancement remains governed by the accepted validation workflow.
+The active validation scope file should now point to Phase38A for the next
+contract-first packet.
 
 Accepted Phase 37A outside validation packet:
 
@@ -2410,22 +2425,18 @@ Phase 13 simulator contracts or a new UI/API contract is explicitly selected.
 
 ## Known Caveats
 
-- Phase 37D Tag Graph Metric Packet Models and Validators are PR validated;
-  phase-ledger validation remains pending.
-- Phase 37E Tag Graph Export / Report Contract is prepared and must be
-  validated before Phase 38A starts.
-- Phase 37E declares:
-  `phase_id: Phase37E`, `phase_part: outside-validation`,
-  `gate_scope: INTERMEDIATE_PACKET`, `next_phase_id: Phase38A`,
+- Phase 37 is artifact-validated and accepted.
+- Phase 38A Moxfield Frequency Pool Builder Contract is next.
+- Phase 38A declares:
+  `phase_id: Phase38A`, `phase_part: outside-validation`,
+  `gate_scope: INTERMEDIATE_PACKET`, `next_phase_id: Phase38B`,
   `next_phase_part: outside-validation`, and
   `next_gate_scope: INTERMEDIATE_PACKET`.
 - The next-phase tuple is declared for governance continuity.
-- Phase 37E is not externally accepted yet and must not be marked complete
-  until validation returns PASS or PASS WITH REVIEW NOTES.
-- The active Phase 37 branch changes only authorized frequency-pool and tag
-  graph model files, fixtures, tests, and governance/validation packet docs; no
-  schema, provider, UI, workflow, validator, or constitution files are part of
-  this packet.
+- Phase 38A must remain contract-first until validated.
+- Phase 38A must respect V2 Moxfield observation rules, user-local privacy,
+  unknown-state preservation, provenance, sample-size, coverage, caveat, and
+  recommendation-output boundaries.
 
 - Hareruya live access can hit AWS WAF; treat Hareruya as regional enrichment, not critical path.
 - CLI requires a local Codie SQLite database with card rows before user deck import can resolve cards.
