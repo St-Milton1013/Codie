@@ -2586,23 +2586,25 @@ aggregate: CLEAN_PASS
 
 ```text
 Phase 38A Moxfield Frequency Pool Builder Contract: PASS
-Phase 38B Moxfield Frequency Pool Builder Implementation Contract: INTERNAL PASS
-Current action: send Phase 38B outside validation packet
-Phase 38C: BLOCKED until Phase 38B returns PASS or PASS WITH REVIEW NOTES
+Phase 38B Moxfield Frequency Pool Builder Implementation Contract: PASS
+Phase 38C Moxfield Frequency Pool Builder Implementation: INTERNAL PASS
+Current action: send Phase 38C implementation packet to PR validation
+Phase 38D: BLOCKED until Phase 38C returns PASS or PASS WITH REVIEW NOTES
 ```
 
-Phase 38B is implementation-contract-only. It does not implement Moxfield
-parsing, fetching, provider adapters, frequency calculation, exports, schema,
-repositories, UI, CLI behavior, LLM calls, simulator behavior, file writing, or
-recommendations.
+Phase 38C implements a local, fixture-first Moxfield Frequency Pool Builder. It
+parses already supplied text exports and local fixture payloads. It does not
+fetch Moxfield URLs, call provider APIs, call Scryfall, change schema or
+repositories, write files, add CLI or UI behavior, call LLMs, run simulator
+logic, recalculate analytics, or generate recommendations.
 
-Phase 38B validation tuple:
+Phase 38C validation tuple:
 
 ```text
-phase_id: Phase38B
+phase_id: Phase38C
 phase_part: outside-validation
 gate_scope: INTERMEDIATE_PACKET
-next_phase_id: Phase38C
+next_phase_id: Phase38D
 next_phase_part: outside-validation
 next_gate_scope: INTERMEDIATE_PACKET
 ```
@@ -2625,6 +2627,30 @@ Phase 38B active-scope transition evidence:
 workflow run ID: 29936045711
 validated SHA: 8df261b4353c6fc9a7902112d6a742b27803093d
 artifact: codie-phase_ledger-validation-8df261b4353c6fc9a7902112d6a742b27803093d
+deterministic: CLEAN_PASS
+architecture: CLEAN_PASS
+adversarial: CLEAN_PASS
+aggregate: CLEAN_PASS
+```
+
+Phase 38B acceptance evidence:
+
+```text
+workflow run ID: 29936658939
+validated SHA: e132ca12598c9112d5729300c53d13a398b44f9d
+artifact: codie-phase_ledger-validation-e132ca12598c9112d5729300c53d13a398b44f9d
+deterministic: CLEAN_PASS
+architecture: CLEAN_PASS
+adversarial: CLEAN_PASS
+aggregate: CLEAN_PASS
+```
+
+Phase 38C active-scope transition evidence:
+
+```text
+workflow run ID: 29936996144
+validated SHA: 47756ffaa641a733f47e4ffe9720e7132590f236
+artifact: codie-phase_ledger-validation-47756ffaa641a733f47e4ffe9720e7132590f236
 deterministic: CLEAN_PASS
 architecture: CLEAN_PASS
 adversarial: CLEAN_PASS

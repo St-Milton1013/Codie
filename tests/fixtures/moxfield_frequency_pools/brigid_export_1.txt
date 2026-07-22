@@ -1,0 +1,12 @@
+COMMANDER
+1 Brigid, Clachan's Heart
+
+MAINBOARD
+1 Shared Draw Engine
+2 Repeated Interaction
+1 One Deck Card
+6 Plains
+
+SIDEBOARD
+1 Deafening Silence
+

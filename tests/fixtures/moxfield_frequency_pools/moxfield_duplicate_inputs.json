@@ -1,0 +1,12 @@
+{
+  "inputs": [
+    {
+      "input_ref_id": "deck-1",
+      "source_key": "https://www.moxfield.com/decks/duplicateDeck"
+    },
+    {
+      "input_ref_id": "deck-2",
+      "source_key": "moxfield:duplicateDeck"
+    }
+  ]
+}

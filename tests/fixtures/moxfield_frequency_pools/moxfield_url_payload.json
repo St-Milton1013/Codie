@@ -1,0 +1,41 @@
+{
+  "card_identities": {
+    "Shared Draw Engine": {
+      "oracle_id": "oracle-shared-draw-engine",
+      "scryfall_id": "scryfall-shared-draw-engine"
+    },
+    "Repeated Interaction": {
+      "oracle_id": "oracle-repeated-interaction",
+      "scryfall_id": "scryfall-repeated-interaction"
+    },
+    "One Deck Card": {
+      "oracle_id": "oracle-one-deck-card",
+      "scryfall_id": "scryfall-one-deck-card"
+    },
+    "Two Deck Card": {
+      "oracle_id": "oracle-two-deck-card",
+      "scryfall_id": "scryfall-two-deck-card"
+    },
+    "Three Deck Card": {
+      "oracle_id": "oracle-three-deck-card",
+      "scryfall_id": "scryfall-three-deck-card"
+    },
+    "Four Deck Card": {
+      "oracle_id": "oracle-four-deck-card",
+      "scryfall_id": "scryfall-four-deck-card"
+    },
+    "Five Deck Card": {
+      "oracle_id": "oracle-five-deck-card",
+      "scryfall_id": "scryfall-five-deck-card"
+    },
+    "Utility Piece": {
+      "oracle_id": "oracle-utility-piece",
+      "scryfall_id": "scryfall-utility-piece"
+    },
+    "Known Card": {
+      "oracle_id": "oracle-known-card",
+      "scryfall_id": "scryfall-known-card"
+    }
+  }
+}
+
