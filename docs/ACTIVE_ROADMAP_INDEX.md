@@ -85,27 +85,27 @@ Phase 37C Frequency Pool Packet Models and Validators: externally accepted
 Phase 37D Tag Graph Metric Packet Models and Validators: externally accepted
 Phase 37E Tag Graph Export / Report Contract: externally accepted
 Phase 37 Frequency Pools / Tag Graph Lab split: externally accepted
-Current action: send Phase 38A Moxfield Frequency Pool Builder Contract to outside validation
+Current action: send Phase 38B Moxfield Frequency Pool Builder Implementation Contract to outside validation
 Local alpha tag status: created locally; remote tag push not verified in this environment
 ```
 
 ## Next Allowed Phase
 
 ```text
-Phase 38A Moxfield Frequency Pool Builder Contract
+Phase 38B Moxfield Frequency Pool Builder Implementation Contract
 ```
 
-Phase 37 received artifact-backed phase-ledger validation on merged `main`.
-Phase 38A is prepared as a contract-only packet. Based on the post-31 priority
-plan, Phase 38A is the Moxfield Frequency Pool Builder Contract.
+Phase 38A received artifact-backed phase-ledger validation on merged `main`.
+Phase 38B is prepared as an implementation-contract-only packet. Phase 38C
+remains blocked until Phase 38B returns PASS or PASS WITH REVIEW NOTES.
 
-Phase 38A validation tuple:
+Phase 38B validation tuple:
 
 ```text
-phase_id: Phase38A
+phase_id: Phase38B
 phase_part: outside-validation
 gate_scope: INTERMEDIATE_PACKET
-next_phase_id: Phase38B
+next_phase_id: Phase38C
 next_phase_part: outside-validation
 next_gate_scope: INTERMEDIATE_PACKET
 ```
@@ -116,6 +116,24 @@ Phase 38A active-scope transition evidence:
 workflow run ID: 29928542885
 validated SHA: 7f5caa161ba90f2f753da556a75f97145e0c8d9b
 artifact: codie-phase_ledger-validation-7f5caa161ba90f2f753da556a75f97145e0c8d9b
+aggregate: CLEAN_PASS
+```
+
+Phase 38A acceptance evidence:
+
+```text
+workflow run ID: 29935858106
+validated SHA: 2bfa81dbb8c23a1b62737a8411467b602c6de1c3
+artifact: codie-phase_ledger-validation-2bfa81dbb8c23a1b62737a8411467b602c6de1c3
+aggregate: CLEAN_PASS
+```
+
+Phase 38B active-scope transition evidence:
+
+```text
+workflow run ID: 29936045711
+validated SHA: 8df261b4353c6fc9a7902112d6a742b27803093d
+artifact: codie-phase_ledger-validation-8df261b4353c6fc9a7902112d6a742b27803093d
 aggregate: CLEAN_PASS
 ```
 
@@ -162,8 +180,9 @@ unresolved findings: none
 3. Phase 37C Frequency Pool Packet Models and Validators: accepted
 4. Phase 37D Tag Graph Metric Packet Models and Validators: accepted
 5. Phase 37E Tag Graph Export / Report Contract: accepted
-6. Phase 38A Moxfield Frequency Pool Builder Contract: internal pass; outside validation required
-7. Phase 38B Moxfield Frequency Pool Builder Implementation Contract: blocked
+6. Phase 38A Moxfield Frequency Pool Builder Contract: accepted
+7. Phase 38B Moxfield Frequency Pool Builder Implementation Contract: internal pass; outside validation required
+8. Phase 38C Moxfield Frequency Pool Builder Implementation: blocked
 ```
 
 The post-31 patch priority order is cemented in:

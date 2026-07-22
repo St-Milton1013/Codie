@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: send Phase 38A Moxfield Frequency Pool Builder Contract to outside validation
+Recommended next task: send Phase 38B Moxfield Frequency Pool Builder Implementation Contract to outside validation
 
 ## Constitutional Governance Overlay
 
@@ -72,14 +72,14 @@ final governance verdict: PASS
 unresolved findings: none
 ```
 
-Phase 38A is prepared contract-first. Based on the post-31 priority plan, Phase
-38A is the Moxfield Frequency Pool Builder Contract. Phase 38B remains blocked
-until Phase 38A outside validation returns PASS or PASS WITH REVIEW NOTES.
+Phase 38A returned artifact-backed PASS. Phase 38B is prepared as an
+implementation-contract-only packet. Phase 38C remains blocked until Phase 38B
+outside validation returns PASS or PASS WITH REVIEW NOTES.
 
-Explicit Phase 38A validation tuple:
+Explicit Phase 38B validation tuple:
 
 ```text
-phase_id: Phase38A
+phase_id: Phase38B
 phase_part: outside-validation
 gate_scope: INTERMEDIATE_PACKET
 ```
@@ -87,14 +87,14 @@ gate_scope: INTERMEDIATE_PACKET
 Explicit next-phase validation tuple:
 
 ```text
-next_phase_id: Phase38B
+next_phase_id: Phase38C
 next_phase_part: outside-validation
 next_gate_scope: INTERMEDIATE_PACKET
 ```
 
-The next-phase tuple is declared for governance continuity. Phase 38B is
-reserved for a future Moxfield Frequency Pool Builder implementation-contract
-packet unless the accepted Phase 38A contract chooses a narrower split.
+The next-phase tuple is declared for governance continuity. Phase 38C is
+reserved for a future Moxfield Frequency Pool Builder implementation packet
+unless the accepted Phase 38B contract chooses a narrower split.
 
 Phase 38A must comply with V2 rules for Moxfield observations, user-local deck
 privacy, unknown/unavailable/unsupported state preservation, evidence
@@ -106,6 +106,30 @@ Phase 38A active-scope transition evidence:
 workflow run ID: 29928542885
 validated SHA: 7f5caa161ba90f2f753da556a75f97145e0c8d9b
 artifact: codie-phase_ledger-validation-7f5caa161ba90f2f753da556a75f97145e0c8d9b
+deterministic: CLEAN_PASS
+architecture: CLEAN_PASS
+adversarial: CLEAN_PASS
+aggregate: CLEAN_PASS
+```
+
+Phase 38A acceptance evidence:
+
+```text
+workflow run ID: 29935858106
+validated SHA: 2bfa81dbb8c23a1b62737a8411467b602c6de1c3
+artifact: codie-phase_ledger-validation-2bfa81dbb8c23a1b62737a8411467b602c6de1c3
+deterministic: CLEAN_PASS
+architecture: CLEAN_PASS
+adversarial: CLEAN_PASS
+aggregate: CLEAN_PASS
+```
+
+Phase 38B active-scope transition evidence:
+
+```text
+workflow run ID: 29936045711
+validated SHA: 8df261b4353c6fc9a7902112d6a742b27803093d
+artifact: codie-phase_ledger-validation-8df261b4353c6fc9a7902112d6a742b27803093d
 deterministic: CLEAN_PASS
 architecture: CLEAN_PASS
 adversarial: CLEAN_PASS
