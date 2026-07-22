@@ -85,7 +85,7 @@ Phase 37C Frequency Pool Packet Models and Validators: externally accepted
 Phase 37D Tag Graph Metric Packet Models and Validators: externally accepted
 Phase 37E Tag Graph Export / Report Contract: externally accepted
 Phase 37 Frequency Pools / Tag Graph Lab split: externally accepted
-Current action: begin Phase 38A Moxfield Frequency Pool Builder Contract
+Current action: send Phase 38A Moxfield Frequency Pool Builder Contract to outside validation
 Local alpha tag status: created locally; remote tag push not verified in this environment
 ```
 
@@ -96,8 +96,8 @@ Phase 38A Moxfield Frequency Pool Builder Contract
 ```
 
 Phase 37 received artifact-backed phase-ledger validation on merged `main`.
-The next allowed work is Phase 38A contract-first. Based on the post-31
-priority plan, Phase 38A is the Moxfield Frequency Pool Builder Contract.
+Phase 38A is prepared as a contract-only packet. Based on the post-31 priority
+plan, Phase 38A is the Moxfield Frequency Pool Builder Contract.
 
 Phase 38A validation tuple:
 
@@ -108,6 +108,15 @@ gate_scope: INTERMEDIATE_PACKET
 next_phase_id: Phase38B
 next_phase_part: outside-validation
 next_gate_scope: INTERMEDIATE_PACKET
+```
+
+Phase 38A active-scope transition evidence:
+
+```text
+workflow run ID: 29928542885
+validated SHA: 7f5caa161ba90f2f753da556a75f97145e0c8d9b
+artifact: codie-phase_ledger-validation-7f5caa161ba90f2f753da556a75f97145e0c8d9b
+aggregate: CLEAN_PASS
 ```
 
 Phase 37A acceptance evidence:
@@ -153,7 +162,8 @@ unresolved findings: none
 3. Phase 37C Frequency Pool Packet Models and Validators: accepted
 4. Phase 37D Tag Graph Metric Packet Models and Validators: accepted
 5. Phase 37E Tag Graph Export / Report Contract: accepted
-6. Phase 38A Moxfield Frequency Pool Builder Contract: next
+6. Phase 38A Moxfield Frequency Pool Builder Contract: internal pass; outside validation required
+7. Phase 38B Moxfield Frequency Pool Builder Implementation Contract: blocked
 ```
 
 The post-31 patch priority order is cemented in:
