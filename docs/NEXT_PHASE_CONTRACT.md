@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: begin Phase 38A Moxfield Frequency Pool Builder Contract
+Recommended next task: send Phase 38A Moxfield Frequency Pool Builder Contract to outside validation
 
 ## Constitutional Governance Overlay
 
@@ -72,8 +72,9 @@ final governance verdict: PASS
 unresolved findings: none
 ```
 
-Phase 38A may begin contract-first. Based on the post-31 priority plan, Phase
-38A is the Moxfield Frequency Pool Builder Contract.
+Phase 38A is prepared contract-first. Based on the post-31 priority plan, Phase
+38A is the Moxfield Frequency Pool Builder Contract. Phase 38B remains blocked
+until Phase 38A outside validation returns PASS or PASS WITH REVIEW NOTES.
 
 Explicit Phase 38A validation tuple:
 
@@ -98,6 +99,18 @@ packet unless the accepted Phase 38A contract chooses a narrower split.
 Phase 38A must comply with V2 rules for Moxfield observations, user-local deck
 privacy, unknown/unavailable/unsupported state preservation, evidence
 provenance, sample size, coverage, caveats, and recommendation boundaries.
+
+Phase 38A active-scope transition evidence:
+
+```text
+workflow run ID: 29928542885
+validated SHA: 7f5caa161ba90f2f753da556a75f97145e0c8d9b
+artifact: codie-phase_ledger-validation-7f5caa161ba90f2f753da556a75f97145e0c8d9b
+deterministic: CLEAN_PASS
+architecture: CLEAN_PASS
+adversarial: CLEAN_PASS
+aggregate: CLEAN_PASS
+```
 
 Phase 14 has passed outside validation.
 

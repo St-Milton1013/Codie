@@ -2546,6 +2546,42 @@ Phase 13 simulator contracts or a new UI/API contract is explicitly selected.
 - Do not modify existing simulator implementation for SIM-R until the active validation chain completes, current simulator contracts are frozen, and a dedicated SIM-R contract plus outside validation is accepted.
 - Final recommendation output remains intentionally separate.
 
+## Current Phase 38A Handoff
+
+```text
+Phase 37 Frequency Pools / Tag Graph Lab split: PASS
+Phase 38A Moxfield Frequency Pool Builder Contract: INTERNAL PASS
+Current action: send Phase 38A outside validation packet
+Phase 38B: BLOCKED until Phase 38A returns PASS or PASS WITH REVIEW NOTES
+```
+
+Phase 38A is contract-only. It does not implement Moxfield parsing, fetching,
+provider adapters, frequency calculation, exports, schema, repositories, UI,
+LLM calls, simulator behavior, file writing, or recommendations.
+
+Phase 38A validation tuple:
+
+```text
+phase_id: Phase38A
+phase_part: outside-validation
+gate_scope: INTERMEDIATE_PACKET
+next_phase_id: Phase38B
+next_phase_part: outside-validation
+next_gate_scope: INTERMEDIATE_PACKET
+```
+
+Phase 38A active-scope transition evidence:
+
+```text
+workflow run ID: 29928542885
+validated SHA: 7f5caa161ba90f2f753da556a75f97145e0c8d9b
+artifact: codie-phase_ledger-validation-7f5caa161ba90f2f753da556a75f97145e0c8d9b
+deterministic: CLEAN_PASS
+architecture: CLEAN_PASS
+adversarial: CLEAN_PASS
+aggregate: CLEAN_PASS
+```
+
 ## Quality Gate
 
 Every future packet must include:

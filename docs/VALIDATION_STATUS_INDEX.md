@@ -82,13 +82,16 @@ Phase 37C Frequency Pool Packet Models and Validators: PASS
 Phase 37D Tag Graph Metric Packet Models and Validators: PASS
 Phase 37E Tag Graph Export / Report Contract: PASS
 Phase 37 Frequency Pools / Tag Graph Lab split: PASS
-Phase 38A Moxfield Frequency Pool Builder Contract: NEXT
+Phase 38A Moxfield Frequency Pool Builder Contract: INTERNAL PASS
+Phase 38B Moxfield Frequency Pool Builder Implementation Contract: BLOCKED
 Local alpha tag: created locally; remote tag push not verified in this environment
 ```
 
 Phase 37 received artifact-backed phase-ledger validation on merged `main`.
-The next allowed work is Phase 38A contract-first. Phase 38A must follow V2
-Moxfield, evidence, unknown-state, privacy, and recommendation-boundary rules.
+Phase 38A is prepared as a contract-only packet. Phase 38B remains blocked
+until Phase 38A outside validation returns PASS or PASS WITH REVIEW NOTES.
+Phase 38A follows V2 Moxfield, evidence, unknown-state, privacy, and
+recommendation-boundary rules.
 
 Phase 37B coverage visibility requirement:
 
@@ -145,6 +148,20 @@ gate_scope: INTERMEDIATE_PACKET
 next_phase_id: Phase38B
 next_phase_part: outside-validation
 next_gate_scope: INTERMEDIATE_PACKET
+```
+
+Phase 38A active-scope transition evidence:
+
+```text
+workflow run ID: 29928542885
+validated SHA: 7f5caa161ba90f2f753da556a75f97145e0c8d9b
+artifact: codie-phase_ledger-validation-7f5caa161ba90f2f753da556a75f97145e0c8d9b
+validation scope: phase_ledger
+validator profile: all
+deterministic: CLEAN_PASS
+architecture: CLEAN_PASS
+adversarial: CLEAN_PASS
+aggregate: CLEAN_PASS
 ```
 
 ## Accepted Phase Summary
