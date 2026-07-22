@@ -4,6 +4,16 @@ Status: active governance index
 
 This file is the compact restart map for Codie. Detailed phase history remains in `docs/CODEX_CONTINUITY_HANDOFF.md` and `docs/NEXT_PHASE_CONTRACT.md`.
 
+## Constitutional Authority
+
+```text
+Primary constitutional authority in the V2 adoption commit: docs/CODIE_V2_CONSTITUTION.md
+Historical reference: docs/CODIE_V1_CONSTITUTION.md
+V1 disposition: unchanged and retained
+```
+
+The V2 adoption packet is a parallel governance-only track. When accepted and merged, V2 becomes the primary constitution. This does not advance, merge, validate, or replace the active Phase 37 gate.
+
 ## Current Phase Gate
 
 ```text
@@ -138,12 +148,17 @@ Obsidian / Knowledge Vault
 Advanced UI dashboard
 Mobile-friendly local report delivery
 Optional Discord / LocalSend / QR delivery integrations
+Reddit RSS Community Signal Monitor
 Simulator Revision (SIM-R)
 Codie Master Architecture patch
 Post-Phase 31 Deferred Implementation Priority Plan
 ```
 
 These items remain roadmap-only until a future contract explicitly authorizes implementation.
+
+Mobile report delivery is explicitly deferred by V2. All other V1 capabilities retain their V1 purpose, boundaries, and roadmap status unless V2 directly changes them. The standalone Natural Language Query Helper capability is folded into Jin query planning and Scryfall/Tagger translation.
+
+The Reddit RSS Community Signal Monitor is a post-checkpoint, separately contracted discovery item. It may feed low-confidence community candidates to Jin, Theory Corpus review, research, rules, tool-evaluation, and experiment queues, but never tournament injection, measured analytics, recommendations, canonical evidence, or model training.
 
 ## Research / Reference-Only Items
 

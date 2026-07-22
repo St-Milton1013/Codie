@@ -6,6 +6,23 @@ This document is the recovery packet for continuing Codie after Codex context/ra
 
 Use the repository and this handoff as the source of truth. Do not rely on prior chat history.
 
+## Constitutional Authority Transition
+
+The user ratified Codie V2 on 2026-07-20. The adoption packet adds:
+
+```text
+docs/CODIE_V2_CONSTITUTION.md
+docs/CODIE_V2_CHANGELOG.md
+docs/CODIE_V2_COMPATIBILITY_STATEMENT.md
+docs/CODIE_V2_RATIFICATION_CONTRACT.md
+docs/CHECKPOINT_CODIE_V2_RATIFICATION_REPORT.md
+docs/OUTSIDE_VALIDATION_CODIE_V2_RATIFICATION_PROMPT.md
+```
+
+V2 becomes primary authority only when its adoption pull request passes validation and is merged. `docs/CODIE_V1_CONSTITUTION.md` must remain unchanged as historical reference.
+
+The ratification packet is governance-only. It does not advance Phase 37, authorize runtime implementation, or alter accepted phase evidence.
+
 ## Active Restart Indexes
 
 Read these compact files first when resuming work:

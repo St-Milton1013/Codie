@@ -4,6 +4,17 @@ Status: active validation index
 
 This file is the compact validation snapshot for Codie. Detailed evidence, commands, and phase history remain in `docs/CODEX_CONTINUITY_HANDOFF.md`, `docs/NEXT_PHASE_CONTRACT.md`, and the individual checkpoint reports.
 
+## Constitution Ratification Track
+
+```text
+Codie V2 Constitution Ratification: INTERNAL PASS
+Outside/PR validation: REQUIRED
+Runtime or phase advancement: NONE
+V1 preservation: REQUIRED
+```
+
+The ratification track is governance-only and does not replace the active Phase 37 validation tuple. V2 becomes authoritative only after PASS or PASS WITH REVIEW NOTES and merge.
+
 ## Current Validation Gate
 
 ```text
