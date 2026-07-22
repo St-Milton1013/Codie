@@ -1,0 +1,98 @@
+{
+  "pool_id": "pool-tymna-kraum-top16",
+  "pool_version": "frequency-pool-packet-v1",
+  "pool_type": "partner_pair",
+  "subject": {
+    "subject_type": "partner_pair",
+    "commander": "Tymna the Weaver",
+    "partner": "Kraum, Ludevic's Opus",
+    "subject_key": "tymna-kraum",
+    "user_local": false,
+    "metadata": {}
+  },
+  "source_window": {
+    "date_start": "2026-01-01",
+    "date_end": "2026-06-30",
+    "placement_scope": "top_16",
+    "provider": "edhtop16",
+    "region": "global",
+    "filters": {}
+  },
+  "source_refs": [
+    {
+      "source_ref_id": "src-bluefarm-1",
+      "source_type": "deck",
+      "source_key": "deck-bluefarm-1",
+      "provider": "edhtop16",
+      "event_ref_id": "event-bluefarm-1",
+      "deck_ref_id": "deck-bluefarm-1",
+      "metadata": {}
+    }
+  ],
+  "generated_at": "2026-07-14T00:00:00Z",
+  "cards": [
+    {
+      "identity": {
+        "oracle_id": "oracle-rhystic-study",
+        "scryfall_id": "scryfall-rhystic-study",
+        "card_name": "Rhystic Study"
+      },
+      "card_count": 11,
+      "deck_count": 11,
+      "inclusion_rate": 0.79,
+      "average_copies": 1.0,
+      "placement_weighted_usage": 0.83,
+      "trend_delta": 0.01,
+      "confidence": 0.93,
+      "source_ref_ids": [
+        "src-bluefarm-1"
+      ],
+      "caveat_ids": [],
+      "metadata": {}
+    }
+  ],
+  "tags": [
+    {
+      "tag": "draw engine",
+      "tag_namespace": "scryfall_tagger",
+      "tag_source": "scryfall_tagger",
+      "tag_confidence": 0.97,
+      "oracle_ids": [
+        "oracle-rhystic-study"
+      ],
+      "raw_tag_count": 11,
+      "tag_density": 0.11,
+      "tag_inclusion_rate": 0.79,
+      "average_cards_per_deck_with_tag": 5.8,
+      "matching_deck_count": 11,
+      "available_deck_count": 14,
+      "coverage_ratio": 0.79,
+      "caveat_ids": [],
+      "source_ref_ids": [
+        "src-bluefarm-1"
+      ],
+      "metadata": {}
+    }
+  ],
+  "coverage_report": {
+    "matching_deck_count": 11,
+    "available_deck_count": 14,
+    "coverage_ratio": 0.79,
+    "low_sample_threshold": 5,
+    "low_coverage_threshold": 0.6,
+    "caveat_ids": [],
+    "metadata": {}
+  },
+  "caveats": [],
+  "filters": {
+    "selected_tags": [
+      "draw engine"
+    ]
+  },
+  "identity_version": "canonical-card-identity-v1",
+  "tag_ontology_version": "scryfall-tagger-ontology-v1",
+  "evidence_version": "measured-evidence-v1",
+  "metadata": {
+    "evidence_only": true
+  }
+}

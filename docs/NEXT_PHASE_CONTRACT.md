@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: send Phase 37B Frequency Pools / Tag Graph Lab Implementation Contract to outside validation
+Recommended next task: validate Phase 37E Tag Graph Export / Report Contract
 
 ## Constitutional Governance Overlay
 
@@ -30,12 +30,40 @@ log.
 
 Phase 37A outside validation returned PASS WITH REVIEW NOTES.
 
-Phase 37B Frequency Pools / Tag Graph Lab Implementation Contract is internally complete.
+Phase 37B Frequency Pools / Tag Graph Lab Implementation Contract has been
+accepted with review notes.
 
-Explicit Phase 37B validation tuple:
+Phase 37C Frequency Pool Packet Models and Validators received clean PR
+validation and are being used as the basis for continued Phase 37 work.
+
+Phase 37D Tag Graph Metric Packet Models and Validators received clean PR
+validation and are being used as the basis for the Phase 37E contract-only
+packet. Phase 37D still requires final phase-ledger acceptance before being
+recorded as externally complete on `main`.
+
+Phase 37D PR validation evidence:
 
 ```text
-phase_id: Phase37B
+workflow run ID: 29370051698
+validated SHA: ee592ddfa6c0e6b36247b5f643f8b63994d4ccf5
+artifact: codie-pr-validation-ee592ddfa6c0e6b36247b5f643f8b63994d4ccf5
+validation scope: pr
+validator profile: all
+deterministic: CLEAN_PASS
+architecture: CLEAN_PASS
+adversarial: CLEAN_PASS
+aggregate: CLEAN_PASS
+unresolved findings: none
+```
+
+Phase 37E Tag Graph Export / Report Contract is prepared on the active feature
+branch and must be validated before Phase 38A starts. Phase 37E is
+contract-only and does not implement export/report code.
+
+Explicit Phase 37E validation tuple:
+
+```text
+phase_id: Phase37E
 phase_part: outside-validation
 gate_scope: INTERMEDIATE_PACKET
 ```
@@ -43,13 +71,15 @@ gate_scope: INTERMEDIATE_PACKET
 Explicit next-phase validation tuple:
 
 ```text
-next_phase_id: Phase37C
+next_phase_id: Phase38A
 next_phase_part: outside-validation
 next_gate_scope: INTERMEDIATE_PACKET
 ```
 
-The next-phase tuple is declared for governance continuity. Phase 37B contains
-only the implementation-contract packet and matching governance records.
+The next-phase tuple is declared for governance continuity. Phase 38A is
+reserved for the Moxfield Frequency Pool Builder contract, the next roadmap
+priority after Phase 37 closes. Phase 37E contains only a contract,
+checkpoint, outside-validation prompt, and matching governance records.
 
 Phase 14 has passed outside validation.
 
