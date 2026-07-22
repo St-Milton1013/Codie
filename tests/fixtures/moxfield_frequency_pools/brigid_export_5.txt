@@ -1,0 +1,12 @@
+COMMANDER
+1 Brigid, Clachan's Heart
+
+MAINBOARD
+1 Shared Draw Engine
+1 Five Deck Card
+1 Utility Piece
+1 Mountain
+
+TOKENS
+1 Soldier Token
+
