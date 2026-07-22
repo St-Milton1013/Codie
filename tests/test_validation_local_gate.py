@@ -617,6 +617,17 @@ class ValidationLocalGateTest(unittest.TestCase):
         self.assertIn("pull_request_number", schema["required"])
         self.assertIn("severity_totals", schema["required"])
 
+    def test_trusted_report_duplicate_finding_ids_still_fail(self) -> None:
+        duplicate = finding(finding_id="finding:duplicate")
+
+        with self.assertRaises(ValidationGateError):
+            report(
+                validator="architecture",
+                model="qwen2.5-coder:7b",
+                findings=(duplicate, duplicate),
+                severity_totals=SeverityTotals(HIGH=2),
+            )
+
     def test_intermediate_severity_policy_allows_medium_and_low_notes(self) -> None:
         result = aggregate_validator_reports(
             (
@@ -762,6 +773,30 @@ class ValidationLocalGateTest(unittest.TestCase):
         self.assertEqual(output.result, "FAIL")
         self.assertEqual(output.severity_totals.HIGH, 1)
         self.assertTrue(output.findings[0].finding_id.startswith("architecture:"))
+
+    def test_duplicate_model_findings_are_collapsed_before_trusted_id_assignment(self) -> None:
+        options = ValidationGateOptions(
+            phase_id=CURRENT_EXPECTED_PHASE_ID,
+            phase_part="outside-validation",
+            gate_scope="INTERMEDIATE_PACKET",
+            target_sha=SHA,
+            pull_request_number=PR_NUMBER,
+            branch=BRANCH,
+        )
+        duplicate_finding = model_payload()["findings"][0]
+
+        output = validator_report_from_model_response(
+            validator="adversarial",
+            model="llama3.1:latest",
+            options=options,
+            payload=model_payload(findings=[duplicate_finding, dict(duplicate_finding)]),
+            started_at="2026-07-13T00:00:00+00:00",
+            completed_at="2026-07-13T00:01:00+00:00",
+        )
+
+        self.assertEqual(output.result, "FAIL")
+        self.assertEqual(len(output.findings), 1)
+        self.assertEqual(output.severity_totals.HIGH, 1)
 
     def test_model_findings_are_limited_to_changed_pr_files(self) -> None:
         options = ValidationGateOptions(

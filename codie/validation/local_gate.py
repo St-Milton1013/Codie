@@ -601,8 +601,9 @@ def validator_report_from_model_response(
     validate_model_payload(payload)
     findings = tuple(
         _model_finding_to_validation_finding(validator, item)
-        for item in payload["findings"]
-        if _model_finding_is_in_scope(item, allowed_affected_files)
+        for item in _unique_model_findings(
+            tuple(item for item in payload["findings"] if _model_finding_is_in_scope(item, allowed_affected_files))
+        )
     )
     result = "FAIL" if findings else "CLEAN_PASS"
     return _build_report(
@@ -1422,6 +1423,25 @@ def _model_finding_is_in_scope(finding: dict[str, Any], allowed_affected_files: 
     if allowed_affected_files is not None and not affected_files.issubset(allowed_affected_files):
         return False
     return True
+
+
+def _unique_model_findings(findings: tuple[dict[str, Any], ...]) -> tuple[dict[str, Any], ...]:
+    unique: list[dict[str, Any]] = []
+    seen: set[tuple[str, str, str, tuple[str, ...], str, str]] = set()
+    for finding in findings:
+        key = (
+            str(finding["severity"]).strip(),
+            str(finding["title"]).strip(),
+            str(finding["description"]).strip(),
+            tuple(sorted(_normalize_path(str(path)) for path in finding["affected_files"])),
+            str(finding["governing_rule"]).strip(),
+            str(finding["required_correction"]).strip(),
+        )
+        if key in seen:
+            continue
+        seen.add(key)
+        unique.append(finding)
+    return tuple(unique)
 
 
 def _model_finding_to_validation_finding(validator: str, finding: dict[str, Any]) -> ValidationFinding:
