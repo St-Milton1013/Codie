@@ -87,28 +87,29 @@ Phase 37E Tag Graph Export / Report Contract: externally accepted
 Phase 37 Frequency Pools / Tag Graph Lab split: externally accepted
 Phase 38A Moxfield Frequency Pool Builder Contract: externally accepted
 Phase 38B Moxfield Frequency Pool Builder Implementation Contract: externally accepted
-Phase 38C Moxfield Frequency Pool Builder Implementation: internally complete
-Current action: send Phase 38C Moxfield Frequency Pool Builder Implementation to PR validation
+Phase 38C Moxfield Frequency Pool Builder Implementation: externally accepted with review notes
+Phase 38D Moxfield Frequency Pool Builder Checkpoint: internally complete
+Current action: send Phase 38D Moxfield Frequency Pool Builder Checkpoint to PR validation
 Local alpha tag status: created locally; remote tag push not verified in this environment
 ```
 
 ## Next Allowed Phase
 
 ```text
-Phase 38C Moxfield Frequency Pool Builder Implementation
+Phase 38D Moxfield Frequency Pool Builder Checkpoint
 ```
 
-Phase 38B received artifact-backed phase-ledger validation on merged `main`.
-Phase 38C is prepared as a bounded implementation packet. Phase 38D remains
-blocked until Phase 38C returns PASS or PASS WITH REVIEW NOTES.
+Phase 38C received artifact-backed phase-ledger validation on merged `main`.
+Phase 38D is prepared as a checkpoint-only packet. Phase 39A remains blocked
+until Phase 38D returns PASS or PASS WITH REVIEW NOTES.
 
-Phase 38C validation tuple:
+Phase 38D validation tuple:
 
 ```text
-phase_id: Phase38C
+phase_id: Phase38D
 phase_part: outside-validation
 gate_scope: INTERMEDIATE_PACKET
-next_phase_id: Phase38D
+next_phase_id: Phase39A
 next_phase_part: outside-validation
 next_gate_scope: INTERMEDIATE_PACKET
 ```
@@ -158,6 +159,24 @@ artifact: codie-phase_ledger-validation-47756ffaa641a733f47e4ffe9720e7132590f236
 aggregate: CLEAN_PASS
 ```
 
+Phase 38C acceptance evidence:
+
+```text
+workflow run ID: 29962601660
+validated SHA: bbacc28e00a0cc617f5443d834c47aba05835147
+artifact: codie-phase_ledger-validation-bbacc28e00a0cc617f5443d834c47aba05835147
+validation scope: phase_ledger
+validator profile: all
+deterministic: CLEAN_PASS
+architecture: CLEAN_PASS
+adversarial: FAIL with one INFORMATIONAL finding
+aggregate: CLEAN_PASS
+required corrections: none
+```
+
+The Phase 38C informational finding is a nonblocking historical observation
+from Phase 37A and requires no corrective action.
+
 Phase 37A acceptance evidence:
 
 ```text
@@ -203,8 +222,9 @@ unresolved findings: none
 5. Phase 37E Tag Graph Export / Report Contract: accepted
 6. Phase 38A Moxfield Frequency Pool Builder Contract: accepted
 7. Phase 38B Moxfield Frequency Pool Builder Implementation Contract: accepted
-8. Phase 38C Moxfield Frequency Pool Builder Implementation: internal pass; PR validation required
-9. Phase 38D: blocked
+8. Phase 38C Moxfield Frequency Pool Builder Implementation: accepted with review notes
+9. Phase 38D Moxfield Frequency Pool Builder Checkpoint: internal pass; PR validation required
+10. Phase 39A: blocked
 ```
 
 The post-31 patch priority order is cemented in:

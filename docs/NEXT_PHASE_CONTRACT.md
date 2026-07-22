@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: send Phase 38C Moxfield Frequency Pool Builder Implementation to PR validation
+Recommended next task: send Phase 38D Moxfield Frequency Pool Builder Checkpoint to PR validation
 
 ## Constitutional Governance Overlay
 
@@ -72,14 +72,15 @@ final governance verdict: PASS
 unresolved findings: none
 ```
 
-Phase 38A and Phase 38B returned artifact-backed PASS. Phase 38C is prepared
-as a bounded implementation packet. Phase 38D remains blocked until Phase 38C
-outside validation returns PASS or PASS WITH REVIEW NOTES.
+Phase 38A and Phase 38B returned artifact-backed PASS. Phase 38C returned
+artifact-backed PASS WITH REVIEW NOTES with no required corrections. Phase
+38D is prepared as a checkpoint-only packet. Phase 39A remains blocked until
+Phase 38D outside validation returns PASS or PASS WITH REVIEW NOTES.
 
-Explicit Phase 38C validation tuple:
+Explicit Phase 38D validation tuple:
 
 ```text
-phase_id: Phase38C
+phase_id: Phase38D
 phase_part: outside-validation
 gate_scope: INTERMEDIATE_PACKET
 ```
@@ -87,13 +88,13 @@ gate_scope: INTERMEDIATE_PACKET
 Explicit next-phase validation tuple:
 
 ```text
-next_phase_id: Phase38D
+next_phase_id: Phase39A
 next_phase_part: outside-validation
 next_gate_scope: INTERMEDIATE_PACKET
 ```
 
-The next-phase tuple is declared for governance continuity. Phase 38D remains
-blocked until Phase 38C returns PASS or PASS WITH REVIEW NOTES.
+The next-phase tuple is declared for governance continuity. Phase 39A remains
+blocked until Phase 38D returns PASS or PASS WITH REVIEW NOTES.
 
 Phase 38A must comply with V2 rules for Moxfield observations, user-local deck
 privacy, unknown/unavailable/unsupported state preservation, evidence
@@ -158,6 +159,24 @@ architecture: CLEAN_PASS
 adversarial: CLEAN_PASS
 aggregate: CLEAN_PASS
 ```
+
+Phase 38C acceptance evidence:
+
+```text
+workflow run ID: 29962601660
+validated SHA: bbacc28e00a0cc617f5443d834c47aba05835147
+artifact: codie-phase_ledger-validation-bbacc28e00a0cc617f5443d834c47aba05835147
+validation scope: phase_ledger
+validator profile: all
+deterministic: CLEAN_PASS
+architecture: CLEAN_PASS
+adversarial: FAIL with one INFORMATIONAL finding
+aggregate: CLEAN_PASS
+required corrections: none
+```
+
+The Phase 38C informational finding is a nonblocking historical observation
+from Phase 37A and requires no corrective action.
 
 Phase 14 has passed outside validation.
 
