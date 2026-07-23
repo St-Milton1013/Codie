@@ -96,24 +96,25 @@ Phase 39A Cockatrice Interoperability Contract: externally accepted with review 
 Phase 39B Cockatrice Interoperability Implementation Contract: externally accepted
 Phase 39C Cockatrice Interoperability Implementation: externally accepted
 Phase 39D Cockatrice Interoperability Checkpoint: externally accepted
-Phase 40A Relationship Intelligence Core Contract: internally complete
-Current action: send Phase 40A Relationship Intelligence Core Contract to PR validation
+Phase 40A Relationship Intelligence Core Contract: externally accepted
+Phase 40B Relationship Intelligence Schema and Repository Contract: internally complete
+Current action: validate the Phase 40B contract packet
 Local alpha tag status: verified on origin as local-alpha-0.1.0
 ```
 
 ## Next Allowed Phase
 
 ```text
-Phase 40A Relationship Intelligence Core Contract
+Phase 40B Relationship Intelligence Schema and Repository Contract
 ```
 
 Current-status clarification:
 
 ```text
-Phase 39D status: externally accepted.
-Phase 40A is the next allowed contract packet.
-The protected active scope remains Phase39D until this PR merges; that
-transition safeguard preserves Phase 39D's externally accepted status.
+Phase 40A status: externally accepted.
+Phase 40B is the active contract packet.
+The protected active scope remains Phase40A until this PR merges; that
+transition safeguard preserves Phase 40A's externally accepted status.
 ```
 
 Phase 38D received artifact-backed phase-ledger validation on merged `main`.
@@ -121,9 +122,10 @@ Phase 39A received artifact-backed phase-ledger validation on merged `main`.
 Phase 39B received artifact-backed phase-ledger validation on merged `main`.
 Phase 39C received artifact-backed phase-ledger validation on merged `main`.
 Phase 39D received artifact-backed phase-ledger validation on merged `main`
-and closed the local, fixture-first Cockatrice track. Phase 40A is the
-contract-only Relationship Intelligence core packet. Phase 40B remains
-blocked until Phase 40A returns PASS or PASS WITH REVIEW NOTES.
+and closed the local, fixture-first Cockatrice track. Phase 40A received
+artifact-backed PASS and established the Relationship Intelligence core.
+Phase 40B is contract-only schema and repository planning. Phase 40C remains
+blocked until Phase 40B returns PASS or PASS WITH REVIEW NOTES.
 
 Phase 39A validation tuple:
 
