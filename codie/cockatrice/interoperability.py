@@ -624,7 +624,7 @@ def validate_cockatrice_export_packet(packet: CockatriceExportPacket) -> Cockatr
     if not isinstance(packet, CockatriceExportPacket):
         raise CockatriceInteropBuildError("packet must be CockatriceExportPacket")
     if not packet.zones and not packet.failures:
-        raise CockatriceInteropBuildError("export packet must include zones or visible failures")
+        raise CockatriceInteropBuildError("export packet requires zones or visible failures")
     _reject_private_and_action_content(packet.to_dict(), "export_packet")
     return packet
 
