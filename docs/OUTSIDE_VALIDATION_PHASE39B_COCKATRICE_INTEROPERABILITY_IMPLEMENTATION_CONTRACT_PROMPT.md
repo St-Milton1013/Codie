@@ -91,6 +91,9 @@ fixtures, or implementation tests do not exist yet. Fail Phase 39B only if the
 contract authorizes that work too early, omits the required future boundary, or
 leaves the future validation tuple ambiguous.
 
+Textual future file allowlist entries in the contract are not actual
+implementation files. Confirm actual changed paths with `git diff --name-only`.
+
 Future implementation may cover:
 
 ```text
@@ -120,7 +123,7 @@ Reject if Phase 39B:
 ```text
 implements production Cockatrice parser code
 implements production Cockatrice export code
-adds implementation tests or fixtures
+adds actual implementation test files or fixture files
 modifies codie production files
 modifies tests
 modifies schemas

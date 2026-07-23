@@ -65,7 +65,7 @@ Phase 39B declares next_phase_id, next_phase_part, and next_gate_scope.
 Phase 39B remains implementation-contract-only.
 Phase 39B does not implement Cockatrice parser code.
 Phase 39B does not implement Cockatrice export code.
-Phase 39B does not add implementation tests or fixtures.
+Phase 39B does not add actual implementation test files or fixture files.
 Phase 39B does not modify production code.
 Phase 39B does not modify schema or repositories.
 Phase 39B does not modify providers or analytics.
@@ -101,6 +101,9 @@ file-writing-free output
 These are future Phase 39C obligations, not Phase 39B completion criteria.
 Phase 39B remains contract-only and must not be failed because implementation
 tests or production behavior do not exist yet.
+
+The Phase 39B packet contains textual future file allowlist entries only. It
+does not create `codie/`, `tests/`, or `tests/fixtures/` files.
 
 ## Validation Commands
 

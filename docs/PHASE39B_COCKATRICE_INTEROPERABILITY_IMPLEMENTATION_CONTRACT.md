@@ -66,7 +66,11 @@ recommendation, simulator, UI, CLI, LLM, workflow, validator, dependency,
 active validation scope, export writer, file-writing, or constitution files are
 authorized by Phase 39B.
 
-## Future Phase 39C Authorized Files
+## Future Phase 39C File Allowlist
+
+This section is a textual future allowlist only. Phase 39B does not create any
+of these files. A validator must distinguish textual references in this
+contract from actual repository changes.
 
 A later accepted Phase 39C implementation packet may add or modify only:
 
@@ -94,6 +98,11 @@ runtime services at import time.
 
 Any broader file set requires a later contract amendment and must not be
 introduced opportunistically in Phase 39C.
+
+Phase 39B repository changes must remain limited to docs/governance files. If
+`git diff --name-only` for Phase 39B shows any path under `codie/`, `tests/`,
+or `tests/fixtures/`, Phase 39B must fail. Textual future path references in
+this contract are not implementation files.
 
 ## Future Public Interface
 
@@ -347,13 +356,13 @@ the Phase 39C boundary ambiguous.
 
 ## Forbidden In Phase 39B
 
-Phase 39B must not add:
+Phase 39B must not add actual repository files or runtime behavior for:
 
 ```text
 production Cockatrice parser code
 production Cockatrice export code
-tests for implementation code
-fixtures for implementation code
+implementation test files under tests/
+fixture files under tests/fixtures/
 schema changes
 repository changes
 SQLite reads or writes
@@ -377,6 +386,9 @@ workflow changes
 active validation scope changes
 constitution changes
 ```
+
+The forbidden list above applies to actual repository changes, not to textual
+future allowlist entries inside this implementation contract.
 
 ## Outside Validation Packet
 
