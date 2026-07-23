@@ -197,6 +197,32 @@ class RelationshipPersistenceRepositoryTest(unittest.TestCase):
                     self.members(),
                 )
 
+    def test_json_duplicate_keys_references_and_oversized_input_are_rejected(self) -> None:
+        with self.assertRaisesRegex(RepositoryError, "duplicate key"):
+            self.repository.insert_relationship_population_spec(
+                self.spec(
+                    population_spec_hash="duplicate-key",
+                    spec_json='{"placement":"top_16","placement":"winner"}',
+                )
+            )
+        spec_id = self.repository.insert_relationship_population_spec(self.spec())
+        with self.assertRaisesRegex(RepositoryError, "duplicate references"):
+            self.repository.insert_relationship_population_manifest(
+                self.manifest(
+                    spec_id,
+                    population_manifest_hash="duplicate-ref",
+                    source_snapshot_refs_json=["snapshot-1", "snapshot-1"],
+                ),
+                self.members(),
+            )
+        with self.assertRaisesRegex(RepositoryError, "oversized"):
+            self.repository.insert_relationship_population_spec(
+                self.spec(
+                    population_spec_hash="oversized",
+                    spec_json={"region": "x" * 2049},
+                )
+            )
+
     def test_manifest_members_round_trip_in_stable_order(self) -> None:
         manifest_id = self.create_manifest()
         rows = self.repository.list_relationship_population_members(manifest_id)

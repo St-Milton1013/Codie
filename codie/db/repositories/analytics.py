@@ -43,6 +43,8 @@ _POPULATION_SPEC_JSON_KEYS = {
     "window_start_date",
     "zone_scope",
 }
+_MAX_RELATIONSHIP_JSON_CHARS = 65536
+_MAX_RELATIONSHIP_STRING_CHARS = 2048
 _RELATIONSHIP_METRICS = {
     "support",
     "directional_confidence",
@@ -56,8 +58,19 @@ _RELATIONSHIP_METRICS = {
 
 def _decode_json(value: Any, field_name: str) -> Any:
     if isinstance(value, str):
+        if len(value) > _MAX_RELATIONSHIP_JSON_CHARS:
+            raise RepositoryError(f"{field_name} exceeds maximum JSON size")
+
+        def reject_duplicate_keys(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
+            result: dict[str, Any] = {}
+            for key, item in pairs:
+                if key in result:
+                    raise RepositoryError(f"{field_name} contains duplicate key: {key}")
+                result[key] = item
+            return result
+
         try:
-            return json.loads(value)
+            return json.loads(value, object_pairs_hook=reject_duplicate_keys)
         except json.JSONDecodeError as exc:
             raise RepositoryError(f"{field_name} must contain valid JSON") from exc
     return value
@@ -87,6 +100,11 @@ def _canonical_population_spec_json(value: Any) -> str:
             for nested in values
         ):
             raise RepositoryError(f"{field_name} contains a non-JSON scalar")
+        if any(
+            isinstance(nested, str) and len(nested) > _MAX_RELATIONSHIP_STRING_CHARS
+            for nested in values
+        ):
+            raise RepositoryError(f"{field_name} contains an oversized string")
     try:
         return json.dumps(
             decoded, sort_keys=True, separators=(",", ":"), ensure_ascii=True, allow_nan=False
@@ -101,6 +119,10 @@ def _canonical_reference_json(value: Any, field_name: str) -> str:
         raise RepositoryError(f"{field_name} must be a JSON array")
     if any(not isinstance(item, str) or not item.strip() for item in decoded):
         raise RepositoryError(f"{field_name} must contain non-empty string references")
+    if any(len(item) > _MAX_RELATIONSHIP_STRING_CHARS for item in decoded):
+        raise RepositoryError(f"{field_name} contains an oversized reference")
+    if len(decoded) != len(set(decoded)):
+        raise RepositoryError(f"{field_name} contains duplicate references")
     return json.dumps(decoded, sort_keys=True, separators=(",", ":"), ensure_ascii=True)
 
 
