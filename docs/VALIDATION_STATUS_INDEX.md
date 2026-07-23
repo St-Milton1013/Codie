@@ -90,18 +90,35 @@ Phase 38B Moxfield Frequency Pool Builder Implementation Contract: PASS
 Phase 38C Moxfield Frequency Pool Builder Implementation: PASS WITH REVIEW NOTES
 Phase 38D Moxfield Frequency Pool Builder Checkpoint: PASS
 Phase 39A Cockatrice Interoperability Contract: PASS WITH REVIEW NOTES
-Phase 39B Cockatrice Interoperability Implementation Contract: INTERNAL PASS
-Phase 39C: BLOCKED
+Phase 39B Cockatrice Interoperability Implementation Contract: PASS
+Phase 39C Cockatrice Interoperability Implementation: INTERNAL PASS
+Phase 39D: BLOCKED
 Local alpha tag: created locally; remote tag push not verified in this environment
 ```
 
 Phase 37 received artifact-backed phase-ledger validation on merged `main`.
 Phase 38A, Phase 38B, Phase 38C, and Phase 38D passed artifact-backed
 phase-ledger validation. Phase 39A passed artifact-backed phase-ledger
-validation with review notes. Phase 39B is prepared as an
-implementation-contract-only packet. Phase 39C remains blocked until Phase 39B
-outside validation returns PASS or
-PASS WITH REVIEW NOTES.
+validation with review notes. Phase 39B passed artifact-backed phase-ledger
+validation. Phase 39C is internally complete and remains pending PR
+validation. Phase 39D remains blocked until Phase 39C outside validation
+returns PASS or PASS WITH REVIEW NOTES.
+
+Phase 39B acceptance evidence:
+
+```text
+workflow run ID: 29973752107
+validated SHA: 8296e473cc68dfd6dffcb5382de11d6327e5a69a
+artifact: codie-phase_ledger-validation-8296e473cc68dfd6dffcb5382de11d6327e5a69a
+validation scope: phase_ledger
+validator profile: all
+deterministic: CLEAN_PASS
+architecture: CLEAN_PASS
+adversarial: CLEAN_PASS
+aggregate: CLEAN_PASS
+unresolved findings: none
+required corrections: none
+```
 
 Phase 37B coverage visibility requirement:
 

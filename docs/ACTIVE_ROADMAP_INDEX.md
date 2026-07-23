@@ -93,21 +93,24 @@ Phase 38B Moxfield Frequency Pool Builder Implementation Contract: externally ac
 Phase 38C Moxfield Frequency Pool Builder Implementation: externally accepted with review notes
 Phase 38D Moxfield Frequency Pool Builder Checkpoint: externally accepted
 Phase 39A Cockatrice Interoperability Contract: externally accepted with review notes
-Phase 39B Cockatrice Interoperability Implementation Contract: internally complete
-Current action: send Phase 39B Cockatrice Interoperability Implementation Contract to PR validation
+Phase 39B Cockatrice Interoperability Implementation Contract: externally accepted
+Phase 39C Cockatrice Interoperability Implementation: internally complete
+Current action: send Phase 39C Cockatrice Interoperability Implementation to PR validation
 Local alpha tag status: created locally; remote tag push not verified in this environment
 ```
 
 ## Next Allowed Phase
 
 ```text
-Phase 39B Cockatrice Interoperability Implementation Contract
+Phase 39C Cockatrice Interoperability Implementation
 ```
 
 Phase 38D received artifact-backed phase-ledger validation on merged `main`.
 Phase 39A received artifact-backed phase-ledger validation on merged `main`.
-Phase 39B is prepared as an implementation-contract-only packet. Phase 39C
-remains blocked until Phase 39B returns PASS or PASS WITH REVIEW NOTES.
+Phase 39B received artifact-backed phase-ledger validation on merged `main`.
+Phase 39C implements the approved local, fixture-first Cockatrice
+interoperability packet surface. Phase 39D remains blocked until Phase 39C
+returns PASS or PASS WITH REVIEW NOTES.
 
 Phase 39A validation tuple:
 
@@ -146,6 +149,33 @@ phase_id: Phase39B
 phase_part: outside-validation
 gate_scope: INTERMEDIATE_PACKET
 next_phase_id: Phase39C
+next_phase_part: outside-validation
+next_gate_scope: INTERMEDIATE_PACKET
+```
+
+Phase 39B acceptance evidence:
+
+```text
+workflow run ID: 29973752107
+validated SHA: 8296e473cc68dfd6dffcb5382de11d6327e5a69a
+artifact: codie-phase_ledger-validation-8296e473cc68dfd6dffcb5382de11d6327e5a69a
+validation scope: phase_ledger
+validator profile: all
+deterministic: CLEAN_PASS
+architecture: CLEAN_PASS
+adversarial: CLEAN_PASS
+aggregate: CLEAN_PASS
+unresolved findings: none
+required corrections: none
+```
+
+Phase 39C validation tuple:
+
+```text
+phase_id: Phase39C
+phase_part: outside-validation
+gate_scope: INTERMEDIATE_PACKET
+next_phase_id: Phase39D
 next_phase_part: outside-validation
 next_gate_scope: INTERMEDIATE_PACKET
 ```
@@ -276,8 +306,9 @@ unresolved findings: none
 8. Phase 38C Moxfield Frequency Pool Builder Implementation: accepted with review notes
 9. Phase 38D Moxfield Frequency Pool Builder Checkpoint: accepted
 10. Phase 39A Cockatrice Interoperability Contract: accepted with review notes
-11. Phase 39B Cockatrice Interoperability Implementation Contract: internal pass; PR validation required
-12. Phase 39C: blocked
+11. Phase 39B Cockatrice Interoperability Implementation Contract: accepted
+12. Phase 39C Cockatrice Interoperability Implementation: internal pass; PR validation required
+13. Phase 39D: blocked
 ```
 
 The post-31 patch priority order is cemented in:

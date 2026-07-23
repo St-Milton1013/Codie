@@ -1,0 +1,26 @@
+{
+  "cards": [
+    {
+      "card_name": "Codie, Vociferous Codex",
+      "quantity": 1,
+      "zone_name": "commander",
+      "section_name": "commander",
+      "raw_name": "Codie, Vociferous Codex",
+      "scryfall_id": "scryfall-codie",
+      "oracle_id": "oracle-codie",
+      "unresolved": false,
+      "metadata": {}
+    },
+    {
+      "card_name": "Sol Ring",
+      "quantity": 1,
+      "zone_name": "main",
+      "section_name": "mainboard",
+      "raw_name": "Sol Ring",
+      "scryfall_id": "scryfall-sol-ring",
+      "oracle_id": "oracle-sol-ring",
+      "unresolved": false,
+      "metadata": {}
+    }
+  ]
+}
