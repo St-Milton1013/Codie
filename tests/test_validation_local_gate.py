@@ -12,7 +12,9 @@ from codie.validation.local_gate import (
     ACTIVE_VALIDATION_SCOPE_SCHEMA_VERSION,
     ACTIVE_VALIDATION_SCOPE_PATH,
     ActiveValidationScope,
+    CONSTITUTION_PATH,
     CONSTITUTION_VERSION,
+    CONTEXT_FILES,
     CURRENT_EXPECTED_PHASE_ID,
     REPOSITORY,
     SCHEMA_VERSION,
@@ -39,6 +41,7 @@ from codie.validation.local_gate import (
     _changed_files_for_scan,
     _content_scan_text,
     _phase_ledger_findings,
+    _run_command,
 )
 
 
@@ -91,7 +94,7 @@ def report(**overrides) -> ValidatorReport:
         "pull_request_number": PR_NUMBER,
         "validator": "deterministic",
         "result": "CLEAN_PASS",
-        "constitution_path": "docs/CODIE_V1_CONSTITUTION.md",
+        "constitution_path": CONSTITUTION_PATH,
         "constitution_version": CONSTITUTION_VERSION,
         "started_at": "2026-07-13T00:00:00+00:00",
         "completed_at": "2026-07-13T00:01:00+00:00",
@@ -136,6 +139,30 @@ def model_payload(**overrides):
 
 
 class ValidationLocalGateTest(unittest.TestCase):
+    def test_validator_reports_and_context_use_official_v2_constitution(self) -> None:
+        self.assertEqual(CONSTITUTION_PATH, "docs/CODIE_V2_CONSTITUTION.md")
+        self.assertEqual(CONSTITUTION_VERSION, "codie.constitution.v2")
+        self.assertIn(CONSTITUTION_PATH, CONTEXT_FILES)
+        self.assertNotIn("docs/CODIE_V1_CONSTITUTION.md", CONTEXT_FILES)
+        self.assertEqual(report().constitution_path, CONSTITUTION_PATH)
+        self.assertEqual(report_json_schema()["properties"]["constitution_path"]["const"], CONSTITUTION_PATH)
+
+    def test_subprocess_text_output_is_decoded_as_utf8(self) -> None:
+        completed = subprocess.CompletedProcess(("git", "diff"), 0, stdout="relationship → evidence", stderr="")
+        with mock.patch("codie.validation.local_gate.subprocess.run", return_value=completed) as run:
+            result = _run_command(("git", "diff"), Path.cwd())
+
+        self.assertEqual(result.stdout, "relationship → evidence")
+        run.assert_called_once_with(
+            ("git", "diff"),
+            cwd=Path.cwd(),
+            text=True,
+            encoding="utf-8",
+            errors="replace",
+            capture_output=True,
+            check=False,
+        )
+
     def test_valid_clean_reports_aggregate_to_clean_pass(self) -> None:
         result = aggregate_validator_reports(three_reports(), SHA)
 
@@ -536,6 +563,7 @@ class ValidationLocalGateTest(unittest.TestCase):
                         ".github/workflows/codie-local-validation.yml",
                         "tests/test_validation_local_gate.py",
                         "docs/CODIE_V1_CONSTITUTION.md",
+                        "docs/CODIE_V2_CONSTITUTION.md",
                     )
                 ),
                 stderr="",
@@ -548,6 +576,7 @@ class ValidationLocalGateTest(unittest.TestCase):
         self.assertIn(".github/workflows/codie-local-validation.yml", files)
         self.assertNotIn("tests/test_validation_local_gate.py", files)
         self.assertNotIn("docs/CODIE_V1_CONSTITUTION.md", files)
+        self.assertNotIn("docs/CODIE_V2_CONSTITUTION.md", files)
 
     def test_wrong_phase_part_rejected_against_authoritative_scope(self) -> None:
         result = self._run_security_only_gate(

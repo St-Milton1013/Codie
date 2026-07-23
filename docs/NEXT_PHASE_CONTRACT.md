@@ -4,16 +4,19 @@ Recommended next task: send Phase 39B Cockatrice Interoperability Implementation
 
 ## Constitutional Governance Overlay
 
-The Codie V2 Constitution ratification packet was a parallel governance-only change. After merge:
+The Codie V2 Constitution ratification packet passed validation and merged. The
+active authority is:
 
 ```text
 docs/CODIE_V2_CONSTITUTION.md is primary constitutional authority
 docs/CODIE_V1_CONSTITUTION.md remains unchanged as historical reference
 ```
 
-Ratification does not retroactively authorize runtime, schema, provider, UI,
-LLM, simulator, recommendation, or export implementation without accepted
-contracts.
+The validator-authority / UTF-8 follow-up only aligns validator metadata, review
+context, repair protection, and local-runner encoding with that ratification.
+Ratification and its bounded infrastructure follow-up do not retroactively
+authorize runtime, schema, provider, UI, LLM, simulator, recommendation, or
+export implementation without accepted contracts.
 
 ## Active Indexes
 

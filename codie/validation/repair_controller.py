@@ -33,6 +33,7 @@ PROTECTED_REPAIR_PATHS = frozenset(
         "docs/CODIE_LOCAL_VALIDATION_AUTOMATION_CONTRACT.md",
         "docs/CODIE_ACTIVE_VALIDATION_SCOPE.json",
         "docs/CODIE_V1_CONSTITUTION.md",
+        "docs/CODIE_V2_CONSTITUTION.md",
     }
 )
 PROTECTED_REPAIR_PREFIXES = (
@@ -753,4 +754,12 @@ def _bounded_text(text: str, limit: int = 24_000) -> str:
 
 
 def _run_command(command: tuple[str, ...], root: Path) -> subprocess.CompletedProcess[str]:
-    return subprocess.run(command, cwd=root, text=True, capture_output=True, check=False)
+    return subprocess.run(
+        command,
+        cwd=root,
+        text=True,
+        encoding="utf-8",
+        errors="replace",
+        capture_output=True,
+        check=False,
+    )

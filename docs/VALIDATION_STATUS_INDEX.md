@@ -8,13 +8,16 @@ This file is the compact validation snapshot for Codie. Detailed evidence, comma
 
 ```text
 Codie V2 Constitution Ratification: ADOPTED ON MAIN
-Outside/PR validation: merged governance adoption
+Outside/PR validation: CLEAN PASS
 Runtime or phase advancement: NONE
-V1 preservation: REQUIRED
+V1 preservation: CONFIRMED
+V2 validator authority / UTF-8 follow-up: INTERNAL PASS; OUTSIDE VALIDATION REQUIRED
 ```
 
 The ratification track was governance-only. V2 is now the primary constitution.
-V1 remains unchanged as historical reference.
+V1 remains unchanged as historical reference. The validator-authority / UTF-8
+follow-up is a bounded infrastructure track and does not replace or advance the
+active phase validation tuple.
 
 ## Current Validation Gate
 

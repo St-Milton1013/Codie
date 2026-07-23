@@ -14,8 +14,11 @@ V2 status: adopted on main
 ```
 
 The V2 adoption packet was governance-only. V2 is now the primary constitution.
-This does not retroactively authorize runtime, schema, provider, UI, LLM,
-simulator, recommendation, or export implementation without accepted contracts.
+The bounded validator-authority / UTF-8 follow-up aligns generated reports,
+model review context, repair protection, and local-runner encoding with that
+ratification. Neither packet retroactively authorizes runtime, schema,
+provider, UI, LLM, simulator, recommendation, or export implementation without
+accepted contracts.
 
 ## Current Phase Gate
 
