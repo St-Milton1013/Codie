@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: validate the Phase 40B Relationship Intelligence Schema and Repository Contract
+Recommended next task: validate the Phase 40C Relationship Intelligence Schema and Repository Implementation Contract
 
 ## Constitutional Governance Overlay
 
@@ -82,9 +82,10 @@ WITH REVIEW NOTES. Phase 39B returned artifact-backed PASS. Phase 39C is
 accepted as the local, fixture-first Cockatrice interoperability
 implementation. Phase 39D returned artifact-backed PASS and closed the
 Cockatrice track. Phase 40A received artifact-backed PASS and established the
-Relationship Intelligence core. Phase 40B is internally complete as a
-contract-only schema and repository packet. Phase 40C remains blocked until
-Phase 40B outside validation returns PASS or PASS WITH REVIEW NOTES.
+Relationship Intelligence core. Phase 40B received artifact-backed PASS.
+Phase 40C is internally complete as an implementation-contract-only packet.
+Phase 40D remains blocked until Phase 40C outside validation returns PASS or
+PASS WITH REVIEW NOTES.
 
 Explicit Phase 39A validation tuple:
 
@@ -283,7 +284,43 @@ next_phase_part: outside-validation
 next_gate_scope: INTERMEDIATE_PACKET
 ```
 
-Phase 40C remains blocked until Phase 40B returns PASS or PASS WITH REVIEW
+Phase 40B acceptance evidence:
+
+```text
+workflow run ID: 30050686610
+validated SHA: e90b48ca2a95e325ea1efec646fab80951e78c9f
+artifact: codie-phase_ledger-validation-e90b48ca2a95e325ea1efec646fab80951e78c9f
+validation scope: phase_ledger
+validator profile: all
+deterministic: CLEAN_PASS
+architecture: CLEAN_PASS
+adversarial: CLEAN_PASS
+aggregate: CLEAN_PASS
+severity totals: BLOCKER 0, CRITICAL 0, HIGH 0, MEDIUM 0, LOW 0, INFORMATIONAL 0
+skipped validators: none
+unresolved findings: none
+errors: none
+final governance verdict: PASS
+required corrections: none
+```
+
+Explicit Phase 40C validation tuple:
+
+```text
+phase_id: Phase40C
+phase_part: outside-validation
+gate_scope: INTERMEDIATE_PACKET
+```
+
+Explicit next-phase validation tuple:
+
+```text
+next_phase_id: Phase40D
+next_phase_part: outside-validation
+next_gate_scope: INTERMEDIATE_PACKET
+```
+
+Phase 40D remains blocked until Phase 40C returns PASS or PASS WITH REVIEW
 NOTES.
 
 Phase 38A must comply with V2 rules for Moxfield observations, user-local deck
