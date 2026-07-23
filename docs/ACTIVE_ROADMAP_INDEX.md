@@ -98,24 +98,25 @@ Phase 39C Cockatrice Interoperability Implementation: externally accepted
 Phase 39D Cockatrice Interoperability Checkpoint: externally accepted
 Phase 40A Relationship Intelligence Core Contract: externally accepted
 Phase 40B Relationship Intelligence Schema and Repository Contract: externally accepted
-Phase 40C Relationship Intelligence Schema and Repository Implementation Contract: internally complete
-Current action: validate the Phase 40C implementation contract
+Phase 40C Relationship Intelligence Schema and Repository Implementation Contract: externally accepted
+Phase 40D Relationship Intelligence Schema and Repository Implementation: internally complete
+Current action: validate the Phase 40D implementation
 Local alpha tag status: verified on origin as local-alpha-0.1.0
 ```
 
 ## Next Allowed Phase
 
 ```text
-Phase 40C Relationship Intelligence Schema and Repository Implementation Contract
+Phase 40D Relationship Intelligence Schema and Repository Implementation
 ```
 
 Current-status clarification:
 
 ```text
-Phase 40B status: externally accepted.
-Phase 40C is the active implementation-contract packet.
-The protected active scope remains Phase40B until this PR merges; that
-transition safeguard preserves Phase 40B's externally accepted status.
+Phase 40C status: externally accepted.
+Phase 40D is the active implementation packet.
+The protected active scope remains Phase40C until this PR merges; that
+transition safeguard preserves Phase 40C's externally accepted status.
 ```
 
 Phase 38D received artifact-backed phase-ledger validation on merged `main`.
@@ -125,9 +126,9 @@ Phase 39C received artifact-backed phase-ledger validation on merged `main`.
 Phase 39D received artifact-backed phase-ledger validation on merged `main`
 and closed the local, fixture-first Cockatrice track. Phase 40A received
 artifact-backed PASS and established the Relationship Intelligence core.
-Phase 40B received artifact-backed PASS. Phase 40C is contract-only and
-defines the exact implementation boundary. Phase 40D remains blocked until
-Phase 40C returns PASS or PASS WITH REVIEW NOTES.
+Phase 40B and Phase 40C received artifact-backed PASS. Phase 40D implements
+only the accepted persistence boundary. Phase 40E remains blocked until Phase
+40D returns PASS or PASS WITH REVIEW NOTES.
 
 Phase 39A validation tuple:
 

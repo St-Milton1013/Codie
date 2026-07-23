@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json
 from collections.abc import Mapping
 from datetime import date
 from typing import Any
@@ -10,6 +11,51 @@ from .base import BaseRepository, RepositoryError
 
 
 _OBSERVATION_SCOPES = {"all", "top_16", "winners"}
+_PRIVATE_RELATIONSHIP_KEYS = {
+    "raw_import_text",
+    "raw_deck_text",
+    "private_note",
+    "private_notes",
+    "user_notes",
+}
+_RELATIONSHIP_METRICS = {
+    "support",
+    "directional_confidence",
+    "dependence_delta",
+    "lift",
+    "leverage",
+    "jaccard_similarity",
+    "pmi",
+}
+
+
+def _canonical_json(value: Any, field_name: str) -> str:
+    if isinstance(value, str):
+        try:
+            decoded = json.loads(value)
+        except json.JSONDecodeError as exc:
+            raise RepositoryError(f"{field_name} must contain valid JSON") from exc
+    else:
+        decoded = value
+
+    def validate(item: Any) -> None:
+        if isinstance(item, Mapping):
+            for key, nested in item.items():
+                if str(key).casefold() in _PRIVATE_RELATIONSHIP_KEYS:
+                    raise RepositoryError(f"{field_name} contains private user data")
+                validate(nested)
+        elif isinstance(item, (list, tuple)):
+            for nested in item:
+                validate(nested)
+        elif item is not None and not isinstance(item, (str, int, float, bool)):
+            raise RepositoryError(f"{field_name} must be JSON-compatible")
+
+    validate(decoded)
+    return json.dumps(decoded, sort_keys=True, separators=(",", ":"), ensure_ascii=True)
+
+
+def _same_row(row: Mapping[str, Any], data: Mapping[str, Any], columns: tuple[str, ...]) -> bool:
+    return all(row[column] == data.get(column) for column in columns)
 
 
 def _validate_date(value: str | None, field_name: str) -> None:
@@ -671,3 +717,266 @@ class AnalyticsRepository(BaseRepository):
                 )
         row = self.connection.execute("SELECT COUNT(*) AS count FROM evidence_counts").fetchone()
         return int(row["count"])
+
+    def insert_relationship_population_spec(self, spec: Mapping[str, Any]) -> int:
+        required = (
+            "population_spec_version",
+            "population_spec_hash",
+            "observation_unit",
+            "scope_type",
+            "deduplication_policy",
+            "concentration_policy",
+            "spec_json",
+            "created_at",
+        )
+        self.require(spec, required)
+        data = dict(spec)
+        data["spec_json"] = _canonical_json(data["spec_json"], "spec_json")
+        columns = tuple(data)
+        existing = self.connection.execute(
+            """
+            SELECT * FROM relationship_population_specs
+            WHERE population_spec_hash = ? AND population_spec_version = ?
+            """,
+            (data["population_spec_hash"], data["population_spec_version"]),
+        ).fetchone()
+        if existing is not None:
+            if not _same_row(existing, data, columns):
+                raise RepositoryError("Conflicting immutable population specification identity")
+            return int(existing["population_spec_id"])
+        return self.insert("relationship_population_specs", data)
+
+    def get_relationship_population_spec(
+        self, population_spec_hash: str, population_spec_version: str
+    ):
+        return self.connection.execute(
+            """
+            SELECT * FROM relationship_population_specs
+            WHERE population_spec_hash = ? AND population_spec_version = ?
+            """,
+            (population_spec_hash, population_spec_version),
+        ).fetchone()
+
+    def insert_relationship_population_manifest(
+        self, manifest: Mapping[str, Any], members: list[Mapping[str, Any]]
+    ) -> int:
+        required = (
+            "population_manifest_version",
+            "population_manifest_hash",
+            "population_spec_id",
+            "population_spec_version",
+            "population_spec_hash",
+            "source_snapshot_refs_json",
+            "candidate_population_count",
+            "usable_population_count",
+            "unknown_or_excluded_count",
+            "deduplicated_population_count",
+            "generated_at",
+        )
+        self.require(manifest, required)
+        data = dict(manifest)
+        data["source_snapshot_refs_json"] = _canonical_json(
+            data["source_snapshot_refs_json"], "source_snapshot_refs_json"
+        )
+        for field in (
+            "candidate_population_count",
+            "usable_population_count",
+            "unknown_or_excluded_count",
+            "deduplicated_population_count",
+        ):
+            if int(data[field]) < 0:
+                raise RepositoryError(f"{field} must be non-negative")
+        existing = self.connection.execute(
+            """
+            SELECT * FROM relationship_population_manifests
+            WHERE population_manifest_hash = ? AND population_manifest_version = ?
+            """,
+            (data["population_manifest_hash"], data["population_manifest_version"]),
+        ).fetchone()
+        if existing is not None:
+            if not _same_row(existing, data, tuple(data)):
+                raise RepositoryError("Conflicting immutable population manifest identity")
+            existing_members = self.list_relationship_population_members(
+                int(existing["population_manifest_id"])
+            )
+            normalized_members = []
+            for sequence, member in enumerate(members):
+                normalized = dict(member)
+                normalized.setdefault("member_sequence", sequence)
+                normalized_members.append(normalized)
+            if len(existing_members) != len(normalized_members) or any(
+                not _same_row(row, member, tuple(member))
+                for row, member in zip(existing_members, sorted(
+                    normalized_members, key=lambda item: int(item["member_sequence"])
+                ))
+            ):
+                raise RepositoryError("Conflicting immutable population manifest members")
+            return int(existing["population_manifest_id"])
+
+        with BaseRepository.transaction(self.connection, "relationship_manifest"):
+            manifest_id = self.insert("relationship_population_manifests", data)
+            for sequence, member in enumerate(members):
+                member_data = dict(member)
+                member_data.setdefault("member_sequence", sequence)
+                member_data["population_manifest_id"] = manifest_id
+                self.require(
+                    member_data,
+                    (
+                        "observation_unit_type",
+                        "observation_unit_id",
+                        "inclusion_status",
+                        "deduplication_key",
+                    ),
+                )
+                self.insert("relationship_population_members", member_data)
+        return manifest_id
+
+    def get_relationship_population_manifest(self, population_manifest_id: int):
+        return self.fetch_by_id(
+            "relationship_population_manifests",
+            "population_manifest_id",
+            population_manifest_id,
+        )
+
+    def list_relationship_population_members(self, population_manifest_id: int):
+        return self.connection.execute(
+            """
+            SELECT * FROM relationship_population_members
+            WHERE population_manifest_id = ?
+            ORDER BY member_sequence, population_member_id
+            """,
+            (population_manifest_id,),
+        ).fetchall()
+
+    def insert_relationship_measurement(
+        self, measurement: Mapping[str, Any], metrics: list[Mapping[str, Any]]
+    ) -> int:
+        required = (
+            "relationship_measurement_version",
+            "relationship_measurement_hash",
+            "relationship_type",
+            "source_endpoint_type",
+            "source_endpoint_id",
+            "target_endpoint_type",
+            "target_endpoint_id",
+            "directionality",
+            "population_manifest_id",
+            "population_manifest_version",
+            "N",
+            "nA",
+            "nB",
+            "nAB",
+            "candidate_population_count",
+            "usable_population_count",
+            "unknown_or_excluded_count",
+            "deduplicated_population_count",
+            "observed_co_occurrence",
+            "expected_co_occurrence",
+            "metric_bundle_version",
+            "provenance_refs_json",
+            "caveat_refs_json",
+            "generated_at",
+        )
+        self.require(measurement, required)
+        data = dict(measurement)
+        data["provenance_refs_json"] = _canonical_json(
+            data["provenance_refs_json"], "provenance_refs_json"
+        )
+        data["caveat_refs_json"] = _canonical_json(
+            data["caveat_refs_json"], "caveat_refs_json"
+        )
+        n, na, nb, nab = (int(data[key]) for key in ("N", "nA", "nB", "nAB"))
+        if n <= 0 or not (0 <= nab <= na <= n and 0 <= nab <= nb <= n):
+            raise RepositoryError("Relationship counts violate N/nA/nB/nAB invariants")
+        existing = self.connection.execute(
+            """
+            SELECT * FROM relationship_measurements
+            WHERE relationship_measurement_hash = ?
+              AND relationship_measurement_version = ?
+            """,
+            (
+                data["relationship_measurement_hash"],
+                data["relationship_measurement_version"],
+            ),
+        ).fetchone()
+        if existing is not None:
+            if not _same_row(existing, data, tuple(data)):
+                raise RepositoryError("Conflicting immutable relationship measurement identity")
+            existing_metrics = self.list_relationship_measurement_metrics(
+                int(existing["relationship_measurement_id"])
+            )
+            normalized_metrics = sorted(
+                (dict(metric) for metric in metrics),
+                key=lambda item: (
+                    str(item["metric_name"]),
+                    str(item["orientation"]),
+                    str(item["metric_version"]),
+                ),
+            )
+            if len(existing_metrics) != len(normalized_metrics) or any(
+                not _same_row(row, metric, tuple(metric))
+                for row, metric in zip(existing_metrics, normalized_metrics)
+            ):
+                raise RepositoryError("Conflicting immutable relationship measurement metrics")
+            return int(existing["relationship_measurement_id"])
+
+        with BaseRepository.transaction(self.connection, "relationship_measurement"):
+            measurement_id = self.insert("relationship_measurements", data)
+            for metric in metrics:
+                metric_data = dict(metric)
+                metric_data["relationship_measurement_id"] = measurement_id
+                self.require(metric_data, ("metric_name", "metric_version", "orientation"))
+                if metric_data["metric_name"] not in _RELATIONSHIP_METRICS:
+                    raise RepositoryError("Unsupported relationship metric name")
+                value = metric_data.get("metric_value")
+                reason = metric_data.get("undefined_reason")
+                if (value is None) == (reason in (None, "")):
+                    raise RepositoryError(
+                        "Metric value and undefined reason must be mutually exclusive"
+                    )
+                self.insert("relationship_measurement_metrics", metric_data)
+        return measurement_id
+
+    def get_relationship_measurement(self, relationship_measurement_id: int):
+        return self.fetch_by_id(
+            "relationship_measurements",
+            "relationship_measurement_id",
+            relationship_measurement_id,
+        )
+
+    def list_relationship_measurements(
+        self,
+        *,
+        population_manifest_id: int | None = None,
+        source_endpoint_id: str | None = None,
+        target_endpoint_id: str | None = None,
+    ):
+        filters: list[str] = []
+        params: list[Any] = []
+        for column, value in (
+            ("population_manifest_id", population_manifest_id),
+            ("source_endpoint_id", source_endpoint_id),
+            ("target_endpoint_id", target_endpoint_id),
+        ):
+            if value is not None:
+                filters.append(f"{column} = ?")
+                params.append(value)
+        where = f"WHERE {' AND '.join(filters)}" if filters else ""
+        return self.connection.execute(
+            f"""
+            SELECT * FROM relationship_measurements
+            {where}
+            ORDER BY generated_at, relationship_measurement_id
+            """,
+            tuple(params),
+        ).fetchall()
+
+    def list_relationship_measurement_metrics(self, relationship_measurement_id: int):
+        return self.connection.execute(
+            """
+            SELECT * FROM relationship_measurement_metrics
+            WHERE relationship_measurement_id = ?
+            ORDER BY metric_name, orientation, metric_version
+            """,
+            (relationship_measurement_id,),
+        ).fetchall()

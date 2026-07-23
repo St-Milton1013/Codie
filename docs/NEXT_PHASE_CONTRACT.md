@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: validate the Phase 40C Relationship Intelligence Schema and Repository Implementation Contract
+Recommended next task: validate the Phase 40D Relationship Intelligence Schema and Repository Implementation
 
 ## Constitutional Governance Overlay
 
@@ -83,9 +83,9 @@ accepted as the local, fixture-first Cockatrice interoperability
 implementation. Phase 39D returned artifact-backed PASS and closed the
 Cockatrice track. Phase 40A received artifact-backed PASS and established the
 Relationship Intelligence core. Phase 40B received artifact-backed PASS.
-Phase 40C is internally complete as an implementation-contract-only packet.
-Phase 40D remains blocked until Phase 40C outside validation returns PASS or
-PASS WITH REVIEW NOTES.
+Phase 40C received artifact-backed PASS. Phase 40D is internally complete as
+the accepted persistence implementation. Phase 40E remains blocked until
+Phase 40D outside validation returns PASS or PASS WITH REVIEW NOTES.
 
 Explicit Phase 39A validation tuple:
 
@@ -320,7 +320,37 @@ next_phase_part: outside-validation
 next_gate_scope: INTERMEDIATE_PACKET
 ```
 
-Phase 40D remains blocked until Phase 40C returns PASS or PASS WITH REVIEW
+Phase 40C acceptance evidence:
+
+```text
+workflow run ID: 30051000010
+validated SHA: 08314aad80324f4e483ec6a9e38ad4cb9b7e1074
+artifact: codie-phase_ledger-validation-08314aad80324f4e483ec6a9e38ad4cb9b7e1074
+deterministic: CLEAN_PASS
+architecture: CLEAN_PASS
+adversarial: CLEAN_PASS
+aggregate: CLEAN_PASS
+findings, skips, and errors: none
+final governance verdict: PASS
+```
+
+Explicit Phase 40D validation tuple:
+
+```text
+phase_id: Phase40D
+phase_part: outside-validation
+gate_scope: INTERMEDIATE_PACKET
+```
+
+Explicit next-phase validation tuple:
+
+```text
+next_phase_id: Phase40E
+next_phase_part: outside-validation
+next_gate_scope: INTERMEDIATE_PACKET
+```
+
+Phase 40E remains blocked until Phase 40D returns PASS or PASS WITH REVIEW
 NOTES.
 
 Phase 38A must comply with V2 rules for Moxfield observations, user-local deck
