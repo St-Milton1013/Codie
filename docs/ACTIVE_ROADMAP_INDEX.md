@@ -107,6 +107,15 @@ Local alpha tag status: verified on origin as local-alpha-0.1.0
 Phase 40A Relationship Intelligence Core Contract
 ```
 
+Current-status clarification:
+
+```text
+Phase 39D is externally accepted, not internally complete or pending validation.
+Phase 40A is the next allowed contract packet.
+The protected active scope remains Phase39D until this PR merges; that
+transition safeguard does not reverse Phase 39D acceptance.
+```
+
 Phase 38D received artifact-backed phase-ledger validation on merged `main`.
 Phase 39A received artifact-backed phase-ledger validation on merged `main`.
 Phase 39B received artifact-backed phase-ledger validation on merged `main`.
