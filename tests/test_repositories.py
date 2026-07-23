@@ -129,7 +129,7 @@ class RelationshipPersistenceRepositoryTest(unittest.TestCase):
     def test_spec_json_is_deterministic_and_identity_is_idempotent(self) -> None:
         spec_id = self.repository.insert_relationship_population_spec(self.spec())
         repeated = self.repository.insert_relationship_population_spec(
-            self.spec(spec_json='{"placement":"top_16","region":null}')
+            self.spec(spec_json={"region": None, "placement": "top_16"})
         )
         self.assertEqual(spec_id, repeated)
         row = self.repository.get_relationship_population_spec(
@@ -197,11 +197,11 @@ class RelationshipPersistenceRepositoryTest(unittest.TestCase):
                     self.members(),
                 )
 
-    def test_json_duplicate_keys_references_and_oversized_input_are_rejected(self) -> None:
-        with self.assertRaisesRegex(RepositoryError, "duplicate key"):
+    def test_json_text_duplicate_references_and_oversized_input_are_rejected(self) -> None:
+        with self.assertRaisesRegex(RepositoryError, "structured JSON object"):
             self.repository.insert_relationship_population_spec(
                 self.spec(
-                    population_spec_hash="duplicate-key",
+                    population_spec_hash="raw-json-text",
                     spec_json='{"placement":"top_16","placement":"winner"}',
                 )
             )

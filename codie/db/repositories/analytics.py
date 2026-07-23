@@ -43,7 +43,6 @@ _POPULATION_SPEC_JSON_KEYS = {
     "window_start_date",
     "zone_scope",
 }
-_MAX_RELATIONSHIP_JSON_CHARS = 65536
 _MAX_RELATIONSHIP_STRING_CHARS = 2048
 _RELATIONSHIP_METRICS = {
     "support",
@@ -56,32 +55,11 @@ _RELATIONSHIP_METRICS = {
 }
 
 
-def _decode_json(value: Any, field_name: str) -> Any:
-    if isinstance(value, str):
-        if len(value) > _MAX_RELATIONSHIP_JSON_CHARS:
-            raise RepositoryError(f"{field_name} exceeds maximum JSON size")
-
-        def reject_duplicate_keys(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
-            result: dict[str, Any] = {}
-            for key, item in pairs:
-                if key in result:
-                    raise RepositoryError(f"{field_name} contains duplicate key: {key}")
-                result[key] = item
-            return result
-
-        try:
-            return json.loads(value, object_pairs_hook=reject_duplicate_keys)
-        except json.JSONDecodeError as exc:
-            raise RepositoryError(f"{field_name} must contain valid JSON") from exc
-    return value
-
-
 def _canonical_population_spec_json(value: Any) -> str:
     field_name = "spec_json"
-    decoded = _decode_json(value, field_name)
-    if not isinstance(decoded, dict):
-        raise RepositoryError(f"{field_name} must be a JSON object")
-    for key, item in decoded.items():
+    if not isinstance(value, dict):
+        raise RepositoryError(f"{field_name} must be a structured JSON object")
+    for key, item in value.items():
         if not isinstance(key, str):
             raise RepositoryError(f"{field_name} object keys must be strings")
         normalized_key = "".join(character for character in key.casefold() if character.isalnum())
@@ -107,23 +85,22 @@ def _canonical_population_spec_json(value: Any) -> str:
             raise RepositoryError(f"{field_name} contains an oversized string")
     try:
         return json.dumps(
-            decoded, sort_keys=True, separators=(",", ":"), ensure_ascii=True, allow_nan=False
+            value, sort_keys=True, separators=(",", ":"), ensure_ascii=True, allow_nan=False
         )
     except ValueError as exc:
         raise RepositoryError(f"{field_name} numbers must be finite") from exc
 
 
 def _canonical_reference_json(value: Any, field_name: str) -> str:
-    decoded = _decode_json(value, field_name)
-    if not isinstance(decoded, list):
-        raise RepositoryError(f"{field_name} must be a JSON array")
-    if any(not isinstance(item, str) or not item.strip() for item in decoded):
+    if not isinstance(value, list):
+        raise RepositoryError(f"{field_name} must be a structured JSON array")
+    if any(not isinstance(item, str) or not item.strip() for item in value):
         raise RepositoryError(f"{field_name} must contain non-empty string references")
-    if any(len(item) > _MAX_RELATIONSHIP_STRING_CHARS for item in decoded):
+    if any(len(item) > _MAX_RELATIONSHIP_STRING_CHARS for item in value):
         raise RepositoryError(f"{field_name} contains an oversized reference")
-    if len(decoded) != len(set(decoded)):
+    if len(value) != len(set(value)):
         raise RepositoryError(f"{field_name} contains duplicate references")
-    return json.dumps(decoded, sort_keys=True, separators=(",", ":"), ensure_ascii=True)
+    return json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=True)
 
 
 def _same_row(row: Mapping[str, Any], data: Mapping[str, Any], columns: tuple[str, ...]) -> bool:
