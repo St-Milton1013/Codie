@@ -1138,6 +1138,14 @@ class ValidationLocalGateTest(unittest.TestCase):
                     "required_correction": "Remove the trusted prompt instruction.",
                 },
                 {
+                    "severity": "BLOCKER",
+                    "title": "Untrusted label treated as a finding",
+                    "description": "The review-material safety label is itself reported as a vulnerability.",
+                    "affected_files": ["codie/validation/local_gate.py"],
+                    "governing_rule": "UNTRUSTED CONTENT",
+                    "required_correction": "Remove the trusted prompt boundary.",
+                },
+                {
                     "severity": "HIGH",
                     "title": "Valid architecture issue",
                     "description": "Changed code imports through the wrong boundary.",
