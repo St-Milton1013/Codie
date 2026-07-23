@@ -41,6 +41,7 @@ from codie.validation.local_gate import (
     _changed_files_for_scan,
     _content_scan_text,
     _phase_ledger_findings,
+    _phase_ledger_scan_files,
     _run_command,
 )
 
@@ -442,6 +443,28 @@ class ValidationLocalGateTest(unittest.TestCase):
 
             self.assertEqual(findings, ())
 
+    def test_phase_ledger_model_scan_is_bounded_to_active_phase(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            write_scope(root, phase_id="Phase39C")
+            tracked = (
+                "docs/CHECKPOINT_PHASE39C_REPORT.md",
+                "docs/PHASE39C_IMPLEMENTATION_REPORT.md",
+                "docs/CHECKPOINT_PHASE10_REPORT.md",
+                "docs/OUTSIDE_VALIDATION_PHASE38D_PROMPT.md",
+                "docs/UNRELATED_DESIGN.md",
+            )
+
+            with mock.patch("codie.validation.local_gate._tracked_files", return_value=tracked):
+                files = _phase_ledger_scan_files(root)
+
+            self.assertIn(ACTIVE_VALIDATION_SCOPE_PATH, files)
+            self.assertIn("docs/CHECKPOINT_PHASE39C_REPORT.md", files)
+            self.assertIn("docs/PHASE39C_IMPLEMENTATION_REPORT.md", files)
+            self.assertNotIn("docs/CHECKPOINT_PHASE10_REPORT.md", files)
+            self.assertNotIn("docs/OUTSIDE_VALIDATION_PHASE38D_PROMPT.md", files)
+            self.assertNotIn("docs/UNRELATED_DESIGN.md", files)
+
     def test_phase_ledger_rejects_missing_active_phase_reference(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
@@ -752,6 +775,26 @@ class ValidationLocalGateTest(unittest.TestCase):
 
         self.assertEqual(report_result.result, "ERROR")
         self.assertIn("Ollama executable is unavailable.", report_result.errors)
+
+    def test_ollama_timeout_is_validator_error(self) -> None:
+        options = ValidationGateOptions(
+            phase_id=CURRENT_EXPECTED_PHASE_ID,
+            phase_part="outside-validation",
+            gate_scope="INTERMEDIATE_PACKET",
+            target_sha=SHA,
+            pull_request_number=PR_NUMBER,
+            branch=BRANCH,
+        )
+
+        report_result = run_ollama_validator(
+            "architecture",
+            options,
+            Path.cwd(),
+            ollama_runner=lambda _model, _prompt: (_ for _ in ()).throw(TimeoutError()),
+        )
+
+        self.assertEqual(report_result.result, "ERROR")
+        self.assertEqual(report_result.errors, ("Ollama validator request timed out.",))
 
     def test_cost_policy_violation_is_reported(self) -> None:
         result = aggregate_validator_reports(

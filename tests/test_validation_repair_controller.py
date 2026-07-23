@@ -843,14 +843,18 @@ class RepairControllerTest(unittest.TestCase):
         workflow = Path(".github/workflows/codie-local-validation.yml").read_text(encoding="utf-8")
         pr_section = workflow.split("manual-validation:")[0]
         manual_validation_section = workflow.split("manual-validation:")[1].split("manual-repair:")[0]
+        snapshot_section = workflow.split("manual-snapshot-validation:")[1].split("manual-repair:")[0]
 
-        for section in (pr_section, manual_validation_section):
+        for section in (pr_section, manual_validation_section, snapshot_section):
             self.assertIn("Ensure validation artifact after infrastructure failure", section)
             self.assertIn("codie-validation-result.json", section)
             self.assertIn("codie-validation-summary.md", section)
             self.assertIn('final_result = "VALIDATOR_ERROR"', section)
             self.assertIn("workflow infrastructure failed before validators ran", section)
             self.assertIn("inspect preceding step logs for the original failure", section)
+            self.assertIn("$artifactIsCurrent", section)
+            self.assertIn("$payload.target_sha", section)
+            self.assertIn("Remove-Item -LiteralPath validation_artifacts -Recurse -Force", section)
             self.assertIn("if-no-files-found: warn", section)
 
     def test_pull_request_workflow_resolves_phase_without_phase35a_hardcoding(self) -> None:
@@ -879,6 +883,8 @@ class RepairControllerTest(unittest.TestCase):
         self.assertIn("--validation-scope", snapshot_section)
         self.assertIn("--validator-profile", snapshot_section)
         self.assertIn("--target-ref", snapshot_section)
+        self.assertIn('$payload.validation_scope -eq "${{ inputs.validation_scope }}"', snapshot_section)
+        self.assertIn('$payload.validator_profile -eq "${{ inputs.validator_profile }}"', snapshot_section)
         self.assertIn("codie-${{ inputs.validation_scope }}-validation-${{ steps.target.outputs.target_sha }}", snapshot_section)
         self.assertNotIn("scripts/codie_repair_controller.py", snapshot_section)
         self.assertNotIn("contents: write", snapshot_section)
