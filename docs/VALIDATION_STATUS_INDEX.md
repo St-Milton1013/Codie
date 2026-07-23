@@ -92,8 +92,9 @@ Phase 38D Moxfield Frequency Pool Builder Checkpoint: PASS
 Phase 39A Cockatrice Interoperability Contract: PASS WITH REVIEW NOTES
 Phase 39B Cockatrice Interoperability Implementation Contract: PASS
 Phase 39C Cockatrice Interoperability Implementation: PASS
-Phase 39D Cockatrice Interoperability Checkpoint: INTERNAL PASS
-Phase 40A Relationship Intelligence Core Contract: BLOCKED
+Phase 39D Cockatrice Interoperability Checkpoint: PASS
+Phase 40A Relationship Intelligence Core Contract: INTERNAL PASS
+Phase 40B Relationship Intelligence Schema and Repository Contract: BLOCKED
 Local alpha tag: verified on origin as local-alpha-0.1.0
 ```
 
@@ -102,9 +103,10 @@ Phase 38A, Phase 38B, Phase 38C, and Phase 38D passed artifact-backed
 phase-ledger validation. Phase 39A passed artifact-backed phase-ledger
 validation with review notes. Phase 39B passed artifact-backed phase-ledger
 validation. Phase 39C passed artifact-backed phase-ledger validation. Phase
-39D is internally complete as a checkpoint-only packet. Phase 40A remains
-blocked until Phase 39D outside validation returns PASS or PASS WITH REVIEW
-NOTES.
+39D passed artifact-backed phase-ledger validation and closed the Cockatrice
+track. Phase 40A is internally complete as a contract-only packet. Phase 40B
+remains blocked until Phase 40A outside validation returns PASS or PASS WITH
+REVIEW NOTES.
 
 Phase 39C acceptance evidence:
 
@@ -132,6 +134,36 @@ phase_id: Phase39D
 phase_part: outside-validation
 gate_scope: INTERMEDIATE_PACKET
 next_phase_id: Phase40A
+next_phase_part: outside-validation
+next_gate_scope: INTERMEDIATE_PACKET
+```
+
+Phase 39D acceptance evidence:
+
+```text
+workflow run ID: 30027838101
+validated SHA: 51deab669d8bafaf0531143f8439ef79fa192ca2
+artifact: codie-phase_ledger-validation-51deab669d8bafaf0531143f8439ef79fa192ca2
+validation scope: phase_ledger
+validator profile: all
+deterministic: CLEAN_PASS
+architecture: CLEAN_PASS
+adversarial: CLEAN_PASS
+aggregate: CLEAN_PASS
+severity totals: BLOCKER 0, CRITICAL 0, HIGH 0, MEDIUM 0, LOW 0, INFORMATIONAL 0
+skipped validators: none
+unresolved findings: none
+errors: none
+required corrections: none
+```
+
+Phase 40A validation tuple:
+
+```text
+phase_id: Phase40A
+phase_part: outside-validation
+gate_scope: INTERMEDIATE_PACKET
+next_phase_id: Phase40B
 next_phase_part: outside-validation
 next_gate_scope: INTERMEDIATE_PACKET
 ```

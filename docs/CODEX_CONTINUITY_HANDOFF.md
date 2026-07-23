@@ -2585,7 +2585,7 @@ adversarial: CLEAN_PASS
 aggregate: CLEAN_PASS
 ```
 
-## Current Phase 38D Handoff
+## Current Phase 40A Handoff
 
 ```text
 Phase 38A Moxfield Frequency Pool Builder Contract: PASS
@@ -2595,9 +2595,10 @@ Phase 38D Moxfield Frequency Pool Builder Checkpoint: PASS
 Phase 39A Cockatrice Interoperability Contract: PASS WITH REVIEW NOTES
 Phase 39B Cockatrice Interoperability Implementation Contract: PASS
 Phase 39C Cockatrice Interoperability Implementation: PASS
-Phase 39D Cockatrice Interoperability Checkpoint: INTERNAL PASS
-Current action: send Phase 39D checkpoint packet to PR validation
-Phase 40A Relationship Intelligence Core Contract: BLOCKED until Phase 39D returns PASS or PASS WITH REVIEW NOTES
+Phase 39D Cockatrice Interoperability Checkpoint: PASS
+Phase 40A Relationship Intelligence Core Contract: INTERNAL PASS
+Current action: send Phase 40A contract packet to PR validation
+Phase 40B Relationship Intelligence Schema and Repository Contract: BLOCKED until Phase 40A returns PASS or PASS WITH REVIEW NOTES
 ```
 
 Phase 38C implements a local, fixture-first Moxfield Frequency Pool Builder. It
@@ -2609,9 +2610,11 @@ current Moxfield builder track as a checkpoint-only packet. Phase 39A begins
 the Cockatrice Interoperability track contract-first. Phase 39B narrowed the
 implementation boundary and returned artifact-backed PASS. Phase 39C implements
 only the approved local, fixture-first, in-memory Cockatrice import/export
-packet surface and returned artifact-backed PASS. Phase 39D closes the
-Cockatrice track as a checkpoint-only packet before the V2 Relationship
-Intelligence program begins contract-first.
+packet surface and returned artifact-backed PASS. Phase 39D returned
+artifact-backed PASS and closed the Cockatrice track. Phase 40A defines the
+V2 Relationship Intelligence core boundary contract-first. It adds no
+production models, schema, repositories, metrics, providers, integrations, or
+recommendation behavior.
 
 Phase 38C validation tuple:
 
@@ -2763,6 +2766,37 @@ phase_id: Phase39D
 phase_part: outside-validation
 gate_scope: INTERMEDIATE_PACKET
 next_phase_id: Phase40A
+next_phase_part: outside-validation
+next_gate_scope: INTERMEDIATE_PACKET
+```
+
+Phase 39D acceptance evidence:
+
+```text
+workflow run ID: 30027838101
+validated SHA: 51deab669d8bafaf0531143f8439ef79fa192ca2
+artifact: codie-phase_ledger-validation-51deab669d8bafaf0531143f8439ef79fa192ca2
+validation scope: phase_ledger
+validator profile: all
+deterministic: CLEAN_PASS
+architecture: CLEAN_PASS
+adversarial: CLEAN_PASS
+aggregate: CLEAN_PASS
+severity totals: BLOCKER 0, CRITICAL 0, HIGH 0, MEDIUM 0, LOW 0, INFORMATIONAL 0
+skipped validators: none
+unresolved findings: none
+errors: none
+final governance verdict: PASS
+required corrections: none
+```
+
+Phase 40A validation tuple:
+
+```text
+phase_id: Phase40A
+phase_part: outside-validation
+gate_scope: INTERMEDIATE_PACKET
+next_phase_id: Phase40B
 next_phase_part: outside-validation
 next_gate_scope: INTERMEDIATE_PACKET
 ```

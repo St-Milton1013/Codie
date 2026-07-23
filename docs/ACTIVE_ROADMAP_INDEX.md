@@ -95,24 +95,35 @@ Phase 38D Moxfield Frequency Pool Builder Checkpoint: externally accepted
 Phase 39A Cockatrice Interoperability Contract: externally accepted with review notes
 Phase 39B Cockatrice Interoperability Implementation Contract: externally accepted
 Phase 39C Cockatrice Interoperability Implementation: externally accepted
-Phase 39D Cockatrice Interoperability Checkpoint: internally complete
-Current action: send Phase 39D Cockatrice Interoperability Checkpoint to PR validation
+Phase 39D Cockatrice Interoperability Checkpoint: externally accepted
+Phase 40A Relationship Intelligence Core Contract: internally complete
+Current action: send Phase 40A Relationship Intelligence Core Contract to PR validation
 Local alpha tag status: verified on origin as local-alpha-0.1.0
 ```
 
 ## Next Allowed Phase
 
 ```text
-Phase 39D Cockatrice Interoperability Checkpoint
+Phase 40A Relationship Intelligence Core Contract
+```
+
+Current-status clarification:
+
+```text
+Phase 39D status: externally accepted.
+Phase 40A is the next allowed contract packet.
+The protected active scope remains Phase39D until this PR merges; that
+transition safeguard preserves Phase 39D's externally accepted status.
 ```
 
 Phase 38D received artifact-backed phase-ledger validation on merged `main`.
 Phase 39A received artifact-backed phase-ledger validation on merged `main`.
 Phase 39B received artifact-backed phase-ledger validation on merged `main`.
 Phase 39C received artifact-backed phase-ledger validation on merged `main`.
-Phase 39D closes the local, fixture-first Cockatrice track as a checkpoint.
-Phase 40A Relationship Intelligence remains blocked until Phase 39D returns
-PASS or PASS WITH REVIEW NOTES.
+Phase 39D received artifact-backed phase-ledger validation on merged `main`
+and closed the local, fixture-first Cockatrice track. Phase 40A is the
+contract-only Relationship Intelligence core packet. Phase 40B remains
+blocked until Phase 40A returns PASS or PASS WITH REVIEW NOTES.
 
 Phase 39A validation tuple:
 
@@ -208,6 +219,37 @@ phase_id: Phase39D
 phase_part: outside-validation
 gate_scope: INTERMEDIATE_PACKET
 next_phase_id: Phase40A
+next_phase_part: outside-validation
+next_gate_scope: INTERMEDIATE_PACKET
+```
+
+Phase 39D acceptance evidence:
+
+```text
+workflow run ID: 30027838101
+validated SHA: 51deab669d8bafaf0531143f8439ef79fa192ca2
+artifact: codie-phase_ledger-validation-51deab669d8bafaf0531143f8439ef79fa192ca2
+validation scope: phase_ledger
+validator profile: all
+deterministic: CLEAN_PASS
+architecture: CLEAN_PASS
+adversarial: CLEAN_PASS
+aggregate: CLEAN_PASS
+severity totals: BLOCKER 0, CRITICAL 0, HIGH 0, MEDIUM 0, LOW 0, INFORMATIONAL 0
+skipped validators: none
+unresolved findings: none
+errors: none
+final governance verdict: PASS
+required corrections: none
+```
+
+Phase 40A validation tuple:
+
+```text
+phase_id: Phase40A
+phase_part: outside-validation
+gate_scope: INTERMEDIATE_PACKET
+next_phase_id: Phase40B
 next_phase_part: outside-validation
 next_gate_scope: INTERMEDIATE_PACKET
 ```
@@ -340,8 +382,9 @@ unresolved findings: none
 10. Phase 39A Cockatrice Interoperability Contract: accepted with review notes
 11. Phase 39B Cockatrice Interoperability Implementation Contract: accepted
 12. Phase 39C Cockatrice Interoperability Implementation: accepted
-13. Phase 39D Cockatrice Interoperability Checkpoint: internal pass; PR validation required
-14. Phase 40A Relationship Intelligence Core Contract: blocked
+13. Phase 39D Cockatrice Interoperability Checkpoint: accepted
+14. Phase 40A Relationship Intelligence Core Contract: internal pass; PR validation required
+15. Phase 40B Relationship Intelligence Schema and Repository Contract: blocked
 ```
 
 The post-31 patch priority order is cemented in:
