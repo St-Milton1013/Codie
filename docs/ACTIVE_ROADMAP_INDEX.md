@@ -110,10 +110,10 @@ Phase 40A Relationship Intelligence Core Contract
 Current-status clarification:
 
 ```text
-Phase 39D is externally accepted, not internally complete or pending validation.
+Phase 39D status: externally accepted.
 Phase 40A is the next allowed contract packet.
 The protected active scope remains Phase39D until this PR merges; that
-transition safeguard does not reverse Phase 39D acceptance.
+transition safeguard preserves Phase 39D's externally accepted status.
 ```
 
 Phase 38D received artifact-backed phase-ledger validation on merged `main`.
