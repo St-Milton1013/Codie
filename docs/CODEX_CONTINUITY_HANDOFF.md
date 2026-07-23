@@ -2585,7 +2585,7 @@ adversarial: CLEAN_PASS
 aggregate: CLEAN_PASS
 ```
 
-## Current Phase 40B Handoff
+## Current Phase 40C Handoff
 
 ```text
 Phase 38A Moxfield Frequency Pool Builder Contract: PASS
@@ -2597,9 +2597,10 @@ Phase 39B Cockatrice Interoperability Implementation Contract: PASS
 Phase 39C Cockatrice Interoperability Implementation: PASS
 Phase 39D Cockatrice Interoperability Checkpoint: PASS
 Phase 40A Relationship Intelligence Core Contract: PASS
-Phase 40B Relationship Intelligence Schema and Repository Contract: INTERNAL PASS
-Current action: validate the Phase 40B contract packet
-Phase 40C Relationship Intelligence Schema and Repository Implementation Contract: BLOCKED until Phase 40B returns PASS or PASS WITH REVIEW NOTES
+Phase 40B Relationship Intelligence Schema and Repository Contract: PASS
+Phase 40C Relationship Intelligence Schema and Repository Implementation Contract: INTERNAL PASS
+Current action: validate the Phase 40C implementation contract
+Phase 40D Relationship Intelligence Schema and Repository Implementation: BLOCKED until Phase 40C returns PASS or PASS WITH REVIEW NOTES
 ```
 
 Phase 38C implements a local, fixture-first Moxfield Frequency Pool Builder. It
@@ -2614,9 +2615,11 @@ only the approved local, fixture-first, in-memory Cockatrice import/export
 packet surface and returned artifact-backed PASS. Phase 39D returned
 artifact-backed PASS and closed the Cockatrice track. Phase 40A received
 artifact-backed PASS and defines the V2 Relationship Intelligence core.
-Phase 40B narrows future persistence to immutable population manifests and
-versioned measured evidence. It adds no production models, schema,
-repositories, metrics, providers, integrations, or recommendation behavior.
+Phase 40B received artifact-backed PASS and narrows future persistence to
+immutable population manifests and versioned measured evidence. Phase 40C
+declares the exact Phase 40D schema, repository, constraint, index, and test
+boundary. It adds no production models, schema, repositories, metrics,
+providers, integrations, or recommendation behavior.
 
 Phase 40A acceptance evidence:
 
@@ -2645,6 +2648,37 @@ phase_id: Phase40B
 phase_part: outside-validation
 gate_scope: INTERMEDIATE_PACKET
 next_phase_id: Phase40C
+next_phase_part: outside-validation
+next_gate_scope: INTERMEDIATE_PACKET
+```
+
+Phase 40B acceptance evidence:
+
+```text
+workflow run ID: 30050686610
+validated SHA: e90b48ca2a95e325ea1efec646fab80951e78c9f
+artifact: codie-phase_ledger-validation-e90b48ca2a95e325ea1efec646fab80951e78c9f
+validation scope: phase_ledger
+validator profile: all
+deterministic: CLEAN_PASS
+architecture: CLEAN_PASS
+adversarial: CLEAN_PASS
+aggregate: CLEAN_PASS
+severity totals: BLOCKER 0, CRITICAL 0, HIGH 0, MEDIUM 0, LOW 0, INFORMATIONAL 0
+skipped validators: none
+unresolved findings: none
+errors: none
+final governance verdict: PASS
+required corrections: none
+```
+
+Phase 40C validation tuple:
+
+```text
+phase_id: Phase40C
+phase_part: outside-validation
+gate_scope: INTERMEDIATE_PACKET
+next_phase_id: Phase40D
 next_phase_part: outside-validation
 next_gate_scope: INTERMEDIATE_PACKET
 ```
