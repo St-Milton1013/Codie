@@ -27,6 +27,24 @@ _PRIVATE_RELATIONSHIP_KEY_MARKERS = (
     "importeddecktext",
 )
 _MAX_RELATIONSHIP_JSON_DEPTH = 20
+_POPULATION_SPEC_JSON_KEYS = {
+    "commander_key",
+    "concentration_policy",
+    "deduplication_policy",
+    "minimum_event_size",
+    "observation_unit",
+    "organizer",
+    "partner_key",
+    "placement",
+    "placement_filter",
+    "region",
+    "scope_key",
+    "scope_type",
+    "store",
+    "window_end_date",
+    "window_start_date",
+    "zone_scope",
+}
 _RELATIONSHIP_METRICS = {
     "support",
     "directional_confidence",
@@ -43,6 +61,8 @@ def _canonical_json(
     field_name: str,
     *,
     expected_type: type[dict] | type[list],
+    allowed_object_keys: set[str] | None = None,
+    string_array: bool = False,
 ) -> str:
     if isinstance(value, str):
         try:
@@ -55,7 +75,6 @@ def _canonical_json(
     if not isinstance(decoded, expected_type):
         expected_name = "object" if expected_type is dict else "array"
         raise RepositoryError(f"{field_name} must be a JSON {expected_name}")
-
     def validate(item: Any, depth: int = 0) -> None:
         if depth > _MAX_RELATIONSHIP_JSON_DEPTH:
             raise RepositoryError(f"{field_name} exceeds maximum JSON depth")
@@ -69,6 +88,8 @@ def _canonical_json(
                     or any(marker in normalized_key for marker in _PRIVATE_RELATIONSHIP_KEY_MARKERS)
                 ):
                     raise RepositoryError(f"{field_name} contains private user data")
+                if depth > 0:
+                    raise RepositoryError(f"{field_name} does not allow nested objects")
                 validate(nested, depth + 1)
         elif isinstance(item, (list, tuple)):
             for nested in item:
@@ -79,6 +100,14 @@ def _canonical_json(
             raise RepositoryError(f"{field_name} must be JSON-compatible")
 
     validate(decoded)
+    if allowed_object_keys is not None:
+        unknown_keys = sorted(set(decoded) - allowed_object_keys)
+        if unknown_keys:
+            raise RepositoryError(
+                f"{field_name} contains unsupported field(s): {', '.join(unknown_keys)}"
+            )
+    if string_array and any(not isinstance(item, str) or not item.strip() for item in decoded):
+        raise RepositoryError(f"{field_name} must contain non-empty string references")
     return json.dumps(decoded, sort_keys=True, separators=(",", ":"), ensure_ascii=True)
 
 
@@ -760,7 +789,10 @@ class AnalyticsRepository(BaseRepository):
         self.require(spec, required)
         data = dict(spec)
         data["spec_json"] = _canonical_json(
-            data["spec_json"], "spec_json", expected_type=dict
+            data["spec_json"],
+            "spec_json",
+            expected_type=dict,
+            allowed_object_keys=_POPULATION_SPEC_JSON_KEYS,
         )
         columns = tuple(data)
         existing = self.connection.execute(
@@ -809,6 +841,7 @@ class AnalyticsRepository(BaseRepository):
             data["source_snapshot_refs_json"],
             "source_snapshot_refs_json",
             expected_type=list,
+            string_array=True,
         )
         for field in (
             "candidate_population_count",
@@ -912,10 +945,16 @@ class AnalyticsRepository(BaseRepository):
         self.require(measurement, required)
         data = dict(measurement)
         data["provenance_refs_json"] = _canonical_json(
-            data["provenance_refs_json"], "provenance_refs_json", expected_type=list
+            data["provenance_refs_json"],
+            "provenance_refs_json",
+            expected_type=list,
+            string_array=True,
         )
         data["caveat_refs_json"] = _canonical_json(
-            data["caveat_refs_json"], "caveat_refs_json", expected_type=list
+            data["caveat_refs_json"],
+            "caveat_refs_json",
+            expected_type=list,
+            string_array=True,
         )
         n, na, nb, nab = (int(data[key]) for key in ("N", "nA", "nB", "nAB"))
         if n <= 0 or not (0 <= nab <= na <= n and 0 <= nab <= nb <= n):

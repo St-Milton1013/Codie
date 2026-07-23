@@ -152,13 +152,13 @@ class RelationshipPersistenceRepositoryTest(unittest.TestCase):
                 self.repository.insert_relationship_population_spec(
                     self.spec(
                         population_spec_hash=f"private-{key}",
-                        spec_json={"nested": [{key: "secret"}]},
+                        spec_json={key: "secret"},
                     )
                 )
 
     def test_json_shapes_nested_arrays_depth_and_numbers_are_validated(self) -> None:
         spec_id = self.repository.insert_relationship_population_spec(
-            self.spec(spec_json={"nested": [{"values": [1, 2, {"ok": True}]}]})
+            self.spec(spec_json={"placement": ["top_16", "winner"]})
         )
         self.assertGreater(spec_id, 0)
         with self.assertRaisesRegex(RepositoryError, "JSON object"):
@@ -178,8 +178,21 @@ class RelationshipPersistenceRepositoryTest(unittest.TestCase):
             too_deep = [too_deep]
         with self.assertRaisesRegex(RepositoryError, "maximum JSON depth"):
             self.repository.insert_relationship_population_spec(
-                self.spec(population_spec_hash="too-deep", spec_json={"value": too_deep})
+                self.spec(population_spec_hash="too-deep", spec_json={"placement": too_deep})
             )
+
+    def test_reference_json_rejects_non_string_payloads(self) -> None:
+        spec_id = self.repository.insert_relationship_population_spec(self.spec())
+        for payload in ([{"url": "private"}], ["ok", ""], ["ok", 7]):
+            with self.subTest(payload=payload), self.assertRaises(RepositoryError):
+                self.repository.insert_relationship_population_manifest(
+                    self.manifest(
+                        spec_id,
+                        population_manifest_hash=f"manifest-{payload!r}",
+                        source_snapshot_refs_json=payload,
+                    ),
+                    self.members(),
+                )
 
     def test_manifest_members_round_trip_in_stable_order(self) -> None:
         manifest_id = self.create_manifest()
