@@ -145,10 +145,16 @@ class RelationshipPersistenceRepositoryTest(unittest.TestCase):
             )
 
     def test_private_global_population_metadata_is_rejected_recursively(self) -> None:
-        with self.assertRaisesRegex(RepositoryError, "private user data"):
-            self.repository.insert_relationship_population_spec(
-                self.spec(spec_json={"nested": {"private_notes": "secret"}})
-            )
+        for key in ("private_notes", "Private Notes", "raw-deck-text", "userNote"):
+            with self.subTest(key=key), self.assertRaisesRegex(
+                RepositoryError, "private user data"
+            ):
+                self.repository.insert_relationship_population_spec(
+                    self.spec(
+                        population_spec_hash=f"private-{key}",
+                        spec_json={"nested": [{key: "secret"}]},
+                    )
+                )
 
     def test_json_shapes_nested_arrays_depth_and_numbers_are_validated(self) -> None:
         spec_id = self.repository.insert_relationship_population_spec(

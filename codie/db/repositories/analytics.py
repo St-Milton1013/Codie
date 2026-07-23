@@ -19,6 +19,14 @@ _PRIVATE_RELATIONSHIP_KEYS = {
     "private_notes",
     "user_notes",
 }
+_PRIVATE_RELATIONSHIP_KEY_MARKERS = (
+    "private",
+    "usernote",
+    "rawdeck",
+    "rawimport",
+    "importeddecktext",
+)
+_MAX_RELATIONSHIP_JSON_DEPTH = 20
 _RELATIONSHIP_METRICS = {
     "support",
     "directional_confidence",
@@ -35,7 +43,6 @@ def _canonical_json(
     field_name: str,
     *,
     expected_type: type[dict] | type[list],
-    max_depth: int = 20,
 ) -> str:
     if isinstance(value, str):
         try:
@@ -50,13 +57,17 @@ def _canonical_json(
         raise RepositoryError(f"{field_name} must be a JSON {expected_name}")
 
     def validate(item: Any, depth: int = 0) -> None:
-        if depth > max_depth:
+        if depth > _MAX_RELATIONSHIP_JSON_DEPTH:
             raise RepositoryError(f"{field_name} exceeds maximum JSON depth")
         if isinstance(item, Mapping):
             for key, nested in item.items():
                 if not isinstance(key, str):
                     raise RepositoryError(f"{field_name} object keys must be strings")
-                if str(key).casefold() in _PRIVATE_RELATIONSHIP_KEYS:
+                normalized_key = "".join(character for character in key.casefold() if character.isalnum())
+                if (
+                    key.casefold() in _PRIVATE_RELATIONSHIP_KEYS
+                    or any(marker in normalized_key for marker in _PRIVATE_RELATIONSHIP_KEY_MARKERS)
+                ):
                     raise RepositoryError(f"{field_name} contains private user data")
                 validate(nested, depth + 1)
         elif isinstance(item, (list, tuple)):
