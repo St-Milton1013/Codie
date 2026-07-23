@@ -150,6 +150,31 @@ class RelationshipPersistenceRepositoryTest(unittest.TestCase):
                 self.spec(spec_json={"nested": {"private_notes": "secret"}})
             )
 
+    def test_json_shapes_nested_arrays_depth_and_numbers_are_validated(self) -> None:
+        spec_id = self.repository.insert_relationship_population_spec(
+            self.spec(spec_json={"nested": [{"values": [1, 2, {"ok": True}]}]})
+        )
+        self.assertGreater(spec_id, 0)
+        with self.assertRaisesRegex(RepositoryError, "JSON object"):
+            self.repository.insert_relationship_population_spec(
+                self.spec(population_spec_hash="wrong-shape", spec_json=[])
+            )
+        with self.assertRaisesRegex(RepositoryError, "JSON array"):
+            self.repository.insert_relationship_population_manifest(
+                self.manifest(spec_id, source_snapshot_refs_json={}), self.members()
+            )
+        with self.assertRaisesRegex(RepositoryError, "finite"):
+            self.repository.insert_relationship_population_spec(
+                self.spec(population_spec_hash="non-finite", spec_json={"value": float("inf")})
+            )
+        too_deep: object = "leaf"
+        for _ in range(22):
+            too_deep = [too_deep]
+        with self.assertRaisesRegex(RepositoryError, "maximum JSON depth"):
+            self.repository.insert_relationship_population_spec(
+                self.spec(population_spec_hash="too-deep", spec_json={"value": too_deep})
+            )
+
     def test_manifest_members_round_trip_in_stable_order(self) -> None:
         manifest_id = self.create_manifest()
         rows = self.repository.list_relationship_population_members(manifest_id)

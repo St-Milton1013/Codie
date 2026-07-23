@@ -31,9 +31,8 @@ repository filters return stable ordering
 ```text
 git diff --check: passed
 schema bootstrap: passed
-focused tests: 27 passed
-full suite: 1116 passed, 1 skipped
+focused tests: 28 passed
+full suite: 1117 passed, 1 skipped
 ```
 
 Phase 40D does not calculate relationship metrics or produce decision output.
-

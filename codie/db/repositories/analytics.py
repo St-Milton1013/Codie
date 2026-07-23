@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import math
 from collections.abc import Mapping
 from datetime import date
 from typing import Any
@@ -29,7 +30,13 @@ _RELATIONSHIP_METRICS = {
 }
 
 
-def _canonical_json(value: Any, field_name: str) -> str:
+def _canonical_json(
+    value: Any,
+    field_name: str,
+    *,
+    expected_type: type[dict] | type[list],
+    max_depth: int = 20,
+) -> str:
     if isinstance(value, str):
         try:
             decoded = json.loads(value)
@@ -38,15 +45,25 @@ def _canonical_json(value: Any, field_name: str) -> str:
     else:
         decoded = value
 
-    def validate(item: Any) -> None:
+    if not isinstance(decoded, expected_type):
+        expected_name = "object" if expected_type is dict else "array"
+        raise RepositoryError(f"{field_name} must be a JSON {expected_name}")
+
+    def validate(item: Any, depth: int = 0) -> None:
+        if depth > max_depth:
+            raise RepositoryError(f"{field_name} exceeds maximum JSON depth")
         if isinstance(item, Mapping):
             for key, nested in item.items():
+                if not isinstance(key, str):
+                    raise RepositoryError(f"{field_name} object keys must be strings")
                 if str(key).casefold() in _PRIVATE_RELATIONSHIP_KEYS:
                     raise RepositoryError(f"{field_name} contains private user data")
-                validate(nested)
+                validate(nested, depth + 1)
         elif isinstance(item, (list, tuple)):
             for nested in item:
-                validate(nested)
+                validate(nested, depth + 1)
+        elif isinstance(item, float) and not math.isfinite(item):
+            raise RepositoryError(f"{field_name} numbers must be finite")
         elif item is not None and not isinstance(item, (str, int, float, bool)):
             raise RepositoryError(f"{field_name} must be JSON-compatible")
 
@@ -731,7 +748,9 @@ class AnalyticsRepository(BaseRepository):
         )
         self.require(spec, required)
         data = dict(spec)
-        data["spec_json"] = _canonical_json(data["spec_json"], "spec_json")
+        data["spec_json"] = _canonical_json(
+            data["spec_json"], "spec_json", expected_type=dict
+        )
         columns = tuple(data)
         existing = self.connection.execute(
             """
@@ -776,7 +795,9 @@ class AnalyticsRepository(BaseRepository):
         self.require(manifest, required)
         data = dict(manifest)
         data["source_snapshot_refs_json"] = _canonical_json(
-            data["source_snapshot_refs_json"], "source_snapshot_refs_json"
+            data["source_snapshot_refs_json"],
+            "source_snapshot_refs_json",
+            expected_type=list,
         )
         for field in (
             "candidate_population_count",
@@ -880,10 +901,10 @@ class AnalyticsRepository(BaseRepository):
         self.require(measurement, required)
         data = dict(measurement)
         data["provenance_refs_json"] = _canonical_json(
-            data["provenance_refs_json"], "provenance_refs_json"
+            data["provenance_refs_json"], "provenance_refs_json", expected_type=list
         )
         data["caveat_refs_json"] = _canonical_json(
-            data["caveat_refs_json"], "caveat_refs_json"
+            data["caveat_refs_json"], "caveat_refs_json", expected_type=list
         )
         n, na, nb, nab = (int(data[key]) for key in ("N", "nA", "nB", "nAB"))
         if n <= 0 or not (0 <= nab <= na <= n and 0 <= nab <= nb <= n):
