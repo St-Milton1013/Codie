@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import json
-import math
 from collections.abc import Mapping
 from datetime import date
 from typing import Any
@@ -26,7 +25,6 @@ _PRIVATE_RELATIONSHIP_KEY_MARKERS = (
     "rawimport",
     "importeddecktext",
 )
-_MAX_RELATIONSHIP_JSON_DEPTH = 20
 _POPULATION_SPEC_JSON_KEYS = {
     "commander_key",
     "concentration_policy",
@@ -56,57 +54,52 @@ _RELATIONSHIP_METRICS = {
 }
 
 
-def _canonical_json(
-    value: Any,
-    field_name: str,
-    *,
-    expected_type: type[dict] | type[list],
-    allowed_object_keys: set[str] | None = None,
-    string_array: bool = False,
-) -> str:
+def _decode_json(value: Any, field_name: str) -> Any:
     if isinstance(value, str):
         try:
-            decoded = json.loads(value)
+            return json.loads(value)
         except json.JSONDecodeError as exc:
             raise RepositoryError(f"{field_name} must contain valid JSON") from exc
-    else:
-        decoded = value
+    return value
 
-    if not isinstance(decoded, expected_type):
-        expected_name = "object" if expected_type is dict else "array"
-        raise RepositoryError(f"{field_name} must be a JSON {expected_name}")
-    def validate(item: Any, depth: int = 0) -> None:
-        if depth > _MAX_RELATIONSHIP_JSON_DEPTH:
-            raise RepositoryError(f"{field_name} exceeds maximum JSON depth")
-        if isinstance(item, Mapping):
-            for key, nested in item.items():
-                if not isinstance(key, str):
-                    raise RepositoryError(f"{field_name} object keys must be strings")
-                normalized_key = "".join(character for character in key.casefold() if character.isalnum())
-                if (
-                    key.casefold() in _PRIVATE_RELATIONSHIP_KEYS
-                    or any(marker in normalized_key for marker in _PRIVATE_RELATIONSHIP_KEY_MARKERS)
-                ):
-                    raise RepositoryError(f"{field_name} contains private user data")
-                if depth > 0:
-                    raise RepositoryError(f"{field_name} does not allow nested objects")
-                validate(nested, depth + 1)
-        elif isinstance(item, (list, tuple)):
-            for nested in item:
-                validate(nested, depth + 1)
-        elif isinstance(item, float) and not math.isfinite(item):
-            raise RepositoryError(f"{field_name} numbers must be finite")
-        elif item is not None and not isinstance(item, (str, int, float, bool)):
-            raise RepositoryError(f"{field_name} must be JSON-compatible")
 
-    validate(decoded)
-    if allowed_object_keys is not None:
-        unknown_keys = sorted(set(decoded) - allowed_object_keys)
-        if unknown_keys:
-            raise RepositoryError(
-                f"{field_name} contains unsupported field(s): {', '.join(unknown_keys)}"
-            )
-    if string_array and any(not isinstance(item, str) or not item.strip() for item in decoded):
+def _canonical_population_spec_json(value: Any) -> str:
+    field_name = "spec_json"
+    decoded = _decode_json(value, field_name)
+    if not isinstance(decoded, dict):
+        raise RepositoryError(f"{field_name} must be a JSON object")
+    for key, item in decoded.items():
+        if not isinstance(key, str):
+            raise RepositoryError(f"{field_name} object keys must be strings")
+        normalized_key = "".join(character for character in key.casefold() if character.isalnum())
+        if (
+            key.casefold() in _PRIVATE_RELATIONSHIP_KEYS
+            or any(marker in normalized_key for marker in _PRIVATE_RELATIONSHIP_KEY_MARKERS)
+        ):
+            raise RepositoryError(f"{field_name} contains private user data")
+        if key not in _POPULATION_SPEC_JSON_KEYS:
+            raise RepositoryError(f"{field_name} contains unsupported field: {key}")
+        values = item if isinstance(item, list) else [item]
+        if any(isinstance(nested, (dict, list, tuple)) for nested in values):
+            raise RepositoryError(f"{field_name} allows only scalars or flat scalar arrays")
+        if any(
+            nested is not None and not isinstance(nested, (str, int, float, bool))
+            for nested in values
+        ):
+            raise RepositoryError(f"{field_name} contains a non-JSON scalar")
+    try:
+        return json.dumps(
+            decoded, sort_keys=True, separators=(",", ":"), ensure_ascii=True, allow_nan=False
+        )
+    except ValueError as exc:
+        raise RepositoryError(f"{field_name} numbers must be finite") from exc
+
+
+def _canonical_reference_json(value: Any, field_name: str) -> str:
+    decoded = _decode_json(value, field_name)
+    if not isinstance(decoded, list):
+        raise RepositoryError(f"{field_name} must be a JSON array")
+    if any(not isinstance(item, str) or not item.strip() for item in decoded):
         raise RepositoryError(f"{field_name} must contain non-empty string references")
     return json.dumps(decoded, sort_keys=True, separators=(",", ":"), ensure_ascii=True)
 
@@ -788,12 +781,7 @@ class AnalyticsRepository(BaseRepository):
         )
         self.require(spec, required)
         data = dict(spec)
-        data["spec_json"] = _canonical_json(
-            data["spec_json"],
-            "spec_json",
-            expected_type=dict,
-            allowed_object_keys=_POPULATION_SPEC_JSON_KEYS,
-        )
+        data["spec_json"] = _canonical_population_spec_json(data["spec_json"])
         columns = tuple(data)
         existing = self.connection.execute(
             """
@@ -837,11 +825,8 @@ class AnalyticsRepository(BaseRepository):
         )
         self.require(manifest, required)
         data = dict(manifest)
-        data["source_snapshot_refs_json"] = _canonical_json(
-            data["source_snapshot_refs_json"],
-            "source_snapshot_refs_json",
-            expected_type=list,
-            string_array=True,
+        data["source_snapshot_refs_json"] = _canonical_reference_json(
+            data["source_snapshot_refs_json"], "source_snapshot_refs_json"
         )
         for field in (
             "candidate_population_count",
@@ -944,17 +929,11 @@ class AnalyticsRepository(BaseRepository):
         )
         self.require(measurement, required)
         data = dict(measurement)
-        data["provenance_refs_json"] = _canonical_json(
-            data["provenance_refs_json"],
-            "provenance_refs_json",
-            expected_type=list,
-            string_array=True,
+        data["provenance_refs_json"] = _canonical_reference_json(
+            data["provenance_refs_json"], "provenance_refs_json"
         )
-        data["caveat_refs_json"] = _canonical_json(
-            data["caveat_refs_json"],
-            "caveat_refs_json",
-            expected_type=list,
-            string_array=True,
+        data["caveat_refs_json"] = _canonical_reference_json(
+            data["caveat_refs_json"], "caveat_refs_json"
         )
         n, na, nb, nab = (int(data[key]) for key in ("N", "nA", "nB", "nAB"))
         if n <= 0 or not (0 <= nab <= na <= n and 0 <= nab <= nb <= n):

@@ -156,7 +156,7 @@ class RelationshipPersistenceRepositoryTest(unittest.TestCase):
                     )
                 )
 
-    def test_json_shapes_nested_arrays_depth_and_numbers_are_validated(self) -> None:
+    def test_json_shapes_and_nested_values_are_validated(self) -> None:
         spec_id = self.repository.insert_relationship_population_spec(
             self.spec(spec_json={"placement": ["top_16", "winner"]})
         )
@@ -171,14 +171,17 @@ class RelationshipPersistenceRepositoryTest(unittest.TestCase):
             )
         with self.assertRaisesRegex(RepositoryError, "finite"):
             self.repository.insert_relationship_population_spec(
-                self.spec(population_spec_hash="non-finite", spec_json={"value": float("inf")})
+                self.spec(
+                    population_spec_hash="non-finite",
+                    spec_json={"minimum_event_size": float("inf")},
+                )
             )
-        too_deep: object = "leaf"
-        for _ in range(22):
-            too_deep = [too_deep]
-        with self.assertRaisesRegex(RepositoryError, "maximum JSON depth"):
+        with self.assertRaisesRegex(RepositoryError, "flat scalar arrays"):
             self.repository.insert_relationship_population_spec(
-                self.spec(population_spec_hash="too-deep", spec_json={"placement": too_deep})
+                self.spec(
+                    population_spec_hash="nested",
+                    spec_json={"placement": [["top_16"]]},
+                )
             )
 
     def test_reference_json_rejects_non_string_payloads(self) -> None:
