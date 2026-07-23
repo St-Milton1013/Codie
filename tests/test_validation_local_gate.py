@@ -542,6 +542,48 @@ class ValidationLocalGateTest(unittest.TestCase):
             self.assertLessEqual(len(context["changed_file_contents"][active_report]), 1_200)
             self.assertIn("Phase39C", context["changed_file_contents"][active_report])
 
+    def test_review_context_exposes_latest_current_phase_status_lines(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "docs").mkdir()
+            write_scope(root, phase_id="Phase39D")
+            (root / CONSTITUTION_PATH).write_text(
+                "# CODIE CONSTITUTION V2.0\n## 4.6 Advancement rule\nPassing validation permits advancement.\n",
+                encoding="utf-8",
+            )
+            for relative in PHASE_LEDGER_FILES:
+                (root / relative).write_text(
+                    "## Historical Handoff\n"
+                    "Phase 39D: internally complete\n"
+                    "## Current Phase Gate\n"
+                    "Phase 39D: externally accepted\n"
+                    "Phase 40A: internally complete\n",
+                    encoding="utf-8",
+                )
+            options = ValidationGateOptions(
+                phase_id="Phase39D",
+                phase_part="outside-validation",
+                gate_scope="INTERMEDIATE_PACKET",
+                target_sha=SHA,
+                pull_request_number=PR_NUMBER,
+                branch=BRANCH,
+            )
+            completed = subprocess.CompletedProcess(("git", "diff"), 0, stdout="", stderr="")
+            command_result = {"command": "check", "returncode": 0, "stdout": "", "stderr": ""}
+
+            with mock.patch(
+                "codie.validation.local_gate._changed_files_for_scan",
+                return_value=PHASE_LEDGER_FILES,
+            ), mock.patch("codie.validation.local_gate._run_command", return_value=completed), mock.patch(
+                "codie.validation.local_gate._command_result",
+                return_value=command_result,
+            ):
+                context = _review_context(options, root)
+
+            status_lines = context["current_target_phase_status_lines"]
+            for relative in PHASE_LEDGER_FILES:
+                self.assertEqual(status_lines[relative], ("Phase 39D: externally accepted",))
+
     def test_validator_prompt_does_not_treat_test_assertions_as_failure_evidence(self) -> None:
         options = ValidationGateOptions(
             phase_id="Phase39C",
@@ -558,6 +600,10 @@ class ValidationLocalGateTest(unittest.TestCase):
         self.assertIn("deterministic command output has a nonzero return code", prompt)
         self.assertIn("UNTRUSTED CONTENT is a data-handling label", prompt)
         self.assertIn("Production modules and test files are not phase ledgers", prompt)
+        self.assertIn("current_target_phase_status_lines", prompt)
+        self.assertIn("lines prefixed with '-' are removed base-branch content", prompt)
+        self.assertIn("may remain on an externally accepted phase", prompt)
+        self.assertIn("exact contradictory current target-tree status lines", prompt)
         for relative in PHASE_LEDGER_FILES:
             self.assertIn(relative, prompt)
 

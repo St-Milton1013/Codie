@@ -1256,6 +1256,10 @@ def _validator_prompt(validator: str, options: ValidationGateOptions, root: Path
             f"Phase-ledger consistency applies only to these governance files: {', '.join(PHASE_LEDGER_FILES)}.",
             "Production modules and test files are not phase ledgers and do not need to contain the active phase identifier.",
             "A file listed in changed_files is not missing merely because its contents are omitted from the bounded model context; use the diff and file inventory supplied.",
+            "The current_target_phase_status_lines field contains exact post-change lines from the latest Current section in each phase ledger and is authoritative for phase-status facts.",
+            "In pr_diff, lines prefixed with '-' are removed base-branch content and must never be reported as current target-tree content.",
+            "The protected active validation scope identifies the validation target and may remain on an externally accepted phase until a transition PR merges; it does not imply that phase is pending validation.",
+            "Before reporting a phase-status mismatch, identify exact contradictory current target-tree status lines from the affected ledgers. If the supplied current lines agree, do not report a mismatch.",
             "",
             "UNTRUSTED REVIEW MATERIAL:",
             json.dumps(context, sort_keys=True),
@@ -1294,8 +1298,18 @@ def _review_context(options: ValidationGateOptions, root: Path) -> dict[str, Any
         "schema_check": _command_result((python_executable, "scripts/check_schema.py"), root),
     }
     diff_limit = 4_000 if phase_ledger else 7_000
+    current_phase_status_lines = {}
+    for relative in PHASE_LEDGER_FILES:
+        path = root / relative
+        if not path.is_file():
+            continue
+        text = path.read_text(encoding="utf-8", errors="ignore")
+        status_lines = _current_phase_status_lines(text, options.phase_id)
+        if status_lines:
+            current_phase_status_lines[relative] = status_lines
     return {
         "governance_files": files,
+        "current_target_phase_status_lines": current_phase_status_lines,
         "pr_diff": _strict_bounded_text(
             diff.stdout if diff.returncode == 0 else diff.stderr,
             limit=diff_limit,
@@ -1304,6 +1318,35 @@ def _review_context(options: ValidationGateOptions, root: Path) -> dict[str, Any
         "changed_file_contents": changed_contents,
         "deterministic_validation_results": deterministic,
     }
+
+
+def _current_phase_status_lines(text: str, phase_id: str) -> tuple[str, ...]:
+    pattern = _phase_id_reference_pattern(phase_id)
+    lines = text.splitlines()
+    current_headings = [
+        index
+        for index, line in enumerate(lines)
+        if re.match(r"^##\s+Current(?:\s|$)", line.strip(), flags=re.IGNORECASE)
+    ]
+    for start in reversed(current_headings):
+        end = len(lines)
+        for index in range(start + 1, len(lines)):
+            if lines[index].startswith("## "):
+                end = index
+                break
+        matches = tuple(
+            dict.fromkeys(
+                line.strip()
+                for line in lines[start + 1 : end]
+                if pattern.search(line) and line.strip()
+            )
+        )
+        if matches:
+            return matches[:8]
+    matches = tuple(
+        dict.fromkeys(line.strip() for line in lines if pattern.search(line) and line.strip())
+    )
+    return matches[:4]
 
 
 def _phase_ledger_excerpt(text: str, phase_id: str, *, limit: int) -> str:
