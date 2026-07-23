@@ -25,6 +25,7 @@ from codie.validation.repair_controller import (
     unauthorized_repair_paths,
     verify_pull_request,
     _repair_prompt,
+    _run_command as _run_repair_command,
 )
 
 
@@ -96,6 +97,22 @@ def cycle_summary(
 
 
 class RepairControllerTest(unittest.TestCase):
+    def test_repair_subprocess_text_output_is_decoded_as_utf8(self) -> None:
+        result = completed(stdout="repair → validated")
+        with mock.patch("codie.validation.repair_controller.subprocess.run", return_value=result) as run:
+            output = _run_repair_command(("git", "status"), Path.cwd())
+
+        self.assertEqual(output.stdout, "repair → validated")
+        run.assert_called_once_with(
+            ("git", "status"),
+            cwd=Path.cwd(),
+            text=True,
+            encoding="utf-8",
+            errors="replace",
+            capture_output=True,
+            check=False,
+        )
+
     def test_successful_first_repair(self) -> None:
         validations = {
             SHA1: ValidationCycleResult("REPAIR_REQUIRED", SHA1, summary=cycle_summary()),
@@ -266,6 +283,11 @@ class RepairControllerTest(unittest.TestCase):
         offenders = unauthorized_repair_paths(("docs/CODIE_V1_CONSTITUTION.md",))
 
         self.assertEqual(offenders, ("docs/CODIE_V1_CONSTITUTION.md",))
+
+    def test_official_v2_constitution_is_protected(self) -> None:
+        offenders = unauthorized_repair_paths(("docs/CODIE_V2_CONSTITUTION.md",))
+
+        self.assertEqual(offenders, ("docs/CODIE_V2_CONSTITUTION.md",))
 
     def test_active_scope_file_is_protected(self) -> None:
         offenders = unauthorized_repair_paths(("docs/CODIE_ACTIVE_VALIDATION_SCOPE.json",))
@@ -810,6 +832,12 @@ class RepairControllerTest(unittest.TestCase):
 
         self.assertIn("shell: powershell", workflow)
         self.assertNotIn("shell: pwsh", workflow)
+
+    def test_self_hosted_workflow_persists_utf8_python_environment(self) -> None:
+        workflow = Path(".github/workflows/codie-local-validation.yml").read_text(encoding="utf-8")
+
+        self.assertIn('PYTHONUTF8: "1"', workflow)
+        self.assertIn("PYTHONIOENCODING: utf-8", workflow)
 
     def test_infrastructure_failure_artifacts_are_written_and_uploaded_without_masking_failure(self) -> None:
         workflow = Path(".github/workflows/codie-local-validation.yml").read_text(encoding="utf-8")

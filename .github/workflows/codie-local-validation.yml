@@ -80,6 +80,10 @@ permissions:
   contents: read
   actions: read
 
+env:
+  PYTHONUTF8: "1"
+  PYTHONIOENCODING: utf-8
+
 jobs:
   pull-request-validation:
     name: Pull Request Validation

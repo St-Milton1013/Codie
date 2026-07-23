@@ -19,7 +19,8 @@ from typing import Any, Callable
 
 
 SCHEMA_VERSION = "codie.validator.report.v1"
-CONSTITUTION_VERSION = "codie.constitution.v1"
+CONSTITUTION_PATH = "docs/CODIE_V2_CONSTITUTION.md"
+CONSTITUTION_VERSION = "codie.constitution.v2"
 REPOSITORY = "St-Milton1013/Codie"
 CURRENT_EXPECTED_PHASE_ID = "Phase35A"
 ACTIVE_VALIDATION_SCOPE_SCHEMA_VERSION = "codie.active_validation_scope.v1"
@@ -98,7 +99,7 @@ VALIDATOR_SELF_REFERENCE_SCAN_EXCLUSIONS = (
     '"recommended include"',
 )
 CONTEXT_FILES = (
-    "docs/CODIE_V1_CONSTITUTION.md",
+    CONSTITUTION_PATH,
     ACTIVE_VALIDATION_SCOPE_PATH,
     "docs/ACTIVE_ROADMAP_INDEX.md",
     "docs/VALIDATION_STATUS_INDEX.md",
@@ -241,7 +242,8 @@ class ValidatorReport:
         _require_allowed(self.result, REPORT_STATUSES, "result")
         if self.pull_request_number < 1:
             raise ValidationGateError("pull_request_number must be positive")
-        _require_text(self.constitution_path, "constitution_path")
+        if self.constitution_path != CONSTITUTION_PATH:
+            raise ValidationGateError("constitution_path mismatch")
         if self.constitution_version != CONSTITUTION_VERSION:
             raise ValidationGateError("constitution_version mismatch")
         _require_text(self.started_at, "started_at")
@@ -684,7 +686,7 @@ def report_json_schema() -> dict[str, Any]:
             "pull_request_number": {"type": "integer", "minimum": 1},
             "validator": {"enum": list(VALIDATORS)},
             "result": {"enum": sorted(VALIDATOR_RESULTS)},
-            "constitution_path": {"type": "string", "minLength": 1},
+            "constitution_path": {"const": CONSTITUTION_PATH},
             "constitution_version": {"const": CONSTITUTION_VERSION},
             "started_at": {"type": "string", "minLength": 1},
             "completed_at": {"type": "string", "minLength": 1},
@@ -1297,7 +1299,7 @@ def _build_report(
         pull_request_number=options.pull_request_number or 0,
         validator=validator,
         result=result,
-        constitution_path="docs/CODIE_V1_CONSTITUTION.md",
+        constitution_path=CONSTITUTION_PATH,
         constitution_version=CONSTITUTION_VERSION,
         started_at=started_at,
         completed_at=completed_at,
@@ -1551,7 +1553,15 @@ def _is_constitution_conflict_finding(finding: ValidationFinding) -> bool:
 
 
 def _run_command(command: tuple[str, ...], root: Path) -> subprocess.CompletedProcess[str]:
-    return subprocess.run(command, cwd=root, text=True, capture_output=True, check=False)
+    return subprocess.run(
+        command,
+        cwd=root,
+        text=True,
+        encoding="utf-8",
+        errors="replace",
+        capture_output=True,
+        check=False,
+    )
 
 
 def _command_result(command: tuple[str, ...], root: Path) -> dict[str, Any]:
@@ -1600,7 +1610,15 @@ def _run_ollama(model: str, prompt: str) -> str:
 
 
 def _git_output(command: tuple[str, ...], root: Path) -> str:
-    completed = subprocess.run(command, cwd=root, text=True, capture_output=True, check=True)
+    completed = subprocess.run(
+        command,
+        cwd=root,
+        text=True,
+        encoding="utf-8",
+        errors="replace",
+        capture_output=True,
+        check=True,
+    )
     return completed.stdout.strip()
 
 
@@ -1609,6 +1627,8 @@ def _git_show_text(root: Path, ref: str, relative_path: str) -> str | None:
         ("git", "show", f"{ref}:{relative_path}"),
         cwd=root,
         text=True,
+        encoding="utf-8",
+        errors="replace",
         capture_output=True,
         check=False,
     )
@@ -1630,6 +1650,8 @@ def _is_allowed_active_scope_bootstrap(root: Path, base_ref: str, head_scope: Ac
         ("git", "merge-base", base_ref, "HEAD"),
         cwd=root,
         text=True,
+        encoding="utf-8",
+        errors="replace",
         capture_output=True,
         check=False,
     )

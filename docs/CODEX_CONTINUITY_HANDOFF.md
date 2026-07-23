@@ -19,12 +19,15 @@ docs/CHECKPOINT_CODIE_V2_RATIFICATION_REPORT.md
 docs/OUTSIDE_VALIDATION_CODIE_V2_RATIFICATION_PROMPT.md
 ```
 
-V2 is now primary authority. `docs/CODIE_V1_CONSTITUTION.md` must remain
-unchanged as historical reference.
+The adoption pull request passed deterministic, architecture, and adversarial
+validation and merged. `docs/CODIE_V2_CONSTITUTION.md` is the primary authority.
+`docs/CODIE_V1_CONSTITUTION.md` remains unchanged as historical reference.
 
-The ratification packet is governance-only. It does not retroactively authorize
-runtime, schema, provider, UI, LLM, simulator, recommendation, or export
-implementation without accepted contracts.
+The bounded validator-authority / UTF-8 follow-up changes new report metadata
+and model review context to V2, protects both constitutions from repair, and
+persists UTF-8 behavior on the self-hosted runner. Neither the ratification nor
+its infrastructure follow-up advances the active phase, authorizes runtime
+implementation, or alters accepted phase evidence.
 
 ## Active Restart Indexes
 

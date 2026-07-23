@@ -18,11 +18,10 @@
       "type": "string"
     },
     "constitution_path": {
-      "minLength": 1,
-      "type": "string"
+      "const": "docs/CODIE_V2_CONSTITUTION.md"
     },
     "constitution_version": {
-      "const": "codie.constitution.v1"
+      "const": "codie.constitution.v2"
     },
     "errors": {
       "items": {
