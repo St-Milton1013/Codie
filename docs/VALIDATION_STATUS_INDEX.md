@@ -91,18 +91,50 @@ Phase 38C Moxfield Frequency Pool Builder Implementation: PASS WITH REVIEW NOTES
 Phase 38D Moxfield Frequency Pool Builder Checkpoint: PASS
 Phase 39A Cockatrice Interoperability Contract: PASS WITH REVIEW NOTES
 Phase 39B Cockatrice Interoperability Implementation Contract: PASS
-Phase 39C Cockatrice Interoperability Implementation: INTERNAL PASS
-Phase 39D: BLOCKED
-Local alpha tag: created locally; remote tag push not verified in this environment
+Phase 39C Cockatrice Interoperability Implementation: PASS
+Phase 39D Cockatrice Interoperability Checkpoint: INTERNAL PASS
+Phase 40A Relationship Intelligence Core Contract: BLOCKED
+Local alpha tag: verified on origin as local-alpha-0.1.0
 ```
 
 Phase 37 received artifact-backed phase-ledger validation on merged `main`.
 Phase 38A, Phase 38B, Phase 38C, and Phase 38D passed artifact-backed
 phase-ledger validation. Phase 39A passed artifact-backed phase-ledger
 validation with review notes. Phase 39B passed artifact-backed phase-ledger
-validation. Phase 39C is internally complete and remains pending PR
-validation. Phase 39D remains blocked until Phase 39C outside validation
-returns PASS or PASS WITH REVIEW NOTES.
+validation. Phase 39C passed artifact-backed phase-ledger validation. Phase
+39D is internally complete as a checkpoint-only packet. Phase 40A remains
+blocked until Phase 39D outside validation returns PASS or PASS WITH REVIEW
+NOTES.
+
+Phase 39C acceptance evidence:
+
+```text
+workflow run ID: 30017208205
+validated SHA: c121330f8332f022049eea207079c511e5096873
+artifact: codie-phase_ledger-validation-c121330f8332f022049eea207079c511e5096873
+validation scope: phase_ledger
+validator profile: all
+deterministic: CLEAN_PASS
+architecture: CLEAN_PASS
+adversarial: CLEAN_PASS
+aggregate: CLEAN_PASS
+severity totals: BLOCKER 0, CRITICAL 0, HIGH 0, MEDIUM 0, LOW 0, INFORMATIONAL 0
+skipped validators: none
+unresolved findings: none
+errors: none
+required corrections: none
+```
+
+Phase 39D validation tuple:
+
+```text
+phase_id: Phase39D
+phase_part: outside-validation
+gate_scope: INTERMEDIATE_PACKET
+next_phase_id: Phase40A
+next_phase_part: outside-validation
+next_gate_scope: INTERMEDIATE_PACKET
+```
 
 Phase 39B acceptance evidence:
 
