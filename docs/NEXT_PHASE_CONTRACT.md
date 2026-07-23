@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: send Phase 39B Cockatrice Interoperability Implementation Contract to PR validation
+Recommended next task: send Phase 39C Cockatrice Interoperability Implementation to PR validation
 
 ## Constitutional Governance Overlay
 
@@ -78,9 +78,10 @@ unresolved findings: none
 Phase 38A and Phase 38B returned artifact-backed PASS. Phase 38C returned
 artifact-backed PASS WITH REVIEW NOTES with no required corrections. Phase
 38D returned artifact-backed PASS. Phase 39A returned artifact-backed PASS
-WITH REVIEW NOTES. Phase 39B is prepared as an implementation-contract-only
-packet. Phase 39C remains blocked until Phase 39B outside validation returns
-PASS or PASS WITH REVIEW NOTES.
+WITH REVIEW NOTES. Phase 39B returned artifact-backed PASS. Phase 39C is
+internally complete as the local, fixture-first Cockatrice interoperability
+implementation. Phase 39D remains blocked until Phase 39C outside validation
+returns PASS or PASS WITH REVIEW NOTES.
 
 Explicit Phase 39A validation tuple:
 
@@ -137,7 +138,42 @@ next_gate_scope: INTERMEDIATE_PACKET
 ```
 
 The Phase 39B next-phase tuple is declared for governance continuity. Phase
-39C remains blocked until Phase 39B returns PASS or PASS WITH REVIEW NOTES.
+39C was blocked until Phase 39B returned PASS or PASS WITH REVIEW NOTES.
+
+Phase 39B acceptance evidence:
+
+```text
+workflow run ID: 29973752107
+validated SHA: 8296e473cc68dfd6dffcb5382de11d6327e5a69a
+artifact: codie-phase_ledger-validation-8296e473cc68dfd6dffcb5382de11d6327e5a69a
+validation scope: phase_ledger
+validator profile: all
+deterministic: CLEAN_PASS
+architecture: CLEAN_PASS
+adversarial: CLEAN_PASS
+aggregate: CLEAN_PASS
+unresolved findings: none
+required corrections: none
+```
+
+Explicit Phase 39C validation tuple:
+
+```text
+phase_id: Phase39C
+phase_part: outside-validation
+gate_scope: INTERMEDIATE_PACKET
+```
+
+Explicit next-phase validation tuple:
+
+```text
+next_phase_id: Phase39D
+next_phase_part: outside-validation
+next_gate_scope: INTERMEDIATE_PACKET
+```
+
+Phase 39D remains blocked until Phase 39C returns PASS or PASS WITH REVIEW
+NOTES.
 
 Phase 38A must comply with V2 rules for Moxfield observations, user-local deck
 privacy, unknown/unavailable/unsupported state preservation, evidence

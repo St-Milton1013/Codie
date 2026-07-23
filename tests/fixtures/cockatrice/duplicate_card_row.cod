@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cockatrice_deck version="1" name="Duplicate Fixture">
+  <zone name="main">
+    <card number="1" name="Sol Ring" scryfall_id="scryfall-sol-ring" oracle_id="oracle-sol-ring"/>
+    <card number="1" name="Sol Ring" scryfall_id="scryfall-sol-ring" oracle_id="oracle-sol-ring"/>
+  </zone>
+</cockatrice_deck>
