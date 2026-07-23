@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: send Phase 39A Cockatrice Interoperability Contract to PR validation
+Recommended next task: send Phase 39B Cockatrice Interoperability Implementation Contract to PR validation
 
 ## Constitutional Governance Overlay
 
@@ -74,8 +74,9 @@ unresolved findings: none
 
 Phase 38A and Phase 38B returned artifact-backed PASS. Phase 38C returned
 artifact-backed PASS WITH REVIEW NOTES with no required corrections. Phase
-38D returned artifact-backed PASS. Phase 39A is prepared as a contract-only
-packet. Phase 39B remains blocked until Phase 39A outside validation returns
+38D returned artifact-backed PASS. Phase 39A returned artifact-backed PASS
+WITH REVIEW NOTES. Phase 39B is prepared as an implementation-contract-only
+packet. Phase 39C remains blocked until Phase 39B outside validation returns
 PASS or PASS WITH REVIEW NOTES.
 
 Explicit Phase 39A validation tuple:
@@ -94,8 +95,46 @@ next_phase_part: outside-validation
 next_gate_scope: INTERMEDIATE_PACKET
 ```
 
-The next-phase tuple is declared for governance continuity. Phase 39B remains
-blocked until Phase 39A returns PASS or PASS WITH REVIEW NOTES.
+The next-phase tuple is declared for governance continuity. Phase 39B was
+blocked until Phase 39A returned PASS or PASS WITH REVIEW NOTES.
+
+Phase 39A acceptance evidence:
+
+```text
+workflow run ID: 29969137239
+validated SHA: bf1a966cbbf406820514ec1b2992688ed688bca1
+artifact: codie-phase_ledger-validation-bf1a966cbbf406820514ec1b2992688ed688bca1
+validation scope: phase_ledger
+validator profile: all
+deterministic: CLEAN_PASS
+architecture: CLEAN_PASS
+adversarial: FAIL with one INFORMATIONAL historical finding
+aggregate: CLEAN_PASS
+final governance verdict: PASS WITH REVIEW NOTES
+required corrections: none
+```
+
+The Phase 39A informational finding references historical Phase 36B contract
+narrative and has no required correction.
+
+Explicit Phase 39B validation tuple:
+
+```text
+phase_id: Phase39B
+phase_part: outside-validation
+gate_scope: INTERMEDIATE_PACKET
+```
+
+Explicit next-phase validation tuple:
+
+```text
+next_phase_id: Phase39C
+next_phase_part: outside-validation
+next_gate_scope: INTERMEDIATE_PACKET
+```
+
+The Phase 39B next-phase tuple is declared for governance continuity. Phase
+39C remains blocked until Phase 39B returns PASS or PASS WITH REVIEW NOTES.
 
 Phase 38A must comply with V2 rules for Moxfield observations, user-local deck
 privacy, unknown/unavailable/unsupported state preservation, evidence
