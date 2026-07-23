@@ -1259,6 +1259,8 @@ def _validator_prompt(validator: str, options: ValidationGateOptions, root: Path
             "The current_target_phase_status_lines field contains exact post-change lines from the latest Current section in each phase ledger and is authoritative for phase-status facts.",
             "In pr_diff, lines prefixed with '-' are removed base-branch content and must never be reported as current target-tree content.",
             "The protected active validation scope identifies the validation target and may remain on an externally accepted phase until a transition PR merges; it does not imply that phase is pending validation.",
+            "During a contract transition PR, the valid pre-validation sequence is: previous phase externally accepted, proposed phase internally complete or pending validation, and following phase blocked.",
+            "Next allowed phase means the phase is authorized to undergo its contract and validation process; it does not mean that phase is already externally accepted.",
             "Before reporting a phase-status mismatch, identify exact contradictory current target-tree status lines from the affected ledgers. If the supplied current lines agree, do not report a mismatch.",
             "",
             "UNTRUSTED REVIEW MATERIAL:",
@@ -1322,6 +1324,7 @@ def _review_context(options: ValidationGateOptions, root: Path) -> dict[str, Any
 
 def _current_phase_status_lines(text: str, phase_id: str) -> tuple[str, ...]:
     pattern = _phase_id_reference_pattern(phase_id)
+    any_phase_pattern = re.compile(r"\bPhase\s*\d+[A-Z]?\b")
     lines = text.splitlines()
     current_headings = [
         index
@@ -1334,15 +1337,18 @@ def _current_phase_status_lines(text: str, phase_id: str) -> tuple[str, ...]:
             if lines[index].startswith("## "):
                 end = index
                 break
+        section = lines[start + 1 : end]
+        if not any(pattern.search(line) for line in section):
+            continue
         matches = tuple(
             dict.fromkeys(
                 line.strip()
-                for line in lines[start + 1 : end]
-                if pattern.search(line) and line.strip()
+                for line in section
+                if any_phase_pattern.search(line) and line.strip()
             )
         )
         if matches:
-            return matches[:8]
+            return matches[:12]
     matches = tuple(
         dict.fromkeys(line.strip() for line in lines if pattern.search(line) and line.strip())
     )
