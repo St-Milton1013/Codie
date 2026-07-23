@@ -15,6 +15,8 @@ next_gate_scope: INTERMEDIATE_PACKET
 
 ## Accepted Phase 39B Evidence
 
+Phase 39B evidence provided: YES.
+
 Phase 39B outside phase-ledger validation returned PASS.
 
 ```text
@@ -167,7 +169,35 @@ Ran 18 tests
 OK
 ```
 
-Full validation results are recorded in the Phase 39C checkpoint.
+Validation commands executed:
+
+```text
+git diff --check
+passed
+
+C:\Users\Main\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe scripts\check_schema.py
+Schema bootstrap check passed.
+
+$env:PYTHONPATH='C:\Users\Main\.venvs\codie-py312\Lib\site-packages'
+C:\Users\Main\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe -m unittest discover -s tests -v
+Ran 1092 tests
+OK (skipped=1)
+```
+
+Static scan results:
+
+```text
+git diff --name-only -- schemas codie/db codie/providers codie/analytics codie/recommendations codie/decision_intelligence codie/evidence_fusion codie/probability_engine codie/cli .github requirements.txt requirements-dev.txt docs/CODIE_ACTIVE_VALIDATION_SCOPE.json docs/CODIE_V1_CONSTITUTION.md docs/CODIE_V2_CONSTITUTION.md
+no matches
+
+rg -n "requests|httpx|sqlite3|codie\\.db|codie\\.providers|codie\\.analytics|codie\\.recommendations|codie\\.decision_intelligence|codie\\.evidence_fusion|openai|anthropic|fastapi|flask|uvicorn" codie/cockatrice tests/test_cockatrice_interoperability.py
+matches only in tests/test_cockatrice_interoperability.py forbidden-import assertion list
+
+rg -n "recommend|should play|should cut|optimal|strict upgrade|deck health" codie/cockatrice tests/test_cockatrice_interoperability.py
+matches only in tests/test_cockatrice_interoperability.py forbidden-language test names/assertion list
+```
+
+Full validation results are also recorded in the Phase 39C checkpoint.
 
 ## Final Governance Summary
 
