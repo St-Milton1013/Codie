@@ -310,9 +310,14 @@ file-writing helpers
 live Cockatrice process control
 ```
 
-## Required Future Tests
+## Future Phase 39C Test Obligations
 
-Phase 39C must include tests proving:
+The following obligations are not Phase 39B completion criteria. Phase 39B is
+complete when the implementation contract packet is validated. These
+obligations become enforceable only against the later Phase 39C implementation
+packet after Phase 39B is accepted.
+
+The later Phase 39C implementation packet must include tests proving:
 
 ```text
 valid commander deck XML parses deterministically
@@ -334,6 +339,11 @@ no live network dependencies exist
 no schema, repository, provider, analytics, recommendation, simulator, UI, LLM,
 or file-writing imports exist
 ```
+
+An outside validator must not fail Phase 39B merely because these future
+implementation tests do not exist yet. Phase 39B must be rejected only if it
+implements production behavior early, omits the future requirements, or leaves
+the Phase 39C boundary ambiguous.
 
 ## Forbidden In Phase 39B
 

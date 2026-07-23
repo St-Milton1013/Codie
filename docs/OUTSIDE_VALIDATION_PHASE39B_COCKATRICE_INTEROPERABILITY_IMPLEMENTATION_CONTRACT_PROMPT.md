@@ -85,6 +85,12 @@ Do not accept ambiguous next-phase scope.
 Confirm Phase 39B limits future Phase 39C implementation to local,
 fixture-first, in-memory Cockatrice interoperability models and validators.
 
+These are future Phase 39C obligations, not Phase 39B completion criteria.
+Do not fail Phase 39B because parser implementation, export implementation,
+fixtures, or implementation tests do not exist yet. Fail Phase 39B only if the
+contract authorizes that work too early, omits the required future boundary, or
+leaves the future validation tuple ambiguous.
+
 Future implementation may cover:
 
 ```text

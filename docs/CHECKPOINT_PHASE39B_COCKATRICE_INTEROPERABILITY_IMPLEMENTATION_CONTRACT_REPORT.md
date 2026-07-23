@@ -98,6 +98,10 @@ recommendation-free output
 file-writing-free output
 ```
 
+These are future Phase 39C obligations, not Phase 39B completion criteria.
+Phase 39B remains contract-only and must not be failed because implementation
+tests or production behavior do not exist yet.
+
 ## Validation Commands
 
 Local validation must run before PR validation:
