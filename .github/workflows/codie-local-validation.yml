@@ -140,8 +140,22 @@ jobs:
         if: always()
         shell: powershell
         run: |
-          New-Item -ItemType Directory -Force -Path validation_artifacts | Out-Null
-          if (-not (Test-Path validation_artifacts/codie-validation-result.json)) {
+          $expectedTargetSha = "${{ github.event.pull_request.head.sha }}"
+          $artifactIsCurrent = $false
+          if (Test-Path validation_artifacts/codie-validation-result.json) {
+            try {
+              $payload = Get-Content validation_artifacts/codie-validation-result.json -Raw | ConvertFrom-Json
+              $artifactIsCurrent = $payload.target_sha -eq $expectedTargetSha
+            }
+            catch {
+              $artifactIsCurrent = $false
+            }
+          }
+          if (-not $artifactIsCurrent) {
+            if (Test-Path validation_artifacts) {
+              Remove-Item -LiteralPath validation_artifacts -Recurse -Force
+            }
+            New-Item -ItemType Directory -Force -Path validation_artifacts | Out-Null
             $message = "workflow infrastructure failed before validators ran; inspect preceding step logs for the original failure"
             $result = [ordered]@{
               final_result = "VALIDATOR_ERROR"
@@ -251,8 +265,22 @@ jobs:
         if: always()
         shell: powershell
         run: |
-          New-Item -ItemType Directory -Force -Path validation_artifacts | Out-Null
-          if (-not (Test-Path validation_artifacts/codie-validation-result.json)) {
+          $expectedTargetSha = "${{ inputs.target_sha }}"
+          $artifactIsCurrent = $false
+          if (Test-Path validation_artifacts/codie-validation-result.json) {
+            try {
+              $payload = Get-Content validation_artifacts/codie-validation-result.json -Raw | ConvertFrom-Json
+              $artifactIsCurrent = $payload.target_sha -eq $expectedTargetSha
+            }
+            catch {
+              $artifactIsCurrent = $false
+            }
+          }
+          if (-not $artifactIsCurrent) {
+            if (Test-Path validation_artifacts) {
+              Remove-Item -LiteralPath validation_artifacts -Recurse -Force
+            }
+            New-Item -ItemType Directory -Force -Path validation_artifacts | Out-Null
             $message = "workflow infrastructure failed before validators ran; inspect preceding step logs for the original failure"
             $result = [ordered]@{
               final_result = "VALIDATOR_ERROR"
@@ -361,8 +389,26 @@ jobs:
         if: always()
         shell: powershell
         run: |
-          New-Item -ItemType Directory -Force -Path validation_artifacts | Out-Null
-          if (-not (Test-Path validation_artifacts/codie-validation-result.json)) {
+          $expectedTargetSha = "${{ steps.target.outputs.target_sha }}"
+          $artifactIsCurrent = $false
+          if (Test-Path validation_artifacts/codie-validation-result.json) {
+            try {
+              $payload = Get-Content validation_artifacts/codie-validation-result.json -Raw | ConvertFrom-Json
+              $artifactIsCurrent = (
+                $payload.target_sha -eq $expectedTargetSha -and
+                $payload.validation_scope -eq "${{ inputs.validation_scope }}" -and
+                $payload.validator_profile -eq "${{ inputs.validator_profile }}"
+              )
+            }
+            catch {
+              $artifactIsCurrent = $false
+            }
+          }
+          if (-not $artifactIsCurrent) {
+            if (Test-Path validation_artifacts) {
+              Remove-Item -LiteralPath validation_artifacts -Recurse -Force
+            }
+            New-Item -ItemType Directory -Force -Path validation_artifacts | Out-Null
             $message = "workflow infrastructure failed before validators ran; inspect preceding step logs for the original failure"
             $targetSha = "${{ steps.target.outputs.target_sha }}"
             if (-not $targetSha) {

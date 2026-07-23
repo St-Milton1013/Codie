@@ -417,6 +417,14 @@ def run_ollama_validator(
         response = runner(model, prompt)
     except FileNotFoundError:
         return _ollama_error_report(validator, model, options, started_at, "Ollama executable is unavailable.")
+    except TimeoutError:
+        return _ollama_error_report(
+            validator,
+            model,
+            options,
+            started_at,
+            "Ollama validator request timed out.",
+        )
     except subprocess.CalledProcessError as exc:
         return _ollama_error_report(validator, model, options, started_at, (exc.stderr or str(exc)).strip())
     except ValidationGateError as exc:
@@ -1076,18 +1084,15 @@ def _tracked_files(root: Path) -> tuple[str, ...]:
 
 
 def _phase_ledger_scan_files(root: Path) -> tuple[str, ...]:
-    patterns = (
-        "phase",
-        "checkpoint",
-        "outside-validation",
-        "outside_validation",
-        "validation-prompt",
-        "validation_prompt",
-    )
     files = set(PHASE_LEDGER_FILES)
+    files.add(ACTIVE_VALIDATION_SCOPE_PATH)
+    try:
+        active_phase = resolve_active_validation_scope(root).phase_id.lower().replace(" ", "")
+    except ValidationGateError:
+        return tuple(sorted(files))
     for relative in _tracked_files(root):
         lowered = relative.lower()
-        if relative.startswith("docs/") and any(pattern in lowered for pattern in patterns):
+        if relative.startswith("docs/") and active_phase in lowered.replace(" ", ""):
             files.add(relative)
     return tuple(sorted(files))
 
