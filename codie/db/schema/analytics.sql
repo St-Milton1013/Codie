@@ -163,3 +163,112 @@ CREATE TABLE innovation_snapshot_items (
     FOREIGN KEY(innovation_snapshot_run_id) REFERENCES innovation_snapshot_runs(innovation_snapshot_run_id),
     FOREIGN KEY(scryfall_id) REFERENCES cards(scryfall_id)
 );
+
+CREATE TABLE relationship_population_specs (
+    population_spec_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    population_spec_version TEXT NOT NULL,
+    population_spec_hash TEXT NOT NULL,
+    observation_unit TEXT NOT NULL,
+    scope_type TEXT NOT NULL,
+    scope_key TEXT,
+    zone_scope TEXT,
+    window_start_date TEXT,
+    window_end_date TEXT,
+    region TEXT,
+    store TEXT,
+    organizer TEXT,
+    minimum_event_size INTEGER CHECK(minimum_event_size IS NULL OR minimum_event_size >= 0),
+    placement_filter TEXT,
+    deduplication_policy TEXT NOT NULL,
+    concentration_policy TEXT NOT NULL,
+    spec_json TEXT NOT NULL,
+    created_at TEXT NOT NULL,
+    UNIQUE(population_spec_hash, population_spec_version)
+);
+
+CREATE TABLE relationship_population_manifests (
+    population_manifest_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    population_manifest_version TEXT NOT NULL,
+    population_manifest_hash TEXT NOT NULL,
+    population_spec_id INTEGER NOT NULL,
+    population_spec_version TEXT NOT NULL,
+    population_spec_hash TEXT NOT NULL,
+    source_snapshot_refs_json TEXT NOT NULL,
+    candidate_population_count INTEGER NOT NULL CHECK(candidate_population_count >= 0),
+    usable_population_count INTEGER NOT NULL CHECK(usable_population_count >= 0),
+    unknown_or_excluded_count INTEGER NOT NULL CHECK(unknown_or_excluded_count >= 0),
+    deduplicated_population_count INTEGER NOT NULL CHECK(deduplicated_population_count >= 0),
+    generated_at TEXT NOT NULL,
+    UNIQUE(population_manifest_hash, population_manifest_version),
+    FOREIGN KEY(population_spec_id) REFERENCES relationship_population_specs(population_spec_id)
+);
+
+CREATE TABLE relationship_population_members (
+    population_member_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    population_manifest_id INTEGER NOT NULL,
+    member_sequence INTEGER NOT NULL CHECK(member_sequence >= 0),
+    observation_unit_type TEXT NOT NULL,
+    observation_unit_id TEXT NOT NULL,
+    canonical_deck_id INTEGER,
+    canonical_event_id INTEGER,
+    inclusion_status TEXT NOT NULL,
+    exclusion_reason TEXT,
+    deduplication_key TEXT NOT NULL,
+    concentration_group_key TEXT,
+    UNIQUE(population_manifest_id, member_sequence),
+    UNIQUE(population_manifest_id, observation_unit_type, observation_unit_id),
+    FOREIGN KEY(population_manifest_id) REFERENCES relationship_population_manifests(population_manifest_id),
+    FOREIGN KEY(canonical_deck_id) REFERENCES canonical_decks(canonical_deck_id),
+    FOREIGN KEY(canonical_event_id) REFERENCES canonical_events(canonical_event_id)
+);
+
+CREATE TABLE relationship_measurements (
+    relationship_measurement_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    relationship_measurement_version TEXT NOT NULL,
+    relationship_measurement_hash TEXT NOT NULL,
+    relationship_type TEXT NOT NULL,
+    source_endpoint_type TEXT NOT NULL,
+    source_endpoint_id TEXT NOT NULL,
+    target_endpoint_type TEXT NOT NULL,
+    target_endpoint_id TEXT NOT NULL,
+    directionality TEXT NOT NULL,
+    population_manifest_id INTEGER NOT NULL,
+    population_manifest_version TEXT NOT NULL,
+    N INTEGER NOT NULL CHECK(N > 0),
+    nA INTEGER NOT NULL CHECK(nA >= 0 AND nA <= N),
+    nB INTEGER NOT NULL CHECK(nB >= 0 AND nB <= N),
+    nAB INTEGER NOT NULL CHECK(nAB >= 0 AND nAB <= nA AND nAB <= nB),
+    candidate_population_count INTEGER NOT NULL CHECK(candidate_population_count >= 0),
+    usable_population_count INTEGER NOT NULL CHECK(usable_population_count >= 0),
+    unknown_or_excluded_count INTEGER NOT NULL CHECK(unknown_or_excluded_count >= 0),
+    deduplicated_population_count INTEGER NOT NULL CHECK(deduplicated_population_count >= 0),
+    observed_co_occurrence REAL NOT NULL,
+    expected_co_occurrence REAL NOT NULL,
+    metric_bundle_version TEXT NOT NULL,
+    provenance_refs_json TEXT NOT NULL,
+    caveat_refs_json TEXT NOT NULL,
+    generated_at TEXT NOT NULL,
+    UNIQUE(relationship_measurement_hash, relationship_measurement_version),
+    FOREIGN KEY(population_manifest_id) REFERENCES relationship_population_manifests(population_manifest_id)
+);
+
+CREATE TABLE relationship_measurement_metrics (
+    relationship_measurement_metric_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    relationship_measurement_id INTEGER NOT NULL,
+    metric_name TEXT NOT NULL CHECK(metric_name IN (
+        'support', 'directional_confidence', 'dependence_delta', 'lift',
+        'leverage', 'jaccard_similarity', 'pmi'
+    )),
+    metric_version TEXT NOT NULL,
+    orientation TEXT NOT NULL,
+    metric_value REAL,
+    numerator REAL,
+    denominator REAL,
+    undefined_reason TEXT,
+    CHECK(
+        (metric_value IS NULL AND undefined_reason IS NOT NULL AND length(trim(undefined_reason)) > 0)
+        OR (metric_value IS NOT NULL AND undefined_reason IS NULL)
+    ),
+    UNIQUE(relationship_measurement_id, metric_name, metric_version, orientation),
+    FOREIGN KEY(relationship_measurement_id) REFERENCES relationship_measurements(relationship_measurement_id)
+);

@@ -1081,3 +1081,56 @@ CREATE TABLE analysis_sessions (
 );
 ```
 
+## Relationship Intelligence Persistence
+
+Relationship Intelligence measurements are analytics-owned, append-only
+records. Population manifests freeze the exact canonical observation units
+used for a measurement. Recalculation creates new versioned identities rather
+than updating historical rows.
+
+### `relationship_population_specs`
+
+Stores deterministic population filters and policy JSON. Identity is unique
+on `(population_spec_hash, population_spec_version)`.
+
+### `relationship_population_manifests`
+
+Stores immutable realized population counts and source snapshot references.
+Each row references one population specification and is unique on
+`(population_manifest_hash, population_manifest_version)`.
+
+### `relationship_population_members`
+
+Stores the stable ordered membership of a manifest. Applicable canonical deck
+and event references use foreign keys. Member sequence and observation-unit
+identity are unique within a manifest.
+
+### `relationship_measurements`
+
+Stores endpoint identity, directionality, manifest identity, raw `N`, `nA`,
+`nB`, and `nAB` counts, population disclosure counts, observed and expected
+co-occurrence, provenance, caveats, and metric-bundle version. Count checks
+enforce:
+
+```text
+0 <= nAB <= nA <= N
+0 <= nAB <= nB <= N
+N > 0
+```
+
+Identity is unique on
+`(relationship_measurement_hash, relationship_measurement_version)`.
+
+### `relationship_measurement_metrics`
+
+Stores each constitutional metric separately. Allowed names are `support`,
+`directional_confidence`, `dependence_delta`, `lift`, `leverage`,
+`jaccard_similarity`, and `pmi`. A null value requires a visible
+`undefined_reason`; a defined value prohibits one. No combined relationship
+or synergy score is stored.
+
+### Relationship indexes
+
+Indexes cover specification, manifest, measurement, endpoint-pair, metric,
+member-order, version, and audit-time retrieval. `AnalyticsRepository` is the
+sole owner of this persistence family.

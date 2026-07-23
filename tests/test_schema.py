@@ -81,6 +81,11 @@ class SchemaFoundationTest(unittest.TestCase):
             "user_labels",
             "custom_packages",
             "analysis_sessions",
+            "relationship_population_specs",
+            "relationship_population_manifests",
+            "relationship_population_members",
+            "relationship_measurements",
+            "relationship_measurement_metrics",
         }
         rows = self.connection.execute(
             "SELECT name FROM sqlite_master WHERE type = 'table'"
@@ -104,6 +109,15 @@ class SchemaFoundationTest(unittest.TestCase):
             "idx_simulation_line_reviews_trace_id",
             "idx_simulation_line_reviews_review_status",
             "idx_analysis_sessions_deck_hash",
+            "idx_relationship_population_specs_identity",
+            "idx_relationship_population_manifests_identity",
+            "idx_relationship_population_manifests_spec",
+            "idx_relationship_population_members_order",
+            "idx_relationship_measurements_identity",
+            "idx_relationship_measurements_manifest",
+            "idx_relationship_measurements_endpoints",
+            "idx_relationship_measurements_generated",
+            "idx_relationship_measurement_metrics_lookup",
         }
         rows = self.connection.execute(
             "SELECT name FROM sqlite_master WHERE type = 'index'"
