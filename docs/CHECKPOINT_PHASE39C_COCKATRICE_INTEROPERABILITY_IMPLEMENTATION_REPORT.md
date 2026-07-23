@@ -94,6 +94,39 @@ Unresolved export rows can be rejected with visible failures.
 Phase 39D remains blocked until Phase 39C returns PASS or PASS WITH REVIEW NOTES.
 ```
 
+## Implementation Completeness Verified
+
+```text
+public interface is exported from codie/cockatrice/__init__.py
+public interface is implemented in codie/cockatrice/interoperability.py
+import packet models are implemented
+export packet models are implemented
+Cockatrice XML payload parser accepts supplied payload text only
+Cockatrice export packet builder accepts supplied card rows only
+deterministic serialization helpers are implemented
+validation helpers are implemented
+fixtures are present under tests/fixtures/cockatrice
+focused tests are present in tests/test_cockatrice_interoperability.py
+documentation packet is present
+governance state update is present
+active validation scope was not changed
+constitution files were not changed
+validator and workflow files were not changed
+```
+
+## Rejection Coverage Verified
+
+```text
+malformed XML produces visible failure
+DTD and external entity declarations produce visible failure
+unsupported non-Cockatrice format produces visible failure
+empty payloads produce visible failure
+privacy metadata produces visible failure
+forbidden strategic language produces visible failure
+unresolved export rows can produce visible failure when configured
+export packets without zones or visible failures are rejected
+```
+
 ## Boundary Verified
 
 ```text
@@ -123,23 +156,18 @@ no constitution changes
 
 ## Validation Commands
 
-The configured Windows venv failed to launch:
+The configured Windows venv was repaired before this corrective commit and now
+launches successfully:
 
 ```text
-C:\Users\Main\.venvs\codie-py312\Scripts\python.exe -m unittest tests.test_cockatrice_interoperability -v
-Unable to create process using '"C:\Users\Main\AppData\Local\Programs\Python\Python312\python.exe" ...'
-```
-
-Validation used the bundled Python runtime:
-
-```text
-C:\Users\Main\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe
+C:\Users\Main\.venvs\codie-py312\Scripts\python.exe --version
+Python 3.12.13
 ```
 
 Focused tests:
 
 ```text
-C:\Users\Main\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe -m unittest tests.test_cockatrice_interoperability -v
+C:\Users\Main\.venvs\codie-py312\Scripts\python.exe -m unittest tests.test_cockatrice_interoperability -v
 Ran 18 tests
 OK
 ```
@@ -147,11 +175,24 @@ OK
 Full validation:
 
 ```text
-$env:PYTHONPATH='C:\Users\Main\.venvs\codie-py312\Lib\site-packages'
-C:\Users\Main\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe -m unittest discover -s tests -v
+git diff --check
+passed
+
+C:\Users\Main\.venvs\codie-py312\Scripts\python.exe scripts\check_schema.py
+Schema bootstrap check passed.
+
+C:\Users\Main\.venvs\codie-py312\Scripts\python.exe -m unittest discover -s tests -v
 Ran 1092 tests
 OK (skipped=1)
 ```
+
+## PR Validation Posture
+
+Phase 39C is being validated through the draft PR before merge. The
+phase-ledger outside validation run is intentionally deferred until the PR is
+accepted and merged to `main`. This checkpoint does not mark Phase 39C
+externally accepted, and Phase 39D remains blocked until Phase 39C receives
+PASS or PASS WITH REVIEW NOTES from the post-merge outside validation gate.
 
 ## Static Scan Expectations
 

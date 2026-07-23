@@ -98,6 +98,26 @@ cockatrice_imported_deck_to_dict(...)
 cockatrice_export_packet_to_dict(...)
 ```
 
+## Implementation Completeness Matrix
+
+```text
+public interface exported: codie/cockatrice/__init__.py
+public interface implemented: codie/cockatrice/interoperability.py
+import packet models: implemented
+export packet models: implemented
+Cockatrice XML payload parser: implemented for supplied payload text only
+Cockatrice export packet builder: implemented for supplied card rows only
+deterministic serialization helpers: implemented
+validation helpers: implemented
+fixtures: present under tests/fixtures/cockatrice
+focused tests: tests/test_cockatrice_interoperability.py
+documentation packet: implementation report, checkpoint, outside prompt
+governance state update: active roadmap, validation status, next contract, handoff
+active validation scope change: none
+constitution change: none
+validator or workflow change: none
+```
+
 ## Behavior Implemented
 
 ```text
@@ -120,6 +140,19 @@ unknown, unavailable, unsupported, not-applicable, and zero states remain distin
 user-local import packets are labeled not_tournament_evidence
 unresolved export rows can be preserved with caveats
 unresolved export rows can be rejected with visible failures
+```
+
+## Required Rejection Coverage
+
+```text
+malformed XML produces visible failure
+DTD and external entity declarations produce visible failure
+unsupported non-Cockatrice format produces visible failure
+empty payloads produce visible failure
+privacy metadata produces visible failure
+forbidden strategic language produces visible failure
+unresolved export rows can produce visible failure when configured
+export packets without zones or visible failures are rejected
 ```
 
 ## Boundary Preserved
@@ -150,21 +183,27 @@ no constitution changes
 Cockatrice user deck files remain user-local and are not tournament evidence by
 default.
 
+## Implementation Completion Statement
+
+Phase 39C contains the complete implementation authorized by the accepted Phase
+39B implementation contract. Remaining validation work is limited to PR
+validation, human review, merge, and the post-merge phase-ledger outside
+validation gate. No Phase 39D work is implemented or authorized by this packet.
+
 ## Validation Notes
 
-The configured Windows venv at
-`C:\Users\Main\.venvs\codie-py312\Scripts\python.exe` failed to launch because
-its launcher still points at a missing Python executable. Development
-validation used the bundled runtime:
+The configured Windows venv was repaired before this corrective commit and now
+launches successfully:
 
 ```text
-C:\Users\Main\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe
+C:\Users\Main\.venvs\codie-py312\Scripts\python.exe --version
+Python 3.12.13
 ```
 
 Focused validation:
 
 ```text
-C:\Users\Main\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe -m unittest tests.test_cockatrice_interoperability -v
+C:\Users\Main\.venvs\codie-py312\Scripts\python.exe -m unittest tests.test_cockatrice_interoperability -v
 Ran 18 tests
 OK
 ```
@@ -175,11 +214,10 @@ Validation commands executed:
 git diff --check
 passed
 
-C:\Users\Main\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe scripts\check_schema.py
+C:\Users\Main\.venvs\codie-py312\Scripts\python.exe scripts\check_schema.py
 Schema bootstrap check passed.
 
-$env:PYTHONPATH='C:\Users\Main\.venvs\codie-py312\Lib\site-packages'
-C:\Users\Main\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe -m unittest discover -s tests -v
+C:\Users\Main\.venvs\codie-py312\Scripts\python.exe -m unittest discover -s tests -v
 Ran 1092 tests
 OK (skipped=1)
 ```
@@ -198,6 +236,14 @@ matches only in tests/test_cockatrice_interoperability.py forbidden-language tes
 ```
 
 Full validation results are also recorded in the Phase 39C checkpoint.
+
+## PR Validation Posture
+
+Phase 39C is being validated through the draft PR first. The protected
+phase-ledger outside validation run is intentionally deferred until the PR is
+accepted and merged to `main`. This report does not claim external acceptance
+for Phase 39C, and Phase 39D remains blocked until Phase 39C receives PASS or
+PASS WITH REVIEW NOTES from the post-merge outside validation gate.
 
 ## Final Governance Summary
 
