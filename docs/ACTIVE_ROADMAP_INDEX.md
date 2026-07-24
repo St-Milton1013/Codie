@@ -108,10 +108,11 @@ Current action: validate the Phase 40H population resolution contract
 Local alpha tag status: verified on origin as local-alpha-0.1.0
 ```
 
-## Next Allowed Work Packet
+## Authoritative Next Allowed Work Packet
 
 ```text
-Phase 40H Relationship Intelligence Population Resolution Contract
+Next allowed work packet: Phase 40H Relationship Intelligence Population Resolution Contract
+Phase 40G is accepted and is not the next work packet.
 ```
 
 Current-status clarification:
@@ -119,7 +120,7 @@ Current-status clarification:
 ```text
 Current protected validation gate: Phase40G / outside-validation / INTERMEDIATE_PACKET.
 Phase 40G status: externally accepted.
-Next allowed work packet: Phase 40H.
+Authoritative next allowed work packet: Phase 40H Relationship Intelligence Population Resolution Contract.
 Phase 40H is the active contract packet.
 The protected active scope remains Phase40G until this PR merges; that
 transition safeguard preserves Phase 40G's externally accepted status.
