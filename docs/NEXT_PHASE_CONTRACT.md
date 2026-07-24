@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: validate the Phase 40D Relationship Intelligence Schema and Repository Implementation
+Recommended next task: validate the Phase 40E Relationship Intelligence Metric Calculation Contract
 
 ## Constitutional Governance Overlay
 
@@ -83,9 +83,9 @@ accepted as the local, fixture-first Cockatrice interoperability
 implementation. Phase 39D returned artifact-backed PASS and closed the
 Cockatrice track. Phase 40A received artifact-backed PASS and established the
 Relationship Intelligence core. Phase 40B received artifact-backed PASS.
-Phase 40C received artifact-backed PASS. Phase 40D is internally complete as
-the accepted persistence implementation. Phase 40E remains blocked until
-Phase 40D outside validation returns PASS or PASS WITH REVIEW NOTES.
+Phase 40C and Phase 40D received artifact-backed PASS. Phase 40E is internally
+complete as a metric-calculation contract. Phase 40F remains blocked until
+Phase 40E outside validation returns PASS or PASS WITH REVIEW NOTES.
 
 Explicit Phase 39A validation tuple:
 
@@ -350,7 +350,37 @@ next_phase_part: outside-validation
 next_gate_scope: INTERMEDIATE_PACKET
 ```
 
-Phase 40E remains blocked until Phase 40D returns PASS or PASS WITH REVIEW
+Phase 40D acceptance evidence:
+
+```text
+workflow run ID: 30053244480
+validated SHA: 4efe3746181fb0f893e0f1393da52df899acf4b8
+artifact: codie-phase_ledger-validation-4efe3746181fb0f893e0f1393da52df899acf4b8
+deterministic: CLEAN_PASS
+architecture: CLEAN_PASS
+adversarial: CLEAN_PASS
+aggregate: CLEAN_PASS
+findings, skips, and errors: none
+final governance verdict: PASS
+```
+
+Explicit Phase 40E validation tuple:
+
+```text
+phase_id: Phase40E
+phase_part: outside-validation
+gate_scope: INTERMEDIATE_PACKET
+```
+
+Explicit next-phase validation tuple:
+
+```text
+next_phase_id: Phase40F
+next_phase_part: outside-validation
+next_gate_scope: INTERMEDIATE_PACKET
+```
+
+Phase 40F remains blocked until Phase 40E returns PASS or PASS WITH REVIEW
 NOTES.
 
 Phase 38A must comply with V2 rules for Moxfield observations, user-local deck
