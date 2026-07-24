@@ -2666,6 +2666,12 @@ PASS. Phase 40H defines population resolution without implementing it. The
 protected active validation scope remains Phase40G until the Phase 40H
 contract PR merges.
 
+The active-scope `Phase40G` token is the externally accepted trusted-base
+authority for Phase 40H PR validation, not an `INTERNAL PASS` status claim.
+The Phase 40H PR must not change its own validation authority. A separately
+authorized post-merge transition sets the active scope to Phase40H before
+Phase 40H phase-ledger outside validation.
+
 Phase 40A acceptance evidence:
 
 ```text
