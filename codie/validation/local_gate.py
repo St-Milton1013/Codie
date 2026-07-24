@@ -1341,13 +1341,18 @@ def _current_phase_status_lines(text: str, phase_id: str) -> tuple[str, ...]:
         section = lines[start + 1 : end]
         if not any(pattern.search(line) for line in section):
             continue
-        matches = tuple(
-            dict.fromkeys(
-                line.strip()
-                for line in section
-                if any_phase_pattern.search(line) and line.strip()
-            )
+        phase_lines = [
+            line.strip()
+            for line in section
+            if any_phase_pattern.search(line) and line.strip()
+        ]
+        active_index = next(
+            index for index, line in enumerate(phase_lines) if pattern.search(line)
         )
+        neighborhood = phase_lines[
+            max(0, active_index - 3) : min(len(phase_lines), active_index + 7)
+        ]
+        matches = tuple(dict.fromkeys(neighborhood))
         if matches:
             return matches[:12]
     matches = tuple(

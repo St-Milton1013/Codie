@@ -590,6 +590,54 @@ class ValidationLocalGateTest(unittest.TestCase):
                     ),
                 )
 
+    def test_review_context_status_lines_anchor_on_active_phase_after_long_history(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "docs").mkdir()
+            write_scope(root, phase_id="Phase40E")
+            (root / CONSTITUTION_PATH).write_text(
+                "# CODIE CONSTITUTION V2.0\n## 4.6 Advancement rule\nPassing validation permits advancement.\n",
+                encoding="utf-8",
+            )
+            historical_statuses = "".join(
+                f"Phase {number}A: externally accepted\n" for number in range(25, 40)
+            )
+            for relative in PHASE_LEDGER_FILES:
+                (root / relative).write_text(
+                    "## Current Phase Gate\n"
+                    + historical_statuses
+                    + "Phase 40D: externally accepted\n"
+                    + "Phase 40E: externally accepted\n"
+                    + "Phase 40F: internally complete\n"
+                    + "Phase 40G: blocked\n",
+                    encoding="utf-8",
+                )
+            options = ValidationGateOptions(
+                phase_id="Phase40E",
+                phase_part="outside-validation",
+                gate_scope="INTERMEDIATE_PACKET",
+                target_sha=SHA,
+                pull_request_number=PR_NUMBER,
+                branch=BRANCH,
+            )
+            completed = subprocess.CompletedProcess(("git", "diff"), 0, stdout="", stderr="")
+            command_result = {"command": "check", "returncode": 0, "stdout": "", "stderr": ""}
+
+            with mock.patch(
+                "codie.validation.local_gate._changed_files_for_scan",
+                return_value=PHASE_LEDGER_FILES,
+            ), mock.patch("codie.validation.local_gate._run_command", return_value=completed), mock.patch(
+                "codie.validation.local_gate._command_result",
+                return_value=command_result,
+            ):
+                context = _review_context(options, root)
+
+            for lines in context["current_target_phase_status_lines"].values():
+                self.assertIn("Phase 40E: externally accepted", lines)
+                self.assertIn("Phase 40F: internally complete", lines)
+                self.assertIn("Phase 40G: blocked", lines)
+                self.assertNotIn("Phase 25A: externally accepted", lines)
+
     def test_validator_prompt_does_not_treat_test_assertions_as_failure_evidence(self) -> None:
         options = ValidationGateOptions(
             phase_id="Phase39C",
