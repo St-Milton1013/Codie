@@ -98,8 +98,9 @@ Phase 40B Relationship Intelligence Schema and Repository Contract: PASS
 Phase 40C Relationship Intelligence Schema and Repository Implementation Contract: PASS
 Phase 40D Relationship Intelligence Schema and Repository Implementation: PASS
 Phase 40E Relationship Intelligence Metric Calculation Contract: PASS
-Phase 40F Relationship Intelligence Metric Calculation Implementation Contract: INTERNAL PASS
-Phase 40G Relationship Intelligence Metric Calculation Implementation: BLOCKED
+Phase 40F Relationship Intelligence Metric Calculation Implementation Contract: PASS
+Phase 40G Relationship Intelligence Metric Calculation Implementation: INTERNAL PASS
+Phase 40H Relationship Intelligence Population Resolution Contract: BLOCKED
 Local alpha tag: verified on origin as local-alpha-0.1.0
 ```
 
@@ -110,10 +111,10 @@ validation with review notes. Phase 39B passed artifact-backed phase-ledger
 validation. Phase 39C passed artifact-backed phase-ledger validation. Phase
 39D passed artifact-backed phase-ledger validation and closed the Cockatrice
 track. Phase 40A and Phase 40B passed artifact-backed phase-ledger validation.
-Phase 40C, Phase 40D, and Phase 40E passed artifact-backed phase-ledger
-validation. Phase 40F is internally complete as a metric-calculation
-implementation contract. Phase 40G remains blocked until Phase 40F outside
-validation returns PASS or PASS WITH REVIEW NOTES.
+Phase 40C through Phase 40F passed artifact-backed phase-ledger validation.
+Phase 40G is internally complete as the pure metric-calculation
+implementation. Phase 40H remains blocked until Phase 40G outside validation
+returns PASS or PASS WITH REVIEW NOTES.
 
 Phase 39C acceptance evidence:
 
@@ -318,6 +319,36 @@ phase_id: Phase40F
 phase_part: outside-validation
 gate_scope: INTERMEDIATE_PACKET
 next_phase_id: Phase40G
+next_phase_part: outside-validation
+next_gate_scope: INTERMEDIATE_PACKET
+```
+
+Phase 40F acceptance evidence:
+
+```text
+workflow run ID: 30058091071
+validated SHA: c5380cd0571e1a74ceced0f347644e3387372401
+artifact: codie-phase_ledger-validation-c5380cd0571e1a74ceced0f347644e3387372401
+validation scope: phase_ledger
+validator profile: all
+deterministic: CLEAN_PASS
+architecture: CLEAN_PASS
+adversarial: CLEAN_PASS
+aggregate: CLEAN_PASS
+severity totals: all zero
+skipped validators: none
+findings: none
+errors: none
+final governance verdict: PASS
+```
+
+Phase 40G validation tuple:
+
+```text
+phase_id: Phase40G
+phase_part: outside-validation
+gate_scope: INTERMEDIATE_PACKET
+next_phase_id: Phase40H
 next_phase_part: outside-validation
 next_gate_scope: INTERMEDIATE_PACKET
 ```
