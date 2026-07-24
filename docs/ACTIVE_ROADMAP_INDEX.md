@@ -99,24 +99,25 @@ Phase 39D Cockatrice Interoperability Checkpoint: externally accepted
 Phase 40A Relationship Intelligence Core Contract: externally accepted
 Phase 40B Relationship Intelligence Schema and Repository Contract: externally accepted
 Phase 40C Relationship Intelligence Schema and Repository Implementation Contract: externally accepted
-Phase 40D Relationship Intelligence Schema and Repository Implementation: internally complete
-Current action: validate the Phase 40D implementation
+Phase 40D Relationship Intelligence Schema and Repository Implementation: externally accepted
+Phase 40E Relationship Intelligence Metric Calculation Contract: internally complete
+Current action: validate the Phase 40E metric calculation contract
 Local alpha tag status: verified on origin as local-alpha-0.1.0
 ```
 
 ## Next Allowed Phase
 
 ```text
-Phase 40D Relationship Intelligence Schema and Repository Implementation
+Phase 40E Relationship Intelligence Metric Calculation Contract
 ```
 
 Current-status clarification:
 
 ```text
-Phase 40C status: externally accepted.
-Phase 40D is the active implementation packet.
-The protected active scope remains Phase40C until this PR merges; that
-transition safeguard preserves Phase 40C's externally accepted status.
+Phase 40D status: externally accepted.
+Phase 40E is the active contract packet.
+The protected active scope remains Phase40D until this PR merges; that
+transition safeguard preserves Phase 40D's externally accepted status.
 ```
 
 Phase 38D received artifact-backed phase-ledger validation on merged `main`.
@@ -126,9 +127,9 @@ Phase 39C received artifact-backed phase-ledger validation on merged `main`.
 Phase 39D received artifact-backed phase-ledger validation on merged `main`
 and closed the local, fixture-first Cockatrice track. Phase 40A received
 artifact-backed PASS and established the Relationship Intelligence core.
-Phase 40B and Phase 40C received artifact-backed PASS. Phase 40D implements
-only the accepted persistence boundary. Phase 40E remains blocked until Phase
-40D returns PASS or PASS WITH REVIEW NOTES.
+Phase 40B, Phase 40C, and Phase 40D received artifact-backed PASS. Phase 40E
+defines the pure metric calculator boundary. Phase 40F remains blocked until
+Phase 40E returns PASS or PASS WITH REVIEW NOTES.
 
 Phase 39A validation tuple:
 
