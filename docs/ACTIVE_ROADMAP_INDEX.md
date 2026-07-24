@@ -100,24 +100,25 @@ Phase 40A Relationship Intelligence Core Contract: externally accepted
 Phase 40B Relationship Intelligence Schema and Repository Contract: externally accepted
 Phase 40C Relationship Intelligence Schema and Repository Implementation Contract: externally accepted
 Phase 40D Relationship Intelligence Schema and Repository Implementation: externally accepted
-Phase 40E Relationship Intelligence Metric Calculation Contract: internally complete
-Current action: validate the Phase 40E metric calculation contract
+Phase 40E Relationship Intelligence Metric Calculation Contract: externally accepted
+Phase 40F Relationship Intelligence Metric Calculation Implementation Contract: internally complete
+Current action: validate the Phase 40F metric calculation implementation contract
 Local alpha tag status: verified on origin as local-alpha-0.1.0
 ```
 
 ## Next Allowed Phase
 
 ```text
-Phase 40E Relationship Intelligence Metric Calculation Contract
+Phase 40F Relationship Intelligence Metric Calculation Implementation Contract
 ```
 
 Current-status clarification:
 
 ```text
-Phase 40D status: externally accepted.
-Phase 40E is the active contract packet.
-The protected active scope remains Phase40D until this PR merges; that
-transition safeguard preserves Phase 40D's externally accepted status.
+Phase 40E status: externally accepted.
+Phase 40F is the active implementation-contract packet.
+The protected active scope remains Phase40E until this PR merges; that
+transition safeguard preserves Phase 40E's externally accepted status.
 ```
 
 Phase 38D received artifact-backed phase-ledger validation on merged `main`.
@@ -127,9 +128,9 @@ Phase 39C received artifact-backed phase-ledger validation on merged `main`.
 Phase 39D received artifact-backed phase-ledger validation on merged `main`
 and closed the local, fixture-first Cockatrice track. Phase 40A received
 artifact-backed PASS and established the Relationship Intelligence core.
-Phase 40B, Phase 40C, and Phase 40D received artifact-backed PASS. Phase 40E
-defines the pure metric calculator boundary. Phase 40F remains blocked until
-Phase 40E returns PASS or PASS WITH REVIEW NOTES.
+Phase 40B through Phase 40E received artifact-backed PASS. Phase 40F narrows
+the pure metric calculator implementation boundary. Phase 40G remains blocked
+until Phase 40F returns PASS or PASS WITH REVIEW NOTES.
 
 Phase 39A validation tuple:
 
