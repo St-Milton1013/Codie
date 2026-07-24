@@ -100,8 +100,7 @@ Phase 40A Relationship Intelligence Core Contract: externally accepted
 Phase 40B Relationship Intelligence Schema and Repository Contract: externally accepted
 Phase 40C Relationship Intelligence Schema and Repository Implementation Contract: externally accepted
 Phase 40D Relationship Intelligence Schema and Repository Implementation: externally accepted
-Phase 40E Relationship Intelligence Metric Calculation Contract: externally accepted
-Phase 40F Relationship Intelligence Metric Calculation Implementation Contract: internally complete
+Phase 40E Relationship Intelligence Metric Calculation Contract: externally accepted; Phase 40F Relationship Intelligence Metric Calculation Implementation Contract: internally complete
 Current action: validate the Phase 40F metric calculation implementation contract
 Local alpha tag status: verified on origin as local-alpha-0.1.0
 ```
