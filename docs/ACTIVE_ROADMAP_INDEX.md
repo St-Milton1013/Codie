@@ -106,7 +106,7 @@ Current action: validate the Phase 40F metric calculation implementation contrac
 Local alpha tag status: verified on origin as local-alpha-0.1.0
 ```
 
-## Next Allowed Phase
+## Next Allowed Work Packet
 
 ```text
 Phase 40F Relationship Intelligence Metric Calculation Implementation Contract
@@ -115,7 +115,9 @@ Phase 40F Relationship Intelligence Metric Calculation Implementation Contract
 Current-status clarification:
 
 ```text
-Phase 40E status: externally accepted; next allowed phase: Phase 40F.
+Current protected validation gate: Phase40E / outside-validation / INTERMEDIATE_PACKET.
+Phase 40E status: externally accepted.
+Next allowed work packet: Phase 40F.
 Phase 40F is the active implementation-contract packet.
 The protected active scope remains Phase40E until this PR merges; that
 transition safeguard preserves Phase 40E's externally accepted status.
