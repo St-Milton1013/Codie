@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: validate the Phase 40F Relationship Intelligence Metric Calculation Implementation Contract
+Recommended next task: validate the Phase 40G Relationship Intelligence Metric Calculation Implementation
 
 ## Constitutional Governance Overlay
 
@@ -83,10 +83,10 @@ accepted as the local, fixture-first Cockatrice interoperability
 implementation. Phase 39D returned artifact-backed PASS and closed the
 Cockatrice track. Phase 40A received artifact-backed PASS and established the
 Relationship Intelligence core. Phase 40B received artifact-backed PASS.
-Phase 40C through Phase 40E received artifact-backed PASS. Phase 40F is
-internally complete as a metric-calculation implementation contract. Phase
-40G remains blocked until Phase 40F outside validation returns PASS or PASS
-WITH REVIEW NOTES.
+Phase 40C through Phase 40F received artifact-backed PASS. Phase 40G is
+internally complete as the pure metric-calculation implementation. Phase 40H
+remains blocked until Phase 40G outside validation returns PASS or PASS WITH
+REVIEW NOTES.
 
 Explicit Phase 39A validation tuple:
 
@@ -411,7 +411,37 @@ next_phase_part: outside-validation
 next_gate_scope: INTERMEDIATE_PACKET
 ```
 
-Phase 40G remains blocked until Phase 40F returns PASS or PASS WITH REVIEW
+Phase 40F acceptance evidence:
+
+```text
+workflow run ID: 30058091071
+validated SHA: c5380cd0571e1a74ceced0f347644e3387372401
+artifact: codie-phase_ledger-validation-c5380cd0571e1a74ceced0f347644e3387372401
+deterministic: CLEAN_PASS
+architecture: CLEAN_PASS
+adversarial: CLEAN_PASS
+aggregate: CLEAN_PASS
+findings, skips, and errors: none
+final governance verdict: PASS
+```
+
+Explicit Phase 40G validation tuple:
+
+```text
+phase_id: Phase40G
+phase_part: outside-validation
+gate_scope: INTERMEDIATE_PACKET
+```
+
+Explicit next-phase validation tuple:
+
+```text
+next_phase_id: Phase40H
+next_phase_part: outside-validation
+next_gate_scope: INTERMEDIATE_PACKET
+```
+
+Phase 40H remains blocked until Phase 40G returns PASS or PASS WITH REVIEW
 NOTES.
 
 Phase 38A must comply with V2 rules for Moxfield observations, user-local deck

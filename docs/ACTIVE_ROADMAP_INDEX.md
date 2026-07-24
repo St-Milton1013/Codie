@@ -100,26 +100,28 @@ Phase 40A Relationship Intelligence Core Contract: externally accepted
 Phase 40B Relationship Intelligence Schema and Repository Contract: externally accepted
 Phase 40C Relationship Intelligence Schema and Repository Implementation Contract: externally accepted
 Phase 40D Relationship Intelligence Schema and Repository Implementation: externally accepted
-Phase 40E Relationship Intelligence Metric Calculation Contract: externally accepted; Phase 40F Relationship Intelligence Metric Calculation Implementation Contract: internally complete
-Current action: validate the Phase 40F metric calculation implementation contract
+Phase 40E Relationship Intelligence Metric Calculation Contract: externally accepted
+Phase 40F Relationship Intelligence Metric Calculation Implementation Contract: externally accepted
+Phase 40G Relationship Intelligence Metric Calculation Implementation: internally complete
+Current action: validate the Phase 40G metric calculation implementation
 Local alpha tag status: verified on origin as local-alpha-0.1.0
 ```
 
 ## Next Allowed Work Packet
 
 ```text
-Phase 40F Relationship Intelligence Metric Calculation Implementation Contract
+Phase 40G Relationship Intelligence Metric Calculation Implementation
 ```
 
 Current-status clarification:
 
 ```text
-Current protected validation gate: Phase40E / outside-validation / INTERMEDIATE_PACKET.
-Phase 40E status: externally accepted.
-Next allowed work packet: Phase 40F.
-Phase 40F is the active implementation-contract packet.
-The protected active scope remains Phase40E until this PR merges; that
-transition safeguard preserves Phase 40E's externally accepted status.
+Current protected validation gate: Phase40F / outside-validation / INTERMEDIATE_PACKET.
+Phase 40F status: externally accepted.
+Next allowed work packet: Phase 40G.
+Phase 40G is the active implementation packet.
+The protected active scope remains Phase40F until this PR merges; that
+transition safeguard preserves Phase 40F's externally accepted status.
 ```
 
 Phase 38D received artifact-backed phase-ledger validation on merged `main`.
@@ -129,9 +131,9 @@ Phase 39C received artifact-backed phase-ledger validation on merged `main`.
 Phase 39D received artifact-backed phase-ledger validation on merged `main`
 and closed the local, fixture-first Cockatrice track. Phase 40A received
 artifact-backed PASS and established the Relationship Intelligence core.
-Phase 40B through Phase 40E received artifact-backed PASS. Phase 40F narrows
-the pure metric calculator implementation boundary. Phase 40G remains blocked
-until Phase 40F returns PASS or PASS WITH REVIEW NOTES.
+Phase 40B through Phase 40F received artifact-backed PASS. Phase 40G
+implements the pure metric calculator. Phase 40H population resolution remains
+blocked until Phase 40G returns PASS or PASS WITH REVIEW NOTES.
 
 Phase 39A validation tuple:
 

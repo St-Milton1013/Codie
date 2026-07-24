@@ -2585,7 +2585,7 @@ adversarial: CLEAN_PASS
 aggregate: CLEAN_PASS
 ```
 
-## Current Phase 40F Handoff
+## Current Phase 40G Handoff
 
 ```text
 Phase 38A Moxfield Frequency Pool Builder Contract: PASS
@@ -2601,9 +2601,10 @@ Phase 40B Relationship Intelligence Schema and Repository Contract: PASS
 Phase 40C Relationship Intelligence Schema and Repository Implementation Contract: PASS
 Phase 40D Relationship Intelligence Schema and Repository Implementation: PASS
 Phase 40E Relationship Intelligence Metric Calculation Contract: PASS
-Phase 40F Relationship Intelligence Metric Calculation Implementation Contract: INTERNAL PASS
-Current action: validate the Phase 40F metric calculation implementation contract
-Phase 40G Relationship Intelligence Metric Calculation Implementation: BLOCKED until Phase 40F returns PASS or PASS WITH REVIEW NOTES
+Phase 40F Relationship Intelligence Metric Calculation Implementation Contract: PASS
+Phase 40G Relationship Intelligence Metric Calculation Implementation: INTERNAL PASS
+Current action: validate the Phase 40G metric calculation implementation
+Phase 40H Relationship Intelligence Population Resolution Contract: BLOCKED until Phase 40G returns PASS or PASS WITH REVIEW NOTES
 ```
 
 Phase 38C implements a local, fixture-first Moxfield Frequency Pool Builder. It
@@ -2625,12 +2626,12 @@ Phase 40D adds only the five analytics-owned persistence tables, indexes,
 repository methods, schema specification, and tests. It calculates no metrics
 and adds no provider, recommendation, Jin, Tournament Exposure, simulator, UI,
 LLM, or network behavior. Phase 40D and Phase 40E received artifact-backed
-PASS. Phase 40F narrows the later pure, deterministic metric-calculator
-implementation to one analytics module, one focused test file, and exports
-only. It adds no production calculator code, schema, repository, provider,
-recommendation, simulator, UI, LLM, network, or file-writing behavior. The
-protected active validation scope remains Phase40E until the Phase 40F
-implementation-contract PR merges.
+PASS. Phase 40F received artifact-backed PASS and narrowed the pure,
+deterministic metric-calculator implementation to one analytics module, one
+focused test file, and exports only. Phase 40G implements that calculator
+without schema, repository, provider, recommendation, simulator, UI, LLM,
+network, wall-clock, or file-writing behavior. The protected active validation
+scope remains Phase40F until the Phase 40G implementation PR merges.
 
 Phase 40A acceptance evidence:
 
@@ -2777,6 +2778,37 @@ phase_id: Phase40F
 phase_part: outside-validation
 gate_scope: INTERMEDIATE_PACKET
 next_phase_id: Phase40G
+next_phase_part: outside-validation
+next_gate_scope: INTERMEDIATE_PACKET
+```
+
+Phase 40F acceptance evidence:
+
+```text
+workflow run ID: 30058091071
+validated SHA: c5380cd0571e1a74ceced0f347644e3387372401
+artifact: codie-phase_ledger-validation-c5380cd0571e1a74ceced0f347644e3387372401
+validation scope: phase_ledger
+validator profile: all
+deterministic: CLEAN_PASS
+architecture: CLEAN_PASS
+adversarial: CLEAN_PASS
+aggregate: CLEAN_PASS
+severity totals: all zero
+skipped validators: none
+unresolved findings: none
+errors: none
+final governance verdict: PASS
+required corrections: none
+```
+
+Phase 40G validation tuple:
+
+```text
+phase_id: Phase40G
+phase_part: outside-validation
+gate_scope: INTERMEDIATE_PACKET
+next_phase_id: Phase40H
 next_phase_part: outside-validation
 next_gate_scope: INTERMEDIATE_PACKET
 ```

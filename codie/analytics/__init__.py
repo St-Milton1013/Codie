@@ -17,6 +17,17 @@ from .innovation import (
     innovation_evidence_line,
     persist_innovation_snapshot,
 )
+from .relationship_metrics import (
+    RELATIONSHIP_METRIC_VERSION,
+    RelationshipCountPacket,
+    RelationshipMetricBuildError,
+    RelationshipMetricBundle,
+    RelationshipMetricValue,
+    build_relationship_metric_bundle,
+    relationship_metric_bundle_to_dict,
+    validate_relationship_count_packet,
+    validate_relationship_metric_bundle,
+)
 from .weights import (
     AnalyticsError,
     decklist_completeness_weight,
@@ -37,6 +48,12 @@ __all__ = [
     "InnovationSnapshotSpec",
     "InnovationSignal",
     "PersistedInnovationSnapshot",
+    "RELATIONSHIP_METRIC_VERSION",
+    "RelationshipCountPacket",
+    "RelationshipMetricBuildError",
+    "RelationshipMetricBundle",
+    "RelationshipMetricValue",
+    "build_relationship_metric_bundle",
     "config_hash",
     "config_json",
     "detect_innovations",
@@ -52,5 +69,8 @@ __all__ = [
     "persist_innovation_snapshot",
     "placement_weight",
     "recency_weight",
+    "relationship_metric_bundle_to_dict",
     "source_confidence_weight",
+    "validate_relationship_count_packet",
+    "validate_relationship_metric_bundle",
 ]
