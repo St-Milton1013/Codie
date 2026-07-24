@@ -2585,7 +2585,7 @@ adversarial: CLEAN_PASS
 aggregate: CLEAN_PASS
 ```
 
-## Current Phase 40G Handoff
+## Current Phase 40H Handoff
 
 ```text
 Phase 38A Moxfield Frequency Pool Builder Contract: PASS
@@ -2602,9 +2602,40 @@ Phase 40C Relationship Intelligence Schema and Repository Implementation Contrac
 Phase 40D Relationship Intelligence Schema and Repository Implementation: PASS
 Phase 40E Relationship Intelligence Metric Calculation Contract: PASS
 Phase 40F Relationship Intelligence Metric Calculation Implementation Contract: PASS
-Phase 40G Relationship Intelligence Metric Calculation Implementation: INTERNAL PASS
-Current action: validate the Phase 40G metric calculation implementation
-Phase 40H Relationship Intelligence Population Resolution Contract: BLOCKED until Phase 40G returns PASS or PASS WITH REVIEW NOTES
+Phase 40G Relationship Intelligence Metric Calculation Implementation: PASS
+Phase 40H Relationship Intelligence Population Resolution Contract: INTERNAL PASS
+Current action: validate the Phase 40H population resolution contract
+Phase 40I Relationship Intelligence Population Resolution Implementation Contract: BLOCKED until Phase 40H returns PASS or PASS WITH REVIEW NOTES
+```
+
+Phase 40G acceptance evidence:
+
+```text
+workflow run ID: 30058616182
+validated SHA: 41e0794c9aea1282c6d923f8436bfa19b5499617
+artifact: codie-phase_ledger-validation-41e0794c9aea1282c6d923f8436bfa19b5499617
+validation scope: phase_ledger
+validator profile: all
+deterministic: CLEAN_PASS
+architecture: CLEAN_PASS
+adversarial: CLEAN_PASS
+aggregate: CLEAN_PASS
+severity totals: BLOCKER 0, CRITICAL 0, HIGH 0, MEDIUM 0, LOW 0, INFORMATIONAL 0
+skipped validators: none
+unresolved findings: none
+errors: none
+final governance verdict: PASS
+```
+
+Phase 40H validation tuple:
+
+```text
+phase_id: Phase40H
+phase_part: outside-validation
+gate_scope: INTERMEDIATE_PACKET
+next_phase_id: Phase40I
+next_phase_part: outside-validation
+next_gate_scope: INTERMEDIATE_PACKET
 ```
 
 Phase 38C implements a local, fixture-first Moxfield Frequency Pool Builder. It
@@ -2630,8 +2661,16 @@ PASS. Phase 40F received artifact-backed PASS and narrowed the pure,
 deterministic metric-calculator implementation to one analytics module, one
 focused test file, and exports only. Phase 40G implements that calculator
 without schema, repository, provider, recommendation, simulator, UI, LLM,
-network, wall-clock, or file-writing behavior. The protected active validation
-scope remains Phase40F until the Phase 40G implementation PR merges.
+network, wall-clock, or file-writing behavior and returned artifact-backed
+PASS. Phase 40H defines population resolution without implementing it. The
+protected active validation scope remains Phase40G until the Phase 40H
+contract PR merges.
+
+The active-scope `Phase40G` token is the externally accepted trusted-base
+authority for Phase 40H PR validation, not an `INTERNAL PASS` status claim.
+The Phase 40H PR must not change its own validation authority. A separately
+authorized post-merge transition sets the active scope to Phase40H before
+Phase 40H phase-ledger outside validation.
 
 Phase 40A acceptance evidence:
 

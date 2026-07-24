@@ -99,8 +99,9 @@ Phase 40C Relationship Intelligence Schema and Repository Implementation Contrac
 Phase 40D Relationship Intelligence Schema and Repository Implementation: PASS
 Phase 40E Relationship Intelligence Metric Calculation Contract: PASS
 Phase 40F Relationship Intelligence Metric Calculation Implementation Contract: PASS
-Phase 40G Relationship Intelligence Metric Calculation Implementation: INTERNAL PASS
-Phase 40H Relationship Intelligence Population Resolution Contract: BLOCKED
+Phase 40G Relationship Intelligence Metric Calculation Implementation: PASS
+Phase 40H Relationship Intelligence Population Resolution Contract: INTERNAL PASS
+Phase 40I Relationship Intelligence Population Resolution Implementation Contract: BLOCKED
 Local alpha tag: verified on origin as local-alpha-0.1.0
 ```
 
@@ -111,10 +112,40 @@ validation with review notes. Phase 39B passed artifact-backed phase-ledger
 validation. Phase 39C passed artifact-backed phase-ledger validation. Phase
 39D passed artifact-backed phase-ledger validation and closed the Cockatrice
 track. Phase 40A and Phase 40B passed artifact-backed phase-ledger validation.
-Phase 40C through Phase 40F passed artifact-backed phase-ledger validation.
-Phase 40G is internally complete as the pure metric-calculation
-implementation. Phase 40H remains blocked until Phase 40G outside validation
-returns PASS or PASS WITH REVIEW NOTES.
+Phase 40C through Phase 40G passed artifact-backed phase-ledger validation.
+Phase 40H is internally complete as the population-resolution contract.
+Phase 40I remains blocked until Phase 40H outside validation returns PASS or
+PASS WITH REVIEW NOTES.
+
+Phase 40G acceptance evidence:
+
+```text
+workflow run ID: 30058616182
+validated SHA: 41e0794c9aea1282c6d923f8436bfa19b5499617
+artifact: codie-phase_ledger-validation-41e0794c9aea1282c6d923f8436bfa19b5499617
+validation scope: phase_ledger
+validator profile: all
+deterministic: CLEAN_PASS
+architecture: CLEAN_PASS
+adversarial: CLEAN_PASS
+aggregate: CLEAN_PASS
+severity totals: BLOCKER 0, CRITICAL 0, HIGH 0, MEDIUM 0, LOW 0, INFORMATIONAL 0
+skipped validators: none
+unresolved findings: none
+errors: none
+final governance verdict: PASS
+```
+
+Phase 40H validation tuple:
+
+```text
+phase_id: Phase40H
+phase_part: outside-validation
+gate_scope: INTERMEDIATE_PACKET
+next_phase_id: Phase40I
+next_phase_part: outside-validation
+next_gate_scope: INTERMEDIATE_PACKET
+```
 
 Phase 39C acceptance evidence:
 

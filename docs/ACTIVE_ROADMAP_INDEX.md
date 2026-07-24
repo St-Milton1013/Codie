@@ -102,26 +102,40 @@ Phase 40C Relationship Intelligence Schema and Repository Implementation Contrac
 Phase 40D Relationship Intelligence Schema and Repository Implementation: externally accepted
 Phase 40E Relationship Intelligence Metric Calculation Contract: externally accepted
 Phase 40F Relationship Intelligence Metric Calculation Implementation Contract: externally accepted
-Phase 40G Relationship Intelligence Metric Calculation Implementation: internally complete
-Current action: validate the Phase 40G metric calculation implementation
+Phase 40G Relationship Intelligence Metric Calculation Implementation: externally accepted
+Phase 40H Relationship Intelligence Population Resolution Contract: internally complete
+Current action: validate the Phase 40H population resolution contract
 Local alpha tag status: verified on origin as local-alpha-0.1.0
+```
+
+## Previous Work Packet
+
+```text
+Phase 40G Relationship Intelligence Metric Calculation Implementation
+Status: externally accepted
 ```
 
 ## Next Allowed Work Packet
 
 ```text
-Phase 40G Relationship Intelligence Metric Calculation Implementation
+Phase 40H Relationship Intelligence Population Resolution Contract
+Status: internally complete; outside validation required
 ```
 
 Current-status clarification:
 
 ```text
-Current protected validation gate: Phase40F / outside-validation / INTERMEDIATE_PACKET.
-Phase 40F status: externally accepted.
-Next allowed work packet: Phase 40G.
-Phase 40G is the active implementation packet.
-The protected active scope remains Phase40F until this PR merges; that
-transition safeguard preserves Phase 40F's externally accepted status.
+Current protected validation gate: Phase40G / outside-validation / INTERMEDIATE_PACKET.
+Phase 40G status: externally accepted.
+Authoritative next allowed work packet: Phase 40H Relationship Intelligence Population Resolution Contract.
+Phase 40H is the active contract packet.
+The protected active scope remains Phase40G until this PR merges; that
+transition safeguard preserves Phase 40G's externally accepted status.
+The `Phase40G` value in `CODIE_ACTIVE_VALIDATION_SCOPE.json` identifies the
+trusted, externally accepted base authority for this PR. It does not state
+that Phase 40G is internally complete, and an ordinary PR head must not change
+its own validation authority. After this contract merges, the separately
+authorized active-scope transition may set Phase40H for outside validation.
 ```
 
 Phase 38D received artifact-backed phase-ledger validation on merged `main`.
@@ -131,9 +145,34 @@ Phase 39C received artifact-backed phase-ledger validation on merged `main`.
 Phase 39D received artifact-backed phase-ledger validation on merged `main`
 and closed the local, fixture-first Cockatrice track. Phase 40A received
 artifact-backed PASS and established the Relationship Intelligence core.
-Phase 40B through Phase 40F received artifact-backed PASS. Phase 40G
-implements the pure metric calculator. Phase 40H population resolution remains
-blocked until Phase 40G returns PASS or PASS WITH REVIEW NOTES.
+Phase 40B through Phase 40G received artifact-backed PASS. Phase 40H defines
+the population-resolution boundary contract-first. Phase 40I remains blocked
+until Phase 40H returns PASS or PASS WITH REVIEW NOTES.
+
+Phase 40G acceptance evidence:
+
+```text
+workflow run ID: 30058616182
+validated SHA: 41e0794c9aea1282c6d923f8436bfa19b5499617
+artifact: codie-phase_ledger-validation-41e0794c9aea1282c6d923f8436bfa19b5499617
+deterministic: CLEAN_PASS
+architecture: CLEAN_PASS
+adversarial: CLEAN_PASS
+aggregate: CLEAN_PASS
+findings, skips, and errors: none
+final governance verdict: PASS
+```
+
+Phase 40H validation tuple:
+
+```text
+phase_id: Phase40H
+phase_part: outside-validation
+gate_scope: INTERMEDIATE_PACKET
+next_phase_id: Phase40I
+next_phase_part: outside-validation
+next_gate_scope: INTERMEDIATE_PACKET
+```
 
 Phase 39A validation tuple:
 
