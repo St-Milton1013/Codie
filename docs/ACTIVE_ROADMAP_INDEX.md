@@ -108,11 +108,18 @@ Current action: validate the Phase 40H population resolution contract
 Local alpha tag status: verified on origin as local-alpha-0.1.0
 ```
 
-## Authoritative Next Allowed Work Packet
+## Previous Work Packet
 
 ```text
-Next allowed work packet: Phase 40H Relationship Intelligence Population Resolution Contract
-Phase 40G is accepted and is not the next work packet.
+Phase 40G Relationship Intelligence Metric Calculation Implementation
+Status: externally accepted
+```
+
+## Next Allowed Work Packet
+
+```text
+Phase 40H Relationship Intelligence Population Resolution Contract
+Status: internally complete; outside validation required
 ```
 
 Current-status clarification:
