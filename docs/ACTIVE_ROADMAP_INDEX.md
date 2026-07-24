@@ -115,10 +115,8 @@ Phase 40F Relationship Intelligence Metric Calculation Implementation Contract
 Current-status clarification:
 
 ```text
-Phase 40E status: externally accepted.
+Phase 40E status: externally accepted; next allowed phase: Phase 40F.
 Phase 40F is the active implementation-contract packet.
-The next allowed phase is Phase 40F; Phase 40E is accepted and is no longer
-the next-phase gate.
 The protected active scope remains Phase40E until this PR merges; that
 transition safeguard preserves Phase 40E's externally accepted status.
 ```
