@@ -105,34 +105,35 @@ Phase 40F Relationship Intelligence Metric Calculation Implementation Contract: 
 Phase 40G Relationship Intelligence Metric Calculation Implementation: externally accepted
 Phase 40H Relationship Intelligence Population Resolution Contract: externally accepted
 Phase 40I Relationship Intelligence Population Resolution Implementation Contract: externally accepted
-Phase 40J Relationship Intelligence Population Resolution Implementation: internally complete
-Current action: validate the Phase 40J population resolution implementation
+Phase 40J Relationship Intelligence Population Resolution Implementation: externally accepted
+Phase 40K Relationship Intelligence Core Checkpoint / Freeze: internally complete
+Current action: validate the Phase 40K Relationship Intelligence checkpoint
 Local alpha tag status: verified on origin as local-alpha-0.1.0
 ```
 
 ## Previous Work Packet
 
 ```text
-Phase 40I Relationship Intelligence Population Resolution Implementation Contract
+Phase 40J Relationship Intelligence Population Resolution Implementation
 Status: externally accepted
 ```
 
 ## Next Allowed Work Packet
 
 ```text
-Phase 40J Relationship Intelligence Population Resolution Implementation
+Phase 40K Relationship Intelligence Core Checkpoint / Freeze
 Status: internally complete; outside validation required
 ```
 
 Current-status clarification:
 
 ```text
-Current protected validation gate: Phase40J / outside-validation / INTERMEDIATE_PACKET.
-Phase 40I status: externally accepted.
-Authoritative next allowed work packet: Phase 40J Relationship Intelligence Population Resolution Implementation.
-Phase 40J is the active implementation packet.
+Current protected validation gate: Phase40K / outside-validation / INTERMEDIATE_PACKET.
+Phase 40J status: externally accepted.
+Authoritative next allowed work packet: Phase 40K Relationship Intelligence Core Checkpoint / Freeze.
+Phase 40K is the active checkpoint packet.
 The authorized one-file transition on main set
-`CODIE_ACTIVE_VALIDATION_SCOPE.json` to Phase40J before this PR was validated.
+`CODIE_ACTIVE_VALIDATION_SCOPE.json` to Phase40K before this PR was validated.
 The PR does not alter its own validation authority.
 ```
 
@@ -143,17 +144,17 @@ Phase 39C received artifact-backed phase-ledger validation on merged `main`.
 Phase 39D received artifact-backed phase-ledger validation on merged `main`
 and closed the local, fixture-first Cockatrice track. Phase 40A received
 artifact-backed PASS and established the Relationship Intelligence core.
-Phase 40B through Phase 40I received artifact-backed PASS. Phase 40J
-implements the pure population resolver through immutable local packets in one
-analytics module, one focused test file, and exports only. Phase 40K remains
-blocked until Phase 40J returns PASS or PASS WITH REVIEW NOTES.
+Phase 40B through Phase 40J received artifact-backed PASS. Phase 40K freezes
+the accepted Relationship Intelligence schema, repository, metric, and
+population surfaces. Phase 41A remains blocked until Phase 40K returns PASS or
+PASS WITH REVIEW NOTES.
 
-Phase 40I acceptance evidence:
+Phase 40J acceptance evidence:
 
 ```text
-workflow run ID: 30495860894
-validated SHA: c58736e3857de78278d92342bfc3863e92563c7b
-artifact: codie-phase_ledger-validation-c58736e3857de78278d92342bfc3863e92563c7b
+workflow run ID: 30497683444
+validated SHA: 8f27099334635f2a508645ccc58bd3f033321840
+artifact: codie-phase_ledger-validation-8f27099334635f2a508645ccc58bd3f033321840
 deterministic: CLEAN_PASS
 architecture: CLEAN_PASS
 adversarial: CLEAN_PASS
@@ -162,13 +163,13 @@ findings, skips, and errors: none
 final governance verdict: PASS
 ```
 
-Phase 40J validation tuple:
+Phase 40K validation tuple:
 
 ```text
-phase_id: Phase40J
+phase_id: Phase40K
 phase_part: outside-validation
 gate_scope: INTERMEDIATE_PACKET
-next_phase_id: Phase40K
+next_phase_id: Phase41A
 next_phase_part: outside-validation
 next_gate_scope: INTERMEDIATE_PACKET
 ```
