@@ -442,6 +442,7 @@ def run_ollama_validator(
             started_at=started_at,
             completed_at=_now(),
             allowed_affected_files=frozenset(_changed_files_for_scan(options, root)),
+            current_phase_status_lines=_current_phase_status_lines_by_file(options, root),
         )
     except ValidationGateError as exc:
         return _ollama_error_report(validator, model, options, started_at, str(exc))
@@ -610,12 +611,22 @@ def validator_report_from_model_response(
     started_at: str,
     completed_at: str,
     allowed_affected_files: frozenset[str] | None = None,
+    current_phase_status_lines: dict[str, tuple[str, ...]] | None = None,
 ) -> ValidatorReport:
     validate_model_payload(payload)
+    candidate_findings = tuple(
+        item for item in payload["findings"] if _model_finding_is_in_scope(item, allowed_affected_files)
+    )
+    if validator == "architecture" and current_phase_status_lines is not None:
+        candidate_findings = tuple(
+            item
+            for item in candidate_findings
+            if _model_phase_status_finding_is_supported(item, current_phase_status_lines)
+        )
     findings = tuple(
         _model_finding_to_validation_finding(validator, item)
         for item in _unique_model_findings(
-            tuple(item for item in payload["findings"] if _model_finding_is_in_scope(item, allowed_affected_files))
+            candidate_findings
         )
     )
     result = "FAIL" if findings else "CLEAN_PASS"
@@ -1301,15 +1312,7 @@ def _review_context(options: ValidationGateOptions, root: Path) -> dict[str, Any
         "schema_check": _command_result((python_executable, "scripts/check_schema.py"), root),
     }
     diff_limit = 4_000 if phase_ledger else 7_000
-    current_phase_status_lines = {}
-    for relative in PHASE_LEDGER_FILES:
-        path = root / relative
-        if not path.is_file():
-            continue
-        text = path.read_text(encoding="utf-8", errors="ignore")
-        status_lines = _current_phase_status_lines(text, options.phase_id)
-        if status_lines:
-            current_phase_status_lines[relative] = status_lines
+    current_phase_status_lines = _current_phase_status_lines_by_file(options, root)
     return {
         "governance_files": files,
         "current_target_phase_status_lines": current_phase_status_lines,
@@ -1321,6 +1324,22 @@ def _review_context(options: ValidationGateOptions, root: Path) -> dict[str, Any
         "changed_file_contents": changed_contents,
         "deterministic_validation_results": deterministic,
     }
+
+
+def _current_phase_status_lines_by_file(
+    options: ValidationGateOptions,
+    root: Path,
+) -> dict[str, tuple[str, ...]]:
+    status_by_file: dict[str, tuple[str, ...]] = {}
+    for relative in PHASE_LEDGER_FILES:
+        path = root / relative
+        if not path.is_file():
+            continue
+        text = path.read_text(encoding="utf-8", errors="ignore")
+        status_lines = _current_phase_status_lines(text, options.phase_id)
+        if status_lines:
+            status_by_file[relative] = status_lines
+    return status_by_file
 
 
 def _current_phase_status_lines(text: str, phase_id: str) -> tuple[str, ...]:
@@ -1549,6 +1568,104 @@ def _model_finding_is_in_scope(finding: dict[str, Any], allowed_affected_files: 
     if allowed_affected_files is not None and not affected_files.issubset(allowed_affected_files):
         return False
     return True
+
+
+def _model_phase_status_finding_is_supported(
+    finding: dict[str, Any],
+    current_phase_status_lines: dict[str, tuple[str, ...]],
+) -> bool:
+    if not _is_model_phase_status_finding(finding):
+        return True
+
+    affected_files = tuple(
+        _normalize_path(str(path)) for path in finding["affected_files"]
+    )
+    cited_text = " ".join(
+        str(finding[field]).strip()
+        for field in ("title", "description", "governing_rule", "required_correction")
+    ).casefold()
+    statuses_by_phase: dict[str, dict[str, list[tuple[str, str]]]] = {}
+    for relative in affected_files:
+        for line in current_phase_status_lines.get(relative, ()):
+            parsed = _parse_phase_status_line(line)
+            if parsed is None:
+                continue
+            phase_id, status = parsed
+            statuses_by_phase.setdefault(phase_id, {}).setdefault(status, []).append(
+                (relative, line)
+            )
+
+    for statuses in statuses_by_phase.values():
+        if len(statuses) < 2:
+            continue
+        cited_states = 0
+        for entries in statuses.values():
+            cited_entries = [
+                (relative, line)
+                for relative, line in entries
+                if line.casefold() in cited_text
+            ]
+            if not cited_entries:
+                continue
+            cited_states += 1
+        if cited_states >= 2:
+            return True
+    return False
+
+
+def _is_model_phase_status_finding(finding: dict[str, Any]) -> bool:
+    affected_files = frozenset(
+        _normalize_path(str(path)) for path in finding["affected_files"]
+    )
+    if not affected_files or not affected_files.issubset(PHASE_LEDGER_FILES):
+        return False
+    finding_text = " ".join(
+        str(finding[field])
+        for field in ("title", "description", "governing_rule", "required_correction")
+    ).casefold()
+    return any(
+        marker in finding_text
+        for marker in (
+            "phase status",
+            "phase-status",
+            "phase ledger",
+            "phase-ledger",
+            "active validation scope",
+        )
+    )
+
+
+def _parse_phase_status_line(line: str) -> tuple[str, str] | None:
+    phase_match = re.search(r"\bPhase\s*(\d+[A-Z]?)\b", line, flags=re.IGNORECASE)
+    if phase_match is None:
+        return None
+    normalized = line.casefold()
+    if "blocked" in normalized:
+        status = "blocked"
+    elif any(
+        marker in normalized
+        for marker in (
+            "internally complete",
+            "internal pass",
+            "outside validation required",
+            "outside validation pending",
+            "pending validation",
+        )
+    ):
+        status = "current"
+    elif (
+        "externally accepted" in normalized
+        or "accepted with review notes" in normalized
+        or re.search(
+            r":\s*pass(?:\s+with\s+review\s+notes)?\s*$",
+            normalized,
+        )
+        is not None
+    ):
+        status = "accepted"
+    else:
+        return None
+    return f"Phase{phase_match.group(1).upper()}", status
 
 
 def _unique_model_findings(findings: tuple[dict[str, Any], ...]) -> tuple[dict[str, Any], ...]:
