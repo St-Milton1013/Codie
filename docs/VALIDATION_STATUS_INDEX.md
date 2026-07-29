@@ -101,8 +101,9 @@ Phase 40E Relationship Intelligence Metric Calculation Contract: PASS
 Phase 40F Relationship Intelligence Metric Calculation Implementation Contract: PASS
 Phase 40G Relationship Intelligence Metric Calculation Implementation: PASS
 Phase 40H Relationship Intelligence Population Resolution Contract: PASS
-Phase 40I Relationship Intelligence Population Resolution Implementation Contract: INTERNAL PASS
-Phase 40J Relationship Intelligence Population Resolution Implementation: BLOCKED
+Phase 40I Relationship Intelligence Population Resolution Implementation Contract: PASS
+Phase 40J Relationship Intelligence Population Resolution Implementation: INTERNAL PASS
+Phase 40K Relationship Intelligence Core Checkpoint / Freeze: BLOCKED
 Local alpha tag: verified on origin as local-alpha-0.1.0
 ```
 
@@ -113,17 +114,17 @@ validation with review notes. Phase 39B passed artifact-backed phase-ledger
 validation. Phase 39C passed artifact-backed phase-ledger validation. Phase
 39D passed artifact-backed phase-ledger validation and closed the Cockatrice
 track. Phase 40A and Phase 40B passed artifact-backed phase-ledger validation.
-Phase 40C through Phase 40H passed artifact-backed phase-ledger validation.
-Phase 40I is internally complete as the population-resolution implementation
-contract. Phase 40J remains blocked until Phase 40I outside validation returns
-PASS or PASS WITH REVIEW NOTES.
+Phase 40C through Phase 40I passed artifact-backed phase-ledger validation.
+Phase 40J is internally complete as the pure population-resolution
+implementation. Phase 40K remains blocked until Phase 40J outside validation
+returns PASS or PASS WITH REVIEW NOTES.
 
-Phase 40H acceptance evidence:
+Phase 40I acceptance evidence:
 
 ```text
-workflow run ID: 30495006317
-validated SHA: bba2affdd42011fa36bfb069119f2afecb2cdb4f
-artifact: codie-phase_ledger-validation-bba2affdd42011fa36bfb069119f2afecb2cdb4f
+workflow run ID: 30495860894
+validated SHA: c58736e3857de78278d92342bfc3863e92563c7b
+artifact: codie-phase_ledger-validation-c58736e3857de78278d92342bfc3863e92563c7b
 validation scope: phase_ledger
 validator profile: all
 deterministic: CLEAN_PASS
@@ -137,13 +138,13 @@ errors: none
 final governance verdict: PASS
 ```
 
-Phase 40I validation tuple:
+Phase 40J validation tuple:
 
 ```text
-phase_id: Phase40I
+phase_id: Phase40J
 phase_part: outside-validation
 gate_scope: INTERMEDIATE_PACKET
-next_phase_id: Phase40J
+next_phase_id: Phase40K
 next_phase_part: outside-validation
 next_gate_scope: INTERMEDIATE_PACKET
 ```
