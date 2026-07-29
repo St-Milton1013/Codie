@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: validate the Phase 41A Tournament Exposure Analyzer Core Contract
+Recommended next task: validate the Phase 41B Tournament Exposure Independent-Seat Implementation Contract
 
 ## Constitutional Governance Overlay
 
@@ -85,16 +85,17 @@ Cockatrice track. Phase 40A received artifact-backed PASS and established the
 Relationship Intelligence core. Phase 40B received artifact-backed PASS.
 Phase 40C through Phase 40J received artifact-backed PASS. Phase 40K received
 artifact-backed PASS and closed the Relationship Intelligence core track.
-Phase 41A is internally complete as the Tournament Exposure Analyzer core
-contract. Phase 41B remains blocked until Phase 41A outside validation returns
-PASS or PASS WITH REVIEW NOTES.
+Phase 41A received artifact-backed PASS and defines the Tournament Exposure
+Analyzer core. Phase 41B is internally complete as the independent-seat
+implementation contract. Phase 41C remains blocked until Phase 41B outside
+validation returns PASS or PASS WITH REVIEW NOTES.
 
-Phase 40K acceptance evidence:
+Phase 41A acceptance evidence:
 
 ```text
-workflow run ID: 30498165528
-validated SHA: 773653af334b1107c52954493515dd72bf9ab7ff
-artifact: codie-phase_ledger-validation-773653af334b1107c52954493515dd72bf9ab7ff
+workflow run ID: 30498940677
+validated SHA: c81e8d4d86d1554998e25882bee92a35bba48bc5
+artifact: codie-phase_ledger-validation-c81e8d4d86d1554998e25882bee92a35bba48bc5
 validation scope: phase_ledger
 validator profile: all
 deterministic: CLEAN_PASS
@@ -108,13 +109,13 @@ errors: none
 final governance verdict: PASS
 ```
 
-Explicit Phase 41A validation tuple:
+Explicit Phase 41B validation tuple:
 
 ```text
-phase_id: Phase41A
+phase_id: Phase41B
 phase_part: outside-validation
 gate_scope: INTERMEDIATE_PACKET
-next_phase_id: Phase41B
+next_phase_id: Phase41C
 next_phase_part: outside-validation
 next_gate_scope: INTERMEDIATE_PACKET
 ```

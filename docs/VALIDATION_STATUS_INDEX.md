@@ -104,8 +104,9 @@ Phase 40H Relationship Intelligence Population Resolution Contract: PASS
 Phase 40I Relationship Intelligence Population Resolution Implementation Contract: PASS
 Phase 40J Relationship Intelligence Population Resolution Implementation: PASS
 Phase 40K Relationship Intelligence Core Checkpoint / Freeze: PASS
-Phase 41A Tournament Exposure Analyzer Core Contract: INTERNAL PASS
-Phase 41B Tournament Exposure Independent-Seat Implementation Contract: BLOCKED
+Phase 41A Tournament Exposure Analyzer Core Contract: PASS
+Phase 41B Tournament Exposure Independent-Seat Implementation Contract: INTERNAL PASS
+Phase 41C Tournament Exposure Independent-Seat Implementation: BLOCKED
 Local alpha tag: verified on origin as local-alpha-0.1.0
 ```
 
@@ -118,16 +119,17 @@ validation. Phase 39C passed artifact-backed phase-ledger validation. Phase
 track. Phase 40A and Phase 40B passed artifact-backed phase-ledger validation.
 Phase 40C through Phase 40J passed artifact-backed phase-ledger validation.
 Phase 40K passed artifact-backed phase-ledger validation and closed the
-Relationship Intelligence core track. Phase 41A is internally complete as the
-Tournament Exposure Analyzer core contract. Phase 41B remains blocked until
-Phase 41A outside validation returns PASS or PASS WITH REVIEW NOTES.
+Relationship Intelligence core track. Phase 41A passed artifact-backed
+phase-ledger validation. Phase 41B is internally complete as the independent-
+seat implementation contract. Phase 41C remains blocked until Phase 41B
+outside validation returns PASS or PASS WITH REVIEW NOTES.
 
-Phase 40K acceptance evidence:
+Phase 41A acceptance evidence:
 
 ```text
-workflow run ID: 30498165528
-validated SHA: 773653af334b1107c52954493515dd72bf9ab7ff
-artifact: codie-phase_ledger-validation-773653af334b1107c52954493515dd72bf9ab7ff
+workflow run ID: 30498940677
+validated SHA: c81e8d4d86d1554998e25882bee92a35bba48bc5
+artifact: codie-phase_ledger-validation-c81e8d4d86d1554998e25882bee92a35bba48bc5
 validation scope: phase_ledger
 validator profile: all
 deterministic: CLEAN_PASS
@@ -141,13 +143,13 @@ errors: none
 final governance verdict: PASS
 ```
 
-Phase 41A validation tuple:
+Phase 41B validation tuple:
 
 ```text
-phase_id: Phase41A
+phase_id: Phase41B
 phase_part: outside-validation
 gate_scope: INTERMEDIATE_PACKET
-next_phase_id: Phase41B
+next_phase_id: Phase41C
 next_phase_part: outside-validation
 next_gate_scope: INTERMEDIATE_PACKET
 ```

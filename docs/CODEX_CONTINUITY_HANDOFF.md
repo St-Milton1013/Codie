@@ -2585,7 +2585,7 @@ adversarial: CLEAN_PASS
 aggregate: CLEAN_PASS
 ```
 
-## Current Phase 41A Handoff
+## Current Phase 41B Handoff
 
 ```text
 Phase 38A Moxfield Frequency Pool Builder Contract: PASS
@@ -2607,17 +2607,18 @@ Phase 40H Relationship Intelligence Population Resolution Contract: PASS
 Phase 40I Relationship Intelligence Population Resolution Implementation Contract: PASS
 Phase 40J Relationship Intelligence Population Resolution Implementation: PASS
 Phase 40K Relationship Intelligence Core Checkpoint / Freeze: PASS
-Phase 41A Tournament Exposure Analyzer Core Contract: INTERNAL PASS
-Current action: validate the Phase 41A Tournament Exposure Analyzer Core Contract
-Phase 41B Tournament Exposure Independent-Seat Implementation Contract: BLOCKED until Phase 41A returns PASS or PASS WITH REVIEW NOTES
+Phase 41A Tournament Exposure Analyzer Core Contract: PASS
+Phase 41B Tournament Exposure Independent-Seat Implementation Contract: INTERNAL PASS
+Current action: validate the Phase 41B Tournament Exposure Independent-Seat Implementation Contract
+Phase 41C Tournament Exposure Independent-Seat Implementation: BLOCKED until Phase 41B returns PASS or PASS WITH REVIEW NOTES
 ```
 
-Phase 40K acceptance evidence:
+Phase 41A acceptance evidence:
 
 ```text
-workflow run ID: 30498165528
-validated SHA: 773653af334b1107c52954493515dd72bf9ab7ff
-artifact: codie-phase_ledger-validation-773653af334b1107c52954493515dd72bf9ab7ff
+workflow run ID: 30498940677
+validated SHA: c81e8d4d86d1554998e25882bee92a35bba48bc5
+artifact: codie-phase_ledger-validation-c81e8d4d86d1554998e25882bee92a35bba48bc5
 validation scope: phase_ledger
 validator profile: all
 deterministic: CLEAN_PASS
@@ -2631,13 +2632,13 @@ errors: none
 final governance verdict: PASS
 ```
 
-Phase 41A validation tuple:
+Phase 41B validation tuple:
 
 ```text
-phase_id: Phase41A
+phase_id: Phase41B
 phase_part: outside-validation
 gate_scope: INTERMEDIATE_PACKET
-next_phase_id: Phase41B
+next_phase_id: Phase41C
 next_phase_part: outside-validation
 next_gate_scope: INTERMEDIATE_PACKET
 ```
@@ -2673,11 +2674,13 @@ artifact-backed PASS. Phase 40J implemented that resolver without storage,
 providers, metric calculation, recommendations, UI, LLM, simulator, network,
 wall-clock, or file-writing behavior and returned artifact-backed PASS. Phase
 40K received artifact-backed PASS and freezes the accepted Relationship
-Intelligence core. Phase 41A defines only the independent-seat Tournament
-Exposure Analyzer contract; it adds no calculation, provider, schema,
-recommendation, Jin, simulator, UI, LLM, network, or file-writing behavior. The
+Intelligence core. Phase 41A received artifact-backed PASS and defines the
+independent-seat Tournament Exposure Analyzer core. Phase 41B narrows the
+future implementation to pure immutable packets and deterministic
+calculations; it adds no production code, provider, schema, recommendation,
+Jin, simulator, UI, LLM, network, or file-writing behavior. The
 authorized one-file transition on main set the protected active validation
-scope to Phase41A before this PR was validated. The PR does not alter its own
+scope to Phase41B before this PR was validated. The PR does not alter its own
 validation authority.
 
 Phase 40A acceptance evidence:
