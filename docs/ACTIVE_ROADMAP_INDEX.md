@@ -108,8 +108,9 @@ Phase 40I Relationship Intelligence Population Resolution Implementation Contrac
 Phase 40J Relationship Intelligence Population Resolution Implementation: externally accepted
 Phase 40K Relationship Intelligence Core Checkpoint / Freeze: externally accepted
 Phase 41A Tournament Exposure Analyzer Core Contract: externally accepted
-Phase 41B Tournament Exposure Independent-Seat Implementation Contract: internally complete
-Current action: validate the Phase 41B Tournament Exposure Independent-Seat Implementation Contract
+Phase 41B Tournament Exposure Independent-Seat Implementation Contract: externally accepted
+Phase 41C Tournament Exposure Independent-Seat Implementation: internally complete
+Current action: validate the Phase 41C Tournament Exposure Independent-Seat Implementation
 Local alpha tag status: verified on origin as local-alpha-0.1.0
 ```
 
@@ -123,19 +124,19 @@ Status: externally accepted
 ## Next Allowed Work Packet
 
 ```text
-Phase 41B Tournament Exposure Independent-Seat Implementation Contract
+Phase 41C Tournament Exposure Independent-Seat Implementation
 Status: internally complete; outside validation required
 ```
 
 Current-status clarification:
 
 ```text
-Current protected validation gate: Phase41B / outside-validation / INTERMEDIATE_PACKET.
-Phase 41A status: externally accepted.
-Authoritative next allowed work packet: Phase 41B Tournament Exposure Independent-Seat Implementation Contract.
-Phase 41B is the active implementation-contract packet.
+Current protected validation gate: Phase41C / outside-validation / INTERMEDIATE_PACKET.
+Phase 41B status: externally accepted.
+Authoritative next allowed work packet: Phase 41C Tournament Exposure Independent-Seat Implementation.
+Phase 41C is the active implementation packet.
 The authorized one-file transition on main set
-`CODIE_ACTIVE_VALIDATION_SCOPE.json` to Phase41B before this PR was validated.
+`CODIE_ACTIVE_VALIDATION_SCOPE.json` to Phase41C before this PR was validated.
 The PR does not alter its own validation authority.
 ```
 
@@ -150,16 +151,16 @@ Phase 40B through Phase 40J received artifact-backed PASS. Phase 40K received
 artifact-backed PASS and froze the accepted Relationship Intelligence schema,
 repository, metric, and population surfaces. Phase 41A received
 artifact-backed PASS and defines the Tournament Exposure Analyzer core. Phase
-41B narrows the future pure independent-seat packet and calculator
-implementation. Phase 41C remains blocked until Phase 41B returns PASS or
-PASS WITH REVIEW NOTES.
+41B received artifact-backed PASS. Phase 41C implements the pure
+independent-seat packets and calculator. Phase 41D remains blocked until
+Phase 41C returns PASS or PASS WITH REVIEW NOTES.
 
-Phase 41A acceptance evidence:
+Phase 41B acceptance evidence:
 
 ```text
-workflow run ID: 30498940677
-validated SHA: c81e8d4d86d1554998e25882bee92a35bba48bc5
-artifact: codie-phase_ledger-validation-c81e8d4d86d1554998e25882bee92a35bba48bc5
+workflow run ID: 30499567970
+validated SHA: 9af972d6771177a754201ce90b7a3dd1d7bb3b09
+artifact: codie-phase_ledger-validation-9af972d6771177a754201ce90b7a3dd1d7bb3b09
 deterministic: CLEAN_PASS
 architecture: CLEAN_PASS
 adversarial: CLEAN_PASS
@@ -168,13 +169,13 @@ findings, skips, and errors: none
 final governance verdict: PASS
 ```
 
-Phase 41B validation tuple:
+Phase 41C validation tuple:
 
 ```text
-phase_id: Phase41B
+phase_id: Phase41C
 phase_part: outside-validation
 gate_scope: INTERMEDIATE_PACKET
-next_phase_id: Phase41C
+next_phase_id: Phase41D
 next_phase_part: outside-validation
 next_gate_scope: INTERMEDIATE_PACKET
 ```
