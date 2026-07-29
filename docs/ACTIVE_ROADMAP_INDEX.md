@@ -103,34 +103,35 @@ Phase 40D Relationship Intelligence Schema and Repository Implementation: extern
 Phase 40E Relationship Intelligence Metric Calculation Contract: externally accepted
 Phase 40F Relationship Intelligence Metric Calculation Implementation Contract: externally accepted
 Phase 40G Relationship Intelligence Metric Calculation Implementation: externally accepted
-Phase 40H Relationship Intelligence Population Resolution Contract: internally complete
-Current action: validate the Phase 40H population resolution contract
+Phase 40H Relationship Intelligence Population Resolution Contract: externally accepted
+Phase 40I Relationship Intelligence Population Resolution Implementation Contract: internally complete
+Current action: validate the Phase 40I population resolution implementation contract
 Local alpha tag status: verified on origin as local-alpha-0.1.0
 ```
 
 ## Previous Work Packet
 
 ```text
-Phase 40G Relationship Intelligence Metric Calculation Implementation
+Phase 40H Relationship Intelligence Population Resolution Contract
 Status: externally accepted
 ```
 
 ## Next Allowed Work Packet
 
 ```text
-Phase 40H Relationship Intelligence Population Resolution Contract
+Phase 40I Relationship Intelligence Population Resolution Implementation Contract
 Status: internally complete; outside validation required
 ```
 
 Current-status clarification:
 
 ```text
-Current protected validation gate: Phase40H / outside-validation / INTERMEDIATE_PACKET.
-Phase 40G status: externally accepted.
-Authoritative next allowed work packet: Phase 40H Relationship Intelligence Population Resolution Contract.
-Phase 40H is the active contract packet.
+Current protected validation gate: Phase40I / outside-validation / INTERMEDIATE_PACKET.
+Phase 40H status: externally accepted.
+Authoritative next allowed work packet: Phase 40I Relationship Intelligence Population Resolution Implementation Contract.
+Phase 40I is the active implementation-contract packet.
 The authorized one-file transition on main set
-`CODIE_ACTIVE_VALIDATION_SCOPE.json` to Phase40H before this PR was refreshed.
+`CODIE_ACTIVE_VALIDATION_SCOPE.json` to Phase40I before this PR was validated.
 The PR does not alter its own validation authority.
 ```
 
@@ -141,16 +142,17 @@ Phase 39C received artifact-backed phase-ledger validation on merged `main`.
 Phase 39D received artifact-backed phase-ledger validation on merged `main`
 and closed the local, fixture-first Cockatrice track. Phase 40A received
 artifact-backed PASS and established the Relationship Intelligence core.
-Phase 40B through Phase 40G received artifact-backed PASS. Phase 40H defines
-the population-resolution boundary contract-first. Phase 40I remains blocked
-until Phase 40H returns PASS or PASS WITH REVIEW NOTES.
+Phase 40B through Phase 40H received artifact-backed PASS. Phase 40I narrows
+the population-resolution implementation to immutable local packets in one
+analytics module, one focused test file, and exports only. Phase 40J remains
+blocked until Phase 40I returns PASS or PASS WITH REVIEW NOTES.
 
-Phase 40G acceptance evidence:
+Phase 40H acceptance evidence:
 
 ```text
-workflow run ID: 30058616182
-validated SHA: 41e0794c9aea1282c6d923f8436bfa19b5499617
-artifact: codie-phase_ledger-validation-41e0794c9aea1282c6d923f8436bfa19b5499617
+workflow run ID: 30495006317
+validated SHA: bba2affdd42011fa36bfb069119f2afecb2cdb4f
+artifact: codie-phase_ledger-validation-bba2affdd42011fa36bfb069119f2afecb2cdb4f
 deterministic: CLEAN_PASS
 architecture: CLEAN_PASS
 adversarial: CLEAN_PASS
@@ -159,13 +161,13 @@ findings, skips, and errors: none
 final governance verdict: PASS
 ```
 
-Phase 40H validation tuple:
+Phase 40I validation tuple:
 
 ```text
-phase_id: Phase40H
+phase_id: Phase40I
 phase_part: outside-validation
 gate_scope: INTERMEDIATE_PACKET
-next_phase_id: Phase40I
+next_phase_id: Phase40J
 next_phase_part: outside-validation
 next_gate_scope: INTERMEDIATE_PACKET
 ```

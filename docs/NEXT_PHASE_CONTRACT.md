@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: validate the Phase 40H Relationship Intelligence Population Resolution Contract
+Recommended next task: validate the Phase 40I Relationship Intelligence Population Resolution Implementation Contract
 
 ## Constitutional Governance Overlay
 
@@ -83,17 +83,17 @@ accepted as the local, fixture-first Cockatrice interoperability
 implementation. Phase 39D returned artifact-backed PASS and closed the
 Cockatrice track. Phase 40A received artifact-backed PASS and established the
 Relationship Intelligence core. Phase 40B received artifact-backed PASS.
-Phase 40C through Phase 40G received artifact-backed PASS. Phase 40H is
-internally complete as the population-resolution contract. Phase 40I remains
-blocked until Phase 40H outside validation returns PASS or PASS WITH REVIEW
-NOTES.
+Phase 40C through Phase 40H received artifact-backed PASS. Phase 40I is
+internally complete as the population-resolution implementation contract.
+Phase 40J remains blocked until Phase 40I outside validation returns PASS or
+PASS WITH REVIEW NOTES.
 
-Phase 40G acceptance evidence:
+Phase 40H acceptance evidence:
 
 ```text
-workflow run ID: 30058616182
-validated SHA: 41e0794c9aea1282c6d923f8436bfa19b5499617
-artifact: codie-phase_ledger-validation-41e0794c9aea1282c6d923f8436bfa19b5499617
+workflow run ID: 30495006317
+validated SHA: bba2affdd42011fa36bfb069119f2afecb2cdb4f
+artifact: codie-phase_ledger-validation-bba2affdd42011fa36bfb069119f2afecb2cdb4f
 validation scope: phase_ledger
 validator profile: all
 deterministic: CLEAN_PASS
@@ -107,13 +107,13 @@ errors: none
 final governance verdict: PASS
 ```
 
-Explicit Phase 40H validation tuple:
+Explicit Phase 40I validation tuple:
 
 ```text
-phase_id: Phase40H
+phase_id: Phase40I
 phase_part: outside-validation
 gate_scope: INTERMEDIATE_PACKET
-next_phase_id: Phase40I
+next_phase_id: Phase40J
 next_phase_part: outside-validation
 next_gate_scope: INTERMEDIATE_PACKET
 ```
