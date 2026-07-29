@@ -1192,6 +1192,57 @@ class ValidationLocalGateTest(unittest.TestCase):
         self.assertEqual(output.result, "CLEAN_PASS")
         self.assertEqual(output.findings, ())
 
+    def test_phase_status_finding_cannot_bypass_guard_with_non_ledger_files(self) -> None:
+        options = ValidationGateOptions(
+            phase_id="Phase40H",
+            phase_part="outside-validation",
+            gate_scope="INTERMEDIATE_PACKET",
+            target_sha=SHA,
+            pull_request_number=PR_NUMBER,
+            branch=BRANCH,
+        )
+        changed_files = frozenset(
+            {
+                "codie/validation/local_gate.py",
+                "tests/test_validation_local_gate.py",
+            }
+        )
+        payload = model_payload(
+            findings=[
+                {
+                    "severity": "BLOCKER",
+                    "title": "Phase Status Mismatch",
+                    "description": (
+                        "The current target phase is blocked until the previous "
+                        "phase returns PASS, but the validator diff does not record it."
+                    ),
+                    "affected_files": sorted(changed_files),
+                    "governing_rule": "Phase Status Continuity",
+                    "required_correction": "Change the validator files to record phase acceptance.",
+                }
+            ],
+        )
+
+        output = validator_report_from_model_response(
+            validator="architecture",
+            model="qwen2.5-coder:7b",
+            options=options,
+            payload=payload,
+            started_at="2026-07-29T00:00:00+00:00",
+            completed_at="2026-07-29T00:01:00+00:00",
+            allowed_affected_files=changed_files,
+            current_phase_status_lines={
+                "docs/ACTIVE_ROADMAP_INDEX.md": (
+                    "Phase 40G Relationship Intelligence: externally accepted",
+                    "Phase 40H Relationship Intelligence: internally complete",
+                    "Phase 40I Relationship Intelligence: blocked",
+                )
+            },
+        )
+
+        self.assertEqual(output.result, "CLEAN_PASS")
+        self.assertEqual(output.findings, ())
+
     def test_cited_genuine_phase_status_contradiction_is_preserved(self) -> None:
         options = ValidationGateOptions(
             phase_id="Phase40H",

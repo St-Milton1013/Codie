@@ -1614,11 +1614,6 @@ def _model_phase_status_finding_is_supported(
 
 
 def _is_model_phase_status_finding(finding: dict[str, Any]) -> bool:
-    affected_files = frozenset(
-        _normalize_path(str(path)) for path in finding["affected_files"]
-    )
-    if not affected_files or not affected_files.issubset(PHASE_LEDGER_FILES):
-        return False
     finding_text = " ".join(
         str(finding[field])
         for field in ("title", "description", "governing_rule", "required_correction")
