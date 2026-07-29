@@ -2585,7 +2585,7 @@ adversarial: CLEAN_PASS
 aggregate: CLEAN_PASS
 ```
 
-## Current Phase 40K Handoff
+## Current Phase 41A Handoff
 
 ```text
 Phase 38A Moxfield Frequency Pool Builder Contract: PASS
@@ -2606,17 +2606,18 @@ Phase 40G Relationship Intelligence Metric Calculation Implementation: PASS
 Phase 40H Relationship Intelligence Population Resolution Contract: PASS
 Phase 40I Relationship Intelligence Population Resolution Implementation Contract: PASS
 Phase 40J Relationship Intelligence Population Resolution Implementation: PASS
-Phase 40K Relationship Intelligence Core Checkpoint / Freeze: INTERNAL PASS
-Current action: validate the Phase 40K Relationship Intelligence checkpoint
-Phase 41A Tournament Exposure Analyzer Core Contract: BLOCKED until Phase 40K returns PASS or PASS WITH REVIEW NOTES
+Phase 40K Relationship Intelligence Core Checkpoint / Freeze: PASS
+Phase 41A Tournament Exposure Analyzer Core Contract: INTERNAL PASS
+Current action: validate the Phase 41A Tournament Exposure Analyzer Core Contract
+Phase 41B Tournament Exposure Independent-Seat Implementation Contract: BLOCKED until Phase 41A returns PASS or PASS WITH REVIEW NOTES
 ```
 
-Phase 40J acceptance evidence:
+Phase 40K acceptance evidence:
 
 ```text
-workflow run ID: 30497683444
-validated SHA: 8f27099334635f2a508645ccc58bd3f033321840
-artifact: codie-phase_ledger-validation-8f27099334635f2a508645ccc58bd3f033321840
+workflow run ID: 30498165528
+validated SHA: 773653af334b1107c52954493515dd72bf9ab7ff
+artifact: codie-phase_ledger-validation-773653af334b1107c52954493515dd72bf9ab7ff
 validation scope: phase_ledger
 validator profile: all
 deterministic: CLEAN_PASS
@@ -2630,13 +2631,13 @@ errors: none
 final governance verdict: PASS
 ```
 
-Phase 40K validation tuple:
+Phase 41A validation tuple:
 
 ```text
-phase_id: Phase40K
+phase_id: Phase41A
 phase_part: outside-validation
 gate_scope: INTERMEDIATE_PACKET
-next_phase_id: Phase41A
+next_phase_id: Phase41B
 next_phase_part: outside-validation
 next_gate_scope: INTERMEDIATE_PACKET
 ```
@@ -2671,9 +2672,12 @@ pure analytics module, one focused test file, and exports only and returned
 artifact-backed PASS. Phase 40J implemented that resolver without storage,
 providers, metric calculation, recommendations, UI, LLM, simulator, network,
 wall-clock, or file-writing behavior and returned artifact-backed PASS. Phase
-40K freezes the accepted Relationship Intelligence core. The
+40K received artifact-backed PASS and freezes the accepted Relationship
+Intelligence core. Phase 41A defines only the independent-seat Tournament
+Exposure Analyzer contract; it adds no calculation, provider, schema,
+recommendation, Jin, simulator, UI, LLM, network, or file-writing behavior. The
 authorized one-file transition on main set the protected active validation
-scope to Phase40K before this PR was validated. The PR does not alter its own
+scope to Phase41A before this PR was validated. The PR does not alter its own
 validation authority.
 
 Phase 40A acceptance evidence:
