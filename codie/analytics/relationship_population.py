@@ -1317,5 +1317,5 @@ def _require_iso_datetime(value: Any, field_name: str) -> None:
         ) from exc
     if parsed.tzinfo is None:
         raise RelationshipPopulationBuildError(
-            f"{field_name} must include a timezone"
+            f"{field_name} requires a timezone"
         )
