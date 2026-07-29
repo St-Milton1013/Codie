@@ -1139,6 +1139,241 @@ class ValidationLocalGateTest(unittest.TestCase):
         self.assertEqual(output.result, "CLEAN_PASS")
         self.assertEqual(output.findings, ())
 
+    def test_valid_phase_transition_status_finding_is_rejected(self) -> None:
+        options = ValidationGateOptions(
+            phase_id="Phase40H",
+            phase_part="outside-validation",
+            gate_scope="INTERMEDIATE_PACKET",
+            target_sha=SHA,
+            pull_request_number=PR_NUMBER,
+            branch=BRANCH,
+        )
+        affected_files = (
+            "docs/ACTIVE_ROADMAP_INDEX.md",
+            "docs/VALIDATION_STATUS_INDEX.md",
+            "docs/NEXT_PHASE_CONTRACT.md",
+            "docs/CODEX_CONTINUITY_HANDOFF.md",
+        )
+        payload = model_payload(
+            findings=[
+                {
+                    "severity": "CRITICAL",
+                    "title": "Phase Status Mismatch",
+                    "description": (
+                        "Phase 40G is externally accepted while Phase 40H is "
+                        "internally complete and Phase 40I is blocked."
+                    ),
+                    "affected_files": list(affected_files),
+                    "governing_rule": "Phase-ledger consistency across governance files.",
+                    "required_correction": "Rewrite the transition statuses.",
+                }
+            ],
+        )
+        current_lines = {
+            relative: (
+                "Phase 40G Relationship Intelligence: externally accepted",
+                "Phase 40H Relationship Intelligence: internally complete",
+                "Phase 40I Relationship Intelligence: blocked",
+            )
+            for relative in affected_files
+        }
+
+        output = validator_report_from_model_response(
+            validator="architecture",
+            model="qwen2.5-coder:7b",
+            options=options,
+            payload=payload,
+            started_at="2026-07-29T00:00:00+00:00",
+            completed_at="2026-07-29T00:01:00+00:00",
+            allowed_affected_files=frozenset(affected_files),
+            current_phase_status_lines=current_lines,
+        )
+
+        self.assertEqual(output.result, "CLEAN_PASS")
+        self.assertEqual(output.findings, ())
+
+    def test_phase_status_finding_cannot_bypass_guard_with_non_ledger_files(self) -> None:
+        options = ValidationGateOptions(
+            phase_id="Phase40H",
+            phase_part="outside-validation",
+            gate_scope="INTERMEDIATE_PACKET",
+            target_sha=SHA,
+            pull_request_number=PR_NUMBER,
+            branch=BRANCH,
+        )
+        changed_files = frozenset(
+            {
+                "codie/validation/local_gate.py",
+                "tests/test_validation_local_gate.py",
+            }
+        )
+        payload = model_payload(
+            findings=[
+                {
+                    "severity": "BLOCKER",
+                    "title": "Phase Status Mismatch",
+                    "description": (
+                        "The current target phase is blocked until the previous "
+                        "phase returns PASS, but the validator diff does not record it."
+                    ),
+                    "affected_files": sorted(changed_files),
+                    "governing_rule": "Phase Status Continuity",
+                    "required_correction": "Change the validator files to record phase acceptance.",
+                }
+            ],
+        )
+
+        output = validator_report_from_model_response(
+            validator="architecture",
+            model="qwen2.5-coder:7b",
+            options=options,
+            payload=payload,
+            started_at="2026-07-29T00:00:00+00:00",
+            completed_at="2026-07-29T00:01:00+00:00",
+            allowed_affected_files=changed_files,
+            current_phase_status_lines={
+                "docs/ACTIVE_ROADMAP_INDEX.md": (
+                    "Phase 40G Relationship Intelligence: externally accepted",
+                    "Phase 40H Relationship Intelligence: internally complete",
+                    "Phase 40I Relationship Intelligence: blocked",
+                )
+            },
+        )
+
+        self.assertEqual(output.result, "CLEAN_PASS")
+        self.assertEqual(output.findings, ())
+
+    def test_cited_genuine_phase_status_contradiction_is_preserved(self) -> None:
+        options = ValidationGateOptions(
+            phase_id="Phase40H",
+            phase_part="outside-validation",
+            gate_scope="INTERMEDIATE_PACKET",
+            target_sha=SHA,
+            pull_request_number=PR_NUMBER,
+            branch=BRANCH,
+        )
+        accepted_file = "docs/ACTIVE_ROADMAP_INDEX.md"
+        current_file = "docs/VALIDATION_STATUS_INDEX.md"
+        accepted_line = "Phase 40H Relationship Intelligence: externally accepted"
+        current_line = "Phase 40H Relationship Intelligence: internally complete"
+        payload = model_payload(
+            findings=[
+                {
+                    "severity": "HIGH",
+                    "title": "Phase Status Mismatch",
+                    "description": (
+                        f'The current ledgers contradict each other: "{accepted_line}" '
+                        f'and "{current_line}".'
+                    ),
+                    "affected_files": [accepted_file, current_file],
+                    "governing_rule": "Phase-ledger consistency across governance files.",
+                    "required_correction": "Align the two cited current status lines.",
+                }
+            ],
+        )
+
+        output = validator_report_from_model_response(
+            validator="architecture",
+            model="qwen2.5-coder:7b",
+            options=options,
+            payload=payload,
+            started_at="2026-07-29T00:00:00+00:00",
+            completed_at="2026-07-29T00:01:00+00:00",
+            allowed_affected_files=frozenset({accepted_file, current_file}),
+            current_phase_status_lines={
+                accepted_file: (accepted_line,),
+                current_file: (current_line,),
+            },
+        )
+
+        self.assertEqual(output.result, "FAIL")
+        self.assertEqual(len(output.findings), 1)
+        self.assertIn("Phase Status Mismatch", output.findings[0].finding)
+
+    def test_cited_same_ledger_phase_status_contradiction_is_preserved(self) -> None:
+        options = ValidationGateOptions(
+            phase_id="Phase40H",
+            phase_part="outside-validation",
+            gate_scope="INTERMEDIATE_PACKET",
+            target_sha=SHA,
+            pull_request_number=PR_NUMBER,
+            branch=BRANCH,
+        )
+        ledger = "docs/ACTIVE_ROADMAP_INDEX.md"
+        accepted_line = "Phase 40H Relationship Intelligence: externally accepted"
+        blocked_line = "Phase 40H Relationship Intelligence: BLOCKED"
+        payload = model_payload(
+            findings=[
+                {
+                    "severity": "HIGH",
+                    "title": "Phase Status Mismatch",
+                    "description": (
+                        f'The current ledger contains both "{accepted_line}" '
+                        f'and "{blocked_line}".'
+                    ),
+                    "affected_files": [ledger],
+                    "governing_rule": "Phase-ledger consistency across governance files.",
+                    "required_correction": "Remove the contradictory current status.",
+                }
+            ],
+        )
+
+        output = validator_report_from_model_response(
+            validator="architecture",
+            model="qwen2.5-coder:7b",
+            options=options,
+            payload=payload,
+            started_at="2026-07-29T00:00:00+00:00",
+            completed_at="2026-07-29T00:01:00+00:00",
+            allowed_affected_files=frozenset({ledger}),
+            current_phase_status_lines={ledger: (accepted_line, blocked_line)},
+        )
+
+        self.assertEqual(output.result, "FAIL")
+        self.assertEqual(len(output.findings), 1)
+
+    def test_pass_with_required_fixes_is_not_accepted_status(self) -> None:
+        options = ValidationGateOptions(
+            phase_id="Phase40H",
+            phase_part="outside-validation",
+            gate_scope="INTERMEDIATE_PACKET",
+            target_sha=SHA,
+            pull_request_number=PR_NUMBER,
+            branch=BRANCH,
+        )
+        ledger = "docs/VALIDATION_STATUS_INDEX.md"
+        required_fixes_line = "Phase 40H Relationship Intelligence: PASS WITH REQUIRED FIXES"
+        blocked_line = "Phase 40H Relationship Intelligence: BLOCKED"
+        payload = model_payload(
+            findings=[
+                {
+                    "severity": "HIGH",
+                    "title": "Phase Status Mismatch",
+                    "description": (
+                        f'The current ledger contains "{required_fixes_line}" '
+                        f'and "{blocked_line}".'
+                    ),
+                    "affected_files": [ledger],
+                    "governing_rule": "Phase-ledger consistency across governance files.",
+                    "required_correction": "Align the current phase status.",
+                }
+            ],
+        )
+
+        output = validator_report_from_model_response(
+            validator="architecture",
+            model="qwen2.5-coder:7b",
+            options=options,
+            payload=payload,
+            started_at="2026-07-29T00:00:00+00:00",
+            completed_at="2026-07-29T00:01:00+00:00",
+            allowed_affected_files=frozenset({ledger}),
+            current_phase_status_lines={ledger: (required_fixes_line, blocked_line)},
+        )
+
+        self.assertEqual(output.result, "CLEAN_PASS")
+        self.assertEqual(output.findings, ())
+
     def test_model_cannot_contribute_reserved_preflight_or_deterministic_findings(self) -> None:
         options = ValidationGateOptions(
             phase_id=CURRENT_EXPECTED_PHASE_ID,
