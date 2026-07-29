@@ -2663,14 +2663,9 @@ focused test file, and exports only. Phase 40G implements that calculator
 without schema, repository, provider, recommendation, simulator, UI, LLM,
 network, wall-clock, or file-writing behavior and returned artifact-backed
 PASS. Phase 40H defines population resolution without implementing it. The
-protected active validation scope remains Phase40G until the Phase 40H
-contract PR merges.
-
-The active-scope `Phase40G` token is the externally accepted trusted-base
-authority for Phase 40H PR validation, not an `INTERNAL PASS` status claim.
-The Phase 40H PR must not change its own validation authority. A separately
-authorized post-merge transition sets the active scope to Phase40H before
-Phase 40H phase-ledger outside validation.
+authorized one-file transition on main set the protected active validation
+scope to Phase40H before this PR was refreshed. The PR does not alter its own
+validation authority.
 
 Phase 40A acceptance evidence:
 

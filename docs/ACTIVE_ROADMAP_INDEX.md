@@ -125,17 +125,13 @@ Status: internally complete; outside validation required
 Current-status clarification:
 
 ```text
-Current protected validation gate: Phase40G / outside-validation / INTERMEDIATE_PACKET.
+Current protected validation gate: Phase40H / outside-validation / INTERMEDIATE_PACKET.
 Phase 40G status: externally accepted.
 Authoritative next allowed work packet: Phase 40H Relationship Intelligence Population Resolution Contract.
 Phase 40H is the active contract packet.
-The protected active scope remains Phase40G until this PR merges; that
-transition safeguard preserves Phase 40G's externally accepted status.
-The `Phase40G` value in `CODIE_ACTIVE_VALIDATION_SCOPE.json` identifies the
-trusted, externally accepted base authority for this PR. It does not state
-that Phase 40G is internally complete, and an ordinary PR head must not change
-its own validation authority. After this contract merges, the separately
-authorized active-scope transition may set Phase40H for outside validation.
+The authorized one-file transition on main set
+`CODIE_ACTIVE_VALIDATION_SCOPE.json` to Phase40H before this PR was refreshed.
+The PR does not alter its own validation authority.
 ```
 
 Phase 38D received artifact-backed phase-ledger validation on merged `main`.
