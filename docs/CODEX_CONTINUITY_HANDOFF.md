@@ -2610,17 +2610,18 @@ Phase 40K Relationship Intelligence Core Checkpoint / Freeze: PASS
 Phase 41A Tournament Exposure Analyzer Core Contract: PASS
 Phase 41B Tournament Exposure Independent-Seat Implementation Contract: PASS
 Phase 41C Tournament Exposure Independent-Seat Implementation: PASS
-Phase 41D Tournament Exposure Core Checkpoint / Freeze: INTERNAL PASS
-Current action: validate the Phase 41D Tournament Exposure Core Checkpoint / Freeze
-Phase 42A Jin / Theory / Rules / Corrections Cross-Specification Boundary and Decision Contract: BLOCKED until Phase 41D returns PASS or PASS WITH REVIEW NOTES
+Phase 41D Tournament Exposure Core Checkpoint / Freeze: PASS
+Phase 42A Jin / Theory / Rules / Corrections Cross-Specification Boundary and Decision Contract: INTERNAL PASS
+Current action: validate the Phase 42A Jin / Theory / Rules / Corrections Cross-Specification Boundary and Decision Contract
+Phase 42B Fixed Jin Regression Corpus Schema and Deterministic Evaluation Contract: BLOCKED until Phase 42A returns PASS or PASS WITH REVIEW NOTES
 ```
 
-Phase 41C acceptance evidence:
+Phase 41D acceptance evidence:
 
 ```text
-workflow run ID: 30500721283
-validated SHA: 0ba15f789a8f6410b376205cf500830f9c45f6ce
-artifact: codie-phase_ledger-validation-0ba15f789a8f6410b376205cf500830f9c45f6ce
+workflow run ID: 30506116873
+validated SHA: efd53e259b2bb9069b65c995207abbacd1a404e8
+artifact: codie-phase_ledger-validation-efd53e259b2bb9069b65c995207abbacd1a404e8
 validation scope: phase_ledger
 validator profile: all
 deterministic: CLEAN_PASS
@@ -2634,13 +2635,13 @@ errors: none
 final governance verdict: PASS
 ```
 
-Phase 41D validation tuple:
+Phase 42A validation tuple:
 
 ```text
-phase_id: Phase41D
+phase_id: Phase42A
 phase_part: outside-validation
 gate_scope: INTERMEDIATE_PACKET
-next_phase_id: Phase42A
+next_phase_id: Phase42B
 next_phase_part: outside-validation
 next_gate_scope: INTERMEDIATE_PACKET
 ```
