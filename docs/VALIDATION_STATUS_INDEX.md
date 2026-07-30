@@ -113,8 +113,9 @@ Phase 42B Fixed Jin Regression Corpus Schema and Deterministic Evaluation Contra
 Phase 42C Rules Authority, Legality, and Bounded Interaction Contract: PASS
 Phase 42D Local-First Model Profile, Redaction, Consent, and Routing Contract: PASS
 Phase 42E Minimal User Correction Ledger Core Contract: PASS
-Phase 42F Theory Source Registry, Rights, Immutable Source Version, and Citation Contract: INTERNAL PASS
-Phase 42G Reviewed Claim, Typed Graph, Contradiction, Translation, and Retrieval Contract: BLOCKED
+Phase 42F Theory Source Registry, Rights, Immutable Source Version, and Citation Contract: PASS
+Phase 42G Reviewed Claim, Typed Graph, Contradiction, Translation, and Retrieval Contract: INTERNAL PASS
+Phase 42H Jin Intent, Scope, Query-Plan, Evidence-Gate, and Legality-Gate Contract: BLOCKED
 Local alpha tag: verified on origin as local-alpha-0.1.0
 ```
 
@@ -139,16 +140,18 @@ phase-ledger validation and defines the Rules authority contract. Phase 42D
 passed artifact-backed phase-ledger validation and defines the local-first
 model-profile contract. Phase 42E passed artifact-backed phase-ledger
 validation and defines the minimal Correction Ledger core contract. Phase 42F
-is internally complete as the Theory source and rights foundation. Phase 42G
-remains blocked until Phase 42F outside validation returns PASS or PASS WITH
+passed artifact-backed phase-ledger validation and defines the Theory source
+and rights foundation. Phase 42G is internally complete as the reviewed claim,
+typed graph, contradiction, translation, and retrieval contract. Phase 42H
+remains blocked until Phase 42G outside validation returns PASS or PASS WITH
 REVIEW NOTES.
 
-Phase 42E acceptance evidence:
+Phase 42F acceptance evidence:
 
 ```text
-workflow run ID: 30509996661
-validated SHA: eebca10dc0835fcafd5e1951b85e495a07ff2676
-artifact: codie-phase_ledger-validation-eebca10dc0835fcafd5e1951b85e495a07ff2676
+workflow run ID: 30510678610
+validated SHA: c550b8a52a51d0a7438243967f8af7666afd9b3a
+artifact: codie-phase_ledger-validation-c550b8a52a51d0a7438243967f8af7666afd9b3a
 validation scope: phase_ledger
 validator profile: all
 deterministic: CLEAN_PASS
@@ -162,13 +165,13 @@ errors: none
 final governance verdict: PASS
 ```
 
-Phase 42F validation tuple:
+Phase 42G validation tuple:
 
 ```text
-phase_id: Phase42F
+phase_id: Phase42G
 phase_part: outside-validation
 gate_scope: INTERMEDIATE_PACKET
-next_phase_id: Phase42G
+next_phase_id: Phase42H
 next_phase_part: outside-validation
 next_gate_scope: INTERMEDIATE_PACKET
 ```

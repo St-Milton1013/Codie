@@ -116,35 +116,36 @@ Phase 42B Fixed Jin Regression Corpus Schema and Deterministic Evaluation Contra
 Phase 42C Rules Authority, Legality, and Bounded Interaction Contract: externally accepted
 Phase 42D Local-First Model Profile, Redaction, Consent, and Routing Contract: externally accepted
 Phase 42E Minimal User Correction Ledger Core Contract: externally accepted
-Phase 42F Theory Source Registry, Rights, Immutable Source Version, and Citation Contract: internally complete
-Current action: validate the Phase 42F Theory Source Registry, Rights, Immutable Source Version, and Citation Contract
-Phase 42G Reviewed Claim, Typed Graph, Contradiction, Translation, and Retrieval Contract: blocked
+Phase 42F Theory Source Registry, Rights, Immutable Source Version, and Citation Contract: externally accepted
+Phase 42G Reviewed Claim, Typed Graph, Contradiction, Translation, and Retrieval Contract: internally complete
+Current action: validate the Phase 42G Reviewed Claim, Typed Graph, Contradiction, Translation, and Retrieval Contract
+Phase 42H Jin Intent, Scope, Query-Plan, Evidence-Gate, and Legality-Gate Contract: blocked
 Local alpha tag status: verified on origin as local-alpha-0.1.0
 ```
 
 ## Previous Work Packet
 
 ```text
-Phase 42E Minimal User Correction Ledger Core Contract
+Phase 42F Theory Source Registry, Rights, Immutable Source Version, and Citation Contract
 Status: externally accepted
 ```
 
 ## Next Allowed Work Packet
 
 ```text
-Phase 42F Theory Source Registry, Rights, Immutable Source Version, and Citation Contract
+Phase 42G Reviewed Claim, Typed Graph, Contradiction, Translation, and Retrieval Contract
 Status: internally complete; outside validation required
 ```
 
 Current-status clarification:
 
 ```text
-Current protected validation gate: Phase42F / outside-validation / INTERMEDIATE_PACKET.
-Phase 42E status: externally accepted.
-Authoritative next allowed work packet: Phase 42F Theory Source Registry, Rights, Immutable Source Version, and Citation Contract.
-Phase 42F is the active contract-only packet.
+Current protected validation gate: Phase42G / outside-validation / INTERMEDIATE_PACKET.
+Phase 42F status: externally accepted.
+Authoritative next allowed work packet: Phase 42G Reviewed Claim, Typed Graph, Contradiction, Translation, and Retrieval Contract.
+Phase 42G is the active contract-only packet.
 The authorized one-file transition on main set
-`CODIE_ACTIVE_VALIDATION_SCOPE.json` to Phase42F before this PR was validated.
+`CODIE_ACTIVE_VALIDATION_SCOPE.json` to Phase42G before this PR was validated.
 The PR does not alter its own validation authority.
 ```
 
@@ -167,31 +168,38 @@ defines the fixed regression-corpus schema and evaluation rules. Phase 42C
 received artifact-backed PASS and defines the Rules authority boundary. Phase
 42D received artifact-backed PASS and defines the model-profile, consent,
 redaction, and routing boundary. Phase 42E received artifact-backed PASS and
-defines the minimal Correction Ledger core. Phase 42F defines the Theory
-source, rights, immutable version, and citation foundation. Phase 42G remains
-blocked until Phase 42F returns PASS or PASS WITH REVIEW NOTES.
+defines the minimal Correction Ledger core. Phase 42F received artifact-backed
+PASS and defines the Theory source, rights, immutable version, and citation
+foundation. Phase 42G defines reviewed claims, typed graph relationships,
+contradictions, translations, and retrieval packets. Phase 42H remains blocked
+until Phase 42G returns PASS or PASS WITH REVIEW NOTES.
 
-Phase 42E acceptance evidence:
+Phase 42F acceptance evidence:
 
 ```text
-workflow run ID: 30509996661
-validated SHA: eebca10dc0835fcafd5e1951b85e495a07ff2676
-artifact: codie-phase_ledger-validation-eebca10dc0835fcafd5e1951b85e495a07ff2676
+workflow run ID: 30510678610
+validated SHA: c550b8a52a51d0a7438243967f8af7666afd9b3a
+artifact: codie-phase_ledger-validation-c550b8a52a51d0a7438243967f8af7666afd9b3a
+validation scope: phase_ledger
+validator profile: all
 deterministic: CLEAN_PASS
 architecture: CLEAN_PASS
 adversarial: CLEAN_PASS
 aggregate: CLEAN_PASS
-findings, skips, and errors: none
+severity totals: BLOCKER 0, CRITICAL 0, HIGH 0, MEDIUM 0, LOW 0, INFORMATIONAL 0
+skipped validators: none
+unresolved findings: none
+errors: none
 final governance verdict: PASS
 ```
 
-Phase 42F validation tuple:
+Phase 42G validation tuple:
 
 ```text
-phase_id: Phase42F
+phase_id: Phase42G
 phase_part: outside-validation
 gate_scope: INTERMEDIATE_PACKET
-next_phase_id: Phase42G
+next_phase_id: Phase42H
 next_phase_part: outside-validation
 next_gate_scope: INTERMEDIATE_PACKET
 ```
