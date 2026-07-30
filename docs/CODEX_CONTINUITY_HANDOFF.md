@@ -2615,17 +2615,18 @@ Phase 42A Jin / Theory / Rules / Corrections Cross-Specification Boundary and De
 Phase 42B Fixed Jin Regression Corpus Schema and Deterministic Evaluation Contract: PASS
 Phase 42C Rules Authority, Legality, and Bounded Interaction Contract: PASS
 Phase 42D Local-First Model Profile, Redaction, Consent, and Routing Contract: PASS
-Phase 42E Minimal User Correction Ledger Core Contract: INTERNAL PASS
-Current action: validate the Phase 42E Minimal User Correction Ledger Core Contract
-Phase 42F Theory Source Registry, Rights, Immutable Source Version, and Citation Contract: BLOCKED until Phase 42E returns PASS or PASS WITH REVIEW NOTES
+Phase 42E Minimal User Correction Ledger Core Contract: PASS
+Phase 42F Theory Source Registry, Rights, Immutable Source Version, and Citation Contract: INTERNAL PASS
+Current action: validate the Phase 42F Theory Source Registry, Rights, Immutable Source Version, and Citation Contract
+Phase 42G Reviewed Claim, Typed Graph, Contradiction, Translation, and Retrieval Contract: BLOCKED until Phase 42F returns PASS or PASS WITH REVIEW NOTES
 ```
 
-Phase 42D acceptance evidence:
+Phase 42E acceptance evidence:
 
 ```text
-workflow run ID: 30509449057
-validated SHA: e2e0f9437b16627349efabdf05741f10398fd312
-artifact: codie-phase_ledger-validation-e2e0f9437b16627349efabdf05741f10398fd312
+workflow run ID: 30509996661
+validated SHA: eebca10dc0835fcafd5e1951b85e495a07ff2676
+artifact: codie-phase_ledger-validation-eebca10dc0835fcafd5e1951b85e495a07ff2676
 validation scope: phase_ledger
 validator profile: all
 deterministic: CLEAN_PASS
@@ -2639,13 +2640,13 @@ errors: none
 final governance verdict: PASS
 ```
 
-Phase 42E validation tuple:
+Phase 42F validation tuple:
 
 ```text
-phase_id: Phase42E
+phase_id: Phase42F
 phase_part: outside-validation
 gate_scope: INTERMEDIATE_PACKET
-next_phase_id: Phase42F
+next_phase_id: Phase42G
 next_phase_part: outside-validation
 next_gate_scope: INTERMEDIATE_PACKET
 ```
