@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: validate the Phase 42B Fixed Jin Regression Corpus Schema and Deterministic Evaluation Contract
+Recommended next task: validate the Phase 42C Rules Authority, Legality, and Bounded Interaction Contract
 
 ## Constitutional Governance Overlay
 
@@ -89,16 +89,17 @@ Phase 41A received artifact-backed PASS and defines the Tournament Exposure
 Analyzer core. Phase 41B and Phase 41C received artifact-backed PASS. Phase
 41D received artifact-backed PASS and closed the independent-seat Tournament
 Exposure core. Phase 42A received artifact-backed PASS and defines the Program
-B cross-specification boundary. Phase 42B is internally complete as the fixed
-corpus/evaluation contract. Phase 42C remains blocked until Phase 42B outside
-validation returns PASS or PASS WITH REVIEW NOTES.
+B cross-specification boundary. Phase 42B received artifact-backed PASS and
+defines the fixed corpus/evaluation contract. Phase 42C is internally complete
+as the Rules authority contract. Phase 42D remains blocked until Phase 42C
+outside validation returns PASS or PASS WITH REVIEW NOTES.
 
-Phase 42A acceptance evidence:
+Phase 42B acceptance evidence:
 
 ```text
-workflow run ID: 30506627453
-validated SHA: 4fd0bf1f36c1f5e9ff7c3dd681339a28da4bac2c
-artifact: codie-phase_ledger-validation-4fd0bf1f36c1f5e9ff7c3dd681339a28da4bac2c
+workflow run ID: 30507244978
+validated SHA: 52973c10d6fea3fd661367685feb759adf7e317b
+artifact: codie-phase_ledger-validation-52973c10d6fea3fd661367685feb759adf7e317b
 validation scope: phase_ledger
 validator profile: all
 deterministic: CLEAN_PASS
@@ -112,13 +113,13 @@ errors: none
 final governance verdict: PASS
 ```
 
-Explicit Phase 42B validation tuple:
+Explicit Phase 42C validation tuple:
 
 ```text
-phase_id: Phase42B
+phase_id: Phase42C
 phase_part: outside-validation
 gate_scope: INTERMEDIATE_PACKET
-next_phase_id: Phase42C
+next_phase_id: Phase42D
 next_phase_part: outside-validation
 next_gate_scope: INTERMEDIATE_PACKET
 ```
