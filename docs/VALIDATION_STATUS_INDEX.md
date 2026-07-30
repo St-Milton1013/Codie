@@ -108,8 +108,9 @@ Phase 41A Tournament Exposure Analyzer Core Contract: PASS
 Phase 41B Tournament Exposure Independent-Seat Implementation Contract: PASS
 Phase 41C Tournament Exposure Independent-Seat Implementation: PASS
 Phase 41D Tournament Exposure Core Checkpoint / Freeze: PASS
-Phase 42A Jin / Theory / Rules / Corrections Cross-Specification Boundary and Decision Contract: INTERNAL PASS
-Phase 42B Fixed Jin Regression Corpus Schema and Deterministic Evaluation Contract: BLOCKED
+Phase 42A Jin / Theory / Rules / Corrections Cross-Specification Boundary and Decision Contract: PASS
+Phase 42B Fixed Jin Regression Corpus Schema and Deterministic Evaluation Contract: INTERNAL PASS
+Phase 42C Rules Authority, Legality, and Bounded Interaction Contract: BLOCKED
 Local alpha tag: verified on origin as local-alpha-0.1.0
 ```
 
@@ -126,17 +127,18 @@ Relationship Intelligence core track. Phase 41A passed artifact-backed
 phase-ledger validation. Phase 41B passed artifact-backed phase-ledger
 validation. Phase 41C passed artifact-backed phase-ledger validation for the
 independent-seat implementation. Phase 41D passed artifact-backed
-phase-ledger validation and closed the Tournament Exposure core. Phase 42A is
-internally complete as the Program B boundary contract. Phase 42B remains
-blocked until Phase 42A outside validation returns PASS or PASS WITH REVIEW
-NOTES.
+phase-ledger validation and closed the Tournament Exposure core. Phase 42A
+passed artifact-backed phase-ledger validation and defines the Program B
+boundary. Phase 42B is internally complete as the fixed corpus/evaluation
+contract. Phase 42C remains blocked until Phase 42B outside validation returns
+PASS or PASS WITH REVIEW NOTES.
 
-Phase 41D acceptance evidence:
+Phase 42A acceptance evidence:
 
 ```text
-workflow run ID: 30506116873
-validated SHA: efd53e259b2bb9069b65c995207abbacd1a404e8
-artifact: codie-phase_ledger-validation-efd53e259b2bb9069b65c995207abbacd1a404e8
+workflow run ID: 30506627453
+validated SHA: 4fd0bf1f36c1f5e9ff7c3dd681339a28da4bac2c
+artifact: codie-phase_ledger-validation-4fd0bf1f36c1f5e9ff7c3dd681339a28da4bac2c
 validation scope: phase_ledger
 validator profile: all
 deterministic: CLEAN_PASS
@@ -150,13 +152,13 @@ errors: none
 final governance verdict: PASS
 ```
 
-Phase 42A validation tuple:
+Phase 42B validation tuple:
 
 ```text
-phase_id: Phase42A
+phase_id: Phase42B
 phase_part: outside-validation
 gate_scope: INTERMEDIATE_PACKET
-next_phase_id: Phase42B
+next_phase_id: Phase42C
 next_phase_part: outside-validation
 next_gate_scope: INTERMEDIATE_PACKET
 ```
