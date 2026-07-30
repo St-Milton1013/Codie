@@ -115,35 +115,36 @@ Phase 42A Jin / Theory / Rules / Corrections Cross-Specification Boundary and De
 Phase 42B Fixed Jin Regression Corpus Schema and Deterministic Evaluation Contract: externally accepted
 Phase 42C Rules Authority, Legality, and Bounded Interaction Contract: externally accepted
 Phase 42D Local-First Model Profile, Redaction, Consent, and Routing Contract: externally accepted
-Phase 42E Minimal User Correction Ledger Core Contract: internally complete
-Current action: validate the Phase 42E Minimal User Correction Ledger Core Contract
-Phase 42F Theory Source Registry, Rights, Immutable Source Version, and Citation Contract: blocked
+Phase 42E Minimal User Correction Ledger Core Contract: externally accepted
+Phase 42F Theory Source Registry, Rights, Immutable Source Version, and Citation Contract: internally complete
+Current action: validate the Phase 42F Theory Source Registry, Rights, Immutable Source Version, and Citation Contract
+Phase 42G Reviewed Claim, Typed Graph, Contradiction, Translation, and Retrieval Contract: blocked
 Local alpha tag status: verified on origin as local-alpha-0.1.0
 ```
 
 ## Previous Work Packet
 
 ```text
-Phase 42D Local-First Model Profile, Redaction, Consent, and Routing Contract
+Phase 42E Minimal User Correction Ledger Core Contract
 Status: externally accepted
 ```
 
 ## Next Allowed Work Packet
 
 ```text
-Phase 42E Minimal User Correction Ledger Core Contract
+Phase 42F Theory Source Registry, Rights, Immutable Source Version, and Citation Contract
 Status: internally complete; outside validation required
 ```
 
 Current-status clarification:
 
 ```text
-Current protected validation gate: Phase42E / outside-validation / INTERMEDIATE_PACKET.
-Phase 42D status: externally accepted.
-Authoritative next allowed work packet: Phase 42E Minimal User Correction Ledger Core Contract.
-Phase 42E is the active contract-only packet.
+Current protected validation gate: Phase42F / outside-validation / INTERMEDIATE_PACKET.
+Phase 42E status: externally accepted.
+Authoritative next allowed work packet: Phase 42F Theory Source Registry, Rights, Immutable Source Version, and Citation Contract.
+Phase 42F is the active contract-only packet.
 The authorized one-file transition on main set
-`CODIE_ACTIVE_VALIDATION_SCOPE.json` to Phase42E before this PR was validated.
+`CODIE_ACTIVE_VALIDATION_SCOPE.json` to Phase42F before this PR was validated.
 The PR does not alter its own validation authority.
 ```
 
@@ -165,16 +166,17 @@ cross-specification boundary. Phase 42B received artifact-backed PASS and
 defines the fixed regression-corpus schema and evaluation rules. Phase 42C
 received artifact-backed PASS and defines the Rules authority boundary. Phase
 42D received artifact-backed PASS and defines the model-profile, consent,
-redaction, and routing boundary. Phase 42E defines the minimal Correction
-Ledger core. Phase 42F remains blocked until Phase 42E returns PASS or PASS
-WITH REVIEW NOTES.
+redaction, and routing boundary. Phase 42E received artifact-backed PASS and
+defines the minimal Correction Ledger core. Phase 42F defines the Theory
+source, rights, immutable version, and citation foundation. Phase 42G remains
+blocked until Phase 42F returns PASS or PASS WITH REVIEW NOTES.
 
-Phase 42D acceptance evidence:
+Phase 42E acceptance evidence:
 
 ```text
-workflow run ID: 30509449057
-validated SHA: e2e0f9437b16627349efabdf05741f10398fd312
-artifact: codie-phase_ledger-validation-e2e0f9437b16627349efabdf05741f10398fd312
+workflow run ID: 30509996661
+validated SHA: eebca10dc0835fcafd5e1951b85e495a07ff2676
+artifact: codie-phase_ledger-validation-eebca10dc0835fcafd5e1951b85e495a07ff2676
 deterministic: CLEAN_PASS
 architecture: CLEAN_PASS
 adversarial: CLEAN_PASS
@@ -183,13 +185,13 @@ findings, skips, and errors: none
 final governance verdict: PASS
 ```
 
-Phase 42E validation tuple:
+Phase 42F validation tuple:
 
 ```text
-phase_id: Phase42E
+phase_id: Phase42F
 phase_part: outside-validation
 gate_scope: INTERMEDIATE_PACKET
-next_phase_id: Phase42F
+next_phase_id: Phase42G
 next_phase_part: outside-validation
 next_gate_scope: INTERMEDIATE_PACKET
 ```
