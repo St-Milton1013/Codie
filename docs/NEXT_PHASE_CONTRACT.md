@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: validate the Phase 42H Jin Intent, Scope, Query-Plan, Evidence-Gate, and Legality-Gate Contract
+Recommended next task: validate the Phase 42I Jin Writer, Auditor, Deterministic Finalizer, and Answer-Packet Contract
 
 ## Constitutional Governance Overlay
 
@@ -98,16 +98,18 @@ Ledger core contract. Phase 42F received artifact-backed PASS and defines the
 Theory source, rights, immutable version, and citation contract. Phase 42G
 received artifact-backed PASS and defines reviewed claims, typed graph
 relationships, contradictions, translations, and retrieval packets. Phase
-42H is internally complete as the Jin intent, scope, query-plan,
-evidence-gate, and legality-gate contract. Phase 42I remains blocked until
-Phase 42H outside validation returns PASS or PASS WITH REVIEW NOTES.
+42H received artifact-backed PASS and defines Jin intent, scope, query
+planning, evidence gates, and legality gates. Phase 42I is internally complete
+as the writer, auditor, deterministic finalizer, and answer-packet contract.
+Phase 42J remains blocked until Phase 42I outside validation returns PASS or
+PASS WITH REVIEW NOTES.
 
-Phase 42G acceptance evidence:
+Phase 42H acceptance evidence:
 
 ```text
-workflow run ID: 30548700626
-validated SHA: 16aceeab03f2612fbab9ffe93881df03c133fe02
-artifact: codie-phase_ledger-validation-16aceeab03f2612fbab9ffe93881df03c133fe02
+workflow run ID: 30551069158
+validated SHA: 0a33e33604bc3ff7c2b6357f4becbe9ab5ec1cab
+artifact: codie-phase_ledger-validation-0a33e33604bc3ff7c2b6357f4becbe9ab5ec1cab
 validation scope: phase_ledger
 validator profile: all
 deterministic: CLEAN_PASS
@@ -121,13 +123,13 @@ errors: none
 final governance verdict: PASS
 ```
 
-Explicit Phase 42H validation tuple:
+Explicit Phase 42I validation tuple:
 
 ```text
-phase_id: Phase42H
+phase_id: Phase42I
 phase_part: outside-validation
 gate_scope: INTERMEDIATE_PACKET
-next_phase_id: Phase42I
+next_phase_id: Phase42J
 next_phase_part: outside-validation
 next_gate_scope: INTERMEDIATE_PACKET
 ```
