@@ -117,35 +117,36 @@ Phase 42C Rules Authority, Legality, and Bounded Interaction Contract: externall
 Phase 42D Local-First Model Profile, Redaction, Consent, and Routing Contract: externally accepted
 Phase 42E Minimal User Correction Ledger Core Contract: externally accepted
 Phase 42F Theory Source Registry, Rights, Immutable Source Version, and Citation Contract: externally accepted
-Phase 42G Reviewed Claim, Typed Graph, Contradiction, Translation, and Retrieval Contract: internally complete
-Current action: validate the Phase 42G Reviewed Claim, Typed Graph, Contradiction, Translation, and Retrieval Contract
-Phase 42H Jin Intent, Scope, Query-Plan, Evidence-Gate, and Legality-Gate Contract: blocked
+Phase 42G Reviewed Claim, Typed Graph, Contradiction, Translation, and Retrieval Contract: externally accepted
+Phase 42H Jin Intent, Scope, Query-Plan, Evidence-Gate, and Legality-Gate Contract: internally complete
+Current action: validate the Phase 42H Jin Intent, Scope, Query-Plan, Evidence-Gate, and Legality-Gate Contract
+Phase 42I Jin Writer, Auditor, Deterministic Finalizer, and Answer-Packet Contract: blocked
 Local alpha tag status: verified on origin as local-alpha-0.1.0
 ```
 
 ## Previous Work Packet
 
 ```text
-Phase 42F Theory Source Registry, Rights, Immutable Source Version, and Citation Contract
+Phase 42G Reviewed Claim, Typed Graph, Contradiction, Translation, and Retrieval Contract
 Status: externally accepted
 ```
 
 ## Next Allowed Work Packet
 
 ```text
-Phase 42G Reviewed Claim, Typed Graph, Contradiction, Translation, and Retrieval Contract
+Phase 42H Jin Intent, Scope, Query-Plan, Evidence-Gate, and Legality-Gate Contract
 Status: internally complete; outside validation required
 ```
 
 Current-status clarification:
 
 ```text
-Current protected validation gate: Phase42G / outside-validation / INTERMEDIATE_PACKET.
-Phase 42F status: externally accepted.
-Authoritative next allowed work packet: Phase 42G Reviewed Claim, Typed Graph, Contradiction, Translation, and Retrieval Contract.
-Phase 42G is the active contract-only packet.
+Current protected validation gate: Phase42H / outside-validation / INTERMEDIATE_PACKET.
+Phase 42G status: externally accepted.
+Authoritative next allowed work packet: Phase 42H Jin Intent, Scope, Query-Plan, Evidence-Gate, and Legality-Gate Contract.
+Phase 42H is the active contract-only packet.
 The authorized one-file transition on main set
-`CODIE_ACTIVE_VALIDATION_SCOPE.json` to Phase42G before this PR was validated.
+`CODIE_ACTIVE_VALIDATION_SCOPE.json` to Phase42H before this PR was validated.
 The PR does not alter its own validation authority.
 ```
 
@@ -170,16 +171,18 @@ received artifact-backed PASS and defines the Rules authority boundary. Phase
 redaction, and routing boundary. Phase 42E received artifact-backed PASS and
 defines the minimal Correction Ledger core. Phase 42F received artifact-backed
 PASS and defines the Theory source, rights, immutable version, and citation
-foundation. Phase 42G defines reviewed claims, typed graph relationships,
-contradictions, translations, and retrieval packets. Phase 42H remains blocked
-until Phase 42G returns PASS or PASS WITH REVIEW NOTES.
+foundation. Phase 42G received artifact-backed PASS and defines reviewed
+claims, typed graph relationships, contradictions, translations, and
+retrieval packets. Phase 42H defines Jin intent, scope, query planning,
+evidence gates, and legality gates. Phase 42I remains blocked until Phase 42H
+returns PASS or PASS WITH REVIEW NOTES.
 
-Phase 42F acceptance evidence:
+Phase 42G acceptance evidence:
 
 ```text
-workflow run ID: 30510678610
-validated SHA: c550b8a52a51d0a7438243967f8af7666afd9b3a
-artifact: codie-phase_ledger-validation-c550b8a52a51d0a7438243967f8af7666afd9b3a
+workflow run ID: 30548700626
+validated SHA: 16aceeab03f2612fbab9ffe93881df03c133fe02
+artifact: codie-phase_ledger-validation-16aceeab03f2612fbab9ffe93881df03c133fe02
 validation scope: phase_ledger
 validator profile: all
 deterministic: CLEAN_PASS
@@ -193,13 +196,13 @@ errors: none
 final governance verdict: PASS
 ```
 
-Phase 42G validation tuple:
+Phase 42H validation tuple:
 
 ```text
-phase_id: Phase42G
+phase_id: Phase42H
 phase_part: outside-validation
 gate_scope: INTERMEDIATE_PACKET
-next_phase_id: Phase42H
+next_phase_id: Phase42I
 next_phase_part: outside-validation
 next_gate_scope: INTERMEDIATE_PACKET
 ```
