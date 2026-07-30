@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: validate the Phase 42C Rules Authority, Legality, and Bounded Interaction Contract
+Recommended next task: validate the Phase 42D Local-First Model Profile, Redaction, Consent, and Routing Contract
 
 ## Constitutional Governance Overlay
 
@@ -90,16 +90,17 @@ Analyzer core. Phase 41B and Phase 41C received artifact-backed PASS. Phase
 41D received artifact-backed PASS and closed the independent-seat Tournament
 Exposure core. Phase 42A received artifact-backed PASS and defines the Program
 B cross-specification boundary. Phase 42B received artifact-backed PASS and
-defines the fixed corpus/evaluation contract. Phase 42C is internally complete
-as the Rules authority contract. Phase 42D remains blocked until Phase 42C
-outside validation returns PASS or PASS WITH REVIEW NOTES.
+defines the fixed corpus/evaluation contract. Phase 42C received artifact-
+backed PASS and defines the Rules authority contract. Phase 42D is internally
+complete as the local-first model-profile contract. Phase 42E remains blocked
+until Phase 42D outside validation returns PASS or PASS WITH REVIEW NOTES.
 
-Phase 42B acceptance evidence:
+Phase 42C acceptance evidence:
 
 ```text
-workflow run ID: 30507244978
-validated SHA: 52973c10d6fea3fd661367685feb759adf7e317b
-artifact: codie-phase_ledger-validation-52973c10d6fea3fd661367685feb759adf7e317b
+workflow run ID: 30508152138
+validated SHA: 626c9e5a73040adb5d3c9d720e5f45af620fa28c
+artifact: codie-phase_ledger-validation-626c9e5a73040adb5d3c9d720e5f45af620fa28c
 validation scope: phase_ledger
 validator profile: all
 deterministic: CLEAN_PASS
@@ -113,13 +114,13 @@ errors: none
 final governance verdict: PASS
 ```
 
-Explicit Phase 42C validation tuple:
+Explicit Phase 42D validation tuple:
 
 ```text
-phase_id: Phase42C
+phase_id: Phase42D
 phase_part: outside-validation
 gate_scope: INTERMEDIATE_PACKET
-next_phase_id: Phase42D
+next_phase_id: Phase42E
 next_phase_part: outside-validation
 next_gate_scope: INTERMEDIATE_PACKET
 ```
