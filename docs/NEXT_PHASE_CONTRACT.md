@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: validate the Phase 42D Local-First Model Profile, Redaction, Consent, and Routing Contract
+Recommended next task: validate the Phase 42E Minimal User Correction Ledger Core Contract
 
 ## Constitutional Governance Overlay
 
@@ -91,16 +91,18 @@ Analyzer core. Phase 41B and Phase 41C received artifact-backed PASS. Phase
 Exposure core. Phase 42A received artifact-backed PASS and defines the Program
 B cross-specification boundary. Phase 42B received artifact-backed PASS and
 defines the fixed corpus/evaluation contract. Phase 42C received artifact-
-backed PASS and defines the Rules authority contract. Phase 42D is internally
-complete as the local-first model-profile contract. Phase 42E remains blocked
-until Phase 42D outside validation returns PASS or PASS WITH REVIEW NOTES.
+backed PASS and defines the Rules authority contract. Phase 42D received
+artifact-backed PASS and defines the local-first model-profile contract.
+Phase 42E is internally complete as the minimal Correction Ledger core
+contract. Phase 42F remains blocked until Phase 42E outside validation returns
+PASS or PASS WITH REVIEW NOTES.
 
-Phase 42C acceptance evidence:
+Phase 42D acceptance evidence:
 
 ```text
-workflow run ID: 30508152138
-validated SHA: 626c9e5a73040adb5d3c9d720e5f45af620fa28c
-artifact: codie-phase_ledger-validation-626c9e5a73040adb5d3c9d720e5f45af620fa28c
+workflow run ID: 30509449057
+validated SHA: e2e0f9437b16627349efabdf05741f10398fd312
+artifact: codie-phase_ledger-validation-e2e0f9437b16627349efabdf05741f10398fd312
 validation scope: phase_ledger
 validator profile: all
 deterministic: CLEAN_PASS
@@ -114,13 +116,13 @@ errors: none
 final governance verdict: PASS
 ```
 
-Explicit Phase 42D validation tuple:
+Explicit Phase 42E validation tuple:
 
 ```text
-phase_id: Phase42D
+phase_id: Phase42E
 phase_part: outside-validation
 gate_scope: INTERMEDIATE_PACKET
-next_phase_id: Phase42E
+next_phase_id: Phase42F
 next_phase_part: outside-validation
 next_gate_scope: INTERMEDIATE_PACKET
 ```

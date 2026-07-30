@@ -111,8 +111,9 @@ Phase 41D Tournament Exposure Core Checkpoint / Freeze: PASS
 Phase 42A Jin / Theory / Rules / Corrections Cross-Specification Boundary and Decision Contract: PASS
 Phase 42B Fixed Jin Regression Corpus Schema and Deterministic Evaluation Contract: PASS
 Phase 42C Rules Authority, Legality, and Bounded Interaction Contract: PASS
-Phase 42D Local-First Model Profile, Redaction, Consent, and Routing Contract: INTERNAL PASS
-Phase 42E Minimal User Correction Ledger Core Contract: BLOCKED
+Phase 42D Local-First Model Profile, Redaction, Consent, and Routing Contract: PASS
+Phase 42E Minimal User Correction Ledger Core Contract: INTERNAL PASS
+Phase 42F Theory Source Registry, Rights, Immutable Source Version, and Citation Contract: BLOCKED
 Local alpha tag: verified on origin as local-alpha-0.1.0
 ```
 
@@ -133,17 +134,18 @@ phase-ledger validation and closed the Tournament Exposure core. Phase 42A
 passed artifact-backed phase-ledger validation and defines the Program B
 boundary. Phase 42B passed artifact-backed phase-ledger validation and defines
 the fixed corpus/evaluation contract. Phase 42C passed artifact-backed
-phase-ledger validation and defines the Rules authority contract. Phase 42D is
-internally complete as the local-first model-profile contract. Phase 42E
-remains blocked until Phase 42D outside validation returns PASS or PASS WITH
-REVIEW NOTES.
+phase-ledger validation and defines the Rules authority contract. Phase 42D
+passed artifact-backed phase-ledger validation and defines the local-first
+model-profile contract. Phase 42E is internally complete as the minimal
+Correction Ledger core contract. Phase 42F remains blocked until Phase 42E
+outside validation returns PASS or PASS WITH REVIEW NOTES.
 
-Phase 42C acceptance evidence:
+Phase 42D acceptance evidence:
 
 ```text
-workflow run ID: 30508152138
-validated SHA: 626c9e5a73040adb5d3c9d720e5f45af620fa28c
-artifact: codie-phase_ledger-validation-626c9e5a73040adb5d3c9d720e5f45af620fa28c
+workflow run ID: 30509449057
+validated SHA: e2e0f9437b16627349efabdf05741f10398fd312
+artifact: codie-phase_ledger-validation-e2e0f9437b16627349efabdf05741f10398fd312
 validation scope: phase_ledger
 validator profile: all
 deterministic: CLEAN_PASS
@@ -157,13 +159,13 @@ errors: none
 final governance verdict: PASS
 ```
 
-Phase 42D validation tuple:
+Phase 42E validation tuple:
 
 ```text
-phase_id: Phase42D
+phase_id: Phase42E
 phase_part: outside-validation
 gate_scope: INTERMEDIATE_PACKET
-next_phase_id: Phase42E
+next_phase_id: Phase42F
 next_phase_part: outside-validation
 next_gate_scope: INTERMEDIATE_PACKET
 ```
