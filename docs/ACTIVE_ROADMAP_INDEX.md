@@ -112,35 +112,36 @@ Phase 41B Tournament Exposure Independent-Seat Implementation Contract: external
 Phase 41C Tournament Exposure Independent-Seat Implementation: externally accepted
 Phase 41D Tournament Exposure Core Checkpoint / Freeze: externally accepted
 Phase 42A Jin / Theory / Rules / Corrections Cross-Specification Boundary and Decision Contract: externally accepted
-Phase 42B Fixed Jin Regression Corpus Schema and Deterministic Evaluation Contract: internally complete
-Current action: validate the Phase 42B Fixed Jin Regression Corpus Schema and Deterministic Evaluation Contract
-Phase 42C Rules Authority, Legality, and Bounded Interaction Contract: blocked
+Phase 42B Fixed Jin Regression Corpus Schema and Deterministic Evaluation Contract: externally accepted
+Phase 42C Rules Authority, Legality, and Bounded Interaction Contract: internally complete
+Current action: validate the Phase 42C Rules Authority, Legality, and Bounded Interaction Contract
+Phase 42D Local-First Model Profile, Redaction, Consent, and Routing Contract: blocked
 Local alpha tag status: verified on origin as local-alpha-0.1.0
 ```
 
 ## Previous Work Packet
 
 ```text
-Phase 42A Jin / Theory / Rules / Corrections Cross-Specification Boundary and Decision Contract
+Phase 42B Fixed Jin Regression Corpus Schema and Deterministic Evaluation Contract
 Status: externally accepted
 ```
 
 ## Next Allowed Work Packet
 
 ```text
-Phase 42B Fixed Jin Regression Corpus Schema and Deterministic Evaluation Contract
+Phase 42C Rules Authority, Legality, and Bounded Interaction Contract
 Status: internally complete; outside validation required
 ```
 
 Current-status clarification:
 
 ```text
-Current protected validation gate: Phase42B / outside-validation / INTERMEDIATE_PACKET.
-Phase 42A status: externally accepted.
-Authoritative next allowed work packet: Phase 42B Fixed Jin Regression Corpus Schema and Deterministic Evaluation Contract.
-Phase 42B is the active contract-only packet.
+Current protected validation gate: Phase42C / outside-validation / INTERMEDIATE_PACKET.
+Phase 42B status: externally accepted.
+Authoritative next allowed work packet: Phase 42C Rules Authority, Legality, and Bounded Interaction Contract.
+Phase 42C is the active contract-only packet.
 The authorized one-file transition on main set
-`CODIE_ACTIVE_VALIDATION_SCOPE.json` to Phase42B before this PR was validated.
+`CODIE_ACTIVE_VALIDATION_SCOPE.json` to Phase42C before this PR was validated.
 The PR does not alter its own validation authority.
 ```
 
@@ -158,16 +159,17 @@ artifact-backed PASS and defines the Tournament Exposure Analyzer core. Phase
 41B and Phase 41C received artifact-backed PASS. Phase 41D received
 artifact-backed PASS and closed the independent-seat Tournament Exposure core.
 Phase 42A received artifact-backed PASS and defines the Program B
-cross-specification boundary. Phase 42B defines the fixed regression-corpus
-schema and deterministic evaluation rules. Phase 42C remains blocked until
-Phase 42B returns PASS or PASS WITH REVIEW NOTES.
+cross-specification boundary. Phase 42B received artifact-backed PASS and
+defines the fixed regression-corpus schema and evaluation rules. Phase 42C
+defines the Rules authority boundary. Phase 42D remains blocked until Phase
+42C returns PASS or PASS WITH REVIEW NOTES.
 
-Phase 42A acceptance evidence:
+Phase 42B acceptance evidence:
 
 ```text
-workflow run ID: 30506627453
-validated SHA: 4fd0bf1f36c1f5e9ff7c3dd681339a28da4bac2c
-artifact: codie-phase_ledger-validation-4fd0bf1f36c1f5e9ff7c3dd681339a28da4bac2c
+workflow run ID: 30507244978
+validated SHA: 52973c10d6fea3fd661367685feb759adf7e317b
+artifact: codie-phase_ledger-validation-52973c10d6fea3fd661367685feb759adf7e317b
 deterministic: CLEAN_PASS
 architecture: CLEAN_PASS
 adversarial: CLEAN_PASS
@@ -176,13 +178,13 @@ findings, skips, and errors: none
 final governance verdict: PASS
 ```
 
-Phase 42B validation tuple:
+Phase 42C validation tuple:
 
 ```text
-phase_id: Phase42B
+phase_id: Phase42C
 phase_part: outside-validation
 gate_scope: INTERMEDIATE_PACKET
-next_phase_id: Phase42C
+next_phase_id: Phase42D
 next_phase_part: outside-validation
 next_gate_scope: INTERMEDIATE_PACKET
 ```
