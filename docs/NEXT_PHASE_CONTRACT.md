@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: validate the Phase 42A Jin / Theory / Rules / Corrections Cross-Specification Boundary and Decision Contract
+Recommended next task: validate the Phase 42B Fixed Jin Regression Corpus Schema and Deterministic Evaluation Contract
 
 ## Constitutional Governance Overlay
 
@@ -88,16 +88,17 @@ artifact-backed PASS and closed the Relationship Intelligence core track.
 Phase 41A received artifact-backed PASS and defines the Tournament Exposure
 Analyzer core. Phase 41B and Phase 41C received artifact-backed PASS. Phase
 41D received artifact-backed PASS and closed the independent-seat Tournament
-Exposure core. Phase 42A is internally complete as the Program B
-cross-specification boundary contract. Phase 42B remains blocked until Phase
-42A outside validation returns PASS or PASS WITH REVIEW NOTES.
+Exposure core. Phase 42A received artifact-backed PASS and defines the Program
+B cross-specification boundary. Phase 42B is internally complete as the fixed
+corpus/evaluation contract. Phase 42C remains blocked until Phase 42B outside
+validation returns PASS or PASS WITH REVIEW NOTES.
 
-Phase 41D acceptance evidence:
+Phase 42A acceptance evidence:
 
 ```text
-workflow run ID: 30506116873
-validated SHA: efd53e259b2bb9069b65c995207abbacd1a404e8
-artifact: codie-phase_ledger-validation-efd53e259b2bb9069b65c995207abbacd1a404e8
+workflow run ID: 30506627453
+validated SHA: 4fd0bf1f36c1f5e9ff7c3dd681339a28da4bac2c
+artifact: codie-phase_ledger-validation-4fd0bf1f36c1f5e9ff7c3dd681339a28da4bac2c
 validation scope: phase_ledger
 validator profile: all
 deterministic: CLEAN_PASS
@@ -111,13 +112,13 @@ errors: none
 final governance verdict: PASS
 ```
 
-Explicit Phase 42A validation tuple:
+Explicit Phase 42B validation tuple:
 
 ```text
-phase_id: Phase42A
+phase_id: Phase42B
 phase_part: outside-validation
 gate_scope: INTERMEDIATE_PACKET
-next_phase_id: Phase42B
+next_phase_id: Phase42C
 next_phase_part: outside-validation
 next_gate_scope: INTERMEDIATE_PACKET
 ```

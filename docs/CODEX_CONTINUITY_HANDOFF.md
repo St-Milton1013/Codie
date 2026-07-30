@@ -2611,17 +2611,18 @@ Phase 41A Tournament Exposure Analyzer Core Contract: PASS
 Phase 41B Tournament Exposure Independent-Seat Implementation Contract: PASS
 Phase 41C Tournament Exposure Independent-Seat Implementation: PASS
 Phase 41D Tournament Exposure Core Checkpoint / Freeze: PASS
-Phase 42A Jin / Theory / Rules / Corrections Cross-Specification Boundary and Decision Contract: INTERNAL PASS
-Current action: validate the Phase 42A Jin / Theory / Rules / Corrections Cross-Specification Boundary and Decision Contract
-Phase 42B Fixed Jin Regression Corpus Schema and Deterministic Evaluation Contract: BLOCKED until Phase 42A returns PASS or PASS WITH REVIEW NOTES
+Phase 42A Jin / Theory / Rules / Corrections Cross-Specification Boundary and Decision Contract: PASS
+Phase 42B Fixed Jin Regression Corpus Schema and Deterministic Evaluation Contract: INTERNAL PASS
+Current action: validate the Phase 42B Fixed Jin Regression Corpus Schema and Deterministic Evaluation Contract
+Phase 42C Rules Authority, Legality, and Bounded Interaction Contract: BLOCKED until Phase 42B returns PASS or PASS WITH REVIEW NOTES
 ```
 
-Phase 41D acceptance evidence:
+Phase 42A acceptance evidence:
 
 ```text
-workflow run ID: 30506116873
-validated SHA: efd53e259b2bb9069b65c995207abbacd1a404e8
-artifact: codie-phase_ledger-validation-efd53e259b2bb9069b65c995207abbacd1a404e8
+workflow run ID: 30506627453
+validated SHA: 4fd0bf1f36c1f5e9ff7c3dd681339a28da4bac2c
+artifact: codie-phase_ledger-validation-4fd0bf1f36c1f5e9ff7c3dd681339a28da4bac2c
 validation scope: phase_ledger
 validator profile: all
 deterministic: CLEAN_PASS
@@ -2635,13 +2636,13 @@ errors: none
 final governance verdict: PASS
 ```
 
-Phase 42A validation tuple:
+Phase 42B validation tuple:
 
 ```text
-phase_id: Phase42A
+phase_id: Phase42B
 phase_part: outside-validation
 gate_scope: INTERMEDIATE_PACKET
-next_phase_id: Phase42B
+next_phase_id: Phase42C
 next_phase_part: outside-validation
 next_gate_scope: INTERMEDIATE_PACKET
 ```
