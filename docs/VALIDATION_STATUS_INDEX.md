@@ -110,8 +110,9 @@ Phase 41C Tournament Exposure Independent-Seat Implementation: PASS
 Phase 41D Tournament Exposure Core Checkpoint / Freeze: PASS
 Phase 42A Jin / Theory / Rules / Corrections Cross-Specification Boundary and Decision Contract: PASS
 Phase 42B Fixed Jin Regression Corpus Schema and Deterministic Evaluation Contract: PASS
-Phase 42C Rules Authority, Legality, and Bounded Interaction Contract: INTERNAL PASS
-Phase 42D Local-First Model Profile, Redaction, Consent, and Routing Contract: BLOCKED
+Phase 42C Rules Authority, Legality, and Bounded Interaction Contract: PASS
+Phase 42D Local-First Model Profile, Redaction, Consent, and Routing Contract: INTERNAL PASS
+Phase 42E Minimal User Correction Ledger Core Contract: BLOCKED
 Local alpha tag: verified on origin as local-alpha-0.1.0
 ```
 
@@ -131,16 +132,18 @@ independent-seat implementation. Phase 41D passed artifact-backed
 phase-ledger validation and closed the Tournament Exposure core. Phase 42A
 passed artifact-backed phase-ledger validation and defines the Program B
 boundary. Phase 42B passed artifact-backed phase-ledger validation and defines
-the fixed corpus/evaluation contract. Phase 42C is internally complete as the
-Rules authority contract. Phase 42D remains blocked until Phase 42C outside
-validation returns PASS or PASS WITH REVIEW NOTES.
+the fixed corpus/evaluation contract. Phase 42C passed artifact-backed
+phase-ledger validation and defines the Rules authority contract. Phase 42D is
+internally complete as the local-first model-profile contract. Phase 42E
+remains blocked until Phase 42D outside validation returns PASS or PASS WITH
+REVIEW NOTES.
 
-Phase 42B acceptance evidence:
+Phase 42C acceptance evidence:
 
 ```text
-workflow run ID: 30507244978
-validated SHA: 52973c10d6fea3fd661367685feb759adf7e317b
-artifact: codie-phase_ledger-validation-52973c10d6fea3fd661367685feb759adf7e317b
+workflow run ID: 30508152138
+validated SHA: 626c9e5a73040adb5d3c9d720e5f45af620fa28c
+artifact: codie-phase_ledger-validation-626c9e5a73040adb5d3c9d720e5f45af620fa28c
 validation scope: phase_ledger
 validator profile: all
 deterministic: CLEAN_PASS
@@ -154,13 +157,13 @@ errors: none
 final governance verdict: PASS
 ```
 
-Phase 42C validation tuple:
+Phase 42D validation tuple:
 
 ```text
-phase_id: Phase42C
+phase_id: Phase42D
 phase_part: outside-validation
 gate_scope: INTERMEDIATE_PACKET
-next_phase_id: Phase42D
+next_phase_id: Phase42E
 next_phase_part: outside-validation
 next_gate_scope: INTERMEDIATE_PACKET
 ```

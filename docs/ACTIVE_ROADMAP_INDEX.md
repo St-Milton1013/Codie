@@ -113,35 +113,36 @@ Phase 41C Tournament Exposure Independent-Seat Implementation: externally accept
 Phase 41D Tournament Exposure Core Checkpoint / Freeze: externally accepted
 Phase 42A Jin / Theory / Rules / Corrections Cross-Specification Boundary and Decision Contract: externally accepted
 Phase 42B Fixed Jin Regression Corpus Schema and Deterministic Evaluation Contract: externally accepted
-Phase 42C Rules Authority, Legality, and Bounded Interaction Contract: internally complete
-Current action: validate the Phase 42C Rules Authority, Legality, and Bounded Interaction Contract
-Phase 42D Local-First Model Profile, Redaction, Consent, and Routing Contract: blocked
+Phase 42C Rules Authority, Legality, and Bounded Interaction Contract: externally accepted
+Phase 42D Local-First Model Profile, Redaction, Consent, and Routing Contract: internally complete
+Current action: validate the Phase 42D Local-First Model Profile, Redaction, Consent, and Routing Contract
+Phase 42E Minimal User Correction Ledger Core Contract: blocked
 Local alpha tag status: verified on origin as local-alpha-0.1.0
 ```
 
 ## Previous Work Packet
 
 ```text
-Phase 42B Fixed Jin Regression Corpus Schema and Deterministic Evaluation Contract
+Phase 42C Rules Authority, Legality, and Bounded Interaction Contract
 Status: externally accepted
 ```
 
 ## Next Allowed Work Packet
 
 ```text
-Phase 42C Rules Authority, Legality, and Bounded Interaction Contract
+Phase 42D Local-First Model Profile, Redaction, Consent, and Routing Contract
 Status: internally complete; outside validation required
 ```
 
 Current-status clarification:
 
 ```text
-Current protected validation gate: Phase42C / outside-validation / INTERMEDIATE_PACKET.
-Phase 42B status: externally accepted.
-Authoritative next allowed work packet: Phase 42C Rules Authority, Legality, and Bounded Interaction Contract.
-Phase 42C is the active contract-only packet.
+Current protected validation gate: Phase42D / outside-validation / INTERMEDIATE_PACKET.
+Phase 42C status: externally accepted.
+Authoritative next allowed work packet: Phase 42D Local-First Model Profile, Redaction, Consent, and Routing Contract.
+Phase 42D is the active contract-only packet.
 The authorized one-file transition on main set
-`CODIE_ACTIVE_VALIDATION_SCOPE.json` to Phase42C before this PR was validated.
+`CODIE_ACTIVE_VALIDATION_SCOPE.json` to Phase42D before this PR was validated.
 The PR does not alter its own validation authority.
 ```
 
@@ -161,15 +162,16 @@ artifact-backed PASS and closed the independent-seat Tournament Exposure core.
 Phase 42A received artifact-backed PASS and defines the Program B
 cross-specification boundary. Phase 42B received artifact-backed PASS and
 defines the fixed regression-corpus schema and evaluation rules. Phase 42C
-defines the Rules authority boundary. Phase 42D remains blocked until Phase
-42C returns PASS or PASS WITH REVIEW NOTES.
+received artifact-backed PASS and defines the Rules authority boundary. Phase
+42D defines the model-profile, consent, redaction, and routing boundary. Phase
+42E remains blocked until Phase 42D returns PASS or PASS WITH REVIEW NOTES.
 
-Phase 42B acceptance evidence:
+Phase 42C acceptance evidence:
 
 ```text
-workflow run ID: 30507244978
-validated SHA: 52973c10d6fea3fd661367685feb759adf7e317b
-artifact: codie-phase_ledger-validation-52973c10d6fea3fd661367685feb759adf7e317b
+workflow run ID: 30508152138
+validated SHA: 626c9e5a73040adb5d3c9d720e5f45af620fa28c
+artifact: codie-phase_ledger-validation-626c9e5a73040adb5d3c9d720e5f45af620fa28c
 deterministic: CLEAN_PASS
 architecture: CLEAN_PASS
 adversarial: CLEAN_PASS
@@ -178,13 +180,13 @@ findings, skips, and errors: none
 final governance verdict: PASS
 ```
 
-Phase 42C validation tuple:
+Phase 42D validation tuple:
 
 ```text
-phase_id: Phase42C
+phase_id: Phase42D
 phase_part: outside-validation
 gate_scope: INTERMEDIATE_PACKET
-next_phase_id: Phase42D
+next_phase_id: Phase42E
 next_phase_part: outside-validation
 next_gate_scope: INTERMEDIATE_PACKET
 ```
