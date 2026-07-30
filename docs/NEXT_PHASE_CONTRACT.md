@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: validate the Phase 41D Tournament Exposure Core Checkpoint / Freeze
+Recommended next task: validate the Phase 42A Jin / Theory / Rules / Corrections Cross-Specification Boundary and Decision Contract
 
 ## Constitutional Governance Overlay
 
@@ -86,17 +86,18 @@ Relationship Intelligence core. Phase 40B received artifact-backed PASS.
 Phase 40C through Phase 40J received artifact-backed PASS. Phase 40K received
 artifact-backed PASS and closed the Relationship Intelligence core track.
 Phase 41A received artifact-backed PASS and defines the Tournament Exposure
-Analyzer core. Phase 41B received artifact-backed PASS. Phase 41C received
-artifact-backed PASS for the independent-seat implementation. Phase 41D is
-internally complete as the checkpoint and freeze. Phase 42A remains blocked
-until Phase 41D outside validation returns PASS or PASS WITH REVIEW NOTES.
+Analyzer core. Phase 41B and Phase 41C received artifact-backed PASS. Phase
+41D received artifact-backed PASS and closed the independent-seat Tournament
+Exposure core. Phase 42A is internally complete as the Program B
+cross-specification boundary contract. Phase 42B remains blocked until Phase
+42A outside validation returns PASS or PASS WITH REVIEW NOTES.
 
-Phase 41C acceptance evidence:
+Phase 41D acceptance evidence:
 
 ```text
-workflow run ID: 30500721283
-validated SHA: 0ba15f789a8f6410b376205cf500830f9c45f6ce
-artifact: codie-phase_ledger-validation-0ba15f789a8f6410b376205cf500830f9c45f6ce
+workflow run ID: 30506116873
+validated SHA: efd53e259b2bb9069b65c995207abbacd1a404e8
+artifact: codie-phase_ledger-validation-efd53e259b2bb9069b65c995207abbacd1a404e8
 validation scope: phase_ledger
 validator profile: all
 deterministic: CLEAN_PASS
@@ -110,13 +111,13 @@ errors: none
 final governance verdict: PASS
 ```
 
-Explicit Phase 41D validation tuple:
+Explicit Phase 42A validation tuple:
 
 ```text
-phase_id: Phase41D
+phase_id: Phase42A
 phase_part: outside-validation
 gate_scope: INTERMEDIATE_PACKET
-next_phase_id: Phase42A
+next_phase_id: Phase42B
 next_phase_part: outside-validation
 next_gate_scope: INTERMEDIATE_PACKET
 ```
