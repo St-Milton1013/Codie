@@ -122,35 +122,36 @@ Phase 42H Jin Intent, Scope, Query-Plan, Evidence-Gate, and Legality-Gate Contra
 Phase 42I Jin Writer, Auditor, Deterministic Finalizer, and Answer-Packet Contract: externally accepted
 Phase 42J Experiment and Permitted User-Context Write Contract: externally accepted with review notes
 Phase 42K Judge-Training and Curriculum Contract: externally accepted
-Phase 42L Program Checkpoint and Release Acceptance: internally complete
-Current action: validate the Phase 42L final Program Checkpoint and Release Acceptance
-Phase 43A Shared Read-Model and View-Model Boundary Contract: blocked
+Phase 42L Program Checkpoint and Release Acceptance: externally accepted
+Phase 43A Shared Read-Model and View-Model Boundary Contract: internally complete
+Current action: validate the Phase 43A Shared Read-Model and View-Model Boundary Contract
+Phase 43B Desktop Deck and Analysis Workspace Contract: blocked
 Local alpha tag status: verified on origin as local-alpha-0.1.0
 ```
 
 ## Previous Work Packet
 
 ```text
-Phase 42H Jin Intent, Scope, Query-Plan, Evidence-Gate, and Legality-Gate Contract
+Phase 42L Jin / Theory / Rules / Corrections Program Checkpoint and Release Acceptance
 Status: externally accepted
 ```
 
 ## Next Allowed Work Packet
 
 ```text
-Phase 42L Jin / Theory / Rules / Corrections Program Checkpoint and Release Acceptance
+Phase 43A Shared Read-Model and View-Model Boundary Contract
 Status: internally complete; outside validation required
 ```
 
 Current-status clarification:
 
 ```text
-Current protected validation gate: Phase42L / outside-validation / FINAL_PHASE.
-Phase 42K status: externally accepted.
-Authoritative next allowed work packet: Phase 42L final Program Checkpoint and Release Acceptance.
-Phase 42L is the active contract-only packet.
+Current protected validation gate: Phase43A / outside-validation / INTERMEDIATE_PACKET.
+Phase 42L status: externally accepted on merged main.
+Authoritative next allowed work packet: Phase 43A Shared Read-Model and View-Model Boundary Contract.
+Phase 43A is the active contract-only packet.
 The authorized one-file transition on main set
-`CODIE_ACTIVE_VALIDATION_SCOPE.json` to Phase42L before this PR was validated.
+`CODIE_ACTIVE_VALIDATION_SCOPE.json` to Phase43A before this PR was validated.
 The PR does not alter its own validation authority.
 ```
 
@@ -183,9 +184,31 @@ received artifact-backed PASS and defines the writer, auditor, deterministic
 finalizer, and answer packet. Phase 42J received artifact-backed PASS WITH
 REVIEW NOTES and defines the experiment and permitted user-context write
 boundary. Phase 42K received artifact-backed PASS and defines the
-Judge-Training and Curriculum boundary. Phase 42L is internally complete as
-the final Program Checkpoint and Release Acceptance contract. Phase 43A
-remains blocked pending Phase 42L outside validation.
+Judge-Training and Curriculum boundary. Phase 42L received artifact-backed
+PASS on merged `main` and closes the Program B contract foundation. Phase 43A
+is internally complete; Phase 43B remains blocked pending Phase 43A outside
+validation.
+
+Phase 42L final acceptance evidence:
+
+```text
+workflow run ID: 30717688571
+validated SHA: ddf046abca5d1cd04f33891e3735ec2b90a3ca9d
+artifact: codie-phase_ledger-validation-ddf046abca5d1cd04f33891e3735ec2b90a3ca9d
+artifact ID: 8823858342
+artifact digest: sha256:7b0a71fd62ad42c27498076dd5eb2425282d5fac9d4abd004bfdafd8207b56b3
+validation scope: phase_ledger
+gate scope: FINAL_PHASE
+deterministic: CLEAN_PASS
+architecture: CLEAN_PASS
+adversarial: CLEAN_PASS
+aggregate: CLEAN_PASS
+severity totals: all zero
+skipped validators: none
+unresolved findings: none
+errors: none
+final governance verdict: PASS
+```
 
 Phase 42H acceptance evidence:
 

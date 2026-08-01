@@ -119,8 +119,9 @@ Phase 42H Jin Intent, Scope, Query-Plan, Evidence-Gate, and Legality-Gate Contra
 Phase 42I Jin Writer, Auditor, Deterministic Finalizer, and Answer-Packet Contract: PASS
 Phase 42J Experiment and Permitted User-Context Write Contract: PASS WITH REVIEW NOTES
 Phase 42K Judge-Training and Curriculum Contract: PASS
-Phase 42L Program Checkpoint and Release Acceptance: INTERNAL PASS
-Phase 43A Shared Read-Model and View-Model Boundary Contract: BLOCKED
+Phase 42L Program Checkpoint and Release Acceptance: PASS
+Phase 43A Shared Read-Model and View-Model Boundary Contract: INTERNAL PASS
+Phase 43B Desktop Deck and Analysis Workspace Contract: BLOCKED
 Local alpha tag: verified on origin as local-alpha-0.1.0
 ```
 
@@ -155,9 +156,30 @@ and defines the writer, auditor, deterministic finalizer, and answer-packet
 contract. Phase 42J received artifact-backed PASS WITH REVIEW NOTES and
 defines the experiment and permitted user-context write boundary. Phase 42K
 received artifact-backed PASS and defines the Judge-Training and Curriculum
-boundary. Phase 42L is internally complete as the final Program Checkpoint and
-Release Acceptance contract. Phase 43A remains blocked pending Phase 42L
-outside validation.
+boundary. Phase 42L received artifact-backed PASS on merged `main` and closes
+the Program B contract foundation. Phase 43A is internally complete; Phase 43B
+remains blocked pending Phase 43A outside validation.
+
+Phase 42L final acceptance evidence:
+
+```text
+workflow run ID: 30717688571
+validated SHA: ddf046abca5d1cd04f33891e3735ec2b90a3ca9d
+artifact: codie-phase_ledger-validation-ddf046abca5d1cd04f33891e3735ec2b90a3ca9d
+artifact ID: 8823858342
+artifact digest: sha256:7b0a71fd62ad42c27498076dd5eb2425282d5fac9d4abd004bfdafd8207b56b3
+validation scope: phase_ledger
+gate scope: FINAL_PHASE
+deterministic: CLEAN_PASS
+architecture: CLEAN_PASS
+adversarial: CLEAN_PASS
+aggregate: CLEAN_PASS
+severity totals: all zero
+skipped validators: none
+unresolved findings: none
+errors: none
+final governance verdict: PASS
+```
 
 Phase 42H acceptance evidence:
 
