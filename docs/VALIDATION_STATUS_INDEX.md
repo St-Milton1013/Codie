@@ -116,8 +116,9 @@ Phase 42E Minimal User Correction Ledger Core Contract: PASS
 Phase 42F Theory Source Registry, Rights, Immutable Source Version, and Citation Contract: PASS
 Phase 42G Reviewed Claim, Typed Graph, Contradiction, Translation, and Retrieval Contract: PASS
 Phase 42H Jin Intent, Scope, Query-Plan, Evidence-Gate, and Legality-Gate Contract: PASS
-Phase 42I Jin Writer, Auditor, Deterministic Finalizer, and Answer-Packet Contract: INTERNAL PASS
-Phase 42J Experiment and Permitted User-Context Write Contract: BLOCKED
+Phase 42I Jin Writer, Auditor, Deterministic Finalizer, and Answer-Packet Contract: PASS
+Phase 42J Experiment and Permitted User-Context Write Contract: INTERNAL PASS
+Phase 42K Judge-Training and Curriculum Contract: BLOCKED
 Local alpha tag: verified on origin as local-alpha-0.1.0
 ```
 
@@ -147,10 +148,11 @@ and rights foundation. Phase 42G passed artifact-backed phase-ledger validation
 and defines reviewed claims, typed graph relationships, contradictions,
 translations, and retrieval packets. Phase 42H passed artifact-backed
 phase-ledger validation and defines Jin intent, scope, query planning, evidence
-gates, and legality gates. Phase 42I is internally complete as the writer,
-auditor, deterministic finalizer, and answer-packet contract. Phase 42J remains
-blocked until Phase 42I outside validation returns PASS or PASS WITH REVIEW
-NOTES.
+gates, and legality gates. Phase 42I passed artifact-backed outside validation
+and defines the writer, auditor, deterministic finalizer, and answer-packet
+contract. Phase 42J is internally complete as the experiment and permitted
+user-context write contract. Phase 42K remains blocked pending Phase 42J
+outside validation.
 
 Phase 42H acceptance evidence:
 

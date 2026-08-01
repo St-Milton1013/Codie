@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: validate the Phase 42I Jin Writer, Auditor, Deterministic Finalizer, and Answer-Packet Contract
+Recommended next task: validate the Phase 42J Experiment and Permitted User-Context Write Contract
 
 ## Constitutional Governance Overlay
 
@@ -99,10 +99,11 @@ Theory source, rights, immutable version, and citation contract. Phase 42G
 received artifact-backed PASS and defines reviewed claims, typed graph
 relationships, contradictions, translations, and retrieval packets. Phase
 42H received artifact-backed PASS and defines Jin intent, scope, query
-planning, evidence gates, and legality gates. Phase 42I is internally complete
-as the writer, auditor, deterministic finalizer, and answer-packet contract.
-Phase 42J remains blocked until Phase 42I outside validation returns PASS or
-PASS WITH REVIEW NOTES.
+planning, evidence gates, and legality gates. Phase 42I received artifact-
+backed PASS and defines the writer, auditor, deterministic finalizer, and
+answer-packet contract. Phase 42J is internally complete as the experiment and
+permitted user-context write contract. Phase 42K remains blocked until Phase
+42J outside validation returns PASS or PASS WITH REVIEW NOTES.
 
 Phase 42H acceptance evidence:
 
@@ -130,6 +131,17 @@ phase_id: Phase42I
 phase_part: outside-validation
 gate_scope: INTERMEDIATE_PACKET
 next_phase_id: Phase42J
+next_phase_part: outside-validation
+next_gate_scope: INTERMEDIATE_PACKET
+```
+
+Explicit Phase 42J validation tuple:
+
+```text
+phase_id: Phase42J
+phase_part: outside-validation
+gate_scope: INTERMEDIATE_PACKET
+next_phase_id: Phase42K
 next_phase_part: outside-validation
 next_gate_scope: INTERMEDIATE_PACKET
 ```

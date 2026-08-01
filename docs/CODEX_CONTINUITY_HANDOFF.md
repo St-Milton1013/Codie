@@ -2619,9 +2619,10 @@ Phase 42E Minimal User Correction Ledger Core Contract: PASS
 Phase 42F Theory Source Registry, Rights, Immutable Source Version, and Citation Contract: PASS
 Phase 42G Reviewed Claim, Typed Graph, Contradiction, Translation, and Retrieval Contract: PASS
 Phase 42H Jin Intent, Scope, Query-Plan, Evidence-Gate, and Legality-Gate Contract: PASS
-Phase 42I Jin Writer, Auditor, Deterministic Finalizer, and Answer-Packet Contract: INTERNAL PASS
-Current action: validate the Phase 42I Jin Writer, Auditor, Deterministic Finalizer, and Answer-Packet Contract
-Phase 42J Experiment and Permitted User-Context Write Contract: BLOCKED until Phase 42I returns PASS or PASS WITH REVIEW NOTES
+Phase 42I Jin Writer, Auditor, Deterministic Finalizer, and Answer-Packet Contract: PASS
+Phase 42J Experiment and Permitted User-Context Write Contract: INTERNAL PASS
+Current action: validate the Phase 42J Experiment and Permitted User-Context Write Contract
+Phase 42K Judge-Training and Curriculum Contract: BLOCKED until Phase 42J returns PASS or PASS WITH REVIEW NOTES
 ```
 
 Phase 42H acceptance evidence:
