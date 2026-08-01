@@ -2620,9 +2620,10 @@ Phase 42F Theory Source Registry, Rights, Immutable Source Version, and Citation
 Phase 42G Reviewed Claim, Typed Graph, Contradiction, Translation, and Retrieval Contract: PASS
 Phase 42H Jin Intent, Scope, Query-Plan, Evidence-Gate, and Legality-Gate Contract: PASS
 Phase 42I Jin Writer, Auditor, Deterministic Finalizer, and Answer-Packet Contract: PASS
-Phase 42J Experiment and Permitted User-Context Write Contract: INTERNAL PASS
-Current action: validate the Phase 42J Experiment and Permitted User-Context Write Contract
-Phase 42K Judge-Training and Curriculum Contract: BLOCKED until Phase 42J returns PASS or PASS WITH REVIEW NOTES
+Phase 42J Experiment and Permitted User-Context Write Contract: PASS WITH REVIEW NOTES
+Phase 42K Judge-Training and Curriculum Contract: INTERNAL PASS
+Current action: validate the Phase 42K Judge-Training and Curriculum Contract
+Phase 42L Program Checkpoint and Release Acceptance: BLOCKED until Phase 42K returns PASS or PASS WITH REVIEW NOTES
 ```
 
 Phase 42H acceptance evidence:

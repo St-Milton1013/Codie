@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: validate the Phase 42J Experiment and Permitted User-Context Write Contract
+Recommended next task: validate the Phase 42K Judge-Training and Curriculum Contract
 
 ## Constitutional Governance Overlay
 
@@ -101,9 +101,10 @@ relationships, contradictions, translations, and retrieval packets. Phase
 42H received artifact-backed PASS and defines Jin intent, scope, query
 planning, evidence gates, and legality gates. Phase 42I received artifact-
 backed PASS and defines the writer, auditor, deterministic finalizer, and
-answer-packet contract. Phase 42J is internally complete as the experiment and
-permitted user-context write contract. Phase 42K remains blocked until Phase
-42J outside validation returns PASS or PASS WITH REVIEW NOTES.
+answer-packet contract. Phase 42J received artifact-backed PASS WITH REVIEW
+NOTES and defines the experiment and permitted user-context write boundary.
+Phase 42K is internally complete as the Judge-Training and Curriculum
+Contract. Phase 42L remains blocked pending Phase 42K outside validation.
 
 Phase 42H acceptance evidence:
 
@@ -144,6 +145,39 @@ gate_scope: INTERMEDIATE_PACKET
 next_phase_id: Phase42K
 next_phase_part: outside-validation
 next_gate_scope: INTERMEDIATE_PACKET
+```
+
+Phase 42J acceptance evidence:
+
+```text
+workflow run ID: 30716078823
+validated SHA: 97fa2229dcec9771e0b27122bd036548ddb382c2
+artifact: codie-pr-validation-97fa2229dcec9771e0b27122bd036548ddb382c2
+artifact ID: 8823641948
+artifact digest: sha256:f11e1c8549318b77434dd8e9cff0f98c4f20a4bc61816ef6d50ede7918b97662
+validation scope: pr
+validator profile: all
+deterministic: CLEAN_PASS
+architecture: CLEAN_PASS
+adversarial: CLEAN_PASS
+aggregate: CLEAN_PASS
+severity totals: BLOCKER 0, CRITICAL 0, HIGH 0, MEDIUM 0, LOW 0, INFORMATIONAL 0
+skipped validators: none
+unresolved findings: none
+errors: none
+final governance verdict: PASS WITH REVIEW NOTES
+required corrections: none
+```
+
+Explicit Phase 42K validation tuple:
+
+```text
+phase_id: Phase42K
+phase_part: outside-validation
+gate_scope: INTERMEDIATE_PACKET
+next_phase_id: Phase42L
+next_phase_part: outside-validation
+next_gate_scope: FINAL_PHASE
 ```
 
 Explicit Phase 39A validation tuple:
