@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: validate the Phase 42K Judge-Training and Curriculum Contract
+Recommended next task: validate the Phase 42L final Program Checkpoint and Release Acceptance
 
 ## Constitutional Governance Overlay
 
@@ -103,8 +103,10 @@ planning, evidence gates, and legality gates. Phase 42I received artifact-
 backed PASS and defines the writer, auditor, deterministic finalizer, and
 answer-packet contract. Phase 42J received artifact-backed PASS WITH REVIEW
 NOTES and defines the experiment and permitted user-context write boundary.
-Phase 42K is internally complete as the Judge-Training and Curriculum
-Contract. Phase 42L remains blocked pending Phase 42K outside validation.
+Phase 42K received artifact-backed PASS and defines the Judge-Training and
+Curriculum boundary. Phase 42L is internally complete as the final Program
+Checkpoint and Release Acceptance contract. Phase 43A remains blocked pending
+Phase 42L outside validation.
 
 Phase 42H acceptance evidence:
 
@@ -178,6 +180,39 @@ gate_scope: INTERMEDIATE_PACKET
 next_phase_id: Phase42L
 next_phase_part: outside-validation
 next_gate_scope: FINAL_PHASE
+```
+
+Phase 42K acceptance evidence:
+
+```text
+workflow run ID: 30717326447
+validated SHA: f02f412a56dada1b21bda56faad77301bfb27af3
+artifact: codie-pr-validation-f02f412a56dada1b21bda56faad77301bfb27af3
+artifact ID: 8823748820
+artifact digest: sha256:9d80b1b791cf7ea2b3031b0063b4e43ffecc8e19982a5c454277038841e7ab51
+validation scope: pr
+validator profile: all
+deterministic: CLEAN_PASS
+architecture: CLEAN_PASS
+adversarial: CLEAN_PASS
+aggregate: CLEAN_PASS
+severity totals: BLOCKER 0, CRITICAL 0, HIGH 0, MEDIUM 0, LOW 0, INFORMATIONAL 0
+skipped validators: none
+unresolved findings: none
+errors: none
+final governance verdict: PASS
+required corrections: none
+```
+
+Explicit Phase 42L validation tuple:
+
+```text
+phase_id: Phase42L
+phase_part: outside-validation
+gate_scope: FINAL_PHASE
+next_phase_id: Phase43A
+next_phase_part: outside-validation
+next_gate_scope: INTERMEDIATE_PACKET
 ```
 
 Explicit Phase 39A validation tuple:

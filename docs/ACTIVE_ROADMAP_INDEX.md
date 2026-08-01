@@ -121,9 +121,10 @@ Phase 42G Reviewed Claim, Typed Graph, Contradiction, Translation, and Retrieval
 Phase 42H Jin Intent, Scope, Query-Plan, Evidence-Gate, and Legality-Gate Contract: externally accepted
 Phase 42I Jin Writer, Auditor, Deterministic Finalizer, and Answer-Packet Contract: externally accepted
 Phase 42J Experiment and Permitted User-Context Write Contract: externally accepted with review notes
-Phase 42K Judge-Training and Curriculum Contract: internally complete
-Current action: validate the Phase 42K Judge-Training and Curriculum Contract
-Phase 42L Program Checkpoint and Release Acceptance: blocked
+Phase 42K Judge-Training and Curriculum Contract: externally accepted
+Phase 42L Program Checkpoint and Release Acceptance: internally complete
+Current action: validate the Phase 42L final Program Checkpoint and Release Acceptance
+Phase 43A Shared Read-Model and View-Model Boundary Contract: blocked
 Local alpha tag status: verified on origin as local-alpha-0.1.0
 ```
 
@@ -137,19 +138,19 @@ Status: externally accepted
 ## Next Allowed Work Packet
 
 ```text
-Phase 42K Judge-Training and Curriculum Contract
+Phase 42L Jin / Theory / Rules / Corrections Program Checkpoint and Release Acceptance
 Status: internally complete; outside validation required
 ```
 
 Current-status clarification:
 
 ```text
-Current protected validation gate: Phase42K / outside-validation / INTERMEDIATE_PACKET.
-Phase 42J status: externally accepted with review notes.
-Authoritative next allowed work packet: Phase 42K Judge-Training and Curriculum Contract.
-Phase 42K is the active contract-only packet.
+Current protected validation gate: Phase42L / outside-validation / FINAL_PHASE.
+Phase 42K status: externally accepted.
+Authoritative next allowed work packet: Phase 42L final Program Checkpoint and Release Acceptance.
+Phase 42L is the active contract-only packet.
 The authorized one-file transition on main set
-`CODIE_ACTIVE_VALIDATION_SCOPE.json` to Phase42K before this PR was validated.
+`CODIE_ACTIVE_VALIDATION_SCOPE.json` to Phase42L before this PR was validated.
 The PR does not alter its own validation authority.
 ```
 
@@ -181,9 +182,10 @@ intent, scope, query planning, evidence gates, and legality gates. Phase 42I
 received artifact-backed PASS and defines the writer, auditor, deterministic
 finalizer, and answer packet. Phase 42J received artifact-backed PASS WITH
 REVIEW NOTES and defines the experiment and permitted user-context write
-boundary. Phase 42K is internally complete as the Judge-Training and
-Curriculum Contract. Phase 42L remains blocked pending Phase 42K outside
-validation.
+boundary. Phase 42K received artifact-backed PASS and defines the
+Judge-Training and Curriculum boundary. Phase 42L is internally complete as
+the final Program Checkpoint and Release Acceptance contract. Phase 43A
+remains blocked pending Phase 42L outside validation.
 
 Phase 42H acceptance evidence:
 
