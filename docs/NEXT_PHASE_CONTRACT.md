@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: validate the Phase 43B Desktop Deck and Analysis Workspace Contract
+Recommended next task: validate the Phase 43C Decision Evidence Panel Contract
 
 ## Constitutional Governance Overlay
 
@@ -106,8 +106,8 @@ NOTES and defines the experiment and permitted user-context write boundary.
 Phase 42K received artifact-backed PASS and defines the Judge-Training and
 Curriculum boundary. Phase 42L received artifact-backed PASS on merged `main`
 and closes the Program B contract foundation. Phase 43A received artifact-backed
-PASS. Phase 43B is internally complete; Phase 43C remains blocked pending Phase
-43B outside validation.
+PASS. Phase 43B received artifact-backed PASS. Phase 43C is internally
+complete; Phase 43D remains blocked pending Phase 43C outside validation.
 
 Phase 43A acceptance evidence:
 
@@ -136,6 +136,37 @@ phase_id: Phase43B
 phase_part: outside-validation
 gate_scope: INTERMEDIATE_PACKET
 next_phase_id: Phase43C
+next_phase_part: outside-validation
+next_gate_scope: INTERMEDIATE_PACKET
+```
+
+Phase 43B acceptance evidence:
+
+```text
+workflow run ID: 30718398867
+validated SHA: 5b80aa96e6212c0f5eeae73b1d9f234a05a0913e
+artifact: codie-pr-validation-5b80aa96e6212c0f5eeae73b1d9f234a05a0913e
+artifact ID: 8824064637
+artifact digest: sha256:68e7d1d2dc08b587f939a437cbddc69e4a59e7cf169a9c5ceadc63022c56ce14
+validation scope: pr
+deterministic: CLEAN_PASS
+architecture: CLEAN_PASS
+adversarial: CLEAN_PASS
+aggregate: CLEAN_PASS
+severity totals: all zero
+skipped validators: none
+unresolved findings: none
+errors: none
+final governance verdict: PASS
+```
+
+Explicit Phase 43C validation tuple:
+
+```text
+phase_id: Phase43C
+phase_part: outside-validation
+gate_scope: INTERMEDIATE_PACKET
+next_phase_id: Phase43D
 next_phase_part: outside-validation
 next_gate_scope: INTERMEDIATE_PACKET
 ```
