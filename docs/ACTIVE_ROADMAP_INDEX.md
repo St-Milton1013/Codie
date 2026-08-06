@@ -128,9 +128,10 @@ Phase 43B Desktop Deck and Analysis Workspace Contract: externally accepted
 Phase 43C Decision Evidence Panel Contract: externally accepted
 Phase 43D Jin Conversation and Evidence Inspection Contract: externally accepted
 Phase 43E Staged Experiment and Correction Workflow Contract: externally accepted
-Phase 43F Knowledge Vault Planner and Renderer Contract: internally complete
-Current action: validate the Phase 43F Knowledge Vault Planner and Renderer Contract
-Phase 43G Separate Safe File Writer Contract: blocked
+Phase 43F Knowledge Vault Planner and Renderer Contract: externally accepted
+Phase 43G Separate Safe File Writer Contract: internally complete
+Current action: validate the Phase 43G Separate Safe File Writer Contract
+Phase 43H Accessibility, Privacy, and Adversarial Checkpoint: blocked
 Local alpha tag status: verified on origin as local-alpha-0.1.0
 ```
 
@@ -144,19 +145,19 @@ Status: externally accepted
 ## Next Allowed Work Packet
 
 ```text
-Phase 43F Knowledge Vault Planner and Renderer Contract
+Phase 43G Separate Safe File Writer Contract
 Status: internally complete; outside validation required
 ```
 
 Current-status clarification:
 
 ```text
-Current protected validation gate: Phase43F / outside-validation / INTERMEDIATE_PACKET.
-Phase 43E status: externally accepted.
-Authoritative next allowed work packet: Phase 43F Knowledge Vault Planner and Renderer Contract.
-Phase 43F is the active contract-only packet.
+Current protected validation gate: Phase43G / outside-validation / INTERMEDIATE_PACKET.
+Phase 43F status: externally accepted.
+Authoritative next allowed work packet: Phase 43G Separate Safe File Writer Contract.
+Phase 43G is the active contract-only packet.
 The authorized one-file transition on main set
-`CODIE_ACTIVE_VALIDATION_SCOPE.json` to Phase43F before this PR was validated.
+`CODIE_ACTIVE_VALIDATION_SCOPE.json` to Phase43G before this PR was validated.
 The PR does not alter its own validation authority.
 ```
 
@@ -191,8 +192,28 @@ REVIEW NOTES and defines the experiment and permitted user-context write
 boundary. Phase 42K received artifact-backed PASS and defines the
 Judge-Training and Curriculum boundary. Phase 42L received artifact-backed
 PASS on merged `main` and closes the Program B contract foundation. Phase 43A
-received artifact-backed PASS. Phase 43B through Phase 43E received artifact-backed PASS. Phase 43F is
-internally complete; Phase 43G remains blocked pending Phase 43F outside validation.
+received artifact-backed PASS. Phase 43B through Phase 43F received artifact-backed PASS. Phase 43G is
+internally complete; Phase 43H remains blocked pending Phase 43G outside validation.
+
+Phase 43F acceptance evidence:
+
+```text
+workflow run ID: 31129051716
+validated SHA: 7035c216c4ee893348963dbf76066f579c3c138d
+artifact: codie-manual-validation-7035c216c4ee893348963dbf76066f579c3c138d
+artifact ID: 8975280044
+artifact digest: sha256:049ececd7e12248bfd3db4482b5fcd136a81e9692eafafe176e8dbfb36d34a2b
+validation scope: pr
+deterministic: CLEAN_PASS
+architecture: CLEAN_PASS
+adversarial: CLEAN_PASS
+aggregate: CLEAN_PASS
+severity totals: all zero
+skipped validators: none
+unresolved findings: none
+errors: none
+final governance verdict: PASS
+```
 
 Phase 43E acceptance evidence:
 

@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: validate the Phase 43F Knowledge Vault Planner and Renderer Contract
+Recommended next task: validate the Phase 43G Separate Safe File Writer Contract
 
 ## Constitutional Governance Overlay
 
@@ -106,8 +106,39 @@ NOTES and defines the experiment and permitted user-context write boundary.
 Phase 42K received artifact-backed PASS and defines the Judge-Training and
 Curriculum boundary. Phase 42L received artifact-backed PASS on merged `main`
 and closes the Program B contract foundation. Phase 43A received artifact-backed
-PASS. Phase 43B through Phase 43E received artifact-backed PASS. Phase 43F is
-internally complete; Phase 43G remains blocked pending Phase 43F outside validation.
+PASS. Phase 43B through Phase 43F received artifact-backed PASS. Phase 43G is
+internally complete; Phase 43H remains blocked pending Phase 43G outside validation.
+
+Phase 43F acceptance evidence:
+
+```text
+workflow run ID: 31129051716
+validated SHA: 7035c216c4ee893348963dbf76066f579c3c138d
+artifact: codie-manual-validation-7035c216c4ee893348963dbf76066f579c3c138d
+artifact ID: 8975280044
+artifact digest: sha256:049ececd7e12248bfd3db4482b5fcd136a81e9692eafafe176e8dbfb36d34a2b
+validation scope: pr
+deterministic: CLEAN_PASS
+architecture: CLEAN_PASS
+adversarial: CLEAN_PASS
+aggregate: CLEAN_PASS
+severity totals: all zero
+skipped validators: none
+unresolved findings: none
+errors: none
+final governance verdict: PASS
+```
+
+Explicit Phase 43G validation tuple:
+
+```text
+phase_id: Phase43G
+phase_part: outside-validation
+gate_scope: INTERMEDIATE_PACKET
+next_phase_id: Phase43H
+next_phase_part: outside-validation
+next_gate_scope: INTERMEDIATE_PACKET
+```
 
 Phase 43E acceptance evidence:
 

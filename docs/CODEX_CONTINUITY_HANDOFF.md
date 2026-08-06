@@ -2585,7 +2585,7 @@ adversarial: CLEAN_PASS
 aggregate: CLEAN_PASS
 ```
 
-## Current Phase 43F Handoff
+## Current Phase 43G Handoff
 
 ```text
 Phase 38A Moxfield Frequency Pool Builder Contract: PASS
@@ -2628,9 +2628,30 @@ Phase 43B Desktop Deck and Analysis Workspace Contract: PASS
 Phase 43C Decision Evidence Panel Contract: PASS
 Phase 43D Jin Conversation and Evidence Inspection Contract: PASS
 Phase 43E Staged Experiment and Correction Workflow Contract: PASS
-Phase 43F Knowledge Vault Planner and Renderer Contract: INTERNAL PASS
-Current action: validate the Phase 43F Knowledge Vault Planner and Renderer Contract
-Phase 43G Separate Safe File Writer Contract: BLOCKED until Phase 43F returns PASS or PASS WITH REVIEW NOTES
+Phase 43F Knowledge Vault Planner and Renderer Contract: PASS
+Phase 43G Separate Safe File Writer Contract: INTERNAL PASS
+Current action: validate the Phase 43G Separate Safe File Writer Contract
+Phase 43H Accessibility, Privacy, and Adversarial Checkpoint: BLOCKED until Phase 43G returns PASS or PASS WITH REVIEW NOTES
+```
+
+Phase 43F acceptance evidence:
+
+```text
+workflow run ID: 31129051716
+validated SHA: 7035c216c4ee893348963dbf76066f579c3c138d
+artifact: codie-manual-validation-7035c216c4ee893348963dbf76066f579c3c138d
+artifact ID: 8975280044
+artifact digest: sha256:049ececd7e12248bfd3db4482b5fcd136a81e9692eafafe176e8dbfb36d34a2b
+validation scope: pr
+deterministic: CLEAN_PASS
+architecture: CLEAN_PASS
+adversarial: CLEAN_PASS
+aggregate: CLEAN_PASS
+severity totals: all zero
+skipped validators: none
+unresolved findings: none
+errors: none
+final governance verdict: PASS
 ```
 
 Phase 43E acceptance evidence:
