@@ -1,6 +1,6 @@
 {
   "gate_scope": "INTERMEDIATE_PACKET",
-  "phase_id": "Phase43K",
-  "phase_part": "implementation",
+  "phase_id": "Phase43L",
+  "phase_part": "outside-validation",
   "schema_version": "codie.active_validation_scope.v1"
 }
