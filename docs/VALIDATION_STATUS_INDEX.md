@@ -140,7 +140,8 @@ Phase 43Q Presentation/Export Safe Writer Integration Implementation: PASS
 Phase 43R Presentation/Export Safe Writer Checkpoint: PASS
 Phase 43S Presentation/Export Local CLI Contract: PASS
 Phase 43T Presentation/Export Local CLI Implementation: PASS
-Phase 43U Presentation/Export Local CLI Checkpoint: INTERNAL PASS
+Phase 43U Presentation/Export Local CLI Checkpoint: PASS
+Phase 43V Presentation/Export Local Package Manifest Contract: INTERNAL PASS
 Local alpha tag: verified on origin as local-alpha-0.1.0
 ```
 
@@ -177,8 +178,28 @@ defines the experiment and permitted user-context write boundary. Phase 42K
 received artifact-backed PASS and defines the Judge-Training and Curriculum
 boundary. Phase 42L received artifact-backed PASS on merged `main` and closes
 the Program B contract foundation. Phase 43A received artifact-backed PASS.
-Phase 43B through Phase 43T received artifact-backed PASS. Phase 43U is
-internally complete; Phase 43V remains blocked pending Phase 43U outside validation.
+Phase 43B through Phase 43U received artifact-backed PASS. Phase 43V is
+internally complete; Phase 43W remains blocked pending Phase 43V outside validation.
+
+Phase 43U acceptance evidence:
+
+```text
+workflow run ID: 31140422373
+validated SHA: aa7f936563faa0b2e47a5260b1b36393d105d25f
+artifact: codie-pr-validation-aa7f936563faa0b2e47a5260b1b36393d105d25f
+artifact ID: 8979596735
+artifact digest: sha256:1c86f34328e9960a8d4acc952888afee63bf1e3d7578f4e8d07b211a78f73a48
+validation scope: pr
+deterministic: CLEAN_PASS
+architecture: CLEAN_PASS
+adversarial: CLEAN_PASS
+aggregate: CLEAN_PASS
+severity totals: all zero
+skipped validators: none
+unresolved findings: none
+errors: none
+final governance verdict: PASS
+```
 
 Phase 43T acceptance evidence:
 
