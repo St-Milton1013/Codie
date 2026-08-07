@@ -53,6 +53,13 @@ from .packages import (
     presentation_package_manifest_to_dict,
     validate_presentation_package_manifest,
 )
+from .package_writers import (
+    PresentationPackageWriteError,
+    PresentationPackageWriteOptions,
+    PresentationPackageWriteReceipt,
+    presentation_package_write_receipt_to_dict,
+    write_presentation_package_manifest,
+)
 
 __all__ = [
     "PresentationAccessibilityState",
@@ -88,6 +95,9 @@ __all__ = [
     "PresentationPackageManifest",
     "PresentationPackageManifestError",
     "PresentationPackageManifestOptions",
+    "PresentationPackageWriteError",
+    "PresentationPackageWriteOptions",
+    "PresentationPackageWriteReceipt",
     "build_presentation_package_artifact_ref",
     "build_presentation_package_manifest",
     "render_presentation_packet",
@@ -97,7 +107,9 @@ __all__ = [
     "rendered_presentation_write_receipt_to_dict",
     "presentation_package_artifact_ref_to_dict",
     "presentation_package_manifest_to_dict",
+    "presentation_package_write_receipt_to_dict",
     "validate_presentation_packet",
     "validate_presentation_package_manifest",
+    "write_presentation_package_manifest",
     "write_rendered_presentation_artifact",
 ]
