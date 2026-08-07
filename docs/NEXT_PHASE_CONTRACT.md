@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: validate the Phase 43V Presentation/Export Local Package Manifest Contract
+Recommended next task: validate the Phase 43W Presentation/Export Local Package Manifest Implementation
 
 ## Constitutional Governance Overlay
 
@@ -106,8 +106,28 @@ NOTES and defines the experiment and permitted user-context write boundary.
 Phase 42K received artifact-backed PASS and defines the Judge-Training and
 Curriculum boundary. Phase 42L received artifact-backed PASS on merged `main`
 and closes the Program B contract foundation. Phase 43A received artifact-backed
-PASS. Phase 43B through Phase 43U received artifact-backed PASS. Phase 43V is
-internally complete; Phase 43W remains blocked pending Phase 43V outside validation.
+PASS. Phase 43B through Phase 43V received artifact-backed PASS. Phase 43W is
+internally complete; Phase 43X remains blocked pending Phase 43W outside validation.
+
+Phase 43V acceptance evidence:
+
+```text
+workflow run ID: 31142464387
+validated SHA: 091e81d52694651e21a9fb1b670c5d19b54db4dd
+artifact: codie-pr-validation-091e81d52694651e21a9fb1b670c5d19b54db4dd
+artifact ID: 8980403237
+artifact digest: sha256:62c15665937046adca19eb23b5453ec3bca91ccafc02e6b6e9c8b59dc0926a3a
+validation scope: pr
+deterministic: CLEAN_PASS
+architecture: CLEAN_PASS
+adversarial: CLEAN_PASS
+aggregate: CLEAN_PASS
+severity totals: all zero
+skipped validators: none
+unresolved findings: none
+errors: none
+final governance verdict: PASS
+```
 
 Phase 43U acceptance evidence:
 

@@ -42,6 +42,17 @@ from .writers import (
     rendered_presentation_write_receipt_to_dict,
     write_rendered_presentation_artifact,
 )
+from .packages import (
+    PresentationPackageArtifactRef,
+    PresentationPackageManifest,
+    PresentationPackageManifestError,
+    PresentationPackageManifestOptions,
+    build_presentation_package_artifact_ref,
+    build_presentation_package_manifest,
+    presentation_package_artifact_ref_to_dict,
+    presentation_package_manifest_to_dict,
+    validate_presentation_package_manifest,
+)
 
 __all__ = [
     "PresentationAccessibilityState",
@@ -73,11 +84,20 @@ __all__ = [
     "PresentationArtifactWriteError",
     "PresentationArtifactWriteOptions",
     "PresentationArtifactWriteReceipt",
+    "PresentationPackageArtifactRef",
+    "PresentationPackageManifest",
+    "PresentationPackageManifestError",
+    "PresentationPackageManifestOptions",
+    "build_presentation_package_artifact_ref",
+    "build_presentation_package_manifest",
     "render_presentation_packet",
     "render_presentation_packet_json",
     "render_presentation_packet_markdown",
     "rendered_presentation_artifact_to_dict",
     "rendered_presentation_write_receipt_to_dict",
+    "presentation_package_artifact_ref_to_dict",
+    "presentation_package_manifest_to_dict",
     "validate_presentation_packet",
+    "validate_presentation_package_manifest",
     "write_rendered_presentation_artifact",
 ]

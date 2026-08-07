@@ -2644,9 +2644,30 @@ Phase 43R Presentation/Export Safe Writer Checkpoint: PASS
 Phase 43S Presentation/Export Local CLI Contract: PASS
 Phase 43T Presentation/Export Local CLI Implementation: PASS
 Phase 43U Presentation/Export Local CLI Checkpoint: PASS
-Current action: validate the Phase 43V Presentation/Export Local Package Manifest Contract
-Phase 43V Presentation/Export Local Package Manifest Contract: INTERNAL PASS
-Phase 43W local package manifest implementation: BLOCKED until Phase 43V returns PASS or PASS WITH REVIEW NOTES
+Phase 43V Presentation/Export Local Package Manifest Contract: PASS
+Current action: validate the Phase 43W Presentation/Export Local Package Manifest Implementation
+Phase 43W Presentation/Export Local Package Manifest Implementation: INTERNAL PASS
+Phase 43X Presentation/Export Local Package Manifest Checkpoint: BLOCKED until Phase 43W returns PASS or PASS WITH REVIEW NOTES
+```
+
+Phase 43V acceptance evidence:
+
+```text
+workflow run ID: 31142464387
+validated SHA: 091e81d52694651e21a9fb1b670c5d19b54db4dd
+artifact: codie-pr-validation-091e81d52694651e21a9fb1b670c5d19b54db4dd
+artifact ID: 8980403237
+artifact digest: sha256:62c15665937046adca19eb23b5453ec3bca91ccafc02e6b6e9c8b59dc0926a3a
+validation scope: pr
+deterministic: CLEAN_PASS
+architecture: CLEAN_PASS
+adversarial: CLEAN_PASS
+aggregate: CLEAN_PASS
+severity totals: all zero
+skipped validators: none
+unresolved findings: none
+errors: none
+final governance verdict: PASS
 ```
 
 Phase 43U acceptance evidence:
