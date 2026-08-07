@@ -35,6 +35,13 @@ from .renderers import (
     render_presentation_packet_markdown,
     rendered_presentation_artifact_to_dict,
 )
+from .writers import (
+    PresentationArtifactWriteError,
+    PresentationArtifactWriteOptions,
+    PresentationArtifactWriteReceipt,
+    rendered_presentation_write_receipt_to_dict,
+    write_rendered_presentation_artifact,
+)
 
 __all__ = [
     "PresentationAccessibilityState",
@@ -63,9 +70,14 @@ __all__ = [
     "PresentationRenderError",
     "PresentationRenderOptions",
     "RenderedPresentationArtifact",
+    "PresentationArtifactWriteError",
+    "PresentationArtifactWriteOptions",
+    "PresentationArtifactWriteReceipt",
     "render_presentation_packet",
     "render_presentation_packet_json",
     "render_presentation_packet_markdown",
     "rendered_presentation_artifact_to_dict",
+    "rendered_presentation_write_receipt_to_dict",
     "validate_presentation_packet",
+    "write_rendered_presentation_artifact",
 ]
