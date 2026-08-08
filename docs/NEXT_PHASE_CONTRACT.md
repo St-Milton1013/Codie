@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: reestablish the next roadmap packet after Phase 43Z closure
+Recommended next task: validate the Phase44A Goal Engine v1.0 Ratification packet
 
 ## Constitutional Governance Overlay
 
@@ -108,8 +108,10 @@ Curriculum boundary. Phase 42L received artifact-backed PASS on merged `main`
 and closes the Program B contract foundation. Phase 43A received artifact-backed
 PASS. Phase 43B through Phase 43Y received artifact-backed PASS. Phase 43Z
 received artifact-backed PASS and closes the local package-manifest writer
-track. The next roadmap packet remains unestablished pending a separate
-roadmap decision.
+track. Phase44A Goal Engine v1.0 Ratification is internally complete and
+awaiting outside validation. Until Goal Engine reaches validated Stage 1
+authority with explicit human promotion, existing human-governed planning
+remains active.
 
 Phase 43Z acceptance evidence:
 
@@ -131,6 +133,25 @@ unresolved findings: none
 errors: none
 final governance verdict: PASS
 ```
+
+Phase44A Goal Engine v1.0 Ratification tuple:
+
+```text
+phase_id: Phase44A
+phase_part: ratification
+gate_scope: INTERMEDIATE_PACKET
+next_phase_id: Phase44B
+next_phase_part: implementation-contract
+next_gate_scope: INTERMEDIATE_PACKET
+```
+
+After Phase44A Goal Engine v1.0 Ratification is externally accepted and merged,
+the next task is a Phase44B Goal Engine Foundation implementation contract.
+That contract should concentrate on canonical vocabulary, schema/version
+conventions, policy registry, Goal Contract model, Idea/Finding model,
+authority state representation, paper-trail lineage, kill-switch/safe-mode
+representation, and governance regression foundation. It must not implement
+runtime autonomy.
 
 Phase 43Y acceptance evidence:
 
