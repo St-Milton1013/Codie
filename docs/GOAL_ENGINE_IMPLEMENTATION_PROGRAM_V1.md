@@ -7,9 +7,9 @@ Status: implementation roadmap
 Authority: subordinate to `docs/CODIE_V2_CONSTITUTION.md` and the ratified
 `docs/GOAL_ENGINE_V1_SPEC.md`
 
-Current execution boundary: Phase44A ratification is accepted. Phase44B is the
-active contract-only packet. No runtime Goal Engine implementation begins
-before its governing contract is accepted.
+Current execution boundary: Phase44D Foundation v1 checkpoint is accepted.
+Phase44E is the active State Engine contract-only packet. Phase44F runtime
+implementation remains blocked until its governing contract is accepted.
 
 ## Operating Rule
 
@@ -548,9 +548,11 @@ The active implementation sequence is:
 
 ```text
 Phase44A ratification: accepted
--> Phase44B Foundation contract: active
--> Phase44C Foundation implementation: blocked
--> Phase44D Foundation checkpoint: blocked
+-> Phase44B Foundation contract: accepted
+-> Phase44C Foundation implementation: accepted
+-> Phase44D Foundation checkpoint: accepted
+-> Phase44E State Engine contract: active
+-> Phase44F State Engine implementation: blocked
 -> continue sequentially
 ```
 
