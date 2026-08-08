@@ -147,8 +147,10 @@ Phase 43X Presentation/Export Local Package Manifest Checkpoint: PASS
 Phase 43Y Presentation/Export Local Package Writer Contract: PASS
 Phase 43Z Presentation/Export Local Package Writer: PASS
 Phase44A Goal Engine v1.0 Ratification: PASS
-Phase44B Goal Engine Foundation Implementation Contract: INTERNAL PASS
-Phase44C Goal Engine Foundation Implementation: BLOCKED
+Phase44B Goal Engine Foundation Implementation Contract: PASS
+Phase44C Goal Engine Foundation Implementation: PASS
+Phase44D Goal Engine Foundation Checkpoint / Freeze: INTERNAL PASS
+Phase44E State Engine Contract: BLOCKED
 Local alpha tag: verified on origin as local-alpha-0.1.0
 ```
 
@@ -188,12 +190,16 @@ the Program B contract foundation. Phase 43A received artifact-backed PASS.
 Phase 43B through Phase 43Y received artifact-backed PASS. Phase 43Z received
 artifact-backed PASS and closes the local package-manifest writer track.
 Phase44A received artifact-backed PASS and ratified Goal Engine v1.0 as
-subordinate repository governance. Phase44B is internally complete and awaits
-outside validation. The canonical Phase44-49 build order is recorded in
-`docs/GOAL_ENGINE_IMPLEMENTATION_PROGRAM_V1.md`; later runtime and authority
-surfaces remain sequentially blocked. Until Goal Engine reaches validated
-Stage 1 authority with explicit human promotion, existing human-governed
-planning remains active.
+subordinate repository governance. Phase44B received artifact-backed PASS and
+defined the Foundation implementation contract. Phase44C received artifact-
+backed PASS and implemented only the deterministic, authority-neutral
+Foundation v1 surface. Phase44D is internally complete and awaits outside
+validation as a documentation-only checkpoint and freeze. The canonical
+Phase44-49 build order is recorded in
+`docs/GOAL_ENGINE_IMPLEMENTATION_PROGRAM_V1.md`; Phase44E and all later runtime
+and authority surfaces remain sequentially blocked. Until Goal Engine reaches
+validated Stage 1 authority with explicit human promotion, existing human-
+governed planning remains active.
 
 Phase44A acceptance evidence:
 
@@ -215,6 +221,43 @@ skipped validators: none
 unresolved findings: none
 errors: none
 final governance verdict: PASS
+```
+
+Phase44B acceptance evidence:
+
+```text
+pull request: 81
+workflow run ID: 31268850113
+workflow attempt: 2
+validated SHA: 03a0bc35a47b8aeac00e41ca532be17e029ad1ee
+merge commit: 8610e4e39a1aed5ac10d4a1c27b61a09f1acdc41
+artifact ID: 9025097396
+artifact digest: sha256:961b8d04f0ec81ab1a0eb08c131811c8bb0fe8bd2570f56e05b018cc1f1e55a8
+deterministic: CLEAN_PASS
+architecture: CLEAN_PASS
+adversarial: CLEAN_PASS
+aggregate: CLEAN_PASS
+findings: 0
+errors: 0
+skipped validators: 0
+```
+
+Phase44C acceptance evidence:
+
+```text
+pull request: 82
+workflow run ID: 31270633231
+validated SHA: f1e63cc4ec1a7fad4981020b69b0a5ed9378230a
+merge commit: 9fb9593a6a84bfc119246d35fe808052afd74bbe
+artifact ID: 9025493719
+artifact digest: sha256:c3234a7035f2954b6ada43c480505a319a385e8d376ac7c5f35dc7c2a71ffb75
+deterministic: CLEAN_PASS
+architecture: CLEAN_PASS
+adversarial: CLEAN_PASS
+aggregate: CLEAN_PASS
+findings: 0
+errors: 0
+skipped validators: 0
 ```
 
 Phase 43Z acceptance evidence:

@@ -150,36 +150,39 @@ Phase 43X Presentation/Export Local Package Manifest Checkpoint: externally acce
 Phase 43Y Presentation/Export Local Package Writer Contract: externally accepted
 Phase 43Z Presentation/Export Local Package Writer: externally accepted
 Phase44A Goal Engine v1.0 Ratification: externally accepted
-Current action: validate the Phase44B Goal Engine Foundation implementation contract
-Phase44B Goal Engine Foundation Implementation Contract: internally complete
-Phase44C Goal Engine Foundation Implementation: blocked
+Phase44B Goal Engine Foundation Implementation Contract: externally accepted
+Phase44C Goal Engine Foundation Implementation: externally accepted
+Current action: validate the Phase44D Goal Engine Foundation checkpoint / freeze
+Phase44D Goal Engine Foundation Checkpoint / Freeze: internally complete
+Phase44E State Engine Contract: blocked
 Local alpha tag status: verified on origin as local-alpha-0.1.0
 ```
 
 ## Previous Work Packet
 
 ```text
-Phase44A Goal Engine v1.0 Ratification
+Phase44C Goal Engine Foundation Implementation
 Status: externally accepted
 ```
 
 ## Next Allowed Work Packet
 
 ```text
-Phase44B Goal Engine Foundation Implementation Contract
+Phase44D Goal Engine Foundation Checkpoint / Freeze
 Status: internally complete; outside validation required
 ```
 
 Current-status clarification:
 
 ```text
-Current protected validation gate: Phase44B / implementation-contract / INTERMEDIATE_PACKET.
-Phase44A status: externally accepted.
-Authoritative next allowed work packet: Phase44B Goal Engine Foundation Implementation Contract.
-This contract packet is documentation-only. It does not authorize runtime Goal
-Engine code, autonomous work selection, schema/runtime expansion, persistence,
-provider behavior, paid dependencies, human merge bypass, Stage 1 promotion, or
-any Phase43Z scope change. Phase44C remains blocked.
+Current protected validation gate: Phase44D / outside-validation / INTERMEDIATE_PACKET.
+Phase44B and Phase44C status: externally accepted.
+Authoritative next allowed work packet: Phase44D Goal Engine Foundation Checkpoint / Freeze.
+This checkpoint packet is documentation-only. It freezes the accepted
+authority-neutral Foundation v1 surface and authorizes no runtime change,
+State Engine behavior, autonomous work selection, persistence, provider
+behavior, paid dependency, human merge bypass, or authority promotion.
+Phase44E remains blocked.
 ```
 
 Phase 38D received artifact-backed phase-ledger validation on merged `main`.
@@ -216,11 +219,13 @@ PASS on merged `main` and closes the Program B contract foundation. Phase 43A
 received artifact-backed PASS. Phase 43B through Phase 43Y received
 artifact-backed PASS. Phase 43Z received artifact-backed PASS and closes the
 local package-manifest writer track. Phase44A received artifact-backed PASS and
-ratified Goal Engine v1.0 as subordinate repository governance. Phase44B is the
-active contract-only packet for deterministic in-memory foundation models.
-The canonical Phase44-49 sequence is recorded in
-`docs/GOAL_ENGINE_IMPLEMENTATION_PROGRAM_V1.md`; Phase44C implementation and
-Phase44D checkpoint are next, while Build Graph and CCPM-inspired execution
+ratified Goal Engine v1.0 as subordinate repository governance. Phase44B
+received artifact-backed PASS and defined the deterministic in-memory
+foundation contract. Phase44C received artifact-backed PASS and implemented
+the authority-neutral Foundation v1 surface. Phase44D is the active
+checkpoint-and-freeze packet. The canonical Phase44-49 sequence is recorded in
+`docs/GOAL_ENGINE_IMPLEMENTATION_PROGRAM_V1.md`; Phase44E State Engine contract
+work remains next and blocked, while Build Graph and CCPM-inspired execution
 remain reserved for conditional Phase48 work.
 Until Goal Engine reaches validated Stage 1 authority with explicit human
 promotion, existing human-governed planning remains active.
@@ -245,6 +250,43 @@ skipped validators: none
 unresolved findings: none
 errors: none
 final governance verdict: PASS
+```
+
+Phase44B acceptance evidence:
+
+```text
+pull request: 81
+workflow run ID: 31268850113
+workflow attempt: 2
+validated SHA: 03a0bc35a47b8aeac00e41ca532be17e029ad1ee
+merge commit: 8610e4e39a1aed5ac10d4a1c27b61a09f1acdc41
+artifact ID: 9025097396
+artifact digest: sha256:961b8d04f0ec81ab1a0eb08c131811c8bb0fe8bd2570f56e05b018cc1f1e55a8
+deterministic: CLEAN_PASS
+architecture: CLEAN_PASS
+adversarial: CLEAN_PASS
+aggregate: CLEAN_PASS
+findings: 0
+errors: 0
+skipped validators: 0
+```
+
+Phase44C acceptance evidence:
+
+```text
+pull request: 82
+workflow run ID: 31270633231
+validated SHA: f1e63cc4ec1a7fad4981020b69b0a5ed9378230a
+merge commit: 9fb9593a6a84bfc119246d35fe808052afd74bbe
+artifact ID: 9025493719
+artifact digest: sha256:c3234a7035f2954b6ada43c480505a319a385e8d376ac7c5f35dc7c2a71ffb75
+deterministic: CLEAN_PASS
+architecture: CLEAN_PASS
+adversarial: CLEAN_PASS
+aggregate: CLEAN_PASS
+findings: 0
+errors: 0
+skipped validators: 0
 ```
 
 Phase 43Z acceptance evidence:
