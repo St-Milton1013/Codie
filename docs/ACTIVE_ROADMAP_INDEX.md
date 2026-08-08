@@ -149,7 +149,8 @@ Phase 43W Presentation/Export Local Package Manifest Implementation: externally 
 Phase 43X Presentation/Export Local Package Manifest Checkpoint: externally accepted
 Phase 43Y Presentation/Export Local Package Writer Contract: externally accepted
 Phase 43Z Presentation/Export Local Package Writer: externally accepted
-Current action: close Phase 43Z and reestablish the next roadmap packet separately
+Current action: ratify Goal Engine v1.0 as the next governing program
+Phase44A Goal Engine v1.0 Ratification: internally complete
 Local alpha tag status: verified on origin as local-alpha-0.1.0
 ```
 
@@ -163,20 +164,19 @@ Status: externally accepted
 ## Next Allowed Work Packet
 
 ```text
-Next roadmap packet
-Status: not yet established after Phase 43Z closure
+Phase44A Goal Engine v1.0 Ratification
+Status: internally complete; outside validation required
 ```
 
 Current-status clarification:
 
 ```text
-Current protected validation gate: Phase43Z / implementation / INTERMEDIATE_PACKET.
+Current protected validation gate: Phase44A / ratification / INTERMEDIATE_PACKET.
 Phase 43Z status: externally accepted.
-Authoritative next allowed work packet: not yet established.
-This closure packet records Phase 43Z acceptance only. It does not authorize
-Phase 44, Phase 43AA, a package-directory builder, zip/archive behavior, local
-preview, QR, sharing, provider write-back, Stream Deck adapter behavior, or any
-new runtime surface.
+Authoritative next allowed work packet: Phase44A Goal Engine v1.0 Ratification.
+This ratification packet is governance-only. It does not authorize runtime Goal
+Engine code, autonomous work selection, schema/runtime expansion, provider
+behavior, paid dependencies, human merge bypass, or any Phase43Z scope change.
 ```
 
 Phase 38D received artifact-backed phase-ledger validation on merged `main`.
@@ -212,8 +212,10 @@ Judge-Training and Curriculum boundary. Phase 42L received artifact-backed
 PASS on merged `main` and closes the Program B contract foundation. Phase 43A
 received artifact-backed PASS. Phase 43B through Phase 43Y received
 artifact-backed PASS. Phase 43Z received artifact-backed PASS and closes the
-local package-manifest writer track. The next roadmap packet remains
-unestablished pending a separate roadmap decision.
+local package-manifest writer track. Goal Engine v1.0 is the next proposed
+governing program and remains pending outside validation and human merge.
+Until Goal Engine reaches validated Stage 1 authority with explicit human
+promotion, existing human-governed planning remains active.
 
 Phase 43Z acceptance evidence:
 

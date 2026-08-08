@@ -146,7 +146,7 @@ Phase 43W Presentation/Export Local Package Manifest Implementation: PASS
 Phase 43X Presentation/Export Local Package Manifest Checkpoint: PASS
 Phase 43Y Presentation/Export Local Package Writer Contract: PASS
 Phase 43Z Presentation/Export Local Package Writer: PASS
-Next roadmap packet after Phase 43Z: NOT ESTABLISHED
+Phase44A Goal Engine v1.0 Ratification: INTERNAL PASS
 Local alpha tag: verified on origin as local-alpha-0.1.0
 ```
 
@@ -184,8 +184,10 @@ received artifact-backed PASS and defines the Judge-Training and Curriculum
 boundary. Phase 42L received artifact-backed PASS on merged `main` and closes
 the Program B contract foundation. Phase 43A received artifact-backed PASS.
 Phase 43B through Phase 43Y received artifact-backed PASS. Phase 43Z received
-artifact-backed PASS and closes the local package-manifest writer track. The
-next roadmap packet remains unestablished pending a separate roadmap decision.
+artifact-backed PASS and closes the local package-manifest writer track. Goal
+Engine v1.0 ratification is internally complete and awaiting outside
+validation. Until Goal Engine reaches validated Stage 1 authority with explicit
+human promotion, existing human-governed planning remains active.
 
 Phase 43Z acceptance evidence:
 

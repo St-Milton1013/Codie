@@ -2649,8 +2649,26 @@ Phase 43W Presentation/Export Local Package Manifest Implementation: PASS
 Phase 43X Presentation/Export Local Package Manifest Checkpoint: PASS
 Phase 43Y Presentation/Export Local Package Writer Contract: PASS
 Phase 43Z local package writer implementation: PASS
-Current action: close Phase 43Z and reestablish the next roadmap packet separately
-Next roadmap packet after Phase 43Z: NOT ESTABLISHED
+Current action: validate the Phase44A Goal Engine v1.0 Ratification packet
+Phase44A Goal Engine v1.0 Ratification: INTERNAL PASS
+Next packet after ratification: Phase44B Goal Engine Foundation implementation
+contract
+```
+
+Phase44A Goal Engine v1.0 Ratification status:
+
+```text
+phase_id: Phase44A
+phase_part: ratification
+gate_scope: INTERMEDIATE_PACKET
+status: internally complete; outside validation required
+authority: subordinate to docs/CODIE_V2_CONSTITUTION.md
+runtime implementation: not authorized
+autonomous execution: not authorized
+human merge/release authority: preserved
+Phase43Z scope: closed and unmodified
+next_phase_id: Phase44B
+next_phase_part: implementation-contract
 ```
 
 Phase 43Z acceptance evidence:
