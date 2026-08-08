@@ -148,8 +148,8 @@ Phase 43V Presentation/Export Local Package Manifest Contract: externally accept
 Phase 43W Presentation/Export Local Package Manifest Implementation: externally accepted
 Phase 43X Presentation/Export Local Package Manifest Checkpoint: externally accepted
 Phase 43Y Presentation/Export Local Package Writer Contract: externally accepted
-Current action: implement the Phase 43Z Presentation/Export Local Package Writer
-Phase 43Z Presentation/Export Local Package Writer: internally complete
+Phase 43Z Presentation/Export Local Package Writer: externally accepted
+Current action: close Phase 43Z and reestablish the next roadmap packet separately
 Local alpha tag status: verified on origin as local-alpha-0.1.0
 ```
 
@@ -163,20 +163,20 @@ Status: externally accepted
 ## Next Allowed Work Packet
 
 ```text
-Phase 43Z Presentation/Export Local Package Writer
-Status: internally complete; outside validation required
+Next roadmap packet
+Status: not yet established after Phase 43Z closure
 ```
 
 Current-status clarification:
 
 ```text
 Current protected validation gate: Phase43Z / implementation / INTERMEDIATE_PACKET.
-Phase 43Y status: externally accepted.
-Authoritative next allowed work packet: Phase 43Z Presentation/Export Local Package Writer.
-Phase 43Z is the active implementation packet.
-The authorized one-file transition on main set
-`CODIE_ACTIVE_VALIDATION_SCOPE.json` to Phase43Z before this PR is validated.
-The PR does not alter its own validation authority.
+Phase 43Z status: externally accepted.
+Authoritative next allowed work packet: not yet established.
+This closure packet records Phase 43Z acceptance only. It does not authorize
+Phase 44, Phase 43AA, a package-directory builder, zip/archive behavior, local
+preview, QR, sharing, provider write-back, Stream Deck adapter behavior, or any
+new runtime surface.
 ```
 
 Phase 38D received artifact-backed phase-ledger validation on merged `main`.
@@ -211,8 +211,30 @@ boundary. Phase 42K received artifact-backed PASS and defines the
 Judge-Training and Curriculum boundary. Phase 42L received artifact-backed
 PASS on merged `main` and closes the Program B contract foundation. Phase 43A
 received artifact-backed PASS. Phase 43B through Phase 43Y received
-artifact-backed PASS. Phase 43Z is internally complete and awaiting outside
-validation.
+artifact-backed PASS. Phase 43Z received artifact-backed PASS and closes the
+local package-manifest writer track. The next roadmap packet remains
+unestablished pending a separate roadmap decision.
+
+Phase 43Z acceptance evidence:
+
+```text
+workflow run ID: 31144455689
+validated SHA: 90516c5f44cf58fff1e66cd385ab254d47551962
+merge commit: 1c57fa8f403df430c51c8c7749a076c521b96a4a
+artifact: codie-pr-validation-90516c5f44cf58fff1e66cd385ab254d47551962
+artifact ID: 8980965118
+artifact digest: sha256:75e56a97e2764c7d675fdb1c78db78558879a15e1ba92ed2e74b6ce08d5a101e
+validation scope: pr
+deterministic: CLEAN_PASS
+architecture: CLEAN_PASS
+adversarial: CLEAN_PASS
+aggregate: CLEAN_PASS
+severity totals: all zero
+skipped validators: none
+unresolved findings: none
+errors: none
+final governance verdict: PASS
+```
 
 Phase 43Y acceptance evidence:
 

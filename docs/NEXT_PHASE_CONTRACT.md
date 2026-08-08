@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: validate the Phase 43Z Presentation/Export Local Package Writer implementation
+Recommended next task: reestablish the next roadmap packet after Phase 43Z closure
 
 ## Constitutional Governance Overlay
 
@@ -106,8 +106,31 @@ NOTES and defines the experiment and permitted user-context write boundary.
 Phase 42K received artifact-backed PASS and defines the Judge-Training and
 Curriculum boundary. Phase 42L received artifact-backed PASS on merged `main`
 and closes the Program B contract foundation. Phase 43A received artifact-backed
-PASS. Phase 43B through Phase 43Y received artifact-backed PASS. Phase 43Z is
-internally complete and awaiting outside validation.
+PASS. Phase 43B through Phase 43Y received artifact-backed PASS. Phase 43Z
+received artifact-backed PASS and closes the local package-manifest writer
+track. The next roadmap packet remains unestablished pending a separate
+roadmap decision.
+
+Phase 43Z acceptance evidence:
+
+```text
+workflow run ID: 31144455689
+validated SHA: 90516c5f44cf58fff1e66cd385ab254d47551962
+merge commit: 1c57fa8f403df430c51c8c7749a076c521b96a4a
+artifact: codie-pr-validation-90516c5f44cf58fff1e66cd385ab254d47551962
+artifact ID: 8980965118
+artifact digest: sha256:75e56a97e2764c7d675fdb1c78db78558879a15e1ba92ed2e74b6ce08d5a101e
+validation scope: pr
+deterministic: CLEAN_PASS
+architecture: CLEAN_PASS
+adversarial: CLEAN_PASS
+aggregate: CLEAN_PASS
+severity totals: all zero
+skipped validators: none
+unresolved findings: none
+errors: none
+final governance verdict: PASS
+```
 
 Phase 43Y acceptance evidence:
 
