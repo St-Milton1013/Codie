@@ -2650,34 +2650,36 @@ Phase 43X Presentation/Export Local Package Manifest Checkpoint: PASS
 Phase 43Y Presentation/Export Local Package Writer Contract: PASS
 Phase 43Z local package writer implementation: PASS
 Phase44A Goal Engine v1.0 Ratification: PASS
-Current action: validate the Phase44B Goal Engine Foundation implementation contract
-Phase44B Goal Engine Foundation Implementation Contract: INTERNAL PASS
-Phase44C Goal Engine Foundation Implementation: BLOCKED
+Phase44B Goal Engine Foundation Implementation Contract: PASS
+Phase44C Goal Engine Foundation Implementation: PASS
+Current action: validate the Phase44D Goal Engine Foundation checkpoint / freeze
+Phase44D Goal Engine Foundation Checkpoint / Freeze: INTERNAL PASS
+Phase44E State Engine Contract: BLOCKED
 ```
 
-Phase44B Goal Engine Foundation Implementation Contract status:
+Phase44D Goal Engine Foundation Checkpoint / Freeze status:
 
 ```text
-phase_id: Phase44B
-phase_part: implementation-contract
+phase_id: Phase44D
+phase_part: outside-validation
 gate_scope: INTERMEDIATE_PACKET
 status: internally complete; outside validation required
 authority: subordinate to docs/CODIE_V2_CONSTITUTION.md
-runtime implementation: not authorized
+production/runtime changes: none
 autonomous execution: not authorized
 human merge/release authority: preserved
 Phase43Z scope: closed and unmodified
-next_phase_id: Phase44C
-next_phase_part: implementation
+next_phase_id: Phase44E
+next_phase_part: implementation-contract
 ```
 
 Canonical continuation:
 
 ```text
 roadmap: docs/GOAL_ENGINE_IMPLEMENTATION_PROGRAM_V1.md
-Phase44C: foundation implementation only; no decision-making
-Phase44D: foundation checkpoint
-Phase44E and later: sequentially blocked
+Phase44D: Foundation v1 checkpoint and freeze only
+Phase44E: State Engine Contract; next and blocked
+Phase44F and later: sequentially blocked
 Build Graph and CCPM-inspired execution: reserved for conditional Phase48
 current runtime authority: unchanged
 ```
@@ -2702,6 +2704,43 @@ skipped validators: none
 unresolved findings: none
 errors: none
 final governance verdict: PASS
+```
+
+Phase44B acceptance evidence:
+
+```text
+pull request: 81
+workflow run ID: 31268850113
+workflow attempt: 2
+validated SHA: 03a0bc35a47b8aeac00e41ca532be17e029ad1ee
+merge commit: 8610e4e39a1aed5ac10d4a1c27b61a09f1acdc41
+artifact ID: 9025097396
+artifact digest: sha256:961b8d04f0ec81ab1a0eb08c131811c8bb0fe8bd2570f56e05b018cc1f1e55a8
+deterministic: CLEAN_PASS
+architecture: CLEAN_PASS
+adversarial: CLEAN_PASS
+aggregate: CLEAN_PASS
+findings: 0
+errors: 0
+skipped validators: 0
+```
+
+Phase44C acceptance evidence:
+
+```text
+pull request: 82
+workflow run ID: 31270633231
+validated SHA: f1e63cc4ec1a7fad4981020b69b0a5ed9378230a
+merge commit: 9fb9593a6a84bfc119246d35fe808052afd74bbe
+artifact ID: 9025493719
+artifact digest: sha256:c3234a7035f2954b6ada43c480505a319a385e8d376ac7c5f35dc7c2a71ffb75
+deterministic: CLEAN_PASS
+architecture: CLEAN_PASS
+adversarial: CLEAN_PASS
+aggregate: CLEAN_PASS
+findings: 0
+errors: 0
+skipped validators: 0
 ```
 
 Phase 43Z acceptance evidence:
