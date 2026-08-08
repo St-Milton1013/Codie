@@ -146,7 +146,9 @@ Phase 43W Presentation/Export Local Package Manifest Implementation: PASS
 Phase 43X Presentation/Export Local Package Manifest Checkpoint: PASS
 Phase 43Y Presentation/Export Local Package Writer Contract: PASS
 Phase 43Z Presentation/Export Local Package Writer: PASS
-Phase44A Goal Engine v1.0 Ratification: INTERNAL PASS
+Phase44A Goal Engine v1.0 Ratification: PASS
+Phase44B Goal Engine Foundation Implementation Contract: INTERNAL PASS
+Phase44C Goal Engine Foundation Implementation: BLOCKED
 Local alpha tag: verified on origin as local-alpha-0.1.0
 ```
 
@@ -184,10 +186,36 @@ received artifact-backed PASS and defines the Judge-Training and Curriculum
 boundary. Phase 42L received artifact-backed PASS on merged `main` and closes
 the Program B contract foundation. Phase 43A received artifact-backed PASS.
 Phase 43B through Phase 43Y received artifact-backed PASS. Phase 43Z received
-artifact-backed PASS and closes the local package-manifest writer track. Goal
-Engine v1.0 ratification is internally complete and awaiting outside
-validation. Until Goal Engine reaches validated Stage 1 authority with explicit
-human promotion, existing human-governed planning remains active.
+artifact-backed PASS and closes the local package-manifest writer track.
+Phase44A received artifact-backed PASS and ratified Goal Engine v1.0 as
+subordinate repository governance. Phase44B is internally complete and awaits
+outside validation. The canonical Phase44-49 build order is recorded in
+`docs/GOAL_ENGINE_IMPLEMENTATION_PROGRAM_V1.md`; later runtime and authority
+surfaces remain sequentially blocked. Until Goal Engine reaches validated
+Stage 1 authority with explicit human promotion, existing human-governed
+planning remains active.
+
+Phase44A acceptance evidence:
+
+```text
+pull request: 80
+workflow run ID: 31241668025
+validated SHA: 1c8ddc03c5d5c53dcb06298cfe6892f46594daae
+merge commit: a9999a58bfc40696a94f8366f4686325004c3fcb
+artifact: codie-pr-validation-1c8ddc03c5d5c53dcb06298cfe6892f46594daae
+artifact ID: 9017218547
+artifact digest: sha256:c79aa87d86692df1a9e7563d7403d391c31c6bc88c102f99f96db80eb01aecb5
+validation scope: pr
+deterministic: CLEAN_PASS
+architecture: CLEAN_PASS
+adversarial: CLEAN_PASS
+aggregate: CLEAN_PASS
+severity totals: all zero
+skipped validators: none
+unresolved findings: none
+errors: none
+final governance verdict: PASS
+```
 
 Phase 43Z acceptance evidence:
 
