@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: validate the Phase44A Goal Engine v1.0 Ratification packet
+Recommended next task: validate the Phase44B Goal Engine Foundation implementation contract
 
 ## Constitutional Governance Overlay
 
@@ -108,10 +108,33 @@ Curriculum boundary. Phase 42L received artifact-backed PASS on merged `main`
 and closes the Program B contract foundation. Phase 43A received artifact-backed
 PASS. Phase 43B through Phase 43Y received artifact-backed PASS. Phase 43Z
 received artifact-backed PASS and closes the local package-manifest writer
-track. Phase44A Goal Engine v1.0 Ratification is internally complete and
-awaiting outside validation. Until Goal Engine reaches validated Stage 1
-authority with explicit human promotion, existing human-governed planning
-remains active.
+track. Phase44A Goal Engine v1.0 Ratification received artifact-backed PASS and
+merged. Phase44B Goal Engine Foundation Implementation Contract is internally
+complete and awaiting outside validation. Until Goal Engine reaches validated
+Stage 1 authority with explicit human promotion, existing human-governed
+planning remains active.
+
+Phase44A acceptance evidence:
+
+```text
+pull request: 80
+workflow run ID: 31241668025
+validated SHA: 1c8ddc03c5d5c53dcb06298cfe6892f46594daae
+merge commit: a9999a58bfc40696a94f8366f4686325004c3fcb
+artifact: codie-pr-validation-1c8ddc03c5d5c53dcb06298cfe6892f46594daae
+artifact ID: 9017218547
+artifact digest: sha256:c79aa87d86692df1a9e7563d7403d391c31c6bc88c102f99f96db80eb01aecb5
+validation scope: pr
+deterministic: CLEAN_PASS
+architecture: CLEAN_PASS
+adversarial: CLEAN_PASS
+aggregate: CLEAN_PASS
+severity totals: all zero
+skipped validators: none
+unresolved findings: none
+errors: none
+final governance verdict: PASS
+```
 
 Phase 43Z acceptance evidence:
 
@@ -145,13 +168,35 @@ next_phase_part: implementation-contract
 next_gate_scope: INTERMEDIATE_PACKET
 ```
 
-After Phase44A Goal Engine v1.0 Ratification is externally accepted and merged,
-the next task is a Phase44B Goal Engine Foundation implementation contract.
-That contract should concentrate on canonical vocabulary, schema/version
-conventions, policy registry, Goal Contract model, Idea/Finding model,
-authority state representation, paper-trail lineage, kill-switch/safe-mode
-representation, and governance regression foundation. It must not implement
-runtime autonomy.
+Phase44B Goal Engine Foundation Implementation Contract tuple:
+
+```text
+phase_id: Phase44B
+phase_part: implementation-contract
+gate_scope: INTERMEDIATE_PACKET
+next_phase_id: Phase44C
+next_phase_part: implementation
+next_gate_scope: INTERMEDIATE_PACKET
+```
+
+Phase44B defines a future Phase44C implementation containing only immutable,
+deterministic, local-only, in-memory Goal Engine foundation records, pure
+validation, and canonical serialization. It covers canonical vocabulary,
+schema/version conventions, distinct Goal/Idea/Finding identifiers, policy
+records, Goal Contract models, authority and safe-mode vocabulary, paper-trail
+lineage, and explicit persistence boundaries.
+
+Phase44C remains blocked pending Phase44B exact-SHA artifact-backed acceptance
+and human merge. Phase44C must not implement runtime autonomy, work selection,
+ranking, scheduling, persistence, State Engine behavior, health models,
+Idea/Finding ledger behavior, impact or experiment engines, read-only decision
+logic, regression corpus work, Build Graph execution, authority promotion,
+provider access, model calls, UI, CLI, Stream Deck control, or Stage 1 authority.
+
+The canonical continuation is Phase44C foundation implementation followed by
+the Phase44D foundation checkpoint. All later work remains sequentially gated
+by `docs/GOAL_ENGINE_IMPLEMENTATION_PROGRAM_V1.md`. Build Graph and
+CCPM-inspired execution remain reserved for conditional Phase48 work.
 
 Phase 43Y acceptance evidence:
 
