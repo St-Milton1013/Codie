@@ -1958,7 +1958,7 @@ def reconcile_project_state(
         lineage = sorted(lineages[snapshot_id], key=lambda item: item.revision)
         if lineage[0].revision != 1:
             raise GoalEngineStateError(
-                f"snapshot lineage must include revision 1: {snapshot_id}"
+                f"snapshot lineage lacks required revision 1: {snapshot_id}"
             )
         for previous, current in zip(lineage, lineage[1:], strict=False):
             validate_project_state_snapshot_revision(previous, current)
