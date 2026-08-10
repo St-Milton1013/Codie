@@ -150,8 +150,10 @@ Phase44A Goal Engine v1.0 Ratification: PASS
 Phase44B Goal Engine Foundation Implementation Contract: PASS
 Phase44C Goal Engine Foundation Implementation: PASS
 Phase44D Goal Engine Foundation Checkpoint / Freeze: PASS
-Phase44E Goal Engine State Engine Implementation Contract: INTERNAL PASS
-Phase44F Goal Engine State Engine Implementation: BLOCKED
+Phase44E Goal Engine State Engine Implementation Contract: PASS
+Phase44F Goal Engine State Engine Implementation: PASS
+Phase44G Goal Engine State Engine Checkpoint / Freeze: INTERNAL PASS
+Phase44H Subsystem Health Foundation Contract: BLOCKED
 Local alpha tag: verified on origin as local-alpha-0.1.0
 ```
 
@@ -195,10 +197,12 @@ subordinate repository governance. Phase44B received artifact-backed PASS and
 defined the Foundation implementation contract. Phase44C received artifact-
 backed PASS and implemented only the deterministic, authority-neutral
 Foundation v1 surface. Phase44D received artifact-backed PASS and froze
-Foundation v1. Phase44E is internally complete and awaits outside validation
-as a State Engine implementation-contract-only packet. The canonical Phase44-49
-build order is recorded in
-`docs/GOAL_ENGINE_IMPLEMENTATION_PROGRAM_V1.md`; Phase44F and all later runtime
+Foundation v1. Phase44E received artifact-backed PASS and defined the State
+Engine implementation boundary. Phase44F received artifact-backed PASS and
+implemented the pure, immutable State Engine v1 surface. Phase44G is internally
+complete and awaits outside validation as a documentation-only checkpoint /
+freeze. The canonical Phase44-49 build order is recorded in
+`docs/GOAL_ENGINE_IMPLEMENTATION_PROGRAM_V1.md`; Phase44H and all later runtime
 and authority surfaces remain sequentially blocked. Until Goal Engine reaches
 validated Stage 1 authority with explicit human promotion, existing human-
 governed planning remains active.
@@ -272,6 +276,50 @@ merge commit: ae1d214b890562071ce0c1d5d74b1fdd4e845671
 artifact: codie-pr-validation-b78ffe6700c0a988afa51db7fd14a20c1c25adfe
 artifact ID: 9025958095
 artifact digest: sha256:2c06d2a90b9800a35ad5bae6464037b2543ef1675023e394c88ee424792078f8
+validation scope: pr
+deterministic: CLEAN_PASS
+architecture: CLEAN_PASS
+adversarial: CLEAN_PASS
+aggregate: CLEAN_PASS
+severity totals: all zero
+skipped validators: none
+unresolved findings: none
+errors: none
+final governance verdict: PASS
+```
+
+Phase44E acceptance evidence:
+
+```text
+pull request: 84
+workflow run ID: 31284763261
+validated SHA: 33021d0119b06e325c2ba027fb9a0e3dba19346a
+merge commit: c47bb63daeb450b2ab9f1efabb245021fdb3dfcd
+artifact: codie-pr-validation-33021d0119b06e325c2ba027fb9a0e3dba19346a
+artifact ID: 9029456243
+artifact digest: sha256:c44917bb137883e48c8805addbb65884770e1c4717e1b68a0f264959703b98d6
+validation scope: pr
+deterministic: CLEAN_PASS
+architecture: CLEAN_PASS
+adversarial: CLEAN_PASS
+aggregate: CLEAN_PASS
+severity totals: all zero
+skipped validators: none
+unresolved findings: none
+errors: none
+final governance verdict: PASS
+```
+
+Phase44F acceptance evidence:
+
+```text
+pull request: 85
+workflow run ID: 31329888622
+validated SHA: 135794f9949efe8be9b18e303ad5257f5167aa40
+merge commit: 9f18b9d57286f0b72f21ecceb91f7b20f3f63828
+artifact: codie-pr-validation-135794f9949efe8be9b18e303ad5257f5167aa40
+artifact ID: 9042604599
+artifact digest: sha256:6bd4dd894a419b31e3fb16d775571a9c906c3f1ae6a34c30eceb909e32ea27c2
 validation scope: pr
 deterministic: CLEAN_PASS
 architecture: CLEAN_PASS
