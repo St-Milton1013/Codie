@@ -2653,26 +2653,29 @@ Phase44A Goal Engine v1.0 Ratification: PASS
 Phase44B Goal Engine Foundation Implementation Contract: PASS
 Phase44C Goal Engine Foundation Implementation: PASS
 Phase44D Goal Engine Foundation Checkpoint / Freeze: PASS
-Current action: validate the Phase44E Goal Engine State Engine implementation contract
-Phase44E Goal Engine State Engine Implementation Contract: INTERNAL PASS
-Phase44F Goal Engine State Engine Implementation: BLOCKED
+Phase44E Goal Engine State Engine Implementation Contract: PASS
+Phase44F Goal Engine State Engine Implementation: PASS
+Current action: validate the Phase44G Goal Engine State Engine checkpoint / freeze
+Phase44G Goal Engine State Engine Checkpoint / Freeze: INTERNAL PASS
+Phase44H Subsystem Health Foundation Contract: BLOCKED
 ```
 
-Phase44E Goal Engine State Engine Implementation Contract status:
+Phase44G Goal Engine State Engine Checkpoint / Freeze status:
 
 ```text
-phase_id: Phase44E
-phase_part: implementation-contract
+phase_id: Phase44G
+phase_part: outside-validation
 gate_scope: INTERMEDIATE_PACKET
 status: internally complete; outside validation required
-scope commit: 710a42d24cece33f3234fd952bb31ea76b2914ac
+scope commit: 5ebe1f7662917f2254d3aef5bac2146b2377326b
 authority: subordinate to docs/CODIE_V2_CONSTITUTION.md
 production/runtime changes: none
 autonomous execution: not authorized
 human merge/release authority: preserved
 Foundation v1: frozen and unmodified
-next_phase_id: Phase44F
-next_phase_part: implementation
+State Engine v1: accepted implementation; frozen by this packet only after acceptance
+next_phase_id: Phase44H
+next_phase_part: implementation-contract
 next_gate_scope: INTERMEDIATE_PACKET
 ```
 
@@ -2681,9 +2684,11 @@ Canonical continuation:
 ```text
 roadmap: docs/GOAL_ENGINE_IMPLEMENTATION_PROGRAM_V1.md
 Phase44D: Foundation v1 checkpoint accepted
-Phase44E: State Engine contract only; active
-Phase44F: pure State Engine implementation; next and blocked
-Phase44G and later: sequentially blocked
+Phase44E: State Engine contract accepted
+Phase44F: pure State Engine implementation accepted
+Phase44G: documentation-only State Engine checkpoint / freeze; active
+Phase44H: Subsystem Health Foundation contract; next and blocked
+Phase44I and later: sequentially blocked
 Build Graph and CCPM-inspired execution: reserved for conditional Phase48
 current runtime authority: unchanged
 ```
@@ -2757,6 +2762,50 @@ merge commit: ae1d214b890562071ce0c1d5d74b1fdd4e845671
 artifact: codie-pr-validation-b78ffe6700c0a988afa51db7fd14a20c1c25adfe
 artifact ID: 9025958095
 artifact digest: sha256:2c06d2a90b9800a35ad5bae6464037b2543ef1675023e394c88ee424792078f8
+validation scope: pr
+deterministic: CLEAN_PASS
+architecture: CLEAN_PASS
+adversarial: CLEAN_PASS
+aggregate: CLEAN_PASS
+severity totals: all zero
+skipped validators: none
+unresolved findings: none
+errors: none
+final governance verdict: PASS
+```
+
+Phase44E acceptance evidence:
+
+```text
+pull request: 84
+workflow run ID: 31284763261
+validated SHA: 33021d0119b06e325c2ba027fb9a0e3dba19346a
+merge commit: c47bb63daeb450b2ab9f1efabb245021fdb3dfcd
+artifact: codie-pr-validation-33021d0119b06e325c2ba027fb9a0e3dba19346a
+artifact ID: 9029456243
+artifact digest: sha256:c44917bb137883e48c8805addbb65884770e1c4717e1b68a0f264959703b98d6
+validation scope: pr
+deterministic: CLEAN_PASS
+architecture: CLEAN_PASS
+adversarial: CLEAN_PASS
+aggregate: CLEAN_PASS
+severity totals: all zero
+skipped validators: none
+unresolved findings: none
+errors: none
+final governance verdict: PASS
+```
+
+Phase44F acceptance evidence:
+
+```text
+pull request: 85
+workflow run ID: 31329888622
+validated SHA: 135794f9949efe8be9b18e303ad5257f5167aa40
+merge commit: 9f18b9d57286f0b72f21ecceb91f7b20f3f63828
+artifact: codie-pr-validation-135794f9949efe8be9b18e303ad5257f5167aa40
+artifact ID: 9042604599
+artifact digest: sha256:6bd4dd894a419b31e3fb16d775571a9c906c3f1ae6a34c30eceb909e32ea27c2
 validation scope: pr
 deterministic: CLEAN_PASS
 architecture: CLEAN_PASS

@@ -7,9 +7,10 @@ Status: implementation roadmap
 Authority: subordinate to `docs/CODIE_V2_CONSTITUTION.md` and the ratified
 `docs/GOAL_ENGINE_V1_SPEC.md`
 
-Current execution boundary: Phase44D Foundation v1 checkpoint is accepted.
-Phase44E is the active State Engine contract-only packet. Phase44F runtime
-implementation remains blocked until its governing contract is accepted.
+Current execution boundary: Phase44E State Engine contract and Phase44F State
+Engine implementation are accepted. Phase44G is the active documentation-only
+State Engine checkpoint / freeze. Phase44H remains blocked until Phase44G
+artifact acceptance and human merge.
 
 ## Operating Rule
 
@@ -551,8 +552,10 @@ Phase44A ratification: accepted
 -> Phase44B Foundation contract: accepted
 -> Phase44C Foundation implementation: accepted
 -> Phase44D Foundation checkpoint: accepted
--> Phase44E State Engine contract: active
--> Phase44F State Engine implementation: blocked
+-> Phase44E State Engine contract: accepted
+-> Phase44F State Engine implementation: accepted
+-> Phase44G State Engine checkpoint: active
+-> Phase44H Subsystem Health Foundation contract: blocked
 -> continue sequentially
 ```
 
