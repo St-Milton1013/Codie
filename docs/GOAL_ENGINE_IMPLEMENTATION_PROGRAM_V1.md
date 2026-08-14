@@ -7,10 +7,29 @@ Status: implementation roadmap
 Authority: subordinate to `docs/CODIE_V2_CONSTITUTION.md` and the ratified
 `docs/GOAL_ENGINE_V1_SPEC.md`
 
-Current execution boundary: Phase44E State Engine contract and Phase44F State
-Engine implementation are accepted. Phase44G is the active documentation-only
-State Engine checkpoint / freeze. Phase44H remains blocked until Phase44G
-artifact acceptance and human merge.
+Current execution boundary: Phase44E State Engine contract, Phase44F State
+Engine implementation, and the Phase44G State Engine checkpoint / freeze are
+accepted. Phase50A-C are temporarily interposed by explicit human priority
+decision. Phase44H is paused until Phase50C.
+
+## Temporary Phase50 delivery-priority interposition
+
+Phase44G later received artifact-backed acceptance through merged PR #86. On
+2026-08-14 the human project owner approved Codie Local Working Iteration v0.1
+as the next implementation packet ahead of further Goal Engine work.
+
+The temporary sequence is:
+
+```text
+Phase50A - Local Working Iteration v0.1 contract
+Phase50B - Local Working Iteration v0.1 implementation
+Phase50C - Local Working Iteration v0.1 checkpoint / freeze
+resume this program at Phase44H
+```
+
+This interposition changes delivery priority only. It does not renumber,
+implement, validate, satisfy, promote, or weaken any Phase44-49 Goal Engine
+gate. Build Graph and CCPM-inspired execution remain conditional Phase48 work.
 
 ## Operating Rule
 
@@ -554,9 +573,12 @@ Phase44A ratification: accepted
 -> Phase44D Foundation checkpoint: accepted
 -> Phase44E State Engine contract: accepted
 -> Phase44F State Engine implementation: accepted
--> Phase44G State Engine checkpoint: active
--> Phase44H Subsystem Health Foundation contract: blocked
--> continue sequentially
+-> Phase44G State Engine checkpoint: accepted
+-> Phase50A Local Working Iteration contract: active validation target
+-> Phase50B Local Working Iteration implementation: blocked
+-> Phase50C Local Working Iteration checkpoint: blocked
+-> Phase44H Subsystem Health Foundation contract: paused until Phase50C
+-> continue the original Goal Engine sequence
 ```
 
 Normal Codie development remains human-directed until Stage 1 earns and
