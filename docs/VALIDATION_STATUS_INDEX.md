@@ -152,8 +152,11 @@ Phase44C Goal Engine Foundation Implementation: PASS
 Phase44D Goal Engine Foundation Checkpoint / Freeze: PASS
 Phase44E Goal Engine State Engine Implementation Contract: PASS
 Phase44F Goal Engine State Engine Implementation: PASS
-Phase44G Goal Engine State Engine Checkpoint / Freeze: INTERNAL PASS
-Phase44H Subsystem Health Foundation Contract: BLOCKED
+Phase44G Goal Engine State Engine Checkpoint / Freeze: PASS
+Phase50A Local Working Iteration v0.1 Contract: INTERNAL PASS
+Phase50B Local Working Iteration v0.1 Implementation: BLOCKED
+Phase50C Local Working Iteration v0.1 Checkpoint / Freeze: BLOCKED
+Phase44H Subsystem Health Foundation Contract: PAUSED UNTIL PHASE50C
 Local alpha tag: verified on origin as local-alpha-0.1.0
 ```
 
@@ -199,13 +202,14 @@ backed PASS and implemented only the deterministic, authority-neutral
 Foundation v1 surface. Phase44D received artifact-backed PASS and froze
 Foundation v1. Phase44E received artifact-backed PASS and defined the State
 Engine implementation boundary. Phase44F received artifact-backed PASS and
-implemented the pure, immutable State Engine v1 surface. Phase44G is internally
-complete and awaits outside validation as a documentation-only checkpoint /
-freeze. The canonical Phase44-49 build order is recorded in
-`docs/GOAL_ENGINE_IMPLEMENTATION_PROGRAM_V1.md`; Phase44H and all later runtime
-and authority surfaces remain sequentially blocked. Until Goal Engine reaches
-validated Stage 1 authority with explicit human promotion, existing human-
-governed planning remains active.
+implemented the pure, immutable State Engine v1 surface. Phase44G received
+artifact-backed PASS through merged PR #86. Phase50A is internally complete as
+the human-approved local working-iteration contract and awaits exact-SHA
+outside validation. Phase50B and Phase50C are blocked. The canonical Phase44-49
+build order remains recorded in `docs/GOAL_ENGINE_IMPLEMENTATION_PROGRAM_V1.md`;
+Phase44H is paused until Phase50C and no Goal Engine runtime or authority gate
+has advanced. Until Goal Engine reaches validated Stage 1 authority with
+explicit human promotion, existing human-governed planning remains active.
 
 Phase44A acceptance evidence:
 

@@ -155,37 +155,52 @@ Phase44C Goal Engine Foundation Implementation: externally accepted
 Phase44D Goal Engine Foundation Checkpoint / Freeze: externally accepted
 Phase44E Goal Engine State Engine Implementation Contract: externally accepted
 Phase44F Goal Engine State Engine Implementation: externally accepted
-Current action: validate the Phase44G Goal Engine State Engine checkpoint / freeze
-Phase44G Goal Engine State Engine Checkpoint / Freeze: internally complete
-Phase44H Subsystem Health Foundation Contract: blocked
+Phase44G Goal Engine State Engine Checkpoint / Freeze: externally accepted through PR #86
+Current action: validate the Phase50A Local Working Iteration v0.1 contract
+Phase50A Local Working Iteration v0.1 Contract: internally complete
+Phase50B Local Working Iteration v0.1 Implementation: blocked
+Phase50C Local Working Iteration v0.1 Checkpoint / Freeze: blocked
+Phase44H Subsystem Health Foundation Contract: paused; resumes after Phase50C
 Local alpha tag status: verified on origin as local-alpha-0.1.0
 ```
 
 ## Previous Work Packet
 
 ```text
-Phase44F Goal Engine State Engine Implementation
-Status: externally accepted
+Phase44G Goal Engine State Engine Checkpoint / Freeze
+Status: externally accepted through merged PR #86
 ```
 
 ## Next Allowed Work Packet
 
 ```text
-Phase44G Goal Engine State Engine Checkpoint / Freeze
+Phase50A Local Working Iteration v0.1 Contract
 Status: internally complete; outside validation required
 ```
 
 Current-status clarification:
 
 ```text
-Current protected validation gate: Phase44G / outside-validation / INTERMEDIATE_PACKET.
-Phase44E and Phase44F status: externally accepted; State Engine v1 is implemented.
-Authoritative next allowed work packet: Phase44G Goal Engine State Engine Checkpoint / Freeze.
-This checkpoint packet is documentation-only. It freezes the accepted pure,
-immutable State Engine representation and reconciliation boundary. It
-authorizes no runtime change, state mutation, work selection, health logic,
-persistence, provider behavior, authority promotion, or human-gate bypass.
-Phase44H remains blocked.
+Proposed protected validation gate: Phase50A / implementation-contract / INTERMEDIATE_PACKET.
+Live main remains Phase44G until the separate scope transition is explicitly pushed.
+Phase44G status: externally accepted through merged PR #86.
+Authoritative next allowed work packet: Phase50A Local Working Iteration v0.1 Contract.
+Phase50A is documentation-only. Phase50B remains blocked until exact-SHA
+artifact-backed acceptance and human merge. Phase44H is paused, not
+superseded, and resumes after the Phase50C working-iteration checkpoint.
+No Goal Engine runtime or authority gate is changed by this priority amendment.
+```
+
+## Current Phase50 Priority Amendment
+
+```text
+human priority decision: approved 2026-08-14
+Phase50A: Local Working Iteration v0.1 contract; internally complete
+Phase50B: implementation; blocked
+Phase50C: checkpoint / freeze; blocked
+return point: Phase44H Subsystem Health Foundation Contract
+Goal Engine Phase44-49 identifiers and gates: unchanged
+Build Graph / CCPM-inspired execution: conditional Phase48 only
 ```
 
 Phase 38D received artifact-backed phase-ledger validation on merged `main`.
@@ -228,11 +243,13 @@ foundation contract. Phase44C received artifact-backed PASS and implemented
 the authority-neutral Foundation v1 surface. Phase44D received artifact-backed
 PASS and froze Foundation v1. Phase44E received artifact-backed PASS and defined
 the State Engine contract. Phase44F received artifact-backed PASS and
-implemented the pure State Engine v1 surface. Phase44G is the active
-documentation-only checkpoint / freeze. The canonical Phase44-49 sequence is
-recorded in `docs/GOAL_ENGINE_IMPLEMENTATION_PROGRAM_V1.md`; Phase44H remains
-next and blocked, while Build Graph and CCPM-inspired execution remain reserved
-for conditional Phase48 work.
+implemented the pure State Engine v1 surface. Phase44G received artifact-backed
+PASS through merged PR #86. The human owner then approved Phase50A-C as a
+temporary local-delivery priority ahead of further Goal Engine work. The
+canonical Phase44-49 sequence remains recorded in
+`docs/GOAL_ENGINE_IMPLEMENTATION_PROGRAM_V1.md`; Phase44H is paused until
+Phase50C, while Build Graph and CCPM-inspired execution remain reserved for
+conditional Phase48 work.
 Until Goal Engine reaches validated Stage 1 authority with explicit human
 promotion, existing human-governed planning remains active.
 

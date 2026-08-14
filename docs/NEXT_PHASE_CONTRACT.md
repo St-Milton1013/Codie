@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: validate the Phase44G Goal Engine State Engine checkpoint / freeze
+Recommended next task: validate the Phase50A Codie Local Working Iteration v0.1 contract
 
 ## Constitutional Governance Overlay
 
@@ -114,7 +114,11 @@ Engine Foundation Implementation, and Phase44D Goal Engine Foundation
 Checkpoint / Freeze received artifact-backed PASS and merged. Phase44E Goal
 Engine State Engine Implementation Contract and Phase44F State Engine
 Implementation received artifact-backed PASS and merged. Phase44G State Engine
-Checkpoint / Freeze is internally complete and awaiting outside validation.
+Checkpoint / Freeze received artifact-backed PASS through merged PR #86.
+The human owner approved Phase50A-C as a temporary local-working-iteration
+priority ahead of further Goal Engine work. Phase50A is internally complete
+and awaiting outside validation. Phase50B and Phase50C remain blocked, and
+Phase44H is paused until Phase50C.
 Until Goal Engine reaches validated Stage 1 authority with explicit human
 promotion, existing human-governed planning remains active.
 
@@ -336,8 +340,19 @@ Phase44G Goal Engine State Engine Checkpoint / Freeze tuple:
 phase_id: Phase44G
 phase_part: outside-validation
 gate_scope: INTERMEDIATE_PACKET
-next_phase_id: Phase44H
+next_phase_id: Phase50A
 next_phase_part: implementation-contract
+next_gate_scope: INTERMEDIATE_PACKET
+```
+
+Phase50A Codie Local Working Iteration v0.1 Contract tuple:
+
+```text
+phase_id: Phase50A
+phase_part: implementation-contract
+gate_scope: INTERMEDIATE_PACKET
+next_phase_id: Phase50B
+next_phase_part: implementation
 next_gate_scope: INTERMEDIATE_PACKET
 ```
 
@@ -356,15 +371,16 @@ immutable, caller-input-only boundary without mutation, work selection,
 persistence, provider access, model calls, UI, CLI, Stream Deck control, or
 authority behavior.
 
-The canonical continuation is the Phase44G documentation-only State Engine
-checkpoint / freeze. Phase44H remains blocked until exact-SHA Phase44G
-artifact-backed acceptance and human merge. Phase44H may define only the
-Subsystem Health Foundation Contract, must keep CODIE, JIN, and THEORY_CORPUS
-separate, may define evidence-backed health signals or findings but no universal
-health score and no direct Goal production, and may not implement runtime or a
-later capability. All later work remains sequentially gated by
-`docs/GOAL_ENGINE_IMPLEMENTATION_PROGRAM_V1.md`. Build Graph and CCPM-inspired
-execution remain reserved for conditional Phase48 work.
+The current continuation is the human-approved Phase50A Local Working
+Iteration v0.1 contract. Phase50B may implement only the accepted local,
+loopback-only vertical slice after exact-SHA Phase50A artifact acceptance and
+human merge. Phase50C must checkpoint that slice before control returns to
+Phase44H. The underlying Phase44-49 Goal Engine sequence remains unchanged and
+sequentially gated by `docs/GOAL_ENGINE_IMPLEMENTATION_PROGRAM_V1.md`. Phase44H
+must still keep CODIE, JIN, and THEORY_CORPUS separate, may define
+evidence-backed health signals or findings but no universal health score and no
+direct Goal production, and may not implement a later capability. Build Graph
+and CCPM-inspired execution remain reserved for conditional Phase48 work.
 
 Phase 43Y acceptance evidence:
 
