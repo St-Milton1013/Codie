@@ -157,9 +157,9 @@ Phase44E Goal Engine State Engine Implementation Contract: externally accepted
 Phase44F Goal Engine State Engine Implementation: externally accepted
 Phase44G Goal Engine State Engine Checkpoint / Freeze: externally accepted through PR #86
 Phase50A Local Working Iteration v0.1 Contract: externally accepted through PR #87
-Current action: validate the Phase50B Local Working Iteration v0.1 implementation
-Phase50B Local Working Iteration v0.1 Implementation: internally complete
-Phase50C Local Working Iteration v0.1 Checkpoint / Freeze: blocked
+Phase50B Local Working Iteration v0.1 Implementation: externally accepted through PR #88
+Current action: validate the Phase50C Local Working Iteration v0.1 checkpoint / freeze
+Phase50C Local Working Iteration v0.1 Checkpoint / Freeze: internally complete
 Phase44H Subsystem Health Foundation Contract: paused; resumes after Phase50C
 Local alpha tag status: verified on origin as local-alpha-0.1.0
 ```
@@ -167,26 +167,26 @@ Local alpha tag status: verified on origin as local-alpha-0.1.0
 ## Previous Work Packet
 
 ```text
-Phase50A Local Working Iteration v0.1 Contract
-Status: externally accepted through merged PR #87
+Phase50B Local Working Iteration v0.1 Implementation
+Status: externally accepted through merged PR #88
 ```
 
 ## Next Allowed Work Packet
 
 ```text
-Phase50B Local Working Iteration v0.1 Implementation
+Phase50C Local Working Iteration v0.1 Checkpoint / Freeze
 Status: internally complete; outside validation required
 ```
 
 Current-status clarification:
 
 ```text
-Protected validation gate: Phase50B / implementation / INTERMEDIATE_PACKET.
-Live main includes the accepted Phase50A contract through merged PR #87.
-Authoritative next allowed work packet: Phase50B Local Working Iteration v0.1 Implementation.
-Phase50B is internally complete and awaits exact-SHA artifact-backed outside
-validation and human merge. Phase50C remains blocked. Phase44H is paused, not
-superseded, and resumes after the Phase50C working-iteration checkpoint.
+Protected validation gate: Phase50C / outside-validation / INTERMEDIATE_PACKET.
+Live main includes the accepted Phase50B implementation through merged PR #88.
+Authoritative next allowed work packet: Phase50C Local Working Iteration v0.1 Checkpoint / Freeze.
+Phase50C is internally complete and awaits exact-SHA artifact-backed outside
+validation and human merge. Phase44H is paused, not superseded, and resumes
+after the accepted Phase50C working-iteration checkpoint.
 No Goal Engine runtime or authority gate is changed by this priority amendment.
 The 2026-08-25 owner-approved Phase50B usability amendment permits only
 user-initiated official card-data preparation and public Moxfield deck import;
@@ -198,8 +198,8 @@ all evidence and authority boundaries remain unchanged.
 ```text
 human priority decision: approved 2026-08-14
 Phase50A: Local Working Iteration v0.1 contract; externally accepted through PR #87
-Phase50B: implementation; internally complete; outside validation required
-Phase50C: checkpoint / freeze; blocked
+Phase50B: implementation; externally accepted through PR #88
+Phase50C: checkpoint / freeze; internally complete; outside validation required
 return point: Phase44H Subsystem Health Foundation Contract
 Goal Engine Phase44-49 identifiers and gates: unchanged
 Build Graph / CCPM-inspired execution: conditional Phase48 only
@@ -248,8 +248,9 @@ the State Engine contract. Phase44F received artifact-backed PASS and
 implemented the pure State Engine v1 surface. Phase44G received artifact-backed
 PASS through merged PR #86. The human owner then approved Phase50A-C as a
 temporary local-delivery priority ahead of further Goal Engine work. Phase50A
-received artifact-backed PASS through merged PR #87. Phase50B is internally
-complete and awaiting outside validation. The
+received artifact-backed PASS through merged PR #87. Phase50B received
+artifact-backed PASS through merged PR #88. Phase50C is internally complete
+and awaiting outside validation. The
 canonical Phase44-49 sequence remains recorded in
 `docs/GOAL_ENGINE_IMPLEMENTATION_PROGRAM_V1.md`; Phase44H is paused until
 Phase50C, while Build Graph and CCPM-inspired execution remain reserved for
@@ -266,6 +267,24 @@ workflow run ID: 31780486668
 artifact ID: 9211499937
 artifact digest: sha256:1e0101358896a70d6508dfc91dfe3a30fb159173321037967e3a900eaf5bc5b2
 merge commit: b5b1b4b5bf815f3d6d1cdf2106697fa3bb007dc4
+deterministic: CLEAN_PASS
+architecture: CLEAN_PASS
+adversarial: CLEAN_PASS
+aggregate: CLEAN_PASS
+findings: 0
+errors: 0
+skipped validators: 0
+```
+
+Phase50B acceptance evidence:
+
+```text
+pull request: 88
+validated SHA: 651cda193186b4e4f410de3d5e8e58ef7429be5f
+workflow run ID: 32975408263
+artifact ID: 9610763003
+artifact digest: sha256:909dac79d2ac87e809cd3fefc6fbf53f4b40e7227d5690ae4f4812f900f4468f
+merge commit: 041f061ac31504a97ebc6af39d3587bc1345d1fc
 deterministic: CLEAN_PASS
 architecture: CLEAN_PASS
 adversarial: CLEAN_PASS

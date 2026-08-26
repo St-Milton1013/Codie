@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: validate the Phase50B Codie Local Working Iteration v0.1 implementation
+Recommended next task: validate the Phase50C Codie Local Working Iteration v0.1 checkpoint / freeze
 
 ## Constitutional Governance Overlay
 
@@ -117,8 +117,9 @@ Implementation received artifact-backed PASS and merged. Phase44G State Engine
 Checkpoint / Freeze received artifact-backed PASS through merged PR #86.
 The human owner approved Phase50A-C as a temporary local-working-iteration
 priority ahead of further Goal Engine work. Phase50A received artifact-backed
-PASS through merged PR #87. Phase50B is internally complete and awaiting
-exact-SHA outside validation. Phase50C remains blocked, and
+PASS through merged PR #87. Phase50B received artifact-backed PASS through
+merged PR #88. Phase50C is internally complete and awaiting exact-SHA outside
+validation, and
 Phase44H is paused until Phase50C.
 Until Goal Engine reaches validated Stage 1 authority with explicit human
 promotion, existing human-governed planning remains active.
@@ -132,6 +133,21 @@ workflow run ID: 31780486668
 artifact ID: 9211499937
 artifact digest: sha256:1e0101358896a70d6508dfc91dfe3a30fb159173321037967e3a900eaf5bc5b2
 merge commit: b5b1b4b5bf815f3d6d1cdf2106697fa3bb007dc4
+aggregate: CLEAN_PASS
+findings: 0
+errors: 0
+skipped validators: 0
+```
+
+Phase50B acceptance evidence:
+
+```text
+pull request: 88
+validated SHA: 651cda193186b4e4f410de3d5e8e58ef7429be5f
+workflow run ID: 32975408263
+artifact ID: 9610763003
+artifact digest: sha256:909dac79d2ac87e809cd3fefc6fbf53f4b40e7227d5690ae4f4812f900f4468f
+merge commit: 041f061ac31504a97ebc6af39d3587bc1345d1fc
 aggregate: CLEAN_PASS
 findings: 0
 errors: 0
@@ -383,6 +399,17 @@ next_phase_part: outside-validation
 next_gate_scope: INTERMEDIATE_PACKET
 ```
 
+Phase50C Codie Local Working Iteration v0.1 Checkpoint / Freeze tuple:
+
+```text
+phase_id: Phase50C
+phase_part: outside-validation
+gate_scope: INTERMEDIATE_PACKET
+next_phase_id: Phase44H
+next_phase_part: implementation-contract
+next_gate_scope: INTERMEDIATE_PACKET
+```
+
 Phase44B and Phase44C define and implement only immutable, deterministic,
 local-only, in-memory Goal Engine Foundation v1 records, pure validation, and
 canonical serialization. Phase44D freezes that accepted surface without
@@ -398,11 +425,11 @@ immutable, caller-input-only boundary without mutation, work selection,
 persistence, provider access, model calls, UI, CLI, Stream Deck control, or
 authority behavior.
 
-The current continuation is the human-approved Phase50B Local Working
-Iteration v0.1 implementation, built against the accepted Phase50A contract.
-Phase50B is internally complete and requires exact-SHA artifact-backed outside
-validation and human merge. Phase50C must checkpoint that slice before control returns to
-Phase44H. The underlying Phase44-49 Goal Engine sequence remains unchanged and
+The current continuation is the human-approved Phase50C Local Working
+Iteration v0.1 checkpoint / freeze. It records and freezes the accepted
+Phase50A contract and Phase50B implementation without changing runtime.
+Phase50C requires exact-SHA artifact-backed outside validation and human merge
+before control returns to Phase44H. The underlying Phase44-49 Goal Engine sequence remains unchanged and
 sequentially gated by `docs/GOAL_ENGINE_IMPLEMENTATION_PROGRAM_V1.md`. Phase44H
 must still keep CODIE, JIN, and THEORY_CORPUS separate, may define
 evidence-backed health signals or findings but no universal health score and no

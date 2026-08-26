@@ -9,10 +9,10 @@ Authority: subordinate to `docs/CODIE_V2_CONSTITUTION.md` and the ratified
 
 Current execution boundary: Phase44E State Engine contract, Phase44F State
 Engine implementation, and the Phase44G State Engine checkpoint / freeze are
-accepted. Phase50A was accepted through merged PR #87. Phase50B is internally
-complete and awaits outside validation. Phase50A-C remain temporarily
-interposed by explicit human priority decision. Phase44H is paused until
-Phase50C.
+accepted. Phase50A was accepted through merged PR #87 and Phase50B through
+merged PR #88. Phase50C is internally complete and awaits outside validation.
+Phase50A-C remain temporarily interposed by explicit human priority decision.
+Phase44H is paused until Phase50C is accepted and merged.
 
 On 2026-08-25 the project owner approved a narrow Phase50B usability amendment
 for explicit user-initiated official card-data preparation and public Moxfield
@@ -582,8 +582,8 @@ Phase44A ratification: accepted
 -> Phase44F State Engine implementation: accepted
 -> Phase44G State Engine checkpoint: accepted
 -> Phase50A Local Working Iteration contract: accepted through PR #87
--> Phase50B Local Working Iteration implementation: active validation target
--> Phase50C Local Working Iteration checkpoint: blocked
+-> Phase50B Local Working Iteration implementation: accepted through PR #88
+-> Phase50C Local Working Iteration checkpoint: active validation target
 -> Phase44H Subsystem Health Foundation contract: paused until Phase50C
 -> continue the original Goal Engine sequence
 ```
