@@ -2656,29 +2656,30 @@ Phase44D Goal Engine Foundation Checkpoint / Freeze: PASS
 Phase44E Goal Engine State Engine Implementation Contract: PASS
 Phase44F Goal Engine State Engine Implementation: PASS
 Phase44G Goal Engine State Engine Checkpoint / Freeze: PASS through merged PR #86
-Current action: validate the Phase50A Local Working Iteration v0.1 contract
-Phase50A Local Working Iteration v0.1 Contract: INTERNAL PASS
-Phase50B Local Working Iteration v0.1 Implementation: BLOCKED
+Phase50A Local Working Iteration v0.1 Contract: PASS through merged PR #87
+Current action: validate the Phase50B Local Working Iteration v0.1 implementation
+Phase50B Local Working Iteration v0.1 Implementation: INTERNAL PASS
 Phase50C Local Working Iteration v0.1 Checkpoint / Freeze: BLOCKED
 Phase44H Subsystem Health Foundation Contract: PAUSED UNTIL PHASE50C
 ```
 
-Phase50A Local Working Iteration v0.1 Contract status:
+Phase50B Local Working Iteration v0.1 Implementation status:
 
 ```text
-phase_id: Phase50A
-phase_part: implementation-contract
+phase_id: Phase50B
+phase_part: implementation
 gate_scope: INTERMEDIATE_PACKET
 status: internally complete; outside validation required
-scope transition: separate local commit; not pushed
 authority: subordinate to docs/CODIE_V2_CONSTITUTION.md
-production/runtime changes: none
+production/runtime changes: accepted local, loopback-only vertical slice only
+owner-approved amendment: explicit card-data preparation and public Moxfield
+  deck import only; approved 2026-08-25
 autonomous execution: not authorized
 human merge/release authority: preserved
 Foundation v1: frozen and unmodified
 State Engine v1: accepted and frozen through Phase44G / PR #86
-next_phase_id: Phase50B
-next_phase_part: implementation
+next_phase_id: Phase50C
+next_phase_part: outside-validation
 next_gate_scope: INTERMEDIATE_PACKET
 ```
 
@@ -2690,13 +2691,31 @@ Phase44D: Foundation v1 checkpoint accepted
 Phase44E: State Engine contract accepted
 Phase44F: pure State Engine implementation accepted
 Phase44G: documentation-only State Engine checkpoint / freeze; accepted
-Phase50A: Local Working Iteration v0.1 contract; active validation target
-Phase50B: Local Working Iteration v0.1 implementation; blocked
+Phase50A: Local Working Iteration v0.1 contract; accepted through PR #87
+Phase50B: Local Working Iteration v0.1 implementation; active validation target
 Phase50C: Local Working Iteration v0.1 checkpoint; blocked
 Phase44H: Subsystem Health Foundation contract; paused until Phase50C
 Phase44I and later: sequentially blocked behind Phase44H
 Build Graph and CCPM-inspired execution: reserved for conditional Phase48
 current runtime authority: unchanged
+```
+
+Phase50A acceptance evidence:
+
+```text
+pull request: 87
+validated SHA: 597f2e9531b1ab8666bb89054e3e516e67ee97e5
+workflow run ID: 31780486668
+artifact ID: 9211499937
+artifact digest: sha256:1e0101358896a70d6508dfc91dfe3a30fb159173321037967e3a900eaf5bc5b2
+merge commit: b5b1b4b5bf815f3d6d1cdf2106697fa3bb007dc4
+deterministic: CLEAN_PASS
+architecture: CLEAN_PASS
+adversarial: CLEAN_PASS
+aggregate: CLEAN_PASS
+findings: 0
+errors: 0
+skipped validators: 0
 ```
 
 Phase44A acceptance evidence:

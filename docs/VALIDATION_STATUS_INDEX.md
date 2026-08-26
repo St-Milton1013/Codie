@@ -153,8 +153,8 @@ Phase44D Goal Engine Foundation Checkpoint / Freeze: PASS
 Phase44E Goal Engine State Engine Implementation Contract: PASS
 Phase44F Goal Engine State Engine Implementation: PASS
 Phase44G Goal Engine State Engine Checkpoint / Freeze: PASS
-Phase50A Local Working Iteration v0.1 Contract: INTERNAL PASS
-Phase50B Local Working Iteration v0.1 Implementation: BLOCKED
+Phase50A Local Working Iteration v0.1 Contract: PASS THROUGH MERGED PR #87
+Phase50B Local Working Iteration v0.1 Implementation: INTERNAL PASS
 Phase50C Local Working Iteration v0.1 Checkpoint / Freeze: BLOCKED
 Phase44H Subsystem Health Foundation Contract: PAUSED UNTIL PHASE50C
 Local alpha tag: verified on origin as local-alpha-0.1.0
@@ -203,13 +203,34 @@ Foundation v1 surface. Phase44D received artifact-backed PASS and froze
 Foundation v1. Phase44E received artifact-backed PASS and defined the State
 Engine implementation boundary. Phase44F received artifact-backed PASS and
 implemented the pure, immutable State Engine v1 surface. Phase44G received
-artifact-backed PASS through merged PR #86. Phase50A is internally complete as
-the human-approved local working-iteration contract and awaits exact-SHA
-outside validation. Phase50B and Phase50C are blocked. The canonical Phase44-49
+artifact-backed PASS through merged PR #86. Phase50A received artifact-backed
+PASS through merged PR #87. Phase50B is internally complete and awaits
+exact-SHA outside validation. Phase50C remains blocked. The canonical Phase44-49
 build order remains recorded in `docs/GOAL_ENGINE_IMPLEMENTATION_PROGRAM_V1.md`;
 Phase44H is paused until Phase50C and no Goal Engine runtime or authority gate
 has advanced. Until Goal Engine reaches validated Stage 1 authority with
 explicit human promotion, existing human-governed planning remains active.
+Phase50B includes the 2026-08-25 owner-approved usability amendment for
+explicit, user-initiated official card-data preparation and public Moxfield
+deck import; it does not change evidence classes or runtime authority.
+
+Phase50A acceptance evidence:
+
+```text
+pull request: 87
+validated SHA: 597f2e9531b1ab8666bb89054e3e516e67ee97e5
+workflow run ID: 31780486668
+artifact ID: 9211499937
+artifact digest: sha256:1e0101358896a70d6508dfc91dfe3a30fb159173321037967e3a900eaf5bc5b2
+merge commit: b5b1b4b5bf815f3d6d1cdf2106697fa3bb007dc4
+deterministic: CLEAN_PASS
+architecture: CLEAN_PASS
+adversarial: CLEAN_PASS
+aggregate: CLEAN_PASS
+findings: 0
+errors: 0
+skipped validators: 0
+```
 
 Phase44A acceptance evidence:
 
