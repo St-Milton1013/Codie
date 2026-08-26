@@ -154,8 +154,8 @@ Phase44E Goal Engine State Engine Implementation Contract: PASS
 Phase44F Goal Engine State Engine Implementation: PASS
 Phase44G Goal Engine State Engine Checkpoint / Freeze: PASS
 Phase50A Local Working Iteration v0.1 Contract: PASS THROUGH MERGED PR #87
-Phase50B Local Working Iteration v0.1 Implementation: INTERNAL PASS
-Phase50C Local Working Iteration v0.1 Checkpoint / Freeze: BLOCKED
+Phase50B Local Working Iteration v0.1 Implementation: PASS THROUGH MERGED PR #88
+Phase50C Local Working Iteration v0.1 Checkpoint / Freeze: INTERNAL PASS
 Phase44H Subsystem Health Foundation Contract: PAUSED UNTIL PHASE50C
 Local alpha tag: verified on origin as local-alpha-0.1.0
 ```
@@ -204,8 +204,9 @@ Foundation v1. Phase44E received artifact-backed PASS and defined the State
 Engine implementation boundary. Phase44F received artifact-backed PASS and
 implemented the pure, immutable State Engine v1 surface. Phase44G received
 artifact-backed PASS through merged PR #86. Phase50A received artifact-backed
-PASS through merged PR #87. Phase50B is internally complete and awaits
-exact-SHA outside validation. Phase50C remains blocked. The canonical Phase44-49
+PASS through merged PR #87. Phase50B received artifact-backed PASS through
+merged PR #88. Phase50C is internally complete and awaits exact-SHA outside
+validation. The canonical Phase44-49
 build order remains recorded in `docs/GOAL_ENGINE_IMPLEMENTATION_PROGRAM_V1.md`;
 Phase44H is paused until Phase50C and no Goal Engine runtime or authority gate
 has advanced. Until Goal Engine reaches validated Stage 1 authority with
@@ -223,6 +224,24 @@ workflow run ID: 31780486668
 artifact ID: 9211499937
 artifact digest: sha256:1e0101358896a70d6508dfc91dfe3a30fb159173321037967e3a900eaf5bc5b2
 merge commit: b5b1b4b5bf815f3d6d1cdf2106697fa3bb007dc4
+deterministic: CLEAN_PASS
+architecture: CLEAN_PASS
+adversarial: CLEAN_PASS
+aggregate: CLEAN_PASS
+findings: 0
+errors: 0
+skipped validators: 0
+```
+
+Phase50B acceptance evidence:
+
+```text
+pull request: 88
+validated SHA: 651cda193186b4e4f410de3d5e8e58ef7429be5f
+workflow run ID: 32975408263
+artifact ID: 9610763003
+artifact digest: sha256:909dac79d2ac87e809cd3fefc6fbf53f4b40e7227d5690ae4f4812f900f4468f
+merge commit: 041f061ac31504a97ebc6af39d3587bc1345d1fc
 deterministic: CLEAN_PASS
 architecture: CLEAN_PASS
 adversarial: CLEAN_PASS
