@@ -10,16 +10,16 @@ Authority: subordinate to `docs/CODIE_V2_CONSTITUTION.md` and the ratified
 Current execution boundary: Phase44E State Engine contract, Phase44F State
 Engine implementation, and the Phase44G State Engine checkpoint / freeze are
 accepted. Phase50A was accepted through merged PR #87 and Phase50B through
-merged PR #88. Phase50C is internally complete and awaits outside validation.
-Phase50A-C remain temporarily interposed by explicit human priority decision.
-Phase44H is paused until Phase50C is accepted and merged.
+merged PR #88. Phase50C is accepted through merged PR #89, completing the
+temporary human-priority interposition. Phase44H is the active contract packet;
+Phase44I remains blocked pending Phase44H acceptance.
 
 On 2026-08-25 the project owner approved a narrow Phase50B usability amendment
 for explicit user-initiated official card-data preparation and public Moxfield
 deck import. The amendment does not change the Phase44-49 sequence, evidence
 authority, or human validation and merge gates.
 
-## Temporary Phase50 delivery-priority interposition
+## Completed Phase50 delivery-priority interposition
 
 Phase44G later received artifact-backed acceptance through merged PR #86. On
 2026-08-14 the human project owner approved Codie Local Working Iteration v0.1
@@ -33,6 +33,9 @@ Phase50B - Local Working Iteration v0.1 implementation
 Phase50C - Local Working Iteration v0.1 checkpoint / freeze
 resume this program at Phase44H
 ```
+
+Phase50A-C are accepted through merged PRs #87-#89. The original program has
+resumed at Phase44H without changing the sequence or any authority gate.
 
 This interposition changes delivery priority only. It does not renumber,
 implement, validate, satisfy, promote, or weaken any Phase44-49 Goal Engine
@@ -583,8 +586,9 @@ Phase44A ratification: accepted
 -> Phase44G State Engine checkpoint: accepted
 -> Phase50A Local Working Iteration contract: accepted through PR #87
 -> Phase50B Local Working Iteration implementation: accepted through PR #88
--> Phase50C Local Working Iteration checkpoint: active validation target
--> Phase44H Subsystem Health Foundation contract: paused until Phase50C
+-> Phase50C Local Working Iteration checkpoint: accepted through PR #89
+-> Phase44H Subsystem Health Foundation contract: active contract packet
+-> Phase44I Health Foundation implementation: blocked pending Phase44H acceptance
 -> continue the original Goal Engine sequence
 ```
 

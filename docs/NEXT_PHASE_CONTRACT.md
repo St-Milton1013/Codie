@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: validate the Phase50C Codie Local Working Iteration v0.1 checkpoint / freeze
+Recommended next task: validate the Phase44H Goal Engine Subsystem Health Foundation Contract
 
 ## Constitutional Governance Overlay
 
@@ -118,9 +118,9 @@ Checkpoint / Freeze received artifact-backed PASS through merged PR #86.
 The human owner approved Phase50A-C as a temporary local-working-iteration
 priority ahead of further Goal Engine work. Phase50A received artifact-backed
 PASS through merged PR #87. Phase50B received artifact-backed PASS through
-merged PR #88. Phase50C is internally complete and awaiting exact-SHA outside
-validation, and
-Phase44H is paused until Phase50C.
+merged PR #88. Phase50C received artifact-backed PASS through merged PR #89.
+Phase44H is internally complete and awaiting exact-SHA outside validation.
+Phase44I remains blocked.
 Until Goal Engine reaches validated Stage 1 authority with explicit human
 promotion, existing human-governed planning remains active.
 
@@ -148,6 +148,21 @@ workflow run ID: 32975408263
 artifact ID: 9610763003
 artifact digest: sha256:909dac79d2ac87e809cd3fefc6fbf53f4b40e7227d5690ae4f4812f900f4468f
 merge commit: 041f061ac31504a97ebc6af39d3587bc1345d1fc
+aggregate: CLEAN_PASS
+findings: 0
+errors: 0
+skipped validators: 0
+```
+
+Phase50C acceptance evidence:
+
+```text
+pull request: 89
+validated SHA: ae32c9bc590274b7ef36ed1b388c38a811c6684d
+workflow run ID: 32981468252
+artifact ID: 9611629279
+artifact digest: sha256:239592a38b9cd839688da51d79e7c7b97ee30237728e2af4b43b13d3b9e98969
+merge commit: f814ad41e0863c95126c9d904bcbc00b5074d36e
 aggregate: CLEAN_PASS
 findings: 0
 errors: 0
@@ -410,6 +425,17 @@ next_phase_part: implementation-contract
 next_gate_scope: INTERMEDIATE_PACKET
 ```
 
+Phase44H Goal Engine Subsystem Health Foundation Contract tuple:
+
+```text
+phase_id: Phase44H
+phase_part: implementation-contract
+gate_scope: INTERMEDIATE_PACKET
+next_phase_id: Phase44I
+next_phase_part: implementation
+next_gate_scope: INTERMEDIATE_PACKET
+```
+
 Phase44B and Phase44C define and implement only immutable, deterministic,
 local-only, in-memory Goal Engine Foundation v1 records, pure validation, and
 canonical serialization. Phase44D freezes that accepted surface without
@@ -425,15 +451,15 @@ immutable, caller-input-only boundary without mutation, work selection,
 persistence, provider access, model calls, UI, CLI, Stream Deck control, or
 authority behavior.
 
-The current continuation is the human-approved Phase50C Local Working
-Iteration v0.1 checkpoint / freeze. It records and freezes the accepted
-Phase50A contract and Phase50B implementation without changing runtime.
-Phase50C requires exact-SHA artifact-backed outside validation and human merge
-before control returns to Phase44H. The underlying Phase44-49 Goal Engine sequence remains unchanged and
-sequentially gated by `docs/GOAL_ENGINE_IMPLEMENTATION_PROGRAM_V1.md`. Phase44H
-must still keep CODIE, JIN, and THEORY_CORPUS separate, may define
-evidence-backed health signals or findings but no universal health score and no
-direct Goal production, and may not implement a later capability. Build Graph
+Phase50C is accepted through merged PR #89 and control has returned to the
+original Goal Engine sequence. The current continuation is Phase44H Subsystem
+Health Foundation Contract. It keeps CODIE, JIN, and THEORY_CORPUS separate,
+defines evidence-backed health signals and Findings, defines no universal
+health score, produces no Goal, and implements no later capability. Phase44I
+requires exact-SHA artifact-backed outside validation and human merge of
+Phase44H before implementation may begin. The underlying Phase44-49 Goal
+Engine sequence remains unchanged and sequentially gated by
+`docs/GOAL_ENGINE_IMPLEMENTATION_PROGRAM_V1.md`. Build Graph
 and CCPM-inspired execution remain reserved for conditional Phase48 work.
 The Phase50B implementation includes the 2026-08-25 owner-approved narrow
 usability amendment: user-initiated official card-data preparation and public
