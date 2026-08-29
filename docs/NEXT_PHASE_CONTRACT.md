@@ -119,10 +119,53 @@ The human owner approved Phase50A-C as a temporary local-working-iteration
 priority ahead of further Goal Engine work. Phase50A received artifact-backed
 PASS through merged PR #87. Phase50B received artifact-backed PASS through
 merged PR #88. Phase50C received artifact-backed PASS through merged PR #89.
-Phase44H is internally complete and awaiting exact-SHA outside validation.
-Phase44I remains blocked.
+Phase44H received independent, exact-SHA outside validation (PASS) on
+2026-08-28, confirmed against the artifact-backed CI evidence for merged PR
+#90. Phase44I is unblocked and may proceed under the accepted Phase44H
+contract.
 Until Goal Engine reaches validated Stage 1 authority with explicit human
 promotion, existing human-governed planning remains active.
+
+Phase44H outside-validation record:
+
+```text
+outside validation performed: 2026-08-28
+validator: independent Claude Code session, not the Phase44H contract
+  author or the Phase44I implementer
+scope: full determination-by-determination review against
+  docs/OUTSIDE_VALIDATION_PHASE44H_GOAL_ENGINE_SUBSYSTEM_HEALTH_FOUNDATION_CONTRACT_PROMPT.md
+result: PASS
+authorized eight-document boundary: confirmed exact
+required commands independently reproduced: git diff --check (clean),
+  check_schema.py (PASS), full unittest discover (full pass) on a clean
+  extraction of the exact merged SHA
+domain separation, evidence-class boundaries, forbidden-work list, and
+  required record/vocabulary definitions: read in full against the
+  757-line contract text; no violation found
+CI artifact independently downloaded and read: codie-pr-validation-f7a650c...
+  final result CLEAN_PASS across deterministic, architecture
+  (qwen2.5-coder:7b), and adversarial (llama3.1:latest), zero findings
+human authorization: project owner reviewed this validation and authorized
+  recording it as PASS and unblocking Phase44I
+```
+
+Phase44H acceptance evidence:
+
+```text
+pull request: 90
+validated SHA: f7a650c321094b2f4b3359e9b7b3bbb143f31077
+workflow run ID: 33179234184
+artifact ID: 9689061654
+artifact digest: sha256:af10c5bf066490b5e8440becf91244fe318907104224046a9b39c9f7efd7ade7
+merge commit: 74577c9fc5c70e024d8bca739a00224aec881325
+deterministic: CLEAN_PASS
+architecture: CLEAN_PASS
+adversarial: CLEAN_PASS
+aggregate: CLEAN_PASS
+findings: 0
+errors: 0
+skipped validators: 0
+```
 
 Phase50A acceptance evidence:
 
