@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: validate the Phase44K Goal Engine Findings + Idea Ledger Runtime Contract
+Recommended next task: validate the Phase44M Goal Engine Findings + Idea Ledger Checkpoint / Freeze
 
 ## Constitutional Governance Overlay
 
@@ -125,8 +125,10 @@ Phase44H received independent, exact-SHA outside validation (PASS) on
 architecture, and adversarial `CLEAN_PASS`, zero findings, zero errors, and no
 skipped validators, then merged through human authority as PR #91. Phase44J is
 accepted through exact-SHA artifact-backed validation and merged PR #92.
-Phase44K is the active documentation-only Findings + Idea Ledger Runtime
-Contract. Phase44L remains blocked.
+Phase44K is accepted through exact-SHA artifact validation and merged PR #93.
+Phase44L is accepted through exact-SHA artifact validation and merged PR #94.
+Phase44M is the active documentation-only Findings + Idea Ledger Checkpoint /
+Freeze. Phase44N remains blocked.
 Until Goal Engine reaches validated Stage 1 authority with explicit human
 promotion, existing human-governed planning remains active.
 
@@ -546,14 +548,14 @@ next_phase_part: implementation-contract
 next_gate_scope: INTERMEDIATE_PACKET
 ```
 
-Phase44K Goal Engine Findings + Idea Ledger Runtime Contract tuple:
+Phase44M Goal Engine Findings + Idea Ledger Checkpoint / Freeze tuple:
 
 ```text
-phase_id: Phase44K
-phase_part: implementation-contract
+phase_id: Phase44M
+phase_part: outside-validation
 gate_scope: INTERMEDIATE_PACKET
-next_phase_id: Phase44L
-next_phase_part: implementation
+next_phase_id: Phase44N
+next_phase_part: implementation-contract
 next_gate_scope: INTERMEDIATE_PACKET
 ```
 
@@ -579,10 +581,11 @@ Phase44I is accepted through exact-SHA artifact-backed validation and merged PR
 evidence-bounded in-memory signals and Findings, defines no universal health
 score, produces no Goal, and implements no later capability. Phase44J is
 accepted through exact-SHA artifact-backed validation and merged PR #92. The
-current continuation is the documentation-only Phase44K Findings + Idea Ledger
-Runtime Contract. Phase44L remains blocked until exact-SHA Phase44K outside
-validation and human merge. The underlying Phase44-49 Goal Engine sequence
-remains unchanged and sequentially gated by
+current continuation is the documentation-only Phase44M Findings + Idea Ledger
+Checkpoint / Freeze. Phase44K and Phase44L are accepted through merged PRs #93
+and #94. Phase44N remains blocked until exact-SHA Phase44M outside validation
+and human merge. The underlying Phase44-49 Goal Engine sequence remains
+unchanged and sequentially gated by
 `docs/GOAL_ENGINE_IMPLEMENTATION_PROGRAM_V1.md`. Build Graph
 and CCPM-inspired execution remain reserved for conditional Phase48 work.
 The Phase50B implementation includes the 2026-08-25 owner-approved narrow
