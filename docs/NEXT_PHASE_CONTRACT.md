@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: validate the Phase44H Goal Engine Subsystem Health Foundation Contract
+Recommended next task: validate the Phase44J Goal Engine Subsystem Health Foundation checkpoint / freeze
 
 ## Constitutional Governance Overlay
 
@@ -121,8 +121,11 @@ PASS through merged PR #87. Phase50B received artifact-backed PASS through
 merged PR #88. Phase50C received artifact-backed PASS through merged PR #89.
 Phase44H received independent, exact-SHA outside validation (PASS) on
 2026-08-28, confirmed against the artifact-backed CI evidence for merged PR
-#90. Phase44I is unblocked and may proceed under the accepted Phase44H
-contract.
+#90. Phase44I received exact-SHA artifact-backed validation with deterministic,
+architecture, and adversarial `CLEAN_PASS`, zero findings, zero errors, and no
+skipped validators, then merged through human authority as PR #91. Phase44J is
+the active documentation-only Health Foundation checkpoint / freeze. Phase44K
+remains blocked.
 Until Goal Engine reaches validated Stage 1 authority with explicit human
 promotion, existing human-governed planning remains active.
 
@@ -158,6 +161,27 @@ workflow run ID: 33179234184
 artifact ID: 9689061654
 artifact digest: sha256:af10c5bf066490b5e8440becf91244fe318907104224046a9b39c9f7efd7ade7
 merge commit: 74577c9fc5c70e024d8bca739a00224aec881325
+deterministic: CLEAN_PASS
+architecture: CLEAN_PASS
+adversarial: CLEAN_PASS
+aggregate: CLEAN_PASS
+findings: 0
+errors: 0
+skipped validators: 0
+```
+
+Phase44I acceptance evidence:
+
+```text
+pull request: 91
+validated SHA: 02e87172a5dfab58286e813f227649b9c2612499
+workflow run ID: 33252853774
+rerun job ID: 99102192567
+artifact: codie-pr-validation-02e87172a5dfab58286e813f227649b9c2612499
+artifact ID: 9714990921
+artifact digest: sha256:2feeabcf91bc51bc6ed9ea5a46ee7c413e621f6ea5c745135bae589e539139b4
+merge commit: 0a3a77d8ffe6f2fc7ce43bf86017cf765c4bdfaf
+post-merge main workflow run ID: 33253232044
 deterministic: CLEAN_PASS
 architecture: CLEAN_PASS
 adversarial: CLEAN_PASS
@@ -479,6 +503,28 @@ next_phase_part: implementation
 next_gate_scope: INTERMEDIATE_PACKET
 ```
 
+Phase44I Goal Engine Subsystem Health Foundation Implementation tuple:
+
+```text
+phase_id: Phase44I
+phase_part: implementation
+gate_scope: INTERMEDIATE_PACKET
+next_phase_id: Phase44J
+next_phase_part: outside-validation
+next_gate_scope: INTERMEDIATE_PACKET
+```
+
+Phase44J Goal Engine Subsystem Health Foundation Checkpoint / Freeze tuple:
+
+```text
+phase_id: Phase44J
+phase_part: outside-validation
+gate_scope: INTERMEDIATE_PACKET
+next_phase_id: Phase44K
+next_phase_part: implementation-contract
+next_gate_scope: INTERMEDIATE_PACKET
+```
+
 Phase44B and Phase44C define and implement only immutable, deterministic,
 local-only, in-memory Goal Engine Foundation v1 records, pure validation, and
 canonical serialization. Phase44D freezes that accepted surface without
@@ -495,15 +541,15 @@ persistence, provider access, model calls, UI, CLI, Stream Deck control, or
 authority behavior.
 
 Phase50C is accepted through merged PR #89 and control has returned to the
-original Goal Engine sequence. Phase44H is accepted through merged PR #90
-after independent, exact-SHA outside validation (PASS) on 2026-08-28. The
-current continuation is Phase44I Health Foundation Implementation under that
-accepted contract. It keeps CODIE, JIN, and THEORY_CORPUS separate, defines
-evidence-backed health signals and Findings, defines no universal health
-score, produces no Goal, and implements no later capability. Phase44J requires
-exact-SHA artifact-backed outside validation and human merge of Phase44I before
-checkpoint work may begin. The underlying Phase44-49 Goal Engine sequence
-remains unchanged and sequentially gated by
+original Goal Engine sequence. Phase44H is accepted through merged PR #90.
+Phase44I is accepted through exact-SHA artifact-backed validation and merged PR
+#91. It keeps CODIE, JIN, and THEORY_CORPUS separate, produces only
+evidence-bounded in-memory signals and Findings, defines no universal health
+score, produces no Goal, and implements no later capability. The current
+continuation is the documentation-only Phase44J Health Foundation checkpoint /
+freeze. Phase44K remains blocked until exact-SHA Phase44J outside validation
+and human merge. The underlying Phase44-49 Goal Engine sequence remains
+unchanged and sequentially gated by
 `docs/GOAL_ENGINE_IMPLEMENTATION_PROGRAM_V1.md`. Build Graph
 and CCPM-inspired execution remain reserved for conditional Phase48 work.
 The Phase50B implementation includes the 2026-08-25 owner-approved narrow
