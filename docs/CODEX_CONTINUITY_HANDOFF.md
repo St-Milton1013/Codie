@@ -2661,32 +2661,35 @@ Phase50B Local Working Iteration v0.1 Implementation: PASS through merged PR #88
 Phase50C Local Working Iteration v0.1 Checkpoint / Freeze: PASS through merged PR #89
 Phase44H Subsystem Health Foundation Contract: PASS through merged PR #90
 Phase44I Health Foundation Implementation: PASS through merged PR #91
-Current action: validate the Phase44J Health Foundation Checkpoint / Freeze
-Phase44J Health Foundation Checkpoint / Freeze: INTERNAL PASS
-Phase44K Findings + Idea Ledger Runtime Contract: BLOCKED
+Phase44J Health Foundation Checkpoint / Freeze: PASS through merged PR #92
+Current action: validate the Phase44K Findings + Idea Ledger Runtime Contract
+Phase44K Findings + Idea Ledger Runtime Contract: INTERNAL PASS
+Phase44L Findings + Idea Ledger Implementation: BLOCKED
 ```
 
-Phase44J Goal Engine Subsystem Health Foundation Checkpoint / Freeze status:
+Phase44K Goal Engine Findings + Idea Ledger Runtime Contract status:
 
 ```text
-phase_id: Phase44J
-phase_part: outside-validation
+phase_id: Phase44K
+phase_part: implementation-contract
 gate_scope: INTERMEDIATE_PACKET
 status: internally complete; outside validation required
-scope commit: 96d106cba1984c04d39dad085bb340d66b24e150
+scope commit: b2ac50bb76423c8c48bc914e2e66e00814255e83
 authority: subordinate to docs/CODIE_V2_CONSTITUTION.md
-production/runtime changes: none; documentation-only checkpoint / freeze
+production/runtime changes: none; documentation-only implementation contract
 autonomous execution: not authorized
 human merge/release authority: preserved
 Foundation v1: frozen and unmodified
 State Engine v1: accepted and frozen through Phase44G / PR #86
 Local Working Iteration v0.1: accepted and frozen through Phase50C / PR #89
-Subsystem Health Foundation v1: accepted implementation; frozen by this packet only after acceptance
-health domains: CODIE, JIN, THEORY_CORPUS; strictly separate
-health score: none
-direct Goal production: forbidden
-next_phase_id: Phase44K
-next_phase_part: implementation-contract
+Subsystem Health Foundation v1: accepted and frozen through Phase44J / PR #92
+Idea != Finding != Goal: mandatory and permanent
+silent Idea merge: forbidden
+recurrence/reconsideration: explicit request only; no automatic promotion or Goal reactivation
+persistence: caller-owned; no storage engine in Phase44L
+direct Goal creation or execution: forbidden
+next_phase_id: Phase44L
+next_phase_part: implementation
 next_gate_scope: INTERMEDIATE_PACKET
 ```
 
@@ -2703,36 +2706,39 @@ Phase50B: Local Working Iteration v0.1 implementation; accepted through PR #88
 Phase50C: Local Working Iteration v0.1 checkpoint; accepted through PR #89
 Phase44H: Subsystem Health Foundation contract; accepted through PR #90
 Phase44I: Health Foundation implementation; accepted through PR #91
-Phase44J: documentation-only Health Foundation checkpoint / freeze; active
-Phase44K: Findings + Idea Ledger Runtime Contract; next and blocked
+Phase44J: documentation-only Health Foundation checkpoint / freeze; accepted through PR #92
+Phase44K: Findings + Idea Ledger Runtime Contract; active documentation-only packet
+Phase44L: Findings + Idea Ledger implementation; blocked
 Build Graph and CCPM-inspired execution: reserved for conditional Phase48
 current runtime authority: unchanged
 ```
 
-Phase44J checkpoint packet:
+Phase44K contract packet:
 
 ```text
-docs/PHASE44J_GOAL_ENGINE_SUBSYSTEM_HEALTH_FOUNDATION_CHECKPOINT_FREEZE_CONTRACT.md
-docs/CHECKPOINT_PHASE44J_GOAL_ENGINE_SUBSYSTEM_HEALTH_FOUNDATION_CHECKPOINT_FREEZE_REPORT.md
-docs/OUTSIDE_VALIDATION_PHASE44J_GOAL_ENGINE_SUBSYSTEM_HEALTH_FOUNDATION_CHECKPOINT_FREEZE_PROMPT.md
+docs/PHASE44K_GOAL_ENGINE_FINDINGS_IDEA_LEDGER_RUNTIME_CONTRACT.md
+docs/CHECKPOINT_PHASE44K_GOAL_ENGINE_FINDINGS_IDEA_LEDGER_RUNTIME_CONTRACT_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE44K_GOAL_ENGINE_FINDINGS_IDEA_LEDGER_RUNTIME_CONTRACT_PROMPT.md
 ```
 
-Frozen Phase44I implementation surfaces:
+Future Phase44L restricted implementation surfaces:
 
 ```text
-codie/goal_engine/health.py
+codie/goal_engine/idea_ledger.py
 codie/goal_engine/__init__.py
-tests/test_goal_engine_health.py
-docs/PHASE44I_GOAL_ENGINE_SUBSYSTEM_HEALTH_FOUNDATION_IMPLEMENTATION_REPORT.md
+tests/test_goal_engine_idea_ledger.py
+docs/PHASE44L_GOAL_ENGINE_FINDINGS_IDEA_LEDGER_IMPLEMENTATION_REPORT.md
 ```
 
-Phase44I keeps `CODIE`, `JIN`, and `THEORY_CORPUS` health records strictly
-separate. It implements evidence-backed signal observations, manifest-relative
-coverage, and immutable in-memory health Findings. It defines no overall or
-universal health score and authorizes no Goal production, durable ledger,
-work selection, mutation, provider fetch, model call, UI, CLI, Stream Deck,
-Build Graph, CCPM, or authority behavior. Phase44J freezes this accepted
-surface without modifying it.
+Phase44K defines a future pure, immutable, caller-input Findings + Idea Ledger
+surface. It keeps Idea, Finding, and Goal identities and authority strictly
+separate; records recurrence and relationships without silent merge; preserves
+original wording; emits explicit reconsideration requests without automatically
+promoting an Idea, creating a Goal, or reactivating an archived Goal; and
+returns caller-persistable snapshots without implementing persistence. It
+authorizes no work selection, mutation, provider fetch, model call, UI, CLI,
+Stream Deck, Build Graph, CCPM, or authority behavior. Phase44L remains blocked
+until exact-SHA Phase44K outside validation and human merge.
 
 Hard evidence, local-first/privacy/zero-cost, Theory and theory-skill review,
 external Rules/Corrections authority, Hareruya tournament-only provenance,
@@ -2787,6 +2793,26 @@ artifact ID: 9714990921
 artifact digest: sha256:2feeabcf91bc51bc6ed9ea5a46ee7c413e621f6ea5c745135bae589e539139b4
 merge commit: 0a3a77d8ffe6f2fc7ce43bf86017cf765c4bdfaf
 post-merge main workflow run ID: 33253232044
+deterministic: CLEAN_PASS
+architecture: CLEAN_PASS
+adversarial: CLEAN_PASS
+aggregate: CLEAN_PASS
+findings: 0
+errors: 0
+skipped validators: 0
+```
+
+Phase44J acceptance evidence:
+
+```text
+pull request: 92
+validated SHA: 6511459632ccdcb7711e3b6d13d58dd8cb8449e5
+workflow run ID: 33255846278
+validation job ID: 99109283311
+artifact ID: 9715775896
+artifact digest: sha256:1ca2245c4b505f1ede7b249ba76b126d8c0e66bb7f2f245081b7ef87fb45d590
+merge commit: fd255eb72b8a4c6ac56d633da499427f482fef21
+post-merge main workflow run ID: 33257430750
 deterministic: CLEAN_PASS
 architecture: CLEAN_PASS
 adversarial: CLEAN_PASS
