@@ -27,26 +27,18 @@ from .foundation import (
     semantic_hash,
 )
 
-HEALTH_SIGNAL_DEFINITION_SCHEMA_VERSION = (
-    "codie.goal_engine.health_signal_definition.v1"
-)
-HEALTH_SIGNAL_OBSERVATION_SCHEMA_VERSION = (
-    "codie.goal_engine.health_signal_observation.v1"
-)
+HEALTH_SIGNAL_DEFINITION_SCHEMA_VERSION = "codie.goal_engine.health_signal_definition.v1"
+HEALTH_SIGNAL_OBSERVATION_SCHEMA_VERSION = "codie.goal_engine.health_signal_observation.v1"
 HEALTH_MANIFEST_SCHEMA_VERSION = "codie.goal_engine.health_manifest.v1"
 HEALTH_FINDING_SCHEMA_VERSION = "codie.goal_engine.health_finding.v1"
-SUBSYSTEM_HEALTH_ASSESSMENT_SCHEMA_VERSION = (
-    "codie.goal_engine.subsystem_health_assessment.v1"
-)
+SUBSYSTEM_HEALTH_ASSESSMENT_SCHEMA_VERSION = "codie.goal_engine.subsystem_health_assessment.v1"
 SUBSYSTEM_HEALTH_ASSESSMENT_REFERENCE_SCHEMA_VERSION = (
     "codie.goal_engine.subsystem_health_assessment_reference.v1"
 )
 
 HEALTH_DOMAINS = frozenset({"CODIE", "JIN", "THEORY_CORPUS"})
 ASSESSMENT_CLASSES = frozenset({"OBJECTIVE", "SEMI_OBJECTIVE", "SUBJECTIVE"})
-SIGNAL_STATUSES = frozenset(
-    {"PASS", "DEGRADED", "FAIL", "UNKNOWN", "CONFLICTED", "NOT_APPLICABLE"}
-)
+SIGNAL_STATUSES = frozenset({"PASS", "DEGRADED", "FAIL", "UNKNOWN", "CONFLICTED", "NOT_APPLICABLE"})
 FINDING_CLASSES = frozenset(
     {
         "DEGRADATION",
@@ -103,12 +95,8 @@ HEALTH_CATEGORIES: Mapping[str, frozenset[str]] = MappingProxyType(
     }
 )
 
-_JIN_OBJECTIVE_CATEGORIES = frozenset(
-    {"FACTUAL_CORRECTNESS", "CITATION_COVERAGE", "PRIVACY"}
-)
-_JIN_INTERPRETIVE_CATEGORIES = frozenset(
-    {"CORRECTION_HANDLING", "RETRIEVAL_QUALITY"}
-)
+_JIN_OBJECTIVE_CATEGORIES = frozenset({"FACTUAL_CORRECTNESS", "CITATION_COVERAGE", "PRIVACY"})
+_JIN_INTERPRETIVE_CATEGORIES = frozenset({"CORRECTION_HANDLING", "RETRIEVAL_QUALITY"})
 _JIN_SUBJECTIVE_CATEGORIES = frozenset({"CLARITY", "USEFULNESS"})
 _THEORY_OBJECTIVE_CATEGORIES = frozenset(
     {
@@ -120,9 +108,7 @@ _THEORY_OBJECTIVE_CATEGORIES = frozenset(
         "GRAPH_HEALTH",
     }
 )
-_THEORY_INTERPRETIVE_CATEGORIES = frozenset(
-    {"RETRIEVAL_QUALITY", "DISCOVERED_GAPS"}
-)
+_THEORY_INTERPRETIVE_CATEGORIES = frozenset({"RETRIEVAL_QUALITY", "DISCOVERED_GAPS"})
 
 _ID_PATTERN = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._:/-]{0,127}$")
 _SHA256_PATTERN = re.compile(r"^[0-9a-f]{64}$")
@@ -257,9 +243,7 @@ class HealthSignalObservation:
         if self.fresh_until is not None:
             fresh_until = _parse_utc_timestamp(self.fresh_until, "fresh_until")
             if fresh_until < observed_at:
-                raise GoalEngineHealthError(
-                    "fresh_until cannot precede observed_at"
-                )
+                raise GoalEngineHealthError("fresh_until cannot precede observed_at")
         object.__setattr__(
             self,
             "evidence_ref_ids",
@@ -272,9 +256,7 @@ class HealthSignalObservation:
         )
         overlap = sorted(set(self.evidence_ref_ids) & set(self.conflict_ref_ids))
         if overlap:
-            raise GoalEngineHealthError(
-                "supporting and conflicting evidence must remain separate"
-            )
+            raise GoalEngineHealthError("supporting and conflicting evidence must remain separate")
         if self.limitation is not None:
             _require_text(self.limitation, "limitation")
         if self.not_applicable_reason is not None:
@@ -284,21 +266,13 @@ class HealthSignalObservation:
         if self.status == "UNKNOWN" and self.limitation is None:
             raise GoalEngineHealthError("UNKNOWN requires limitation")
         if self.status == "CONFLICTED" and len(self.conflict_ref_ids) < 2:
-            raise GoalEngineHealthError(
-                "CONFLICTED requires at least two conflict references"
-            )
+            raise GoalEngineHealthError("CONFLICTED requires at least two conflict references")
         if self.status != "CONFLICTED" and self.conflict_ref_ids:
-            raise GoalEngineHealthError(
-                "conflict references require CONFLICTED status"
-            )
+            raise GoalEngineHealthError("conflict references require CONFLICTED status")
         if self.status == "NOT_APPLICABLE" and self.not_applicable_reason is None:
-            raise GoalEngineHealthError(
-                "NOT_APPLICABLE requires not_applicable_reason"
-            )
+            raise GoalEngineHealthError("NOT_APPLICABLE requires not_applicable_reason")
         if self.status != "NOT_APPLICABLE" and self.not_applicable_reason is not None:
-            raise GoalEngineHealthError(
-                "not_applicable_reason requires NOT_APPLICABLE status"
-            )
+            raise GoalEngineHealthError("not_applicable_reason requires NOT_APPLICABLE status")
         _require_schema(self.schema_version, HEALTH_SIGNAL_OBSERVATION_SCHEMA_VERSION)
 
 
@@ -339,9 +313,7 @@ class HealthManifest:
         required = set(self.required_definition_ids)
         optional = set(self.optional_definition_ids)
         if required & optional:
-            raise GoalEngineHealthError(
-                "required and optional definition IDs must be disjoint"
-            )
+            raise GoalEngineHealthError("required and optional definition IDs must be disjoint")
         if required | optional != set(self.definition_ids):
             raise GoalEngineHealthError(
                 "required and optional definition IDs must exactly cover definition_ids"
@@ -351,9 +323,7 @@ class HealthManifest:
                 "THEORY_CORPUS requires a declared corpus-manifest reference"
             )
         if self.revision == 1 and self.supersedes_manifest_hash is not None:
-            raise GoalEngineHealthError(
-                "manifest revision 1 cannot supersede an earlier manifest"
-            )
+            raise GoalEngineHealthError("manifest revision 1 cannot supersede an earlier manifest")
         if self.revision > 1:
             if self.supersedes_manifest_hash is None:
                 raise GoalEngineHealthError(
@@ -385,9 +355,7 @@ class HealthFinding:
 
     def __post_init__(self) -> None:
         if not isinstance(self.finding_id, FindingIdentifier):
-            raise GoalEngineHealthError(
-                "finding_id must be FindingIdentifier"
-            )
+            raise GoalEngineHealthError("finding_id must be FindingIdentifier")
         validate_health_domain(self.domain)
         validate_finding_class(self.finding_class)
         object.__setattr__(
@@ -429,9 +397,7 @@ class HealthFinding:
             ),
         )
         if not self.disconfirmation_criteria:
-            raise GoalEngineHealthError(
-                "HealthFinding requires disconfirmation criteria"
-            )
+            raise GoalEngineHealthError("HealthFinding requires disconfirmation criteria")
         object.__setattr__(
             self,
             "limitations",
@@ -515,13 +481,9 @@ class SubsystemHealthAssessment:
                     "later assessment revisions require supersedes_assessment"
                 )
             if self.supersedes_assessment.assessment_id != self.assessment_id:
-                raise GoalEngineHealthError(
-                    "superseded assessment must use the same assessment_id"
-                )
+                raise GoalEngineHealthError("superseded assessment must use the same assessment_id")
             if self.supersedes_assessment.domain != self.domain:
-                raise GoalEngineHealthError(
-                    "superseded assessment must use the same domain"
-                )
+                raise GoalEngineHealthError("superseded assessment must use the same domain")
             if self.supersedes_assessment.revision != self.revision - 1:
                 raise GoalEngineHealthError(
                     "superseded assessment must be the immediately prior revision"
@@ -572,40 +534,28 @@ def validate_health_manifest(
         definition_values = _definition_tuple(definitions)
         definition_ids = tuple(item.definition_id for item in definition_values)
         if definition_ids != manifest.definition_ids:
-            raise GoalEngineHealthError(
-                "definitions must exactly match manifest definition_ids"
-            )
+            raise GoalEngineHealthError("definitions must exactly match manifest definition_ids")
         if any(item.domain != manifest.domain for item in definition_values):
-            raise GoalEngineHealthError(
-                "manifest definitions must remain in one domain"
-            )
+            raise GoalEngineHealthError("manifest definitions must remain in one domain")
     if evidence_snapshot is not None:
         evidence_values = _evidence_reference_tuple(evidence_snapshot)
         evidence_ids = {item.evidence_ref_id for item in evidence_values}
         missing = sorted(set(manifest.scope_manifest_ref_ids) - evidence_ids)
         if missing:
-            raise GoalEngineHealthError(
-                f"dangling scope manifest reference: {missing[0]}"
-            )
+            raise GoalEngineHealthError(f"dangling scope manifest reference: {missing[0]}")
     if prior_manifest is not None:
         _require_type(prior_manifest, HealthManifest, "prior_manifest")
         if manifest.revision != prior_manifest.revision + 1:
-            raise GoalEngineHealthError(
-                "manifest must supersede the immediately prior revision"
-            )
+            raise GoalEngineHealthError("manifest must supersede the immediately prior revision")
         if manifest.manifest_id != prior_manifest.manifest_id:
-            raise GoalEngineHealthError(
-                "manifest revision must retain manifest_id"
-            )
+            raise GoalEngineHealthError("manifest revision must retain manifest_id")
         if manifest.domain != prior_manifest.domain:
             raise GoalEngineHealthError("manifest revision must retain domain")
         if manifest.subject_id != prior_manifest.subject_id:
             raise GoalEngineHealthError("manifest revision must retain subject_id")
         expected_hash = health_manifest_semantic_hash(prior_manifest)
         if manifest.supersedes_manifest_hash != expected_hash:
-            raise GoalEngineHealthError(
-                "supersedes_manifest_hash does not match prior manifest"
-            )
+            raise GoalEngineHealthError("supersedes_manifest_hash does not match prior manifest")
     return manifest
 
 
@@ -621,9 +571,7 @@ def validate_subsystem_health_assessment(
         assessment.evidence_snapshot,
     )
     definition_by_id = {item.definition_id: item for item in assessment.definitions}
-    evidence_by_id = {
-        item.evidence_ref_id: item for item in assessment.evidence_snapshot
-    }
+    evidence_by_id = {item.evidence_ref_id: item for item in assessment.evidence_snapshot}
     observations_by_definition: dict[str, HealthSignalObservation] = {}
     for observation in assessment.signals:
         definition = definition_by_id.get(observation.definition_id)
@@ -643,13 +591,10 @@ def validate_subsystem_health_assessment(
         )
         observations_by_definition[observation.definition_id] = observation
     missing_required = sorted(
-        set(assessment.manifest.required_definition_ids)
-        - set(observations_by_definition)
+        set(assessment.manifest.required_definition_ids) - set(observations_by_definition)
     )
     if missing_required:
-        raise GoalEngineHealthError(
-            f"missing required observation: {missing_required[0]}"
-        )
+        raise GoalEngineHealthError(f"missing required observation: {missing_required[0]}")
     required_observations = tuple(
         observations_by_definition[definition_id]
         for definition_id in assessment.manifest.required_definition_ids
@@ -692,21 +637,15 @@ def validate_subsystem_health_assessment_revision(
     validate_subsystem_health_assessment(assessment)
     validate_subsystem_health_assessment(prior_assessment)
     if assessment.revision != prior_assessment.revision + 1:
-        raise GoalEngineHealthError(
-            "assessment must supersede the immediately prior revision"
-        )
+        raise GoalEngineHealthError("assessment must supersede the immediately prior revision")
     if assessment.assessment_id != prior_assessment.assessment_id:
         raise GoalEngineHealthError("assessment revision must retain assessment_id")
     if assessment.domain != prior_assessment.domain:
         raise GoalEngineHealthError("assessment revision must retain domain")
     reference = assessment.supersedes_assessment
     if reference is None:
-        raise GoalEngineHealthError(
-            "later assessment revision requires supersedes_assessment"
-        )
-    if reference.semantic_hash != subsystem_health_assessment_semantic_hash(
-        prior_assessment
-    ):
+        raise GoalEngineHealthError("later assessment revision requires supersedes_assessment")
+    if reference.semantic_hash != subsystem_health_assessment_semantic_hash(prior_assessment):
         raise GoalEngineHealthError(
             "supersedes_assessment semantic hash does not match prior assessment"
         )
@@ -739,9 +678,7 @@ def build_subsystem_health_assessment(
     if manifest.domain != domain:
         raise GoalEngineHealthError("builder and manifest domains must match")
     if manifest.revision > 1 and prior_manifest is None:
-        raise GoalEngineHealthError(
-            "prior_manifest is required to build a later manifest revision"
-        )
+        raise GoalEngineHealthError("prior_manifest is required to build a later manifest revision")
     validate_health_manifest(
         manifest,
         definition_values,
@@ -773,9 +710,7 @@ def build_subsystem_health_assessment(
         set(manifest.required_definition_ids) - set(observations_by_definition)
     )
     if missing_required:
-        raise GoalEngineHealthError(
-            f"missing required observation: {missing_required[0]}"
-        )
+        raise GoalEngineHealthError(f"missing required observation: {missing_required[0]}")
     signal_by_id = {item.signal_id: item for item in signal_values}
     for finding in caller_findings:
         _validate_finding_against_signals(
@@ -1079,25 +1014,18 @@ def subsystem_health_assessment_to_dict(
         "domain": assessment.domain,
         "manifest": health_manifest_to_dict(assessment.manifest),
         "as_of": assessment.as_of,
-        "definitions": [
-            health_signal_definition_to_dict(item) for item in assessment.definitions
-        ],
-        "signals": [
-            health_signal_observation_to_dict(item) for item in assessment.signals
-        ],
+        "definitions": [health_signal_definition_to_dict(item) for item in assessment.definitions],
+        "signals": [health_signal_observation_to_dict(item) for item in assessment.signals],
         "findings": [health_finding_to_dict(item) for item in assessment.findings],
         "evidence_snapshot": [
-            goal_evidence_reference_to_dict(item)
-            for item in assessment.evidence_snapshot
+            goal_evidence_reference_to_dict(item) for item in assessment.evidence_snapshot
         ],
         "required_signal_count": assessment.required_signal_count,
         "observed_required_signal_count": assessment.observed_required_signal_count,
         "unknown_required_signal_count": assessment.unknown_required_signal_count,
         "conflicted_required_signal_count": assessment.conflicted_required_signal_count,
         "supersedes_assessment": (
-            subsystem_health_assessment_reference_to_dict(
-                assessment.supersedes_assessment
-            )
+            subsystem_health_assessment_reference_to_dict(assessment.supersedes_assessment)
             if assessment.supersedes_assessment is not None
             else None
         ),
@@ -1126,9 +1054,7 @@ def subsystem_health_assessment_from_dict(
         "schema_version",
     }
     data = _require_fields(payload, fields)
-    data["manifest"] = health_manifest_from_dict(
-        _require_mapping(data["manifest"], "manifest")
-    )
+    data["manifest"] = health_manifest_from_dict(_require_mapping(data["manifest"], "manifest"))
     data["definitions"] = tuple(
         health_signal_definition_from_dict(_require_mapping(item, "definition"))
         for item in _json_tuple(data["definitions"], "definitions")
@@ -1146,12 +1072,10 @@ def subsystem_health_assessment_from_dict(
         for item in _json_tuple(data["evidence_snapshot"], "evidence_snapshot")
     )
     if data["supersedes_assessment"] is not None:
-        data["supersedes_assessment"] = (
-            subsystem_health_assessment_reference_from_dict(
-                _require_mapping(
-                    data["supersedes_assessment"],
-                    "supersedes_assessment",
-                )
+        data["supersedes_assessment"] = subsystem_health_assessment_reference_from_dict(
+            _require_mapping(
+                data["supersedes_assessment"],
+                "supersedes_assessment",
             )
         )
     return SubsystemHealthAssessment(**data)
@@ -1203,32 +1127,22 @@ def _validate_domain_assessment_class(
         raise GoalEngineHealthError("CODIE signals must be OBJECTIVE in v1")
     if domain == "JIN":
         if category in _JIN_OBJECTIVE_CATEGORIES and assessment_class != "OBJECTIVE":
-            raise GoalEngineHealthError(
-                f"JIN {category} signals must be OBJECTIVE"
-            )
+            raise GoalEngineHealthError(f"JIN {category} signals must be OBJECTIVE")
         if category in _JIN_INTERPRETIVE_CATEGORIES and assessment_class not in {
             "OBJECTIVE",
             "SEMI_OBJECTIVE",
         }:
-            raise GoalEngineHealthError(
-                f"JIN {category} signals cannot be SUBJECTIVE"
-            )
+            raise GoalEngineHealthError(f"JIN {category} signals cannot be SUBJECTIVE")
         if category in _JIN_SUBJECTIVE_CATEGORIES and assessment_class != "SUBJECTIVE":
-            raise GoalEngineHealthError(
-                f"JIN {category} signals must be SUBJECTIVE"
-            )
+            raise GoalEngineHealthError(f"JIN {category} signals must be SUBJECTIVE")
     if domain == "THEORY_CORPUS":
         if category in _THEORY_OBJECTIVE_CATEGORIES and assessment_class != "OBJECTIVE":
-            raise GoalEngineHealthError(
-                f"THEORY_CORPUS {category} signals must be OBJECTIVE"
-            )
+            raise GoalEngineHealthError(f"THEORY_CORPUS {category} signals must be OBJECTIVE")
         if category in _THEORY_INTERPRETIVE_CATEGORIES and assessment_class not in {
             "OBJECTIVE",
             "SEMI_OBJECTIVE",
         }:
-            raise GoalEngineHealthError(
-                f"THEORY_CORPUS {category} signals cannot be SUBJECTIVE"
-            )
+            raise GoalEngineHealthError(f"THEORY_CORPUS {category} signals cannot be SUBJECTIVE")
 
 
 def _validate_observation_against_definition(
@@ -1251,25 +1165,18 @@ def _validate_observation_against_definition(
         observation.definition_id in manifest.required_definition_ids
         and observation.status == "NOT_APPLICABLE"
     ):
-        raise GoalEngineHealthError(
-            "NOT_APPLICABLE cannot hide a required signal"
-        )
-    referenced_ids = set(observation.evidence_ref_ids) | set(
-        observation.conflict_ref_ids
-    )
+        raise GoalEngineHealthError("NOT_APPLICABLE cannot hide a required signal")
+    referenced_ids = set(observation.evidence_ref_ids) | set(observation.conflict_ref_ids)
     missing = sorted(referenced_ids - set(evidence_by_id))
     if missing:
         raise GoalEngineHealthError(f"dangling evidence reference: {missing[0]}")
     disallowed = sorted(
         evidence_ref_id
         for evidence_ref_id in referenced_ids
-        if evidence_by_id[evidence_ref_id].evidence_class
-        not in definition.allowed_evidence_classes
+        if evidence_by_id[evidence_ref_id].evidence_class not in definition.allowed_evidence_classes
     )
     if disallowed:
-        raise GoalEngineHealthError(
-            f"evidence class is not allowed by definition: {disallowed[0]}"
-        )
+        raise GoalEngineHealthError(f"evidence class is not allowed by definition: {disallowed[0]}")
 
 
 def _validate_finding_against_signals(
@@ -1280,31 +1187,23 @@ def _validate_finding_against_signals(
 ) -> None:
     missing_signals = sorted(set(finding.signal_ids) - set(signal_by_id))
     if missing_signals:
-        raise GoalEngineHealthError(
-            f"finding references unknown signal: {missing_signals[0]}"
-        )
+        raise GoalEngineHealthError(f"finding references unknown signal: {missing_signals[0]}")
     signals = tuple(signal_by_id[item] for item in finding.signal_ids)
     if any(item.domain != finding.domain for item in signals):
         raise GoalEngineHealthError("finding and signal domains must match")
     if finding.finding_class != "STALE_EVIDENCE" and any(
         item.status in {"PASS", "NOT_APPLICABLE"} for item in signals
     ):
-        raise GoalEngineHealthError(
-            "finding cannot resolve from PASS or NOT_APPLICABLE signal"
-        )
+        raise GoalEngineHealthError("finding cannot resolve from PASS or NOT_APPLICABLE signal")
     if finding.finding_class == "STALE_EVIDENCE":
         if any(item.status == "NOT_APPLICABLE" for item in signals):
-            raise GoalEngineHealthError(
-                "STALE_EVIDENCE cannot resolve from NOT_APPLICABLE signal"
-            )
+            raise GoalEngineHealthError("STALE_EVIDENCE cannot resolve from NOT_APPLICABLE signal")
         if not all(
             item.fresh_until is not None
             and as_of > _parse_utc_timestamp(item.fresh_until, "fresh_until")
             for item in signals
         ):
-            raise GoalEngineHealthError(
-                "STALE_EVIDENCE requires stale caller-supplied signals"
-            )
+            raise GoalEngineHealthError("STALE_EVIDENCE requires stale caller-supplied signals")
     expected_statuses = {
         "DEGRADATION": {"DEGRADED"},
         "FAILURE": {"FAIL"},
@@ -1314,37 +1213,28 @@ def _validate_finding_against_signals(
         "MANIFEST_GAP": {"UNKNOWN"},
     }
     if finding.finding_class in expected_statuses and any(
-        item.status not in expected_statuses[finding.finding_class]
-        for item in signals
+        item.status not in expected_statuses[finding.finding_class] for item in signals
     ):
-        raise GoalEngineHealthError(
-            "finding class does not match source signal status"
-        )
+        raise GoalEngineHealthError("finding class does not match source signal status")
     allowed_evidence = set().union(*(set(item.evidence_ref_ids) for item in signals))
     allowed_conflicts = set().union(*(set(item.conflict_ref_ids) for item in signals))
     if not set(finding.evidence_ref_ids) <= allowed_evidence:
         raise GoalEngineHealthError("finding evidence exceeds source signals")
     if not set(finding.conflict_ref_ids) <= allowed_conflicts:
-        raise GoalEngineHealthError(
-            "finding conflict evidence exceeds source signals"
-        )
+        raise GoalEngineHealthError("finding conflict evidence exceeds source signals")
     missing_evidence = sorted(
-        (set(finding.evidence_ref_ids) | set(finding.conflict_ref_ids))
-        - set(evidence_by_id)
+        (set(finding.evidence_ref_ids) | set(finding.conflict_ref_ids)) - set(evidence_by_id)
     )
     if missing_evidence:
         raise GoalEngineHealthError(
             f"finding contains dangling evidence reference: {missing_evidence[0]}"
         )
-    if finding.finding_class == "EVIDENCE_CONFLICT" and len(
-        finding.conflict_ref_ids
-    ) < 2:
-        raise GoalEngineHealthError(
-            "EVIDENCE_CONFLICT requires at least two conflict references"
-        )
-    if finding.finding_class == "EVIDENCE_CONFLICT" and set(
-        finding.conflict_ref_ids
-    ) != allowed_conflicts:
+    if finding.finding_class == "EVIDENCE_CONFLICT" and len(finding.conflict_ref_ids) < 2:
+        raise GoalEngineHealthError("EVIDENCE_CONFLICT requires at least two conflict references")
+    if (
+        finding.finding_class == "EVIDENCE_CONFLICT"
+        and set(finding.conflict_ref_ids) != allowed_conflicts
+    ):
         raise GoalEngineHealthError(
             "EVIDENCE_CONFLICT must preserve all source conflict references"
         )
@@ -1352,9 +1242,7 @@ def _validate_finding_against_signals(
     if finding.finding_class == "PRIVACY_OR_SECURITY" and not any(
         item.category in privacy_categories for item in signals
     ):
-        raise GoalEngineHealthError(
-            "PRIVACY_OR_SECURITY requires a privacy or security signal"
-        )
+        raise GoalEngineHealthError("PRIVACY_OR_SECURITY requires a privacy or security signal")
 
 
 def _validate_policy_references(
@@ -1400,9 +1288,10 @@ def _generated_findings(
     if (
         observation.status != "NOT_APPLICABLE"
         and observation.fresh_until is not None
-        and as_of_value > _parse_utc_timestamp(
-        observation.fresh_until,
-        "fresh_until",
+        and as_of_value
+        > _parse_utc_timestamp(
+            observation.fresh_until,
+            "fresh_until",
         )
     ):
         finding_classes.append("STALE_EVIDENCE")
@@ -1434,9 +1323,7 @@ def _generated_finding(
         "finding_class": finding_class,
         "evidence_semantics": [
             goal_evidence_reference_to_dict(evidence_by_id[evidence_ref_id])
-            for evidence_ref_id in (
-                observation.evidence_ref_ids + observation.conflict_ref_ids
-            )
+            for evidence_ref_id in (observation.evidence_ref_ids + observation.conflict_ref_ids)
         ],
     }
     finding_id = FindingIdentifier(
@@ -1445,9 +1332,7 @@ def _generated_finding(
         schema_version=IDENTIFIER_SCHEMA_VERSION,
     )
     if finding_class == "STALE_EVIDENCE":
-        disconfirmation = (
-            f"Supply current evidence with fresh_until at or after {as_of}.",
-        )
+        disconfirmation = (f"Supply current evidence with fresh_until at or after {as_of}.",)
         limitations = (
             "The caller-supplied signal status is preserved; only freshness is flagged.",
         )
@@ -1457,12 +1342,8 @@ def _generated_finding(
             observation.limitation or "The required evidence is not currently available.",
         )
     elif finding_class == "EVIDENCE_CONFLICT":
-        disconfirmation = (
-            "Resolve the cited conflicting evidence without discarding provenance.",
-        )
-        limitations = (
-            observation.limitation or "The cited evidence remains conflicted.",
-        )
+        disconfirmation = ("Resolve the cited conflicting evidence without discarding provenance.",)
+        limitations = (observation.limitation or "The cited evidence remains conflicted.",)
     else:
         disconfirmation = _unique_texts(
             (definition.pass_condition, definition.degraded_condition)
@@ -1557,9 +1438,7 @@ def _policy_record_tuple(
         raise GoalEngineHealthError("policy_snapshot must be a tuple")
     for item in values:
         if not isinstance(item, GoalPolicyRecord):
-            raise GoalEngineHealthError(
-                "policy_snapshot must contain GoalPolicyRecord values"
-            )
+            raise GoalEngineHealthError("policy_snapshot must contain GoalPolicyRecord values")
     ordered = tuple(sorted(values, key=lambda item: (item.policy_id, item.policy_version)))
     duplicate_ids = _duplicates([item.policy_id for item in ordered])
     if duplicate_ids:
@@ -1579,15 +1458,11 @@ def _record_tuple(
         raise GoalEngineHealthError(f"{field_name} must be a tuple")
     for item in values:
         if not isinstance(item, record_type):
-            raise GoalEngineHealthError(
-                f"{field_name} must contain {record_type.__name__} values"
-            )
+            raise GoalEngineHealthError(f"{field_name} must contain {record_type.__name__} values")
     ordered = tuple(sorted(values, key=identity))
     duplicate_ids = _duplicates([identity(item) for item in ordered])
     if duplicate_ids:
-        raise GoalEngineHealthError(
-            f"{field_name} contains duplicate ID: {duplicate_ids[0]}"
-        )
+        raise GoalEngineHealthError(f"{field_name} contains duplicate ID: {duplicate_ids[0]}")
     return ordered
 
 
@@ -1599,9 +1474,7 @@ def _require_fields(
     keys = set(mapping)
     forbidden = sorted(keys & _FORBIDDEN_FIELD_NAMES)
     if forbidden:
-        raise GoalEngineHealthError(
-            f"payload contains forbidden field: {forbidden[0]}"
-        )
+        raise GoalEngineHealthError(f"payload contains forbidden field: {forbidden[0]}")
     missing = sorted(fields - keys)
     if missing:
         raise GoalEngineHealthError(f"payload missing required field: {missing[0]}")
@@ -1636,9 +1509,7 @@ def _id_tuple(
     validated = tuple(_require_id(item, field_name) for item in values)
     duplicates = _duplicates(list(validated))
     if duplicates:
-        raise GoalEngineHealthError(
-            f"{field_name} contains duplicate ID: {duplicates[0]}"
-        )
+        raise GoalEngineHealthError(f"{field_name} contains duplicate ID: {duplicates[0]}")
     return tuple(sorted(validated)) if sort else validated
 
 
@@ -1653,9 +1524,7 @@ def _label_tuple(
     validated = tuple(_require_label(item, field_name) for item in values)
     duplicates = _duplicates(list(validated))
     if duplicates:
-        raise GoalEngineHealthError(
-            f"{field_name} contains duplicate value: {duplicates[0]}"
-        )
+        raise GoalEngineHealthError(f"{field_name} contains duplicate value: {duplicates[0]}")
     return tuple(sorted(validated)) if sort else validated
 
 
@@ -1670,9 +1539,7 @@ def _text_tuple(
     validated = tuple(_require_text(item, field_name) for item in values)
     duplicates = _duplicates(list(validated))
     if duplicates:
-        raise GoalEngineHealthError(
-            f"{field_name} contains duplicate value: {duplicates[0]}"
-        )
+        raise GoalEngineHealthError(f"{field_name} contains duplicate value: {duplicates[0]}")
     return tuple(sorted(validated)) if sort else validated
 
 
@@ -1711,9 +1578,7 @@ def _require_label(value: Any, field_name: str) -> str:
 def _require_id(value: Any, field_name: str) -> str:
     text = _require_text(value, field_name)
     if not _ID_PATTERN.fullmatch(text):
-        raise GoalEngineHealthError(
-            f"{field_name} must be a stable local identifier"
-        )
+        raise GoalEngineHealthError(f"{field_name} must be a stable local identifier")
     return text
 
 
@@ -1725,9 +1590,7 @@ def _require_positive_int(value: Any, field_name: str) -> int:
 
 def _require_nonnegative_int(value: Any, field_name: str) -> int:
     if not isinstance(value, int) or isinstance(value, bool) or value < 0:
-        raise GoalEngineHealthError(
-            f"{field_name} must be a nonnegative integer"
-        )
+        raise GoalEngineHealthError(f"{field_name} must be a nonnegative integer")
     return value
 
 
@@ -1765,9 +1628,7 @@ def _require_schema(value: Any, expected: str) -> str:
 def _require_sha256(value: Any, field_name: str) -> str:
     text = _require_text(value, field_name)
     if not _SHA256_PATTERN.fullmatch(text):
-        raise GoalEngineHealthError(
-            f"{field_name} must be a lowercase SHA-256 hex digest"
-        )
+        raise GoalEngineHealthError(f"{field_name} must be a lowercase SHA-256 hex digest")
     return text
 
 
@@ -1777,9 +1638,7 @@ def _parse_utc_timestamp(value: Any, field_name: str) -> datetime:
     try:
         parsed = datetime.fromisoformat(normalized)
     except ValueError as exc:
-        raise GoalEngineHealthError(
-            f"{field_name} must be an ISO-8601 UTC timestamp"
-        ) from exc
+        raise GoalEngineHealthError(f"{field_name} must be an ISO-8601 UTC timestamp") from exc
     if parsed.tzinfo is None or parsed.utcoffset() != timedelta(0):
         raise GoalEngineHealthError(f"{field_name} must be UTC")
     return parsed
@@ -1787,9 +1646,7 @@ def _parse_utc_timestamp(value: Any, field_name: str) -> datetime:
 
 def _require_type(value: Any, expected_type: type, field_name: str) -> None:
     if not isinstance(value, expected_type):
-        raise GoalEngineHealthError(
-            f"{field_name} must be {expected_type.__name__}"
-        )
+        raise GoalEngineHealthError(f"{field_name} must be {expected_type.__name__}")
 
 
 def _duplicates(values: list[Any]) -> list[Any]:

@@ -152,9 +152,7 @@ def observation(
 
 def assessment(**overrides):
     signal_definition = overrides.pop("signal_definition", None) or definition()
-    health_manifest = overrides.pop("health_manifest", None) or manifest(
-        signal_definition
-    )
+    health_manifest = overrides.pop("health_manifest", None) or manifest(signal_definition)
     signal = overrides.pop("signal", None) or observation(
         signal_definition,
         health_manifest,
@@ -192,10 +190,7 @@ class HealthVocabularyTest(unittest.TestCase):
             {"CODIE", "JIN", "THEORY_CORPUS"},
         )
         self.assertEqual(
-            {
-                validate_signal_status(value)
-                for value in goal_engine.SIGNAL_STATUSES
-            },
+            {validate_signal_status(value) for value in goal_engine.SIGNAL_STATUSES},
             {
                 "PASS",
                 "DEGRADED",
@@ -514,11 +509,7 @@ class HealthAssessmentBuildTest(unittest.TestCase):
         with self.assertRaisesRegex(GoalEngineHealthError, "dangling evidence"):
             assessment(evidence_snapshot=())
         with self.assertRaisesRegex(GoalEngineHealthError, "not allowed"):
-            assessment(
-                evidence_snapshot=(
-                    evidence(evidence_class="TOURNAMENT_RESULT"),
-                )
-            )
+            assessment(evidence_snapshot=(evidence(evidence_class="TOURNAMENT_RESULT"),))
 
     def test_cross_domain_category_subject_and_version_mismatches_fail_closed(self) -> None:
         cases = (
@@ -557,9 +548,7 @@ class HealthAssessmentBuildTest(unittest.TestCase):
         self.assertEqual(result.definitions[0].policy_ref_ids, ("policy:health:1",))
 
     def test_generated_finding_identity_and_output_are_order_stable(self) -> None:
-        signal_definition = definition(
-            allowed_evidence_classes=("VALIDATOR_RUN", "TEST_RUN")
-        )
+        signal_definition = definition(allowed_evidence_classes=("VALIDATOR_RUN", "TEST_RUN"))
         health_manifest = manifest(signal_definition)
         signal = observation(
             signal_definition,
