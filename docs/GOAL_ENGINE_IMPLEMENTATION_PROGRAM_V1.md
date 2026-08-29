@@ -13,8 +13,9 @@ accepted. Phase50A was accepted through merged PR #87 and Phase50B through
 merged PR #88. Phase50C is accepted through merged PR #89, completing the
 temporary human-priority interposition. Phase44H is accepted through merged PR
 #90. Phase44I is accepted through exact-SHA artifact validation and merged PR
-#91. Phase44J is the active documentation-only Health Foundation checkpoint /
-freeze; Phase44K remains blocked until Phase44J acceptance and human merge.
+#91. Phase44J is accepted through exact-SHA artifact validation and merged PR
+#92. Phase44K is the active documentation-only Findings + Idea Ledger Runtime
+Contract; Phase44L remains blocked until Phase44K acceptance and human merge.
 
 On 2026-08-25 the project owner approved a narrow Phase50B usability amendment
 for explicit user-initiated official card-data preparation and public Moxfield
@@ -591,8 +592,9 @@ Phase44A ratification: accepted
 -> Phase50C Local Working Iteration checkpoint: accepted through PR #89
 -> Phase44H Subsystem Health Foundation contract: accepted through PR #90
 -> Phase44I Health Foundation implementation: accepted through PR #91
--> Phase44J Health Foundation checkpoint: active documentation-only packet
--> Phase44K Findings + Idea Ledger Runtime Contract: blocked
+-> Phase44J Health Foundation checkpoint: accepted through PR #92
+-> Phase44K Findings + Idea Ledger Runtime Contract: active documentation-only packet
+-> Phase44L Findings + Idea Ledger implementation: blocked
 -> continue the original Goal Engine sequence
 ```
 

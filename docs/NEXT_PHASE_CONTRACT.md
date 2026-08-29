@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: validate the Phase44J Goal Engine Subsystem Health Foundation checkpoint / freeze
+Recommended next task: validate the Phase44K Goal Engine Findings + Idea Ledger Runtime Contract
 
 ## Constitutional Governance Overlay
 
@@ -124,8 +124,9 @@ Phase44H received independent, exact-SHA outside validation (PASS) on
 #90. Phase44I received exact-SHA artifact-backed validation with deterministic,
 architecture, and adversarial `CLEAN_PASS`, zero findings, zero errors, and no
 skipped validators, then merged through human authority as PR #91. Phase44J is
-the active documentation-only Health Foundation checkpoint / freeze. Phase44K
-remains blocked.
+accepted through exact-SHA artifact-backed validation and merged PR #92.
+Phase44K is the active documentation-only Findings + Idea Ledger Runtime
+Contract. Phase44L remains blocked.
 Until Goal Engine reaches validated Stage 1 authority with explicit human
 promotion, existing human-governed planning remains active.
 
@@ -182,6 +183,26 @@ artifact ID: 9714990921
 artifact digest: sha256:2feeabcf91bc51bc6ed9ea5a46ee7c413e621f6ea5c745135bae589e539139b4
 merge commit: 0a3a77d8ffe6f2fc7ce43bf86017cf765c4bdfaf
 post-merge main workflow run ID: 33253232044
+deterministic: CLEAN_PASS
+architecture: CLEAN_PASS
+adversarial: CLEAN_PASS
+aggregate: CLEAN_PASS
+findings: 0
+errors: 0
+skipped validators: 0
+```
+
+Phase44J acceptance evidence:
+
+```text
+pull request: 92
+validated SHA: 6511459632ccdcb7711e3b6d13d58dd8cb8449e5
+workflow run ID: 33255846278
+validation job ID: 99109283311
+artifact ID: 9715775896
+artifact digest: sha256:1ca2245c4b505f1ede7b249ba76b126d8c0e66bb7f2f245081b7ef87fb45d590
+merge commit: fd255eb72b8a4c6ac56d633da499427f482fef21
+post-merge main workflow run ID: 33257430750
 deterministic: CLEAN_PASS
 architecture: CLEAN_PASS
 adversarial: CLEAN_PASS
@@ -525,6 +546,17 @@ next_phase_part: implementation-contract
 next_gate_scope: INTERMEDIATE_PACKET
 ```
 
+Phase44K Goal Engine Findings + Idea Ledger Runtime Contract tuple:
+
+```text
+phase_id: Phase44K
+phase_part: implementation-contract
+gate_scope: INTERMEDIATE_PACKET
+next_phase_id: Phase44L
+next_phase_part: implementation
+next_gate_scope: INTERMEDIATE_PACKET
+```
+
 Phase44B and Phase44C define and implement only immutable, deterministic,
 local-only, in-memory Goal Engine Foundation v1 records, pure validation, and
 canonical serialization. Phase44D freezes that accepted surface without
@@ -545,11 +577,12 @@ original Goal Engine sequence. Phase44H is accepted through merged PR #90.
 Phase44I is accepted through exact-SHA artifact-backed validation and merged PR
 #91. It keeps CODIE, JIN, and THEORY_CORPUS separate, produces only
 evidence-bounded in-memory signals and Findings, defines no universal health
-score, produces no Goal, and implements no later capability. The current
-continuation is the documentation-only Phase44J Health Foundation checkpoint /
-freeze. Phase44K remains blocked until exact-SHA Phase44J outside validation
-and human merge. The underlying Phase44-49 Goal Engine sequence remains
-unchanged and sequentially gated by
+score, produces no Goal, and implements no later capability. Phase44J is
+accepted through exact-SHA artifact-backed validation and merged PR #92. The
+current continuation is the documentation-only Phase44K Findings + Idea Ledger
+Runtime Contract. Phase44L remains blocked until exact-SHA Phase44K outside
+validation and human merge. The underlying Phase44-49 Goal Engine sequence
+remains unchanged and sequentially gated by
 `docs/GOAL_ENGINE_IMPLEMENTATION_PROGRAM_V1.md`. Build Graph
 and CCPM-inspired execution remain reserved for conditional Phase48 work.
 The Phase50B implementation includes the 2026-08-25 owner-approved narrow
