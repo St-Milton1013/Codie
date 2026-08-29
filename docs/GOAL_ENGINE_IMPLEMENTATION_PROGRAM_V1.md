@@ -11,8 +11,9 @@ Current execution boundary: Phase44E State Engine contract, Phase44F State
 Engine implementation, and the Phase44G State Engine checkpoint / freeze are
 accepted. Phase50A was accepted through merged PR #87 and Phase50B through
 merged PR #88. Phase50C is accepted through merged PR #89, completing the
-temporary human-priority interposition. Phase44H is the active contract packet;
-Phase44I remains blocked pending Phase44H acceptance.
+temporary human-priority interposition. Phase44H is accepted through merged PR
+#90 after independent, exact-SHA outside validation (PASS) on 2026-08-28;
+Phase44I is the active implementation packet.
 
 On 2026-08-25 the project owner approved a narrow Phase50B usability amendment
 for explicit user-initiated official card-data preparation and public Moxfield
@@ -587,8 +588,8 @@ Phase44A ratification: accepted
 -> Phase50A Local Working Iteration contract: accepted through PR #87
 -> Phase50B Local Working Iteration implementation: accepted through PR #88
 -> Phase50C Local Working Iteration checkpoint: accepted through PR #89
--> Phase44H Subsystem Health Foundation contract: active contract packet
--> Phase44I Health Foundation implementation: blocked pending Phase44H acceptance
+-> Phase44H Subsystem Health Foundation contract: accepted through PR #90
+-> Phase44I Health Foundation implementation: active implementation packet
 -> continue the original Goal Engine sequence
 ```
 

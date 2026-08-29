@@ -495,13 +495,15 @@ persistence, provider access, model calls, UI, CLI, Stream Deck control, or
 authority behavior.
 
 Phase50C is accepted through merged PR #89 and control has returned to the
-original Goal Engine sequence. The current continuation is Phase44H Subsystem
-Health Foundation Contract. It keeps CODIE, JIN, and THEORY_CORPUS separate,
-defines evidence-backed health signals and Findings, defines no universal
-health score, produces no Goal, and implements no later capability. Phase44I
-requires exact-SHA artifact-backed outside validation and human merge of
-Phase44H before implementation may begin. The underlying Phase44-49 Goal
-Engine sequence remains unchanged and sequentially gated by
+original Goal Engine sequence. Phase44H is accepted through merged PR #90
+after independent, exact-SHA outside validation (PASS) on 2026-08-28. The
+current continuation is Phase44I Health Foundation Implementation under that
+accepted contract. It keeps CODIE, JIN, and THEORY_CORPUS separate, defines
+evidence-backed health signals and Findings, defines no universal health
+score, produces no Goal, and implements no later capability. Phase44J requires
+exact-SHA artifact-backed outside validation and human merge of Phase44I before
+checkpoint work may begin. The underlying Phase44-49 Goal Engine sequence
+remains unchanged and sequentially gated by
 `docs/GOAL_ENGINE_IMPLEMENTATION_PROGRAM_V1.md`. Build Graph
 and CCPM-inspired execution remain reserved for conditional Phase48 work.
 The Phase50B implementation includes the 2026-08-25 owner-approved narrow
