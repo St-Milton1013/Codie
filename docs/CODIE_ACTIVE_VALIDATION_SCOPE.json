@@ -1,6 +1,6 @@
 {
   "gate_scope": "INTERMEDIATE_PACKET",
-  "phase_id": "Phase51A",
-  "phase_part": "implementation-contract",
+  "phase_id": "Phase51B",
+  "phase_part": "implementation",
   "schema_version": "codie.active_validation_scope.v1"
 }
