@@ -19,8 +19,10 @@ temporary human-priority interposition. Phase44H is accepted through merged PR
 #94. Phase44M is accepted through exact-SHA artifact validation and merged PR
 #95. Phase44N is accepted through exact-SHA artifact validation and merged PR
 #96. Phase44O is accepted through exact-SHA artifact validation and merged PR
-#97. Phase44P is accepted through merged PR #98. Phase44Q is the active
-documentation-only Goal Experiment Engine contract; Phase44R remains blocked.
+#97. Phase44P is accepted through merged PR #98. Phase44Q is accepted through
+merged PR #99. Phase44R is published as PR #100 and remains blocked by its
+preserved initial validation artifact while separate Phase51A validator-context
+correction work proceeds.
 
 On 2026-08-25 the project owner approved a narrow Phase50B usability amendment
 for explicit user-initiated official card-data preparation and public Moxfield
@@ -172,6 +174,12 @@ This defines experiment machinery only. It grants no autonomous experiment
 authority.
 
 ### Phase44R - Experiment Engine Implementation
+
+Published as PR #100. Its initial exact-SHA artifact remains
+`REPAIR_REQUIRED`; no Phase44R code correction is authorized by that finding.
+Phase51A/Phase51B are a separate validator-infrastructure interposition. After
+Phase51B acceptance, restore the Phase44R validation scope and revalidate PR
+#100 at its unchanged exact head.
 
 ### Phase44S - Experiment Engine Checkpoint
 
