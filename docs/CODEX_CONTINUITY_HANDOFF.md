@@ -2662,7 +2662,7 @@ Phase50C Local Working Iteration v0.1 Checkpoint / Freeze: PASS through merged P
 Phase44H Subsystem Health Foundation Contract: PASS through merged PR #90
 Phase44I Health Foundation Implementation: PASS through merged PR #91
 Phase44J Health Foundation Checkpoint / Freeze: PASS through merged PR #92
-Current action: validate the Phase44T Read-Only Decision Core Contract
+Current action: validate the separate Phase51C Test-Evidence Enforcement Contract before rerunning Phase44U
 Phase44K Findings + Idea Ledger Runtime Contract: PASS through merged PR #93
 Phase44L Findings + Idea Ledger Implementation: PASS through merged PR #94
 Phase44M Findings + Idea Ledger Checkpoint / Freeze: PASS through merged PR #95
