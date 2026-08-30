@@ -162,7 +162,7 @@ Phase50C Local Working Iteration v0.1 Checkpoint / Freeze: externally accepted t
 Phase44H Subsystem Health Foundation Contract: PASS through merged PR #90
 Phase44I Health Foundation Implementation: PASS through merged PR #91
 Phase44J Health Foundation Checkpoint / Freeze: PASS through merged PR #92
-Current action: independently validate the Phase44S Goal Experiment Engine Checkpoint / Freeze
+Current action: independently validate the Phase44T Read-Only Decision Core Contract
 Phase44K Findings + Idea Ledger Runtime Contract: PASS through merged PR #93
 Phase44L Findings + Idea Ledger Implementation: PASS through merged PR #94
 Phase44M Findings + Idea Ledger Checkpoint / Freeze: PASS through merged PR #95
@@ -173,7 +173,8 @@ Phase44Q Goal Experiment Engine Contract: PASS through merged PR #99
 Phase44R Goal Experiment Engine Implementation: PASS through merged PR #100
 Phase51A Validation Gate Context Correction Contract: PASS through merged PR #101
 Phase51B Validation Gate Context Correction Implementation: PASS through merged PR #102
-Phase44S Goal Experiment Engine Checkpoint / Freeze: local checkpoint packet; outside validation pending
+Phase44S Goal Experiment Engine Checkpoint / Freeze: PASS through merged PR #103
+Phase44T Read-Only Decision Core Contract: local contract packet; outside validation pending
 Local alpha tag status: verified on origin as local-alpha-0.1.0
 ```
 
@@ -187,15 +188,15 @@ Status: accepted through merged PR #100 after exact-SHA clean validation
 ## Next Allowed Work Packet
 
 ```text
-Phase44S Goal Experiment Engine Checkpoint / Freeze
-Status: local documentation-only checkpoint packet; outside validation pending
+Phase44T Read-Only Decision Core Contract
+Status: local documentation-only contract packet; outside validation pending
 ```
 
 Current-status clarification:
 
 ```text
-Protected validation gate: Phase44S / outside-validation / INTERMEDIATE_PACKET.
-The separate Phase44S scope transition is the one-file base for this packet.
+Protected validation gate: Phase44T / implementation-contract / INTERMEDIATE_PACKET.
+The separate Phase44T scope transition is the one-file base for this packet.
 Phase44Q received exact-SHA artifact-backed validation and merged through PR #99.
 Phase44R received exact-SHA artifact-backed validation and merged through PR #100.
 Phase51A and Phase51B were accepted as a separate validator-context
@@ -225,7 +226,8 @@ Phase44P: Change / Impact Engine checkpoint / freeze; accepted through PR #98
 Phase44Q: Goal Experiment Engine Contract; accepted through PR #99
 Phase44R: Goal Experiment Engine implementation; accepted through PR #100
 Phase51A/Phase51B: validator-context interposition; accepted through PRs #101/#102
-Phase44S: Goal Experiment Engine checkpoint / freeze; outside validation pending
+Phase44S: Goal Experiment Engine checkpoint / freeze; accepted through PR #103
+Phase44T: Read-Only Decision Core contract; outside validation pending
 Goal Engine Phase44-49 identifiers and gates: unchanged
 Build Graph / CCPM-inspired execution: conditional Phase48 only
 ```

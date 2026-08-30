@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: complete independent outside validation of the Phase44S Goal Experiment Engine Checkpoint / Freeze
+Recommended next task: complete independent outside validation of the Phase44T Read-Only Decision Core Contract
 
 ## Constitutional Governance Overlay
 
@@ -132,7 +132,8 @@ Phase44N is accepted through merged PR #96. Phase44O is accepted through merged 
 Phase44P is accepted through merged PR #98, Phase44Q through PR #99, and
 Phase44R through PR #100. Phase51A and Phase51B are accepted
 validator-context infrastructure interpositions through PRs #101 and #102.
-Phase44S is the local Goal Experiment Engine checkpoint / freeze packet.
+Phase44S is accepted through merged PR #103. Phase44T is the local Read-Only
+Decision Core contract packet.
 Until Goal Engine reaches validated Stage 1 authority with explicit human
 promotion, existing human-governed planning remains active.
 
@@ -563,14 +564,14 @@ next_phase_part: implementation
 next_gate_scope: INTERMEDIATE_PACKET
 ```
 
-Phase44S Goal Experiment Engine Checkpoint / Freeze tuple:
+Phase44T Read-Only Decision Core Contract tuple:
 
 ```text
-phase_id: Phase44S
-phase_part: outside-validation
+phase_id: Phase44T
+phase_part: implementation-contract
 gate_scope: INTERMEDIATE_PACKET
-next_phase_id: Phase44T
-next_phase_part: implementation-contract
+next_phase_id: Phase44U
+next_phase_part: implementation
 next_gate_scope: INTERMEDIATE_PACKET
 ```
 
@@ -596,7 +597,7 @@ Phase44I is accepted through exact-SHA artifact-backed validation and merged PR
 evidence-bounded in-memory signals and Findings, defines no universal health
 score, produces no Goal, and implements no later capability. Phase44J is
 accepted through exact-SHA artifact-backed validation and merged PR #92. The
-current continuation is the Phase44S Goal Experiment Engine checkpoint / freeze.
+current continuation is the Phase44T Read-Only Decision Core contract.
 Phase44K through Phase44P are accepted through merged PRs #93 through #98,
 Phase44Q through PR #99, Phase44R through PR #100, and Phase51A/Phase51B
 through PRs #101/#102. The underlying Phase44-49 Goal Engine sequence remains unchanged

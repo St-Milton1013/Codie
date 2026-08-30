@@ -22,7 +22,8 @@ temporary human-priority interposition. Phase44H is accepted through merged PR
 #97. Phase44P is accepted through merged PR #98. Phase44Q is accepted through
 merged PR #99 and Phase44R through merged PR #100. Phase51A and Phase51B are
 accepted validator-context infrastructure interpositions through PRs #101 and
-#102. Phase44S is the local Goal Experiment Engine checkpoint / freeze packet.
+#102. Phase44S is accepted through merged PR #103. Phase44T is the local
+Read-Only Decision Core contract packet.
 
 On 2026-08-25 the project owner approved a narrow Phase50B usability amendment
 for explicit user-initiated official card-data preparation and public Moxfield

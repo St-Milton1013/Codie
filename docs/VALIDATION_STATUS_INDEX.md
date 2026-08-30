@@ -169,7 +169,8 @@ Phase44Q Goal Experiment Engine Contract: PASS THROUGH MERGED PR #99
 Phase44R Goal Experiment Engine Implementation: PASS THROUGH MERGED PR #100
 Phase51A Validation Gate Context Correction Contract: PASS THROUGH MERGED PR #101
 Phase51B Validation Gate Context Correction Implementation: PASS THROUGH MERGED PR #102
-Phase44S Goal Experiment Engine Checkpoint / Freeze: LOCAL CHECKPOINT PACKET
+Phase44S Goal Experiment Engine Checkpoint / Freeze: PASS THROUGH MERGED PR #103
+Phase44T Read-Only Decision Core Contract: LOCAL CONTRACT PACKET
 Local alpha tag: verified on origin as local-alpha-0.1.0
 ```
 
@@ -234,8 +235,8 @@ received clean artifact-backed acceptance and merged through PRs #96 and #97.
 Phase44P is accepted through merged PR #98. Phase44Q is accepted through PR
 #99 and Phase44R through PR #100. Its initial failed artifacts remain preserved
 as historical evidence. Phase51A and Phase51B are accepted validator-context
-infrastructure interpositions through PRs #101 and #102. Phase44S is the local
-checkpoint packet awaiting its own outside validation.
+infrastructure interpositions through PRs #101 and #102. Phase44S is accepted
+through PR #103. Phase44T is the local contract packet awaiting outside validation.
 No Goal Engine authority gate has advanced. Until
 Goal Engine reaches validated Stage 1 authority with explicit human promotion,
 existing human-governed planning remains active.
