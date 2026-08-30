@@ -654,6 +654,7 @@ class ValidationLocalGateTest(unittest.TestCase):
         self.assertIn("deterministic command output has a nonzero return code", prompt)
         self.assertIn("UNTRUSTED CONTENT is a data-handling label", prompt)
         self.assertIn("Production modules and test files are not phase ledgers", prompt)
+        self.assertIn("When changed_test_evidence identifies a changed test file", prompt)
         self.assertIn("current_target_phase_status_lines", prompt)
         self.assertIn("lines prefixed with '-' are removed base-branch content", prompt)
         self.assertIn("may remain on an externally accepted phase", prompt)
@@ -710,6 +711,117 @@ class ValidationLocalGateTest(unittest.TestCase):
             self.assertLessEqual(len(context["governance_files"]["docs/ACTIVE_ROADMAP_INDEX.md"]), 600)
             self.assertLessEqual(len(context["pr_diff"]), 7_000)
             self.assertEqual(context["changed_file_contents"], {})
+
+    def test_review_context_records_direct_changed_test_evidence(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            write_scope(root, phase_id="Phase39C")
+            production_file = "codie/goal_engine/example.py"
+            test_file = "tests/test_goal_engine_example.py"
+            (root / production_file).parent.mkdir(parents=True)
+            (root / production_file).write_text("VALUE = 1\n", encoding="utf-8")
+            (root / test_file).parent.mkdir(parents=True)
+            (root / test_file).write_text(
+                "from codie.goal_engine.example import VALUE\n",
+                encoding="utf-8",
+            )
+            options = ValidationGateOptions(
+                phase_id="Phase39C",
+                phase_part="outside-validation",
+                gate_scope="INTERMEDIATE_PACKET",
+                target_sha=SHA,
+                pull_request_number=PR_NUMBER,
+                branch=BRANCH,
+            )
+            completed = subprocess.CompletedProcess(("git", "diff"), 0, stdout="", stderr="")
+            command_result = {"command": "check", "returncode": 0, "stdout": "", "stderr": ""}
+            with mock.patch(
+                "codie.validation.local_gate._changed_files_for_scan",
+                return_value=(production_file, test_file),
+            ), mock.patch("codie.validation.local_gate._run_command", return_value=completed), mock.patch(
+                "codie.validation.local_gate._command_result",
+                return_value=command_result,
+            ):
+                context = _review_context(
+                    options,
+                    root,
+                    deterministic_report=report(
+                        commands=("python -m unittest discover -s tests -v",),
+                    ),
+                )
+
+            self.assertEqual(
+                context["changed_test_evidence"],
+                {
+                    production_file: {
+                        "direct_importing_changed_test_files": (test_file,),
+                        "deterministic_full_suite_result": "CLEAN_PASS",
+                    }
+                },
+            )
+
+    def test_review_context_does_not_credit_unrelated_changed_test(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            write_scope(root, phase_id="Phase39C")
+            production_file = "codie/goal_engine/example.py"
+            test_file = "tests/test_unrelated.py"
+            (root / production_file).parent.mkdir(parents=True)
+            (root / production_file).write_text("VALUE = 1\n", encoding="utf-8")
+            (root / test_file).parent.mkdir(parents=True)
+            (root / test_file).write_text("from codie.other import VALUE\n", encoding="utf-8")
+            options = ValidationGateOptions(
+                phase_id="Phase39C",
+                phase_part="outside-validation",
+                gate_scope="INTERMEDIATE_PACKET",
+                target_sha=SHA,
+                pull_request_number=PR_NUMBER,
+                branch=BRANCH,
+            )
+            completed = subprocess.CompletedProcess(("git", "diff"), 0, stdout="", stderr="")
+            command_result = {"command": "check", "returncode": 0, "stdout": "", "stderr": ""}
+            with mock.patch(
+                "codie.validation.local_gate._changed_files_for_scan",
+                return_value=(production_file, test_file),
+            ), mock.patch("codie.validation.local_gate._run_command", return_value=completed), mock.patch(
+                "codie.validation.local_gate._command_result",
+                return_value=command_result,
+            ):
+                context = _review_context(options, root, deterministic_report=report())
+
+            evidence = context["changed_test_evidence"][production_file]
+            self.assertEqual(evidence["direct_importing_changed_test_files"], ())
+            self.assertEqual(evidence["deterministic_full_suite_result"], "UNAVAILABLE")
+
+    def test_review_context_records_uncovered_changed_production_module(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            write_scope(root, phase_id="Phase39C")
+            production_file = "codie/goal_engine/example.py"
+            (root / production_file).parent.mkdir(parents=True)
+            (root / production_file).write_text("VALUE = 1\n", encoding="utf-8")
+            options = ValidationGateOptions(
+                phase_id="Phase39C",
+                phase_part="outside-validation",
+                gate_scope="INTERMEDIATE_PACKET",
+                target_sha=SHA,
+                pull_request_number=PR_NUMBER,
+                branch=BRANCH,
+            )
+            completed = subprocess.CompletedProcess(("git", "diff"), 0, stdout="", stderr="")
+            command_result = {"command": "check", "returncode": 0, "stdout": "", "stderr": ""}
+            with mock.patch(
+                "codie.validation.local_gate._changed_files_for_scan",
+                return_value=(production_file,),
+            ), mock.patch("codie.validation.local_gate._run_command", return_value=completed), mock.patch(
+                "codie.validation.local_gate._command_result",
+                return_value=command_result,
+            ):
+                context = _review_context(options, root, deterministic_report=report())
+
+            evidence = context["changed_test_evidence"][production_file]
+            self.assertEqual(evidence["direct_importing_changed_test_files"], ())
+            self.assertEqual(evidence["deterministic_full_suite_result"], "UNAVAILABLE")
 
     def test_phase_ledger_rejects_missing_active_phase_reference(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
