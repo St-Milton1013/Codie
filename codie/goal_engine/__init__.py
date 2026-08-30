@@ -121,6 +121,7 @@ from .health import (
 )
 from .health import __all__ as _health_all
 from . import idea_ledger
+from . import impact
 from .state_engine import (
     AUTHORITY_STAGE_VALUES,
     AUTHORITY_STATE_SCHEMA_VERSION,
@@ -303,3 +304,4 @@ __all__ = [
 __all__.extend(_state_engine_all)
 __all__.extend(_health_all)
 __all__.append("idea_ledger")
+__all__.append("impact")
