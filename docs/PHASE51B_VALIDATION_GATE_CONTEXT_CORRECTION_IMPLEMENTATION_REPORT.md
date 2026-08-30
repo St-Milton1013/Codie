@@ -60,8 +60,15 @@ and merge authority remain unchanged.
 The focused tests cover a direct changed-test import, an unrelated changed
 test, no changed test, the exact new prompt rule, preservation of existing
 trusted prompt instructions, and the pre-existing bounded review-context
-limits. The exact implementation head must also pass schema bootstrap and the
-complete Codie suite in an isolated local clone before publication.
+limits. In the isolated exact-head clone at
+`0fcafc0b157a9af212cb26dd37b2d64dd5555ea0`, `git diff --check`, schema
+bootstrap, and the focused validation-gate suite passed; the focused suite ran
+72 tests. The complete Codie suite passed 1,437 tests with one expected
+Windows symbolic-link skip.
+
+The local `ruff check` command identified nine pre-existing formatting or
+unused-import findings in the two touched long-lived files. This packet does
+not broaden its authorized repair scope to restyle unrelated existing code.
 
 This packet is not accepted until its exact-SHA pull-request artifact has
 clean deterministic, architecture, adversarial, and aggregate validation
