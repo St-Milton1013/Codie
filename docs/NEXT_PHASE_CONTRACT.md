@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: validate the Phase44Q Goal Experiment Engine Contract
+Recommended next task: complete independent outside validation of the Phase44Q Goal Experiment Engine Contract
 
 ## Constitutional Governance Overlay
 

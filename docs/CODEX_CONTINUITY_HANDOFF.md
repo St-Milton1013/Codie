@@ -2669,7 +2669,7 @@ Phase44M Findings + Idea Ledger Checkpoint / Freeze: PASS through merged PR #95
 Phase44N Change / Impact Engine Contract: PASS through merged PR #96
 Phase44O Change / Impact Engine Implementation: PASS through merged PR #97
 Phase44P Change / Impact Engine Checkpoint / Freeze: PASS through merged PR #98
-Phase44Q Goal Experiment Engine Contract: INTERNAL PASS
+Phase44Q Goal Experiment Engine Contract: OUTSIDE VALIDATION PENDING
 Phase44R Goal Experiment Engine Implementation: BLOCKED
 ```
 
@@ -2679,7 +2679,7 @@ Phase44Q Goal Experiment Engine Contract status:
 phase_id: Phase44Q
 phase_part: implementation-contract
 gate_scope: INTERMEDIATE_PACKET
-status: internally complete; outside validation required
+status: published; outside validation pending
 scope commit: 4dfa6ae
 authority: subordinate to docs/CODIE_V2_CONSTITUTION.md
 production/runtime changes: none; documentation-only implementation contract

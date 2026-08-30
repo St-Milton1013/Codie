@@ -162,14 +162,14 @@ Phase50C Local Working Iteration v0.1 Checkpoint / Freeze: externally accepted t
 Phase44H Subsystem Health Foundation Contract: PASS through merged PR #90
 Phase44I Health Foundation Implementation: PASS through merged PR #91
 Phase44J Health Foundation Checkpoint / Freeze: PASS through merged PR #92
-Current action: define the Phase44Q Goal Experiment Engine Contract
+Current action: independently validate the Phase44Q Goal Experiment Engine Contract
 Phase44K Findings + Idea Ledger Runtime Contract: PASS through merged PR #93
 Phase44L Findings + Idea Ledger Implementation: PASS through merged PR #94
 Phase44M Findings + Idea Ledger Checkpoint / Freeze: PASS through merged PR #95
 Phase44N Change / Impact Engine Contract: PASS through merged PR #96
 Phase44O Change / Impact Engine Implementation: PASS through merged PR #97
 Phase44P Change / Impact Engine Checkpoint / Freeze: PASS through merged PR #98
-Phase44Q Goal Experiment Engine Contract: internally complete
+Phase44Q Goal Experiment Engine Contract: outside validation pending
 Phase44R Goal Experiment Engine Implementation: BLOCKED
 Local alpha tag status: verified on origin as local-alpha-0.1.0
 ```
@@ -185,7 +185,7 @@ Status: externally accepted through exact-SHA validation and merged PR #98
 
 ```text
 Phase44Q Goal Experiment Engine Contract
-Status: internally complete; outside validation required
+Status: published; outside validation pending
 ```
 
 Current-status clarification:
@@ -220,7 +220,7 @@ Phase44M: Findings + Idea Ledger checkpoint / freeze; externally accepted throug
 Phase44N: Change / Impact Engine Contract; externally accepted through PR #96
 Phase44O: Change / Impact Engine implementation; externally accepted through PR #97
 Phase44P: Change / Impact Engine checkpoint / freeze; accepted through PR #98
-Phase44Q: Goal Experiment Engine Contract; internally complete
+Phase44Q: Goal Experiment Engine Contract; outside validation pending
 Phase44R: Goal Experiment Engine implementation; blocked
 Goal Engine Phase44-49 identifiers and gates: unchanged
 Build Graph / CCPM-inspired execution: conditional Phase48 only
@@ -279,8 +279,9 @@ received exact-SHA artifact-backed validation with all three validators
 `CLEAN_PASS` and is accepted through merged PR #92. The canonical Phase44-49
 sequence remains recorded in `docs/GOAL_ENGINE_IMPLEMENTATION_PROGRAM_V1.md`;
 Phase44K through Phase44M are accepted through merged PRs #93 through #95.
-Phase44N and Phase44O are accepted through merged PRs #96 and #97; Phase44P is
-the active documentation-only checkpoint / freeze, while Phase44Q is blocked. Build Graph and CCPM-inspired execution remain
+Phase44N through Phase44P are accepted through merged PRs #96 through #98;
+Phase44Q is the active documentation-only contract and awaits outside validation.
+Build Graph and CCPM-inspired execution remain
 reserved for conditional Phase48 work.
 Until Goal Engine reaches validated Stage 1 authority with explicit human
 promotion, existing human-governed planning remains active.
