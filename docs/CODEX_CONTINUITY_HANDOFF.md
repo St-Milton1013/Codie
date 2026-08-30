@@ -2662,24 +2662,25 @@ Phase50C Local Working Iteration v0.1 Checkpoint / Freeze: PASS through merged P
 Phase44H Subsystem Health Foundation Contract: PASS through merged PR #90
 Phase44I Health Foundation Implementation: PASS through merged PR #91
 Phase44J Health Foundation Checkpoint / Freeze: PASS through merged PR #92
-Current action: validate the Phase44P Change / Impact Engine Checkpoint / Freeze
+Current action: validate the Phase44Q Goal Experiment Engine Contract
 Phase44K Findings + Idea Ledger Runtime Contract: PASS through merged PR #93
 Phase44L Findings + Idea Ledger Implementation: PASS through merged PR #94
 Phase44M Findings + Idea Ledger Checkpoint / Freeze: PASS through merged PR #95
 Phase44N Change / Impact Engine Contract: PASS through merged PR #96
 Phase44O Change / Impact Engine Implementation: PASS through merged PR #97
-Phase44P Change / Impact Engine Checkpoint / Freeze: INTERNAL PASS
-Phase44Q Goal Experiment Engine Contract: BLOCKED
+Phase44P Change / Impact Engine Checkpoint / Freeze: PASS through merged PR #98
+Phase44Q Goal Experiment Engine Contract: OUTSIDE VALIDATION PENDING
+Phase44R Goal Experiment Engine Implementation: BLOCKED
 ```
 
-Phase44P Goal Engine Change / Impact Engine Checkpoint / Freeze status:
+Phase44Q Goal Experiment Engine Contract status:
 
 ```text
-phase_id: Phase44P
-phase_part: outside-validation
+phase_id: Phase44Q
+phase_part: implementation-contract
 gate_scope: INTERMEDIATE_PACKET
-status: internally complete; outside validation required
-scope commit: de79427
+status: published; outside validation pending
+scope commit: 4dfa6ae
 authority: subordinate to docs/CODIE_V2_CONSTITUTION.md
 production/runtime changes: none; documentation-only implementation contract
 autonomous execution: not authorized
@@ -2694,10 +2695,10 @@ Findings + Idea Ledger Checkpoint: accepted through Phase44M / PR #95
 Idea != Finding != Goal: mandatory and permanent
 silent Idea merge: forbidden
 recurrence/reconsideration: explicit request only; no automatic promotion or Goal reactivation
-impact: expected caller-supplied analysis only; no observed outcome or authority
+experiment: planning records only; no execution, approval, or authority
 direct Goal creation or execution: forbidden
-next_phase_id: Phase44Q
-next_phase_part: implementation-contract
+next_phase_id: Phase44R
+next_phase_part: implementation
 next_gate_scope: INTERMEDIATE_PACKET
 ```
 
@@ -2720,18 +2721,19 @@ Phase44L: Findings + Idea Ledger implementation; accepted through PR #94
 Phase44M: documentation-only Findings + Idea Ledger checkpoint / freeze; accepted through PR #95
 Phase44N: Change / Impact Engine Contract; accepted through PR #96
 Phase44O: Change / Impact Engine implementation; accepted through PR #97
-Phase44P: Change / Impact Engine checkpoint / freeze; active documentation-only packet
-Phase44Q: Goal Experiment Engine Contract; blocked
+Phase44P: Change / Impact Engine checkpoint / freeze; accepted through PR #98
+Phase44Q: Goal Experiment Engine Contract; active documentation-only packet
+Phase44R: Goal Experiment Engine implementation; blocked
 Build Graph and CCPM-inspired execution: reserved for conditional Phase48
 current runtime authority: unchanged
 ```
 
-Phase44P checkpoint packet:
+Phase44Q contract packet:
 
 ```text
-docs/PHASE44P_GOAL_ENGINE_CHANGE_IMPACT_ENGINE_CHECKPOINT_FREEZE_CONTRACT.md
-docs/CHECKPOINT_PHASE44P_GOAL_ENGINE_CHANGE_IMPACT_ENGINE_CHECKPOINT_FREEZE_REPORT.md
-docs/OUTSIDE_VALIDATION_PHASE44P_GOAL_ENGINE_CHANGE_IMPACT_ENGINE_CHECKPOINT_FREEZE_PROMPT.md
+docs/PHASE44Q_GOAL_ENGINE_EXPERIMENT_ENGINE_CONTRACT.md
+docs/CHECKPOINT_PHASE44Q_GOAL_ENGINE_EXPERIMENT_ENGINE_CONTRACT_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE44Q_GOAL_ENGINE_EXPERIMENT_ENGINE_CONTRACT_PROMPT.md
 ```
 
 Frozen Phase44O implementation surfaces:
@@ -2749,8 +2751,10 @@ untouched systems; dependency, privacy, security, zero-cost, manual,
 operational, validation, rollback, and historical-attempt considerations. It
 does not infer scope or causality, treat expected impact as outcome, rank or
 select work, create or revise Goals, execute or approve a change, run
-validation, or grant authority. Phase44P freezes this surface; Phase44Q remains
-blocked until exact-SHA checkpoint validation and human merge.
+validation, or grant authority. Phase44P freezes this surface; Phase44Q plans
+the next pure experiment-record surface without execution, approval, or
+authority. Phase44R remains blocked until exact-SHA contract validation and
+human merge.
 
 Hard evidence, local-first/privacy/zero-cost, Theory and theory-skill review,
 external Rules/Corrections authority, Hareruya tournament-only provenance,
