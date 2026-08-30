@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: validate the separate Phase51C Test-Evidence Enforcement Contract before rerunning Phase44U
+Recommended next task: validate the separate Phase51D Suppressed Finding Audit Record Contract before implementing enforcement and rerunning Phase44U
 
 ## Constitutional Governance Overlay
 
