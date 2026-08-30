@@ -162,8 +162,10 @@ Phase44J Health Foundation Checkpoint / Freeze: PASS THROUGH MERGED PR #92
 Phase44K Findings + Idea Ledger Runtime Contract: PASS THROUGH MERGED PR #93
 Phase44L Findings + Idea Ledger Implementation: PASS THROUGH MERGED PR #94
 Phase44M Findings + Idea Ledger Checkpoint / Freeze: PASS THROUGH MERGED PR #95
-Phase44N Change / Impact Engine Contract: INTERNAL PASS
-Phase44O Change / Impact Engine Implementation: BLOCKED
+Phase44N Change / Impact Engine Contract: PASS THROUGH MERGED PR #96
+Phase44O Change / Impact Engine Implementation: PASS THROUGH MERGED PR #97
+Phase44P Change / Impact Engine Checkpoint / Freeze: INTERNAL PASS
+Phase44Q Goal Experiment Engine Contract: BLOCKED
 Local alpha tag: verified on origin as local-alpha-0.1.0
 ```
 
@@ -223,9 +225,10 @@ build order remains recorded in `docs/GOAL_ENGINE_IMPLEMENTATION_PROGRAM_V1.md`;
 Phase44K and Phase44L received exact-SHA artifact-backed validation with every
 validator `CLEAN_PASS`, zero findings, zero errors, and zero skipped validators,
 then merged through PRs #93 and #94. Phase44M received the same clean
-artifact-backed acceptance and merged through PR #95. Phase44N is internally
-complete as a documentation-only contract and awaits outside validation.
-Phase44O remains blocked. No Goal Engine authority gate has advanced. Until
+artifact-backed acceptance and merged through PR #95. Phase44N and Phase44O
+received clean artifact-backed acceptance and merged through PRs #96 and #97.
+Phase44P is the active documentation-only checkpoint / freeze; Phase44Q remains blocked.
+No Goal Engine authority gate has advanced. Until
 Goal Engine reaches validated Stage 1 authority with explicit human promotion,
 existing human-governed planning remains active.
 Phase50B includes the 2026-08-25 owner-approved usability amendment for
