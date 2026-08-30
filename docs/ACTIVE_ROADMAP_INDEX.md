@@ -162,11 +162,13 @@ Phase50C Local Working Iteration v0.1 Checkpoint / Freeze: externally accepted t
 Phase44H Subsystem Health Foundation Contract: PASS through merged PR #90
 Phase44I Health Foundation Implementation: PASS through merged PR #91
 Phase44J Health Foundation Checkpoint / Freeze: PASS through merged PR #92
-Current action: validate the Phase44M Findings + Idea Ledger Checkpoint / Freeze
+Current action: validate the Phase44N Change / Impact Engine Contract
 Phase44K Findings + Idea Ledger Runtime Contract: PASS through merged PR #93
 Phase44L Findings + Idea Ledger Implementation: PASS through merged PR #94
-Phase44M Findings + Idea Ledger Checkpoint / Freeze: internally complete
-Phase44N Change / Impact Engine Contract: BLOCKED
+Phase44M Findings + Idea Ledger Checkpoint / Freeze: PASS through merged PR #95
+Current action: validate the Phase44N Change / Impact Engine Contract
+Phase44N Change / Impact Engine Contract: internally complete
+Phase44O Change / Impact Engine Implementation: BLOCKED
 Local alpha tag status: verified on origin as local-alpha-0.1.0
 ```
 
@@ -180,20 +182,19 @@ Status: externally accepted through exact-SHA validation and merged PR #92
 ## Next Allowed Work Packet
 
 ```text
-Phase44M Findings + Idea Ledger Checkpoint / Freeze
+Phase44N Change / Impact Engine Contract
 Status: internally complete; outside validation required
 ```
 
 Current-status clarification:
 
 ```text
-Protected validation gate: Phase44M / outside-validation / INTERMEDIATE_PACKET.
-Live main includes accepted Phase44K and Phase44L through merged PRs #93 and #94.
-Authoritative next allowed work packet: Phase44M Findings + Idea Ledger Checkpoint / Freeze.
-Phase44K and Phase44L each received exact-SHA artifact-backed validation with
-every validator `CLEAN_PASS`, zero findings, zero errors, and zero skipped
-validators, then merged through human authority. Phase44M is documentation-only;
-Phase44N is blocked.
+Protected validation gate: Phase44N / implementation-contract / INTERMEDIATE_PACKET.
+Live main includes accepted Phase44M through merged PR #95.
+Authoritative next allowed work packet: Phase44N Change / Impact Engine Contract.
+Phase44M received exact-SHA artifact-backed validation with every validator
+`CLEAN_PASS`, zero findings, zero errors, and zero skipped validators, then
+merged through human authority. Phase44N is documentation-only; Phase44O is blocked.
 No Goal Engine runtime or authority gate is changed by this priority amendment.
 The 2026-08-25 owner-approved Phase50B usability amendment permits only
 user-initiated official card-data preparation and public Moxfield deck import;
@@ -213,8 +214,9 @@ Phase44I: Health Foundation implementation; externally accepted through PR #91
 Phase44J: Health Foundation checkpoint / freeze; externally accepted through PR #92
 Phase44K: Findings + Idea Ledger Runtime Contract; externally accepted through PR #93
 Phase44L: Findings + Idea Ledger implementation; externally accepted through PR #94
-Phase44M: Findings + Idea Ledger checkpoint / freeze; internally complete
-Phase44N: Change / Impact Engine Contract; blocked
+Phase44M: Findings + Idea Ledger checkpoint / freeze; externally accepted through PR #95
+Phase44N: Change / Impact Engine Contract; internally complete
+Phase44O: Change / Impact Engine implementation; blocked
 Goal Engine Phase44-49 identifiers and gates: unchanged
 Build Graph / CCPM-inspired execution: conditional Phase48 only
 ```
@@ -271,9 +273,10 @@ validators `CLEAN_PASS` and is accepted through merged PR #91. Phase44J
 received exact-SHA artifact-backed validation with all three validators
 `CLEAN_PASS` and is accepted through merged PR #92. The canonical Phase44-49
 sequence remains recorded in `docs/GOAL_ENGINE_IMPLEMENTATION_PROGRAM_V1.md`;
-Phase44K and Phase44L are accepted through merged PRs #93 and #94. Phase44M is
-the active documentation-only checkpoint, while Phase44N is blocked. Build
-Graph and CCPM-inspired execution remain reserved for conditional Phase48 work.
+Phase44K through Phase44M are accepted through merged PRs #93 through #95.
+Phase44N is the active documentation-only Change / Impact Engine Contract,
+while Phase44O is blocked. Build Graph and CCPM-inspired execution remain
+reserved for conditional Phase48 work.
 Until Goal Engine reaches validated Stage 1 authority with explicit human
 promotion, existing human-governed planning remains active.
 

@@ -16,9 +16,9 @@ temporary human-priority interposition. Phase44H is accepted through merged PR
 #91. Phase44J is accepted through exact-SHA artifact validation and merged PR
 #92. Phase44K is accepted through exact-SHA artifact validation and merged PR
 #93. Phase44L is accepted through exact-SHA artifact validation and merged PR
-#94. Phase44M is the active documentation-only Findings + Idea Ledger
-Checkpoint / Freeze; Phase44N remains blocked until Phase44M acceptance and
-human merge.
+#94. Phase44M is accepted through exact-SHA artifact validation and merged PR
+#95. Phase44N is the active documentation-only Change / Impact Engine Contract;
+Phase44O remains blocked until Phase44N acceptance and human merge.
 
 On 2026-08-25 the project owner approved a narrow Phase50B usability amendment
 for explicit user-initiated official card-data preparation and public Moxfield
@@ -598,8 +598,9 @@ Phase44A ratification: accepted
 -> Phase44J Health Foundation checkpoint: accepted through PR #92
 -> Phase44K Findings + Idea Ledger Runtime Contract: accepted through PR #93
 -> Phase44L Findings + Idea Ledger implementation: accepted through PR #94
--> Phase44M Findings + Idea Ledger checkpoint / freeze: active documentation-only packet
--> Phase44N Change / Impact Engine contract: blocked
+-> Phase44M Findings + Idea Ledger checkpoint / freeze: accepted through PR #95
+-> Phase44N Change / Impact Engine contract: active documentation-only packet
+-> Phase44O Change / Impact Engine implementation: blocked
 -> continue the original Goal Engine sequence
 ```
 

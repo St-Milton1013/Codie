@@ -2662,23 +2662,24 @@ Phase50C Local Working Iteration v0.1 Checkpoint / Freeze: PASS through merged P
 Phase44H Subsystem Health Foundation Contract: PASS through merged PR #90
 Phase44I Health Foundation Implementation: PASS through merged PR #91
 Phase44J Health Foundation Checkpoint / Freeze: PASS through merged PR #92
-Current action: validate the Phase44M Findings + Idea Ledger Checkpoint / Freeze
+Current action: validate the Phase44N Change / Impact Engine Contract
 Phase44K Findings + Idea Ledger Runtime Contract: PASS through merged PR #93
 Phase44L Findings + Idea Ledger Implementation: PASS through merged PR #94
-Phase44M Findings + Idea Ledger Checkpoint / Freeze: INTERNAL PASS
-Phase44N Change / Impact Engine Contract: BLOCKED
+Phase44M Findings + Idea Ledger Checkpoint / Freeze: PASS through merged PR #95
+Phase44N Change / Impact Engine Contract: INTERNAL PASS
+Phase44O Change / Impact Engine Implementation: BLOCKED
 ```
 
-Phase44M Goal Engine Findings + Idea Ledger Checkpoint / Freeze status:
+Phase44N Goal Engine Change / Impact Engine Contract status:
 
 ```text
-phase_id: Phase44M
-phase_part: outside-validation
+phase_id: Phase44N
+phase_part: implementation-contract
 gate_scope: INTERMEDIATE_PACKET
 status: internally complete; outside validation required
-scope commit: 21fd7a8
+scope commit: a947437
 authority: subordinate to docs/CODIE_V2_CONSTITUTION.md
-production/runtime changes: none; documentation-only checkpoint / freeze
+production/runtime changes: none; documentation-only implementation contract
 autonomous execution: not authorized
 human merge/release authority: preserved
 Foundation v1: frozen and unmodified
@@ -2687,13 +2688,14 @@ Local Working Iteration v0.1: accepted and frozen through Phase50C / PR #89
 Subsystem Health Foundation v1: accepted and frozen through Phase44J / PR #92
 Findings + Idea Ledger Contract: accepted through Phase44K / PR #93
 Findings + Idea Ledger Implementation: accepted through Phase44L / PR #94
+Findings + Idea Ledger Checkpoint: accepted through Phase44M / PR #95
 Idea != Finding != Goal: mandatory and permanent
 silent Idea merge: forbidden
 recurrence/reconsideration: explicit request only; no automatic promotion or Goal reactivation
-persistence: caller-owned; no storage engine in Phase44M
+impact: expected caller-supplied analysis only; no observed outcome or authority
 direct Goal creation or execution: forbidden
-next_phase_id: Phase44N
-next_phase_part: implementation-contract
+next_phase_id: Phase44O
+next_phase_part: implementation
 next_gate_scope: INTERMEDIATE_PACKET
 ```
 
@@ -2713,39 +2715,38 @@ Phase44I: Health Foundation implementation; accepted through PR #91
 Phase44J: documentation-only Health Foundation checkpoint / freeze; accepted through PR #92
 Phase44K: Findings + Idea Ledger Runtime Contract; accepted through PR #93
 Phase44L: Findings + Idea Ledger implementation; accepted through PR #94
-Phase44M: documentation-only Findings + Idea Ledger checkpoint / freeze; active
-Phase44N: Change / Impact Engine Contract; blocked
+Phase44M: documentation-only Findings + Idea Ledger checkpoint / freeze; accepted through PR #95
+Phase44N: Change / Impact Engine Contract; active documentation-only packet
+Phase44O: Change / Impact Engine implementation; blocked
 Build Graph and CCPM-inspired execution: reserved for conditional Phase48
 current runtime authority: unchanged
 ```
 
-Phase44M checkpoint packet:
+Phase44N contract packet:
 
 ```text
-docs/PHASE44M_GOAL_ENGINE_FINDINGS_IDEA_LEDGER_CHECKPOINT_FREEZE_CONTRACT.md
-docs/CHECKPOINT_PHASE44M_GOAL_ENGINE_FINDINGS_IDEA_LEDGER_CHECKPOINT_FREEZE_REPORT.md
-docs/OUTSIDE_VALIDATION_PHASE44M_GOAL_ENGINE_FINDINGS_IDEA_LEDGER_CHECKPOINT_FREEZE_PROMPT.md
+docs/PHASE44N_GOAL_ENGINE_CHANGE_IMPACT_ENGINE_CONTRACT.md
+docs/CHECKPOINT_PHASE44N_GOAL_ENGINE_CHANGE_IMPACT_ENGINE_CONTRACT_REPORT.md
+docs/OUTSIDE_VALIDATION_PHASE44N_GOAL_ENGINE_CHANGE_IMPACT_ENGINE_CONTRACT_PROMPT.md
 ```
 
-Frozen Phase44L implementation surfaces:
+Future Phase44O restricted implementation surfaces:
 
 ```text
-codie/goal_engine/idea_ledger.py
+codie/goal_engine/impact.py
 codie/goal_engine/__init__.py
-tests/test_goal_engine_idea_ledger.py
-docs/PHASE44L_GOAL_ENGINE_FINDINGS_IDEA_LEDGER_IMPLEMENTATION_REPORT.md
+tests/test_goal_engine_impact.py
+docs/PHASE44O_GOAL_ENGINE_CHANGE_IMPACT_ENGINE_IMPLEMENTATION_REPORT.md
 ```
 
-Phase44K defined and Phase44L implemented a pure, immutable, caller-input
-Findings + Idea Ledger surface. It keeps Idea, Finding, and Goal identities and
-authority strictly separate; records recurrence and relationships without silent
-merge; preserves original wording; emits explicit reconsideration requests
-without automatically promoting an Idea, creating a Goal, or reactivating an
-archived Goal; and returns caller-persistable snapshots without implementing
-persistence. It authorizes no work selection, mutation, provider fetch, model
-call, UI, CLI, Stream Deck, Build Graph, CCPM, or authority behavior. Phase44M
-freezes that accepted surface; Phase44N remains blocked until Phase44M
-validation and human merge.
+Phase44N defines a future pure, immutable, caller-input Change / Impact Engine.
+It records bounded expected direct, indirect, and possible effects; explicit
+untouched systems; dependency, privacy, security, zero-cost, manual,
+operational, validation, rollback, and historical-attempt considerations. It
+does not infer scope or causality, treat expected impact as outcome, rank or
+select work, create or revise Goals, execute or approve a change, run
+validation, or grant authority. Phase44O remains blocked until exact-SHA
+Phase44N validation and human merge.
 
 Hard evidence, local-first/privacy/zero-cost, Theory and theory-skill review,
 external Rules/Corrections authority, Hareruya tournament-only provenance,
