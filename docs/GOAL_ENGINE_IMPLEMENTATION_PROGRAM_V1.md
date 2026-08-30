@@ -20,9 +20,9 @@ temporary human-priority interposition. Phase44H is accepted through merged PR
 #95. Phase44N is accepted through exact-SHA artifact validation and merged PR
 #96. Phase44O is accepted through exact-SHA artifact validation and merged PR
 #97. Phase44P is accepted through merged PR #98. Phase44Q is accepted through
-merged PR #99. Phase44R is published as PR #100 and remains blocked by its
-preserved initial validation artifact while separate Phase51A validator-context
-correction work proceeds.
+merged PR #99 and Phase44R through merged PR #100. Phase51A and Phase51B are
+accepted validator-context infrastructure interpositions through PRs #101 and
+#102. Phase44S is the local Goal Experiment Engine checkpoint / freeze packet.
 
 On 2026-08-25 the project owner approved a narrow Phase50B usability amendment
 for explicit user-initiated official card-data preparation and public Moxfield
@@ -175,11 +175,9 @@ authority.
 
 ### Phase44R - Experiment Engine Implementation
 
-Published as PR #100. Its initial exact-SHA artifact remains
-`REPAIR_REQUIRED`; no Phase44R code correction is authorized by that finding.
-Phase51A/Phase51B are a separate validator-infrastructure interposition. After
-Phase51B acceptance, restore the Phase44R validation scope and revalidate PR
-#100 at its unchanged exact head.
+Accepted through merged PR #100 after the branch incorporated the accepted
+validator-context interposition without changing the three-file Phase44R
+surface. Earlier failed artifacts remain historical evidence only.
 
 ### Phase44S - Experiment Engine Checkpoint
 
@@ -612,9 +610,10 @@ Phase44A ratification: accepted
 -> Phase44N Change / Impact Engine contract: accepted through PR #96
 -> Phase44O Change / Impact Engine implementation: accepted through PR #97
 -> Phase44P Change / Impact Engine checkpoint / freeze: accepted through PR #98
--> Phase44Q Goal Experiment Engine contract: active documentation-only packet
--> Phase44R Goal Experiment Engine implementation: blocked
--> continue the original Goal Engine sequence
+-> Phase44Q Goal Experiment Engine contract: accepted through PR #99
+-> Phase44R Goal Experiment Engine implementation: accepted through PR #100
+-> Phase51A/Phase51B validator-context interposition: accepted through PRs #101/#102
+-> Phase44S Goal Experiment Engine checkpoint / freeze: local checkpoint packet
 ```
 
 Normal Codie development remains human-directed until Stage 1 earns and
