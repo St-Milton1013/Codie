@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: complete independent outside validation of the Phase44T Read-Only Decision Core Contract
+Recommended next task: validate the separate Phase51C Test-Evidence Enforcement Contract before rerunning Phase44U
 
 ## Constitutional Governance Overlay
 
