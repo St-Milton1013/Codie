@@ -339,12 +339,26 @@ def run_validation_gate(
         return aggregate
     reports: list[ValidatorReport] = []
     skipped: list[str] = []
+    deterministic_report: ValidatorReport | None = None
     for validator in VALIDATORS:
         if _validator_is_enabled(validator, resolved_options.validator_profile):
             if validator == "deterministic":
-                reports.append(run_deterministic_validator(resolved_options, resolved_root, command_runner))
+                deterministic_report = run_deterministic_validator(
+                    resolved_options,
+                    resolved_root,
+                    command_runner,
+                )
+                reports.append(deterministic_report)
             else:
-                reports.append(run_ollama_validator(validator, resolved_options, resolved_root, ollama_runner))
+                reports.append(
+                    run_ollama_validator(
+                        validator,
+                        resolved_options,
+                        resolved_root,
+                        ollama_runner,
+                        deterministic_report=deterministic_report,
+                    )
+                )
         else:
             skipped.append(validator)
             reports.append(_skipped_validator_report(validator, resolved_options))
@@ -411,11 +425,12 @@ def run_ollama_validator(
     options: ValidationGateOptions,
     root: Path,
     ollama_runner: OllamaRunner | None = None,
+    deterministic_report: ValidatorReport | None = None,
 ) -> ValidatorReport:
     model = MODEL_BY_VALIDATOR[validator]
     runner = ollama_runner or _run_ollama
     started_at = _now()
-    prompt = _validator_prompt(validator, options, root)
+    prompt = _validator_prompt(validator, options, root, deterministic_report=deterministic_report)
     try:
         response = runner(model, prompt)
     except FileNotFoundError:
@@ -1246,8 +1261,13 @@ def _phase_id_reference_pattern(phase_id: str) -> re.Pattern[str]:
     return re.compile(rf"\bPhase\s*{re.escape(match.group(1))}\b")
 
 
-def _validator_prompt(validator: str, options: ValidationGateOptions, root: Path) -> str:
-    context = _review_context(options, root)
+def _validator_prompt(
+    validator: str,
+    options: ValidationGateOptions,
+    root: Path,
+    deterministic_report: ValidatorReport | None = None,
+) -> str:
+    context = _review_context(options, root, deterministic_report=deterministic_report)
     skeleton = {
         "result": "CLEAN_PASS",
         "findings": [],
@@ -1268,6 +1288,7 @@ def _validator_prompt(validator: str, options: ValidationGateOptions, root: Path
             f"Phase-ledger consistency applies only to these governance files: {', '.join(PHASE_LEDGER_FILES)}.",
             "Production modules and test files are not phase ledgers and do not need to contain the active phase identifier.",
             "A file listed in changed_files is not missing merely because its contents are omitted from the bounded model context; use the diff and file inventory supplied.",
+            "When changed_test_evidence identifies a changed test file that directly imports a changed production module, and the deterministic full suite is CLEAN_PASS, do not report that production module as having no validation. You may still report a specific insufficiency only by identifying the missing behavior and the supplied test evidence that does not cover it.",
             "The current_target_phase_status_lines field contains exact post-change lines from the latest Current section in each phase ledger and is authoritative for phase-status facts.",
             "In pr_diff, lines prefixed with '-' are removed base-branch content and must never be reported as current target-tree content.",
             "The protected active validation scope identifies the validation target and may remain on an externally accepted phase until a transition PR merges; it does not imply that phase is pending validation.",
@@ -1281,7 +1302,11 @@ def _validator_prompt(validator: str, options: ValidationGateOptions, root: Path
     )
 
 
-def _review_context(options: ValidationGateOptions, root: Path) -> dict[str, Any]:
+def _review_context(
+    options: ValidationGateOptions,
+    root: Path,
+    deterministic_report: ValidatorReport | None = None,
+) -> dict[str, Any]:
     phase_ledger = options.validation_scope == "phase_ledger"
     files = {}
     for relative in CONTEXT_FILES:
@@ -1313,6 +1338,11 @@ def _review_context(options: ValidationGateOptions, root: Path) -> dict[str, Any
     }
     diff_limit = 4_000 if phase_ledger else 7_000
     current_phase_status_lines = _current_phase_status_lines_by_file(options, root)
+    changed_test_evidence = _changed_test_evidence(
+        changed_files,
+        root,
+        deterministic_report=deterministic_report,
+    )
     return {
         "governance_files": files,
         "current_target_phase_status_lines": current_phase_status_lines,
@@ -1322,8 +1352,77 @@ def _review_context(options: ValidationGateOptions, root: Path) -> dict[str, Any
         ),
         "changed_files": changed_files,
         "changed_file_contents": changed_contents,
+        "changed_test_evidence": changed_test_evidence,
         "deterministic_validation_results": deterministic,
     }
+
+
+def _changed_test_evidence(
+    changed_files: tuple[str, ...],
+    root: Path,
+    *,
+    deterministic_report: ValidatorReport | None,
+) -> dict[str, dict[str, Any]]:
+    production_modules = {
+        relative: _production_module_path(relative)
+        for relative in changed_files
+        if _production_module_path(relative) is not None
+    }
+    test_files = tuple(
+        relative
+        for relative in changed_files
+        if relative.startswith("tests/test_") and relative.endswith(".py")
+    )
+    full_suite_result = _deterministic_full_suite_result(deterministic_report)
+    evidence: dict[str, dict[str, Any]] = {}
+    for production_file, module_path in sorted(production_modules.items()):
+        direct_tests = tuple(
+            test_file
+            for test_file in test_files
+            if _test_file_directly_imports_module(root / test_file, module_path)
+        )
+        evidence[production_file] = {
+            "direct_importing_changed_test_files": direct_tests,
+            "deterministic_full_suite_result": full_suite_result,
+        }
+    return evidence
+
+
+def _production_module_path(relative: str) -> str | None:
+    if not relative.startswith("codie/") or not relative.endswith(".py"):
+        return None
+    parts = relative.removesuffix(".py").split("/")
+    if parts[-1] == "__init__":
+        parts = parts[:-1]
+    return ".".join(parts) if parts else None
+
+
+def _deterministic_full_suite_result(report: ValidatorReport | None) -> str:
+    if report is None or report.validator != "deterministic":
+        return "UNAVAILABLE"
+    full_suite_command = "-m unittest discover -s tests -v"
+    if not any(full_suite_command in command for command in report.commands):
+        return "UNAVAILABLE"
+    return report.result
+
+
+def _test_file_directly_imports_module(path: Path, module_path: str) -> bool:
+    if not path.is_file():
+        return False
+    try:
+        tree = ast.parse(path.read_text(encoding="utf-8", errors="ignore"))
+    except SyntaxError:
+        return False
+    for node in ast.walk(tree):
+        if isinstance(node, ast.Import):
+            if any(alias.name == module_path for alias in node.names):
+                return True
+        elif isinstance(node, ast.ImportFrom) and node.level == 0 and node.module:
+            if node.module == module_path:
+                return True
+            if any(f"{node.module}.{alias.name}" == module_path for alias in node.names):
+                return True
+    return False
 
 
 def _current_phase_status_lines_by_file(
