@@ -159,8 +159,10 @@ Phase50C Local Working Iteration v0.1 Checkpoint / Freeze: PASS THROUGH MERGED P
 Phase44H Subsystem Health Foundation Contract: PASS
 Phase44I Health Foundation Implementation: PASS THROUGH MERGED PR #91
 Phase44J Health Foundation Checkpoint / Freeze: PASS THROUGH MERGED PR #92
-Phase44K Findings + Idea Ledger Runtime Contract: INTERNAL PASS
-Phase44L Findings + Idea Ledger Implementation: BLOCKED
+Phase44K Findings + Idea Ledger Runtime Contract: PASS THROUGH MERGED PR #93
+Phase44L Findings + Idea Ledger Implementation: PASS THROUGH MERGED PR #94
+Phase44M Findings + Idea Ledger Checkpoint / Freeze: INTERNAL PASS
+Phase44N Change / Impact Engine Contract: BLOCKED
 Local alpha tag: verified on origin as local-alpha-0.1.0
 ```
 
@@ -217,10 +219,13 @@ then merged through PR #91. Phase44J received exact-SHA artifact-backed
 validation with every validator `CLEAN_PASS`, zero findings, zero errors, and
 zero skipped validators, then merged through PR #92. The canonical Phase44-49
 build order remains recorded in `docs/GOAL_ENGINE_IMPLEMENTATION_PROGRAM_V1.md`;
-Phase44K is internally complete as a documentation-only contract and awaits
-outside validation. Phase44L remains blocked. No Goal Engine authority gate has
-advanced. Until Goal Engine reaches validated Stage 1 authority with explicit
-human promotion, existing human-governed planning remains active.
+Phase44K and Phase44L received exact-SHA artifact-backed validation with every
+validator `CLEAN_PASS`, zero findings, zero errors, and zero skipped validators,
+then merged through PRs #93 and #94. Phase44M is internally complete as a
+documentation-only checkpoint and awaits outside validation. Phase44N remains
+blocked. No Goal Engine authority gate has advanced. Until Goal Engine reaches
+validated Stage 1 authority with explicit human promotion, existing
+human-governed planning remains active.
 Phase50B includes the 2026-08-25 owner-approved usability amendment for
 explicit, user-initiated official card-data preparation and public Moxfield
 deck import; it does not change evidence classes or runtime authority.
