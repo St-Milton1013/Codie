@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: validate the Phase44N Goal Engine Change / Impact Engine Contract
+Recommended next task: validate the Phase44P Goal Engine Change / Impact Engine Checkpoint / Freeze
 
 ## Constitutional Governance Overlay
 
@@ -128,8 +128,9 @@ accepted through exact-SHA artifact-backed validation and merged PR #92.
 Phase44K is accepted through exact-SHA artifact validation and merged PR #93.
 Phase44L is accepted through exact-SHA artifact validation and merged PR #94.
 Phase44M is accepted through exact-SHA artifact validation and merged PR #95.
-Phase44N is the active documentation-only Change / Impact Engine Contract.
-Phase44O remains blocked.
+Phase44N is accepted through merged PR #96. Phase44O is accepted through merged PR #97.
+Phase44P is the active documentation-only Change / Impact Engine checkpoint / freeze.
+Phase44Q remains blocked.
 Until Goal Engine reaches validated Stage 1 authority with explicit human
 promotion, existing human-governed planning remains active.
 
@@ -549,14 +550,14 @@ next_phase_part: implementation-contract
 next_gate_scope: INTERMEDIATE_PACKET
 ```
 
-Phase44N Goal Engine Change / Impact Engine Contract tuple:
+Phase44P Goal Engine Change / Impact Engine Checkpoint / Freeze tuple:
 
 ```text
-phase_id: Phase44N
-phase_part: implementation-contract
+phase_id: Phase44P
+phase_part: outside-validation
 gate_scope: INTERMEDIATE_PACKET
-next_phase_id: Phase44O
-next_phase_part: implementation
+next_phase_id: Phase44Q
+next_phase_part: implementation-contract
 next_gate_scope: INTERMEDIATE_PACKET
 ```
 
@@ -582,10 +583,10 @@ Phase44I is accepted through exact-SHA artifact-backed validation and merged PR
 evidence-bounded in-memory signals and Findings, defines no universal health
 score, produces no Goal, and implements no later capability. Phase44J is
 accepted through exact-SHA artifact-backed validation and merged PR #92. The
-current continuation is the documentation-only Phase44N Change / Impact Engine
-Contract. Phase44K through Phase44M are accepted through merged PRs #93 through
-#95. Phase44O remains blocked until exact-SHA Phase44N outside validation and
-human merge. The underlying Phase44-49 Goal Engine sequence remains unchanged
+current continuation is the documentation-only Phase44P Change / Impact Engine
+checkpoint / freeze. Phase44K through Phase44O are accepted through merged PRs
+#93 through #97. Phase44Q remains blocked until exact-SHA Phase44P outside
+validation and human merge. The underlying Phase44-49 Goal Engine sequence remains unchanged
 and sequentially gated by
 `docs/GOAL_ENGINE_IMPLEMENTATION_PROGRAM_V1.md`. Build Graph
 and CCPM-inspired execution remain reserved for conditional Phase48 work.
