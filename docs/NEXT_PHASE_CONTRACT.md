@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: independently validate the Phase51L Documentation Record Evidence Contract. It is a bounded validator interposition required before PR #113 can be revalidated; it does not accept, modify, or merge Phase51K, Phase51J, or Phase44U.
+Recommended next task: independently validate the Phase51M Two-Lane Documentation Record Evidence Safety Amendment. It is a bounded implementation-safety interposition required before held Phase51M source work resumes; it does not accept, modify, or merge Phase51K, Phase51J, or Phase44U.
 
 ## Constitutional Governance Overlay
 

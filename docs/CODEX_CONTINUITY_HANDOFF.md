@@ -2662,7 +2662,7 @@ Phase50C Local Working Iteration v0.1 Checkpoint / Freeze: PASS through merged P
 Phase44H Subsystem Health Foundation Contract: PASS through merged PR #90
 Phase44I Health Foundation Implementation: PASS through merged PR #91
 Phase44J Health Foundation Checkpoint / Freeze: PASS through merged PR #92
-Current action: validate the Phase51L Documentation Record Evidence Contract. PR #113 (Phase51K) is open but blocked by an independently disproved architecture-model claim that a named Phase51I contract record is absent. Phase51L is a separate validator interposition; it does not change Phase51K's meaning, the held Phase51J implementation, or Phase44U.
+Current action: validate the Phase51M Two-Lane Documentation Record Evidence Safety Amendment. PR #113 (Phase51K) is open but blocked by an independently disproved architecture-model claim that a named Phase51I contract record is absent. The amendment holds partial Phase51M source work because Phase51L's per-finding record assertion could suppress an unrelated ordinary finding; the two-lane replacement audits record assertions separately and leaves all ordinary findings blocking. It does not change Phase51K's meaning, the held Phase51J implementation, or Phase44U.
 Phase44K Findings + Idea Ledger Runtime Contract: PASS through merged PR #93
 Phase44L Findings + Idea Ledger Implementation: PASS through merged PR #94
 Phase44M Findings + Idea Ledger Checkpoint / Freeze: PASS through merged PR #95
