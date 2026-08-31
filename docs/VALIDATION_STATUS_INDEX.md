@@ -170,7 +170,10 @@ Phase44R Goal Experiment Engine Implementation: PASS THROUGH MERGED PR #100
 Phase51A Validation Gate Context Correction Contract: PASS THROUGH MERGED PR #101
 Phase51B Validation Gate Context Correction Implementation: PASS THROUGH MERGED PR #102
 Phase44S Goal Experiment Engine Checkpoint / Freeze: PASS THROUGH MERGED PR #103
-Phase44T Read-Only Decision Core Contract: LOCAL CONTRACT PACKET
+Phase44T Read-Only Decision Core Contract: PASS THROUGH MERGED PR #104
+Phase44U Read-Only Decision Core Implementation: PR validation blocked by repeated architecture-model false positive
+Phase51C Validation Gate Test-Evidence Enforcement Contract: PASS THROUGH MERGED PR #106
+Phase51D Suppressed Finding Audit Record Contract: LOCAL CONTRACT PACKET
 Local alpha tag: verified on origin as local-alpha-0.1.0
 ```
 
