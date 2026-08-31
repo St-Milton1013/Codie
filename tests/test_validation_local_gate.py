@@ -52,18 +52,18 @@ from codie.validation.local_gate import (
 
 
 class SuppressedFindingEnforcementTest(unittest.TestCase):
-    def _finding(self, description="Module has no validation."):
+    def _finding(self, description="Module has no validation.", *, title="Missing Validation", required_correction="Add validation."):
         return {
-            "severity": "CRITICAL", "title": "Missing Validation",
+            "severity": "CRITICAL", "title": title,
             "description": description,
             "affected_files": ["codie/example.py"],
             "governing_rule": "4.5 Validation model",
-            "required_correction": "Add validation.",
+            "required_correction": required_correction,
         }
 
     def test_only_qualified_blanket_claim_is_audited_and_removed(self):
-        from codie.validation.local_gate import _filter_blanket_no_validation_findings
-        kept, suppressed = _filter_blanket_no_validation_findings(
+        from codie.validation.local_gate import _filter_generic_validation_absence_findings
+        kept, suppressed = _filter_generic_validation_absence_findings(
             (self._finding(),),
             {"codie/example.py": {"direct_importing_changed_test_files": ("tests/test_example.py",), "deterministic_full_suite_result": "CLEAN_PASS"}},
         )
@@ -72,25 +72,91 @@ class SuppressedFindingEnforcementTest(unittest.TestCase):
         self.assertEqual(suppressed[0].affected_module, "codie/example.py")
 
     def test_missing_direct_test_or_specific_defect_remains(self):
-        from codie.validation.local_gate import _filter_blanket_no_validation_findings
+        from codie.validation.local_gate import _filter_generic_validation_absence_findings
         for finding, evidence in (
             (self._finding(), {}),
             (self._finding("Module has no validation and misses rollback coverage."), {"codie/example.py": {"direct_importing_changed_test_files": ("tests/test_example.py",), "deterministic_full_suite_result": "CLEAN_PASS"}}),
         ):
-            kept, suppressed = _filter_blanket_no_validation_findings((finding,), evidence)
+            kept, suppressed = _filter_generic_validation_absence_findings((finding,), evidence)
             self.assertEqual(len(kept), 1)
             self.assertEqual(suppressed, ())
 
     def test_ambiguous_claim_remains_blocking(self):
-        from codie.validation.local_gate import _filter_blanket_no_validation_findings
+        from codie.validation.local_gate import _filter_generic_validation_absence_findings
 
-        kept, suppressed = _filter_blanket_no_validation_findings(
+        kept, suppressed = _filter_generic_validation_absence_findings(
             (self._finding("The module may have no validation."),),
             {"codie/example.py": {"direct_importing_changed_test_files": ("tests/test_example.py",), "deterministic_full_suite_result": "CLEAN_PASS"}},
         )
 
         self.assertEqual(len(kept), 1)
         self.assertEqual(suppressed, ())
+
+    def test_generic_phase44u_absence_wording_is_audited_and_removed(self):
+        from codie.validation.local_gate import _filter_generic_validation_absence_findings
+
+        finding = self._finding(
+            "A new file 'codie/example.py' has been added, but it has not been validated according to the governance rules.",
+            title="Missing Validation for New File",
+            required_correction="Validate the new file using deterministic, architecture, adversarial, aggregate, outside-validation, and unresolved-finding methods.",
+        )
+        kept, suppressed = _filter_generic_validation_absence_findings(
+            (finding,),
+            {"codie/example.py": {"direct_importing_changed_test_files": ("tests/test_example.py",), "deterministic_full_suite_result": "CLEAN_PASS"}},
+        )
+
+        self.assertEqual(kept, ())
+        self.assertEqual(len(suppressed), 1)
+        self.assertIn("generic absence-of-validation", suppressed[0].suppression_reason)
+
+    def test_named_report_or_outside_review_requirement_remains_blocking(self):
+        from codie.validation.local_gate import _filter_generic_validation_absence_findings
+
+        evidence = {"codie/example.py": {"direct_importing_changed_test_files": ("tests/test_example.py",), "deterministic_full_suite_result": "CLEAN_PASS"}}
+        for finding in (
+            self._finding("The required Phase44U validation report is missing."),
+            self._finding("Required outside review has not been validated."),
+        ):
+            kept, suppressed = _filter_generic_validation_absence_findings((finding,), evidence)
+            self.assertEqual(len(kept), 1)
+            self.assertEqual(suppressed, ())
+
+    def test_generic_filter_is_architecture_only_in_model_report_conversion(self):
+        options = ValidationGateOptions(
+            phase_id=CURRENT_EXPECTED_PHASE_ID,
+            phase_part="outside-validation",
+            gate_scope="INTERMEDIATE_PACKET",
+            target_sha=SHA,
+            pull_request_number=PR_NUMBER,
+            branch=BRANCH,
+        )
+        payload = {
+            "result": "FAIL",
+            "findings": [
+                self._finding(
+                    "The changed module has not been validated according to the governance rules.",
+                    title="Missing Validation for New File",
+                )
+            ],
+        }
+        evidence = {"codie/example.py": {"direct_importing_changed_test_files": ("tests/test_example.py",), "deterministic_full_suite_result": "CLEAN_PASS"}}
+
+        architecture = validator_report_from_model_response(
+            validator="architecture", model="qwen2.5-coder:7b", options=options,
+            payload=payload, started_at="2026-08-30T00:00:00+00:00", completed_at="2026-08-30T00:01:00+00:00",
+            changed_test_evidence=evidence,
+        )
+        adversarial = validator_report_from_model_response(
+            validator="adversarial", model="llama3.1:latest", options=options,
+            payload=payload, started_at="2026-08-30T00:00:00+00:00", completed_at="2026-08-30T00:01:00+00:00",
+            changed_test_evidence=evidence,
+        )
+
+        self.assertEqual(architecture.result, "CLEAN_PASS")
+        self.assertEqual(len(architecture.suppressed_findings), 1)
+        self.assertEqual(adversarial.result, "FAIL")
+        self.assertEqual(len(adversarial.findings), 1)
+        self.assertEqual(adversarial.suppressed_findings, ())
 
     def test_audit_record_round_trip_is_strict_and_canonical(self):
         original = "Missing Validation | Module has no validation. | Add validation."

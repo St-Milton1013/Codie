@@ -675,7 +675,7 @@ def validator_report_from_model_response(
         )
     suppressed_findings: tuple[SuppressedModelFinding, ...] = ()
     if validator == "architecture" and changed_test_evidence is not None:
-        candidate_findings, suppressed_findings = _filter_blanket_no_validation_findings(
+        candidate_findings, suppressed_findings = _filter_generic_validation_absence_findings(
             candidate_findings, changed_test_evidence
         )
     findings = tuple(
@@ -1790,30 +1790,59 @@ def _model_finding_is_in_scope(finding: dict[str, Any], allowed_affected_files: 
     return True
 
 
-def _filter_blanket_no_validation_findings(
+def _filter_generic_validation_absence_findings(
     findings: tuple[dict[str, Any], ...], evidence: dict[str, dict[str, Any]]
 ) -> tuple[tuple[dict[str, Any], ...], tuple[SuppressedModelFinding, ...]]:
     kept: list[dict[str, Any]] = []
     suppressed: list[SuppressedModelFinding] = []
     for finding in findings:
         files = tuple(_normalize_path(str(path)) for path in finding["affected_files"])
-        text = " ".join(str(finding[field]).casefold() for field in ("title", "description", "required_correction"))
+        claim_text = " ".join(str(finding[field]).casefold() for field in ("title", "description"))
         module = files[0] if len(files) == 1 else ""
         item = evidence.get(module, {})
         tests = tuple(item.get("direct_importing_changed_test_files", ()))
-        specific_markers = ("missing behavior", "coverage", "security", "architecture defect", "scope violation")
-        blanket_assertions = (
+        specific_markers = (
+            "behavior",
+            "test",
+            "assert",
+            "coverage",
+            "security",
+            "architecture defect",
+            "architecture violation",
+            "scope violation",
+            "source violation",
+            "policy violation",
+            "outside review",
+            "outside-validation",
+            "human decision",
+            "human review",
+            "required artifact",
+            "required report",
+        )
+        uncertainty_markers = (" may ", " might ", " possibly ", " unclear ", " appears ", " seems ")
+        generic_absence_assertions = (
             "has no validation",
             "without any validation",
             "lacks validation",
             "is unvalidated",
+            "has not been validated",
+            "is not validated",
+            "missing validation",
+            "missing a validation report",
+            "missing validation report",
+            "no validation report",
+            "does not have a corresponding validation report",
         )
-        blanket = any(assertion in text for assertion in blanket_assertions) and not any(
-            marker in text for marker in specific_markers
+        named_report = bool(re.search(r"\bphase\d|docs/|\.md\b", claim_text))
+        generic_absence = (
+            any(assertion in claim_text for assertion in generic_absence_assertions)
+            and not any(marker in claim_text for marker in specific_markers)
+            and not any(marker in f" {claim_text} " for marker in uncertainty_markers)
+            and not named_report
         )
-        if blanket and tests and item.get("deterministic_full_suite_result") == "CLEAN_PASS":
+        if generic_absence and tests and item.get("deterministic_full_suite_result") == "CLEAN_PASS":
             original = " | ".join((str(finding["title"]), str(finding["description"]), str(finding["required_correction"])))
-            suppressed.append(SuppressedModelFinding(_finding_hash(original), "architecture", original, module, tests, "CLEAN_PASS", "Direct changed-test evidence contradicts blanket absence-of-validation claim."))
+            suppressed.append(SuppressedModelFinding(_finding_hash(original), "architecture", original, module, tests, "CLEAN_PASS", "Direct changed-test evidence contradicts generic absence-of-validation claim."))
         else:
             kept.append(finding)
     return tuple(kept), tuple(suppressed)
