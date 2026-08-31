@@ -25,9 +25,15 @@ accepted validator-context infrastructure interpositions through PRs #101 and
 #102. Phase44S and Phase44T are accepted through merged PRs #103 and #104.
 Phase44U awaits validation. Phase51C through Phase51H are accepted
 validator-gate corrections through PRs #106, #107, #109, #110, and #111.
-Phase51I is the separate local contract prompted by the Phase51H classifier's
-overly literal treatment of generic correctness/security boilerplate in a
-correct-scope Phase44U architecture-model finding.
+Phase51I is accepted through merged PR #112. Phase51K is a separate structured-
+disposition design contract in open PR #113. Its automatic validation is
+blocked by one independently disproved architecture-model claim that a named
+Phase51I record is absent from the active roadmap. Phase51L is the deliberate
+documentation-record-evidence contract interposition: it does not change
+Phase51K's meaning, Phase51J, or Phase44U. Phase51M may implement only that
+bounded record-evidence correction and the specified Phase51K-to-Phase51N
+handoff before PR #113 is revalidated. Phase51N is then the structured-
+disposition implementation formerly projected as Phase51L.
 
 On 2026-08-25 the project owner approved a narrow Phase50B usability amendment
 for explicit user-initiated official card-data preparation and public Moxfield
