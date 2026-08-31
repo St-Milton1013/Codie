@@ -181,7 +181,9 @@ Phase51D Suppressed Finding Audit Record Contract: PASS through merged PR #107
 Phase51E Test-Evidence Enforcement Implementation: PASS through merged PR #109
 Phase51G Generic Validation-Absence Claim Contract: PASS through merged PR #110
 Phase51H Generic Validation-Absence Claim Implementation: PASS through merged PR #111
-Phase51I Concrete Defect Distinction Contract: local contract packet
+Phase51I Concrete Defect Distinction Contract: PASS through merged PR #112
+Phase51J Concrete Defect Distinction Implementation: local-only held; post-hoc text matching did not meet the accepted concrete-defect guarantee
+Phase51K Structured Concrete-Defect Disposition Contract: local contract packet
 Local alpha tag status: verified on origin as local-alpha-0.1.0
 ```
 

@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: validate the separate Phase51I Concrete Defect Distinction Contract before implementing its bounded gate correction and rerunning Phase44U
+Recommended next task: validate the separate Phase51K Structured Concrete-Defect Disposition Contract before any successor implementation or Phase44U rerun
 
 ## Constitutional Governance Overlay
 
