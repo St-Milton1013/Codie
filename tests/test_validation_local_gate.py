@@ -49,6 +49,37 @@ from codie.validation.local_gate import (
 )
 
 
+class SuppressedFindingEnforcementTest(unittest.TestCase):
+    def _finding(self, description="Module has no validation."):
+        return {
+            "severity": "CRITICAL", "title": "Missing Validation",
+            "description": description,
+            "affected_files": ["codie/example.py"],
+            "governing_rule": "4.5 Validation model",
+            "required_correction": "Add validation.",
+        }
+
+    def test_only_qualified_blanket_claim_is_audited_and_removed(self):
+        from codie.validation.local_gate import _filter_blanket_no_validation_findings
+        kept, suppressed = _filter_blanket_no_validation_findings(
+            (self._finding(),),
+            {"codie/example.py": {"direct_importing_changed_test_files": ("tests/test_example.py",), "deterministic_full_suite_result": "CLEAN_PASS"}},
+        )
+        self.assertEqual(kept, ())
+        self.assertEqual(len(suppressed), 1)
+        self.assertEqual(suppressed[0].affected_module, "codie/example.py")
+
+    def test_missing_direct_test_or_specific_defect_remains(self):
+        from codie.validation.local_gate import _filter_blanket_no_validation_findings
+        for finding, evidence in (
+            (self._finding(), {}),
+            (self._finding("Module has no validation and misses rollback coverage."), {"codie/example.py": {"direct_importing_changed_test_files": ("tests/test_example.py",), "deterministic_full_suite_result": "CLEAN_PASS"}}),
+        ):
+            kept, suppressed = _filter_blanket_no_validation_findings((finding,), evidence)
+            self.assertEqual(len(kept), 1)
+            self.assertEqual(suppressed, ())
+
+
 SHA = "a" * 40
 BRANCH = "codex/operational-local-validation-bootstrap"
 PR_NUMBER = 1
