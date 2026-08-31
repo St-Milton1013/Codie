@@ -728,6 +728,32 @@ def report_json_schema() -> dict[str, Any]:
         "additionalProperties": False,
         "properties": {severity: {"type": "integer", "minimum": 0} for severity in SEVERITIES},
     }
+    suppressed_finding_schema = {
+        "type": "object",
+        "required": [
+            "finding_hash",
+            "validator",
+            "finding",
+            "affected_module",
+            "direct_test_files",
+            "deterministic_full_suite_result",
+            "suppression_reason",
+        ],
+        "additionalProperties": False,
+        "properties": {
+            "finding_hash": {"type": "string", "pattern": "^[0-9a-f]{12}$"},
+            "validator": {"const": "architecture"},
+            "finding": {"type": "string", "minLength": 1},
+            "affected_module": {"type": "string", "minLength": 1},
+            "direct_test_files": {
+                "type": "array",
+                "minItems": 1,
+                "items": {"type": "string", "minLength": 1},
+            },
+            "deterministic_full_suite_result": {"const": "CLEAN_PASS"},
+            "suppression_reason": {"type": "string", "minLength": 1},
+        },
+    }
     return {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
         "$id": "https://codie.local/schemas/codie_validator_report_v1.schema.json",
@@ -774,7 +800,7 @@ def report_json_schema() -> dict[str, Any]:
             "commands": {"type": "array", "items": {"type": "string"}},
             "findings": {"type": "array", "items": finding_schema},
             "errors": {"type": "array", "items": {"type": "string"}},
-            "suppressed_findings": {"type": "array", "items": {"type": "object"}},
+            "suppressed_findings": {"type": "array", "items": suppressed_finding_schema},
         },
     }
 
@@ -813,6 +839,8 @@ def validate_report_payload(payload: dict[str, Any]) -> None:
             raise ValidationGateError(f"severity_totals.{severity} must be an integer")
     for finding in payload["findings"]:
         _validate_finding_payload(finding)
+    for suppressed in payload.get("suppressed_findings", []):
+        _validate_suppressed_finding_payload(suppressed)
     computed = SeverityTotals.from_findings(tuple(ValidationFinding(**finding) for finding in payload["findings"]))
     if payload["severity_totals"] != computed.to_dict():
         raise ValidationGateError("severity_totals do not match findings")
@@ -1688,6 +1716,40 @@ def _validate_finding_payload(finding: Any) -> None:
         raise ValidationGateError("affected_files must be an array")
 
 
+def _validate_suppressed_finding_payload(finding: Any) -> None:
+    if not isinstance(finding, dict):
+        raise ValidationGateError("suppressed finding must be an object")
+    required = {
+        "finding_hash",
+        "validator",
+        "finding",
+        "affected_module",
+        "direct_test_files",
+        "deterministic_full_suite_result",
+        "suppression_reason",
+    }
+    missing = sorted(required.difference(finding))
+    if missing:
+        raise ValidationGateError(f"suppressed finding missing fields: {', '.join(missing)}")
+    extra = sorted(set(finding).difference(required))
+    if extra:
+        raise ValidationGateError(f"suppressed finding contains unsupported fields: {', '.join(extra)}")
+    original = _require_text(finding["finding"], "suppressed_finding")
+    finding_hash = _require_text(finding["finding_hash"], "finding_hash")
+    if finding_hash != _finding_hash(original):
+        raise ValidationGateError("suppressed finding hash does not match original finding")
+    if finding["validator"] != "architecture":
+        raise ValidationGateError("suppressed finding validator must be architecture")
+    _require_text(finding["affected_module"], "affected_module")
+    if not isinstance(finding["direct_test_files"], list) or not finding["direct_test_files"]:
+        raise ValidationGateError("suppressed finding requires direct test evidence")
+    for path in finding["direct_test_files"]:
+        _require_text(path, "direct_test_file")
+    if finding["deterministic_full_suite_result"] != "CLEAN_PASS":
+        raise ValidationGateError("suppressed finding requires clean deterministic suite")
+    _require_text(finding["suppression_reason"], "suppression_reason")
+
+
 def _validate_model_finding_payload(finding: Any) -> None:
     if not isinstance(finding, dict):
         raise ValidationGateError("model finding must be an object")
@@ -1740,7 +1802,15 @@ def _filter_blanket_no_validation_findings(
         item = evidence.get(module, {})
         tests = tuple(item.get("direct_importing_changed_test_files", ()))
         specific_markers = ("missing behavior", "coverage", "security", "architecture defect", "scope violation")
-        blanket = ("no validation" in text or "without any validation" in text) and not any(marker in text for marker in specific_markers)
+        blanket_assertions = (
+            "has no validation",
+            "without any validation",
+            "lacks validation",
+            "is unvalidated",
+        )
+        blanket = any(assertion in text for assertion in blanket_assertions) and not any(
+            marker in text for marker in specific_markers
+        )
         if blanket and tests and item.get("deterministic_full_suite_result") == "CLEAN_PASS":
             original = " | ".join((str(finding["title"]), str(finding["description"]), str(finding["required_correction"])))
             suppressed.append(SuppressedModelFinding(_finding_hash(original), "architecture", original, module, tests, "CLEAN_PASS", "Direct changed-test evidence contradicts blanket absence-of-validation claim."))

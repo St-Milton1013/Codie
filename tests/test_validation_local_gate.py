@@ -20,6 +20,7 @@ from codie.validation.local_gate import (
     REPOSITORY,
     SCHEMA_VERSION,
     SeverityTotals,
+    SuppressedModelFinding,
     ValidationFinding,
     ValidationGateError,
     ValidationGateOptions,
@@ -38,6 +39,7 @@ from codie.validation.local_gate import (
     run_validation_gate,
     validate_report_payload,
     validator_report_from_model_response,
+    validator_report_from_dict,
     validator_report_to_dict,
     _changed_files_for_scan,
     _content_scan_text,
@@ -78,6 +80,41 @@ class SuppressedFindingEnforcementTest(unittest.TestCase):
             kept, suppressed = _filter_blanket_no_validation_findings((finding,), evidence)
             self.assertEqual(len(kept), 1)
             self.assertEqual(suppressed, ())
+
+    def test_ambiguous_claim_remains_blocking(self):
+        from codie.validation.local_gate import _filter_blanket_no_validation_findings
+
+        kept, suppressed = _filter_blanket_no_validation_findings(
+            (self._finding("The module may have no validation."),),
+            {"codie/example.py": {"direct_importing_changed_test_files": ("tests/test_example.py",), "deterministic_full_suite_result": "CLEAN_PASS"}},
+        )
+
+        self.assertEqual(len(kept), 1)
+        self.assertEqual(suppressed, ())
+
+    def test_audit_record_round_trip_is_strict_and_canonical(self):
+        original = "Missing Validation | Module has no validation. | Add validation."
+        suppressed = SuppressedModelFinding(
+            finding_hash="68b83c279c1c",
+            validator="architecture",
+            finding=original,
+            affected_module="codie/example.py",
+            direct_test_files=("tests/test_example.py",),
+            deterministic_full_suite_result="CLEAN_PASS",
+            suppression_reason="Direct changed-test evidence contradicts blanket absence-of-validation claim.",
+        )
+        original_report = report(
+            validator="architecture",
+            model="qwen2.5-coder:7b",
+            suppressed_findings=(suppressed,),
+        )
+        payload = validator_report_to_dict(original_report)
+
+        self.assertEqual(validator_report_from_dict(payload), original_report)
+
+        payload["suppressed_findings"][0]["unexpected"] = "not allowed"
+        with self.assertRaises(ValidationGateError):
+            validator_report_from_dict(payload)
 
 
 SHA = "a" * 40
