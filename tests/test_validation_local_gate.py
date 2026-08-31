@@ -20,6 +20,7 @@ from codie.validation.local_gate import (
     REPOSITORY,
     SCHEMA_VERSION,
     SeverityTotals,
+    SuppressedModelFinding,
     ValidationFinding,
     ValidationGateError,
     ValidationGateOptions,
@@ -38,6 +39,7 @@ from codie.validation.local_gate import (
     run_validation_gate,
     validate_report_payload,
     validator_report_from_model_response,
+    validator_report_from_dict,
     validator_report_to_dict,
     _changed_files_for_scan,
     _content_scan_text,
@@ -47,6 +49,72 @@ from codie.validation.local_gate import (
     _run_command,
     _validator_prompt,
 )
+
+
+class SuppressedFindingEnforcementTest(unittest.TestCase):
+    def _finding(self, description="Module has no validation."):
+        return {
+            "severity": "CRITICAL", "title": "Missing Validation",
+            "description": description,
+            "affected_files": ["codie/example.py"],
+            "governing_rule": "4.5 Validation model",
+            "required_correction": "Add validation.",
+        }
+
+    def test_only_qualified_blanket_claim_is_audited_and_removed(self):
+        from codie.validation.local_gate import _filter_blanket_no_validation_findings
+        kept, suppressed = _filter_blanket_no_validation_findings(
+            (self._finding(),),
+            {"codie/example.py": {"direct_importing_changed_test_files": ("tests/test_example.py",), "deterministic_full_suite_result": "CLEAN_PASS"}},
+        )
+        self.assertEqual(kept, ())
+        self.assertEqual(len(suppressed), 1)
+        self.assertEqual(suppressed[0].affected_module, "codie/example.py")
+
+    def test_missing_direct_test_or_specific_defect_remains(self):
+        from codie.validation.local_gate import _filter_blanket_no_validation_findings
+        for finding, evidence in (
+            (self._finding(), {}),
+            (self._finding("Module has no validation and misses rollback coverage."), {"codie/example.py": {"direct_importing_changed_test_files": ("tests/test_example.py",), "deterministic_full_suite_result": "CLEAN_PASS"}}),
+        ):
+            kept, suppressed = _filter_blanket_no_validation_findings((finding,), evidence)
+            self.assertEqual(len(kept), 1)
+            self.assertEqual(suppressed, ())
+
+    def test_ambiguous_claim_remains_blocking(self):
+        from codie.validation.local_gate import _filter_blanket_no_validation_findings
+
+        kept, suppressed = _filter_blanket_no_validation_findings(
+            (self._finding("The module may have no validation."),),
+            {"codie/example.py": {"direct_importing_changed_test_files": ("tests/test_example.py",), "deterministic_full_suite_result": "CLEAN_PASS"}},
+        )
+
+        self.assertEqual(len(kept), 1)
+        self.assertEqual(suppressed, ())
+
+    def test_audit_record_round_trip_is_strict_and_canonical(self):
+        original = "Missing Validation | Module has no validation. | Add validation."
+        suppressed = SuppressedModelFinding(
+            finding_hash="68b83c279c1c",
+            validator="architecture",
+            finding=original,
+            affected_module="codie/example.py",
+            direct_test_files=("tests/test_example.py",),
+            deterministic_full_suite_result="CLEAN_PASS",
+            suppression_reason="Direct changed-test evidence contradicts blanket absence-of-validation claim.",
+        )
+        original_report = report(
+            validator="architecture",
+            model="qwen2.5-coder:7b",
+            suppressed_findings=(suppressed,),
+        )
+        payload = validator_report_to_dict(original_report)
+
+        self.assertEqual(validator_report_from_dict(payload), original_report)
+
+        payload["suppressed_findings"][0]["unexpected"] = "not allowed"
+        with self.assertRaises(ValidationGateError):
+            validator_report_from_dict(payload)
 
 
 SHA = "a" * 40

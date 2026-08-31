@@ -171,6 +171,54 @@
       "minLength": 1,
       "type": "string"
     },
+    "suppressed_findings": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "affected_module": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "deterministic_full_suite_result": {
+            "const": "CLEAN_PASS"
+          },
+          "direct_test_files": {
+            "items": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "minItems": 1,
+            "type": "array"
+          },
+          "finding": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "finding_hash": {
+            "pattern": "^[0-9a-f]{12}$",
+            "type": "string"
+          },
+          "suppression_reason": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "validator": {
+            "const": "architecture"
+          }
+        },
+        "required": [
+          "finding_hash",
+          "validator",
+          "finding",
+          "affected_module",
+          "direct_test_files",
+          "deterministic_full_suite_result",
+          "suppression_reason"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
     "target_sha": {
       "pattern": "^[0-9a-f]{40}$",
       "type": "string"
