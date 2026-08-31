@@ -179,7 +179,9 @@ Phase44U Read-Only Decision Core Implementation: validation blocked by repeated 
 Phase51C Validation Gate Test-Evidence Enforcement Contract: PASS through merged PR #106
 Phase51D Suppressed Finding Audit Record Contract: PASS through merged PR #107
 Phase51E Test-Evidence Enforcement Implementation: PASS through merged PR #109
-Phase51G Generic Validation-Absence Claim Contract: local contract packet
+Phase51G Generic Validation-Absence Claim Contract: PASS through merged PR #110
+Phase51H Generic Validation-Absence Claim Implementation: PASS through merged PR #111
+Phase51I Concrete Defect Distinction Contract: local contract packet
 Local alpha tag status: verified on origin as local-alpha-0.1.0
 ```
 
