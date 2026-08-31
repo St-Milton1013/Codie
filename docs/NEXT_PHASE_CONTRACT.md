@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: validate the separate Phase51G Generic Validation-Absence Claim Contract before implementing its bounded gate correction and rerunning Phase44U
+Recommended next task: validate the separate Phase51I Concrete Defect Distinction Contract before implementing its bounded gate correction and rerunning Phase44U
 
 ## Constitutional Governance Overlay
 
