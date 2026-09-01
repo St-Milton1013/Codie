@@ -23,6 +23,57 @@
     "constitution_version": {
       "const": "codie.constitution.v2"
     },
+    "documentation_record_assertion_audits": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "assertion": {
+            "type": [
+              "object",
+              "null"
+            ]
+          },
+          "assertion_hash": {
+            "pattern": "^[0-9a-f]{12}$",
+            "type": "string"
+          },
+          "audit_reason": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "disposition": {
+            "enum": [
+              "DISPROVED",
+              "BLOCKING"
+            ]
+          },
+          "raw_assertion": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "target_record": {
+            "type": [
+              "object",
+              "null"
+            ]
+          },
+          "validator": {
+            "const": "architecture"
+          }
+        },
+        "required": [
+          "assertion_hash",
+          "validator",
+          "assertion",
+          "raw_assertion",
+          "target_record",
+          "disposition",
+          "audit_reason"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
     "errors": {
       "items": {
         "type": "string"
