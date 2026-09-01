@@ -179,8 +179,8 @@ Phase51G Generic Validation-Absence Claim Contract: PASS THROUGH MERGED PR #110
 Phase51H Generic Validation-Absence Claim Implementation: PASS THROUGH MERGED PR #111
 Phase51I Concrete Defect Distinction Contract: PASS THROUGH MERGED PR #112
 Phase51K Structured Concrete-Defect Disposition Contract: PR #113 OPEN / BLOCKED — deterministic and adversarial CLEAN_PASS; one independently disproved architecture-model documentation-record claim
-Phase51L Documentation Record Evidence Contract: LOCAL CONTRACT PACKET
-Phase51M Documentation Record Evidence Implementation: BLOCKED PENDING PHASE51L ACCEPTANCE
+Phase51L Documentation Record Evidence Contract: PASS THROUGH MERGED PR #114
+Phase51M Documentation Record Evidence Implementation: TWO-LANE SAFETY AMENDMENT INDEPENDENT REVIEW PASS / OWNER-ACCEPTED; PR #115 PENDING NORMAL VALIDATION AND MERGE
 Phase51N Structured Disposition Implementation: BLOCKED PENDING PHASE51K AND PHASE51M ACCEPTANCE
 Local alpha tag: verified on origin as local-alpha-0.1.0
 ```
