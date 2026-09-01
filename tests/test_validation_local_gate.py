@@ -16,6 +16,8 @@ from codie.validation.local_gate import (
     CONSTITUTION_VERSION,
     CONTEXT_FILES,
     CURRENT_EXPECTED_PHASE_ID,
+    DocumentationRecordAssertionAudit,
+    DocumentationRecordIndexEntry,
     PHASE_LEDGER_FILES,
     REPOSITORY,
     SCHEMA_VERSION,
@@ -261,6 +263,7 @@ def report_payload(**overrides):
 def model_payload(**overrides):
     payload = {
         "result": "FAIL",
+        "documentation_record_assertions": [],
         "findings": [
             {
                 "severity": "HIGH",
@@ -1824,6 +1827,134 @@ class ValidationLocalGateTest(unittest.TestCase):
             return_value=SHA,
         ):
             return run_validation_gate(options, root=Path.cwd())
+
+
+class DocumentationRecordAssertionLaneTest(unittest.TestCase):
+    def _options(self) -> ValidationGateOptions:
+        return ValidationGateOptions(
+            phase_id=CURRENT_EXPECTED_PHASE_ID,
+            phase_part="outside-validation",
+            gate_scope="INTERMEDIATE_PACKET",
+            target_sha=SHA,
+            pull_request_number=PR_NUMBER,
+            branch=BRANCH,
+        )
+
+    def _assertion(self, **overrides):
+        value = {
+            "record_kind": "phase_contract",
+            "phase_id": "Phase51I",
+            "assertion": "absent",
+            "affected_file": "docs/ACTIVE_ROADMAP_INDEX.md",
+            "record_location": {
+                "section_anchor": "Current Work Packet",
+                "table_or_block_ordinal": 1,
+                "record_key": "Phase51I",
+            },
+            "claimed_status": None,
+        }
+        value.update(overrides)
+        return value
+
+    def _index(self):
+        return (
+            DocumentationRecordIndexEntry(
+                affected_file="docs/ACTIVE_ROADMAP_INDEX.md",
+                section_anchor="Current Work Packet",
+                table_or_block_ordinal=1,
+                line_start=100,
+                line_end=100,
+                record_key="Phase51I",
+                normalized_line_digest="a" * 64,
+                exact_line="Phase51I Concrete Defect Distinction Contract: PASS through merged PR #112",
+            ),
+        )
+
+    def test_model_schema_exposes_only_a_separate_record_assertion_lane(self) -> None:
+        schema = model_response_json_schema()
+
+        self.assertIn("documentation_record_assertions", schema["properties"])
+        self.assertNotIn(
+            "record_assertions",
+            schema["properties"]["findings"]["items"]["properties"],
+        )
+
+    def test_disproved_assertion_is_audited_but_security_finding_remains_blocking(self) -> None:
+        security_finding = {
+            "severity": "BLOCKER",
+            "title": "SQL injection in query builder",
+            "description": "Untrusted input reaches a database query.",
+            "affected_files": ["codie/validation/local_gate.py"],
+            "governing_rule": "Security boundary",
+            "required_correction": "Use parameterized queries.",
+        }
+        output = validator_report_from_model_response(
+            validator="architecture", model="qwen2.5-coder:7b", options=self._options(),
+            payload=model_payload(findings=[security_finding], documentation_record_assertions=[self._assertion()]),
+            started_at="2026-08-31T00:00:00+00:00", completed_at="2026-08-31T00:01:00+00:00",
+            allowed_affected_files=frozenset({"codie/validation/local_gate.py"}),
+            documentation_record_index=self._index(),
+        )
+
+        self.assertEqual(output.result, "FAIL")
+        self.assertEqual(len(output.findings), 1)
+        self.assertIn("SQL injection", output.findings[0].finding)
+        self.assertEqual(len(output.documentation_record_assertion_audits), 1)
+        self.assertIsInstance(output.documentation_record_assertion_audits[0], DocumentationRecordAssertionAudit)
+        self.assertEqual(output.documentation_record_assertion_audits[0].disposition, "DISPROVED")
+
+    def test_record_claim_in_ordinary_findings_lane_remains_blocking(self) -> None:
+        record_claim = {
+            "severity": "HIGH",
+            "title": "Phase51I record is absent",
+            "description": "The active roadmap lacks the Phase51I contract record.",
+            "affected_files": ["docs/ACTIVE_ROADMAP_INDEX.md"],
+            "governing_rule": "Documentation record evidence",
+            "required_correction": "Add the record.",
+        }
+        output = validator_report_from_model_response(
+            validator="architecture", model="qwen2.5-coder:7b", options=self._options(),
+            payload=model_payload(findings=[record_claim], documentation_record_assertions=[]),
+            started_at="2026-08-31T00:00:00+00:00", completed_at="2026-08-31T00:01:00+00:00",
+            allowed_affected_files=frozenset({"docs/ACTIVE_ROADMAP_INDEX.md"}),
+            documentation_record_index=self._index(),
+        )
+
+        self.assertEqual(output.result, "FAIL")
+        self.assertEqual(len(output.findings), 1)
+        self.assertEqual(output.documentation_record_assertion_audits, ())
+
+    def test_unresolved_and_malformed_assertions_become_blocking_findings(self) -> None:
+        unresolved = validator_report_from_model_response(
+            validator="architecture", model="qwen2.5-coder:7b", options=self._options(),
+            payload=model_payload(findings=[], documentation_record_assertions=[self._assertion(record_location={"section_anchor": "Other", "table_or_block_ordinal": 2, "record_key": "Phase51I"})]),
+            started_at="2026-08-31T00:00:00+00:00", completed_at="2026-08-31T00:01:00+00:00",
+            documentation_record_index=self._index(),
+        )
+        malformed = validator_report_from_model_response(
+            validator="architecture", model="qwen2.5-coder:7b", options=self._options(),
+            payload=model_payload(findings=[], documentation_record_assertions=[{"record_kind": "phase_contract"}]),
+            started_at="2026-08-31T00:00:00+00:00", completed_at="2026-08-31T00:01:00+00:00",
+            documentation_record_index=self._index(),
+        )
+
+        for output in (unresolved, malformed):
+            self.assertEqual(output.result, "FAIL")
+            self.assertEqual(len(output.findings), 1)
+            self.assertEqual(output.documentation_record_assertion_audits[0].disposition, "BLOCKING")
+
+    def test_assertion_audit_round_trips_independently(self) -> None:
+        output = validator_report_from_model_response(
+            validator="architecture", model="qwen2.5-coder:7b", options=self._options(),
+            payload=model_payload(findings=[], documentation_record_assertions=[self._assertion()]),
+            started_at="2026-08-31T00:00:00+00:00", completed_at="2026-08-31T00:01:00+00:00",
+            documentation_record_index=self._index(),
+        )
+
+        restored = validator_report_from_dict(validator_report_to_dict(output))
+
+        self.assertEqual(restored, output)
+        self.assertEqual(restored.documentation_record_assertion_audits[0].disposition, "DISPROVED")
 
 
 if __name__ == "__main__":

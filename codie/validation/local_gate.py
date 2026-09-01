@@ -238,6 +238,82 @@ class SuppressedModelFinding:
 
 
 @dataclass(frozen=True)
+class DocumentationRecordAssertion:
+    record_kind: str
+    phase_id: str
+    assertion: str
+    affected_file: str
+    section_anchor: str
+    table_or_block_ordinal: int
+    record_key: str
+    claimed_status: str | None
+
+    def __post_init__(self) -> None:
+        if self.record_kind != "phase_contract":
+            raise ValidationGateError("record assertion kind must be phase_contract")
+        if re.fullmatch(r"Phase\d+[A-Z]?", self.phase_id) is None:
+            raise ValidationGateError("record assertion phase_id is invalid")
+        if self.assertion not in {"absent", "status_mismatch"}:
+            raise ValidationGateError("record assertion type is invalid")
+        object.__setattr__(self, "affected_file", _normalize_path(_require_text(self.affected_file, "record_assertion_affected_file")))
+        _require_text(self.section_anchor, "record_assertion_section_anchor")
+        if self.table_or_block_ordinal < 1:
+            raise ValidationGateError("record assertion table_or_block_ordinal must be positive")
+        if self.record_key != self.phase_id:
+            raise ValidationGateError("record assertion key must equal phase_id")
+        if self.assertion == "absent" and self.claimed_status is not None:
+            raise ValidationGateError("absent record assertion must not claim a status")
+        if self.assertion == "status_mismatch":
+            _require_text(self.claimed_status or "", "record_assertion_claimed_status")
+
+
+@dataclass(frozen=True)
+class DocumentationRecordIndexEntry:
+    affected_file: str
+    section_anchor: str
+    table_or_block_ordinal: int
+    line_start: int
+    line_end: int
+    record_key: str
+    normalized_line_digest: str
+    exact_line: str
+
+    def __post_init__(self) -> None:
+        object.__setattr__(self, "affected_file", _normalize_path(_require_text(self.affected_file, "record_index_affected_file")))
+        _require_text(self.section_anchor, "record_index_section_anchor")
+        if self.table_or_block_ordinal < 1 or self.line_start < 1 or self.line_end < self.line_start:
+            raise ValidationGateError("record index location is invalid")
+        if re.fullmatch(r"Phase\d+[A-Z]?", self.record_key) is None:
+            raise ValidationGateError("record index key is invalid")
+        _require_text(self.normalized_line_digest, "record_index_digest")
+        _require_text(self.exact_line, "record_index_exact_line")
+
+
+@dataclass(frozen=True)
+class DocumentationRecordAssertionAudit:
+    assertion_hash: str
+    validator: str
+    assertion: DocumentationRecordAssertion | None
+    raw_assertion: str
+    target_record: DocumentationRecordIndexEntry | None
+    disposition: str
+    audit_reason: str
+
+    def __post_init__(self) -> None:
+        _require_text(self.assertion_hash, "documentation_record_assertion_hash")
+        if self.validator != "architecture":
+            raise ValidationGateError("documentation record assertion validator must be architecture")
+        if self.disposition not in {"DISPROVED", "BLOCKING"}:
+            raise ValidationGateError("documentation record assertion disposition is invalid")
+        _require_text(self.raw_assertion, "documentation_record_raw_assertion")
+        if self.assertion_hash != _finding_hash(self.raw_assertion):
+            raise ValidationGateError("documentation record assertion audit hash does not match raw assertion")
+        if self.assertion is None and self.disposition != "BLOCKING":
+            raise ValidationGateError("malformed documentation record assertion must remain blocking")
+        _require_text(self.audit_reason, "documentation_record_assertion_audit_reason")
+
+
+@dataclass(frozen=True)
 class ValidatorReport:
     phase_id: str
     phase_part: str
@@ -259,6 +335,7 @@ class ValidatorReport:
     generated_at: str = ""
     commands: tuple[str, ...] = ()
     suppressed_findings: tuple[SuppressedModelFinding, ...] = ()
+    documentation_record_assertion_audits: tuple[DocumentationRecordAssertionAudit, ...] = ()
 
     def __post_init__(self) -> None:
         _require_text(self.phase_id, "phase_id")
@@ -291,6 +368,10 @@ class ValidatorReport:
         if len({item.finding_hash for item in suppressed}) != len(suppressed):
             raise ValidationGateError("duplicate suppressed finding hash")
         object.__setattr__(self, "suppressed_findings", suppressed)
+        assertion_audits = tuple(sorted(self.documentation_record_assertion_audits, key=lambda item: item.assertion_hash))
+        if len({item.assertion_hash for item in assertion_audits}) != len(assertion_audits):
+            raise ValidationGateError("duplicate documentation record assertion audit hash")
+        object.__setattr__(self, "documentation_record_assertion_audits", assertion_audits)
         totals = self.severity_totals
         if isinstance(totals, dict):
             totals = SeverityTotals(**{severity: int(totals.get(severity, 0)) for severity in SEVERITIES})
@@ -489,6 +570,7 @@ def run_ollama_validator(
             completed_at=_now(),
             allowed_affected_files=frozenset(_changed_files_for_scan(options, root)),
             current_phase_status_lines=_current_phase_status_lines_by_file(options, root),
+            documentation_record_index=_documentation_record_index(root),
             changed_test_evidence=_changed_test_evidence(
                 _changed_files_for_scan(options, root), root, deterministic_report=deterministic_report
             ),
@@ -603,6 +685,29 @@ def parse_model_validator_json(text: str) -> dict[str, Any]:
 
 
 def model_response_json_schema() -> dict[str, Any]:
+    record_location_schema = {
+        "type": "object",
+        "required": ["section_anchor", "table_or_block_ordinal", "record_key"],
+        "additionalProperties": False,
+        "properties": {
+            "section_anchor": {"type": "string", "minLength": 1},
+            "table_or_block_ordinal": {"type": "integer", "minimum": 1},
+            "record_key": {"type": "string", "minLength": 1},
+        },
+    }
+    record_assertion_schema = {
+        "type": "object",
+        "required": ["record_kind", "phase_id", "assertion", "affected_file", "record_location", "claimed_status"],
+        "additionalProperties": False,
+        "properties": {
+            "record_kind": {"const": "phase_contract"},
+            "phase_id": {"type": "string", "pattern": "^Phase[0-9]+[A-Z]?$"},
+            "assertion": {"enum": ["absent", "status_mismatch"]},
+            "affected_file": {"type": "string", "minLength": 1},
+            "record_location": record_location_schema,
+            "claimed_status": {"type": ["string", "null"]},
+        },
+    }
     return {
         "type": "object",
         "required": ["result", "findings"],
@@ -632,6 +737,9 @@ def model_response_json_schema() -> dict[str, Any]:
                     },
                 },
             },
+            "documentation_record_assertions": {
+                "type": "array", "items": record_assertion_schema,
+            },
         },
     }
 
@@ -641,7 +749,7 @@ def validate_model_payload(payload: dict[str, Any]) -> None:
     missing = sorted(required.difference(payload))
     if missing:
         raise ValidationGateError(f"model response missing required fields: {', '.join(missing)}")
-    extra = sorted(set(payload).difference(required))
+    extra = sorted(set(payload).difference(required | {"documentation_record_assertions"}))
     if extra:
         raise ValidationGateError(f"model response contains unsupported fields: {', '.join(extra)}")
     _require_allowed(str(payload["result"]), frozenset({"CLEAN_PASS", "FAIL"}), "model_result")
@@ -649,6 +757,9 @@ def validate_model_payload(payload: dict[str, Any]) -> None:
         raise ValidationGateError("model findings must be an array")
     for item in payload["findings"]:
         _validate_model_finding_payload(item)
+    assertions = payload.get("documentation_record_assertions", [])
+    if not isinstance(assertions, list):
+        raise ValidationGateError("documentation_record_assertions must be an array")
 
 
 def validator_report_from_model_response(
@@ -661,6 +772,7 @@ def validator_report_from_model_response(
     completed_at: str,
     allowed_affected_files: frozenset[str] | None = None,
     current_phase_status_lines: dict[str, tuple[str, ...]] | None = None,
+    documentation_record_index: tuple[DocumentationRecordIndexEntry, ...] | None = None,
     changed_test_evidence: dict[str, dict[str, Any]] | None = None,
 ) -> ValidatorReport:
     validate_model_payload(payload)
@@ -673,16 +785,23 @@ def validator_report_from_model_response(
             for item in candidate_findings
             if _model_phase_status_finding_is_supported(item, current_phase_status_lines)
         )
+    documentation_record_assertion_audits: tuple[DocumentationRecordAssertionAudit, ...] = ()
+    deterministic_assertion_findings: tuple[ValidationFinding, ...] = ()
+    if validator == "architecture" and documentation_record_index is not None:
+        documentation_record_assertion_audits, deterministic_assertion_findings = _audit_documentation_record_assertions(
+            payload.get("documentation_record_assertions", []), documentation_record_index
+        )
     suppressed_findings: tuple[SuppressedModelFinding, ...] = ()
     if validator == "architecture" and changed_test_evidence is not None:
         candidate_findings, suppressed_findings = _filter_generic_validation_absence_findings(
             candidate_findings, changed_test_evidence
         )
-    findings = tuple(
-        _model_finding_to_validation_finding(validator, item)
-        for item in _unique_model_findings(
-            candidate_findings
+    findings = (
+        tuple(
+            _model_finding_to_validation_finding(validator, item)
+            for item in _unique_model_findings(candidate_findings)
         )
+        + deterministic_assertion_findings
     )
     result = "FAIL" if findings else "CLEAN_PASS"
     return _build_report(
@@ -695,6 +814,7 @@ def validator_report_from_model_response(
         completed_at=completed_at,
         model=model,
         suppressed_findings=suppressed_findings,
+        documentation_record_assertion_audits=documentation_record_assertion_audits,
     )
 
 
@@ -754,6 +874,50 @@ def report_json_schema() -> dict[str, Any]:
             "suppression_reason": {"type": "string", "minLength": 1},
         },
     }
+    documentation_record_assertion_schema = {
+        "type": "object",
+        "required": ["record_kind", "phase_id", "assertion", "affected_file", "section_anchor", "table_or_block_ordinal", "record_key", "claimed_status"],
+        "additionalProperties": False,
+        "properties": {
+            "record_kind": {"const": "phase_contract"},
+            "phase_id": {"type": "string", "pattern": "^Phase[0-9]+[A-Z]?$"},
+            "assertion": {"enum": ["absent", "status_mismatch"]},
+            "affected_file": {"type": "string", "minLength": 1},
+            "section_anchor": {"type": "string", "minLength": 1},
+            "table_or_block_ordinal": {"type": "integer", "minimum": 1},
+            "record_key": {"type": "string", "minLength": 1},
+            "claimed_status": {"type": ["string", "null"]},
+        },
+    }
+    documentation_record_index_schema = {
+        "type": "object",
+        "required": ["affected_file", "section_anchor", "table_or_block_ordinal", "line_start", "line_end", "record_key", "normalized_line_digest", "exact_line"],
+        "additionalProperties": False,
+        "properties": {
+            "affected_file": {"type": "string", "minLength": 1},
+            "section_anchor": {"type": "string", "minLength": 1},
+            "table_or_block_ordinal": {"type": "integer", "minimum": 1},
+            "line_start": {"type": "integer", "minimum": 1},
+            "line_end": {"type": "integer", "minimum": 1},
+            "record_key": {"type": "string", "minLength": 1},
+            "normalized_line_digest": {"type": "string", "minLength": 1},
+            "exact_line": {"type": "string", "minLength": 1},
+        },
+    }
+    documentation_record_assertion_audit_schema = {
+        "type": "object",
+        "required": ["assertion_hash", "validator", "assertion", "raw_assertion", "target_record", "disposition", "audit_reason"],
+        "additionalProperties": False,
+        "properties": {
+            "assertion_hash": {"type": "string", "pattern": "^[0-9a-f]{12}$"},
+            "validator": {"const": "architecture"},
+            "assertion": {"type": ["object", "null"]},
+            "raw_assertion": {"type": "string", "minLength": 1},
+            "target_record": {"type": ["object", "null"]},
+            "disposition": {"enum": ["DISPROVED", "BLOCKING"]},
+            "audit_reason": {"type": "string", "minLength": 1},
+        },
+    }
     return {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
         "$id": "https://codie.local/schemas/codie_validator_report_v1.schema.json",
@@ -801,6 +965,7 @@ def report_json_schema() -> dict[str, Any]:
             "findings": {"type": "array", "items": finding_schema},
             "errors": {"type": "array", "items": {"type": "string"}},
             "suppressed_findings": {"type": "array", "items": suppressed_finding_schema},
+            "documentation_record_assertion_audits": {"type": "array", "items": documentation_record_assertion_audit_schema},
         },
     }
 
@@ -832,6 +997,8 @@ def validate_report_payload(payload: dict[str, Any]) -> None:
         raise ValidationGateError("errors must be an array")
     if not isinstance(payload.get("suppressed_findings", []), list):
         raise ValidationGateError("suppressed_findings must be an array")
+    if not isinstance(payload.get("documentation_record_assertion_audits", []), list):
+        raise ValidationGateError("documentation_record_assertion_audits must be an array")
     if not isinstance(payload["severity_totals"], dict):
         raise ValidationGateError("severity_totals must be an object")
     for severity in SEVERITIES:
@@ -841,6 +1008,8 @@ def validate_report_payload(payload: dict[str, Any]) -> None:
         _validate_finding_payload(finding)
     for suppressed in payload.get("suppressed_findings", []):
         _validate_suppressed_finding_payload(suppressed)
+    for audit in payload.get("documentation_record_assertion_audits", []):
+        _validate_documentation_record_assertion_audit_payload(audit)
     computed = SeverityTotals.from_findings(tuple(ValidationFinding(**finding) for finding in payload["findings"]))
     if payload["severity_totals"] != computed.to_dict():
         raise ValidationGateError("severity_totals do not match findings")
@@ -869,6 +1038,16 @@ def validator_report_from_dict(payload: dict[str, Any]) -> ValidatorReport:
         findings=tuple(ValidationFinding(**finding) for finding in payload["findings"]),
         errors=tuple(str(error) for error in payload["errors"]),
         suppressed_findings=tuple(SuppressedModelFinding(**item) for item in payload.get("suppressed_findings", [])),
+        documentation_record_assertion_audits=tuple(
+            DocumentationRecordAssertionAudit(
+                assertion_hash=str(item["assertion_hash"]), validator=str(item["validator"]),
+                assertion=(DocumentationRecordAssertion(**item["assertion"]) if item["assertion"] is not None else None),
+                raw_assertion=str(item["raw_assertion"]),
+                target_record=(DocumentationRecordIndexEntry(**item["target_record"]) if item["target_record"] is not None else None),
+                disposition=str(item["disposition"]), audit_reason=str(item["audit_reason"]),
+            )
+            for item in payload.get("documentation_record_assertion_audits", [])
+        ),
     )
 
 
@@ -905,6 +1084,18 @@ def validator_report_to_dict(report: ValidatorReport) -> dict[str, Any]:
                 "suppression_reason": item.suppression_reason,
             }
             for item in report.suppressed_findings
+        ],
+        "documentation_record_assertion_audits": [
+            {
+                "assertion_hash": item.assertion_hash,
+                "validator": item.validator,
+                "assertion": item.assertion.__dict__ if item.assertion is not None else None,
+                "raw_assertion": item.raw_assertion,
+                "target_record": item.target_record.__dict__ if item.target_record is not None else None,
+                "disposition": item.disposition,
+                "audit_reason": item.audit_reason,
+            }
+            for item in report.documentation_record_assertion_audits
         ],
     }
 
@@ -1375,6 +1566,7 @@ def _validator_prompt(
             "A file listed in changed_files is not missing merely because its contents are omitted from the bounded model context; use the diff and file inventory supplied.",
             "When changed_test_evidence identifies a changed test file that directly imports a changed production module, and the deterministic full suite is CLEAN_PASS, do not report that production module as having no validation. You may still report a specific insufficiency only by identifying the missing behavior and the supplied test evidence that does not cover it.",
             "The current_target_phase_status_lines field contains exact post-change lines from the latest Current section in each phase ledger and is authoritative for phase-status facts.",
+            "Return documentation_record_assertions as a separate top-level array. Leave it empty unless a named phase contract record is claimed absent or status-mismatched in a protected phase ledger. For such a claim, emit one exact structured assertion using a location from documentation_record_index. Never attach an assertion to a finding, and never encode a security, code, behavior, test, coverage, policy, or other ordinary finding in the assertion lane.",
             "In pr_diff, lines prefixed with '-' are removed base-branch content and must never be reported as current target-tree content.",
             "The protected active validation scope identifies the validation target and may remain on an externally accepted phase until a transition PR merges; it does not imply that phase is pending validation.",
             "During a contract transition PR, the valid pre-validation sequence is: previous phase externally accepted, proposed phase internally complete or pending validation, and following phase blocked.",
@@ -1423,6 +1615,7 @@ def _review_context(
     }
     diff_limit = 4_000 if phase_ledger else 7_000
     current_phase_status_lines = _current_phase_status_lines_by_file(options, root)
+    documentation_record_index = _documentation_record_index(root)
     changed_test_evidence = _changed_test_evidence(
         changed_files,
         root,
@@ -1431,6 +1624,7 @@ def _review_context(
     return {
         "governance_files": files,
         "current_target_phase_status_lines": current_phase_status_lines,
+        "documentation_record_index": [entry.__dict__ for entry in documentation_record_index],
         "pr_diff": _strict_bounded_text(
             diff.stdout if diff.returncode == 0 else diff.stderr,
             limit=diff_limit,
@@ -1526,6 +1720,117 @@ def _current_phase_status_lines_by_file(
     return status_by_file
 
 
+def _documentation_record_index(root: Path) -> tuple[DocumentationRecordIndexEntry, ...]:
+    entries: list[DocumentationRecordIndexEntry] = []
+    phase_pattern = re.compile(r"\bPhase\s*(\d+[A-Z]?)\b", flags=re.IGNORECASE)
+    for relative in PHASE_LEDGER_FILES:
+        path = root / relative
+        if not path.is_file():
+            continue
+        section_anchor = "document-root"
+        block_ordinal = 0
+        in_block = False
+        for line_number, raw_line in enumerate(path.read_text(encoding="utf-8", errors="ignore").splitlines(), start=1):
+            stripped = raw_line.strip()
+            heading = re.match(r"^#{1,6}\s+(.+?)\s*$", stripped)
+            if heading:
+                section_anchor = heading.group(1)
+                in_block = False
+                continue
+            if not stripped:
+                in_block = False
+                continue
+            if not in_block:
+                block_ordinal += 1
+                in_block = True
+            for match in phase_pattern.finditer(stripped):
+                record_key = f"Phase{match.group(1).upper()}"
+                normalized = " ".join(stripped.split()).casefold()
+                entries.append(
+                    DocumentationRecordIndexEntry(
+                        affected_file=relative,
+                        section_anchor=section_anchor,
+                        table_or_block_ordinal=block_ordinal,
+                        line_start=line_number,
+                        line_end=line_number,
+                        record_key=record_key,
+                        normalized_line_digest=hashlib.sha256(normalized.encode("utf-8")).hexdigest(),
+                        exact_line=stripped,
+                    )
+                )
+    return tuple(entries)
+
+
+def _audit_documentation_record_assertions(
+    raw_assertions: list[Any],
+    record_index: tuple[DocumentationRecordIndexEntry, ...],
+) -> tuple[tuple[DocumentationRecordAssertionAudit, ...], tuple[ValidationFinding, ...]]:
+    audits: list[DocumentationRecordAssertionAudit] = []
+    blocking: list[ValidationFinding] = []
+    if len(raw_assertions) != 1:
+        if raw_assertions:
+            serialized = json.dumps(raw_assertions, sort_keys=True, separators=(",", ":"))
+            audits.append(
+                DocumentationRecordAssertionAudit(
+                    assertion_hash=_finding_hash(serialized), validator="architecture",
+                    assertion=None, raw_assertion=serialized,
+                    target_record=None, disposition="BLOCKING",
+                    audit_reason="Documentation record assertions must contain exactly one item.",
+                )
+            )
+            blocking.append(_documentation_record_assertion_finding(serialized, "Documentation record assertions must contain exactly one item."))
+        return tuple(audits), tuple(blocking)
+    try:
+        assertion = _documentation_record_assertion_from_model(raw_assertions[0])
+    except ValidationGateError as error:
+        serialized = json.dumps(raw_assertions[0], sort_keys=True, separators=(",", ":"))
+        audits.append(DocumentationRecordAssertionAudit(_finding_hash(serialized), "architecture", None, serialized, None, "BLOCKING", str(error)))
+        blocking.append(_documentation_record_assertion_finding(serialized, str(error)))
+        return tuple(audits), tuple(blocking)
+    serialized = json.dumps(raw_assertions[0], sort_keys=True, separators=(",", ":"))
+    matches = [
+        entry for entry in record_index
+        if entry.affected_file == assertion.affected_file
+        and entry.section_anchor == assertion.section_anchor
+        and entry.table_or_block_ordinal == assertion.table_or_block_ordinal
+        and entry.record_key == assertion.record_key == assertion.phase_id
+    ]
+    if len(matches) != 1:
+        reason = "Documentation record assertion does not resolve to exactly one current target-tree record."
+        audits.append(DocumentationRecordAssertionAudit(_finding_hash(serialized), "architecture", assertion, serialized, None, "BLOCKING", reason))
+        blocking.append(_documentation_record_assertion_finding(serialized, reason))
+        return tuple(audits), tuple(blocking)
+    target_record = matches[0]
+    disproved = assertion.assertion == "absent" or (
+        assertion.assertion == "status_mismatch"
+        and (assertion.claimed_status or "").casefold() not in target_record.exact_line.casefold()
+    )
+    if disproved:
+        audits.append(
+            DocumentationRecordAssertionAudit(
+                _finding_hash(serialized), "architecture", assertion, serialized, target_record, "DISPROVED",
+                "Deterministic target-tree documentation record disproves structured architecture assertion.",
+            )
+        )
+        return tuple(audits), tuple(blocking)
+    reason = "Documentation record assertion remains unresolved against the exact current target-tree record."
+    audits.append(DocumentationRecordAssertionAudit(_finding_hash(serialized), "architecture", assertion, serialized, target_record, "BLOCKING", reason))
+    blocking.append(_documentation_record_assertion_finding(serialized, reason))
+    return tuple(audits), tuple(blocking)
+
+
+def _documentation_record_assertion_finding(serialized: str, reason: str) -> ValidationFinding:
+    return ValidationFinding(
+        finding_id=f"architecture:documentation-record-assertion:{_finding_hash(serialized)}",
+        severity="HIGH",
+        finding=f"Documentation record assertion requires review: {reason}",
+        affected_files=(),
+        governing_rule="Phase51M documentation record evidence",
+        required_correction="Provide one exact, supported documentation record assertion or remove it from the model response.",
+        resolution_status="OPEN",
+    )
+
+
 def _current_phase_status_lines(text: str, phase_id: str) -> tuple[str, ...]:
     pattern = _phase_id_reference_pattern(phase_id)
     any_phase_pattern = re.compile(r"\bPhase\s*\d+[A-Z]?\b")
@@ -1616,6 +1921,7 @@ def _build_report(
     model: str | None = None,
     commands: tuple[str, ...] = (),
     suppressed_findings: tuple[SuppressedModelFinding, ...] = (),
+    documentation_record_assertion_audits: tuple[DocumentationRecordAssertionAudit, ...] = (),
 ) -> ValidatorReport:
     return ValidatorReport(
         phase_id=options.phase_id,
@@ -1637,6 +1943,7 @@ def _build_report(
         model=model,
         commands=commands,
         suppressed_findings=suppressed_findings,
+        documentation_record_assertion_audits=documentation_record_assertion_audits,
     )
 
 
@@ -1776,6 +2083,50 @@ def _validate_model_finding_payload(finding: Any) -> None:
         raise ValidationGateError("model affected_files must be an array")
     for path in finding["affected_files"]:
         _require_text(str(path), "affected_file")
+def _documentation_record_assertion_from_model(payload: Any) -> DocumentationRecordAssertion:
+    if not isinstance(payload, dict):
+        raise ValidationGateError("record assertion must be an object")
+    required = {"record_kind", "phase_id", "assertion", "affected_file", "record_location", "claimed_status"}
+    missing = sorted(required.difference(payload))
+    if missing:
+        raise ValidationGateError(f"record assertion missing fields: {', '.join(missing)}")
+    extra = sorted(set(payload).difference(required))
+    if extra:
+        raise ValidationGateError(f"record assertion contains unsupported fields: {', '.join(extra)}")
+    location = payload["record_location"]
+    if not isinstance(location, dict):
+        raise ValidationGateError("record assertion location must be an object")
+    location_required = {"section_anchor", "table_or_block_ordinal", "record_key"}
+    if set(location) != location_required:
+        raise ValidationGateError("record assertion location fields are invalid")
+    if not isinstance(location["table_or_block_ordinal"], int):
+        raise ValidationGateError("record assertion table_or_block_ordinal must be an integer")
+    if payload["claimed_status"] is not None and not isinstance(payload["claimed_status"], str):
+        raise ValidationGateError("record assertion claimed_status must be text or null")
+    return DocumentationRecordAssertion(
+        record_kind=str(payload["record_kind"]), phase_id=str(payload["phase_id"]), assertion=str(payload["assertion"]),
+        affected_file=str(payload["affected_file"]), section_anchor=str(location["section_anchor"]),
+        table_or_block_ordinal=location["table_or_block_ordinal"], record_key=str(location["record_key"]),
+        claimed_status=payload["claimed_status"],
+    )
+
+
+def _validate_documentation_record_assertion_audit_payload(payload: Any) -> None:
+    if not isinstance(payload, dict):
+        raise ValidationGateError("documentation record assertion audit must be an object")
+    required = {"assertion_hash", "validator", "assertion", "raw_assertion", "target_record", "disposition", "audit_reason"}
+    if set(payload) != required:
+        raise ValidationGateError("documentation record assertion audit fields are invalid")
+    assertion = DocumentationRecordAssertion(**payload["assertion"]) if payload["assertion"] is not None else None
+    target = payload["target_record"]
+    target_record = DocumentationRecordIndexEntry(**target) if target is not None else None
+    item = DocumentationRecordAssertionAudit(
+        assertion_hash=str(payload["assertion_hash"]), validator=str(payload["validator"]), assertion=assertion,
+        raw_assertion=str(payload["raw_assertion"]),
+        target_record=target_record, disposition=str(payload["disposition"]), audit_reason=str(payload["audit_reason"]),
+    )
+    if item.assertion_hash != _finding_hash(item.raw_assertion):
+        raise ValidationGateError("documentation record assertion audit hash does not match assertion")
 
 
 def _model_finding_is_in_scope(finding: dict[str, Any], allowed_affected_files: frozenset[str] | None) -> bool:
