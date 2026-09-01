@@ -1,6 +1,6 @@
 # Next Phase Contract
 
-Recommended next task: independently validate the Phase51M Two-Lane Documentation Record Evidence Safety Amendment. It is a bounded implementation-safety interposition required before held Phase51M source work resumes; it does not accept, modify, or merge Phase51K, Phase51J, or Phase44U.
+Recommended next task: complete normal validation and, with explicit human authority, merge PR #115 for the independently reviewed, owner-accepted Phase51M Two-Lane Documentation Record Evidence Safety Amendment. It does not accept, modify, or merge Phase51K, Phase51J, or Phase44U.
 
 ## Constitutional Governance Overlay
 

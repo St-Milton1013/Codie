@@ -24,16 +24,17 @@ and are independently audited or converted to deterministic blocking findings.
 ## Current State
 
 - Phase51L is accepted through merged PR #114.
-- Phase51M scope transition `ada64fac5db0350cc08eb0c2a51c9d9452854deb` is
-  local-only.
-- The partial Phase51M source edits remain uncommitted and held in their
-  separate worktree.
+- Phase51M scope transition `ada64fac5db0350cc08eb0c2a51c9d9452854deb` is on
+  `main`.
+- The amendment received independent review PASS and owner acceptance; PR #115
+  remains pending normal validation and merge.
+- The Phase51M implementation remains local-only and separately gated.
 - PR #113 remains open and blocked; it is unchanged by this packet.
 - Held Phase51J and blocked Phase44U are unchanged.
 
 ## Required Review
 
-An independent reviewer must validate the exact amendment boundary, the
-two-lane no-cross-suppression rule, all required regression cases, and the
-preserved hard boundaries. Human acceptance is required before source work
-resumes.
+Independent review passed the exact amendment boundary, the two-lane
+no-cross-suppression rule, required regression cases, and preserved hard
+boundaries. Owner acceptance has occurred. Normal PR #115 validation and an
+explicit merge decision remain required before the amendment becomes durable.

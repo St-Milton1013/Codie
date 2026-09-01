@@ -184,7 +184,7 @@ Phase51H Generic Validation-Absence Claim Implementation: PASS through merged PR
 Phase51I Concrete Defect Distinction Contract: PASS through merged PR #112
 Phase51K Structured Concrete-Defect Disposition Contract: PR #113 open; validation blocked by one independently disproved architecture-model documentation-record claim
 Phase51L Documentation Record Evidence Contract: PASS through merged PR #114
-Phase51M Documentation Record Evidence Implementation: held pending independent validation and human acceptance of the two-lane safety amendment
+Phase51M Documentation Record Evidence Implementation: two-lane safety amendment independently reviewed PASS and owner-accepted; PR #115 pending normal validation and merge
 Phase51N Structured Disposition Implementation: blocked pending Phase51K and Phase51M acceptance
 Local alpha tag status: verified on origin as local-alpha-0.1.0
 ```
